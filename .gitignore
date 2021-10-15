@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Hammerspoon local config
+*_nosync.lua
+
+# vim generate under ~/.vim/
+.netrwhist
+

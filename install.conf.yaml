@@ -1,0 +1,51 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+
+- clean: ['~']
+
+
+- link:
+    # link cross-platform
+    ~/.vim: vim
+    ~/.vimrc: vimrc
+    ~/.tmux.conf: tmux.conf
+    ~/.tmux.conf.local: tmux.conf.local
+    ~/.gitconfig: gitconfig
+    ~/.fzf: fzf
+    ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
+
+    # link for macOS
+    ~/.hammerspoon:
+      if: '[ `uname` = Darwin ]'
+      path: macOS/hammerspoon
+    # link for macOS version <= 10.14
+    ~/bin/rg:
+      if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/bash" ]'
+      path: macOS/bin/rg
+    ~/.bash_profile:
+      if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/bash" ]'
+      path: bashrc
+    # link for macOS version >= 10.15
+    ~/.zshrc:
+      if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/zsh" ]'
+      path: bashrc
+
+    # link for Linux(Ubuntu)
+    ~/.bashrc:
+      if: '[ $(uname) = Linux ]'
+      path: bashrc
+
+
+- create:
+    ~/.ssh:
+      mode: 0700
+    ~/temp:
+
+
+- shell:
+  - [git submodule update --recursive, Update submodules]
+
