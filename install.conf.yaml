@@ -47,5 +47,5 @@
 
 
 - shell:
-  - [git submodule update --recursive, Update submodules]
+  - [git submodule update --init --recursive fzf, Update specific submodules]
 

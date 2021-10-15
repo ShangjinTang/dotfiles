@@ -2,14 +2,12 @@
 
 export LANG="en_US.UTF-8"
 
-if [ $(uname) = "Darwin" ]; then
-    # Alias commands from Ubuntu
-    alias l='ls -CF'
-    alias la='ls -A'
-    alias ll='ls -alF'
-    alias ls='ls -G'
-    alias grep='grep --color=auto'
-fi
+# Alias commands
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls -G'
+alias grep='grep --color=auto'
 
 # Path
 if [ -d "$HOME/bin" ]; then    
