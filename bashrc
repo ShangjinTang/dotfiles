@@ -2,11 +2,18 @@
 
 export LANG="en_US.UTF-8"
 
-# Alias commands
-alias l='ls -CF'
-alias la='ls -A'
-alias ll='ls -alF'
-alias ls='ls -G'
+# ls/grep: alias & enable color
+if [ $(uname) = "Darwin" ]; then
+    alias l='ls -CFG'
+    alias la='ls -AG'
+    alias ll='ls -alFG'
+    alias ls='ls -G'
+elif [ $(uname) = "Linux" ]; then
+    alias l='ls -CF --color=auto'
+    alias la='ls -A --color=auto'
+    alias ll='ls -alF --color=auto'
+    alias ls='ls -G --color=auto'
+fi
 alias grep='grep --color=auto'
 
 # Path
