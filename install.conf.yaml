@@ -20,7 +20,7 @@
 
     # link for macOS
     ~/.hammerspoon:
-      if: '[ `uname` = Darwin ]'
+      if: '[ $(uname) = Darwin ]'
       path: macOS/hammerspoon
     # link for macOS version <= 10.14
     ~/bin/rg:
