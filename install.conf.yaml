@@ -48,4 +48,5 @@
 
 - shell:
   - [git submodule update --init --recursive fzf, Update specific submodules]
+  - [chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
 
