@@ -24,6 +24,11 @@ if [ -d "$HOME/anaconda3/bin" ]; then
     export PATH="$PATH:$HOME/anaconda3/bin"
 fi
 
+# git completion
+if [ $(uname) = "Linux" ]; then
+    [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
+fi
+
 # Proxy (V2Ray)
 alias setproxy='export HTTP_PROXY=http://127.0.0.1:1080;export HTTPS_PROXY=http://127.0.0.1:1080;export SOCKS5_PROXY=socks5://127.0.0.1:1080'
 alias unsetproxy='unset HTTP_PROXY HTTPS_PROXY SOCKS5_PROXY'
