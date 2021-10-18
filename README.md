@@ -11,13 +11,17 @@ $ git clone --depth 1 https://github.com/ShangjinTang/dotfiles ~/.dotfiles
 $ ~/.dotfiles/install
 ```
 
-Note:
-
-This will enable proxy by default.
-
-To disable proxy, type command `unsetproxy && touch ~/.noproxy.flag`.
 
 ## Customization
 
 1. Add configuration files.
 2. Edit `install.conf.yaml` to create symlink.
+
+
+### Proxy
+
+Proxy is enabled by default at port 1080. To disable proxy, type command:
+
+```bash
+$ unsetproxy && touch ~/.noproxy.flag
+```
