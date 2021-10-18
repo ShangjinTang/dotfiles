@@ -22,11 +22,11 @@
     # link for macOS
     ~/.hammerspoon:
       if: '[ $(uname) = Darwin ]'
-      path: macOS/hammerspoon
+      path: macos/hammerspoon
     # link for macOS version <= 10.14
     ~/bin/rg:
       if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/bash" ]'
-      path: macOS/bin/rg
+      path: macos/bin/rg
     ~/.bash_profile:
       if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/bash" ]'
       path: bashrc
