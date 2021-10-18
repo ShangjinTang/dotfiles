@@ -34,7 +34,13 @@
     ~/.zshrc:
       if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/zsh" ]'
       path: bashrc
-
+    ~/.tmux.conf.macos:
+      if: '[ $(uname) = Darwin ]'
+      path: macos/tmux.conf.macos
+    ~/.tmux.conf.linux:
+      if: '[ $(uname) = Linux ]'
+      path: linux/tmux.conf.linux
+      
     # link for Linux(Ubuntu)
     ~/.bashrc:
       if: '[ $(uname) = Linux ]'
