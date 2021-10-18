@@ -30,10 +30,10 @@ if [ $(uname) = "Linux" ]; then
 fi
 
 # Proxy (V2Ray)
-alias setproxy='export HTTP_PROXY=http://127.0.0.1:1080;export HTTPS_PROXY=http://127.0.0.1:1080;export SOCKS5_PROXY=socks5://127.0.0.1:1080'
-alias unsetproxy='unset HTTP_PROXY HTTPS_PROXY SOCKS5_PROXY'
-# Comment out line below if no proxy
-setproxy
+alias setproxy='export https_proxy=http://127.0.0.1:1080 http_proxy=http://127.0.0.1:1080 all_proxy=socks5://127.0.0.1:1080 '
+alias unsetproxy='unset https_proxy http_proxy all_proxy'
+# setproxy by default (to disable proxy, add a flag file by `touch ~/.noproxy.flag`)
+[ ! -f ~/.noproxy.flag ] && setproxy
 
 # Git
 alias gpristine='git reset --hard && git clean -dfx'
