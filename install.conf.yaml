@@ -11,7 +11,7 @@
 
 - link:
     # link cross-platform
-    ~/.vim: vim
+    ~/.vim/autoload: vim/autoload
     ~/.vimrc: vimrc
     ~/.tmux.conf: tmux.conf
     ~/.tmux.conf.local: tmux.conf.local
