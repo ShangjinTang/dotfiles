@@ -47,17 +47,19 @@ tmux_conf_new_session_prompt=false
 tmux_conf_theme_24b_colour=false
 
 # window style
+# 默认窗口的颜色（如果有 pane 高亮，则使用 pane 高亮颜色）
 tmux_conf_theme_window_fg="default"
-tmux_conf_theme_window_bg="default"
+tmux_conf_theme_window_bg="#bcbcbc"
 
 # highlight focused pane (tmux >= 2.1), possible values are:
 #   - true
 #   - false (default)
-tmux_conf_theme_highlight_focused_pane=false
-
+# 高亮当前 pane
+tmux_conf_theme_highlight_focused_pane=true
 # focused pane colours:
+# 当前 pane 的颜色（需要 tmux_conf_theme_highlight_focused_pane=true 才生效）
 tmux_conf_theme_focused_pane_fg="default"
-tmux_conf_theme_focused_pane_bg="#0087d7"               # light blue
+tmux_conf_theme_focused_pane_bg="#ffffff"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -65,15 +67,17 @@ tmux_conf_theme_focused_pane_bg="#0087d7"               # light blue
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="#444444"                   # gray
-tmux_conf_theme_pane_active_border="#00afff"            # light blue
+# pane 分隔线颜色配置
+tmux_conf_theme_pane_border="#878787"
+tmux_conf_theme_pane_active_border="#8700af"
 
 # pane indicator colours
-tmux_conf_theme_pane_indicator="#00afff"                # light blue
-tmux_conf_theme_pane_active_indicator="#00afff"         # light blue
+# pane 指示器颜色配置 (Ctrl-b q)
+tmux_conf_theme_pane_indicator="#878787"
+tmux_conf_theme_pane_active_indicator="#8700af"
 
 # status line message style
-# 命令响应颜色配置 (如 Ctrl-b R)
+# 命令响应颜色配置 (如 Ctrl-b r)
 tmux_conf_theme_message_fg="#eeeeee"                    # black
 tmux_conf_theme_message_bg="#015f87"                    # yellow
 tmux_conf_theme_message_attr="bold"
@@ -200,7 +204,7 @@ tmux_conf_theme_right_separator_sub="|"
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 tmux_conf_theme_status_left=' ❐ #S | #{username}#{root} | #{prefix} '
-tmux_conf_theme_status_right='#{pairing}#{synchronized} %m/%d %R | #{loadavg}/#{cpu_num} | #{hostname} '
+tmux_conf_theme_status_right=' #(~/.gitmux "#{pane_current_path}") | #{pairing}#{synchronized} %m/%d %R | #{loadavg}/#{cpu_num} | #{hostname} '
 # Shangjin edit end
 
 # status left style
@@ -211,9 +215,9 @@ tmux_conf_theme_status_left_attr="bold,bold,bold"
 
 # status right style
 # 状态栏右侧颜色
-tmux_conf_theme_status_right_fg="#8700af,#444444,#eeeeee"
-tmux_conf_theme_status_right_bg="#ffffff,#eeeeee,#d70000"
-tmux_conf_theme_status_right_attr="none,none,bold"
+tmux_conf_theme_status_right_fg="#000000,#8700af,#444444,#eeeeee"
+tmux_conf_theme_status_right_bg="#ffffff,#ffffff,#eeeeee,#d70000"
+tmux_conf_theme_status_right_attr="none,none,none,bold"
 
 # pairing indicator
 tmux_conf_theme_pairing="⚇"                 # U+2687
@@ -310,7 +314,7 @@ set -g mouse on
 
 # let copy on mouse selection without zoom
 # reference: https://unix.stackexchange.com/questions/318281/how-to-copy-and-paste-with-a-mouse-with-tmux
-# note: os-based configuration is required (macos: pbcopy; linux: xclip)
+# note: os-based configuration is required (macOS: pbcopy; Linux: xclip)
 bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
 bind -n WheelDownPane select-pane -t= \; send-keys -M
 bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
@@ -335,8 +339,10 @@ unbind C-a
 unbind _
 bind | split-window -h
 
-if '[ -f ~/.tmux.conf.linux ]' 'source -q ~/.tmux.conf.linux'
-if '[ -f ~/.tmux.conf.macos ]' 'source -q ~/.tmux.conf.macos'
+# Set refresh interval
+set -g status-interval 1
+
+if '[ -f ~/.tmux.conf.local.os ]' 'source -q ~/.tmux.conf.local.os'
 
 # <<< Shangjin customize end <<<
 
