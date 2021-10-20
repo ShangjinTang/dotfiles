@@ -8,10 +8,9 @@ if [ $(uname) = "Darwin" ]; then
     alias l='ls -lFG'
     alias ll='ls -AlFG'
 elif [ $(uname) = "Linux" ]; then
-    alias l='ls -CF --color=auto'
-    alias la='ls -A --color=auto'
-    alias ll='ls -alF --color=auto'
-    alias ls='ls -G --color=auto'
+    alias ls='ls --color=auto'
+    alias l='ls -lF --color=auto'
+    alias ll='ls -AlF --color=auto'
 fi
 alias grep='grep --color=auto'
 
