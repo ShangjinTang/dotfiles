@@ -13,11 +13,12 @@
     # link cross-platform
     ~/.vim/autoload: vim/autoload
     ~/.vimrc: vimrc
-    ~/.tmux.conf: tmux.conf
     ~/.tmux.conf.local: tmux.conf.local
     ~/.gitconfig: gitconfig
-    ~/.fzf: fzf
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
+    # submodules
+    ~/.fzf: submodules/fzf
+    ~/.tmux.conf: submodules/.tmux/.tmux.conf
 
     # link for macOS
     ~/.hammerspoon:
@@ -54,6 +55,6 @@
 
 
 - shell:
-  - [git submodule update --init --recursive fzf, Update specific submodules]
+  - [git submodule update --init --recursive, Update submodules]
   - [chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
 
