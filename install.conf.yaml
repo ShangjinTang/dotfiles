@@ -1,3 +1,9 @@
+- clean: ['~']
+
+# link cross-platform
+- shell:
+  - ["", ========== common install ==========]
+
 - defaults:
     link:
       create: true
@@ -5,12 +11,7 @@
       force: true
       relative: true
 
-
-- clean: ['~']
-
-
 - link:
-    # link cross-platform
     ~/.vim/autoload: vim/autoload
     ~/.vimrc: vimrc
     ~/.tmux.conf.local: tmux.conf.local
@@ -20,41 +21,54 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
 
-    # link for macOS
-    ~/.hammerspoon:
-      if: '[ $(uname) = Darwin ]'
-      path: macos/hammerspoon
-    # link for macOS version <= 10.14
-    ~/bin/rg:
-      if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/bash" ]'
-      path: macos/bin/rg
-    ~/.bash_profile:
-      if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/bash" ]'
-      path: bashrc
-    # link for macOS version >= 10.15
-    ~/.zshrc:
-      if: '[ $(uname) = Darwin ] && [ $SHELL = "/bin/zsh" ]'
-      path: bashrc
-    ~/.tmux.conf.macos:
-      if: '[ $(uname) = Darwin ]'
-      path: macos/tmux.conf.macos
-    ~/.tmux.conf.linux:
-      if: '[ $(uname) = Linux ]'
-      path: linux/tmux.conf.linux
-      
-    # link for Linux(Ubuntu)
-    ~/.bashrc:
-      if: '[ $(uname) = Linux ]'
-      path: bashrc
 
 
-- create:
-    ~/.ssh:
-      mode: 0700
-    ~/temp:
-
-
+# link for macOS
 - shell:
+  - ["", ========== macOS install ==========]
+
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: true
+      if: '[ $(uname) = Darwin ]'
+
+- link:
+    ~/.hammerspoon: macos/hammerspoon
+    ~/.tmux.conf.local.os: macos/tmux.conf.local
+    ~/.gitmux: macos/gitmux
+    # link for macOS version <= 10.14
+    ~/bin/rg: macos/bin/rg
+    ~/.bash_profile: bashrc
+    # link for macOS version >= 10.15
+    ~/.zshrc: bashrc
+
+
+
+# link for Linux(Ubuntu)
+- shell:
+  - ["", ========== Linux install ==========]
+
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: true
+      if: '[ $(uname) = Linux ]'
+
+- link:
+    ~/.bashrc: bashrc
+    ~/.tmux.conf.local.os: linux/tmux.conf.local
+    ~/.gitmux: linux/gitmux
+
+
+
+# Shell
+- shell:
+  - ["", ========== shell execute ==========]
   - [git submodule update --init --recursive, Update submodules]
-  - [chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
+  - [chmod 700 ~/.ssh && chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
 
