@@ -4,10 +4,9 @@ export LANG="en_US.UTF-8"
 
 # ls/grep: alias & enable color
 if [ $(uname) = "Darwin" ]; then
-    alias l='ls -CFG'
-    alias la='ls -AG'
-    alias ll='ls -alFG'
     alias ls='ls -G'
+    alias l='ls -lFG'
+    alias ll='ls -AlFG'
 elif [ $(uname) = "Linux" ]; then
     alias l='ls -CF --color=auto'
     alias la='ls -A --color=auto'
