@@ -16,10 +16,10 @@ fi
 alias grep='grep --color=auto'
 
 # Path
-if [ -d "$HOME/bin" ]; then    
+if [ -d "$HOME/bin" ]; then
     export PATH="$PATH:$HOME/bin"
 fi
-if [ -d "$HOME/anaconda3/bin" ]; then    
+if [ -d "$HOME/anaconda3/bin" ]; then
     export PATH="$PATH:$HOME/anaconda3/bin"
 fi
 
