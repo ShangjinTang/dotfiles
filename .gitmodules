@@ -2,7 +2,11 @@
 	ignore = dirty
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "fzf"]
+[submodule "submodules/fzf"]
 	ignore = dirty
-	path = fzf
+	path = submodules/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "submodules/.tmux"]
+	ignore = dirty
+	path = submodules/.tmux
+	url = https://github.com/gpakosz/.tmux

@@ -135,7 +135,7 @@ if has("gui_running")
 endif
 
 " vim patch 7.4.1799 support termguicolors (true color)
-if (has("termguicolors"))
+if has("termguicolors")
     set termguicolors
 endif
 " ====================================================================
