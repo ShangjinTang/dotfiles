@@ -1,7 +1,5 @@
 # macOS only
 
-tmux_conf_theme_24b_colour=true
-
 # To copy, left click and drag to highlight text in yellow,
 # once you release left click yellow text will disappear and will automatically be available in clibboard
 # # Use vim keybindings in copy mode
