@@ -1,8 +1,11 @@
 # >>> Shangjin add begin >>>
 
 export LANG="en_US.UTF-8"
-# ignore commands with leading space; ignore duplicate commands
-export HISTCONTROL=ignoreboth
+
+# history control
+export HISTFILESIZE=10000  # max size in history file, e.g. ~/.bash_history
+export HISTSIZE=1000  # max size in command `history`
+export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 
 # ls/grep: alias & enable color
 if [ $(uname) = "Darwin" ]; then
@@ -27,6 +30,9 @@ fi
 # git completion
 if [ $(uname) = "Linux" ]; then
     [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
+fi
+if [ $(uname) = "Darwin" ]; then
+    [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 fi
 
 # Proxy (V2Ray)
