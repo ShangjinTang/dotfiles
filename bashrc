@@ -37,14 +37,18 @@ alias unsetproxy='unset https_proxy http_proxy all_proxy'
 alias gpristine='git reset --hard && git clean -dfx'
 alias cdgitroot='cd $(git rev-parse --show-cdup)'
 
-# TMUX Session
-alias t='tmux attach-session 2> /dev/null || tmux new-session'
-alias tat='tmux attach-session -t'
-alias tn='tmux new-session'
-alias tns='tmux new-session -s'
-alias tk='tmux kill-session'
-alias tkt='tmux kill-session -t'
-alias tl='tmux list-sessions'
+# TMUX
+if command -v tmux &> /dev/null; then
+    function t() {
+        if [ $# -eq 1 ]; then
+            tmux attach-session -t $1 2> /dev/null || tmux new-session -s $1
+        elif [ $# -eq 0 ]; then
+            tmux attach-session -t 0 2> /dev/null || tmux new-session -s 0
+        fi
+    }
+    alias tk='tmux kill-session -at 0'
+    alias tl='tmux list-sessions'
+fi
 
 
 
@@ -54,11 +58,15 @@ alias tl='tmux list-sessions'
 
 
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
-if type rg &> /dev/null; then
+if command -v rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.CMVolumes}/*' 2> /dev/null"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-# <<< Shangjin add end <<<
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    tmux attach-session -t 0 2> /dev/null || tmux new-session -s 0
+fi
+
+# <<< Shangjin add end <<<
