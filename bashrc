@@ -32,7 +32,9 @@ if [ $(uname) = "Linux" ]; then
     [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
 fi
 if [ $(uname) = "Darwin" ]; then
-    [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+    if [ $SHELL = "/bin/bash" ]; then
+        [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+    fi
 fi
 
 # Proxy (V2Ray)
