@@ -1,6 +1,8 @@
 # >>> Shangjin add begin >>>
 
 export LANG="en_US.UTF-8"
+# ignore commands with leading space; ignore duplicate commands
+export HISTCONTROL=ignoreboth
 
 # ls/grep: alias & enable color
 if [ $(uname) = "Darwin" ]; then
@@ -66,7 +68,8 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    tmux attach-session -t 0 2> /dev/null || tmux new-session -s 0
+    tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
+    tmux attach-session -t 0:1 2> /dev/null || tmux new-session -s 0
 fi
 
 # <<< Shangjin add end <<<
