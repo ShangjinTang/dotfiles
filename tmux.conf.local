@@ -47,15 +47,15 @@ tmux_conf_new_session_prompt=false
 tmux_conf_theme_24b_colour=false
 
 # window style
-# 默认窗口的颜色（如果有 pane 高亮，则使用 pane 高亮颜色）
+# 默认窗口的颜色
 tmux_conf_theme_window_fg="default"
-tmux_conf_theme_window_bg="#bcbcbc"
+tmux_conf_theme_window_bg="default"
 
 # highlight focused pane (tmux >= 2.1), possible values are:
 #   - true
 #   - false (default)
 # 高亮当前 pane
-tmux_conf_theme_highlight_focused_pane=true
+tmux_conf_theme_highlight_focused_pane=false
 # focused pane colours:
 # 当前 pane 的颜色（需要 tmux_conf_theme_highlight_focused_pane=true 才生效）
 tmux_conf_theme_focused_pane_fg="default"
@@ -93,7 +93,7 @@ tmux_conf_theme_mode_bg="#ffff00"                       # yellow
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
-tmux_conf_theme_status_fg="#8a8a8a"                     # light gray
+tmux_conf_theme_status_fg="#878787"                     # light gray
 tmux_conf_theme_status_bg="#ffffff"                     # white
 tmux_conf_theme_status_attr="none"
 
@@ -203,21 +203,22 @@ tmux_conf_theme_right_separator_sub="|"
 # 状态栏项目客制化
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
-tmux_conf_theme_status_left=' ❐ #S | #{username}#{root} | #{prefix} '
-tmux_conf_theme_status_right=' #(~/.gitmux "#{pane_current_path}") | #{pairing}#{synchronized} %m/%d %R | #{loadavg}/#{cpu_num} | #{hostname} '
+tmux_conf_theme_status_left=" ❐ #S | #{username}#{root} | #{pairing}#{synchronized}#{prefix}"
+# month date: %m/%d
+tmux_conf_theme_status_right="#(~/.gitmux -cfg ~/.gitmux.conf #{pane_current_path}) | #{loadavg}/#{cpu_num} | #{hostname} | %R "
 # Shangjin edit end
 
 # status left style
 # 状态栏左侧颜色
-tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#eeeeee"
+tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#8700af"
 tmux_conf_theme_status_left_bg="#015f87,#d70000,#ffffff"
 tmux_conf_theme_status_left_attr="bold,bold,bold"
 
 # status right style
 # 状态栏右侧颜色
-tmux_conf_theme_status_right_fg="#000000,#8700af,#444444,#eeeeee"
-tmux_conf_theme_status_right_bg="#ffffff,#ffffff,#eeeeee,#d70000"
-tmux_conf_theme_status_right_attr="none,none,none,bold"
+tmux_conf_theme_status_right_fg="#000000,#eeeeee,#eeeeee,#444444"
+tmux_conf_theme_status_right_bg="#ffffff,#015f87,#d70000,#eeeeee"
+tmux_conf_theme_status_right_attr="none,bold,bold,bold"
 
 # pairing indicator
 tmux_conf_theme_pairing="⚇"                 # U+2687

@@ -20,6 +20,7 @@
     # submodules
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
+    ~/.gitmux.conf: gitmux.conf
 
 
 
