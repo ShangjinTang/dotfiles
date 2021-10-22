@@ -17,11 +17,3 @@ $ ~/.dotfiles/install
 1. Add configuration files.
 2. Edit `install.conf.yaml` to create symlink.
 
-
-### Proxy
-
-Proxy is enabled by default at port 1080. To disable proxy, type command:
-
-```bash
-$ unsetproxy && touch ~/.noproxy.flag
-```
