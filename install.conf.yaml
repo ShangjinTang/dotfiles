@@ -2,7 +2,8 @@
 
 # link cross-platform
 - shell:
-  - ["", ========== common install ==========]
+  - ["", ========== shell execute ==========]
+  - [git submodule update --init --recursive, Update submodules]
 
 - defaults:
     link:
@@ -12,7 +13,7 @@
       relative: true
 
 - link:
-    ~/.vim/autoload: vim/autoload
+    ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
     ~/.vimrc: vimrc
     ~/.tmux.conf.local: tmux.conf.local
     ~/.gitconfig: gitconfig
@@ -70,6 +71,5 @@
 # Shell
 - shell:
   - ["", ========== shell execute ==========]
-  - [git submodule update --init --recursive, Update submodules]
   - [chmod 700 ~/.ssh && chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
 
