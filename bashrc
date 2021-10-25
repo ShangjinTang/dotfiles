@@ -34,6 +34,10 @@ fi
 if [ $(uname) = "Darwin" ]; then
     if [ $SHELL = "/bin/bash" ]; then
         [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+    elif [ $SHELL = "/bin/zsh" ]; then
+        # To fix warning: "zsh compinit: insecure directories", enter the command below:
+        # `compaudit | xargs chmod g-w`
+        autoload -Uz compinit && compinit
     fi
 fi
 
