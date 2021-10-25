@@ -56,6 +56,9 @@ set hidden                     " Switch between buffers without having to save f
 set splitbelow                 " Open new windows below the current window for :split.
 set splitright                 " Open new windows right of the current window for :vsplit.
 
+" ### Number Formats
+set nrformats=bin,hex          " Do not recognize 0.. as octal number for command <C-a> and <C-x>
+
 " ====================================================================
 
 " ## Key Combination (map & noremap)
