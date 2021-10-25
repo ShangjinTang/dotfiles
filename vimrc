@@ -153,6 +153,8 @@ call plug#begin('~/.vim/plugged')
     " fzf plugin
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+    " comment plugin
+    Plug 'tpope/vim-commentary'
     " file tree plugin
     Plug 'preservim/nerdtree'
     " theme plugin
