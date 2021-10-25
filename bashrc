@@ -27,17 +27,17 @@ if [ -d "$HOME/anaconda3/bin" ]; then
     export PATH="$PATH:$HOME/anaconda3/bin"
 fi
 
-# git completion
-if [ $(uname) = "Linux" ]; then
-    [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
-fi
-if [ $(uname) = "Darwin" ]; then
-    if [ $SHELL = "/bin/bash" ]; then
+# command completion
+if [ $SHELL = "/bin/zsh" ]; then
+    # To fix warning: "zsh compinit: insecure directories", enter the command below:
+    # `compaudit | xargs chmod g-w`
+    autoload -Uz compinit && compinit
+elif [ $SHELL = "/bin/bash" ]; then
+    # git completion for bash
+    if [ $(uname) = "Linux" ]; then
+        [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
+    elif [ $(uname) = "Darwin" ]; then
         [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
-    elif [ $SHELL = "/bin/zsh" ]; then
-        # To fix warning: "zsh compinit: insecure directories", enter the command below:
-        # `compaudit | xargs chmod g-w`
-        autoload -Uz compinit && compinit
     fi
 fi
 
