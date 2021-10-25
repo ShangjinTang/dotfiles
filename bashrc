@@ -77,9 +77,13 @@ if command -v rg &> /dev/null; then
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ $SHELL = "/bin/bash" ]; then
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+elif [ $SHELL = "/bin/zsh" ]; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
 
-# set tmux auto launch by flag file 
+# set tmux auto launch by flag file
 if [ -f ~/.dotfiles.local/.flag.tmux_auto_launch ]; then
     if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
@@ -88,3 +92,4 @@ if [ -f ~/.dotfiles.local/.flag.tmux_auto_launch ]; then
 fi
 
 # <<< Shangjin add end <<<
+
