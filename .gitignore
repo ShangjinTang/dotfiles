@@ -1,3 +1,6 @@
+submodules/
+dotbot/
+
 # macOS
 .DS_Store
 
