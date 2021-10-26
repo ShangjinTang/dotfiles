@@ -63,6 +63,13 @@ set nrformats=bin,hex          " Do not recognize 0.. as octal number for comman
 
 " ## Key Combination (map & noremap)
 
+" ### Disable arrow keys, force use hjkl for cursor move
+" TODO: remove these after familiar with hjkl
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
 let mapleader = "\<space>"               " Mapleader used for extra key combinations
 " noremap <leader>w :w!<cr>              " Fast saving with mapleader
 " command W w !sudo tee % > /dev/null    " (useful for handling the permission-denied error)
