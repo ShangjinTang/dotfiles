@@ -8,14 +8,12 @@ export HISTSIZE=1000  # max size in command `history`
 export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 
 # ls/grep: alias & enable color
-if [ $(uname) = "Darwin" ]; then
-    alias ls='ls -G'
-    alias l='ls -lFG'
-    alias ll='ls -AlFG'
-elif [ $(uname) = "Linux" ]; then
+if [ $(uname) = "Linux" ]; then
     alias ls='ls --color=auto'
-    alias l='ls -lF --color=auto'
-    alias ll='ls -AlF --color=auto'
+    alias lsa='ls -lah'
+    alias l='ls -lah'
+    alias ll='ls -lh'
+    alias ll='ls -lAh'
 fi
 alias grep='grep --color=auto'
 
@@ -35,9 +33,12 @@ if [ $SHELL = "/bin/zsh" ]; then
     # ohmyzsh settings
     if [ -d "$HOME/.oh-my-zsh" ]; then
         export ZSH=$HOME/.oh-my-zsh
-        ZSH_THEME="robbyrussell"
-        plugins=(git)
+        ZSH_THEME="sol"  # ZSH_THEME="robbyrussell"
+        HIST_STAMPS="mm-dd"
+        # plugins=(git)
         source $ZSH/oh-my-zsh.sh
+        unset LSCOLORS
+        zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
     fi
 elif [ $SHELL = "/bin/bash" ]; then
     [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
