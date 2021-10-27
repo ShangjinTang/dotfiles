@@ -45,6 +45,9 @@
     ~/bin/rg: macos/bin/rg
     ~/.zshrc: bashrc
     ~/.oh-my-zsh: submodules/ohmyzsh
+    ~/.oh-my-zsh/themes/sol.zsh-theme:
+        relative: false
+        path: macos/oh-my-zsh.theme.sol
 
 
 
