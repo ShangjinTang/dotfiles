@@ -42,11 +42,9 @@
     ~/.hammerspoon: macos/hammerspoon
     ~/.tmux.conf.local.os: macos/tmux.conf.local
     ~/.gitmux: macos/gitmux
-    # link for macOS version <= 10.14
     ~/bin/rg: macos/bin/rg
-    ~/.bash_profile: bashrc
-    # link for macOS version >= 10.15
     ~/.zshrc: bashrc
+    ~/.oh-my-zsh: submodules/ohmyzsh
 
 
 
