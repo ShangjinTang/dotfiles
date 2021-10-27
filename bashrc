@@ -29,7 +29,6 @@ fi
 
 # zsh/bash configurations
 if [ $SHELL = "/bin/zsh" ]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     # completion for zsh
     # To fix warning: "zsh compinit: insecure directories", enter command `compaudit | xargs chmod g-w`
     autoload -Uz compinit && compinit
@@ -41,7 +40,6 @@ if [ $SHELL = "/bin/zsh" ]; then
         source $ZSH/oh-my-zsh.sh
     fi
 elif [ $SHELL = "/bin/bash" ]; then
-    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
 fi
 
@@ -86,9 +84,9 @@ if command -v rg &> /dev/null; then
 fi
 
 if [ $SHELL = "/bin/bash" ]; then
-
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 elif [ $SHELL = "/bin/zsh" ]; then
-
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
 
 # set tmux auto launch by flag file
