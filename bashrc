@@ -27,18 +27,22 @@ if [ -d "$HOME/anaconda3/bin" ]; then
     export PATH="$PATH:$HOME/anaconda3/bin"
 fi
 
-# command completion
+# zsh/bash configurations
 if [ $SHELL = "/bin/zsh" ]; then
-    # To fix warning: "zsh compinit: insecure directories", enter the command below:
-    # `compaudit | xargs chmod g-w`
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # completion for zsh
+    # To fix warning: "zsh compinit: insecure directories", enter command `compaudit | xargs chmod g-w`
     autoload -Uz compinit && compinit
-elif [ $SHELL = "/bin/bash" ]; then
-    # git completion for bash
-    if [ $(uname) = "Linux" ]; then
-        [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
-    elif [ $(uname) = "Darwin" ]; then
-        [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+    # ohmyzsh settings
+    if [ -d "$HOME/.oh-my-zsh" ]; then
+        export ZSH=$HOME/.oh-my-zsh
+        ZSH_THEME="robbyrussell"
+        plugins=(git)
+        source $ZSH/oh-my-zsh.sh
     fi
+elif [ $SHELL = "/bin/bash" ]; then
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
 fi
 
 # Proxy (V2Ray)
@@ -82,9 +86,9 @@ if command -v rg &> /dev/null; then
 fi
 
 if [ $SHELL = "/bin/bash" ]; then
-    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 elif [ $SHELL = "/bin/zsh" ]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 fi
 
 # set tmux auto launch by flag file
