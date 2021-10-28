@@ -73,8 +73,8 @@ noremap <Right> <Nop>
 let mapleader = "\<space>"               " Mapleader used for extra key combinations
 " noremap <leader>w :w!<cr>              " Fast saving with mapleader
 " command W w !sudo tee % > /dev/null    " (useful for handling the permission-denied error)
-nnoremap <leader>q :qa!<cr>     " Close vim
-nnoremap <leader>w :bd<cr>      " Close buffer
+nnoremap <leader>q :qa!<cr>     " Quit vim (close all buffers)
+nnoremap <leader>w :bd<cr>      " Close current buffer
 nnoremap <leader>[ :bp<cr>      " Switch to previous buffer
 nnoremap <leader>] :bn<cr>      " Switch to next buffer
 
@@ -171,8 +171,8 @@ call plug#end()
 " ----------------------------------------------------------
 " ### Plugin map
 nnoremap <C-t> :FZF<cr>         " fzf CTRL-T
-nnoremap <leader>f :Files<cr>   " fzf **<TAB>
-nnoremap <leader>l :Commits<cr> " fzf & fugitive, show git commits
+nnoremap <leader>f :Files<cr>   " fzf **<TAB>, show fzf with preview window
+nnoremap <leader>l :Commits<cr> " fzf & fugitive, show git log with preview window
 
 " ### airline
 " Reference: https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt
