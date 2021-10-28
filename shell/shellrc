@@ -21,6 +21,7 @@ else
 fi
 
 # Git
+alias g='git'
 alias gpristine='git reset --hard && git clean -dfx'
 alias cdgitroot='cd $(git rev-parse --show-cdup)'
 
