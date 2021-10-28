@@ -34,7 +34,6 @@ if [ $SHELL = "/bin/zsh" ]; then
     if [ -d "$HOME/.oh-my-zsh" ]; then
         export ZSH=$HOME/.oh-my-zsh
         ZSH_THEME="sol"  # ZSH_THEME="robbyrussell"
-        HIST_STAMPS="mm-dd"
         # plugins=(git)
         source $ZSH/oh-my-zsh.sh
         unset LSCOLORS
