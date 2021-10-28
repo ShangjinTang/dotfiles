@@ -53,6 +53,7 @@ Quick Launch a specified app. Fixed apps are:
   - **⇧S** : System Preferences
   - **⇧D** : Parallel Desktop
   - **⇧F** : ForkLift (or Finder)
+  - **⇧H** : HazeOver
   - **⇧V** : VS Code
   - **⇧B** : Bartender 3
   - **⇧N** : Notion
