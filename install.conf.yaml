@@ -69,7 +69,7 @@
       relink: true
       force: true
       relative: false
-      if: '[ $SHELL = /bin/zsh ]'
+      if: '[ $(basename $SHELL) = zsh ]'
 - link:
     ~/.zshrc: shell/zshrc
     ~/.oh-my-zsh: submodules/ohmyzsh
@@ -87,7 +87,7 @@
       relink: true
       force: true
       relative: false
-      if: '[ $SHELL = /bin/bash ]'
+      if: '[ $(basename $SHELL) = bash ]'
 - link:
     ~/.bashrc: shell/bashrc
 
