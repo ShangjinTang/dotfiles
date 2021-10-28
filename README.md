@@ -34,7 +34,9 @@ git pull && ~/.dotfiles/install
 
 
 ```bash
-~/.fzf/install # (Y/Y/N)
+# fzf installation (select Y,Y,N respectively)
+~/.fzf/install
+# install vim plugins
 vim +PlugInstall
 ```
 
@@ -43,7 +45,7 @@ vim +PlugInstall
 ## dotfiles customization
 
 1. Add configuration files.
-2. Edit `preinstall` to create flags to dynamic control fuctions (platform-independent) on or off.
+2. Edit `preinstall` to create flags to dynamic control fuctions (platform-independent) toggle on or off.
 3. Edit `install.conf.yaml` to create symlink.
 
 ---
@@ -55,33 +57,40 @@ Note: Terminal colors (tmux/vim) are based on light theme.
 ### [tmux](https://github.com/gpakosz/.tmux.git)
 
 - settings:
-  - `.tmux.conf.local`: cross-platform settings 
+  - `.tmux.conf.local`: cross-platform settings
   - `.tmux.conf.local.os`: os-based settings
 - plugins:
-  - gitmux: show git status in tmux bar
-  - gitmux.config: status bar color/font configurations
-- theme: self-customized, adjust to papercolor-theme light
+  - [gitmux](https://github.com/arl/gitmux): show git status in tmux bar; customize color / font in `gitmux.config`
+- theme: self-customized in `.tmux.conf.local` (adjust to [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light)
 - aliases:
+  - `t`: open session 0 (default session-name); if attach fail, will create
+  - `t <session-name>`: open session with *session-name*; if attach fail, will create
   - `tl`: list all sessions
   - `tk`: kill all sessions except session 0
 
 ### vim with [vim-plug](https://github.com/junegunn/vim-plug)
 
 - plugins:
-  - 'vim-airline/vim-airline'
-  - 'vim-airline/vim-airline-themes'
-  - 'tpope/vim-fugitive'
-  - 'junegunn/fzf'
-  - 'junegunn/fzf.vim'
-  - 'tpope/vim-commentary'
-  - 'preservim/nerdtree'
-  - 'NLKNguyen/papercolor-theme'
+  - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
+  - [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
+  - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
+  - [junegunn/fzf](https://github.com/junegunn/fzf)
+  - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
+  - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
+  - [preservim/nerdtree](https://github.com/preservim/nerdtree)
+  - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
 - theme:
-  - papercolor-light
+  - [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
 - map keys (LEADER: Space):
   - CTRL-T: fzf
-  - LEADER-l: git commits
-  - LEADER LEADER: nerdtree
+  - LEADER-f: fzf with preview window
+  - LEADER-l: show git log with preview window
+  - LEADER LEADER: nerdtree (sidebar tree browser)
+  - LEADER-q: Quit vim (close all buffers)
+  - LEADER-w: Close current buffer
+  - LEADER-[: Switch to previous buffer
+  - LEADER-]: Switch to next buffer
+
 
 ### [fzf](https://github.com/junegunn/fzf)
 
