@@ -74,6 +74,7 @@
     ~/.zshrc: shell/zshrc
     ~/.oh-my-zsh: submodules/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
+    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme: shell/zsh_custom/themes/sol-light.zsh-theme
 
 
