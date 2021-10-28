@@ -14,3 +14,7 @@
 	ignore = dirty
 	path = submodules/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule "submodules/zsh-autosuggestions"]
+	ignore = dirty
+	path = submodules/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions

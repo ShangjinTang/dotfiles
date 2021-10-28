@@ -34,7 +34,9 @@ if [ $SHELL = "/bin/zsh" ]; then
     if [ -d "$HOME/.oh-my-zsh" ]; then
         export ZSH=$HOME/.oh-my-zsh
         ZSH_THEME="sol"  # ZSH_THEME="robbyrussell"
+        ZSH_CUSTOM=$HOME/.oh-my-zsh.custom
         # plugins=(git)
+        plugins=(zsh-autosuggestions)
         source $ZSH/oh-my-zsh.sh
         unset LSCOLORS
         zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
