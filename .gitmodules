@@ -1,24 +1,31 @@
 [submodule "dotbot"]
-	ignore = dirty
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
+	branch = master
+	update = rebase
+[submodule "submodules/vim-plug"]
+	path = submodules/vim-plug
+	url = https://github.com/junegunn/vim-plug
+	branch = master
+	update = rebase
 [submodule "submodules/fzf"]
-	ignore = dirty
 	path = submodules/fzf
 	url = https://github.com/junegunn/fzf
+	branch = master
+	update = rebase
 [submodule "submodules/.tmux"]
-	ignore = dirty
 	path = submodules/.tmux
 	url = https://github.com/gpakosz/.tmux
+	branch = master
+	update = rebase
 [submodule "submodules/ohmyzsh"]
 	ignore = dirty
 	path = submodules/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+	branch = master
+	update = rebase
 [submodule "submodules/zsh-autosuggestions"]
-	ignore = dirty
 	path = submodules/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule "submodules/vim-plug"]
-	ignore = dirty
-	path = submodules/vim-plug
-	url = https://github.com/junegunn/vim-plug
+	branch = master
+	update = rebase
