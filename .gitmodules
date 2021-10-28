@@ -18,3 +18,7 @@
 	ignore = dirty
 	path = submodules/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "submodules/vim-plug"]
+	ignore = dirty
+	path = submodules/vim-plug
+	url = https://github.com/junegunn/vim-plug
