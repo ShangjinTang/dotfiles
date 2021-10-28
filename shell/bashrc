@@ -1,4 +1,4 @@
-[ -f ~/.dotfiles/.shrc ] && source ~/.dotfiles/.shrc
+[ -f ~/.dotfiles/shell/shellrc ] && source ~/.dotfiles/shell/shellrc
 
 # Use aliases from zsh
 alias ls='ls --color=auto'
