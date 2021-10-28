@@ -3,7 +3,7 @@
 
 # link cross-platform
 - shell:
-  - ["", ========== shell execute ==========]
+  - ["", ========== shell pre-execute ==========]
   - [git submodule update --init --recursive, Update submodules]
 
 - defaults:
@@ -14,7 +14,7 @@
       relative: true
 
 - link:
-    ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
+    ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
     ~/.vimrc: vimrc
     ~/.tmux.conf.local: tmux.conf.local
     ~/.gitconfig: gitconfig
@@ -39,17 +39,18 @@
       if: '[ $(uname) = Darwin ]'
 
 - link:
+    ~/bin/rg: macos/bin/rg
     ~/.hammerspoon: macos/hammerspoon
     ~/.tmux.conf.local.os: macos/tmux.conf.local
     ~/.gitmux: macos/gitmux
-    ~/bin/rg: macos/bin/rg
-    ~/.zshrc: bashrc
+    ~/.zshrc: zshrc
     ~/.oh-my-zsh: submodules/ohmyzsh
-    ~/.oh-my-zsh/themes/sol.zsh-theme:
-        relative: false
-        path: macos/oh-my-zsh.theme.sol
-    ~/.oh-my-zsh.custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
-
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions:
+      relative: false
+      path: submodules/zsh-autosuggestions
+    ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme:
+      relative: false
+      path: zsh/oh-my-zsh.theme.sol-light
 
 
 # link for Linux(Ubuntu)
@@ -73,6 +74,6 @@
 
 # Shell
 - shell:
-  - ["", ========== shell execute ==========]
+  - ["", ========== shell post-execute ==========]
   - [chmod 700 ~/.ssh && chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
 
