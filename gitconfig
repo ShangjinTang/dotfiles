@@ -3,6 +3,9 @@
 	br = branch
 	ci = commit
 	st = status
+	l = log --color --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cd) %C(blue)<%an> -%C(cyan)%d%Creset %s %Creset' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'
+	ls = log --color --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cd) %C(blue)<%an> -%C(cyan)%d%Creset %s %Creset' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S' --stat
+	lf = log --color --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cd) %C(blue)<%an> -%C(cyan)%d%Creset %s %Creset' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S' --follow --
 [user]
 	email = shangjin.tang@gmail.com
 	name = Shangjin Tang
