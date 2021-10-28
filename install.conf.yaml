@@ -5,14 +5,12 @@
 - shell:
   - ["", ========== shell pre-execute ==========]
   - [git submodule update --init --recursive, Update submodules]
-
 - defaults:
     link:
       create: true
       relink: true
       force: true
       relative: false
-
 - link:
     # submodules
     ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
@@ -30,7 +28,6 @@
 # link for macOS
 - shell:
   - ["", ========== macOS install ==========]
-
 - defaults:
     link:
       create: true
@@ -38,24 +35,18 @@
       force: true
       relative: false
       if: '[ $(uname) = Darwin ]'
-
 - link:
-    ~/.zshrc: shell/zshrc
     ~/.tmux.conf.local.os: tmux/tmux.conf.local.macos
     ~/.gitmux: tmux/gitmux/gitmux.macos.amd64
     # macOS only
     ~/bin/rg: macos/bin/rg
     ~/.hammerspoon: macos/hammerspoon
-    ~/.oh-my-zsh: submodules/ohmyzsh
-    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
-    ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme: shell/zsh_custom/themes/sol-light.zsh-theme
 
 
 
 # link for Linux(Ubuntu)
 - shell:
   - ["", ========== Linux install ==========]
-
 - defaults:
     link:
       create: true
@@ -63,11 +54,42 @@
       force: true
       relative: false
       if: '[ $(uname) = Linux ]'
-
 - link:
-    ~/.bashrc: shell/bashrc
     ~/.tmux.conf.local.os: tmux/tmux.conf.local.linux
     ~/.gitmux: tmux/gitmux/gitmux.linux.amd64
+
+
+
+# zshrc
+- shell:
+  - ["", ========== update zshrc ==========]
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      if: '[ $SHELL = /bin/zsh ]'
+- link:
+    ~/.zshrc: shell/zshrc
+    ~/.oh-my-zsh: submodules/ohmyzsh
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
+    ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme: shell/zsh_custom/themes/sol-light.zsh-theme
+
+
+
+# bashrc
+- shell:
+  - ["", ========== update bashrc ==========]
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      if: '[ $SHELL = /bin/bash ]'
+- link:
+    ~/.bashrc: shell/bashrc
 
 
 
