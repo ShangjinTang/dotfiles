@@ -1,4 +1,4 @@
-[ -f ~/.dotfiles/.shrc ] && source ~/.dotfiles/.shrc
+[ -f ~/.dotfiles/shell/shellrc ] && source ~/.dotfiles/shell/shellrc
 
 # completion for zsh
 # To fix warning: "zsh compinit: insecure directories", enter command `compaudit | xargs chmod g-w`

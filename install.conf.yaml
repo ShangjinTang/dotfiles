@@ -11,18 +11,19 @@
       create: true
       relink: true
       force: true
-      relative: true
+      relative: false
 
 - link:
-    ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
-    ~/.vimrc: vimrc
-    ~/.tmux.conf.local: tmux.conf.local
-    ~/.gitconfig: gitconfig
-    ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
     # submodules
+    ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
-    ~/.gitmux.conf: gitmux.conf
+    ~/.gitmux.conf: tmux/gitmux/gitmux.conf
+    # configs
+    ~/.vimrc: vimrc
+    ~/.tmux.conf.local: tmux/tmux.conf.local
+    ~/.gitconfig: gitconfig
+    ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
 
 
 
@@ -35,22 +36,20 @@
       create: true
       relink: true
       force: true
-      relative: true
+      relative: false
       if: '[ $(uname) = Darwin ]'
 
 - link:
+    ~/.zshrc: shell/zshrc
+    ~/.tmux.conf.local.os: tmux/tmux.conf.local.macos
+    ~/.gitmux: tmux/gitmux/gitmux.macos.amd64
+    # macOS only
     ~/bin/rg: macos/bin/rg
     ~/.hammerspoon: macos/hammerspoon
-    ~/.tmux.conf.local.os: macos/tmux.conf.local
-    ~/.gitmux: macos/gitmux
-    ~/.zshrc: zshrc
     ~/.oh-my-zsh: submodules/ohmyzsh
-    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions:
-      relative: false
-      path: submodules/zsh-autosuggestions
-    ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme:
-      relative: false
-      path: zsh/oh-my-zsh.theme.sol-light
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
+    ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme: shell/zsh_custom/themes/sol-light.zsh-theme
+
 
 
 # link for Linux(Ubuntu)
@@ -62,13 +61,13 @@
       create: true
       relink: true
       force: true
-      relative: true
+      relative: false
       if: '[ $(uname) = Linux ]'
 
 - link:
-    ~/.bashrc: bashrc
-    ~/.tmux.conf.local.os: linux/tmux.conf.local
-    ~/.gitmux: linux/gitmux
+    ~/.bashrc: shell/bashrc
+    ~/.tmux.conf.local.os: tmux/tmux.conf.local.linux
+    ~/.gitmux: tmux/gitmux/gitmux.linux.amd64
 
 
 
