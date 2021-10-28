@@ -48,6 +48,7 @@
     ~/.oh-my-zsh/themes/sol.zsh-theme:
         relative: false
         path: macos/oh-my-zsh.theme.sol
+    ~/.oh-my-zsh.custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
 
 
 
