@@ -17,7 +17,7 @@ brew install vim git tmux zsh reattach-to-user-namespace
 ```bash
 # Linux
 sudo apt update
-sudo apt install vim git tmux zsh ripgrep
+sudo apt install vim git tmux zsh ripgrep xclip
 ```
 
 ### Dotfiles Install
