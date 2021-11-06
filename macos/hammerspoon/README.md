@@ -48,10 +48,10 @@ Quick Launch a specified app. Fixed apps are:
   - **⇧E** : NeteaseMusic
   - **⇧R** : TickTick
   - **⇧T** : Terminal
+  - **⇧P** : Parallel Desktop
   - **⇧U** : App Cleaner
   - **⇧A** : Launchpad
   - **⇧S** : System Preferences
-  - **⇧D** : Parallel Desktop
   - **⇧F** : ForkLift (or Finder)
   - **⇧H** : HazeOver
   - **⇧V** : VS Code
