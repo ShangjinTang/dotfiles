@@ -46,6 +46,12 @@ print("Special characters keybindings Alt(Option)+KEY disabled...")
   hs.alert.show("Hammerspoon Config Loaded")
 
   -- Simulate Key Pressed:
+  local function simulateKeyPressed(key)
+    hs.eventtap.event.newKeyEvent(key, true):post()
+    hs.eventtap.event.newKeyEvent(key, false):post()
+  end
+
+  -- Simulate ModsKey Pressed:
     -- mods[1] down -> mods[2] down .. -> key down -> key up -> .. -> mods[2] up -> mods[1] up
   -- mods: nil, or table (e.g. {"ctrl", "alt"})
   local function simulateModsKeyPressed(mods, key)
@@ -130,6 +136,8 @@ appLaunch:setConfigs({
   {key = 'N', name = "Notion", id = "notion.id"},  -- fixed
   {key = 'M', name = "MindNode", id = "com.ideasoncanvas.mindnode.macos"},
 })
+
+hs.hotkey.bind("alt", 'D', function() simulateKeyPressed('F11') end)
 
 -- hs.hotkey.bind("alt", 'Z', function() simulateModsKeyPressed({"ctrl"}, "left") end)
 -- hs.hotkey.bind("alt", 'C', function() simulateModsKeyPressed({"ctrl"}, "right") end)
