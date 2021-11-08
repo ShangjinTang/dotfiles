@@ -57,7 +57,7 @@ Quick Launch a specified app. Fixed apps are:
   - **⇧V** : VS Code
   - **⇧B** : Bartender 3
   - **⇧N** : Notion
-  - **⇧M** : MindNode
+  - **⇧M** : Microsoft Remote Desktop
 
 ## Weather Status Bar
 
