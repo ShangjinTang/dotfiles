@@ -134,7 +134,8 @@ appLaunch:setConfigs({
   {key = 'V', name = "Code", id = "com.microsoft.VSCode", message = "VS Code"},  -- fixed
   {key = 'B', name = "Bartender 3", id = "com.surteesstudios.Bartender"},
   {key = 'N', name = "Notion", id = "notion.id"},  -- fixed
-  {key = 'M', name = "MindNode", id = "com.ideasoncanvas.mindnode.macos"},
+  {key = 'M', name = "Microsoft Remote Desktop", id = "com.microsoft.rdc.macos"},
+  -- {key = 'M', name = "MindNode", id = "com.ideasoncanvas.mindnode.macos"},
 })
 
 hs.hotkey.bind("alt", 'D', function() simulateKeyPressed('F11') end)
