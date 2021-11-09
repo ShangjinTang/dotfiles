@@ -150,7 +150,7 @@ function obj:updateHourWeather(urlBody)
     end
     for i = 1,24 do
         local logo = getTimeEmoji(tonumber(hours[i]))
-        str = string.format("%s\t%-s \t\t\t%-s \t\t\t%-s \t%-16s", logo, hours[i] .. ":00", tems[i] .. "°C", weaEmoji[wea_imgs[i]], weas[i])
+        str = string.format("%s\t%-s \t\t\t%-8s \t\t\t%-s \t%-16s", logo, hours[i] .. ":00", tems[i] .. "°C", weaEmoji[wea_imgs[i]], weas[i])
         obj:appendMenuData(str)
     end
 end
