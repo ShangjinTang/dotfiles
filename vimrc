@@ -20,8 +20,9 @@ set pastetoggle=<F2>           " Key to swtich on/off paste mode.
 set cursorline                 " Find the current line quickly.
 set display=lastline           " Show as much as possible of the last line.
 " set list                       " Show non-printable characters.
-set matchtime=1                " Tenths of a second to show the matching paren.
-" set relativenumber
+set matchtime=1                " Tenths of a second to show the matching parent.
+set number                     " Show current line number on the left.
+set relativenumber             " Show relative line number of above/below lines on the left.
 set showmatch                  " Show matching brackets when text indicator is over them.
 set so=7                       " Lines padding to bottom/top while moving with j/k.
 set synmaxcol=200              " Only highlight the first 200 columns.
@@ -61,7 +62,10 @@ set nrformats=bin,hex          " Do not recognize 0.. as octal number for comman
 
 " ====================================================================
 
-" ## Key Combination (map & noremap)
+" ## Key Maps (map & noremap)
+
+" Set key to toggle number & relativenumber
+nnoremap <silent> <F1> :set nonumber! norelativenumber!<cr>
 
 " ### Disable arrow keys, force use hjkl for cursor move
 " TODO: remove these after familiar with hjkl
