@@ -1,5 +1,8 @@
 [ -f ~/.dotfiles/shell/shellrc ] && source ~/.dotfiles/shell/shellrc
 
+# enable ohmyzsh auto update
+zstyle ':omz:update' mode auto
+
 # completion for zsh
 # To fix warning: "zsh compinit: insecure directories", enter command `compaudit | xargs chmod g-w`
 autoload -Uz compinit && compinit
