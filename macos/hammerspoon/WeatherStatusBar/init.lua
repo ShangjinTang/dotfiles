@@ -65,10 +65,10 @@ function obj:initialize()
 end
 
 
--- Reference: https://www.tianqiapi.com/index/doc?version=v1
+-- Reference: https://yiketianqi.com/index/doc?version=v1
 -- obj:setIdSecret() must be called before obj:updateWeatherUrl()
 function obj:updateWeatherUrl()
-    obj.apiUrl = "https://www.tianqiapi.com/api?unescape=1&version=v1" .. "&appid=" .. obj.appid .. "&appsecret=" .. obj.appsecret
+    obj.apiUrl = "https://yiketianqi.com/api?unescape=1&version=v1" .. "&appid=" .. obj.appid .. "&appsecret=" .. obj.appsecret
     if obj.city then
         obj.apiUrl = obj.apiUrl .. "&city=" .. hs.http.encodeForQuery(obj.city)
     end
