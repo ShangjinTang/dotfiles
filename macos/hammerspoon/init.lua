@@ -20,7 +20,7 @@ end
 
 -- Disable special characters (e.g. ALT+Q -> œ, ALT+SHIFT+Q -> Œ)
 -- Note: This will also disable any hotkeys in any application
-for key in string.gmatch("abdefghijklmnopqrstuvwxyz0123456789", ".") do
+for key in string.gmatch("abcdefghijklmnopqrstuvwxyz", ".") do
   -- hs.hotkey.bind({"alt", "shift"}, key, function() end)
   hs.hotkey.bind({"alt"}, key, function() end)
 end
@@ -110,12 +110,7 @@ appLaunch:setConfigs({
     -- id -> CFBundleIdentifier
     -- name -> CFBundleName
   -- {key = '', name = ""[, id = ""][,message = ""]},
-  {key = '1', name = "Google Chrome", id = "com.google.Chrome"},  -- fixed
-  {key = '2', name = "Safari", id = "com.apple.Safari"},  -- fixed
-  {key = '7', name = "Android Studio", id = "com.google.android.studio"},
-  {key = '8', name = "IntelliJ IDEA", id = "com.jetbrains.intellij"},
-  {key = '9', name = "CLion", id = "com.jetbrains.CLion"},
-  {key = '0', name = "PyCharm", id = "com.jetbrains.pycharm"},
+
   {key = 'Q', name = "IINA", id = "com.colliderli.iina"},
   {key = 'W', name = "WeChat", id = "com.tencent.xinWeChat"},  -- fixed
   {key = 'E', name = "NeteaseMusic", id = "com.netease.163music"},  -- fixed
@@ -130,16 +125,14 @@ appLaunch:setConfigs({
   {key = 'H', name = "HazeOver", id = "com.pointum.hazeover"},  -- fixed
   -- {key = 'Z', name = "", id = ""},
   -- {key = 'X', name = "", id = ""},
-  -- {key = 'C', name = "", id = ""},
+  {key = 'C', name = "Chrome", id = "com.google.Chrome"},  -- fixed
   {key = 'V', name = "Code", id = "com.microsoft.VSCode", message = "VS Code"},  -- fixed
   {key = 'B', name = "Bartender 3", id = "com.surteesstudios.Bartender"},
   {key = 'N', name = "Notion", id = "notion.id"},  -- fixed
   {key = 'M', name = "Microsoft Remote Desktop", id = "com.microsoft.rdc.macos"},
-  -- {key = 'M', name = "MindNode", id = "com.ideasoncanvas.mindnode.macos"},
 })
 
+-- Other alt keys bind
 hs.hotkey.bind("alt", 'D', function() simulateKeyPressed('F11') end)
-
--- hs.hotkey.bind("alt", 'Z', function() simulateModsKeyPressed({"ctrl"}, "left") end)
--- hs.hotkey.bind("alt", 'C', function() simulateModsKeyPressed({"ctrl"}, "right") end)
--- hs.hotkey.bind("alt", 'X', "Application windows", function() simulateModsKeyPressed({"ctrl"}, "down") end)
+hs.hotkey.bind("alt", 'Z', function() simulateModsKeyPressed({"ctrl"}, "left") end)
+hs.hotkey.bind("alt", 'X', function() simulateModsKeyPressed({"ctrl"}, "right") end)
