@@ -2,7 +2,7 @@
   "title": "Sol Customization: [M]andatory | [O]ptional",
   "rules": [
     {
-      "description": "[M] CapsLock -> Hyper/Esc(WinOS-excluded) & Shift+CapsLock -> CapsLock",
+      "description": "[M] CapsLock -> Hyper/Esc & Shift+CapsLock -> CapsLock",
       "manipulators": [
         {
           "type": "basic",
@@ -22,16 +22,6 @@
           "to_if_alone": [
             {
               "key_code": "escape"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^com\\.microsoft\\.rdc\\.macos$",
-                "^com\\.parallels\\.winapp",
-                "^com\\.parallels\\.desktop\\.console"
-              ]
             }
           ]
         },
@@ -90,7 +80,7 @@
 
 
     {
-      "description": "[M] LOption(RAlt) + 1234567890-= -> standard F-Keys",
+      "description": "[M] LOption(LAlt) + 1234567890-= -> standard F-Keys",
       "manipulators": [
         {
           "type": "basic",
@@ -436,7 +426,7 @@
 
 
     {
-      "description": "[O] Hyper + w/s/a/d/q/e/r/f -> up/down/left/right/home/end/pgup/pgdn",
+      "description": "[O] Hyper + w/s/a/d/q/e/r/g -> up/down/left/right/home/end/pgup/pgdn, z/x/c -> ctrl+left/up/down, f -> full screen",
       "manipulators": [
         {
           "type": "basic",
@@ -546,7 +536,7 @@
         {
           "type": "basic",
           "from": {
-            "key_code": "f",
+            "key_code": "v",
             "modifiers": {
               "mandatory": ["command", "control", "option", "shift"],
               "optional": ["caps_lock"]
@@ -555,6 +545,70 @@
           "to": [
             {
               "key_code": "page_down"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "z",
+            "modifiers": {
+              "mandatory": ["command", "control", "option", "shift"],
+              "optional": ["caps_lock"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": ["control"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "x",
+            "modifiers": {
+              "mandatory": ["command", "control", "option", "shift"],
+              "optional": ["caps_lock"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow",
+              "modifiers": ["control"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": ["command", "control", "option", "shift"],
+              "optional": ["caps_lock"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": ["control"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": ["command", "control", "option", "shift"],
+              "optional": ["caps_lock"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f",
+              "modifiers": ["command", "control"]
             }
           ]
         }

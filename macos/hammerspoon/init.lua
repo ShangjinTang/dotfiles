@@ -143,7 +143,5 @@ appLaunch:setConfigs({
   {key = 'M', name = "Microsoft Remote Desktop", id = "com.microsoft.rdc.macos"},
 })
 
--- Other alt keys bind
+-- Other alt keys binding
 hs.hotkey.bind("alt", 'D', function() simulateKeyPressed('F11') end)
-hs.hotkey.bind("alt", 'Z', function() simulateModsKeyPressed({"ctrl"}, "left") end)
-hs.hotkey.bind("alt", 'X', function() simulateModsKeyPressed({"ctrl"}, "right") end)
