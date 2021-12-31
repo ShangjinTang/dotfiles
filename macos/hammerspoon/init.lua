@@ -10,6 +10,8 @@ if hs.fs.displayName("./config_nosync.lua") then
   require("config_nosync")
 end
 
+HYPER = {"cmd", "ctrl", "alt", "shift"}
+
 -- Hammerspoon Arguments Configuration
   -- Disable useless window hints (icons at the front of every app with CMD+TAB)
   hs.hints.showTitleThresh = 0
@@ -83,19 +85,28 @@ periodicallyUpdateWeather:start()
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 -- Quick Search
-quickSearch = require("QuickSearch")
-quickSearch:setMods({"alt", "shift"})
-quickSearch:setConfigs({
+-- quickSearch = require("QuickSearch")
+-- quickSearch:setMods({"alt", "shift"})
+-- quickSearch:setConfigs({
+--   {key = '', searchUrl = "", fallbackUrl = "", message = ""},
+--   {key = 'T', searchUrl = "https://translate.google.com/?sl=auto&tl=zh-CN&text=", fallbackUrl = "https://translate.google.com/?sl=auto&tl=zh-CN", message = "Google Translate"},
+--   {key = 'S', searchUrl = "https://www.google.com/search?q=", fallbackUrl = "https://www.google.com/", message = "Search with Google"},
+--   {key = 'G', searchUrl = "https://github.com/search?&q=", fallbackUrl = "https://github.com/", message = "Search with GitHub"},
+--   {key = 'A', searchUrl = "https://cs.android.com/search?q=", fallbackUrl = "https://cs.android.com/", message = "Android Code Search"},
+--   {key = 'B', searchUrl = "https://search.bilibili.com/all?keyword=", fallbackUrl = "https://www.bilibili.com/", message = "Search with Bilibili"},
+--   {key = 'B', searchUrl = "http://www.baidu.com/s?wd=", fallbackUrl = "http://www.baidu.com/", message = "Search with Baidu"},
+--   {key = 'C', searchUrl = "https://so.csdn.net/so/search/s.do?q=", fallbackUrl = "https://www.csdn.net/", message = "Search with CSDN"},
+--   {key = 'W', searchUrl = "https://wikipedia.org/wiki/Special:Search/", fallbackUrl = "https://www.wikipedia.org/", message = "Search with Wikipedia"},
+--   {key = 'Z', searchUrl = "https://www.zhihu.com/search?q=", fallbackUrl = "https://www.zhihu.com/", message = "Search with Zhihu"},
+-- })
+
+hyperSearch = require("QuickSearch")
+hyperSearch:setMods(HYPER)
+hyperSearch:setConfigs({
   -- {key = '', searchUrl = "", fallbackUrl = "", message = ""},
-  {key = 'S', searchUrl = "https://www.google.com/search?q=", fallbackUrl = "https://www.google.com/", message = "Search with Google"},
+  {key = 'G', searchUrl = "https://www.google.com/search?q=", fallbackUrl = "https://www.google.com/", message = "Search with Google"},
   {key = 'T', searchUrl = "https://translate.google.com/?sl=auto&tl=zh-CN&text=", fallbackUrl = "https://translate.google.com/?sl=auto&tl=zh-CN", message = "Google Translate"},
-  {key = 'G', searchUrl = "https://github.com/search?&q=", fallbackUrl = "https://github.com/", message = "Search with GitHub"},
-  {key = 'A', searchUrl = "https://cs.android.com/search?q=", fallbackUrl = "https://cs.android.com/", message = "Android Code Search"},
-  {key = 'B', searchUrl = "https://search.bilibili.com/all?keyword=", fallbackUrl = "https://www.bilibili.com/", message = "Search with Bilibili"},
-  -- {key = 'B', searchUrl = "http://www.baidu.com/s?wd=", fallbackUrl = "http://www.baidu.com/", message = "Search with Baidu"},
-  {key = 'C', searchUrl = "https://so.csdn.net/so/search/s.do?q=", fallbackUrl = "https://www.csdn.net/", message = "Search with CSDN"},
-  {key = 'W', searchUrl = "https://wikipedia.org/wiki/Special:Search/", fallbackUrl = "https://www.wikipedia.org/", message = "Search with Wikipedia"},
-  {key = 'Z', searchUrl = "https://www.zhihu.com/search?q=", fallbackUrl = "https://www.zhihu.com/", message = "Search with Zhihu"},
+  {key = 'B', searchUrl = "http://www.baidu.com/s?wd=", fallbackUrl = "http://www.baidu.com/", message = "Search with Baidu"},
 })
 
 ------------------------------------------------------------------------------------------
