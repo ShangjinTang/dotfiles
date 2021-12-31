@@ -32,7 +32,7 @@ Note: On MacBook, F5 is for Siri and F6 is for Do-Not-Disturb, cannot be customi
 
 ### How to disable hyper keys for Windows OS
 
-Disable keys in Microsoft Remote Desktop & Parallel Desktop
+Disable keys in Microsoft Remote Desktop & Parallel Desktop:
 
 ```json
 "conditions": [
@@ -44,12 +44,13 @@ Disable keys in Microsoft Remote Desktop & Parallel Desktop
       "^com\\.parallels\\.desktop\\.console"
     ]
   }
+]
 ```
 
 ### Prevent hyper key (Win+Ctrl+Alt+Shift) opens office in Windows
 
-Run follow command in Windows CMD
+Run follow command in Windows CMD:
 
-```
+```plain
 REG ADD HKCU\Software\Classes\ms-officeapp\Shell\Open\Command /t REG_SZ /d rundll32
 ```
