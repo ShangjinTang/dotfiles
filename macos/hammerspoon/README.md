@@ -14,19 +14,16 @@ To add non-sync configurations:
 2. Add configuration `CONFIG_NOSYNC_* = <value>` in this file.
 3. Use `CONFIG_NOSYNC_*` in main `~/.hammerspoon/init.lua`.
 
+**Note: Hyper key is based on KE (Karabiner-Elements).**
+
 ## Quick Search
 
 Select some text and search.
 If no text or empty text is selected, press a key will open corresponding homepage.
 
-- **⌥⇧S** : Search with Google
-- **⌥⇧T** : Google Translate
-- **⌥⇧G** : Search with GitHub
-- **⌥⇧A** : Android Code Search
-- **⌥⇧B** : Search with Bilibili
-- **⌥⇧C** : Search with CSDN
-- **⌥⇧W** : Search with Wikipedia
-- **⌥⇧Z** : Search with Zhihu
+- **Hyper+G** : Search with Google
+- **Hyper+T** : Google Translate
+- **Hyper+B** : Search with Baidu
 
 ## App Launch
 
@@ -35,13 +32,6 @@ If no text or empty text is selected, press a key will open corresponding homepa
 
 Quick Launch a specified app. Fixed apps are:
 
-- Numeric
-  - **⇧1** : Chrome
-  - **⇧2** : Safari
-  - **⇧7** : Android Studio
-  - **⇧8** : Intellij Idea
-  - **⇧9** : CLion
-  - **⇧0** : PyCharm
 - Alpha
   - **⇧Q** : IINA
   - **⇧W** : WeChat
@@ -54,6 +44,7 @@ Quick Launch a specified app. Fixed apps are:
   - **⇧S** : System Preferences
   - **⇧F** : ForkLift (or Finder)
   - **⇧H** : HazeOver
+  - **⇧C** : Chrome
   - **⇧V** : VS Code
   - **⇧B** : Bartender 3
   - **⇧N** : Notion
