@@ -621,6 +621,7 @@
       "description": "[M] LShift/RShift -> Switch input to English/Chinese; need to set input shortcut to F19(Shift) in settings",
       "manipulators": [
         {
+          "type": "basic",
           "conditions": [
             {
               "input_sources": [
@@ -662,10 +663,10 @@
             {
               "key_code": "left_shift"
             }
-          ],
-          "type": "basic"
+          ]
         },
         {
+          "type": "basic",
           "conditions": [
             {
               "input_sources": [
@@ -707,10 +708,10 @@
             {
               "key_code": "left_shift"
             }
-          ],
-          "type": "basic"
+          ]
         },
         {
+          "type": "basic",
           "conditions": [
             {
               "input_sources": [
@@ -752,10 +753,10 @@
             {
               "key_code": "right_shift"
             }
-          ],
-          "type": "basic"
+          ]
         },
         {
+          "type": "basic",
           "conditions": [
             {
               "input_sources": [
@@ -797,8 +798,7 @@
             {
               "key_code": "right_shift"
             }
-          ],
-          "type": "basic"
+          ]
         }
       ]
     }
