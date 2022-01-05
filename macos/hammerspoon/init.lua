@@ -106,7 +106,7 @@ hyperSearch:setConfigs({
   -- {key = '', searchUrl = "", fallbackUrl = "", message = ""},
   {key = 'G', searchUrl = "https://www.google.com/search?q=", fallbackUrl = "https://www.google.com/", message = "Search with Google"},
   {key = 'T', searchUrl = "https://translate.google.com/?sl=auto&tl=zh-CN&text=", fallbackUrl = "https://translate.google.com/?sl=auto&tl=zh-CN", message = "Google Translate"},
-  {key = 'B', searchUrl = "http://www.baidu.com/s?wd=", fallbackUrl = "http://www.baidu.com/", message = "Search with Baidu"},
+  {key = 'B', searchUrl = "", fallbackUrl = "https://www.bilibili.com/", message = "Bilibili"},
 })
 
 ------------------------------------------------------------------------------------------
