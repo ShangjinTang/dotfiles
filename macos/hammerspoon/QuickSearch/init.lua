@@ -10,18 +10,21 @@ local function stripSpace(s)
 end
 
 local function searchWithEngine(searchUrl, fallbackUrl)
-    oldData = hs.pasteboard.readAllData()
-    hs.pasteboard.clearContents()
-
-    hs.eventtap.keyStroke({"cmd"}, "c", 0)
-    hs.timer.doAfter(0.1, function()
-        local copiedString = stripSpace(hs.pasteboard.readString())
-        if not isEmpty(copiedString) and not isEmpty(searchUrl) then
-            hs.urlevent.openURL(searchUrl .. hs.http.encodeForQuery(copiedString))
-        elseif not isEmpty(fallbackUrl) then
-            hs.urlevent.openURL(fallbackUrl)
-        end
-    end)
+    if isEmpty(searchUrl) and not isEmpty(fallbackUrl) then
+        hs.urlevent.openURL(fallbackUrl)
+    else
+        oldData = hs.pasteboard.readAllData()
+        hs.pasteboard.clearContents()
+        hs.eventtap.keyStroke({"cmd"}, "c", 0)
+        hs.timer.doAfter(0.1, function()
+            local copiedString = stripSpace(hs.pasteboard.readString())
+            if not isEmpty(copiedString) and not isEmpty(searchUrl) then
+                hs.urlevent.openURL(searchUrl .. hs.http.encodeForQuery(copiedString))
+            elseif not isEmpty(fallbackUrl) then
+                hs.urlevent.openURL(fallbackUrl)
+            end
+        end)
+    end
 end
 
 ------------------------------------------------------------------------------------------
