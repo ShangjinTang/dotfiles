@@ -10,23 +10,26 @@ Install from [Hammerspoon Offcial](https://karabiner-elements.pqrs.org/).
 
 Note: Do not map Hyper + comma(`,`) period(`.`) or slash(`/`) on macOS.
 
-### LOption(LAlt) + 1234567890-= -> standard F-Keys
-
-Note: currently do not support optional keys adding.
-
-### ROption(RAlt) + 12347890-= -> non-standard F-Keys
+### Option(Alt) + 12347890-= -> non-standard F-Keys
 
 Note: On MacBook, F5 is for Siri and F6 is for Do-Not-Disturb, cannot be customized in KE.
 
 ## Optional Key Mapping
 
-### Hyper + QWER / ASDF / ZXCV
+### Hyper + WSAD / QE / RF / ZXC / Enter
 
 - Hyper + W/S/A/D: Up/Down/Left/Right
 - Hyper + Q/E: Home/End
-- Hyper + R/V: PgUp/PgDn
+- Hyper + R/F: PgUp/PgDn
 - Hyper + Z/X/C: Ctrl + Left/Up/Right
-- Hyper + F: ⌃⌘F (Full Screen)
+- Hyper + Enter: ⌃⌘F (Full Screen)
+
+## Other Apps Key Mapping
+
+- Hyper + Space: Toggle Alfred
+- Hyper + V: Clipboard (Alfred 4)
+- Hyper + 3: Snipaste - Snip
+- Hyper + 4: Snipaste - Hide/Show all images
 
 ## Issues
 
