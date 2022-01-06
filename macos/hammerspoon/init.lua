@@ -140,7 +140,7 @@ appLaunch:setConfigs({
   {key = 'H', name = "HazeOver", id = "com.pointum.hazeover"},  -- fixed
   -- {key = 'J', name = "", id = ""},
   {key = 'K', name = "Karabiner-Elements", id = "org.pqrs.Karabiner-Elements.Preferences"},  -- fixed
-  {key = 'L', name = "Lunar", id = "site.lunarapp.Lunar"},  -- fixed
+  -- {key = 'L', name = "", id = ""},
   -- {key = 'Z', name = "", id = ""},
   -- {key = 'X', name = "", id = ""},
   {key = 'C', name = "Chrome", id = "com.google.Chrome"},  -- fixed
