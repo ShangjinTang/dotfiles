@@ -122,18 +122,23 @@ appLaunch:setConfigs({
     -- name -> CFBundleName
   -- {key = '', name = ""[, id = ""][,message = ""]},
 
-  {key = 'Q', name = "IINA", id = "com.colliderli.iina"},
+  -- {key = 'Q', name = "", id = ""},
   {key = 'W', name = "WeChat", id = "com.tencent.xinWeChat"},  -- fixed
   {key = 'E', name = "NeteaseMusic", id = "com.netease.163music"},  -- fixed
   {key = 'R', name = "TickTick", id = "com.TickTick.task.mac"},
   {key = 'T', name = "Terminal", id = "com.apple.Terminal"},  -- system fixed
+  -- {key = 'Y', name = "", id = ""},
   {key = 'U', name = "App Cleaner", id = "com.nektony.App-Cleaner-SII"},
+  {key = 'I', name = "IINA", id = "com.colliderli.iina"},
+  -- {key = 'O', name = "", id = ""},
   {key = 'P', name = "Parallels Desktop", id = "com.parallels.desktop.console"},  -- fixed
   {key = 'A', name = "Launchpad", id = "com.apple.launchpad.launcher"},  -- system fixed
   {key = 'S', name = "System Preferences", id = "com.apple.systempreferences"},  -- system fixed
-  {key = 'F', name = "ForkLift", id = "com.binarynights.ForkLift-3"},  -- fixed
-  -- {key = 'F', name = "Finder", id = "com.apple.finder"},  -- fixed
+  -- {key = 'D', name = "", id = ""},  -- used for mapping Alt+D to F11 (show desktop)
+  {key = 'F', name = "ForkLift", id = "com.binarynights.ForkLift-3"},  -- fixed (optional: Finder/com.apple.finder)
+  -- {key = 'G', name = "", id = ""},
   {key = 'H', name = "HazeOver", id = "com.pointum.hazeover"},  -- fixed
+  -- {key = 'J', name = "", id = ""},
   {key = 'K', name = "Karabiner-Elements", id = "org.pqrs.Karabiner-Elements.Preferences"},  -- fixed
   {key = 'L', name = "Lunar", id = "site.lunarapp.Lunar"},  -- fixed
   -- {key = 'Z', name = "", id = ""},
