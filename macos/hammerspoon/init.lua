@@ -134,6 +134,8 @@ appLaunch:setConfigs({
   {key = 'F', name = "ForkLift", id = "com.binarynights.ForkLift-3"},  -- fixed
   -- {key = 'F', name = "Finder", id = "com.apple.finder"},  -- fixed
   {key = 'H', name = "HazeOver", id = "com.pointum.hazeover"},  -- fixed
+  {key = 'K', name = "Karabiner-Elements", id = "org.pqrs.Karabiner-Elements.Preferences"},  -- fixed
+  {key = 'L', name = "Lunar", id = "site.lunarapp.Lunar"},  -- fixed
   -- {key = 'Z', name = "", id = ""},
   -- {key = 'X', name = "", id = ""},
   {key = 'C', name = "Chrome", id = "com.google.Chrome"},  -- fixed
@@ -145,3 +147,15 @@ appLaunch:setConfigs({
 
 -- Other alt keys binding
 hs.hotkey.bind("alt", 'D', function() simulateKeyPressed('F11') end)
+
+hs.hotkey.bind("alt", '/', function()
+  simulateModsKeyPressed({"shift"},'e')
+  simulateKeyPressed('r')
+  simulateKeyPressed('a')
+  simulateModsKeyPressed({"shift"},'2')
+  simulateKeyPressed('2')
+  simulateKeyPressed('0')
+  simulateKeyPressed('2')
+  simulateKeyPressed('2')
+  simulateKeyPressed('return')
+end)
