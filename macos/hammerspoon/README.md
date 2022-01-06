@@ -60,5 +60,5 @@ Show weather on status bar, support:
 - today's AQI, sunrise & sunset
 - weather within 24 hours (can be closed by `weatherStatusBar:setHourWeatherEnabled()`)
 
-> To customize weather city, set `CONFIG_NOSYNC_WEATHER_CITY` to cityname.  
+> To customize weather city, set `CONFIG_NOSYNC_WEATHER_CITY` to cityname in `~/.hammerspoon/config_nosync.lua`.  
 > e.g. `CONFIG_NOSYNC_WEATHER_CITY = "上海"`
