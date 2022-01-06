@@ -33,12 +33,12 @@ If no text or empty text is selected, press a key will open corresponding homepa
 Quick Launch a specified app. Fixed apps are:
 
 - Alpha
-  - **⇧Q** : IINA
   - **⇧W** : WeChat
   - **⇧E** : NeteaseMusic
   - **⇧R** : TickTick
   - **⇧T** : Terminal
   - **⇧U** : App Cleaner
+  - **⇧I** : IINA
   - **⇧P** : Parallel Desktop
   - **⇧A** : Launchpad
   - **⇧S** : System Preferences
