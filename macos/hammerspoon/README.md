@@ -45,7 +45,6 @@ Quick Launch a specified app. Fixed apps are:
   - **⇧F** : ForkLift (or Finder)
   - **⇧H** : HazeOver
   - **⇧K** : Karabiner-Elements
-  - **⇧L** : Lunar
   - **⇧C** : Chrome
   - **⇧V** : VS Code
   - **⇧B** : Bartender 3
