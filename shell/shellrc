@@ -14,7 +14,12 @@ if [ -d "$HOME/bin" ]; then
 fi
 
 # Proxy (V2Ray)
-alias setproxy='export https_proxy=http://127.0.0.1:1080 http_proxy=http://127.0.0.1:1080 all_proxy=socks5://127.0.0.1:1080 '
+if [ -f ~/.proxy_ip ]; then
+    export PROXY_IP=$(cat ~/.proxy_ip)
+else
+    export PROXY_IP="127.0.0.1:1080"
+fi
+alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=socks5://$PROXY_IP"
 alias unsetproxy='unset https_proxy http_proxy all_proxy'
 # setproxy by flag file
 if [ -f ~/.dotfiles.local/.flag.proxy ]; then
