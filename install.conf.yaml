@@ -41,7 +41,8 @@
     # macOS only
     ~/bin/rg: macos/bin/rg
     ~/.hammerspoon: macos/hammerspoon
-    ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner-elements/custom.json
+    ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner/custom.json
+    ~/.config/clash/config.yaml: macos/clash/config.yaml
 
 
 # link for Linux(Ubuntu)
