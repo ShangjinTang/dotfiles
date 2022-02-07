@@ -62,9 +62,10 @@ proxies:
     skip-cert-verify: true
     servername: gcn.szdev.com
     network: ws
-    ws-path: /qwerty/
-    ws-headers:
-      Host: gcn.szdev.com
+    ws-opts:
+      path: /qwerty/
+      headers:
+        Host: gcn.szdev.com
 
 rule-providers:
 # type: http/local. http means a remote file, filemeans a local file.
