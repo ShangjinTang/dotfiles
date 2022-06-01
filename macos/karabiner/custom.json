@@ -64,9 +64,9 @@
           "to": []
         },
         {
+          "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+/",
+          "type": "basic",
           "from": {
-            "description": "Avoid starting sysdiagnose with the built-in macOS shortcut cmd+shift+option+ctrl+/",
-            "type": "basic",
             "key_code": "slash",
             "modifiers": {
               "mandatory": ["command", "control", "option", "shift"]
