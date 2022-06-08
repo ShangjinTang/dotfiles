@@ -11,6 +11,7 @@
 	name = Shangjin Tang
 [core]
 	editor = vim
+	excludesfile = ~/.dotfiles/gitignore
 [color]
 	ui = auto
 [credential]
