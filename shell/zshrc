@@ -29,3 +29,5 @@ if [ -f ~/.dotfiles.local/.flag.tmux_auto_launch ]; then
         tmux attach-session -t 0:1 2> /dev/null || tmux new-session -s 0
     fi
 fi
+
+[ -f ~/.dotfiles.local/.zshrc ] && source ~/.dotfiles.local/.zshrc
