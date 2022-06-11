@@ -31,3 +31,5 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias _='sudo '
+
+[ -f ~/.dotfiles.local/.bashrc ] && source ~/.dotfiles.local/.bashrc
