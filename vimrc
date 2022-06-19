@@ -200,6 +200,7 @@ let g:airline_symbols.dirty = " !"
 " ### NERDTree
 let NERDTreeShowBookmarks = 1
 let NERDTreeQuitOnOpen = 1  " 1 = Close file, 2 = Close bookmark, 3 = Both
+let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.out$[[file]]', '^tags$[[file]]']
 nnoremap <leader><leader> :NERDTreeToggle<cr>
 
 " ----------------------------------------------------------
