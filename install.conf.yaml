@@ -16,7 +16,6 @@
     ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
-    ~/.gitmux.conf: tmux/gitmux/gitmux.conf
     # configs
     ~/.vimrc: vimrc
     ~/.tmux.conf.local: tmux/tmux.conf.local
@@ -37,7 +36,7 @@
       if: '[ $(uname) = Darwin ]'
 - link:
     ~/.tmux.conf.local.os: tmux/tmux.conf.local.macos
-    ~/.gitmux: tmux/gitmux/gitmux.macos.amd64
+    ~/.dotfiles.os/gitmux: tmux/gitmux/gitmux.macos.amd64
     # macOS only
     ~/bin/rg: macos/bin/rg
     ~/.hammerspoon: macos/hammerspoon
@@ -57,7 +56,7 @@
       if: '[ $(uname) = Linux ]'
 - link:
     ~/.tmux.conf.local.os: tmux/tmux.conf.local.linux
-    ~/.gitmux: tmux/gitmux/gitmux.linux.amd64
+    ~/.dotfiles.os/gitmux: tmux/gitmux/gitmux.linux.amd64
 
 
 
