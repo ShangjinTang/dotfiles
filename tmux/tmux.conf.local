@@ -205,7 +205,7 @@ tmux_conf_theme_right_separator_sub="|"
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 tmux_conf_theme_status_left=" ❐ #S | #{username}#{root} | #{pairing}#{synchronized}#{prefix}"
 # month date: %m/%d
-tmux_conf_theme_status_right="#(~/.gitmux -cfg ~/.gitmux.conf #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
+tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/tmux/gitmux/gitmux.conf #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
 # Shangjin edit end
 
 # status left style
