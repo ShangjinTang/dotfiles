@@ -11,13 +11,14 @@ Managed by [dotbot](https://github.com/anishathalye/dotbot).
 ```bash
 # macOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  # install homebrew
-brew install vim git tmux zsh reattach-to-user-namespace
+brew install vim git tmux zsh curl tree reattach-to-user-namespace tldr
 ```
 
 ```bash
 # Linux
 sudo apt update
-sudo apt install vim git tmux zsh ripgrep xclip
+sudo apt install vim git tmux zsh curl tree ripgrep xclip python3-pip
+sudo pip3 install tldr
 ```
 
 ### Dotfiles Install
@@ -26,7 +27,7 @@ sudo apt install vim git tmux zsh ripgrep xclip
 # First time install
 git clone --depth 1 https://github.com/ShangjinTang/dotfiles ~/.dotfiles && ~/.dotfiles/install
 
-# Update (if some errors are occured after update, sometimes need to manually remove old symlinks in $HOME directory)
+# Update (sometimes need to manually remove old symlinks to resolve errors)
 git pull && ~/.dotfiles/install
 ```
 
@@ -45,8 +46,8 @@ vim +PlugInstall
 ## dotfiles customization
 
 1. Add configuration files.
-2. Edit `preinstall` to create flags to dynamic control fuctions (platform-independent) toggle on or off.
-3. Edit `install.conf.yaml` to create symlink.
+2. Edit `install.conf.yaml` to create symlink.
+3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation.
 
 ---
 
@@ -99,16 +100,16 @@ use fzf as rg(ripgrep)'s backend
 
 ### shellrc (zshrc / bashrc)
 
-- add ~/bin to path
-- use similar aliases in zsh & bash
-- setproxy/unsetproxy on port 1080
-- ssh to VPS machines
-
+- Edit `pre_shellrc / post_shellrc / zshrc / bashrc` for synced (symlink) configurations
+- Edit `~/.zshrc.local` or `~/.bashrc.local` for non-synced (local) configurations
+- Priority: `pre_shellrc` > `.*shrc` > `~/*shrc.local` > `post_shellrc`
 
 #### [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
 
 - plugins:
+  - [z](https://github.com/rupa/z)
   - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+  - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - theme:
   - self-customized theme 'sol-light'
 
