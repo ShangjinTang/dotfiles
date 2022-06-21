@@ -1,4 +1,4 @@
-[ -f ~/.dotfiles/shell/shellrc ] && source ~/.dotfiles/shell/shellrc
+[ -f ~/.dotfiles/shell/pre_shellrc ] && source ~/.dotfiles/shell/pre_shellrc
 
 # enable ohmyzsh auto update
 zstyle ':omz:update' mode auto
@@ -22,12 +22,6 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# set tmux auto launch by flag file
-if [ -f ~/.dotfiles.local/.flag.tmux_auto_launch ]; then
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-        tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
-        tmux attach-session -t 0:1 2> /dev/null || tmux new-session -s 0
-    fi
-fi
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-[ -f ~/.dotfiles.local/.zshrc ] && source ~/.dotfiles.local/.zshrc
+[ -f ~/.dotfiles/shell/post_shellrc ] && source ~/.dotfiles/shell/post_shellrc

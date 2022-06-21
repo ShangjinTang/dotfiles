@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# mkdir ~/.dotfiles.local &> /dev/null
+# pushd ~/.dotfiles.local

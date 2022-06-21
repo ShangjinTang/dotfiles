@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-[ -f "$SCRIPT_DIR/preinstall" ] && "$SCRIPT_DIR/preinstall"
+
+[ -f "$SCRIPT_DIR/pre_install" ] && "$SCRIPT_DIR/pre_install"
 
 set -e
 
@@ -16,3 +17,5 @@ git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+
+[ -f "$SCRIPT_DIR/post_install" ] && "$SCRIPT_DIR/post_install"
