@@ -68,6 +68,9 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - `t <session-name>`: open session with *session-name*; if attach fail, will create
   - `tl`: list all sessions
   - `tk`: kill all sessions except session 0
+  - `ta`: attach to session with specified name
+  - `tn`: create a new session with specified name
+
 
 ### vim with [vim-plug](https://github.com/junegunn/vim-plug)
 
