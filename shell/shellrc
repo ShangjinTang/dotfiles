@@ -28,6 +28,9 @@ else
     unsetproxy
 fi
 
+# Vim
+alias v='vim'
+
 # Git
 alias g='git'
 alias gpristine='git reset --hard && git clean -dfx'
@@ -44,6 +47,7 @@ if command -v tmux &> /dev/null; then
     }
     alias tk='tmux kill-session -at 0'
     alias tl='tmux list-sessions'
+    alias ta='tmux attach -t'
 fi
 
 
