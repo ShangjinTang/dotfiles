@@ -1,0 +1,3 @@
+export PROXY_IP="127.0.0.1:1080"
+export PROXY_ENABLED="Y"
+export TMUX_AUTO_LAUNCH="Y"

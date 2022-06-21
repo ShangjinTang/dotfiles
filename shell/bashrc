@@ -1,18 +1,10 @@
-[ -f ~/.dotfiles/shell/shellrc ] && source ~/.dotfiles/shell/shellrc
+[ -f ~/.dotfiles/shell/pre_shellrc ] && source ~/.dotfiles/shell/pre_shellrc
 
 [ -f ~/.dotfiles/linux/z.sh ] && source ~/.dotfiles/linux/z.sh
 
 [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# set tmux auto launch by flag file
-if [ -f ~/.dotfiles.local/.flag.tmux_auto_launch ]; then
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-        tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
-        tmux attach-session -t 0:1 2> /dev/null || tmux new-session -s 0
-    fi
-fi
 
 # Use aliases from zsh
 alias ls='ls --color=auto'
@@ -32,4 +24,6 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias _='sudo '
 
-[ -f ~/.dotfiles.local/.bashrc ] && source ~/.dotfiles.local/.bashrc
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+
+[ -f ~/.dotfiles/shell/post_shellrc ] && source ~/.dotfiles/shell/post_shellrc

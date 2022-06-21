@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ $(basename $SHELL) = bash ] && [ ! -f ~/.bashrc.local ]; then
+    cp ~/.dotfiles/shell/default_local_shellrc .bashrc.local
+elif [ $(basename $SHELL) = zsh ] && [ ! -f .zshrc.local ]; then
+    cp ~/.dotfiles/shell/default_local_shellrc .zshrc.local
+fi
