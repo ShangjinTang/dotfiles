@@ -9,9 +9,12 @@ export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 
 alias grep='grep --color=auto'
 
-if [ -d "$HOME/bin" ]; then
-    export PATH="$PATH:$HOME/bin"
-fi
+PATHAPPEND() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+PATHAPPEND "$HOME/bin"
 
 # Misc
 alias c='clear'
