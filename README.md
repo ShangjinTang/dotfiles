@@ -35,7 +35,7 @@ git pull && ~/.dotfiles/install
 
 
 ```bash
-# fzf installation (select Y,Y,N respectively)
+# fzf installation
 ~/.fzf/install
 # install vim plugins
 vim +PlugInstall
