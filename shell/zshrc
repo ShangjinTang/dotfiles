@@ -1,4 +1,12 @@
-[ -f ~/.dotfiles/shell/pre_shellrc ] && source ~/.dotfiles/shell/pre_shellrc
+######################################################################
+
+INCLUDE () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+INCLUDE ~/.dotfiles/shell/pre_shellrc
+
+######################################################################
 
 # enable ohmyzsh auto update
 zstyle ':omz:update' mode auto
@@ -23,8 +31,12 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+INCLUDE ~/.fzf.zsh
 
-[ -f ~/.zshrc.local.sol ] && source ~/.zshrc.local.sol
+######################################################################
 
-[ -f ~/.dotfiles/shell/post_shellrc ] && source ~/.dotfiles/shell/post_shellrc
+INCLUDE ~/.zshrc.local
+INCLUDE ~/.zshrc.local.sol
+INCLUDE ~/.dotfiles/shell/post_shellrc
+
+######################################################################
