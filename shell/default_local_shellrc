@@ -1,9 +1,18 @@
 # Terminal Color
+# xterm-256 color chart:
+#   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 export TERM=xterm-256color
+
+# zsh-autosuggestions
+#   https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
+
 
 # Proxy
 export PROXY_IP="127.0.0.1:1080"
 export PROXY_ENABLED="Y"
 
+
 # Tmux
 export TMUX_AUTO_LAUNCH="Y"
+
