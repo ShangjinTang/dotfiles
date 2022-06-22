@@ -11,13 +11,13 @@ Managed by [dotbot](https://github.com/anishathalye/dotbot).
 ```bash
 # macOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  # install homebrew
-brew install vim git tmux zsh curl tree reattach-to-user-namespace tldr
+brew install vim git tmux zsh curl tree shellcheck reattach-to-user-namespace tldr
 ```
 
 ```bash
 # Linux
 sudo apt update
-sudo apt install vim git tmux zsh curl tree ripgrep xclip python3-pip
+sudo apt install vim git tmux zsh curl ripgrep tree shellcheck xclip python3-pip
 sudo pip3 install tldr
 ```
 
