@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
-if [ $(basename $SHELL) = bash ] && [ ! -f ~/.bashrc.local ]; then
-    cp ~/.dotfiles/shell/default_local_shellrc .bashrc.local
-elif [ $(basename $SHELL) = zsh ] && [ ! -f .zshrc.local ]; then
-    cp ~/.dotfiles/shell/default_local_shellrc .zshrc.local
+if [ $(basename $SHELL) = bash ]; then
+    if [ ! -f ~/.bashrc.local ]; then
+        cp ~/.dotfiles/shell/local_shellrc_default ~/.bashrc.local
+    fi
+    if [ ! -f ~/.bashrc.local.sol ]; then
+        touch ~/.bashrc.local.sol
+    fi
+elif [ $(basename $SHELL) = zsh ]; then
+    if [ ! -f ~/.zshrc.local ]; then
+        cp ~/.dotfiles/shell/local_shellrc_default ~/.zshrc.local
+    fi
+    if [ ! -f ~/.zshrc.local.sol ]; then
+        touch ~/.zshrc.local.sol
+    fi
 fi
