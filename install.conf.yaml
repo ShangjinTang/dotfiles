@@ -22,6 +22,7 @@
     ~/.tmux.conf.local: tmux/tmux.conf.local
     ~/.gitconfig: gitconfig
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
+    ~/.config/bat/config: configs/bat.config
 
 
 
