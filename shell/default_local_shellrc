@@ -1,3 +1,9 @@
+# Terminal Color
+export TERM=xterm-256color
+
+# Proxy
 export PROXY_IP="127.0.0.1:1080"
 export PROXY_ENABLED="Y"
+
+# Tmux
 export TMUX_AUTO_LAUNCH="Y"
