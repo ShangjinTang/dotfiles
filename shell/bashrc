@@ -26,4 +26,6 @@ alias _='sudo '
 
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
+[ -f ~/.bashrc.local.sol ] && source ~/.bashrc.local.sol
+
 [ -f ~/.dotfiles/shell/post_shellrc ] && source ~/.dotfiles/shell/post_shellrc

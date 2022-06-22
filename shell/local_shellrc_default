@@ -15,4 +15,3 @@ export PROXY_ENABLED="Y"
 
 # Tmux
 export TMUX_AUTO_LAUNCH="Y"
-

@@ -25,6 +25,6 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.zshrc.local.sol ] && source ~/.zshrc.local.sol
 
 [ -f ~/.dotfiles/shell/post_shellrc ] && source ~/.dotfiles/shell/post_shellrc
