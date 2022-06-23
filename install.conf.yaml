@@ -18,11 +18,12 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-    ~/.vimrc: vimrc
-    ~/.tmux.conf.local: tmux/tmux.conf.local
-    ~/.gitconfig: gitconfig
+    ~/.vimrc: configs/.vimrc
+    ~/.gitconfig: configs/.gitconfig
+    ~/.gitignore: configs/.gitignore
+    ~/.tmux.conf.local: configs/.tmux.conf.local
+    ~/.config/bat/config: configs/.bat.config
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
-    ~/.config/bat/config: configs/bat.config
 
 
 
@@ -39,7 +40,7 @@
       if: '[ $(uname) = Darwin ]'
 - link:
     ~/bin/: macos/bin/*
-    ~/.tmux.conf.local.os: tmux/tmux.conf.local.macos
+    ~/.tmux.conf.local.os: configs/.tmux.conf.local.macos
     ~/.dotfiles.os/gitmux: tmux/gitmux/gitmux.macos.amd64
     # macOS only
     ~/.hammerspoon: macos/hammerspoon
@@ -60,9 +61,8 @@
       if: '[ $(uname) = Linux ]'
 - link:
     ~/bin/: linux/bin/*
-    ~/.tmux.conf.local.os: tmux/tmux.conf.local.linux
+    ~/.tmux.conf.local.os: configs/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: tmux/gitmux/gitmux.linux.amd64
-    ~/bin/: linux/bin/*
 
 
 
