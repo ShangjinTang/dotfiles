@@ -41,7 +41,7 @@
 - link:
     ~/bin/: macos/bin/*
     ~/.tmux.conf.local.os: configs/.tmux.conf.local.macos
-    ~/.dotfiles.os/gitmux: tmux/gitmux/gitmux.macos.amd64
+    ~/.dotfiles.os/gitmux: gitmux/gitmux.macos.amd64
     # macOS only
     ~/.hammerspoon: macos/hammerspoon
     ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner/custom.json
@@ -62,7 +62,7 @@
 - link:
     ~/bin/: linux/bin/*
     ~/.tmux.conf.local.os: configs/.tmux.conf.local.linux
-    ~/.dotfiles.os/gitmux: tmux/gitmux/gitmux.linux.amd64
+    ~/.dotfiles.os/gitmux: gitmux/gitmux.linux.amd64
 
 
 
