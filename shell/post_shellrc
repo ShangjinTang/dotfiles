@@ -5,7 +5,7 @@
 alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=http://$PROXY_IP"
 alias unsetproxy="unset https_proxy http_proxy all_proxy"
 # setproxy
-if [[ $PROXY_ENABLED = Y ]] || [[ $PROXY_ENABLED = y ]]; then
+if [[ $PROXY_ENABLED = "Y" ]] || [[ $PROXY_ENABLED = "y" ]]; then
     setproxy
 else
     unsetproxy
@@ -14,7 +14,7 @@ fi
 
 # NOTE: THIS TMUX CONFIGURATION MUST BE AT THE END OF FILE
 # set tmux auto launch by flag file
-if [[ $TMUX_AUTO_LAUNCH = "Y" ]]; then
+if [[ $TMUX_AUTO_LAUNCH = "Y" ]] || [[ $TMUX_AUTO_LAUNCH = "y" ]]; then
     if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
         tmux attach-session -t 0:1 2> /dev/null || tmux new-session -s 0
