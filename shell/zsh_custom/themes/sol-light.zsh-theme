@@ -18,7 +18,7 @@ PROMPT=""
 
 # Check if we are on SSH or not
 if [ $SESSION_TYPE = "remote-ssh" ]; then
-    PROMPT+="%m" # SSH
+    PROMPT+="%m " # SSH
 else
     PROMPT+="" # no SSH
 fi
