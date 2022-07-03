@@ -18,7 +18,7 @@ PROMPT=""
 
 # Check if we are on SSH or not
 if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
-    PROMPT+="%m" # SSH
+    PROMPT+="%m " # SSH
 else
     PROMPT+="" # no SSH
 fi
@@ -39,7 +39,11 @@ PROMPT+="%% "
 
 local return_code="%(?..%F{124}%? ↵%f)"
 
-RPROMPT="${return_code}"
+RPROMPT=""
+
+
+
+RPROMPT+="${return_code}"
 
 ######################################################################
 # Others
