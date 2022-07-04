@@ -13,7 +13,7 @@ fi
 
 
 # NOTE: THIS TMUX CONFIGURATION MUST BE AT THE END OF FILE
-# set tmux auto launch by flag file
+# Tmux Auto Launch
 if [[ $TMUX_AUTO_LAUNCH = "Y" ]] || [[ $TMUX_AUTO_LAUNCH = "y" ]]; then
     if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
