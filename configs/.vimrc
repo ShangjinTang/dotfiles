@@ -14,7 +14,7 @@ set smarttab                   " On - tabstop & shiftwidth, off - tabstop.
 set softtabstop=4              " Tab key indents by 4 spaces.
 set shiftwidth=4               " >> indents by 4 spaces.
 set shiftround                 " >> indents to next multiple of 'shiftwidth'.
-set pastetoggle=<F2>           " Key to swtich on/off paste mode.
+set pastetoggle=<C-p>          " Key to swtich on/off paste mode.
 
 " ### Display and show
 set cursorline                 " Find the current line quickly.
@@ -65,7 +65,7 @@ set nrformats=bin,hex          " Do not recognize 0.. as octal number for comman
 " ## Key Maps (map & noremap)
 
 " Set key to toggle number & relativenumber
-nnoremap <silent> <F1> :set nonumber! norelativenumber!<cr>
+nnoremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
 
 " ### Disable arrow keys, force use hjkl for cursor move
 " TODO: remove these after familiar with hjkl
