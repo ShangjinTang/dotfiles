@@ -4,7 +4,8 @@
 # Light theme (inspired by gnzh.zsh-theme)
 
 # Colors:
-# Green:28 | Red:124
+# Green Anchor: 28 | Red Anchor: 124
+# Tmux Blue: 24 | Tmux Red: 160 | Tmux Purple: 91
 
 setopt prompt_subst
 
@@ -18,7 +19,7 @@ PROMPT=""
 
 # Check if we are on SSH or not
 if [ $SESSION_TYPE = "remote-ssh" ]; then
-    PROMPT+="%m " # SSH
+    PROMPT+="%K{255}%F{238}%m%f%k " # SSH
 else
     PROMPT+="" # no SSH
 fi
