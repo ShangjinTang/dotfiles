@@ -55,6 +55,7 @@ fi
 
 
 
+alias ssh-virmach='ssh -p 9147 shangjin@$HOSTDARE_IP' # Use virmach reverse ssh for low latency
 
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
 if command -v rg &> /dev/null; then
