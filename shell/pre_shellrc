@@ -25,16 +25,16 @@ else
     esac
 fi
 
-# Misc
+# MISC
 alias c='clear'
 alias v='vim'
 
-# Git
+# git
 alias g='git'
 alias gpristine='git reset --hard && git clean -dfx'
 alias cdgitroot='cd $(git rev-parse --show-cdup)'
 
-# TMUX
+# tmux
 if command -v tmux &> /dev/null; then
     function t() {
         if [ $# -eq 1 ]; then
@@ -49,13 +49,22 @@ if command -v tmux &> /dev/null; then
     alias tn='tmux new-session -s'
 fi
 
+# exa
+if command -v exa &> /dev/null; then
+    alias exa='exa --group-directories-first -1'
+    alias e='exa -l --no-time'
+    alias em='exa -l --header --modified --sort=modified --time-style=long-iso'
+    alias ec='exa -l --header --created --sort=created --time-style=long-iso'
+    alias ea='exa -l --header --group --modified --created --time-style=long-iso'
+    alias e2='exa --tree --level=2'
+    alias e3='exa --tree --level=3'
+fi
 
 
 
 
 
 
-alias ssh-virmach='ssh -p 9147 shangjin@$HOSTDARE_IP' # Use virmach reverse ssh for low latency
 
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
 if command -v rg &> /dev/null; then
