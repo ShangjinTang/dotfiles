@@ -25,7 +25,7 @@ else
 fi
 
 # Green/Blue anchor based on the return result
-PROMPT+="%(?:%F{28}➤:%F{124}➤)%f  "
+PROMPT+="%(?:%F{28}➤ :%F{124}➤ )%f "
 # Current directory (starts with '~' if possible)
 PROMPT+="%~ "
 # Git branch for server (local: tmux)
