@@ -52,7 +52,7 @@ fi
 # exa
 if command -v exa &> /dev/null; then
     alias exa='exa --group-directories-first --time-style=long-iso'
-    alias e='exa -l --classify --no-time'
+    alias e='exa -l --classify --no-time --icons'
     # show [A]ll files (hidden/dot files)
     alias ea='e -a'
     # sort by [M]odified
@@ -77,6 +77,7 @@ uu=38;5;002:gu=38;5;002:da=38;5;006:\
 ur=38;5;000:gr=38;5;000:tr=38;5;000:\
 uw=38;5;000:gw=38;5;000:tw=38;5;000:\
 ux=38;5;001;01:ue=38;5;012:gx=38;5;001:tx=38;5;001:\
+*.md=38;5;000\
 "
 
 
