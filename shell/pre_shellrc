@@ -52,10 +52,10 @@ fi
 # exa
 if command -v exa &> /dev/null; then
     alias exa='exa --group-directories-first -1'
-    alias e='exa -l --no-time'
-    alias em='exa -l --header --modified --sort=modified --time-style=long-iso'
-    alias ec='exa -l --header --created --sort=created --time-style=long-iso'
-    alias ea='exa -l --header --group --modified --created --time-style=long-iso'
+    alias e='exa -l --classify --no-time'
+    alias em='exa -l --classify --header --modified --sort=modified --time-style=long-iso'
+    alias ec='exa -l --classify --header --created --sort=created --time-style=long-iso'
+    alias ea='exa -al --classify --header --group --modified --created --time-style=long-iso'
     alias e2='exa --tree --level=2'
     alias e3='exa --tree --level=3'
 fi
