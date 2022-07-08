@@ -50,6 +50,11 @@ if command -v tmux &> /dev/null; then
     alias tn='tmux new-session -s'
 fi
 
+# ncdu
+if command -v ncdu &> /dev/null; then
+    alias ncdu='ncdu --color off'
+fi
+
 # exa
 if command -v exa &> /dev/null; then
     alias exa='exa --group-directories-first --time-style=long-iso'
