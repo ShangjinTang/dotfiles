@@ -52,17 +52,17 @@ fi
 # exa
 if command -v exa &> /dev/null; then
     alias exa='exa --group-directories-first --time-style=long-iso'
-    alias e='exa -l --classify --no-time'
-    # show [A]ll files (hidden/dot files)
+    alias e='exa -l --classify --no-time --git-ignore'
+    # show [A]ll files (hidden/ignored files)
     alias ea='e -a'
     # sort by [M]odified
-    alias em='exa -l --classify --header --modified --sort=modified'
+    alias em='exa -l --classify --header --modified --sort=modified --git-ignore'
     # sort by [C]reated
-    alias ec='exa -l --classify --header --created --sort=created'
+    alias ec='exa -l --classify --header --created --sort=created --git-ignore'
     # tree level
-    alias e1='exa -1'
-    alias e2='exa --tree --level=2'
-    alias e3='exa --tree --level=3'
+    alias e1='exa -1 --git-ignore'
+    alias e2='exa --tree --level=2 --git-ignore'
+    alias e3='exa --tree --level=3 --git-ignore'
 fi
 
 # exa colors
