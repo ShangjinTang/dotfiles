@@ -1,14 +1,49 @@
+######################################################################
+
 export EDITOR=vim
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
-
 export HISTFILESIZE=10000  # max size in history file, e.g. ~/.bash_history
 export HISTSIZE=1000  # max size in command `history`
 export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 
-alias grep='grep --color=auto'
+# Terminal Color
+# xterm-256 color chart:
+#   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+export TERM=xterm-256color
+
+# shell: zsh/bash
+export SHELL_NAME="$(basename $SHELL)"
+if [ $SHELL_NAME = "zsh" ]; then
+    # zsh-autosuggestions
+    #   https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
+
+    # session type to distinguish local or ssh(remote), for zsh theme 
+    export SESSION_TYPE=local
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        export SESSION_TYPE="ssh"
+    else
+        case $(ps -o comm= -p "$PPID") in
+            sshd|*/sshd) export SESSION_TYPE="ssh";;
+        esac
+    fi
+fi
+
+######################################################################
+# customized exports, can be overrided in ~/.*shrc.local file
+
+# proxy
+export PROXY_IP="127.0.0.1:1080"
+export PROXY_ENABLED="Y"
+
+# tmux
+export TMUX_AUTO_LAUNCH="Y"
+
+######################################################################
+# functions
 
 PATHAPPEND() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -17,14 +52,10 @@ PATHAPPEND() {
 }
 PATHAPPEND "$HOME/bin"
 
-SESSION_TYPE=local
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    SESSION_TYPE="remote-ssh"
-else
-    case $(ps -o comm= -p "$PPID") in
-        sshd|*/sshd) SESSION_TYPE="remote-ssh";;
-    esac
-fi
+######################################################################
+# aliases
+
+alias grep='grep --color=auto'
 
 # MISC
 alias c='clear'
@@ -69,13 +100,12 @@ if command -v exa &> /dev/null; then
     alias e1='exa -1 --git-ignore'
     alias e2='exa --tree --level=2 --git-ignore'
     alias e3='exa --tree --level=3 --git-ignore'
-fi
-
 # exa colors
-    # di: directory | ex: executable-file | ln: symlink
-    # sn: size numbers | sb: size unit
-    # uu: user not you | gu: group not yours | da: date (timestamp)
-    # (u|g|t)(r|w|x): (user|group|others)(read|write|execute) | ue: user execute (file types)
+# Note: this defination cannot have spaces in the begin or end
+# di: directory | ex: executable-file | ln: symlink
+# sn: size numbers | sb: size unit
+# uu: user not you | gu: group not yours | da: date (timestamp)
+# (u|g|t)(r|w|x): (user|group|others)(read|write|execute) | ue: user execute (file types)
 export EXA_COLORS="\
 di=38;5;012:ex=38;5;001:ln=38;5;013:\
 sn=38;5;002:sb=38;5;002;01:\
@@ -85,15 +115,20 @@ uw=38;5;000:gw=38;5;000:tw=38;5;000:\
 ux=38;5;001;01:ue=38;5;012:gx=38;5;001:tx=38;5;001:\
 *.md=38;5;000\
 "
-
-
-
-
-
-
+fi
 
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
 if command -v rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.CMVolumes}/*' 2> /dev/null"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
+
+######################################################################
+
+
+
+
+
+
+
+######################################################################
