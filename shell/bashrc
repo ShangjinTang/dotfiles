@@ -33,7 +33,6 @@ INCLUDE ~/.fzf.bash
 ######################################################################
 
 INCLUDE ~/.bashrc.local
-INCLUDE ~/.bashrc.local.sol
 INCLUDE ~/.dotfiles/shell/post_shellrc
 
 ######################################################################

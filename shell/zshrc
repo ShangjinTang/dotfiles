@@ -37,7 +37,6 @@ INCLUDE ~/.fzf.zsh
 ######################################################################
 
 INCLUDE ~/.zshrc.local
-INCLUDE ~/.zshrc.local.sol
 INCLUDE ~/.dotfiles/shell/post_shellrc
 
 ######################################################################

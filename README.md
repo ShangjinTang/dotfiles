@@ -104,8 +104,8 @@ use fzf as rg(ripgrep)'s backend
 ### shellrc (zshrc / bashrc)
 
 - Edit `pre_shellrc / post_shellrc / *shrc` for synced (symlink) configurations
-- Edit `~/.*shrc.local*` for non-synced (local) configurations
-- Load sequence: `pre_shellrc` -> `.*shrc` -> `~/*shrc.local` -> `~/*shrc.local.sol` -> `post_shellrc`
+- Edit `~/.*shrc.local` for non-synced (local) configurations, left blank by default
+- Load sequence: `pre_shellrc` -> `.*shrc` -> `~/*shrc.local` ->  `post_shellrc`
 
 Note: `*shrc` means `zshrc` or `bashrc`.
 
