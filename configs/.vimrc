@@ -130,8 +130,11 @@ call plug#begin('~/.vim/plugged')
     " source tree plugin
     Plug 'preservim/nerdtree'
     Plug 'vim-scripts/taglist.vim'
+    Plug 'preservim/tagbar'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
+    " git sidebar plugin
+    Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " ----------------------------------------------------------
