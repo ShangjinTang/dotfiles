@@ -82,14 +82,17 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
   - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
   - [preservim/nerdtree](https://github.com/preservim/nerdtree)
+  - [vim-scripts/taglist.vim](https://github.com/vim-scripts/taglist.vim)
   - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
 - theme:
   - [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
 - map keys (LEADER: Space):
-  - CTRL-T: fzf
-  - LEADER-f: fzf with preview window
-  - LEADER-l: show git log with preview window
+  - Ctrl-p: toggle paste
+  - Ctrl-l: toggle line numbers
+  - LEADER-f: fzf
+  - LEADER-g: show git log with preview window
   - LEADER LEADER: nerdtree (sidebar tree browser)
+  - LEADER t: taglist (sidebar tag browser)
   - LEADER-q: Quit vim (close all buffers)
   - LEADER-w: Close current buffer
   - LEADER-[: Switch to previous buffer
