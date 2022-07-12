@@ -230,7 +230,7 @@ nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t :TlistToggle<cr>
 
 " fzf
-nnoremap  <silent> <leader>f :FZF<cr>
+nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>g :Commits<cr>
 
 " ----------------------------------------------------------
