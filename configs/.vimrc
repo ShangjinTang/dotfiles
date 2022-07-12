@@ -225,17 +225,15 @@ nnoremap <silent> <leader>[ :bp<cr>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<cr>      " Switch to next buffer
 
 " source code plugins
-noremap  <silent> <C-[> <C-t><cr>
 nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t :TlistToggle<cr>
 
-" ### Plugin map
-noremap  <silent> <C-t> :FZF<cr>
-nnoremap <silent> <leader>f :Files<cr>
+" fzf
+nnoremap  <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>g :Commits<cr>
 
 " ----------------------------------------------------------
-" ### Disable arrow keys, force use hjkl for cursor move
+" Disable arrow keys, force use hjkl for cursor move
 " TODO: remove these after familiar with hjkl
 noremap <Up> <Nop>
 noremap <Down> <Nop>
