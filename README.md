@@ -91,8 +91,8 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - Ctrl-l: toggle line numbers
   - LEADER-f: fzf
   - LEADER-g: show git log with preview window
-  - LEADER LEADER: nerdtree (sidebar tree browser)
-  - LEADER t: taglist (sidebar tag browser)
+  - LEADER-LEADER: nerdtree (sidebar tree browser)
+  - LEADER-t: taglist (sidebar tag browser)
   - LEADER-q: Quit vim (close all buffers)
   - LEADER-w: Close current buffer
   - LEADER-[: Switch to previous buffer
