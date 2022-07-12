@@ -201,7 +201,7 @@ endif
 let mapleader = "\<space>"
 
 " Set key to toggle number & relativenumber
-nnoremap <silent> <C-l> :set nonumber norelativenumber<cr>
+nnoremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
 
 " Set key to toggle number & relativenumber
 nnoremap <silent> <C-p> :set invpaste<cr>
@@ -250,7 +250,7 @@ let mapleader = "\<space>"
 " toggle paste mode
 nnoremap <silent> <C-p> :set invpaste<cr>
 " toggle number & relativenumber
-nnoremap <silent> <C-l> :set nonumber norelativenumber<cr>
+nnoremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
 
 " vim buffers
 nnoremap <leader>q :qa!<cr>     " Quit vim (close all buffers)
