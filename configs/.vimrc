@@ -211,6 +211,14 @@ highlight MyTagListFileName guifg=#005f87
 autocmd FileType taglist set norelativenumber
 
 
+" Reference: https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
+" TODO: Read the friendly manual... and continue to config
+let TagbarOpenAutoClose = 1
+let g:tagbar_width = 70
+let g:tagbar_show_linenumbers = 0
+
+
+
 " ====================================================================
 " ====================================================================
 " ## Key Mappings (map & noremap)
@@ -231,6 +239,7 @@ nnoremap <silent> <leader>] :bn<cr>      " Switch to next buffer
 " source code plugins
 nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t :TlistToggle<cr>
+nnoremap <silent> <leader>b :TagbarToggle<cr>
 
 " fzf
 nnoremap <silent> <leader>f :FZF<cr>
