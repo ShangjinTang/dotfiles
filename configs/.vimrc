@@ -214,74 +214,25 @@ highlight MyTagListFileName guifg=#005f87
 let mapleader = "\<space>"
 
 " Set key to toggle number & relativenumber
-nnoremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
-
+noremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
 " Set key to toggle number & relativenumber
-nnoremap <silent> <C-p> :set invpaste<cr>
-nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t :TlistToggle<cr>
+noremap <silent> <C-p> :set invpaste<cr>
 
+" vim buffer
 nnoremap <silent> <leader>q :qa!<cr>     " Quit vim (close all buffers)
 nnoremap <silent> <leader>w :bd<cr>      " Close current buffer
 nnoremap <silent> <leader>[ :bp<cr>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<cr>      " Switch to next buffer
 
-" ----------------------------------------------------------
-" ### Disable arrow keys, force use hjkl for cursor move
-" TODO: remove these after familiar with hjkl
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-" ----------------------------------------------------------
-" ### Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-
-
-" ====================================================================
-" ====================================================================
-" ## Key Mappings (map & noremap)
-
-let mapleader = "\<space>"
-
-" toggle paste mode
-nnoremap <silent> <C-p> :set invpaste<cr>
-" toggle number & relativenumber
-nnoremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
-
-" vim buffers
-nnoremap <leader>q :qa!<cr>     " Quit vim (close all buffers)
-nnoremap <leader>w :bd<cr>      " Close current buffer
-nnoremap <leader>[ :bp<cr>      " Switch to previous buffer
-nnoremap <leader>] :bn<cr>      " Switch to next buffer
-
-" fzf Ctrl-T
-nnoremap <silent> <C-t> :FZF<cr>
-" fzf **<TAB>, show fzf with preview window
-nnoremap <silent> <leader>f :Files<cr>
-" fzf & fugitive, show git log with preview window
-nnoremap <silent> <leader>g :Commits<cr>
-
-" toggle nerdtree
+" source code plugins
+noremap  <silent> <C-[> <C-t><cr>
 nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
-" toggle taglist
 nnoremap <silent> <leader>t :TlistToggle<cr>
+
+" ### Plugin map
+noremap  <silent> <C-t> :FZF<cr>
+nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>g :Commits<cr>
 
 " ----------------------------------------------------------
 " ### Disable arrow keys, force use hjkl for cursor move
