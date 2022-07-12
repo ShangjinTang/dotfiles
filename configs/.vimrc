@@ -158,6 +158,7 @@ let g:airline_symbols.dirty = " !"
 let NERDTreeShowBookmarks = 1
 let NERDTreeQuitOnOpen = 1  " 1 = Close file, 2 = Close bookmark, 3 = Both
 let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.out$[[file]]', '^tags$[[file]]']
+autocmd FileType nerdtree set norelativenumber
 
 " ----------------------------------------------------------
 " ### Theme papercolor
@@ -198,13 +199,13 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Auto_Highlight_Tag = 0
-let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Compact_Format = 1
+" let Tlist_File_Fold_Auto_Close = 1
 " let Tlist_Show_Menu = 1
 " let Tlist_Use_Right_Window = 1
 highlight MyTagListTitle guifg=#d70087
 highlight MyTagListFileName guifg=#005f87
-
+autocmd FileType taglist set norelativenumber
 
 
 " ====================================================================
