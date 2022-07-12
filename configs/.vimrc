@@ -1,6 +1,7 @@
 " # VIM bashrc by shangjin.tang@gmail.com
 
 " ====================================================================
+" ====================================================================
 " ## General Settings
 filetype indent on              " Enable filetype indent.
 filetype plugin on              " Enable filetype plugin.
@@ -14,7 +15,6 @@ set smarttab                   " On - tabstop & shiftwidth, off - tabstop.
 set softtabstop=4              " Tab key indents by 4 spaces.
 set shiftwidth=4               " >> indents by 4 spaces.
 set shiftround                 " >> indents to next multiple of 'shiftwidth'.
-set pastetoggle=<C-p>          " Key to swtich on/off paste mode.
 
 " ### Display and show
 set cursorline                 " Find the current line quickly.
@@ -60,50 +60,7 @@ set splitright                 " Open new windows right of the current window fo
 " ### Number Formats
 set nrformats=bin,hex          " Do not recognize 0.. as octal number for command <C-a> and <C-x>
 
-" ====================================================================
-
-" ## Key Maps (map & noremap)
-
-" Set key to toggle number & relativenumber
-nnoremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
-
-" ### Disable arrow keys, force use hjkl for cursor move
-" TODO: remove these after familiar with hjkl
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-let mapleader = "\<space>"               " Mapleader used for extra key combinations
-" noremap <leader>w :w!<cr>              " Fast saving with mapleader
-" command W w !sudo tee % > /dev/null    " (useful for handling the permission-denied error)
-nnoremap <leader>q :qa!<cr>     " Quit vim (close all buffers)
-nnoremap <leader>w :bd<cr>      " Close current buffer
-nnoremap <leader>[ :bp<cr>      " Switch to previous buffer
-nnoremap <leader>] :bn<cr>      " Switch to next buffer
-
-
 " ----------------------------------------------------------
-" Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-" ====================================================================
-
-" ### Others
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -152,8 +109,12 @@ endif
 if has("termguicolors")
     set termguicolors
 endif
-" ====================================================================
 
+
+
+" ====================================================================
+" ====================================================================
+" ## Plugins
 " ## vim-plug from https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
     " status bar plugin
@@ -166,7 +127,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     " comment plugin
     Plug 'tpope/vim-commentary'
-    " source code plugin
+    " source tree plugin
     Plug 'preservim/nerdtree'
     Plug 'vim-scripts/taglist.vim'
     " theme plugin
@@ -174,11 +135,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " ----------------------------------------------------------
-" ### Plugin map
-nnoremap <C-t> :FZF<cr>         " fzf CTRL-T
-nnoremap <leader>f :Files<cr>   " fzf **<TAB>, show fzf with preview window
-nnoremap <leader>l :Commits<cr> " fzf & fugitive, show git log with preview window
-
 " ### airline
 " Reference: https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt
 let g:airline#extensions#tabline#enabled = 1
@@ -202,7 +158,12 @@ let g:airline_symbols.dirty = " !"
 let NERDTreeShowBookmarks = 1
 let NERDTreeQuitOnOpen = 1  " 1 = Close file, 2 = Close bookmark, 3 = Both
 let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.out$[[file]]', '^tags$[[file]]']
-nnoremap <leader><leader> :NERDTreeToggle<cr>
+
+" ----------------------------------------------------------
+" ### Theme papercolor
+set background=light
+colorscheme PaperColor
+let g:airline_theme='papercolor'
 
 " ----------------------------------------------------------
 " ### ctags / cscope
@@ -231,10 +192,109 @@ if has("cscope")
     nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
-" ----------------------------------------------------------
-" ### Theme papercolor
-set background=light
-colorscheme PaperColor
-let g:airline_theme='papercolor'
 
+
+" ====================================================================
+" ====================================================================
+" ## Key Mappings (map & noremap)
+
+let mapleader = "\<space>"
+
+" Set key to toggle number & relativenumber
+nnoremap <silent> <C-l> :set nonumber norelativenumber<cr>
+
+" Set key to toggle number & relativenumber
+nnoremap <silent> <C-p> :set invpaste<cr>
+nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
+nnoremap <silent> <leader>t :TlistToggle<cr>
+
+nnoremap <silent> <leader>q :qa!<cr>     " Quit vim (close all buffers)
+nnoremap <silent> <leader>w :bd<cr>      " Close current buffer
+nnoremap <silent> <leader>[ :bp<cr>      " Switch to previous buffer
+nnoremap <silent> <leader>] :bn<cr>      " Switch to next buffer
+
+" ----------------------------------------------------------
+" ### Disable arrow keys, force use hjkl for cursor move
+" TODO: remove these after familiar with hjkl
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+" ----------------------------------------------------------
+" ### Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+
+
+" ====================================================================
+" ====================================================================
+" ## Key Mappings (map & noremap)
+
+let mapleader = "\<space>"
+
+" toggle paste mode
+nnoremap <silent> <C-p> :set invpaste<cr>
+" toggle number & relativenumber
+nnoremap <silent> <C-l> :set nonumber norelativenumber<cr>
+
+" vim buffers
+nnoremap <leader>q :qa!<cr>     " Quit vim (close all buffers)
+nnoremap <leader>w :bd<cr>      " Close current buffer
+nnoremap <leader>[ :bp<cr>      " Switch to previous buffer
+nnoremap <leader>] :bn<cr>      " Switch to next buffer
+
+" fzf Ctrl-T
+nnoremap <silent> <C-t> :FZF<cr>
+" fzf **<TAB>, show fzf with preview window
+nnoremap <silent> <leader>f :Files<cr>
+" fzf & fugitive, show git log with preview window
+nnoremap <silent> <leader>g :Commits<cr>
+
+" toggle nerdtree
+nnoremap <leader><leader> :NERDTreeToggle<cr>
+" toggle taglist
+nnoremap <leader>t :TlistToggle<cr>
+
+" ----------------------------------------------------------
+" ### Disable arrow keys, force use hjkl for cursor move
+" TODO: remove these after familiar with hjkl
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+" ----------------------------------------------------------
+" ### Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" ====================================================================
 " ====================================================================
