@@ -166,8 +166,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     " comment plugin
     Plug 'tpope/vim-commentary'
-    " file tree plugin
+    " source code plugin
     Plug 'preservim/nerdtree'
+    Plug 'vim-scripts/taglist.vim'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
@@ -202,6 +203,33 @@ let NERDTreeShowBookmarks = 1
 let NERDTreeQuitOnOpen = 1  " 1 = Close file, 2 = Close bookmark, 3 = Both
 let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.out$[[file]]', '^tags$[[file]]']
 nnoremap <leader><leader> :NERDTreeToggle<cr>
+
+" ----------------------------------------------------------
+" ### ctags / cscope
+
+" search current directory first, then search up to home
+set tags=./tags,tags;$HOME
+
+" Reference: http://cscope.sourceforge.net/cscope_vim_tutorial.html
+if has("cscope")
+    set cscopetag
+    set csto=1
+    if filereadable("cscope.out")
+        cs add cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set cscopeverbose
+
+    nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+endif
 
 " ----------------------------------------------------------
 " ### Theme papercolor
