@@ -266,9 +266,9 @@ nnoremap <silent> <leader>f :Files<cr>
 nnoremap <silent> <leader>g :Commits<cr>
 
 " toggle nerdtree
-nnoremap <leader><leader> :NERDTreeToggle<cr>
+nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
 " toggle taglist
-nnoremap <leader>t :TlistToggle<cr>
+nnoremap <silent> <leader>t :TlistToggle<cr>
 
 " ----------------------------------------------------------
 " ### Disable arrow keys, force use hjkl for cursor move
