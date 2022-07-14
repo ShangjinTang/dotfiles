@@ -129,7 +129,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     " source tree plugin
     Plug 'preservim/nerdtree'
-    Plug 'vim-scripts/taglist.vim'
     Plug 'preservim/tagbar'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
@@ -159,9 +158,29 @@ let g:airline_symbols.dirty = " !"
 " ----------------------------------------------------------
 " ### NERDTree
 let NERDTreeShowBookmarks = 1
-let NERDTreeQuitOnOpen = 1  " 1 = Close file, 2 = Close bookmark, 3 = Both
-let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.out$[[file]]', '^tags$[[file]]']
+let NERDTreeBookmarksSort = 1
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeCaseSensitiveSort = 1
+let NERDTreeChDirMode = 2
+let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', 'cscope.*$[[file]]', '^tags$[[file]]']
+
+" Disable relative number for NERDTree
 autocmd FileType nerdtree set norelativenumber
+
+" Start NERDTree when Vim is started without file arguments. If a file is specified, move the cursor to its window.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 " ----------------------------------------------------------
 " ### Theme papercolor
@@ -170,7 +189,7 @@ colorscheme PaperColor
 let g:airline_theme='papercolor'
 
 " ----------------------------------------------------------
-" ### ctags / cscope / taglist
+" ### ctags / cscope / tagbar
 
 " search current directory first, then search up to home
 set tags=./tags,tags;$HOME
@@ -196,27 +215,15 @@ if has("cscope")
     nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
-" Reference: http://vim-taglist.sourceforge.net/manual.html
-let Tlist_WinWidth = 50
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Auto_Highlight_Tag = 0
-let Tlist_Compact_Format = 1
-" let Tlist_File_Fold_Auto_Close = 1
-" let Tlist_Show_Menu = 1
-" let Tlist_Use_Right_Window = 1
-highlight MyTagListTitle guifg=#d70087
-highlight MyTagListFileName guifg=#005f87
-autocmd FileType taglist set norelativenumber
-
-
 " Reference: https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
-" TODO: Read the friendly manual... and continue to config
-let TagbarOpenAutoClose = 1
-let g:tagbar_width = 70
-let g:tagbar_show_linenumbers = 0
-
+let g:tagbar_width = max([25, winwidth(0) / 4])
+let g:tagbar_autoclose  = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_compact = 2
+let g:tagbar_show_data_type = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_autopreview = 1
 
 
 " ====================================================================
@@ -238,8 +245,7 @@ nnoremap <silent> <leader>] :bn<cr>      " Switch to next buffer
 
 " source code plugins
 nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t :TlistToggle<cr>
-nnoremap <silent> <leader>b :TagbarToggle<cr>
+nnoremap <silent> <leader>t :TagbarToggle<cr>
 
 " fzf
 nnoremap <silent> <leader>f :FZF<cr>
