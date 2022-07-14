@@ -108,9 +108,9 @@ endif
 " vim patch 7.4.1799 support termguicolors (true color)
 if has("termguicolors")
     set termguicolors
+else
+    set term=screen-256color
 endif
-
-set term=screen-256color
 
 
 
