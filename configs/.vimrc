@@ -119,23 +119,22 @@ endif
 " ## Plugins
 " ## vim-plug from https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
-    " status bar plugin
+    " status bar plugins
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    " git support plugin
+    " git plugins
     Plug 'tpope/vim-fugitive'
-    " fzf plugin
+    Plug 'airblade/vim-gitgutter'
+    " fzf plugins
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
-    " comment plugin
-    Plug 'tpope/vim-commentary'
-    " source tree plugin
+    " sidebar plugins
     Plug 'preservim/nerdtree'
     Plug 'preservim/tagbar'
+    " comment plugin
+    Plug 'tpope/vim-commentary'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
-    " git sidebar plugin
-    Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " ----------------------------------------------------------
@@ -159,6 +158,7 @@ let g:airline_symbols.dirty = " !"
 
 " ----------------------------------------------------------
 " ### NERDTree
+" Reference: https://github.com/dmerejkowsky/vim-nerdtree/blob/master/doc/NERD_tree.txt
 let NERDTreeShowBookmarks = 1
 let NERDTreeBookmarksSort = 1
 let NERDTreeQuitOnOpen = 1
@@ -177,7 +177,8 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 " ----------------------------------------------------------
-" ### Theme papercolor
+" Theme papercolor
+" Reference: https://github.com/NLKNguyen/papercolor-theme
 set background=light
 colorscheme PaperColor
 let g:airline_theme='papercolor'
@@ -255,7 +256,7 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " ----------------------------------------------------------
-" ### Visual mode pressing * or # searches for the current selection
+" ## Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 function! VisualSelection(direction, extra_filter) range
