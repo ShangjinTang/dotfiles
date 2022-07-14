@@ -110,6 +110,8 @@ if has("termguicolors")
     set termguicolors
 endif
 
+set term=screen-256color
+
 
 
 " ====================================================================
@@ -167,19 +169,10 @@ let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', 'cscope.*$[[file]]', '^tag
 
 " Disable relative number for NERDTree
 autocmd FileType nerdtree set norelativenumber
-
-autocmd StdinReadPre * let s:std_in=1
-" Start NERDTree when Vim is started without file arguments.
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | wincmd p | endif
-" Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd VimEnter * if argc() > 0 || exists("s:std_in") | NERDTree | wincmd p | endif
-
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
@@ -234,9 +227,10 @@ let g:tagbar_autopreview = 1
 let mapleader = "\<space>"
 
 " Set key to toggle number & relativenumber
-noremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
+set pastetoggle=<C-p>
+
 " Set key to toggle number & relativenumber
-noremap <silent> <C-p> :set invpaste<cr>
+noremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
 
 " vim buffer
 nnoremap <silent> <leader>q :qa!<cr>     " Quit vim (close all buffers)
