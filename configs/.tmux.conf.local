@@ -79,7 +79,7 @@ tmux_conf_theme_pane_active_indicator="#8700af"
 # status line message style
 # 命令响应颜色配置 (如 Ctrl-b r)
 tmux_conf_theme_message_fg="#eeeeee"                    # black
-tmux_conf_theme_message_bg="#015f87"                    # yellow
+tmux_conf_theme_message_bg="#005f87"                    # yellow
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
@@ -138,7 +138,7 @@ tmux_conf_theme_window_status_format="#I #W"
 #     - #{username_ssh}
 # 当前 tab 颜色配置
 tmux_conf_theme_window_status_current_fg="#eeeeee"
-tmux_conf_theme_window_status_current_bg="#015f87"
+tmux_conf_theme_window_status_current_bg="#005f87"
 tmux_conf_theme_window_status_current_attr="bold"
 tmux_conf_theme_window_status_current_format="#I #W"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
@@ -156,7 +156,7 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 # 上一次 tab 颜色配置
-tmux_conf_theme_window_status_last_fg="#015f87"
+tmux_conf_theme_window_status_last_fg="#005f87"
 tmux_conf_theme_window_status_last_bg="#f5f5f5"
 tmux_conf_theme_window_status_last_attr="none"
 
@@ -211,13 +211,13 @@ tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.g
 # status left style
 # 状态栏左侧颜色
 tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#8700af"
-tmux_conf_theme_status_left_bg="#015f87,#d70000,#ffffff"
+tmux_conf_theme_status_left_bg="#005f87,#d70000,#ffffff"
 tmux_conf_theme_status_left_attr="bold,bold,bold"
 
 # status right style
 # 状态栏右侧颜色
 tmux_conf_theme_status_right_fg="#000000,#eeeeee,#eeeeee,#444444"
-tmux_conf_theme_status_right_bg="#ffffff,#015f87,#d70000,#eeeeee"
+tmux_conf_theme_status_right_bg="#ffffff,#005f87,#d70000,#eeeeee"
 tmux_conf_theme_status_right_attr="none,bold,bold,bold"
 
 # pairing indicator
