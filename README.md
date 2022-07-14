@@ -17,7 +17,8 @@ brew install vim git tmux zsh curl tree shellcheck reattach-to-user-namespace tl
 ```bash
 # Linux
 sudo apt update
-sudo apt install vim git tmux zsh curl ripgrep tree shellcheck xclip python3-pip
+sudo apt install vim git tmux zsh curl tree shellcheck xclip python3-pip
+sudo apt install gcc gdb ctags cscope
 sudo pip3 install tldr
 ```
 
@@ -82,7 +83,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
   - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
   - [preservim/nerdtree](https://github.com/preservim/nerdtree)
-  - [vim-scripts/taglist.vim](https://github.com/vim-scripts/taglist.vim)
+  - [preservim/tagbar](https://github.com/preservim/tagbar)
   - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
 - theme:
   - [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
@@ -92,7 +93,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - LEADER-f: fzf
   - LEADER-g: show git log with preview window
   - LEADER-LEADER: nerdtree (sidebar tree browser)
-  - LEADER-t: taglist (sidebar tag browser)
+  - LEADER-t: tagbar (sidebar tag browser)
   - LEADER-q: Quit vim (close all buffers)
   - LEADER-w: Close current buffer
   - LEADER-[: Switch to previous buffer
