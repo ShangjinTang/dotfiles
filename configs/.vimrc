@@ -168,9 +168,10 @@ let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', 'cscope.*$[[file]]', '^tag
 " Disable relative number for NERDTree
 autocmd FileType nerdtree set norelativenumber
 
-" Start NERDTree when Vim is started without file arguments. If a file is specified, move the cursor to its window.
+" Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
