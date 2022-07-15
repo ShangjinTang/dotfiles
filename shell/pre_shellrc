@@ -84,6 +84,9 @@ alias cu="cdup"
 
 alias grep='grep --color=auto'
 
+# rg
+alias rg='rg --smart-case'
+
 # vim
 alias v='vim'
 
