@@ -1,4 +1,17 @@
 ######################################################################
+# customized exports, can be overrided in ~/.*shrc.local file
+
+# proxy
+export PROXY_IP="127.0.0.1:1080"
+export PROXY_ENABLED="Y"
+
+# tmux
+export TMUX_AUTO_LAUNCH="Y"
+
+# security setting
+export SKIP_SSL="Y"
+
+######################################################################
 
 export EDITOR=vim
 export LANGUAGE=en_US.UTF-8
@@ -8,6 +21,12 @@ export LANG=en_US.UTF-8
 export HISTFILESIZE=10000  # max size in history file, e.g. ~/.bash_history
 export HISTSIZE=1000  # max size in command `history`
 export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
+
+if [ $SKIP_SSL = 'Y' ] || [ $SKIP_SSL = 'y' ]; then
+    export GIT_SSL_NO_VERIFY=true
+    alias curl='curl --insecure'
+    alias wget='wget --no-check-certificate'
+fi
 
 # Terminal Color
 # xterm-256 color chart:
@@ -21,7 +40,7 @@ if [ $SHELL_NAME = "zsh" ]; then
     #   https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
 
-    # session type to distinguish local or ssh(remote), for zsh theme 
+    # session type to distinguish local or ssh(remote), for zsh theme
     export SESSION_TYPE=local
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
         export SESSION_TYPE="ssh"
@@ -31,16 +50,6 @@ if [ $SHELL_NAME = "zsh" ]; then
         esac
     fi
 fi
-
-######################################################################
-# customized exports, can be overrided in ~/.*shrc.local file
-
-# proxy
-export PROXY_IP="127.0.0.1:1080"
-export PROXY_ENABLED="Y"
-
-# tmux
-export TMUX_AUTO_LAUNCH="Y"
 
 ######################################################################
 # functions for local use
