@@ -257,10 +257,8 @@ noremap <Right> <Nop>
 
 " ----------------------------------------------------------
 " ## Quick Replace
-" replace current word in current line
-nnoremap <leader>s :s/\<<C-r><C-w>\>//g<Left><Left>
-" replace current word in entire file
-nnoremap <leader>sa :%s/\<<C-r><C-w>\>//g<Left><Left>
+" replace current word in entire file with confirm
+nnoremap <leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 " replace current word in last visual selection
 nnoremap <leader>sv :%s/\%V\<<C-r><C-w>\>//g<Left><Left>
 
