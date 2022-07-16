@@ -231,21 +231,21 @@ let mapleader = "\<space>"
 set pastetoggle=<C-p>
 
 " Set key to toggle number & relativenumber
-noremap <silent> <C-l> :set nonumber! norelativenumber!<cr>
+noremap <silent> <C-l> :set nonumber! norelativenumber!<CR>
 
 " vim buffer
-nnoremap <silent> <leader>q :qa!<cr>     " Quit vim (close all buffers)
-nnoremap <silent> <leader>w :bd<cr>      " Close current buffer
-nnoremap <silent> <leader>[ :bp<cr>      " Switch to previous buffer
-nnoremap <silent> <leader>] :bn<cr>      " Switch to next buffer
+nnoremap <silent> <leader>q :qa!<CR>     " Quit vim (close all buffers)
+nnoremap <silent> <leader>w :bd<CR>      " Close current buffer
+nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
+nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
 
 " source code plugins
-nnoremap <silent> <leader><leader> :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t :TagbarToggle<cr>
+nnoremap <silent> <leader><leader> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " fzf
-nnoremap <silent> <leader>f :FZF<cr>
-nnoremap <silent> <leader>g :Commits<cr>
+nnoremap <silent> <leader>f :FZF<CR>
+nnoremap <silent> <leader>g :Commits<CR>
 
 " ----------------------------------------------------------
 " Disable arrow keys, force use hjkl for cursor move
@@ -264,8 +264,8 @@ nnoremap <leader>sv :%s/\%V\<<C-r><C-w>\>//g<Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-r>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-r>=@/<CR><CR>
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
     execute "normal! vgvy"
