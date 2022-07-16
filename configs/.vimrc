@@ -256,6 +256,15 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " ----------------------------------------------------------
+" ## Quick Replace
+" replace current word in current line
+nnoremap <leader>s :s/\<<C-r><C-w>\>//g<Left><Left>
+" replace current word in entire file
+nnoremap <leader>sa :%s/\<<C-r><C-w>\>//g<Left><Left>
+" replace current word in last visual selection
+nnoremap <leader>sv :%s/\%V\<<C-r><C-w>\>//g<Left><Left>
+
+" ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
