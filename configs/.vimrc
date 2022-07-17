@@ -1,5 +1,7 @@
 " # VIM bashrc by shangjin.tang@gmail.com
 
+autocmd!
+
 " ====================================================================
 " ====================================================================
 " ## General Settings
@@ -257,8 +259,10 @@ noremap <Right> <Nop>
 
 " ----------------------------------------------------------
 " ## Quick Replace
-" replace current word in entire file with confirm
-nnoremap <leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+" replace current word from current line to last line (confirm required)
+nnoremap <leader>ss :.,$s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+" replace current word from first line to last line (confirm required)
+nnoremap <leader>sa :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 " replace current word in last visual selection
 nnoremap <leader>sv :%s/\%V\<<C-r><C-w>\>//g<Left><Left>
 
@@ -279,6 +283,20 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+" set no highlight search after enter insert mode and cursor move
+autocmd CursorMovedI * set nohlsearch
+nnoremap n :set hlsearch<cr>n
+nnoremap N :set hlsearch<cr>N
+nnoremap / :set hlsearch<cr>/
+nnoremap ? :set hlsearch<cr>?
+nnoremap * :set hlsearch<cr>*
+nnoremap # :set hlsearch<cr>#
+
+autocmd InsertEnter * set nonumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set number
+autocmd InsertLeave * set relativenumber
 
 " ====================================================================
 " ====================================================================
