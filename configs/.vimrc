@@ -1,7 +1,5 @@
 " # VIM bashrc by shangjin.tang@gmail.com
 
-autocmd!
-
 " ====================================================================
 " ====================================================================
 " ## General Settings
@@ -169,14 +167,17 @@ let NERDTreeCaseSensitiveSort = 1
 let NERDTreeChDirMode = 2
 let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', 'cscope.*$[[file]]', '^tags$[[file]]']
 
-" Disable relative number for NERDTree
-autocmd FileType nerdtree set norelativenumber
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup nerdtree
+    autocmd!
+    " Disable relative number for NERDTree
+    autocmd FileType nerdtree set norelativenumber
+    " Exit Vim if NERDTree is the only window remaining in the only tab.
+    autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+    " Close the tab if NERDTree is the only window remaining in it.
+    autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+    " Open the existing NERDTree on each new tab.
+    autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+augroup end
 
 " ----------------------------------------------------------
 " Theme papercolor
@@ -230,10 +231,10 @@ let g:tagbar_autopreview = 1
 let mapleader = "\<space>"
 
 " Set key to toggle number & relativenumber
-set pastetoggle=<C-p>
+set pastetoggle=<leader>p
 
 " Set key to toggle number & relativenumber
-noremap <silent> <C-l> :set nonumber! norelativenumber!<CR>
+noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
 
 " vim buffer
 nnoremap <silent> <leader>q :qa!<CR>     " Quit vim (close all buffers)
@@ -260,11 +261,11 @@ noremap <Right> <Nop>
 " ----------------------------------------------------------
 " ## Quick Replace
 " replace current word from current line to last line (confirm required)
-nnoremap <leader>ss :.,$s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+nnoremap <leader>ss :.,$s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
 " replace current word from first line to last line (confirm required)
-nnoremap <leader>sa :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+nnoremap <leader>sa :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
 " replace current word in last visual selection
-nnoremap <leader>sv :%s/\%V\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <leader>sv :%s/\%V\<<C-R>=expand("<cword>")<CR>\>//g<Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
@@ -284,19 +285,27 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-" set no highlight search after enter insert mode and cursor move
-autocmd CursorMovedI * set nohlsearch
-nnoremap n :set hlsearch<cr>n
-nnoremap N :set hlsearch<cr>N
-nnoremap / :set hlsearch<cr>/
-nnoremap ? :set hlsearch<cr>?
-nnoremap * :set hlsearch<cr>*
-nnoremap # :set hlsearch<cr>#
 
-autocmd InsertEnter * set nonumber
-autocmd InsertEnter * set norelativenumber
-autocmd InsertLeave * set number
-autocmd InsertLeave * set relativenumber
+augroup cursormovedi
+    autocmd!
+    " set no highlight search after enter insert mode and move cursor
+    autocmd CursorMovedI * set nohlsearch
+    nnoremap n :set hlsearch<CR>n
+    nnoremap N :set hlsearch<CR>N
+    nnoremap / :set hlsearch<CR>/
+    nnoremap ? :set hlsearch<CR>?
+    nnoremap * :set hlsearch<CR>*
+    nnoremap # :set hlsearch<CR>#
+augroup end
+
+augroup inserttoggle
+    autocmd!
+    " disable line numbers in insert mode
+    autocmd InsertEnter * set nonumber
+    autocmd InsertEnter * set norelativenumber
+    autocmd InsertLeave * set number
+    autocmd InsertLeave * set relativenumber
+augroup end
 
 " ====================================================================
 " ====================================================================
