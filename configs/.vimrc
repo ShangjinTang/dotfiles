@@ -230,10 +230,12 @@ let g:tagbar_autopreview = 1
 
 let mapleader = "\<space>"
 
-" Set key to toggle number & relativenumber
-set pastetoggle=<leader>p
+" source $MYVIMRC reloads the saved $MYVIMRC
+noremap <leader>so :source $MYVIMRC<CR>
 
-" Set key to toggle number & relativenumber
+" Set key to toggle paste mode on/off
+set pastetoggle=<leader>p
+" Set key to toggle number & relativenumber on/off
 noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
 
 " vim buffer
