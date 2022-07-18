@@ -133,6 +133,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/tagbar'
     " comment plugin
     Plug 'tpope/vim-commentary'
+    " tab completion plugin
+    Plug 'ervandew/supertab'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
