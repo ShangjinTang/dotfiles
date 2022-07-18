@@ -159,6 +159,11 @@ let g:airline_symbols.notexists = " ?"
 let g:airline_symbols.dirty = " !"
 
 " ----------------------------------------------------------
+" ### SuperTab
+" Do not create a new line after select completion by <Space>
+inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
+
+" ----------------------------------------------------------
 " ### NERDTree
 " Reference: https://github.com/dmerejkowsky/vim-nerdtree/blob/master/doc/NERD_tree.txt
 let NERDTreeShowBookmarks = 1
@@ -313,3 +318,4 @@ augroup end
 
 " ====================================================================
 " ====================================================================
+
