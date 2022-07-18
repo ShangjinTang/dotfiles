@@ -84,6 +84,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
   - [preservim/nerdtree](https://github.com/preservim/nerdtree)
   - [preservim/tagbar](https://github.com/preservim/tagbar)
+  - [ervandew/supertab](https://github.com/ervandew/supertab)
   - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
 - theme:
   - [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
