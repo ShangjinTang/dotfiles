@@ -24,6 +24,7 @@ export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 
 if [ $SKIP_SSL = 'Y' ] || [ $SKIP_SSL = 'y' ]; then
     export GIT_SSL_NO_VERIFY=true
+    export TLDR_ALLOW_INSECURE=1
     alias curl='curl --insecure'
     alias wget='wget --no-check-certificate'
 fi
