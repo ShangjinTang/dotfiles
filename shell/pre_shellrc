@@ -129,17 +129,17 @@ fi
 # exa
 if command -v exa &> /dev/null; then
     alias exa='exa --group-directories-first --time-style=long-iso'
-    alias e='exa -l --classify --no-time --git-ignore'
+    alias e='exa -l --classify --no-time'
     # show [A]ll files (hidden/ignored files)
     alias ea='e -a'
     # sort by [M]odified
-    alias em='exa -l --classify --header --modified --sort=modified --git-ignore'
+    alias em='exa -l --classify --header --modified --sort=modified'
     # sort by [C]reated
-    alias ec='exa -l --classify --header --created --sort=created --git-ignore'
+    alias ec='exa -l --classify --header --created --sort=created'
     # tree level
-    alias e1='exa -1 --git-ignore'
-    alias e2='exa --tree --level=2 --git-ignore'
-    alias e3='exa --tree --level=3 --git-ignore'
+    alias e1='exa -1'
+    alias e2='exa --tree --level=2'
+    alias e3='exa --tree --level=3'
 # exa colors
 # Note: this defination cannot have spaces in the begin or end
 # di: directory | ex: executable-file | ln: symlink
