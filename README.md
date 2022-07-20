@@ -85,8 +85,8 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [preservim/nerdtree](https://github.com/preservim/nerdtree)
   - [preservim/tagbar](https://github.com/preservim/tagbar)
   - [ervandew/supertab](https://github.com/ervandew/supertab)
+  - [luochen1990/rainbow](https://github.com/luochen1990/rainbow)
   - [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
-  - [kien/rainbow_parentheses.vim](https://github.com/kien/rainbow_parentheses.vim)
 - theme:
   - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
 - map keys (LEADER: Space):

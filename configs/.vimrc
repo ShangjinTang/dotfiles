@@ -138,7 +138,7 @@ call plug#begin('~/.vim/plugged')
     " use same keys navigate between tmux/vim
     Plug 'christoomey/vim-tmux-navigator'
     " bracket highlighting
-    Plug 'kien/rainbow_parentheses.vim'
+    Plug 'luochen1990/rainbow'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
@@ -189,6 +189,10 @@ augroup nerdtree
     " Open the existing NERDTree on each new tab.
     autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 augroup end
+
+" ----------------------------------------------------------
+" bracket highlighting
+let g:rainbow_active = 1
 
 " ----------------------------------------------------------
 " Theme papercolor
@@ -318,15 +322,6 @@ augroup inserttoggle
     autocmd InsertEnter * set norelativenumber
     autocmd InsertLeave * set number
     autocmd InsertLeave * set relativenumber
-augroup end
-
-augroup RainbowParentheses
-    autocmd!
-    autocmd VimEnter * RainbowParenthesesToggle
-    autocmd Syntax * RainbowParenthesesLoadRound
-    autocmd Syntax * RainbowParenthesesLoadSquare
-    autocmd Syntax * RainbowParenthesesLoadBraces
-    autocmd Syntax * RainbowParenthesesLoadChevrons
 augroup end
 
 " ====================================================================
