@@ -135,6 +135,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     " tab completion plugin
     Plug 'ervandew/supertab'
+    " use same keys navigate between tmux/vim
+    Plug 'christoomey/vim-tmux-navigator'
+    " bracket highlighting
+    Plug 'kien/rainbow_parentheses.vim'
     " theme plugin
     Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
@@ -241,7 +245,7 @@ let mapleader = "\<space>"
 noremap <leader>so :source $MYVIMRC<CR>
 
 " Set key to toggle paste mode on/off
-set pastetoggle=<leader>p
+set pastetoggle=<C-p>
 " Set key to toggle number & relativenumber on/off
 noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
 
@@ -314,6 +318,15 @@ augroup inserttoggle
     autocmd InsertEnter * set norelativenumber
     autocmd InsertLeave * set number
     autocmd InsertLeave * set relativenumber
+augroup end
+
+augroup RainbowParentheses
+    autocmd!
+    autocmd VimEnter * RainbowParenthesesToggle
+    autocmd Syntax * RainbowParenthesesLoadRound
+    autocmd Syntax * RainbowParenthesesLoadSquare
+    autocmd Syntax * RainbowParenthesesLoadBraces
+    autocmd Syntax * RainbowParenthesesLoadChevrons
 augroup end
 
 " ====================================================================
