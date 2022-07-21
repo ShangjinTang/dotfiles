@@ -192,7 +192,7 @@ augroup end
 
 " ----------------------------------------------------------
 " bracket highlighting
-let g:rainbow_conf = {'ctermfgs': ["blue", "red", "magenta", "green"]}
+let g:rainbow_conf = {'ctermfgs': [162, 166, 28, 24, 91]}
 let g:rainbow_active = 1
 
 " ----------------------------------------------------------
