@@ -343,8 +343,10 @@ augroup inserttoggle
     " disable line numbers in insert mode
     autocmd InsertEnter * set nonumber
     autocmd InsertEnter * set norelativenumber
+    autocmd InsertEnter * :GitGutterSignsDisable
     autocmd InsertLeave * set number
     autocmd InsertLeave * set relativenumber
+    autocmd InsertLeave * :GitGutterSignsEnable
 augroup end
 
 augroup misc
