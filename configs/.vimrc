@@ -268,6 +268,14 @@ nnoremap <silent> <leader>t :TagbarToggle<CR>
 nnoremap <silent> <leader>f :FZF<CR>
 nnoremap <silent> <leader>g :Commits<CR>
 
+" vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> <C-\>:TmuxNavigatePrevious<cr>
+
 " ----------------------------------------------------------
 " Disable arrow keys, force use hjkl for cursor move
 " TODO: remove these after familiar with hjkl
@@ -303,6 +311,7 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+" ----------------------------------------------------------
 
 augroup cursormovedi
     autocmd!
