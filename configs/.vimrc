@@ -246,9 +246,6 @@ let g:tagbar_autopreview = 1
 
 let mapleader = "\<space>"
 
-" source $MYVIMRC reloads the saved $MYVIMRC
-noremap <leader>so :source $MYVIMRC<CR>
-
 " Set key to toggle paste mode on/off
 set pastetoggle=<C-p>
 " Set key to toggle number & relativenumber on/off
@@ -266,7 +263,20 @@ nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " fzf
 nnoremap <silent> <leader>f :FZF<CR>
-nnoremap <silent> <leader>g :Commits<CR>
+
+" git shortcuts, starts with <leader>g
+" fzf
+nnoremap <silent> <leader>gc :Commits<CR>
+" vim-fugitive
+nnoremap <silent> <leader>gb :Git blame<CR>
+nnoremap <silent> <leader>gg :.Git blame<CR>
+" vim-gitgutter
+nnoremap <silent> <leader>g] :GitGutterNextHunk<CR>
+nnoremap <silent> <leader>g[ :GitGutterPrevHunk<CR>
+nnoremap <silent> <leader>gs :GitGutterStageHunk<CR>
+nnoremap <silent> <leader>gu :GitGutterUndoHunk<CR>
+nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR>
+
 
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
@@ -287,11 +297,14 @@ noremap <Right> <Nop>
 " ----------------------------------------------------------
 " ## Quick Replace
 " replace current word from current line to last line (confirm required)
-nnoremap <leader>ss :.,$s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
+nnoremap <leader>sw :.,$s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
+nnoremap <leader>sW :.,$s/\<<C-R>=expand("<cWORD>")<CR>\>//gc<Left><Left><Left>
 " replace current word from first line to last line (confirm required)
-nnoremap <leader>sa :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
+nnoremap <leader>sn :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
+nnoremap <leader>sN :%s/\<<C-R>=expand("<cWORD>")<CR>\>//gc<Left><Left><Left>
 " replace current word in last visual selection
 nnoremap <leader>sv :%s/\%V\<<C-R>=expand("<cword>")<CR>\>//g<Left><Left>
+nnoremap <leader>sV :%s/\%V\<<C-R>=expand("<cWORD>")<CR>\>//g<Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
@@ -334,6 +347,10 @@ augroup inserttoggle
     autocmd InsertLeave * set relativenumber
 augroup end
 
+augroup misc
+    autocmd!
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup end
 " ====================================================================
 " ====================================================================
 
