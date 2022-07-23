@@ -8,21 +8,39 @@ Managed by [dotbot](https://github.com/anishathalye/dotbot).
 
 ### Pre-Install
 
+#### macOS
+
 ```bash
-# macOS
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  # install homebrew
-brew install vim git tmux zsh curl tree shellcheck reattach-to-user-namespace tldr
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+brew install sshpass vim git tmux zsh curl wget tree reattach-to-user-namespace tldr
 ```
 
 ```bash
-# Linux
+brew install shellcheck
+```
+
+#### Linux
+
+```bash
 sudo apt update
-sudo apt install vim git tmux zsh curl tree shellcheck xclip python3-pip
-sudo apt install gcc gdb ctags cscope
+sudo apt install net-tools vim git zsh curl wget tree xclip python3-pip
 sudo pip3 install tldr
 ```
 
+```
+sudo apt install gcc gdb exuberant-ctags cscope tree shellcheck
+```
+
+### Change shell to zsh
+
+```bash
+chsh -s $(which zsh)
+```
+
+Log out and relogin after successfully change shell to zsh.
+
 ### Dotfiles Install
+
 
 ```bash
 # First time install
