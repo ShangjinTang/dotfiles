@@ -8,7 +8,7 @@ elif [[ -z "$(git status --porcelain)" ]]; then
     exit 0
 fi
 
-GST_PREFIX="git -c color.status=always status -uall --short | grep "
+GST_PREFIX="git -c color.status=always status -uall --short | grep -i "
 INITIAL_QUERY="${*:-}"
 FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$INITIAL_QUERY")" \
 fzf --ansi \
