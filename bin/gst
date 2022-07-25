@@ -9,13 +9,13 @@ elif [[ -z "$(git status --porcelain)" ]]; then
 fi
 
 GST_PREFIX="git -c color.status=always status -uall --short | grep -i "
-INITIAL_QUERY="${*:-}"
-FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$INITIAL_QUERY")" \
+QUERY="${*:-}"
+FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$QUERY")" \
 fzf --ansi \
-    --disabled --query "$INITIAL_QUERY" \
     --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
-    --header "GIT STATUS:" -m --ansi --nth 2..,.. \
     --bind "change:reload:sleep 0.1; $GST_PREFIX {q} || true" \
+    --header "git status" -m --ansi --nth 2..,.. \
+    --disabled \
     --preview '(
         if [ $(git diff --staged -- {-1} | wc -l) -ne 0 ]; then
             echo ">>>>>> Changes to be committed:\n";
@@ -28,11 +28,12 @@ fzf --ansi \
             echo "\n<<<<<< Changes not staged for commit\n";
         fi;
         if [ $(git diff --staged -- {-1} | wc -l) -eq 0 ] &&
-           [ $(git diff -- {-1} | wc -l) -eq 0 ]; then
+            [ $(git diff -- {-1} | wc -l) -eq 0 ]; then
             echo ">>>>>> Untracked file:\n";
             bat {-1};
             echo "\n<<<<<< Untracked file\n";
         fi;
         ) | cat' \
-    --preview-window 'up,75%,border-bottom' |
-    cut -c4- | sed 's/.* -> //'
+    --preview-window 'up,75%,border-bottom' \
+    --query "$QUERY" \
+    | cut -c4- | sed 's/.* -> //'
