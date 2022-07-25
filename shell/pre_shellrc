@@ -163,6 +163,13 @@ if command -v rg &> /dev/null; then
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
+# fzf
+# Reference: https://man.archlinux.org/man/community/fzf/fzf.1.en
+if command -v fzf &> /dev/null; then
+    export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,alt-enter:toggle-preview"
+fi
+#
+
 ######################################################################
 
 
