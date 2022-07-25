@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+if [[ $(git rev-parse HEAD 2>&1 > /dev/null) ]]; then
+    echo "fatal: Not a git repository"
+    exit 1
+elif [[ -z "$(git status --porcelain)" ]]; then
+    echo "nothing to commit, working directory clean"
+    exit 0
+fi
+
+GST_PREFIX="git -c color.status=always status -uall --short | grep "
+INITIAL_QUERY="${*:-}"
+FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$INITIAL_QUERY")" \
+fzf --ansi \
+    --disabled --query "$INITIAL_QUERY" \
+    --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
+    --header "GIT STATUS:" -m --ansi --nth 2..,.. \
+    --bind "change:reload:sleep 0.1; $GST_PREFIX {q} || true" \
+    --preview '(
+        if [ $(git diff --staged -- {-1} | wc -l) -ne 0 ]; then
+            echo ">>>>>> Changes to be committed:\n";
+            git diff --staged --color=always -- {-1} | sed 1,4d;
+            echo "\n<<<<<< Changes to be committed\n";
+        fi;
+        if [ $(git diff -- {-1} | wc -l) -ne 0 ]; then
+            echo ">>>>>> Changes not staged for commit:\n";
+            git diff --color=always -- {-1} | sed 1,4d;
+            echo "\n<<<<<< Changes not staged for commit\n";
+        fi;
+        if [ $(git diff --staged -- {-1} | wc -l) -eq 0 ] &&
+           [ $(git diff -- {-1} | wc -l) -eq 0 ]; then
+            echo ">>>>>> Untracked file:\n";
+            bat {-1};
+            echo "\n<<<<<< Untracked file\n";
+        fi;
+        ) | cat' \
+    --preview-window 'up,75%,border-bottom' |
+    cut -c4- | sed 's/.* -> //'
