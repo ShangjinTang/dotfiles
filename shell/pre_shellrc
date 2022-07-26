@@ -3,13 +3,13 @@
 
 # proxy
 export PROXY_IP="127.0.0.1:1080"
-export PROXY_ENABLED="Y"
+export PROXY_ENABLED=1
 
 # tmux
-export TMUX_AUTO_LAUNCH="Y"
+export TMUX_AUTO_LAUNCH=1
 
 # security setting
-export SKIP_SSL="Y"
+export SKIP_SSL=1
 
 ######################################################################
 
@@ -22,7 +22,7 @@ export HISTFILESIZE=10000  # max size in history file, e.g. ~/.bash_history
 export HISTSIZE=1000  # max size in command `history`
 export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 
-if [ $SKIP_SSL = 'Y' ] || [ $SKIP_SSL = 'y' ]; then
+if [ $SKIP_SSL = '1' ]; then
     export GIT_SSL_NO_VERIFY=true
     export TLDR_ALLOW_INSECURE=1
     alias curl='curl --insecure'
@@ -119,11 +119,6 @@ if command -v tmux &> /dev/null; then
     alias tl='tmux list-sessions'
     alias ta='tmux attach-session -t'
     alias tn='tmux new-session -s'
-fi
-
-# ncdu
-if command -v ncdu &> /dev/null; then
-    alias ncdu='ncdu --color off'
 fi
 
 # exa
