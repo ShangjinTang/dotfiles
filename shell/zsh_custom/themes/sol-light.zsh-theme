@@ -17,8 +17,8 @@ local git_branch='$(git_prompt_info)'
 
 PROMPT=""
 
-# Check if we are on SSH or not
-if [ $SESSION_TYPE = "ssh" ]; then
+# Check if we are on SSH or not (only show if tmux is not launched)
+if [ $SESSION_TYPE = "ssh" ] && [ -z "$TMUX" ]; then
     PROMPT+="%K{255}%F{238}%m%f%k " # SSH
 else
     PROMPT+="" # no SSH
@@ -28,8 +28,9 @@ fi
 PROMPT+="%(?:%F{28}➤ :%F{124}➤ )%f "
 # Current directory (starts with '~' if possible)
 PROMPT+="%~ "
-# Git branch for server (local: tmux)
-if [ $SESSION_TYPE = "ssh" ]; then
+
+# Git branch (only show if tmux is not launched)
+if [ -z "$TMUX" ]; then
     PROMPT+="${git_branch}" # SSH
 fi
 # Use '%' as prompt symbol
