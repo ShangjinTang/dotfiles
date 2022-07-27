@@ -16,7 +16,6 @@ IFS=' ' read -ra selected < <(
     FZF_DEFAULT_COMMAND="$GSH_PREFIX $(printf %q "$QUERY") | sed '1d'" \
     fzf --ansi \
         --bind "change:reload:sleep 0.1; $GSH_PREFIX {q} | sed '1d' || true" \
-        --delimiter '\n' --nth 2..,.. \
         --disabled \
         --header "git show ${QUERY}" \
         --preview "git show $QUERY --color=always -- {1}" \

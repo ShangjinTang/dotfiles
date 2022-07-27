@@ -13,7 +13,7 @@
       relative: false
       glob: true
 - link:
-    ~/bin/: bin/*
+    ~/bin/: scripts/*
     # submodules
     ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
     ~/.fzf: submodules/fzf
