@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+CSF_PREFIX="cscope -dL2 "  # Find functions called by this function
+
+QUERY="${*:-}"
+
+FORMAT='{ file=$1; symbol=$2; line=$3; $1=$2=$3="";
+    printf "\033[35m%s\033[0m:\033[32m%s\033[0m:\t%s\n",file,line,$0; }'
+
+IFS=: read -ra selected < <(
+    FZF_DEFAULT_COMMAND="$CSF_PREFIX $(printf %q "$QUERY") | awk '$FORMAT' " \
+    fzf --ansi \
+        --color "hl:-1:underline:bold,hl+:-1:underline:bold:reverse" \
+        --delimiter : \
+        --header "functions called by '${QUERY}'" \
+        --preview "bat --color=always {1} --highlight-line {2}" \
+        --preview-window 'up,75%,border-bottom,~3,+{2}+0/4'
+)
+[ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"

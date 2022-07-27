@@ -14,7 +14,7 @@ FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$QUERY")" \
 fzf --ansi \
     --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
     --bind "change:reload:sleep 0.1; $GST_PREFIX {q} || true" \
-    --header "git status" -m --ansi --nth 2..,.. \
+    --header "git status" \
     --disabled \
     --preview '(
         if [ $(git diff --staged -- {-1} | wc -l) -ne 0 ]; then

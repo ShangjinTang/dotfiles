@@ -16,7 +16,7 @@ IFS=: read -ra selected < <(
       --header 'CTRL-R (ripgrep)  |  CTRL-F (fzf)' \
       --prompt '1. ripgrep > ' \
       --preview 'bat --color=always {1} --highlight-line {2}' \
-      --preview-window 'up,75%,border-bottom,~3,+3/4' \
+      --preview-window 'up,75%,border-bottom,~3,+{2}+3/4' \
       --query "$INITIAL_QUERY"
 )
 [ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
