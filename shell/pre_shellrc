@@ -90,6 +90,10 @@ function cdup() {
 }
 alias cu="cdup"
 
+if command -v _wf &> /dev/null; then
+    alias wf='cd $(_wf)'
+fi
+
 ######################################################################
 # aliases
 
