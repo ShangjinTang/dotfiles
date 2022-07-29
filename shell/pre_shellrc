@@ -104,10 +104,11 @@ alias rg='rg --smart-case'
 
 # vim
 alias v='vim'
+alias vv='vim ~/.vimrc'
 
 # git
 alias g='git'
-alias gpristine='git reset --hard && git clean -dfx'
+alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
 alias cdgitroot='cd $(git rev-parse --show-cdup)'
 
 # tmux
