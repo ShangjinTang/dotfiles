@@ -300,8 +300,8 @@ noremap <Right> <Nop>
 nnoremap <leader>sw :.,$s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
 nnoremap <leader>sW :.,$s/\<<C-R>=expand("<cWORD>")<CR>\>//gc<Left><Left><Left>
 " replace current word from first line to last line (confirm required)
-nnoremap <leader>sn :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
-nnoremap <leader>sN :%s/\<<C-R>=expand("<cWORD>")<CR>\>//gc<Left><Left><Left>
+nnoremap <leader>sa :%s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
+nnoremap <leader>sA :%s/\<<C-R>=expand("<cWORD>")<CR>\>//gc<Left><Left><Left>
 " replace current word in last visual selection
 nnoremap <leader>sv :%s/\%V\<<C-R>=expand("<cword>")<CR>\>//g<Left><Left>
 nnoremap <leader>sV :%s/\%V\<<C-R>=expand("<cWORD>")<CR>\>//g<Left><Left>
