@@ -22,7 +22,6 @@ IFS=' ' read -ra selected < <(
     FZF_DEFAULT_COMMAND="$GLF_PREFIX $(printf %q "$QUERY")" \
     fzf --ansi \
         --delimiter ' ' \
-        --disabled \
         --header "git log --follow -- $QUERY" \
         --preview "git show {1} --color=always -- $QUERY" \
         --preview-window 'up,75%,border-bottom,~1,+1/4' \
