@@ -1,6 +1,9 @@
 # Bash Shell Scripts
 
-Note: all shell scripts must use `bash` instead of `zsh` for compatability.
+Note:
+
+1. All shell scripts must use `bash` instead of `zsh` for compatability.
+2. Name begin with '\_' is a partial-implemented script and should not be called directly.
 
 ## FZF Integrations
 
