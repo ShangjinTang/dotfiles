@@ -103,6 +103,22 @@ function cdup() {
 }
 alias cu="cdup"
 
+function cdup_contain_file() {
+    if [ $# -eq 0 ]; then
+        echo "fatal: please specify a filename"
+    elif [ $# -eq 1 ]; then
+        dir=${PWD}
+        while [[ ! -f $dir/$1 ]] && [[ $dir != '/' ]]; do
+            dir="$(dirname "$dir")"
+        done
+        if [[ ! -f $dir/$1 ]]; then
+            echo "fatal: file $1 not found in current and parent dirs"
+        else
+            cd $dir
+        fi
+    fi
+}
+
 if command -v _wf &> /dev/null; then
     alias wf='cd $(_wf)'
 fi
