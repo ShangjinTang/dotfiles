@@ -5,7 +5,7 @@
 
 # create symlinks from ~/.dotfiles.local/ to ~/
 if [ -d ~/.dotfiles.local ]; then
-    for file in $(find ~/.dotfiles.local -mindepth 1); do
+    for file in $(find ~/.dotfiles.local -type f); do
         ln -sf $file "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
     done
 fi
