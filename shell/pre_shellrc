@@ -103,6 +103,7 @@ function cdup() {
 }
 alias cu="cdup"
 
+# cd to current/parent dirs which contains input filename
 function cdup_contain_file() {
     if [ $# -eq 0 ]; then
         echo "fatal: please specify a filename"
