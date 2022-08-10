@@ -67,6 +67,7 @@ vim +PlugInstall
 1. Add configuration files.
 2. Edit `install.conf.yaml` to create symlink.
 3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation.
+4. Add ~/.dotfiles.local/**CONFIGFILE** if you need to keep local configs, aka create symlink: ~/CONFIGFILE -> ~/.dotfiles.local/CONFIGFILE
 
 ---
 
