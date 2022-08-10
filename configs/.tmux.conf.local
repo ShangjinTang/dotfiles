@@ -343,6 +343,9 @@ bind | split-window -h
 # Set refresh interval
 set -g status-interval 1
 
+# Kill current session
+bind C-x kill-session
+
 if '[ -f ~/.tmux.conf.local.os ]' 'source -q ~/.tmux.conf.local.os'
 
 # Smart pane switching with awareness of Vim splits.
