@@ -120,7 +120,9 @@ function cdup_contain_file() {
 }
 
 if command -v _wf &> /dev/null; then
-    alias wf='cd $(_wf)'
+    function wf() {
+        cd "$(_wf "$*")"
+    }
 fi
 
 ######################################################################
