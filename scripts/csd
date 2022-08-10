@@ -30,6 +30,7 @@ IFS=: read -ra selected < <(
         --delimiter : \
         --header "functions called by '${QUERY}'" \
         --preview "bat --color=always {1} --highlight-line {2}" \
-        --preview-window 'up,75%,border-bottom,~3,+{2}+0/4'
+        --preview-window 'up,75%,border-bottom,~3,+{2}+0/4' \
+        --exit-0
 )
 [ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
