@@ -64,10 +64,14 @@ vim +PlugInstall
 
 ## dotfiles customization
 
-1. Add configuration files.
-2. Edit `install.conf.yaml` to create symlink.
-3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation.
-4. Add ~/.dotfiles.local/**CONFIGFILE** if you need to keep local configs, aka create symlink: ~/CONFIGFILE -> ~/.dotfiles.local/CONFIGFILE
+1. Add configuration files
+2. Edit `install.conf.yaml` to create symlink
+3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation
+4. Add files in `~/.dotfiles.local/` for local override
+  - Step 1: Create files in .dotfiles.local with same archtecture in home directory
+  - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
+    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
+    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
 
 ---
 
