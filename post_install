@@ -2,3 +2,10 @@
 
 # mkdir ~/.dotfiles.local &> /dev/null
 # pushd ~/.dotfiles.local
+
+# create symlinks from ~/.dotfiles.local/ to ~/
+if [ -d ~/.dotfiles.local ]; then
+    for file in $(find ~/.dotfiles.local -mindepth 1 -maxdepth 1); do
+        ln -sf $file "$(basename "$file")"
+    done
+fi
