@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+######################################################################
+# change to cscope directory
+CSFILE=cscope.out
+
+csdir=${PWD}
+while [[ ! -f $csdir/$CSFILE ]] && [[ $csdir != '/' ]]; do
+    csdir="$(dirname "$csdir")"
+done
+if [[ ! -f $csdir/$CSFILE ]]; then
+    echo "error: file $CSFILE not found in current and parent dirs"
+    exit 1
+fi
+cd $csdir
+
+######################################################################
+
 CSF_PREFIX="cscope -dL3 "  # Find functions calling this function
 
 QUERY="${*:-}"
