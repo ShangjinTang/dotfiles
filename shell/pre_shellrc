@@ -1,4 +1,7 @@
 ######################################################################
+# EXPORTS
+
+#=====================================================================
 # customized exports, can be overrided in ~/.*shrc.local file
 
 # proxy
@@ -11,7 +14,8 @@ export TMUX_AUTO_LAUNCH=1
 # security setting
 export SKIP_SSL=1
 
-######################################################################
+#=====================================================================
+# default exports which do not suggest to modify
 
 export EDITOR=vim
 export LANGUAGE=en_US.UTF-8
@@ -53,7 +57,16 @@ if [ $SHELL_NAME = "zsh" ]; then
     fi
 fi
 
+#=====================================================================
+# exports for specific command line tool
+
+# https://github.com/rupa/z
+export _Z_NO_RESOLVE_SYMLINKS=1
+
 ######################################################################
+# FUNCTIONS
+
+#=====================================================================
 # functions for local use
 
 _PATHAPPEND() {
@@ -63,7 +76,7 @@ _PATHAPPEND() {
 }
 _PATHAPPEND "$HOME/bin"
 
-######################################################################
+#=====================================================================
 # fuctions for command line use
 
 # cdup : same as 'cd ..'
@@ -95,7 +108,7 @@ if command -v _wf &> /dev/null; then
 fi
 
 ######################################################################
-# aliases
+# ALIASES
 
 alias grep='grep --color=auto'
 
