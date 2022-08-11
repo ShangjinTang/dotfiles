@@ -146,16 +146,25 @@ alias cdgitroot='cd $(git rev-parse --show-cdup)'
 # tmux
 if command -v tmux &> /dev/null; then
     function t() {
-        if [ $# -eq 1 ]; then
-            tmux attach-session -t $1 2> /dev/null || tmux new-session -s $1
-        elif [ $# -eq 0 ]; then
-            tmux attach-session -t 0 2> /dev/null || tmux new-session -s 0
+        # set default $session to $1 or 0 (if $1 not exist)
+        local session="${1:-0}"
+        if command -v tmuxinator &> /dev/null && [ -f ~/.tmuxinator/${session}.yml ]; then
+            tmuxinator $session
+        else
+            if tmux has -t $session &> /dev/null; then
+                tmux attach -t $session &> /dev/null || tmux attach -t $session -d
+            else
+                tmux new -t $session &> /dev/null || tmux new -t $session -d
+            fi
         fi
     }
     alias tk='tmux kill-session -at 0'
     alias tl='tmux list-sessions'
-    alias ta='tmux attach-session -t'
-    alias tn='tmux new-session -s'
+fi
+
+# tmuxinator
+if command -v tmuxinator &> /dev/null; then
+    alias mux=tmuxinator
 fi
 
 # exa
