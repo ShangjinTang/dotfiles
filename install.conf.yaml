@@ -80,6 +80,8 @@
       if: '[ $(basename $SHELL) = zsh ]'
 - link:
     ~/.zshrc: shell/zshrc
+    ~/.zshrc.pre: shell/shrc.pre
+    ~/.zshrc.post: shell/shrc.post
     ~/.oh-my-zsh: submodules/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
@@ -100,6 +102,8 @@
       if: '[ $(basename $SHELL) = bash ]'
 - link:
     ~/.bashrc: shell/bashrc
+    ~/.bashrc.pre: shell/shrc.pre
+    ~/.bashrc.post: shell/shrc.post
 
 
 

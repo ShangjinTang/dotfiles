@@ -4,7 +4,7 @@ _INCLUDE () {
     [[ -f "$1" ]] && source "$1"
 }
 
-_INCLUDE ~/.dotfiles/shell/pre_shellrc
+_INCLUDE ~/.zshrc.pre
 
 ######################################################################
 
@@ -37,6 +37,6 @@ _INCLUDE ~/.fzf.zsh
 ######################################################################
 
 _INCLUDE ~/.zshrc.local
-_INCLUDE ~/.dotfiles/shell/post_shellrc
+_INCLUDE ~/.zshrc.post
 
 ######################################################################
