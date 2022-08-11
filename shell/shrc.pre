@@ -154,7 +154,7 @@ if command -v tmux &> /dev/null; then
             if tmux has -t $session &> /dev/null; then
                 tmux attach -t $session &> /dev/null || tmux attach -t $session -d
             else
-                tmux new -t $session &> /dev/null || tmux new -t $session -d
+                tmux new -s $session &> /dev/null || tmux new -s $session -d
             fi
         fi
     }
