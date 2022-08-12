@@ -42,6 +42,7 @@ export TERM=xterm-256color
 export SHELL_NAME="$(basename $SHELL)"
 if [ $SHELL_NAME = "zsh" ]; then
     export ZSH_DISABLE_COMPFIX=1
+    export skip_global_compinit=1
     # zsh-autosuggestions
     #   https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
@@ -61,7 +62,9 @@ fi
 # exports for specific command line tool
 
 # https://github.com/rupa/z
-export _Z_NO_RESOLVE_SYMLINKS=1
+if command -v z &> /dev/null
+    export _Z_NO_RESOLVE_SYMLINKS=1
+fi
 
 ######################################################################
 # FUNCTIONS
