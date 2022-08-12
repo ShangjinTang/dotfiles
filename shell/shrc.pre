@@ -152,10 +152,19 @@ if command -v tmux &> /dev/null; then
             tmuxinator $session
         else
             if tmux has -t $session &> /dev/null; then
-                tmux attach -t $session &> /dev/null || tmux attach -t $session -d
+                if [ -z "$TMUX" ]; then
+                    tmux attach -t $session
+                else
+                    tmux switch -t $session
+                fi
             else
-                tmux new -s $session &> /dev/null || tmux new -s $session -d
+                if [ -z "$TMUX" ]; then
+                    tmux new -s $session
+                else
+                    tmux new -s $session -d && tmux switch -t $session
+                fi
             fi
+
         fi
     }
     alias tk='tmux kill-session -at 0'
