@@ -149,6 +149,8 @@ call plug#end()
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'  " show filepath on filenames comflict
 let g:airline#extensions#tabline#fnamemod = ':t'  " only show filename (if filenames not comflict). use `:help filename-modifiers` to check all available options
+let g:airline#extensions#tabline#buffer_nr_show = 1  " show file buffer number (index)
+let g:airline#extensions#tabline#buffer_nr_format = '%s '
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -259,6 +261,15 @@ nnoremap <silent> <leader>{ :bf<CR>      " Switch to first buffer
 nnoremap <silent> <leader>} :bl<CR>      " Switch to last buffer
 nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
+nnoremap <silent> <leader>1 :b1<CR>      " Switch to buffer 1
+nnoremap <silent> <leader>2 :b2<CR>      " Switch to buffer 2
+nnoremap <silent> <leader>3 :b3<CR>      " Switch to buffer 3
+nnoremap <silent> <leader>4 :b4<CR>      " Switch to buffer 4
+nnoremap <silent> <leader>5 :b5<CR>      " Switch to buffer 5
+nnoremap <silent> <leader>6 :b6<CR>      " Switch to buffer 6
+nnoremap <silent> <leader>7 :b7<CR>      " Switch to buffer 7
+nnoremap <silent> <leader>8 :b8<CR>      " Switch to buffer 8
+nnoremap <silent> <leader>9 :b9<CR>      " Switch to buffer 9
 
 
 " source code plugins
