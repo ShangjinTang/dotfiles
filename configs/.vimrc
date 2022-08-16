@@ -254,8 +254,12 @@ noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
 " vim buffer
 nnoremap <silent> <leader>q :qa!<CR>     " Quit vim (close all buffers)
 nnoremap <silent> <leader>w :bd<CR>      " Close current buffer
+nnoremap <silent> <leader><Tab> :b#<CR>  " Switch between current buffer and previous buffer
+nnoremap <silent> <leader>{ :bf<CR>      " Switch to first buffer
+nnoremap <silent> <leader>} :bl<CR>      " Switch to last buffer
 nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
+
 
 " source code plugins
 nnoremap <silent> <leader><leader> :NERDTreeToggle<CR>
