@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import sys
+import argparse
+import os
+import re
+
+__author__ = "Shangjin Tang"
+__copyright__ = "Copyright 2022 Shangjin Tang"
+__license__ = "GPL"
+__version__ = "1.0.0"
+# __date__ = "20220101"
+__email__ = "shangjin.tang@gmail.com"
+
+ARGS = None  # Get argument: ARGS.arg
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    # Sample Configurations:
+    # parser.add_argument('-d', '--dir', default=".")
+    # parser.add_argument('-p', '--project', default="")
+    # parser.add_argument('-f', '--flag', default=False, action='store_true')
+
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)

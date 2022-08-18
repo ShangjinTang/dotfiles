@@ -1,0 +1,94 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+"""This is the example module.
+
+This module does stuff.
+"""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from six.moves import urllib
+import sys
+import argparse
+import os
+import re
+
+__author__ = "Shangjin Tang"
+__copyright__ = "Copyright 2021 Shangjin Tang"
+__license__ = "GPL"
+__version__ = "1.1.0"
+__date__ = "20210301"
+__email__ = "shangjin.tang@gmail.com"
+
+ARGS = None
+
+
+def get_build_choices():
+    request = urllib.request.Request("https://source.android.com/setup/start/build-numbers");
+    try:
+        response = urllib.request.urlopen(request);
+    except urllib.error.URLError as e:
+        print(e.reason)
+    build_choices = re.findall("<td>android\-(\d+\.\d+\.\d+\_r\d+)<\/td>", response.read())
+    return build_choices
+
+
+def main():
+    if not os.path.exists(ARGS.dir):
+        raise IOError(ARGS.dir + " not exists")
+    os.chdir(ARGS.dir)
+
+    if not os.path.exists(ARGS.branch):
+        os.mkdir(ARGS.branch)
+    os.chdir(ARGS.branch)
+
+    os.system("repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-{}".format(ARGS.branch))
+    projects = []
+    if ARGS.compress:
+        if not os.path.exists("../{}-compressed".format(ARGS.branch)):
+            os.mkdir("../{}-compressed".format(ARGS.branch))
+        os.system("tar -czvf ../{}-compressed/.repo.tar.gz .repo".format(ARGS.branch))
+
+    repo_sync_return_code = 0
+    if not ARGS.projects:
+        ARGS.projects = ['*']
+        # print(ARGS.projects)
+    for project in ARGS.projects:
+        project = project.replace('*', '[\w\/\-\_]+')
+        with open('.repo/manifests/default.xml', 'r') as manifest:
+            for line in manifest:
+                if re.search('project path="({})"'.format(project), line):
+                   projects.append(re.search('project path="({})"'.format(project), line).group(1))
+    # print(projects)
+
+    for project in projects:
+        # do not sync for project "prebuilts/*" for it requires large disk
+        project_topdir = project.split('/')[0]
+        if not project_topdir in ARGS.excluded_topdirs:
+            if not ARGS.included_topdirs or project_topdir in ARGS.included_topdirs:
+                print("Syncing project: " + project)
+                repo_sync_return_code = os.system("repo sync -c -j{} --no-clone-bundle {}".format(ARGS.jobs, project))
+                if not repo_sync_return_code and ARGS.compress:
+                    os.system("tar -czvf ../{}-compressed/{}.tar.gz * && rm -rf *".format(ARGS.branch, project.replace('/', '--')))
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    build_choices = get_build_choices()
+    parser.add_argument('-b', '--branch', default=build_choices[0], choices=get_build_choices())
+    parser.add_argument('-d', '--dir', default=".")
+    parser.add_argument('-j', '--jobs', default="2")
+    parser.add_argument('-p', '--projects', default="", nargs='+')
+    parser.add_argument('-e', '--excluded_topdirs', default="prebuilts", nargs='+')
+    parser.add_argument('-i', '--included_topdirs', default="", nargs='+')
+    parser.add_argument('-c', '--compress', default=False, action='store_true')
+    ARGS = parser.parse_args()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
