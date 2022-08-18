@@ -19,11 +19,11 @@ def main():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    # Sample Configurations:
+    # Sample configurations:
     # parser.add_argument('-d', '--dir', default=".")
     # parser.add_argument('-p', '--project', default="")
     # parser.add_argument('-f', '--flag', default=False, action='store_true')
-
+    ARGS = parser.parse_args()
     try:
         main()
     except KeyboardInterrupt:
