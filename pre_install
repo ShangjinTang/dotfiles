@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+SHELL_NAME=$(basename $SHELL)
 if [ ! -f ~/.${SHELL_NAME}rc.local ]; then
     touch ~/.${SHELL_NAME}rc.local
 fi
