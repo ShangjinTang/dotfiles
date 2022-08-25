@@ -9,6 +9,8 @@ import sys
 import argparse
 import os
 import re
+import urllib.request
+import multiprocessing
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2022 Shangjin Tang"
@@ -17,17 +19,36 @@ __version__ = "1.2.0"
 __date__ = "20210301"
 __email__ = "shangjin.tang@gmail.com"
 
-ARGS = None
+
+# def get_build_versions():
+#     request = urllib.request.Request("https://source.android.com/setup/start/build-numbers")
+#     response = None
+#     try:
+#         response = urllib.request.urlopen(request)
+#     except Exception as e:
+#         print(e.reason)
+#     response_content = response.read().decode('utf-8')
+#
+#     latest_build_branch, latest_build_version = re.search("<td>android\-((\d+)\.\d+\.\d+\_r\d+)<\/td>",
+#                                                           response_content).groups()
+#     build_versions = {latest_build_version: latest_build_branch[0]}
+#     for build_version in range(int(latest_build_version), 1, -1):
+#         build_branch = re.search("<td>android\-({}\.\d+\.\d+\_r\d+)<\/td>".format(str(build_version)),
+#                                  response_content).groups(1)
+#         build_versions[str(build_version)] = build_branch[0]
+#     return build_versions
 
 
-def get_build_choices():
-    request = urllib.request.Request("https://source.android.com/setup/start/build-numbers");
+def get_build_branches():
+    request = urllib.request.Request("https://source.android.com/setup/start/build-numbers")
+    response = None
     try:
-        response = urllib.request.urlopen(request);
+        response = urllib.request.urlopen(request)
     except urllib.error.URLError as e:
         print(e.reason)
-    build_choices = re.findall("<td>android\-(\d+\.\d+\.\d+\_r\d+)<\/td>", response.read().decode('utf-8'))
-    return build_choices
+    build_branches = re.findall("<td>android\-(\d+\.\d+\.\d+\_r\d+)<\/td>", response.read().decode('utf-8'))
+    build_branches.append('master')
+    return build_branches
 
 
 def main():
@@ -35,16 +56,18 @@ def main():
         raise IOError(ARGS.dir + " not exists")
     os.chdir(ARGS.dir)
 
-    if not os.path.exists(ARGS.branch):
-        os.mkdir(ARGS.branch)
-    os.chdir(ARGS.branch)
+    branch = 'master' if ARGS.branch == 'master' else 'android-{}'.format(ARGS.branch)
+    if not os.path.exists(branch):
+        os.mkdir(branch)
+    os.chdir(branch)
 
-    os.system("repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-{}".format(ARGS.branch))
+    os.system(
+        "repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b {}".format(branch))
     projects = []
     if ARGS.compress:
-        if not os.path.exists("../{}-compressed".format(ARGS.branch)):
-            os.mkdir("../{}-compressed".format(ARGS.branch))
-        os.system("tar -czvf ../{}-compressed/.repo.tar.gz .repo".format(ARGS.branch))
+        if not os.path.exists("../{}-compressed".format(branch)):
+            os.mkdir("../{}-compressed".format(branch))
+        os.system("tar -czvf ../{}-compressed/.repo.tar.gz .repo".format(branch))
 
     repo_sync_return_code = 0
     if not ARGS.projects:
@@ -55,7 +78,7 @@ def main():
         with open('.repo/manifests/default.xml', 'r') as manifest:
             for line in manifest:
                 if re.search('project path="({})"'.format(project), line):
-                   projects.append(re.search('project path="({})"'.format(project), line).group(1))
+                    projects.append(re.search('project path="({})"'.format(project), line).group(1))
     # print(projects)
 
     for project in projects:
@@ -66,25 +89,27 @@ def main():
                 print("Syncing project: " + project)
                 repo_sync_return_code = os.system("repo sync -c -j{} --no-clone-bundle {}".format(ARGS.jobs, project))
                 if not repo_sync_return_code and ARGS.compress:
-                    os.system("tar -czvf ../{}-compressed/{}.tar.gz * && rm -rf *".format(ARGS.branch, project.replace('/', '--')))
+                    os.system("tar -czvf ../{}-compressed/{}.tar.gz * && rm -rf *".format(branch,
+                                                                                          project.replace('/', '--')))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    build_choices = get_build_choices()
-    parser.add_argument('-b', '--branch', default=build_choices[0], choices=get_build_choices(),
-            metavar='BRANCH', help= "default: {}".format(get_build_choices()[0]))
+    build_branches = get_build_branches()
+    parser.add_argument('-b', '--branch', choices=build_branches, default=build_branches[0],
+                        metavar='BRANCH', help="e.g. {} (default) / master".format(build_branches[0]))
     parser.add_argument('-d', '--dir', default=".")
-    parser.add_argument('-j', '--jobs', default="2")
+    parser.add_argument('-j', '--jobs', default="{}".format(multiprocessing.cpu_count()))
     parser.add_argument('-p', '--projects', default="", nargs='+')
-    parser.add_argument('-e', '--excluded_topdirs', default="prebuilts", nargs='+')
-    parser.add_argument('-i', '--included_topdirs', default="", nargs='+')
     parser.add_argument('-c', '--compress', default=False, action='store_true')
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-e', '--excluded_topdirs', default="prebuilts", nargs='+')
+    group.add_argument('-i', '--included_topdirs', default="", nargs='+')
     ARGS = parser.parse_args()
     try:
         main()
     except KeyboardInterrupt:
-        print('Interrupted')
+        print('Keyboard Interrupt')
         try:
             sys.exit(0)
         except SystemExit:
