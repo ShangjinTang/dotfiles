@@ -166,8 +166,10 @@ let g:airline_symbols.dirty = " !"
 
 " ----------------------------------------------------------
 " ### SuperTab
-" Do not create a new line after select completion by <Space>
+" Do not create new space after select completion by <Space>
 inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
+" Do not create new line after select completion by <Enter>
+let g:SuperTabCrMapping = 1
 
 " ----------------------------------------------------------
 " ### NERDTree
