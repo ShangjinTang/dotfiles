@@ -1,18 +1,23 @@
 ######################################################################
-# common used
+# common
 .git/*
 .rgignore
 
 ######################################################################
-# Windows/macOS files
-.DS_Store
-.Thumbs.db
+# Linux/macOS Command Line Tools
+cscope.*            # cscope
+tags                # ctags
 
 ######################################################################
-# cscope / ctags
-cscope.*
-tags
+# macOS only
+*_nosync.lua        # Hammerspoon local config
+.DS_Store           # Trash files
 
 ######################################################################
-# Hammerspoon local config
-*_nosync.lua
+# Windows
+.Thumbs.db          # Trash files
+
+######################################################################
+# Cross Platform GUI Software
+.vscode
+.idea
