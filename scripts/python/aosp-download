@@ -1,23 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 """This is the example module.
 
 This module does stuff.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from six.moves import urllib
 import sys
 import argparse
 import os
 import re
 
 __author__ = "Shangjin Tang"
-__copyright__ = "Copyright 2021 Shangjin Tang"
+__copyright__ = "Copyright 2022 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __date__ = "20210301"
 __email__ = "shangjin.tang@gmail.com"
 
@@ -30,7 +26,7 @@ def get_build_choices():
         response = urllib.request.urlopen(request);
     except urllib.error.URLError as e:
         print(e.reason)
-    build_choices = re.findall("<td>android\-(\d+\.\d+\.\d+\_r\d+)<\/td>", response.read())
+    build_choices = re.findall("<td>android\-(\d+\.\d+\.\d+\_r\d+)<\/td>", response.read().decode('utf-8'))
     return build_choices
 
 
@@ -76,7 +72,8 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     build_choices = get_build_choices()
-    parser.add_argument('-b', '--branch', default=build_choices[0], choices=get_build_choices())
+    parser.add_argument('-b', '--branch', default=build_choices[0], choices=get_build_choices(),
+            metavar='BRANCH', help= "default: {}".format(get_build_choices()[0]))
     parser.add_argument('-d', '--dir', default=".")
     parser.add_argument('-j', '--jobs', default="2")
     parser.add_argument('-p', '--projects', default="", nargs='+')
