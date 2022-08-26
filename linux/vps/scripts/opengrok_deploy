@@ -26,42 +26,43 @@ if [ ! -d ${TOMCAT_ROOT} ] || [ ! -d ${OPENGROK_PROJECTS} ];then
 fi
 
 
+if [ $# -ge 2 ]; then
+    echo "########## Configure Tomcat Begin ##########"
 
-echo "########## Configure Tomcat Begin ##########"
+    if [ ! -f ${PROJECT_WEBXML} ]; then
+        echo "Tomcat: copy source.war to ${PROJECT_NAME}.war..."
+        cp -f ${TOMCAT_WEBAPPS}/source.war ${TOMCAT_WEBAPPS}/${PROJECT_NAME}.war
+        while [ ! -f ${PROJECT_WEBXML} ]; do
+            echo "Tomcat: wait generate folder from ${PROJECT_NAME}.war .."
+            sleep 3
+        done
+        echo "Tomcat: generate folder from ${PROJECT_NAME}.war succeed"
+    fi
 
-if [ ! -f ${PROJECT_WEBXML} ]; then
-    echo "Tomcat: copy source.war to ${PROJECT_NAME}.war..."
-    cp -f ${TOMCAT_WEBAPPS}/source.war ${TOMCAT_WEBAPPS}/${PROJECT_NAME}.war
-    while [ ! -f ${PROJECT_WEBXML} ]; do
-        echo "Tomcat: wait generate folder from ${PROJECT_NAME}.war .."
-        sleep 3
-    done
-    echo "Tomcat: generate folder from ${PROJECT_NAME}.war succeed"
+    tomcat_orig_config=$(echo /var/opengrok/etc/configuration.xml | sed 's_/_\\/_g')
+    tomcat_target_config=$(echo ${PROJECT_ROOT}/etc/configuration.xml | sed 's_/_\\/_g')
+    sed -i "s/${tomcat_orig_config}/${tomcat_target_config}/g" ${PROJECT_WEBXML}
+
+    echo "########## Configure Tomcat End ##########"
+
+
+
+    echo "########## Generate Project Filetree Begin ##########"
+
+    if [ ! -d ${PROJECT_ROOT} ]; then
+        cp -rf ${OPENGROK_PROJECTS}/project_example ${PROJECT_ROOT}
+        echo "Filetree: copied from project_example"
+    fi
+
+    sed -i "s/project_example/${PROJECT_NAME}/g" ${PROJECT_ROOT}/etc/logging.properties
+
+    if [ $# -ge 2 ] && [ -d ${PROJECT_ROOT}/src ] ; then
+        echo "Moving folder(s) to ${PROJECT_ROOT}/src/"
+        mv ${@:2} ${PROJECT_ROOT}/src
+    fi
+
+    echo "########## Generate Project Filetree End ##########"
 fi
-
-tomcat_orig_config=$(echo /var/opengrok/etc/configuration.xml | sed 's_/_\\/_g')
-tomcat_target_config=$(echo ${PROJECT_ROOT}/etc/configuration.xml | sed 's_/_\\/_g')
-sed -i "s/${tomcat_orig_config}/${tomcat_target_config}/g" ${PROJECT_WEBXML}
-
-echo "########## Configure Tomcat End ##########"
-
-
-
-echo "########## Generate Project Filetree Begin ##########"
-
-if [ ! -d ${PROJECT_ROOT} ]; then
-    cp -rf ${OPENGROK_PROJECTS}/project_example ${PROJECT_ROOT}
-    echo "Filetree: copied from project_example"
-fi
-
-sed -i "s/project_example/${PROJECT_NAME}/g" ${PROJECT_ROOT}/etc/logging.properties
-
-if [ $# -ge 2 ] && [ -d ${PROJECT_ROOT}/src ] ; then
-    echo "Moving folder(s) to ${PROJECT_ROOT}/src/"
-    mv ${@:2} ${PROJECT_ROOT}/src
-fi
-
-echo "########## Generate Project Filetree End ##########"
 
 
 
