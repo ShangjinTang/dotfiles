@@ -65,6 +65,7 @@
     ~/bin/: linux/bin/*
     ~/.tmux.conf.local.os: configs/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: gitmux/gitmux.linux.amd64
+    ~/.kaggle/kaggle.json: linux/.kaggle/kaggle.json
 
 
 
@@ -80,8 +81,9 @@
       glob: true
       if: '[ $(basename $SHELL) = zsh ]'
 - link:
-    ~/.zshrc: shell/zshrc
+    ~/.zshrc.env: shell/shrc.env
     ~/.zshrc.pre: shell/shrc.pre
+    ~/.zshrc: shell/zshrc
     ~/.zshrc.post: shell/shrc.post
     ~/.oh-my-zsh: submodules/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
@@ -102,8 +104,9 @@
       glob: true
       if: '[ $(basename $SHELL) = bash ]'
 - link:
-    ~/.bashrc: shell/bashrc
+    ~/.bashrc.env: shell/shrc.env
     ~/.bashrc.pre: shell/shrc.pre
+    ~/.bashrc: shell/bashrc
     ~/.bashrc.post: shell/shrc.post
 
 
