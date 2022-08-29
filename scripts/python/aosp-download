@@ -20,23 +20,26 @@ __date__ = "20210301"
 __email__ = "shangjin.tang@gmail.com"
 
 
-# def get_build_versions():
-#     request = urllib.request.Request("https://source.android.com/setup/start/build-numbers")
-#     response = None
-#     try:
-#         response = urllib.request.urlopen(request)
-#     except Exception as e:
-#         print(e.reason)
-#     response_content = response.read().decode('utf-8')
-#
-#     latest_build_branch, latest_build_version = re.search("<td>android\-((\d+)\.\d+\.\d+\_r\d+)<\/td>",
-#                                                           response_content).groups()
-#     build_versions = {latest_build_version: latest_build_branch[0]}
-#     for build_version in range(int(latest_build_version), 1, -1):
-#         build_branch = re.search("<td>android\-({}\.\d+\.\d+\_r\d+)<\/td>".format(str(build_version)),
-#                                  response_content).groups(1)
-#         build_versions[str(build_version)] = build_branch[0]
-#     return build_versions
+def get_build_versions():
+    request = urllib.request.Request("https://source.android.com/setup/start/build-numbers")
+    response = None
+    try:
+        response = urllib.request.urlopen(request)
+    except Exception as e:
+        print(e.reason)
+    response_content = response.read().decode('utf-8')
+
+    latest_build_branch, latest_build_version = re.search("<td>android\-((\d+)\.\d+\.\d+\_r\d+)<\/td>",
+                                                          response_content).groups()
+    build_versions = {latest_build_version: latest_build_branch[0]}
+    for build_version in range(int(latest_build_version), 1, -1):
+        build_branch = re.search("<td>android\-({}\.\d+\.\d+\_r\d+)<\/td>".format(str(build_version)),
+                                 response_content).groups(1)
+        build_versions[str(build_version)] = build_branch[0]
+    return build_versions
+
+def get_latest_build_branch_per_version():
+    return get_build_versions().values()
 
 
 def get_build_branches():
@@ -94,10 +97,11 @@ def main():
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
     build_branches = get_build_branches()
-    parser.add_argument('-b', '--branch', choices=build_branches, default=build_branches[0],
-                        metavar='BRANCH', help="e.g. {} (default) / master".format(build_branches[0]))
+    latest_build_branch_per_version =  ['master'] + list(get_latest_build_branch_per_version())[:3] + ['...']
+    parser.add_argument('-b', '--branch', choices=build_branches, default=latest_build_branch_per_version[0],
+                        metavar='BRANCH', help=' | '.join(latest_build_branch_per_version))
     parser.add_argument('-d', '--dir', default=".")
     parser.add_argument('-j', '--jobs', default="{}".format(multiprocessing.cpu_count()))
     parser.add_argument('-p', '--projects', default="", nargs='+')
