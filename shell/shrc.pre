@@ -207,7 +207,8 @@ if command -v exa &> /dev/null; then
 # sn: size numbers | sb: size unit
 # uu: user not you | gu: group not yours | da: date (timestamp)
 # (u|g|t)(r|w|x): (user|group|others)(read|write|execute) | ue: user execute (file types)
-export EXA_COLORS="\
+    if [ $TERMINAL_COLOR = 'light' ]; then
+        export EXA_COLORS="\
 di=38;5;012:ex=38;5;001:ln=38;5;013:\
 sn=38;5;002:sb=38;5;002;01:\
 uu=38;5;002:gu=38;5;002:da=38;5;006:\
@@ -216,6 +217,9 @@ uw=38;5;000:gw=38;5;000:tw=38;5;000:\
 ux=38;5;001;01:ue=38;5;001:gx=38;5;001:tx=38;5;001:\
 *.md=38;5;000\
 "
+    elif [ $TERMINAL_COLOR = 'dark' ]; then
+        unset EXA_COLORS
+    fi
 fi
 
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
