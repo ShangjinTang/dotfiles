@@ -14,14 +14,14 @@ tmux:
     clear: '#[fg=default]'
     state: '#[fg=#d70000,bold]'
     branch: '#[fg=#ff5faf,bold]'
-    remote: '#[fg=#d0d0d0]'
+    remote: '#[fg=#808080]'
     staged: '#[fg=#5faf00,bold]'
-    conflict: '#[fg=#d0d0d0,bold]'
-    modified: '#[fg=#d0d0d0,bold]'
+    conflict: '#[fg=#eeeeee,bold]'
+    modified: '#[fg=#eeeeee,bold]'
     untracked: '#[fg=#ff5faf,bold]'
     stashed: '#[fg=#0087af,bold]'
     clean: '#[fg=#5faf00,bold]'
-    divergence: '#[fg=d0d0d0]'
+    divergence: '#[fg=eeeeee]'
   layout: [branch, .. , remote-branch, divergence, ' - ', flags]
   options:
     branch_max_len: 0
