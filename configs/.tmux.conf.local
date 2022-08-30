@@ -4,6 +4,7 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+
 # -- navigation ----------------------------------------------------------------
 
 # if you're running tmux within iTerm2
@@ -19,32 +20,39 @@
 # new window retains current path, possible values are:
 #   - true
 #   - false (default)
+#   - disabled (do not modify new-window bindings)
 tmux_conf_new_window_retain_current_path=false
 
 # new pane retains current path, possible values are:
 #   - true (default)
 #   - false
+#   - disabled (do not modify split-window bindings)
 tmux_conf_new_pane_retain_current_path=true
 
-# new pane tries to reconnect ssh sessions (experimental), possible values are:
+# new pane tries to reconnect ssh sessions, possible values are:
 #   - true
 #   - false (default)
+#   - disabled (do not modify split-window bindings)
 tmux_conf_new_pane_reconnect_ssh=false
 
 # prompt for session name when creating a new session, possible values are:
 #   - true
 #   - false (default)
-tmux_conf_new_session_prompt=true
+#   - disabled (do not modify new-session bindings)
+tmux_conf_new_session_prompt=false
 
 
 # -- display -------------------------------------------------------------------
-# https://github.com/NLKNguyen/papercolor-theme#-colors
-# use papercolor-light theme
 
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
-#  - false (default)
-tmux_conf_theme_24b_colour=false
+#  - false
+#  - auto (default)
+#
+# automatic detection relies on the COLORTERM environment variable being defined
+# to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
+# see https://github.com/termstandard/colors
+tmux_conf_24b_colour=auto
 
 # window style
 # 默认窗口的颜色
@@ -56,10 +64,10 @@ tmux_conf_theme_window_bg="default"
 #   - false (default)
 # 高亮当前 pane
 tmux_conf_theme_highlight_focused_pane=false
+
 # focused pane colours:
 # 当前 pane 的颜色（需要 tmux_conf_theme_highlight_focused_pane=true 才生效）
-tmux_conf_theme_focused_pane_fg="default"
-tmux_conf_theme_focused_pane_bg="#ffffff"
+tmux_conf_theme_focused_pane_bg="$ffffff"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -78,23 +86,23 @@ tmux_conf_theme_pane_active_indicator="#8700af"
 
 # status line message style
 # 命令响应颜色配置 (如 Ctrl-b r)
-tmux_conf_theme_message_fg="#eeeeee"                    # black
-tmux_conf_theme_message_bg="#005f87"                    # yellow
+tmux_conf_theme_message_fg="#eeeeee"
+tmux_conf_theme_message_bg="#005f87"
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg="#ffff00"            # yellow
-tmux_conf_theme_message_command_bg="#000000"            # black
+tmux_conf_theme_message_command_fg="#ffff00"
+tmux_conf_theme_message_command_bg="#000000"
 tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
-tmux_conf_theme_mode_fg="#000000"                       # black
-tmux_conf_theme_mode_bg="#ffff00"                       # yellow
+tmux_conf_theme_mode_fg="#000000"
+tmux_conf_theme_mode_bg="#ffff00"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
-tmux_conf_theme_status_fg="#878787"                     # light gray
-tmux_conf_theme_status_bg="#ffffff"                     # white
+tmux_conf_theme_status_fg="#878787"
+tmux_conf_theme_status_bg="#ffffff"
 tmux_conf_theme_status_attr="none"
 
 # terminal title
@@ -124,7 +132,7 @@ tmux_conf_theme_window_status_bg="#f5f5f5"
 tmux_conf_theme_window_status_attr="none"
 tmux_conf_theme_window_status_format="#I #W"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W"
-#tmux_conf_theme_window_status_format="#I #W#{?window_bell_flag,�,}#{?window_zoomed_flag,�,}"
+#tmux_conf_theme_window_status_format="#I #W#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
 # window current status style
 #   - built-in variables are:
@@ -142,7 +150,7 @@ tmux_conf_theme_window_status_current_bg="#005f87"
 tmux_conf_theme_window_status_current_attr="bold"
 tmux_conf_theme_window_status_current_format="#I #W"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
-#tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,�,}"
+#tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="default"
@@ -285,8 +293,8 @@ tmux_conf_battery_vbar_palette="gradient"
 # symbols used to indicate whether battery is charging or discharging
 tmux_conf_battery_status_charging="↑"       # U+2191
 tmux_conf_battery_status_discharging="↓"    # U+2193
-#tmux_conf_battery_status_charging="�"     # U+1F50C
-#tmux_conf_battery_status_discharging="�"  # U+1F50B
+#tmux_conf_battery_status_charging="🔌"     # U+1F50C
+#tmux_conf_battery_status_discharging="🔋"  # U+1F50B
 
 # clock style (when you hit <prefix> + t)
 # you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
@@ -299,6 +307,7 @@ tmux_conf_theme_clock_style="24"
 # in copy mode, copying selection also copies to the OS clipboard
 #   - true
 #   - false (default)
+#   - disabled
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel or xclip
 tmux_conf_copy_to_os_clipboard=false
@@ -308,10 +317,50 @@ tmux_conf_copy_to_os_clipboard=false
 # this is the place to override or undo settings
 
 # increase history size
+#set -g history-limit 10000
+
+# start with mouse mode enabled
+#set -g mouse on
+
+# force Vi mode
+#   really you should export VISUAL or EDITOR environment variable, see manual
+#set -g status-keys vi
+#set -g mode-keys vi
+
+# replace C-b by C-a instead of using both prefixes
+# set -gu prefix2
+# unbind C-a
+# unbind C-b
+# set -g prefix C-a
+# bind C-a send-prefix
+
+# if you don't want Oh my tmux! to alter a binding, use #!important
+# bind v new-window -c #{pane_current_path} #!important
+
+# move status line to top
+#set -g status-position top
+
+# >>> Shangjin customize begin >>>
+
+# increase history size
 set -g history-limit 10000
 
 # mouse mode enabled
 set -g mouse on
+
+# do not use C-a as prefix
+set -gu prefix2
+unbind C-a
+
+# use | to split vertically instead of _
+unbind _
+bind | split-window -h
+
+# set refresh interval
+set -g status-interval 1
+
+# kill current session
+bind C-x kill-session
 
 # let copy on mouse selection without zoom
 # reference: https://unix.stackexchange.com/questions/318281/how-to-copy-and-paste-with-a-mouse-with-tmux
@@ -322,50 +371,7 @@ bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
 bind -T copy-mode-vi    C-WheelUpPane   send-keys -X halfpage-up
 bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
 
-# force Vi mode
-#   really you should export VISUAL or EDITOR environment variable, see manual
-#set -g status-keys vi
-#set -g mode-keys vi
-
-# set status line to bottom(default) or top
-set -g status-position bottom
-
-# >>> Shangjin customize begin >>>
-
-# Do not use C-a as prefix
-set -gu prefix2
-unbind C-a
-
-# Use | to split vertically instead of _
-unbind _
-bind | split-window -h
-
-# Set refresh interval
-set -g status-interval 1
-
-# Kill current session
-bind C-x kill-session
-
 if '[ -f ~/.tmux.conf.local.os ]' 'source -q ~/.tmux.conf.local.os'
-
-# Smart pane switching with awareness of Vim splits.
-# See: https://github.com/christoomey/vim-tmux-navigator
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-bind-key -T copy-mode-vi 'C-h' select-pane -L
-bind-key -T copy-mode-vi 'C-j' select-pane -D
-bind-key -T copy-mode-vi 'C-k' select-pane -U
-bind-key -T copy-mode-vi 'C-l' select-pane -R
-# bind-key -T copy-mode-vi 'C-\' select-pane -l
 
 # <<< Shangjin customize end <<<
 
@@ -426,9 +432,9 @@ tmux_conf_uninstall_plugins_on_reload=true
 #
 # # /!\ do not "uncomment" the functions: the leading "# " characters are needed
 #
-# weather() {
-#   curl -m 1 wttr.in?format=3 2>/dev/null
-#   sleep 900 # sleep for 15 minutes, throttle network requests whatever the value of status-interval
+# weather() {                                         # see https://github.com/chubin/wttr.in#one-line-output
+#   curl -f -s -m 2 'wttr.in?format=3' || printf '\n' # /!\ make sure curl is installed
+#   sleep 900                                         # sleep for 15 minutes, throttle network requests whatever the value of status-interval
 # }
 #
 # online() {
@@ -448,3 +454,4 @@ tmux_conf_uninstall_plugins_on_reload=true
 #
 # "$@"
 # # /!\ do not remove the previous line
+
