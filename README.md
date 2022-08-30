@@ -147,7 +147,12 @@ Note: `*shrc` means `zshrc` or `bashrc`.
   - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
   - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - theme:
-  - self-customized theme 'sol-light'
+  - self-customized theme 'light' and 'dark' (set by `TERMINAL_COLOR`)
+    - vim & vim-airline
+    - tmux & gitmux
+    - PROMPT
+    - zsh-auto-suggestions hint
+
 
 
 ### hammerspoon for macOS

@@ -81,14 +81,13 @@
       glob: true
       if: '[ $(basename $SHELL) = zsh ]'
 - link:
-    ~/.zshrc.env: shell/shrc.env
     ~/.zshrc.pre: shell/shrc.pre
     ~/.zshrc: shell/zshrc
     ~/.zshrc.post: shell/shrc.post
     ~/.oh-my-zsh: submodules/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
-    ~/.oh-my-zsh/custom/themes/sol-light.zsh-theme: shell/zsh_custom/themes/sol-light.zsh-theme
+    ~/.oh-my-zsh/custom/themes/sol.zsh-theme: shell/zsh_custom/themes/sol.zsh-theme
 
 
 
@@ -104,7 +103,6 @@
       glob: true
       if: '[ $(basename $SHELL) = bash ]'
 - link:
-    ~/.bashrc.env: shell/shrc.env
     ~/.bashrc.pre: shell/shrc.pre
     ~/.bashrc: shell/bashrc
     ~/.bashrc.post: shell/shrc.post

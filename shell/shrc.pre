@@ -14,6 +14,9 @@ export TMUX_AUTO_LAUNCH=1
 # security setting
 export SKIP_SSL=1
 
+# export TERMINAL_COLOR='light'  # Use non-transparent theme for light
+export TERMINAL_COLOR='dark'  # Use transparent theme for dark
+
 #=====================================================================
 # default exports which do not suggest to modify
 
@@ -46,7 +49,11 @@ if [ $SHELL_NAME = "zsh" ]; then
     export skip_global_compinit=1
     # zsh-autosuggestions
     #   https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
+    if [ $TERMINAL_COLOR = 'light' ]; then
+        export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
+    elif [ $TERMINAL_COLOR = 'dark' ]; then
+        export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"
+    fi
 
     # session type to distinguish local or ssh(remote), for zsh theme
     export SESSION_TYPE=local

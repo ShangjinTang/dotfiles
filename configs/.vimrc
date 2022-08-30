@@ -200,13 +200,6 @@ let g:rainbow_conf = {'ctermfgs': [162, 166, 28, 24, 91]}
 let g:rainbow_active = 1
 
 " ----------------------------------------------------------
-" Theme papercolor
-" Reference: https://github.com/NLKNguyen/papercolor-theme
-set background=light
-colorscheme PaperColor
-let g:airline_theme='papercolor'
-
-" ----------------------------------------------------------
 " ### ctags / cscope / tagbar
 
 " search current directory first, then search up to home
@@ -299,8 +292,7 @@ nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR>
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr> nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " nnoremap <silent> <C-\>:TmuxNavigatePrevious<cr>
 
 " ----------------------------------------------------------
@@ -374,4 +366,37 @@ augroup end
 
 " ====================================================================
 " ====================================================================
+" ## Terminal Background
 
+if $TERMINAL_COLOR == 'light'
+    set background=light
+    colorscheme PaperColor
+    let g:airline_theme='papercolor'
+endif
+if $TERMINAL_COLOR == 'dark'
+    set background=dark
+    colorscheme PaperColor
+    let g:airline_theme='onedark'
+
+    let t:is_transparent = 1
+    function! Toggle_transparent_background()
+        if t:is_transparent == 0
+            hi Normal guibg=#111111 ctermbg=black
+            let t:is_transparent = 1
+        else
+            hi Normal guibg=NONE ctermbg=NONE
+            let t:is_transparent = 0
+        endif
+    endfunction
+    call Toggle_transparent_background()
+
+    nnoremap <leader>0 :call Toggle_transparent_background()<CR>
+
+    highlight LineNr ctermbg=NONE guibg=NONE
+    highlight clear SignColumn
+    highlight airline_c  ctermbg=NONE guibg=NONE
+    highlight airline_tabfill ctermbg=NONE guibg=NONE
+endif
+
+" ====================================================================
+" ====================================================================

@@ -13,19 +13,31 @@ setopt prompt_subst
 ######################################################################
 # PROMPT
 
+if [ $TERMINAL_COLOR = 'light' ]; then
+    COLOR_DEFAULT='255'
+    COLOR_MACHINE='238'
+    COLOR_RETURN_TRUE='28'
+    COLOR_RETURN_FALSE='124'
+elif [ $TERMINAL_COLOR = 'dark' ]; then
+    COLOR_DEFAULT='234'
+    COLOR_MACHINE='252'
+    COLOR_RETURN_TRUE='70'
+    COLOR_RETURN_FALSE='205'
+fi
+
 local git_branch='$(git_prompt_info)'
 
 PROMPT=""
 
 # Check if we are on SSH or not (only show if tmux is not launched)
 if [ $SESSION_TYPE = "ssh" ] && [ -z "$TMUX" ]; then
-    PROMPT+="%K{255}%F{238}%m%f%k " # SSH
+    PROMPT+="%K{$COLOR_DEFAULT}%F{$COLOR_MACHINE}%m%f%k " # SSH
 else
     PROMPT+="" # no SSH
 fi
 
 # Green/Blue anchor based on the return result
-PROMPT+="%(?:%F{28}➤ :%F{124}➤ )%f "
+PROMPT+="%(?:%F{$COLOR_RETURN_TRUE}➤ :%F{$COLOR_RETURN_FALSE}➤ )%f "
 # Current directory (starts with '~' if possible)
 PROMPT+="%~ "
 

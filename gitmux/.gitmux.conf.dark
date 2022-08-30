@@ -12,16 +12,16 @@ tmux:
     clean: ✔
   styles:
     clear: '#[fg=default]'
-    state: '#[fg=#d70101,bold]'
-    branch: '#[fg=#8700af,bold]'
-    remote: '#[fg=#878787]'
-    staged: '#[fg=#008700,bold]'
-    conflict: '#[fg=#d70101,bold]'
-    modified: '#[fg=#d70101,bold]'
-    untracked: '#[fg=#8700af,bold]'
+    state: '#[fg=#d70000,bold]'
+    branch: '#[fg=#ff5faf,bold]'
+    remote: '#[fg=#d0d0d0]'
+    staged: '#[fg=#5faf00,bold]'
+    conflict: '#[fg=#d0d0d0,bold]'
+    modified: '#[fg=#d0d0d0,bold]'
+    untracked: '#[fg=#ff5faf,bold]'
     stashed: '#[fg=#0087af,bold]'
-    clean: '#[fg=#008700,bold]'
-    divergence: '#[fg=default]'
+    clean: '#[fg=#5faf00,bold]'
+    divergence: '#[fg=d0d0d0]'
   layout: [branch, .. , remote-branch, divergence, ' - ', flags]
   options:
     branch_max_len: 0
