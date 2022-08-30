@@ -44,66 +44,269 @@ tmux_conf_new_session_prompt=false
 
 # -- display -------------------------------------------------------------------
 
-# RGB 24-bit colour support (tmux >= 2.2), possible values are:
-#  - true
-#  - false
-#  - auto (default)
-#
-# automatic detection relies on the COLORTERM environment variable being defined
-# to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
-# see https://github.com/termstandard/colors
-tmux_conf_24b_colour=auto
+if-shell -b '[ $TERMINAL_COLOR = light ]' {
+    # month date: %m/%d
+    tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf.light #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
+    # RGB 24-bit colour support (tmux >= 2.2), possible values are:
+    #  - true
+    #  - false
+    #  - auto (default)
+    #
+    # automatic detection relies on the COLORTERM environment variable being defined
+    # to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
+    # see https://github.com/termstandard/colors
+    tmux_conf_24b_colour=auto
 
-# window style
-# 默认窗口的颜色
-tmux_conf_theme_window_fg="default"
-tmux_conf_theme_window_bg="default"
+    # window style
+    # 默认窗口的颜色
+    tmux_conf_theme_window_fg="default"
+    tmux_conf_theme_window_bg="default"
 
-# highlight focused pane (tmux >= 2.1), possible values are:
-#   - true
-#   - false (default)
-# 高亮当前 pane
-tmux_conf_theme_highlight_focused_pane=false
+    # highlight focused pane (tmux >= 2.1), possible values are:
+    #   - true
+    #   - false (default)
+    # 高亮当前 pane
+    tmux_conf_theme_highlight_focused_pane=false
 
-# focused pane colours:
-# 当前 pane 的颜色（需要 tmux_conf_theme_highlight_focused_pane=true 才生效）
-tmux_conf_theme_focused_pane_bg="$ffffff"
+    # focused pane colours:
+    # 当前 pane 的颜色（需要 tmux_conf_theme_highlight_focused_pane=true 才生效）
+    tmux_conf_theme_focused_pane_bg="$ffffff"
 
-# pane border style, possible values are:
-#   - thin (default)
-#   - fat
-tmux_conf_theme_pane_border_style=thin
+    # pane border style, possible values are:
+    #   - thin (default)
+    #   - fat
+    tmux_conf_theme_pane_border_style=thin
 
-# pane borders colours:
-# pane 分隔线颜色配置
-tmux_conf_theme_pane_border="#878787"
-tmux_conf_theme_pane_active_border="#8700af"
+    # pane borders colours:
+    # pane 分隔线颜色配置
+    tmux_conf_theme_pane_border="#878787"
+    tmux_conf_theme_pane_active_border="#8700af"
 
-# pane indicator colours
-# pane 指示器颜色配置 (Ctrl-b q)
-tmux_conf_theme_pane_indicator="#878787"
-tmux_conf_theme_pane_active_indicator="#8700af"
+    # pane indicator colours
+    # pane 指示器颜色配置 (Ctrl-b q)
+    tmux_conf_theme_pane_indicator="#878787"
+    tmux_conf_theme_pane_active_indicator="#8700af"
 
-# status line message style
-# 命令响应颜色配置 (如 Ctrl-b r)
-tmux_conf_theme_message_fg="#eeeeee"
-tmux_conf_theme_message_bg="#005f87"
-tmux_conf_theme_message_attr="bold"
+    # status line message style
+    # 命令响应颜色配置 (如 Ctrl-b r)
+    tmux_conf_theme_message_fg="#eeeeee"
+    tmux_conf_theme_message_bg="#005f87"
+    tmux_conf_theme_message_attr="bold"
 
-# status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg="#ffff00"
-tmux_conf_theme_message_command_bg="#000000"
-tmux_conf_theme_message_command_attr="bold"
+    # status line command style (<prefix> : Escape)
+    tmux_conf_theme_message_command_fg="#ffff00"
+    tmux_conf_theme_message_command_bg="#000000"
+    tmux_conf_theme_message_command_attr="bold"
 
-# window modes style
-tmux_conf_theme_mode_fg="#000000"
-tmux_conf_theme_mode_bg="#ffff00"
-tmux_conf_theme_mode_attr="bold"
+    # window modes style
+    tmux_conf_theme_mode_fg="#000000"
+    tmux_conf_theme_mode_bg="#ffff00"
+    tmux_conf_theme_mode_attr="bold"
 
-# status line style
-tmux_conf_theme_status_fg="#878787"
-tmux_conf_theme_status_bg="#ffffff"
-tmux_conf_theme_status_attr="none"
+    # status line style
+    tmux_conf_theme_status_fg="#878787"
+    tmux_conf_theme_status_bg="#ffffff"
+    tmux_conf_theme_status_attr="none"
+
+    # window status style
+    tmux_conf_theme_window_status_fg="#8a8a8a"
+    tmux_conf_theme_window_status_bg="#f5f5f5"
+
+    # window current status style
+    tmux_conf_theme_window_status_current_fg="#eeeeee"
+    tmux_conf_theme_window_status_current_bg="#005f87"
+
+    # window activity status style
+    tmux_conf_theme_window_status_activity_fg="default"
+    tmux_conf_theme_window_status_activity_bg="default"
+    tmux_conf_theme_window_status_activity_attr="underscore"
+
+    # window bell status style
+    tmux_conf_theme_window_status_bell_fg="#ffff00"
+    tmux_conf_theme_window_status_bell_bg="default"
+    tmux_conf_theme_window_status_bell_attr="blink,bold"
+
+    # window last status style
+    # 上一次 tab 颜色配置
+    tmux_conf_theme_window_status_last_fg="#005f87"
+    tmux_conf_theme_window_status_last_bg="#f5f5f5"
+    tmux_conf_theme_window_status_last_attr="none"
+
+    # status left style
+    # 状态栏左侧颜色
+    tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#8700af"
+    tmux_conf_theme_status_left_bg="#005f87,#d70000,#ffffff"
+    tmux_conf_theme_status_left_attr="bold,bold,bold"
+
+    # status right style
+    # 状态栏右侧颜色
+    tmux_conf_theme_status_right_fg="#000000,#eeeeee,#eeeeee,#444444"
+    tmux_conf_theme_status_right_bg="#ffffff,#005f87,#d70000,#eeeeee"
+    tmux_conf_theme_status_right_attr="none,bold,bold,bold"
+
+    # pairing indicator
+    tmux_conf_theme_pairing="⚇"                 # U+2687
+    tmux_conf_theme_pairing_fg="none"
+    tmux_conf_theme_pairing_bg="none"
+    tmux_conf_theme_pairing_attr="none"
+
+    # prefix indicator
+    tmux_conf_theme_prefix="⌨"                  # U+2328
+    tmux_conf_theme_prefix_fg="none"
+    tmux_conf_theme_prefix_bg="none"
+    tmux_conf_theme_prefix_attr="none"
+
+    # mouse indicator
+    tmux_conf_theme_mouse="↗"                   # U+2197
+    tmux_conf_theme_mouse_fg="none"
+    tmux_conf_theme_mouse_bg="none"
+    tmux_conf_theme_mouse_attr="none"
+
+    # root indicator
+    tmux_conf_theme_root="!"
+    tmux_conf_theme_root_fg="none"
+    tmux_conf_theme_root_bg="none"
+    tmux_conf_theme_root_attr="bold,blink"
+
+    # synchronized indicator
+    tmux_conf_theme_synchronized="⚏"            # U+268F
+    tmux_conf_theme_synchronized_fg="none"
+    tmux_conf_theme_synchronized_bg="none"
+    tmux_conf_theme_synchronized_attr="none"
+
+}
+
+if-shell -b '[ $TERMINAL_COLOR = dark ]' {
+    # month date: %m/%d
+    tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf.dark #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
+    # RGB 24-bit colour support (tmux >= 2.2), possible values are:
+    #  - true
+    #  - false
+    #  - auto (default)
+    #
+    # automatic detection relies on the COLORTERM environment variable being defined
+    # to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
+    # see https://github.com/termstandard/colors
+    tmux_conf_24b_colour=auto
+
+    # window style
+    # 默认窗口的颜色
+    tmux_conf_theme_window_fg="default"
+    tmux_conf_theme_window_bg="default"
+
+    # highlight focused pane (tmux >= 2.1), possible values are:
+    #   - true
+    #   - false (default)
+    # 高亮当前 pane
+    tmux_conf_theme_highlight_focused_pane=false
+
+    # focused pane colours:
+    # 当前 pane 的颜色（需要 tmux_conf_theme_highlight_focused_pane=true 才生效）
+    tmux_conf_theme_focused_pane_bg="$ffffff"
+
+    # pane border style, possible values are:
+    #   - thin (default)
+    #   - fat
+    tmux_conf_theme_pane_border_style=thin
+
+    # pane borders colours:
+    # pane 分隔线颜色配置
+    tmux_conf_theme_pane_border="#878787"
+    tmux_conf_theme_pane_active_border="#8700af"
+
+    # pane indicator colours
+    # pane 指示器颜色配置 (Ctrl-b q)
+    tmux_conf_theme_pane_indicator="#878787"
+    tmux_conf_theme_pane_active_indicator="#8700af"
+
+    # status line message style
+    # 命令响应颜色配置 (如 Ctrl-b r)
+    tmux_conf_theme_message_fg="#eeeeee"
+    tmux_conf_theme_message_bg="#005f87"
+    tmux_conf_theme_message_attr="bold"
+
+    # status line command style (<prefix> : Escape)
+    tmux_conf_theme_message_command_fg="#ffff00"
+    tmux_conf_theme_message_command_bg="#000000"
+    tmux_conf_theme_message_command_attr="bold"
+
+    # window modes style
+    tmux_conf_theme_mode_fg="#000000"
+    tmux_conf_theme_mode_bg="#ffff00"
+    tmux_conf_theme_mode_attr="bold"
+
+    # status line style
+    tmux_conf_theme_status_fg="#878787"
+    tmux_conf_theme_status_bg="default"
+    tmux_conf_theme_status_attr="none"
+
+    # window status style
+    tmux_conf_theme_window_status_fg="#eeeeee"
+    tmux_conf_theme_window_status_bg="default"
+
+    # window current status style
+    tmux_conf_theme_window_status_current_fg="#eeeeee"
+    tmux_conf_theme_window_status_current_bg="#005f87"
+
+    # window activity status style
+    tmux_conf_theme_window_status_activity_fg="default"
+    tmux_conf_theme_window_status_activity_bg="default"
+    tmux_conf_theme_window_status_activity_attr="underscore"
+
+    # window bell status style
+    tmux_conf_theme_window_status_bell_fg="#ffff00"
+    tmux_conf_theme_window_status_bell_bg="default"
+    tmux_conf_theme_window_status_bell_attr="blink,bold"
+
+    # window last status style
+    # 上一次 tab 颜色配置
+    tmux_conf_theme_window_status_last_fg="#eeeeee"
+    tmux_conf_theme_window_status_last_bg="#878787"
+    tmux_conf_theme_window_status_last_attr="none"
+
+    # status left style
+    # 状态栏左侧颜色
+    tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#eeeeee"
+    tmux_conf_theme_status_left_bg="#005f87,#d70000,default"
+    tmux_conf_theme_status_left_attr="bold,bold,bold"
+
+    # status right style
+    # 状态栏右侧颜色
+    tmux_conf_theme_status_right_fg="#000000,#eeeeee,#eeeeee,#eeeeee"
+    tmux_conf_theme_status_right_bg="default,#005f87,#d70000,default"
+    tmux_conf_theme_status_right_attr="none,bold,bold,bold"
+
+    # pairing indicator
+    tmux_conf_theme_pairing="⚇"                 # U+2687
+    tmux_conf_theme_pairing_fg="none"
+    tmux_conf_theme_pairing_bg="none"
+    tmux_conf_theme_pairing_attr="none"
+
+    # prefix indicator
+    tmux_conf_theme_prefix="⌨"                  # U+2328
+    tmux_conf_theme_prefix_fg="none"
+    tmux_conf_theme_prefix_bg="none"
+    tmux_conf_theme_prefix_attr="none"
+
+    # mouse indicator
+    tmux_conf_theme_mouse="↗"                   # U+2197
+    tmux_conf_theme_mouse_fg="none"
+    tmux_conf_theme_mouse_bg="none"
+    tmux_conf_theme_mouse_attr="none"
+
+    # root indicator
+    tmux_conf_theme_root="!"
+    tmux_conf_theme_root_fg="none"
+    tmux_conf_theme_root_bg="none"
+    tmux_conf_theme_root_attr="bold,blink"
+
+    # synchronized indicator
+    tmux_conf_theme_synchronized="⚏"            # U+268F
+    tmux_conf_theme_synchronized_fg="none"
+    tmux_conf_theme_synchronized_bg="none"
+    tmux_conf_theme_synchronized_attr="none"
+
+}
 
 # terminal title
 #   - built-in variables are:
@@ -127,8 +330,6 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_fg="#8a8a8a"
-tmux_conf_theme_window_status_bg="#f5f5f5"
 tmux_conf_theme_window_status_attr="none"
 tmux_conf_theme_window_status_format="#I #W"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W"
@@ -144,29 +345,10 @@ tmux_conf_theme_window_status_format="#I #W"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-# 当前 tab 颜色配置
-tmux_conf_theme_window_status_current_fg="#eeeeee"
-tmux_conf_theme_window_status_current_bg="#005f87"
 tmux_conf_theme_window_status_current_attr="bold"
 tmux_conf_theme_window_status_current_format="#I #W"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
 #tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
-
-# window activity status style
-tmux_conf_theme_window_status_activity_fg="default"
-tmux_conf_theme_window_status_activity_bg="default"
-tmux_conf_theme_window_status_activity_attr="underscore"
-
-# window bell status style
-tmux_conf_theme_window_status_bell_fg="#ffff00"         # yellow
-tmux_conf_theme_window_status_bell_bg="default"
-tmux_conf_theme_window_status_bell_attr="blink,bold"
-
-# window last status style
-# 上一次 tab 颜色配置
-tmux_conf_theme_window_status_last_fg="#005f87"
-tmux_conf_theme_window_status_last_bg="#f5f5f5"
-tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
 tmux_conf_theme_left_separator_main=""
@@ -212,51 +394,7 @@ tmux_conf_theme_right_separator_sub="|"
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 tmux_conf_theme_status_left=" ❐ #S | #{username}#{root} | #{pairing}#{synchronized}#{prefix}"
-# month date: %m/%d
-tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
 # Shangjin edit end
-
-# status left style
-# 状态栏左侧颜色
-tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#8700af"
-tmux_conf_theme_status_left_bg="#005f87,#d70000,#ffffff"
-tmux_conf_theme_status_left_attr="bold,bold,bold"
-
-# status right style
-# 状态栏右侧颜色
-tmux_conf_theme_status_right_fg="#000000,#eeeeee,#eeeeee,#444444"
-tmux_conf_theme_status_right_bg="#ffffff,#005f87,#d70000,#eeeeee"
-tmux_conf_theme_status_right_attr="none,bold,bold,bold"
-
-# pairing indicator
-tmux_conf_theme_pairing="⚇"                 # U+2687
-tmux_conf_theme_pairing_fg="none"
-tmux_conf_theme_pairing_bg="none"
-tmux_conf_theme_pairing_attr="none"
-
-# prefix indicator
-tmux_conf_theme_prefix="⌨"                  # U+2328
-tmux_conf_theme_prefix_fg="none"
-tmux_conf_theme_prefix_bg="none"
-tmux_conf_theme_prefix_attr="none"
-
-# mouse indicator
-tmux_conf_theme_mouse="↗"                   # U+2197
-tmux_conf_theme_mouse_fg="none"
-tmux_conf_theme_mouse_bg="none"
-tmux_conf_theme_mouse_attr="none"
-
-# root indicator
-tmux_conf_theme_root="!"
-tmux_conf_theme_root_fg="none"
-tmux_conf_theme_root_bg="none"
-tmux_conf_theme_root_attr="bold,blink"
-
-# synchronized indicator
-tmux_conf_theme_synchronized="⚏"            # U+268F
-tmux_conf_theme_synchronized_fg="none"
-tmux_conf_theme_synchronized_bg="none"
-tmux_conf_theme_synchronized_attr="none"
 
 # battery bar symbols
 tmux_conf_battery_bar_symbol_full="◼"
@@ -300,7 +438,6 @@ tmux_conf_battery_status_discharging="↓"    # U+2193
 # you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
 tmux_conf_theme_clock_colour="#00afff"  # light blue
 tmux_conf_theme_clock_style="24"
-
 
 # -- clipboard -----------------------------------------------------------------
 
@@ -441,6 +578,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '✔' || printf '✘'
 # }
 #
+# # Shangjin add begin
 # cpu_num() {
 #   case $(uname -s) in
 #     *Darwin*)
@@ -451,6 +589,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #       ;;
 #   esac
 # }
+# # Shangjin add end
 #
 # "$@"
 # # /!\ do not remove the previous line
