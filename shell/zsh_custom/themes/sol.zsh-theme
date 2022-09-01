@@ -31,7 +31,7 @@ PROMPT=""
 
 # Check if we are on SSH or not (only show if tmux is not launched)
 if [ $SESSION_TYPE = "ssh" ] && [ -z "$TMUX" ]; then
-    PROMPT+="%F{$PROMPT_COLOR_HOSTNAME_FG}%m%f " # SSH
+    PROMPT+="%F{$PROMPT_COLOR_HOSTNAME_FG}%B%m%b%f " # SSH
 else
     PROMPT+="" # no SSH
 fi
@@ -60,7 +60,7 @@ RPROMPT+="${return_code}"
 ######################################################################
 # Others
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{$PROMPT_COLOR_GIT}‹"
-ZSH_THEME_GIT_PROMPT_SUFFIX="› %f"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{$PROMPT_COLOR_GIT}%B‹"
+ZSH_THEME_GIT_PROMPT_SUFFIX="› %b%f"
 
 }
