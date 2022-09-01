@@ -14,13 +14,11 @@ setopt prompt_subst
 # PROMPT
 
 if [ $TERMINAL_THEME = 'light' ]; then
-    PROMPT_COLOR_HOSTNAME_BG=''
     PROMPT_COLOR_HOSTNAME_FG='238'
     PROMPT_COLOR_RETURN_TRUE='28'
     PROMPT_COLOR_RETURN_FALSE='124'
     PROMPT_COLOR_GIT='28'
 elif [ $TERMINAL_THEME = 'dark' ]; then
-    PROMPT_COLOR_HOSTNAME_BG=''
     PROMPT_COLOR_HOSTNAME_FG='252'
     PROMPT_COLOR_RETURN_TRUE='70'
     PROMPT_COLOR_RETURN_FALSE='205'
@@ -33,7 +31,7 @@ PROMPT=""
 
 # Check if we are on SSH or not (only show if tmux is not launched)
 if [ $SESSION_TYPE = "ssh" ] && [ -z "$TMUX" ]; then
-    PROMPT+="%K{$PROMPT_COLOR_HOSTNAME_BG}%F{$PROMPT_COLOR_HOSTNAME_FG}%m%f%k " # SSH
+    PROMPT+="%F{$PROMPT_COLOR_HOSTNAME_FG}%m%f " # SSH
 else
     PROMPT+="" # no SSH
 fi
