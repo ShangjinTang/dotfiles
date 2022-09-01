@@ -24,7 +24,6 @@
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
     ~/.tmux.conf.local: configs/.tmux.conf.local
-    ~/.config/bat/config: configs/.bat.config
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
 
 
