@@ -1,5 +1,15 @@
 # Configurations depend on customized variables should be placed in here
 # Add customized variables in ~/.*shrc.local
+ 
+# Theme
+alias setlight="settheme light && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme"
+alias setdark="settheme dark && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme"
+# setproxy
+if [[ $TERMINAL_THEME == 'light' ]]; then
+    setlight
+elif [[ $TERMINAL_THEME == 'dark' ]]; then
+    setdark
+fi
 
 # Proxy (V2Ray)
 alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=http://$PROXY_IP"
@@ -9,6 +19,15 @@ if [[ $PROXY_ENABLED == 1 ]]; then
     setproxy
 else
     unsetproxy
+fi
+
+# SKIP_SSL
+if [[ $SKIP_SSL == 1 ]]; then
+    export GIT_SSL_NO_VERIFY=true
+    export TLDR_ALLOW_INSECURE=1
+    alias curl="curl --insecure"
+    alias wget="wget --no-check-certificate"
+    alias aria2c="aria2c --check-certificate=false"
 fi
 
 

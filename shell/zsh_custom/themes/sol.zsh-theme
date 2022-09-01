@@ -13,16 +13,18 @@ setopt prompt_subst
 ######################################################################
 # PROMPT
 
-if [ $TERMINAL_COLOR = 'light' ]; then
-    COLOR_DEFAULT='255'
-    COLOR_MACHINE='238'
-    COLOR_RETURN_TRUE='28'
-    COLOR_RETURN_FALSE='124'
-elif [ $TERMINAL_COLOR = 'dark' ]; then
-    COLOR_DEFAULT='234'
-    COLOR_MACHINE='252'
-    COLOR_RETURN_TRUE='70'
-    COLOR_RETURN_FALSE='205'
+if [ $TERMINAL_THEME = 'light' ]; then
+    PROMPT_COLOR_DEFAULT='255'
+    PROMPT_COLOR_MACHINE='238'
+    PROMPT_COLOR_RETURN_TRUE='28'
+    PROMPT_COLOR_RETURN_FALSE='124'
+    PROMPT_COLOR_GIT='28'
+elif [ $TERMINAL_THEME = 'dark' ]; then
+    PROMPT_COLOR_DEFAULT='234'
+    PROMPT_COLOR_MACHINE='252'
+    PROMPT_COLOR_RETURN_TRUE='70'
+    PROMPT_COLOR_RETURN_FALSE='205'
+    PROMPT_COLOR_GIT='70'
 fi
 
 local git_branch='$(git_prompt_info)'
@@ -31,13 +33,13 @@ PROMPT=""
 
 # Check if we are on SSH or not (only show if tmux is not launched)
 if [ $SESSION_TYPE = "ssh" ] && [ -z "$TMUX" ]; then
-    PROMPT+="%K{$COLOR_DEFAULT}%F{$COLOR_MACHINE}%m%f%k " # SSH
+    PROMPT+="%K{$PROMPT_COLOR_DEFAULT}%F{$PROMPT_COLOR_MACHINE}%m%f%k " # SSH
 else
     PROMPT+="" # no SSH
 fi
 
 # Green/Blue anchor based on the return result
-PROMPT+="%(?:%F{$COLOR_RETURN_TRUE}➤ :%F{$COLOR_RETURN_FALSE}➤ )%f "
+PROMPT+="%(?:%F{$PROMPT_COLOR_RETURN_TRUE}➤ :%F{$PROMPT_COLOR_RETURN_FALSE}➤ )%f "
 # Current directory (starts with '~' if possible)
 PROMPT+="%~ "
 
@@ -51,7 +53,7 @@ PROMPT+="%% "
 ######################################################################
 # RPROMPT
 
-local return_code="%(?..%F{124}%? ↵%f)"
+local return_code="%(?..%F{$PROMPT_COLOR_RETURN_FALSE}%? ↵%f)"
 
 RPROMPT=""
 
@@ -60,7 +62,7 @@ RPROMPT+="${return_code}"
 ######################################################################
 # Others
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{28}‹"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{$PROMPT_COLOR_GIT}‹"
 ZSH_THEME_GIT_PROMPT_SUFFIX="› %f"
 
 }

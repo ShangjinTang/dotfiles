@@ -333,15 +333,11 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+" ----------------------------------------------------------
+" ## Automatically set paste mode when pasting in insert mode
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
-
-
-" ----------------------------------------------------------
-" ## Auto paste keep original align without setting ':set paste'
-
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
 function! XTermPasteBegin()
   set pastetoggle=<Esc>[201~
   set paste
@@ -383,12 +379,12 @@ augroup end
 " ====================================================================
 " ## Terminal Background
 
-if $TERMINAL_COLOR == 'light'
+if $TERMINAL_THEME == 'light'
     set background=light
     colorscheme PaperColor
     let g:airline_theme='papercolor'
 endif
-if $TERMINAL_COLOR == 'dark'
+if $TERMINAL_THEME == 'dark'
     set background=dark
     colorscheme PaperColor
     let g:airline_theme='onedark'
