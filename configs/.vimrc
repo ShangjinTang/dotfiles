@@ -133,8 +133,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/tagbar'
     " comment plugin
     Plug 'tpope/vim-commentary'
-    " tab completion plugin
-    Plug 'ervandew/supertab'
     " use same keys navigate between tmux/vim
     Plug 'christoomey/vim-tmux-navigator'
     " bracket highlighting
@@ -149,6 +147,9 @@ call plug#begin('~/.vim/plugged')
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
         source ~/.vimrc.coc
+    else
+        " tab completion plugin (conflict with coc)
+        Plug 'ervandew/supertab'
     endif
 call plug#end()
 
@@ -210,6 +211,10 @@ let g:rainbow_active = 1
 
 " ----------------------------------------------------------
 " code format
+call glaive#Install()
+Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/archive/vim_codefmt/google-java-format.jar --aosp')`
+" Glaive codefmt clang_format_style=`expand('$HOME/.dotfiles/archive/vim_codefmt/.clang-format')`
+Glaive codefmt clang_format_style='{BasedOnStyle: google, AccessModifierOffset: -2, AllowShortIfStatementsOnASingleLine: Never, AllowShortLoopsOnASingleLine: false, IndentWidth: 4, ObjCBlockIndentWidth: 4}'
 if $VIM_CODEFMT_ENABLE == 1
     augroup autoformat_settings
         autocmd FileType bzl AutoFormatBuffer buildifier
