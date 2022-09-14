@@ -145,6 +145,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'google/vim-maktaba'
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
+    " coc code completion
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " ----------------------------------------------------------
