@@ -16,6 +16,8 @@ export SKIP_SSL=1
 export TERMINAL_THEME='light'  # Use non-transparent theme for light
 # export TERMINAL_THEME='dark'  # Use transparent theme for dark
 
+export VIM_COC_ENABLE=0
+
 #=====================================================================
 # default exports which do not suggest to modify
 

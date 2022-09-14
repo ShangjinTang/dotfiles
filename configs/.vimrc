@@ -146,7 +146,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
     " coc code completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    if $VIM_COC_ENABLE == 1
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        source ~/.vimrc.coc
+    endif
 call plug#end()
 
 " ----------------------------------------------------------
