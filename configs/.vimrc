@@ -210,20 +210,22 @@ let g:rainbow_active = 1
 
 " ----------------------------------------------------------
 " code format
-augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-  autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue AutoFormatBuffer prettier
-  autocmd FileType swift AutoFormatBuffer swift-format
-augroup end
+if $VIM_CODEFMT_ENABLE == 1
+    augroup autoformat_settings
+        autocmd FileType bzl AutoFormatBuffer buildifier
+        autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+        autocmd FileType dart AutoFormatBuffer dartfmt
+        autocmd FileType go AutoFormatBuffer gofmt
+        autocmd FileType gn AutoFormatBuffer gn
+        autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+        autocmd FileType java AutoFormatBuffer google-java-format
+        autocmd FileType python AutoFormatBuffer yapf
+        " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+        autocmd FileType rust AutoFormatBuffer rustfmt
+        autocmd FileType vue AutoFormatBuffer prettier
+        autocmd FileType swift AutoFormatBuffer swift-format
+    augroup end
+endif
 
 " ----------------------------------------------------------
 " ### ctags / cscope / tagbar
