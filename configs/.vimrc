@@ -143,6 +143,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'google/vim-maktaba'
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
+    " snippets
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets' 
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
