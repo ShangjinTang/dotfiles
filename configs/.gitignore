@@ -7,6 +7,7 @@
 # Linux/macOS Command Line Tools
 cscope.*            # cscope
 tags                # ctags
+build/*             # cmake
 
 ######################################################################
 # macOS only
@@ -19,5 +20,7 @@ tags                # ctags
 
 ######################################################################
 # Cross Platform GUI Software
-.vscode
-.idea
+.vscode/
+.idea/
+
+

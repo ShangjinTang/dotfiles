@@ -11,7 +11,7 @@
 	name = Shangjin Tang
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
+	excludesfile = /home/shangjin/.gitignore
 [color]
 	ui = auto
 [credential]
