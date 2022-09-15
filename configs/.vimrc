@@ -26,7 +26,6 @@ set relativenumber             " Show relative line number of above/below lines 
 set showmatch                  " Show matching brackets when text indicator is over them.
 set so=7                       " Lines padding to bottom/top while moving with j/k.
 set synmaxcol=200              " Only highlight the first 200 columns.
-
 " ### Cursor Move
 set backspace=indent,eol,start " Allow backspacing over the indent, eol and start in Insert mode.
 set whichwrap+=<,>,h,l         " Allow cursor left/right to move to the previous/next line.
@@ -145,7 +144,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'google/vim-glaive'
     " snippets
     Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets' 
+    Plug 'honza/vim-snippets'
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -244,14 +243,14 @@ if has("cscope")
     endif
     set cscopeverbose
 
-    nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>css :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-\>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-\>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
 " Reference: https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
@@ -320,7 +319,8 @@ nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR>
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr> nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " nnoremap <silent> <C-\>:TmuxNavigatePrevious<cr>
 
 " ----------------------------------------------------------
@@ -465,8 +465,7 @@ else
         \ coc#refresh()
     inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-    " Make <CR> to accept selected completion item or notify coc.nvim to format
-    " <C-g>u breaks current undo, please make your own choice.
+    " Make <CR> to accept selected completion item or notify coc.nvim to format " <C-g>u breaks current undo, please make your own choice.
     inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -475,23 +474,13 @@ else
         return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
 
-    " Use <c-space> to trigger completion.
-    if has('nvim')
-        inoremap <silent><expr> <c-space> coc#refresh()
-    else
-        inoremap <silent><expr> <c-@> coc#refresh()
-    endif
+    " Use <c-@> to trigger completion.
+    inoremap <silent><expr> <c-@> coc#refresh()
 
-    " Use `[g` and `]g` to navigate diagnostics
-    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
     " GoTo code navigation.
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
+    nnoremap <silent> <C-\>d <Plug>(coc-definition)
+    nnoremap <silent> <C-\>s <Plug>(coc-references)
 
     " Use K to show documentation in preview window.
     nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -508,20 +497,21 @@ else
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " Symbol renaming.
-    nmap <C-\>r <Plug>(coc-rename)
+    nnoremap <C-\>r <Plug>(coc-rename)
 
-    " Applying codeAction to the selected region.
-    " Example: `<leader>aap` for current paragraph
-    xmap <C-\>a  <Plug>(coc-codeaction-selected)
-    nmap <C-\>a  <Plug>(coc-codeaction-selected)
-
-    " Remap keys for applying codeAction to the current buffer.
-    nmap <C-\>c  <Plug>(coc-codeaction)
-    " Apply AutoFix to problem on the current line.
-    nmap <C-\>f  <Plug>(coc-fix-current)
-
-    " Run the Code Lens action on the current line.
-    nmap <C-\>l  <Plug>(coc-codelens-action)
+    " GoTo prev/next fix.
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+    nnoremap <silent> <C-\>f[ <Plug>(coc-diagnostic-prev)
+    nnoremap <silent> <C-\>f] <Plug>(coc-diagnostic-next)
+    " AutoFix in the selected region.
+    " Example: `COMMAND` + `ap` for current paragraph
+    xnoremap <C-\>fr  <Plug>(coc-codeaction-selected)
+    nnoremap <C-\>fr  <Plug>(coc-codeaction-selected)
+    " AutoFix in current file (buffer)
+    nnoremap <C-\>fa  <Plug>(coc-codeaction)
+    " AutoFix to problem on the current line.
+    nnoremap <C-\>fix  <Plug>(coc-fix-current)
+    nnoremap <C-\>f  <Plug>(coc-fix-current)
 
 endif
 
