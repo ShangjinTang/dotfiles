@@ -453,7 +453,7 @@ else
     " ### coc
 
     " Extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-clangd', 'coc-java', 'coc-python', 'coc-sh', 'coc-snippets']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-clangd', 'coc-java', 'coc-python', 'coc-sh', 'coc-cmake', 'coc-snippets']
 
     " Some servers have issues with backup files, see #649.
     set nobackup
