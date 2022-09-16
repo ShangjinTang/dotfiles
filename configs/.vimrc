@@ -212,12 +212,17 @@ let g:rainbow_active = 1
 let g:asyncrun_bell = 1
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMakeLists.txt']
 " nnoremap <silent> <F2> :AsyncRun! -mode=term -pos=tmux -cwd=<root> grep -n -s -R <C-R><C-W> --include='*.h' --include='*.c*' '<root>' <cr>
-nnoremap <silent> <F4> :AsyncRun -mode=term -pos=tmux -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. <cr>
-nnoremap <silent> <F5> :AsyncRun -mode=term -pos=tmux -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-nnoremap <silent> <F6> :AsyncRun -mode=term -pos=tmux -cwd=<root> -raw cd build; make test <cr>
-nnoremap <silent> <F7> :AsyncRun -mode=term -pos=tmux -cwd=<root> cd build; make <cr>
-nnoremap <silent> <F8> :AsyncRun -mode=term -pos=tmux -cwd=<root> cd build; make run <cr>
-nnoremap <silent> <F9> :AsyncRun -mode=term -pos=tmux clang++ --std=c++20 -lpthread "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+" 1: compile&run single c file
+nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmux clang -lpthread $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
+" 2: compile&run single cpp/cc file
+nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmux clang++ --std=c++20 -lpthread $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
+" 3: cmake&make in rootmark directory
+nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmux -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
+" 4 : make run in rootmark directory
+nnoremap <silent> <C-\>4 :AsyncRun -mode=term -pos=tmux -cwd=<root> cd build; make run <cr>
+" 7: make in rootmark directory
+nnoremap <silent> <C-\>7 :AsyncRun -mode=term -pos=tmux -cwd=<root> cd build; make <cr>
+
 
 " ----------------------------------------------------------
 " code format
