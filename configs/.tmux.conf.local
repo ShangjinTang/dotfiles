@@ -44,7 +44,7 @@ tmux_conf_new_session_prompt=false
 
 # -- display -------------------------------------------------------------------
 
-if-shell -b '[ $TERMINAL_COLOR = light ]' {
+if-shell -b '[ $TERMINAL_THEME = light ]' {
     # month date: %m/%d
     tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf.light #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
     # RGB 24-bit colour support (tmux >= 2.2), possible values are:
@@ -176,7 +176,7 @@ if-shell -b '[ $TERMINAL_COLOR = light ]' {
 
 }
 
-if-shell -b '[ $TERMINAL_COLOR = dark ]' {
+if-shell -b '[ $TERMINAL_THEME = dark ]' {
     # month date: %m/%d
     tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf.dark #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
     # RGB 24-bit colour support (tmux >= 2.2), possible values are:
