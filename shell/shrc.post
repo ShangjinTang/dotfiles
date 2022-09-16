@@ -4,7 +4,7 @@
 # Theme
 alias setlight="settheme light && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme"
 alias setdark="settheme dark && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme"
-# setproxy
+# set theme
 if [[ $TERMINAL_THEME == 'light' ]]; then
     setlight
 elif [[ $TERMINAL_THEME == 'dark' ]]; then
