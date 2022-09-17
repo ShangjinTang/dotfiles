@@ -166,7 +166,7 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
 
 <details>
 
-  <summary>1. vim9.0 manual install</summary>
+  <summary>1. install vim</summary>
 
   vim install
 
@@ -186,12 +186,7 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
 
 <details>
 
-  <summary>2. coc.nvim manual install</summary>
-
-  - nodejs is required for coc.nvim.
-  - nodejs compilation from source is quite slow. Recommend only install binary.
-
-  node install (for coc)
+  <summary>2. install nodejs</summary>
 
   ```bash
   sudo apt remove node
@@ -206,7 +201,7 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
 
 <details>
 
-  <summary>3. coc enable</summary>
+  <summary>3. enable coc</summary>
 
   ```bash
   vim ~/*rc.local
