@@ -210,28 +210,39 @@ let g:rainbow_active = 1
 " async run
 " Reference: https://github.com/skywind3000/asyncrun.vim/wiki/Better-way-for-C-and-Cpp-development-in-Vim-8
 let g:asyncrun_bell = 1
+let g:VimuxCloseOnExit = 1
+let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMakeLists.txt']
-" nnoremap <silent> <F2> :AsyncRun! -mode=term -pos=tmux -cwd=<root> grep -n -s -R <C-R><C-W> --include='*.h' --include='*.c*' '<root>' <cr>
-" 1: compile&run c file under current directory
-nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmux clang -pthread `find $(VIM_FILEDIR) -iname '*.c'` -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
-" 2: compile&run cc/cpp file under current directory
-nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmux clang++ --std=c++20 -pthread `find $(VIM_FILEDIR) -iname '*.cc' -or -iname '*.cpp'` -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
+
+" nnoremap <silent> <F2> :AsyncRun! -mode=term -pos=tmuxsol -cwd=<root> grep -n -s -R <C-R><C-W> --include='*.h' --include='*.c*' '<root>' <cr>
+" 1: compile&run single c file
+" 2: compile&run file under current directory
 " 3: cmake&make in rootmark directory
-nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmux -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
 " 4 : make run in rootmark directory
-nnoremap <silent> <C-\>4 :AsyncRun -mode=term -pos=tmux -cwd=<root> cd build; make run <cr>
 " 7: make in rootmark directory
-nnoremap <silent> <C-\>7 :AsyncRun -mode=term -pos=tmux -cwd=<root> cd build; make <cr>
+augroup asyncrun_c_c++
+    autocmd!
+    autocmd FileType c nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out <cr>
+    autocmd FileType c nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out <cr>
+    autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out <cr>
+    autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out <cr>
+    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
+    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make run <cr>
+    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>7 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make <cr>
+augroup end
+
+nnoremap <C-\>: :AsyncRun -mode=term -pos=tmuxsol<space>
+
 
 
 " ----------------------------------------------------------
 " code format
 call glaive#Install()
 Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/archive/vim_codefmt/google-java-format.jar --aosp')`
-" Glaive codefmt clang_format_style=`expand('$HOME/.dotfiles/archive/vim_codefmt/.clang-format')`
 Glaive codefmt clang_format_style='{BasedOnStyle: google, AccessModifierOffset: -2, AllowShortIfStatementsOnASingleLine: Never, AllowShortLoopsOnASingleLine: false, IndentWidth: 4, ObjCBlockIndentWidth: 4}'
 if $VIM_CODEFMT_ENABLE == 1
     augroup autoformat_settings
+        autocmd!
         autocmd FileType bzl AutoFormatBuffer buildifier
         autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
         autocmd FileType dart AutoFormatBuffer dartfmt
