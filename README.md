@@ -23,11 +23,11 @@ brew install shellcheck
 
 ```bash
 sudo apt update
-sudo apt install net-tools vim git zsh curl wget tree xclip python3-pip
+sudo apt install net-tools vim git zsh curl wget tree xclip aria2 python3-pip
 sudo pip3 install tldr
 ```
 
-```
+```bash
 sudo apt install gcc gdb exuberant-ctags cscope tree shellcheck
 ```
 
@@ -41,7 +41,6 @@ Log out and relogin after successfully change shell to zsh.
 
 ### Dotfiles Install
 
-
 ```bash
 # First time install
 git clone --depth 1 https://github.com/ShangjinTang/dotfiles ~/.dotfiles && ~/.dotfiles/install
@@ -51,7 +50,6 @@ git pull && ~/.dotfiles/install
 ```
 
 ### Post-Install
-
 
 ```bash
 # fzf installation
@@ -70,8 +68,8 @@ vim +PlugInstall
 4. Add files in `~/.dotfiles.local/` for local override
   - Step 1: Create files in .dotfiles.local with same archtecture in home directory
   - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
-    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
-    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
+  - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
+  - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
 
 ---
 
@@ -95,7 +93,6 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - `ta`: attach to session with specified name
   - `tn`: create a new session with specified name
 
-
 ### vim with [vim-plug](https://github.com/junegunn/vim-plug)
 
 - plugins:
@@ -110,7 +107,15 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [ervandew/supertab](https://github.com/ervandew/supertab)
   - [luochen1990/rainbow](https://github.com/luochen1990/rainbow)
   - [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
-- theme:
+- plugin developer tools
+  - [google/vim-maktaba](https://github.com/google/vim-maktaba)
+  - [google/vim-codefmt](https://github.com/google/vim-codefmt)
+  - [google/vim-glaive](https://github.com/google/vim-glaive)
+  - [SirVer/ultisnips](https://github.com/SirVer/ultisnips)
+  - [honza/vim-snippets](https://github.com/honza/vim-snippets)
+  - [skywind3000/asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
+  - [preservim/vimux](https://github.com/preservim/vimux)
+- plugin theme:
   - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
 - map keys (LEADER: Space):
   - Ctrl-p: toggle paste
@@ -124,11 +129,9 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - LEADER-[: Switch to previous buffer
   - LEADER-]: Switch to next buffer
 
-
 ### [fzf](https://github.com/junegunn/fzf)
 
 use fzf as rg(ripgrep)'s backend
-
 
 ### shellrc (zshrc / bashrc)
 
@@ -138,8 +141,7 @@ use fzf as rg(ripgrep)'s backend
 
 Note: `*shrc` means `zshrc` or `bashrc`.
 
-
-#### [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+s://github.com/ohmyzsh/ohmyzsh)
 
 - plugins:
   - [wd](https://github.com/mfaerevaag/wd)
@@ -153,8 +155,63 @@ Note: `*shrc` means `zshrc` or `bashrc`.
     - PROMPT
     - zsh-auto-suggestions hint
 
-
-
 ### hammerspoon for macOS
 
 See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
+
+## Manual Install from Source
+
+### VIM COC
+
+
+<details>
+
+  <summary>1. vim9.0 manual install</summary>
+
+  vim install
+
+  ```bash
+  sudo apt remove vim
+  sudo apt install libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+  wget https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
+  tar xvf vim-9.0.tar.bz2 && cd vim-9.0
+  ./configure --enable-python3interp
+  make -j16
+  sudo make install
+  cd .. && rm vim-9.0.tar.bz2 && rm -rf vim-9.0 
+  ```
+
+
+</details>
+
+<details>
+
+  <summary>2. coc.nvim manual install</summary>
+
+  - nodejs is required for coc.nvim.
+  - nodejs compilation from source is quite slow. Recommend only install binary.
+
+  node install (for coc)
+
+  ```bash
+  sudo apt remove node
+  aria2c https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+  sudo tar xvf node-v16.17.0-linux-x64.tar.xz -C /opt/
+  sudo mv /opt/node-v16.17.0-linux-x64 /opt/node
+  ```
+
+  add `/opt/node/bin` to $PATH.
+
+</details>
+
+<details>
+
+  <summary>3. coc enable</summary>
+
+  ```bash
+  vim ~/*rc.local
+
+  export VIM_COC_ENABLE=1
+  ```
+
+</details>
