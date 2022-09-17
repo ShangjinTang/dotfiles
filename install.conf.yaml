@@ -28,6 +28,7 @@
     ~/.tmux.conf.theme.light: configs/.tmux.conf.theme.light
     ~/.tmux.conf.theme.dark: configs/.tmux.conf.theme.dark
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
+    ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim: configs/vim_asyncrun_runner_tmuxsol.vim
 
 
 
