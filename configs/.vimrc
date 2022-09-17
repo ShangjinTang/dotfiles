@@ -210,6 +210,7 @@ let g:rainbow_active = 1
 let g:asyncrun_bell = 1
 let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
+let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMakeLists.txt']
 
 " nnoremap <silent> <F2> :AsyncRun! -mode=term -pos=tmuxsol -cwd=<root> grep -n -s -R <C-R><C-W> --include='*.h' --include='*.c*' '<root>' <cr>
@@ -218,18 +219,29 @@ let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMa
 " 3: cmake&make in rootmark directory
 " 4 : make run in rootmark directory
 " 7: make in rootmark directory
-augroup asyncrun_c_c++
+augroup asyncrun
     autocmd!
-    autocmd FileType c nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out <cr>
-    autocmd FileType c nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out <cr>
-    autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out <cr>
-    autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out <cr>
-    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
-    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make run <cr>
-    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>7 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make <cr>
+    if exists("$TMUX")
+        autocmd FileType c nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out <cr>
+        autocmd FileType c nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out <cr>
+        autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out <cr>
+        autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out <cr>
+        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
+        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make run <cr>
+        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>7 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make <cr>
+        nnoremap <C-\>: :AsyncRun -mode=term -pos=tmuxsol<space>
+    else
+        autocmd FileType c nnoremap <silent> <C-\>1 :AsyncRun --mode=term cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out <cr>
+        autocmd FileType c nnoremap <silent> <C-\>2 :AsyncRun --mode=term cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out <cr>
+        autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :AsyncRun cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out <cr>
+        autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :AsyncRun cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out <cr>
+        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :AsyncRun -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
+        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :AsyncRun -cwd=<root> cd build; make run <cr>
+        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>7 :AsyncRun -cwd=<root> cd build; make <cr>
+        nnoremap <C-\>: :AsyncRun <space>
+    endif
 augroup end
 
-nnoremap <C-\>: :AsyncRun -mode=term -pos=tmuxsol<space>
 
 
 
