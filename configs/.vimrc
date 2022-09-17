@@ -213,9 +213,9 @@ let g:asyncrun_bell = 1
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMakeLists.txt']
 " nnoremap <silent> <F2> :AsyncRun! -mode=term -pos=tmux -cwd=<root> grep -n -s -R <C-R><C-W> --include='*.h' --include='*.c*' '<root>' <cr>
 " 1: compile&run c file under current directory
-nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmux clang -lpthread `find $(VIM_FILEDIR) -iname '*.c'` -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
+nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmux clang -pthread `find $(VIM_FILEDIR) -iname '*.c'` -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
 " 2: compile&run cc/cpp file under current directory
-nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmux clang++ --std=c++20 -lpthread `find $(VIM_FILEDIR) -iname '*.cc' -or -iname '*.cpp'` -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
+nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmux clang++ --std=c++20 -pthread `find $(VIM_FILEDIR) -iname '*.cc' -or -iname '*.cpp'` -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) && $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>
 " 3: cmake&make in rootmark directory
 nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmux -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
 " 4 : make run in rootmark directory
