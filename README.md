@@ -28,7 +28,7 @@ sudo pip3 install tldr
 ```
 
 ```bash
-sudo apt install -y gcc gdb exuberant-ctags cscope tree shellcheck
+sudo apt install -y gcc gdb cmake exuberant-ctags cscope tree shellcheck
 ```
 
 ### Change shell to zsh
