@@ -174,7 +174,7 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
   sudo apt remove vim
   sudo apt install libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
   wget https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
-  tar xvf vim-9.0.tar.bz2 && cd vim-9.0
+  tar xvf vim-9.0.tar.bz2 && cd vim90
   ./configure --enable-python3interp
   make -j16
   sudo make install
