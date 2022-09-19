@@ -155,7 +155,7 @@ ux=38;5;001;01:ue=38;5;001:gx=38;5;001:tx=38;5;001:\
 *.md=38;5;000\
 "
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
-            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"  # default color
+            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
         ;;
         d|dark)
             export TERMINAL_THEME="dark"
