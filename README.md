@@ -178,7 +178,7 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
   ./configure --enable-python3interp
   make -j16
   sudo make install
-  cd .. && rm vim-9.0.tar.bz2 && rm -rf vim-9.0 
+  cd .. && rm vim-9.0.tar.bz2 && rm -rf vim90
   ```
 
 
