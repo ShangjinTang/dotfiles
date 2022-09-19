@@ -23,12 +23,12 @@ brew install shellcheck
 
 ```bash
 sudo apt update
-sudo apt install net-tools vim git zsh curl wget tree xclip aria2 python3-pip
+sudo apt install -y net-tools vim git zsh curl wget tree xclip aria2 python3-pip
 sudo pip3 install tldr
 ```
 
 ```bash
-sudo apt install gcc gdb exuberant-ctags cscope tree shellcheck
+sudo apt install -y gcc gdb exuberant-ctags cscope tree shellcheck
 ```
 
 ### Change shell to zsh
@@ -53,7 +53,7 @@ git pull && ~/.dotfiles/install
 
 ```bash
 # fzf installation
-~/.fzf/install
+~/.fzf/install --all
 # install vim plugins
 vim +PlugInstall
 ```
@@ -172,7 +172,7 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
 
   ```bash
   sudo apt remove vim
-  sudo apt install libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+  sudo apt install -y libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
   wget https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
   tar xvf vim-9.0.tar.bz2 && cd vim90
   ./configure --enable-python3interp
@@ -204,8 +204,11 @@ See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/ma
   <summary>3. enable coc</summary>
 
   ```bash
-  vim ~/*rc.local
-
+  sudo apt install -y clangd clang clang-format
+  ```
+  
+  ```bash
+  vim ~/zshrc.local
   export VIM_COC_ENABLE=1
   ```
 
