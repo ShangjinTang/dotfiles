@@ -70,14 +70,18 @@ fi
 # functions for local use
 
 _PATHPREPEND() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="$1${PATH:+":$PATH"}"
-    fi
+    for arg in "$@"; do
+        if [ -d "$arg" ] && [[ ":$PATH:" != *":$arg:"* ]]; then
+            PATH="$arg${PATH:+":$PATH"}"
+        fi
+    done
 }
 _PATHAPPEND() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$1"
-    fi
+    for arg in "$@"; do
+        if [ -d "$arg" ] && [[ ":$PATH:" != *":$arg:"* ]]; then
+            PATH="${PATH:+"$PATH:"}$arg"
+        fi
+    done
 }
 _PATHAPPEND "$HOME/bin"
 
