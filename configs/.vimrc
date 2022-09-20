@@ -130,6 +130,8 @@ call plug#begin('~/.vim/plugged')
     " sidebar plugins
     Plug 'preservim/nerdtree'
     Plug 'preservim/tagbar'
+    " bookmakr plugin
+    Plug 'MattesGroeger/vim-bookmarks'
     " comment plugin
     Plug 'tpope/vim-commentary'
     " use same keys navigate between tmux/vim
