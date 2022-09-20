@@ -376,6 +376,12 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " ----------------------------------------------------------
+" ## Move lines up / down
+" Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" ----------------------------------------------------------
 " ## Quick Replace
 " replace current word from current line to last line (confirm required)
 nnoremap <leader>sw :.,$s/\<<C-R>=expand("<cword>")<CR>\>//gc<Left><Left><Left>
