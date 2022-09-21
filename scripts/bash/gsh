@@ -16,7 +16,7 @@ IFS=' ' read -ra selected < <(
     FZF_DEFAULT_COMMAND="$GSH_PREFIX $(printf %q "$QUERY") | sed '1d'" \
     fzf --ansi \
         --header "git show ${QUERY}" \
-        --preview "git show $QUERY --color=always -- {1}" \
+        --preview "git show $QUERY --color=always --oneline -- {1}" \
         --preview-window 'up,75%,border-bottom,~1,+1/4' \
         --exit-0
 )
