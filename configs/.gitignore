@@ -3,23 +3,41 @@
 .git/*
 .rgignore
 
+
+
 ######################################################################
 # Linux/macOS Command Line Tools
-cscope.*            # cscope
-tags                # ctags
-build/*             # cmake
+
+# cscope
+cscope.*
+# ctags
+tags
+# cmake
+build/*
+
+
 
 ######################################################################
 # macOS only
-*_nosync.lua        # Hammerspoon local config
-.DS_Store           # Trash files
+
+# hammerspoon local config
+*_nosync.lua
+# temporary files
+.DS_Store
+
+
 
 ######################################################################
 # Windows
-.Thumbs.db          # Trash files
+
+# temporary files
+.Thumbs.db
+
+
 
 ######################################################################
 # Cross Platform GUI Software
+
 .vscode/
 .idea/
 
