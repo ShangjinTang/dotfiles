@@ -25,6 +25,7 @@ IFS=' ' read -ra selected < <(
         --header "git log --follow -- $QUERY" \
         --preview "git show {1} --color=always -- $QUERY" \
         --preview-window 'up,75%,border-bottom,~1,+1/4' \
+        --no-sort \
         --exit-0
 )
 [ -n "${selected[0]}" ] && gsh "${selected[0]}"
