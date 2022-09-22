@@ -130,7 +130,7 @@ call plug#begin('~/.vim/plugged')
     " sidebar plugins
     Plug 'preservim/nerdtree'
     Plug 'preservim/tagbar'
-    " bookmakr plugin
+    " bookmark plugin
     Plug 'MattesGroeger/vim-bookmarks'
     " comment plugin
     Plug 'tpope/vim-commentary'
@@ -150,6 +150,8 @@ call plug#begin('~/.vim/plugged')
     " async run
     Plug 'skywind3000/asyncrun.vim'
     Plug 'preservim/vimux'
+    " generate tags
+    Plug 'ludovicchabant/vim-gutentags'
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -271,11 +273,25 @@ if $VIM_CODEFMT_ENABLE == 1
 endif
 
 " ----------------------------------------------------------
-" ### ctags / cscope / tagbar
+" ### ctags / gutentags / cscope / tagbar
 
+" ctags
 " search current directory first, then search up to home
 set tags=./tags,tags;$HOME
 
+" gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" cscope
 " Reference: http://cscope.sourceforge.net/cscope_vim_tutorial.html
 if has("cscope")
     set cscopetag
@@ -287,16 +303,17 @@ if has("cscope")
     endif
     set cscopeverbose
 
-    nnoremap <C-\>css :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>csg :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>csc :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>cst :cs find t <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>cse :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nnoremap <C-\>csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-\>csd :cs find d <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
+" tagbar
 " Reference: https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
 let g:tagbar_width = max([25, winwidth(0) / 4])
 let g:tagbar_autoclose  = 1
@@ -529,8 +546,8 @@ else
 
 
     " GoTo code navigation.
-    nnoremap <silent> <C-\>d <Plug>(coc-definition)
-    nnoremap <silent> <C-\>s <Plug>(coc-references)
+    nnoremap <silent> <C-\>G <Plug>(coc-definition)
+    nnoremap <silent> <C-\>S <Plug>(coc-references)
 
     " Use K to show documentation in preview window.
     nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -560,8 +577,7 @@ else
     " AutoFix in current file (buffer)
     nnoremap <C-\>fa  <Plug>(coc-codeaction)
     " AutoFix to problem on the current line.
-    nnoremap <C-\>fix  <Plug>(coc-fix-current)
-    nnoremap <C-\>f  <Plug>(coc-fix-current)
+    nnoremap <C-\>ff  <Plug>(coc-fix-current)
 
 endif
 
