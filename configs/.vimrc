@@ -134,6 +134,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'MattesGroeger/vim-bookmarks'
     " comment plugin
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
     " use same keys navigate between tmux/vim
     Plug 'christoomey/vim-tmux-navigator'
     " bracket highlighting
