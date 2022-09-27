@@ -223,28 +223,23 @@ let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMa
 " 2: compile&run file under current directory
 " 3: cmake&make in rootmark directory
 " 4 : make run in rootmark directory
-" 7: make in rootmark directory
+function! AsyncRunWith(commands)
+    if exists("$TMUX")
+        execute "AsyncRun -mode=term -pos=tmuxsol " .. a:commands
+    else
+        execute "AsyncRun -mode=term " .. a:commands
+    endif
+endfunction
+
 augroup asyncrun
     autocmd!
-    if exists("$TMUX")
-        autocmd FileType c nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out <cr>
-        autocmd FileType c nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out <cr>
-        autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out <cr>
-        autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :AsyncRun -mode=term -pos=tmuxsol cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out <cr>
-        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
-        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make run <cr>
-        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>7 :AsyncRun -mode=term -pos=tmuxsol -cwd=<root> cd build; make <cr>
-        nnoremap <C-\>: :AsyncRun -mode=term -pos=tmuxsol<space>
-    else
-        autocmd FileType c nnoremap <silent> <C-\>1 :AsyncRun --mode=term cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out <cr>
-        autocmd FileType c nnoremap <silent> <C-\>2 :AsyncRun --mode=term cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out <cr>
-        autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :AsyncRun cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out <cr>
-        autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :AsyncRun cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out <cr>
-        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :AsyncRun -cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make <cr>
-        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :AsyncRun -cwd=<root> cd build; make run <cr>
-        autocmd FileType c,cpp,cc nnoremap <silent> <C-\>7 :AsyncRun -cwd=<root> cd build; make <cr>
-        nnoremap <C-\>: :AsyncRun <space>
-    endif
+    autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out")<cr>
+    autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out")<cr>
+    autocmd FileType cpp,cc nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out")<cr>
+    autocmd FileType cpp,cc nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out")<cr>
+    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make")<cr>
+    autocmd FileType c,cpp,cc nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cd build; make run")<cr>
+    nnoremap <C-\>: :call AsyncRunWith("")<Left><Left>
 augroup end
 
 
@@ -286,7 +281,7 @@ let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
 if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
+    silent! call mkdir(s:vim_tags, 'p')
 endif
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
