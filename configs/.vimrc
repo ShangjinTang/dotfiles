@@ -525,7 +525,6 @@ else
     let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp', 'coc-clangd', 'coc-java', 'coc-python', 'coc-sh', 'coc-cmake', 'coc-snippets', 'coc-pairs', 'coc-yank']
 
     set updatetime=100
-    set signcolumn=yes
 
     " NOTE: There's always complete item selected by default, you may want to enable
     " no select by `"suggest.noselect": true` in your configuration file.
