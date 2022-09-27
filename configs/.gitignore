@@ -1,6 +1,6 @@
 ######################################################################
 # common
-.git/*
+.git/
 .rgignore
 
 
@@ -13,7 +13,11 @@ cscope.*
 # ctags
 tags
 # cmake
-build/*
+build/
+# coc-clangd
+.clangd/
+compile_commands.json
+
 
 
 
