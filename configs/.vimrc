@@ -236,20 +236,20 @@ augroup asyncrun
     " Async Command Line
     nnoremap <C-\>: :call AsyncRunWith("")<Left><Left>
     " C & C++
-    autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<cr>
-    autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out && rm ./a.out")<cr>
-    autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<cr>
-    autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out && rm ./a.out")<cr>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make")<cr>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cd build; make run")<cr>
+    autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<CR>
+    autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out && rm ./a.out")<CR>
+    autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<CR>
+    autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out && rm ./a.out")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cd build; make run")<CR>
     " Rust
-    autocmd FileType rust nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<cr>
-    autocmd FileType rust nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> cargo build")<cr>
-    autocmd FileType rust nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cargo run")<cr>
+    autocmd FileType rust nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
+    autocmd FileType rust nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
+    autocmd FileType rust nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cargo run")<CR>
     " Python3
-    autocmd FileType python nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); python3 $(VIM_FILEPATH)")<cr>
+    autocmd FileType python nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); python3 $(VIM_FILEPATH)")<CR>
     " Bash
-    autocmd FileType bash nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); bash $(VIM_FILEPATH)")<cr>
+    autocmd FileType bash nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); bash $(VIM_FILEPATH)")<CR>
 augroup end
 
 " ----------------------------------------------------------
@@ -332,7 +332,7 @@ let g:tagbar_autopreview = 1
 " ====================================================================
 " ## Key Mappings (map & noremap)
 
-let mapleader = "\<space>"
+let mapleader = "\<Space>"
 
 " Set key to toggle paste mode on/off
 set pastetoggle=<C-p>
@@ -381,11 +381,11 @@ nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR>
 
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-" nnoremap <silent> <C-\>:TmuxNavigatePrevious<cr>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
+" nnoremap <silent> <C-\>:TmuxNavigatePrevious<CR>
 
 " ----------------------------------------------------------
 " Disable arrow keys, force use hjkl for cursor move
