@@ -522,7 +522,7 @@ else
     " ----------------------------------------------------------
     " ### coc
 
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp', 'coc-clangd', 'coc-java', 'coc-python', 'coc-sh', 'coc-cmake', 'coc-snippets', 'coc-pairs']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp', 'coc-clangd', 'coc-java', 'coc-python', 'coc-sh', 'coc-cmake', 'coc-snippets', 'coc-pairs', 'coc-yank']
 
     set updatetime=100
     set signcolumn=yes
@@ -581,6 +581,9 @@ else
     nnoremap <C-\>fa  <Plug>(coc-codeaction)
     " AutoFix to problem on the current line.
     nnoremap <C-\>ff  <Plug>(coc-fix-current)
+
+    " yank
+    nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
 endif
 
