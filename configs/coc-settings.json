@@ -53,5 +53,6 @@
     ],
     "signature.target": "float",
     "python.autoComplete.addBrackets": true,
-    "python.jediEnabled": false
+    "python.jediEnabled": false,
+    "clangd.fallbackFlags": [ "-std=c++17" ]
 }
