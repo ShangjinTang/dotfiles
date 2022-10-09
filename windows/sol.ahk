@@ -21,7 +21,7 @@ SetScrollLockState, AlwaysOff
 :*:+gmail::shangjin.tang@gmail.com
 
 ; ================================================================================
-; 3. Key Mapping: Hyper
+; 3. Key Mapping: CapsLock as Hyper
 ;    Capslock -> Hyper or Escape (alone);
 ;    Shift + Capslock -> Capslock
 
@@ -46,7 +46,6 @@ b::Run "https://www.bilibili.com/"
 3::^#!+3  ; Snipaste: Screenshot
 4::^#!+4  ; Snipaste: Hide/Show all the pins
 \::Reload
-/::^#!+/  ; Listary: Show Listary Toolbar
 Space::^#!+/  ; Listary: Show Listary Toolbar
 #If
 
@@ -58,8 +57,30 @@ Return
 
 +CapsLock::CapsLock
 
-; ------------------------------------------------------------
-; 4. Key Mapping: General
+
+; ================================================================================
+; 4. CapsLock + Tab -> ScrollLock
+; If ScrollLock on, map 1234567890-= to F1~F12
+#If GetKeyState("CapsLock", "P")
+Tab::SetScrollLockState % !GetKeyState("ScrollLock", "T")
+#If
+#If GetKeyState("ScrollLock", "T")
+1::F1
+2::F2
+3::F3
+4::F4
+5::F5
+6::F6
+7::F7
+8::F8
+9::F9
+0::F10
+-::F11
+=::F12
+#If
+
+; ================================================================================
+; 5. Key Mapping: General
 
 ; W: WeChat
 #w::try toggle_ahk_class("C:\Program Files (x86)\Tencent\WeChat\WeChat.exe", "WeChatMainWndForPC")
@@ -84,10 +105,10 @@ Return
 >!=::Volume_Up
 
 ; ================================================================================
-; 5. Key Mapping: Activate Window
+; 6. Key Mapping: Activate Window
 
 ; ------------------------------------------------------------
-; 5.1 XShell use keys as Ubuntu
+; 6.1 XShell use keys as Ubuntu
 ;     Ctrl + Shift + C: Copy
 ;     Ctrl + Shift + V: Paste
 
@@ -106,7 +127,7 @@ Return
 
 ; ======================================================================
 
-; 6. Functions
+; 7. Functions
 
 search_clipboard(main_url, query_url, html_required:=False)
 {
