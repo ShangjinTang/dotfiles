@@ -2,6 +2,11 @@
 
 Dotfiles for macOS and Linux(Ubuntu).
 
+Mainly focus on development and maintenance of the following OS:
+
+- macOS: 10.13 ~ 10.15 X86_64
+- Linux: Ubuntu 20.04 X86_64
+
 Managed by [dotbot](https://github.com/anishathalye/dotbot).
 
 ## Installation
@@ -15,21 +20,53 @@ Managed by [dotbot](https://github.com/anishathalye/dotbot).
 brew install sshpass vim git tmux zsh curl wget tree reattach-to-user-namespace tldr
 ```
 
-```bash
-brew install shellcheck
-```
-
 #### Linux
 
 ```bash
 sudo apt update
-sudo apt install -y net-tools vim git zsh curl wget tree xclip aria2 python3-pip
+sudo apt install -y net-tools vim git zsh curl wget tree xclip aria2 ripgrep tree python3-pip
 sudo pip3 install tldr
 ```
 
 ```bash
-sudo apt install -y gcc gdb cmake exuberant-ctags cscope tree shellcheck
+sudo apt install -y gcc gdb cmake exuberant-ctags cscope
 ```
+
+### VIM COC Installation (Optional)
+
+<details>
+  <summary>1. install vim</summary>
+  ```bash
+  sudo apt remove vim
+  sudo apt install -y libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+  aria2c https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
+  tar xvf vim-9.0.tar.bz2 && cd vim90
+  ./configure --enable-python3interp
+  make -j16
+  sudo make install
+  cd .. && rm vim-9.0.tar.bz2 && rm -rf vim90
+  ```
+</details>
+
+<details>
+  <summary>2. install nodejs</summary>
+  ```bash
+  aria2c https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+  sudo tar xvf node-v16.17.0-linux-x64.tar.xz -C /opt/
+  sudo mv /opt/node-v16.17.0-linux-x64 /opt/node
+  ```
+  add `/opt/node/bin` to $PATH.
+</details>
+
+<details>
+  <summary>3. enable coc</summary>
+  ```bash
+  sudo apt install -y clangd clang clang-format
+  echo "export VIM_COC_ENABLE=1" >> ~/zshrc.local
+  source ~/.zshrc
+  vim +PlugInstall
+  ```
+</details>
 
 ### Change shell to zsh
 
@@ -42,19 +79,13 @@ Log out and relogin after successfully change shell to zsh.
 ### Dotfiles Install
 
 ```bash
-# First time install
 git clone --depth 1 https://github.com/ShangjinTang/dotfiles ~/.dotfiles && ~/.dotfiles/install
-
-# Update (sometimes need to manually remove old symlinks to resolve errors)
-git pull && ~/.dotfiles/install
 ```
 
 ### Post-Install
 
 ```bash
-# fzf installation
 ~/.fzf/install --all
-# install vim plugins
 vim +PlugInstall
 ```
 
@@ -116,18 +147,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [skywind3000/asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
   - [preservim/vimux](https://github.com/preservim/vimux)
 - plugin theme:
-  - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme) light
-- map keys (LEADER: Space):
-  - Ctrl-p: toggle paste
-  - Ctrl-l: toggle line numbers
-  - LEADER-f: fzf
-  - LEADER-g: show git log with preview window
-  - LEADER-LEADER: nerdtree (sidebar tree browser)
-  - LEADER-t: tagbar (sidebar tag browser)
-  - LEADER-q: Quit vim (close all buffers)
-  - LEADER-w: Close current buffer
-  - LEADER-[: Switch to previous buffer
-  - LEADER-]: Switch to next buffer
+  - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
 
 ### [fzf](https://github.com/junegunn/fzf)
 
@@ -136,12 +156,12 @@ use fzf as rg(ripgrep)'s backend
 ### shellrc (zshrc / bashrc)
 
 - Edit `pre_shellrc / post_shellrc / *shrc` for synced (symlink) configurations
-- Edit `~/.*shrc.local` for non-synced (local) configurations, left blank by default
+- Edit `~/.*shrc.local` for non-synced (local) configurations
 - Load sequence: `pre_shellrc` -> `.*shrc` -> `~/*shrc.local` ->  `post_shellrc`
 
 Note: `*shrc` means `zshrc` or `bashrc`.
 
-s://github.com/ohmyzsh/ohmyzsh)
+#### [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
 
 - plugins:
   - [wd](https://github.com/mfaerevaag/wd)
@@ -159,57 +179,3 @@ s://github.com/ohmyzsh/ohmyzsh)
 
 See [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
 
-## Manual Install from Source
-
-### VIM COC
-
-
-<details>
-
-  <summary>1. install vim</summary>
-
-  vim install
-
-  ```bash
-  sudo apt remove vim
-  sudo apt install -y libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
-  wget https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
-  tar xvf vim-9.0.tar.bz2 && cd vim90
-  ./configure --enable-python3interp
-  make -j16
-  sudo make install
-  cd .. && rm vim-9.0.tar.bz2 && rm -rf vim90
-  ```
-
-
-</details>
-
-<details>
-
-  <summary>2. install nodejs</summary>
-
-  ```bash
-  sudo apt remove node
-  aria2c https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
-  sudo tar xvf node-v16.17.0-linux-x64.tar.xz -C /opt/
-  sudo mv /opt/node-v16.17.0-linux-x64 /opt/node
-  ```
-
-  add `/opt/node/bin` to $PATH.
-
-</details>
-
-<details>
-
-  <summary>3. enable coc</summary>
-
-  ```bash
-  sudo apt install -y clangd clang clang-format
-  ```
-  
-  ```bash
-  vim ~/zshrc.local
-  export VIM_COC_ENABLE=1
-  ```
-
-</details>
