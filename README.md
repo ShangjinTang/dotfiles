@@ -32,6 +32,18 @@ sudo pip3 install tldr
 sudo apt install -y gcc gdb cmake exuberant-ctags cscope
 ```
 
+### TMUX Installation
+
+```bash
+sudo apt remove tmux
+sudo apt install libevent-dev ncurses-dev build-essential bison pkg-config
+aria2c https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
+tar zxvf tmux-3.3a.tar.gz && cd tmux-3.3a
+./configure
+make -j16 && sudo make install
+cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
+```
+
 ### VIM COC Installation (Optional)
 
 <details>
@@ -44,8 +56,7 @@ sudo apt install -y gcc gdb cmake exuberant-ctags cscope
   aria2c https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
   tar xvf vim-9.0.tar.bz2 && cd vim90
   ./configure --enable-python3interp
-  make -j16
-  sudo make install
+  make -j16 && sudo make install
   cd .. && rm vim-9.0.tar.bz2 && rm -rf vim90
   ```
 
