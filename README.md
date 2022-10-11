@@ -35,7 +35,9 @@ sudo apt install -y gcc gdb cmake exuberant-ctags cscope
 ### VIM COC Installation (Optional)
 
 <details>
+
   <summary>1. install vim</summary>
+
   ```bash
   sudo apt remove vim
   sudo apt install -y libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
@@ -46,26 +48,33 @@ sudo apt install -y gcc gdb cmake exuberant-ctags cscope
   sudo make install
   cd .. && rm vim-9.0.tar.bz2 && rm -rf vim90
   ```
+
 </details>
 
 <details>
+
   <summary>2. install nodejs</summary>
+
   ```bash
   aria2c https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
   sudo tar xvf node-v16.17.0-linux-x64.tar.xz -C /opt/
   sudo mv /opt/node-v16.17.0-linux-x64 /opt/node
   ```
   add `/opt/node/bin` to $PATH.
+
 </details>
 
 <details>
+
   <summary>3. enable coc</summary>
+
   ```bash
   sudo apt install -y clangd clang clang-format
   echo "export VIM_COC_ENABLE=1" >> ~/zshrc.local
   source ~/.zshrc
   vim +PlugInstall
   ```
+
 </details>
 
 ### Change shell to zsh
