@@ -1,4 +1,6 @@
 {
+    "clangd.fallbackFlags": [ "-std=c++20" ],
+    "yank.highlight.enable": false,
     "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.messageLevel": "error",
     "suggest.labelMaxLength": 60,
@@ -53,6 +55,5 @@
     ],
     "signature.target": "float",
     "python.autoComplete.addBrackets": true,
-    "python.jediEnabled": false,
-    "clangd.fallbackFlags": [ "-std=c++17" ]
+    "python.jediEnabled": false
 }
