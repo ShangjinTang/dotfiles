@@ -256,7 +256,6 @@ augroup end
 " code format
 call glaive#Install()
 Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/archive/vim_codefmt/google-java-format.jar --aosp')`
-Glaive codefmt clang_format_style='{BasedOnStyle: google, AccessModifierOffset: -2, AllowShortIfStatementsOnASingleLine: Never, AllowShortLoopsOnASingleLine: false, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, ObjCBlockIndentWidth: 4, ColumnLimit: 120}'
 if $VIM_CODEFMT_ENABLE == 1
     augroup autoformat_settings
         autocmd!
