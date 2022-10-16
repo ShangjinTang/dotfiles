@@ -27,6 +27,7 @@
     ~/.tmux.conf.local: configs/.tmux.conf.local
     ~/.tmux.conf.theme.light: configs/.tmux.conf.theme.light
     ~/.tmux.conf.theme.dark: configs/.tmux.conf.theme.dark
+    ~/.clang-format: clang-format/.clang-format-10_sol-style
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
     # conditional configs
     ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
