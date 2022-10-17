@@ -24,12 +24,12 @@ brew install sshpass vim git tmux zsh curl wget tree reattach-to-user-namespace 
 
 ```bash
 sudo apt update
-sudo apt install -y net-tools vim git zsh curl wget tree xclip aria2 ripgrep tree python3-pip
+sudo apt install -y net-tools vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip
 sudo pip3 install tldr
 ```
 
 ```bash
-sudo apt install -y gcc gdb cmake exuberant-ctags cscope
+sudo apt install -y gcc g++ make cmake exuberant-ctags cscope ninja-build zipgdb
 ```
 
 ### TMUX Installation
