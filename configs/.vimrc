@@ -216,7 +216,7 @@ let g:asyncrun_bell = 1
 let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml', 'CMakeLists.txt', 'Cargo.toml']
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', 'Cargo.toml']
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
@@ -240,8 +240,8 @@ augroup asyncrun
     autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out && rm ./a.out")<CR>
     autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<CR>
     autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out && rm ./a.out")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake .. && make")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cd build; make run")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && cp compile_commands.json .. && make")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && cp compile_commands.json .. && make run")<CR>
     " Rust
     autocmd FileType rust nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
     autocmd FileType rust nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
