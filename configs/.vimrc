@@ -153,6 +153,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/vimux'
     " generate tags
     Plug 'ludovicchabant/vim-gutentags'
+    " switch between header and source file
+    Plug 'ericcurtin/CurtineIncSw.vim'
+    " startup time
+    Plug 'dstein64/vim-startuptime'
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -273,6 +277,10 @@ if $VIM_CODEFMT_ENABLE == 1
         autocmd FileType swift AutoFormatBuffer swift-format
     augroup end
 endif
+
+" ----------------------------------------------------------
+" ### CurtineIncSw
+map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
 " ### ctags / gutentags / cscope / tagbar
