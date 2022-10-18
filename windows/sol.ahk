@@ -40,6 +40,7 @@ c::^#Right
 t::search_clipboard("https://translate.google.com/", "?sl=auto&tl=zh-CN&text=", html_required=True)
 g::search_clipboard("https://www.google.com/", "search?q=")
 b::Run "https://www.bilibili.com/"
+y::Run "https://www.youtube.com/"
 `::^#!+`  ; Ditto: Activate Window
 1::^#!+1  ; Twinkle Tray: Brightness Down
 2::^#!+2  ; Twinkle Tray: Brightness Up
@@ -86,6 +87,8 @@ Tab::SetScrollLockState % !GetKeyState("ScrollLock", "T")
 #w::try toggle_ahk_class("C:\Program Files (x86)\Tencent\WeChat\WeChat.exe", "WeChatMainWndForPC")
 ; E: Netease Music
 #e::try toggle_ahk_class("C:\Program Files (x86)\Netease\CloudMusic\cloudmusic.exe", "OrpheusBrowserHost")
+; R: TickTick
+#r::Run "https://dida365.com/"
 ; T: Terminal
 #t::try toggle_ahk_exe("wt.exe", "WindowsTerminal.exe")
 ; F: XYExplorer
