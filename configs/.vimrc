@@ -224,10 +224,14 @@ let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', 'Cargo.toml']
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
-        execute "AsyncRun -mode=term -pos=tmuxsol " .. a:commands
+        execute $"AsyncRun -mode=term -pos=tmuxsol {a:commands}"
     else
-        execute "AsyncRun -mode=term " .. a:commands
+        execute $"AsyncRun -mode=term {a:commands}"
     endif
+endfunction
+
+function! CMakeDebugWithTarget(target)
+    call AsyncRunWith($"-cwd=<root> cmake -S . -B build && cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug --target {a:target} .. && cp compile_commands.json .. && make {a:target}")
 endfunction
 
 " :: AsyncRun with prompt
@@ -244,8 +248,9 @@ augroup asyncrun
     autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang -pthread `find . -iname '*.c'` && ./a.out && rm ./a.out")<CR>
     autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<CR>
     autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out && rm ./a.out")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && cp compile_commands.json .. && make")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> mkdir build &> /dev/null; cd build; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && cp compile_commands.json .. && make && make run")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call CMakeDebugWithTarget("run")<CR>
+    autocmd FileType c,cpp nnoremap <C-\>5 :call CMakeDebugWithTarget("")<Left><Left>
     " Rust
     autocmd FileType rust nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
     autocmd FileType rust nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
