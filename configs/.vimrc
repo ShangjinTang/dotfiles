@@ -220,7 +220,7 @@ let g:asyncrun_bell = 1
 let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', 'Cargo.toml']
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', '.workspace', 'Cargo.toml']
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
@@ -237,8 +237,9 @@ endfunction
 " :: AsyncRun with prompt
 " 1: compile&run single file
 " 2: compile&run files under current directory
-" 3: build in <root> directory
-" 4: run in rootmark directory
+" 3: "make all" in <root> directory
+" 4: "make run" in <root> directory
+" 5: "make <target>" in <root> directory
 augroup asyncrun
     autocmd!
     " Async Command Line
@@ -249,8 +250,11 @@ augroup asyncrun
     autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread $(VIM_FILEPATH) && ./a.out && rm ./a.out")<CR>
     autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); clang++ --std=c++20 -pthread `find . -iname '*.cpp' -or -iname '*.cc'` && ./a.out && rm ./a.out")<CR>
     autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
+    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
     autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call CMakeDebugWithTarget("run")<CR>
+    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <C-\>4 :call CMakeDebugWithTarget("run")<CR>
     autocmd FileType c,cpp nnoremap <C-\>5 :call CMakeDebugWithTarget("")<Left><Left>
+    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <C-\>5 :call CMakeDebugWithTarget("")<Left><Left>
     " Rust
     autocmd FileType rust nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
     autocmd FileType rust nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
@@ -295,7 +299,7 @@ map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 set tags=./tags,tags;$HOME
 
 " gutentags
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project', '.workspace']
 let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
