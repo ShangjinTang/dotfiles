@@ -29,7 +29,7 @@ sudo pip3 install tldr
 ```
 
 ```bash
-sudo apt install -y gcc g++ make cmake exuberant-ctags cscope ninja-build zipgdb
+sudo apt install -y gcc g++ make cmake exuberant-ctags cscope ninja-build
 ```
 
 ### TMUX Installation
@@ -37,7 +37,7 @@ sudo apt install -y gcc g++ make cmake exuberant-ctags cscope ninja-build zipgdb
 ```bash
 sudo apt remove tmux
 sudo apt install libevent-dev ncurses-dev build-essential bison pkg-config
-aria2c https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
+wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
 tar zxvf tmux-3.3a.tar.gz && cd tmux-3.3a
 ./configure
 make -j16 && sudo make install
@@ -53,7 +53,7 @@ cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
   ```bash
   sudo apt remove vim
   sudo apt install -y libncurses5-dev libgtk2.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
-  aria2c https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
+  wget https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
   tar xvf vim-9.0.tar.bz2 && cd vim90
   ./configure --enable-python3interp
   make -j16 && sudo make install
@@ -67,9 +67,10 @@ cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
   <summary>2. install nodejs</summary>
 
   ```bash
-  aria2c https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+  wget https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
   sudo tar xvf node-v16.17.0-linux-x64.tar.xz -C /opt/
   sudo mv /opt/node-v16.17.0-linux-x64 /opt/node
+  rm node-v16.17.0-linux-x64.tar.xz
   ```
   add `/opt/node/bin` to $PATH.
 
@@ -81,9 +82,7 @@ cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
 
   ```bash
   sudo apt install -y clangd clang clang-format
-  echo "export VIM_COC_ENABLE=1" >> ~/zshrc.local
-  source ~/.zshrc
-  vim +PlugInstall
+  echo "export VIM_COC_ENABLE=1" >> ~/.zshrc.local
   ```
 
 </details>
@@ -100,6 +99,11 @@ Log out and relogin after successfully change shell to zsh.
 
 ```bash
 git clone --depth 1 https://github.com/ShangjinTang/dotfiles ~/.dotfiles && ~/.dotfiles/install
+```
+
+```bash
+source ~/.zshrc
+vim +PlugInstall
 ```
 
 ### Post-Install
