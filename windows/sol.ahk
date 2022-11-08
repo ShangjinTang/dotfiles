@@ -46,6 +46,7 @@ y::Run "https://www.youtube.com/"
 2::^#!+2  ; Twinkle Tray: Brightness Up
 3::^#!+3  ; Snipaste: Screenshot
 4::^#!+4  ; Snipaste: Hide/Show all the pins
+5:: +#T ; PowerToys: OCR (Text Extractor)
 \::Reload
 Space::^#!+/  ; Listary: Show Listary Toolbar
 #If
