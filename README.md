@@ -4,8 +4,8 @@ Dotfiles for macOS and Linux(Ubuntu).
 
 Mainly focus on development and maintenance of the following OS:
 
-- macOS: 10.13 ~ 10.15 X86_64
-- Linux: Ubuntu 20.04 X86_64
+- macOS: 10.13 ~ 10.15 x86_64
+- Linux: Ubuntu 20.04 x86_64
 
 Managed by [dotbot](https://github.com/anishathalye/dotbot).
 
@@ -29,7 +29,7 @@ sudo pip3 install tldr
 ```
 
 ```bash
-sudo apt install -y gcc g++ make cmake exuberant-ctags cscope ninja-build
+sudo apt install -y gcc g++ make cmake universal-ctags cscope ninja-build
 ```
 
 ### TMUX Installation
@@ -145,12 +145,10 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - `t <session-name>`: open session with *session-name*; if attach fail, will create
   - `tl`: list all sessions
   - `tk`: kill all sessions except session 0
-  - `ta`: attach to session with specified name
-  - `tn`: create a new session with specified name
 
 ### vim with [vim-plug](https://github.com/junegunn/vim-plug)
 
-- plugins:
+- non-developer plugins:
   - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
   - [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
   - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
@@ -162,7 +160,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [ervandew/supertab](https://github.com/ervandew/supertab)
   - [luochen1990/rainbow](https://github.com/luochen1990/rainbow)
   - [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
-- plugin developer tools
+- developer plugins:
   - [google/vim-maktaba](https://github.com/google/vim-maktaba)
   - [google/vim-codefmt](https://github.com/google/vim-codefmt)
   - [google/vim-glaive](https://github.com/google/vim-glaive)
@@ -170,7 +168,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
   - [honza/vim-snippets](https://github.com/honza/vim-snippets)
   - [skywind3000/asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
   - [preservim/vimux](https://github.com/preservim/vimux)
-- plugin theme:
+- theme plugin:
   - [NLKNguyen/papercolor-theme](https://github.com/NLKNguyen/papercolor-theme)
 
 ### [fzf](https://github.com/junegunn/fzf)
