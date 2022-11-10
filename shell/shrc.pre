@@ -256,7 +256,6 @@ fi
 if command -v fzf &> /dev/null; then
     export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,alt-enter:toggle-preview"
 fi
-#
 
 ######################################################################
 
