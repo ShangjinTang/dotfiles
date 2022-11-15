@@ -342,6 +342,14 @@ tmux_conf_uninstall_plugins_on_reload=true
 #       ;;
 #   esac
 # }
+#
+# hostname_wsl() {
+#   if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+#       echo "${WSL_DISTRO_NAME}"
+#   else
+#       echo "${HOST}"
+#   fi
+# }
 # # Shangjin add end
 #
 # "$@"
