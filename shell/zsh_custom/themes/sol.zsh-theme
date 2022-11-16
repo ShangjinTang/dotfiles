@@ -25,6 +25,13 @@ elif [ $TERMINAL_THEME = 'dark' ]; then
     PROMPT_COLOR_GIT='70'
 fi
 
+PROMPT_ICON="➤"
+if [ -z "$TMUX" ]; then
+    if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+        PROMPT_ICON="$WSL_DISTRO_NAME ➤"
+    fi
+fi
+
 local git_branch='$(git_prompt_info)'
 
 PROMPT=""
@@ -37,7 +44,7 @@ else
 fi
 
 # Green/Blue anchor based on the return result
-PROMPT+="%(?:%F{$PROMPT_COLOR_RETURN_TRUE}➤ :%F{$PROMPT_COLOR_RETURN_FALSE}➤ )%f "
+PROMPT+="%(?:%F{$PROMPT_COLOR_RETURN_TRUE}$PROMPT_ICON :%F{$PROMPT_COLOR_RETURN_FALSE}$PROMPT_ICON )%f "
 # Current directory (starts with '~' if possible)
 PROMPT+="%~ "
 
