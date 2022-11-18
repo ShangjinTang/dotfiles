@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+
+import sys
+import argparse
+import os
+from shutil import which
+
+__author__ = "Shangjin Tang"
+__copyright__ = "Copyright 2022 Shangjin Tang"
+__license__ = "GPL"
+__version__ = "1.0.0"
+__email__ = "shangjin.tang@gmail.com"
+
+ARGS = None  # Get argument: ARGS.arg
+
+
+class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
+                            argparse.ArgumentDefaultsHelpFormatter):
+    pass
+
+
+def main():
+    if which('gcc') and not which('clang'):
+        ARGS.compiler = "gcc"
+
+    compile_command_list = [ARGS.compiler, ARGS.flags, '-o', ARGS.output]
+
+    # Generate compile command
+    if ARGS.file:
+        compile_command_list.extend(ARGS.file)
+    else:
+        compile_command_list.append(
+            "$(find {} -iname '*.cpp' -or -iname '*.cc')".format(ARGS.dir))
+    compile_command = ' '.join(compile_command_list)
+
+    # Get run command
+    run_command = './' + ARGS.output
+
+    merged_commands_list = [compile_command, run_command]
+
+    # Get clean command (optional)
+    if ARGS.clean_output:
+        clean_command = "rm ./{}".format(ARGS.output)
+        merged_commands_list.append(clean_command)
+
+    # compile + run + clean
+    merged_commands = ' && '.join(merged_commands_list)
+
+    print(merged_commands)
+    print('-' * 70)
+    os.system(merged_commands)
+    print('-' * 70)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(formatter_class=UltimateHelpFormatter)
+    parser.add_argument(
+        '--compiler',
+        default='clang',
+        choices=['clang', 'gcc'],
+        help="compiler to use; if clang is not installed, use gcc\n")
+    parser.add_argument('--flags', default="-g", help="compile flags\n")
+    parser.add_argument('-o',
+                        '--output',
+                        default='a.out',
+                        help="output executable file name\n")
+    parser.add_argument('-c',
+                        '--clean_output',
+                        default=False,
+                        action='store_true',
+                        help="clean output after run\n")
+    source_type_group = parser.add_mutually_exclusive_group()
+    source_type_group.add_argument('--file',
+                                   nargs='+',
+                                   type=str,
+                                   action='extend',
+                                   help="files to compile\n")
+    source_type_group.add_argument(
+        '--dir',
+        type=str,
+        help="compile all source files under directory\n"
+        "if both '--file' and '--dir' not specified, use --dir=.\n")
+    ARGS = parser.parse_args()
+    if not ARGS.dir and not ARGS.dir:
+        ARGS.dir = "."
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
