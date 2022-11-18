@@ -14,15 +14,21 @@ __email__ = "shangjin.tang@gmail.com"
 
 ARGS = None  # Get argument: ARGS.arg
 
+
 def main():
     pass
 
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter, description="")
     # Sample configurations:
     # parser.add_argument('-d', '--dir', default=".")
-    # parser.add_argument('-p', '--project', default="")
+    # parser.add_argument('-p', '--project', default="", choices=['projectA', 'projectB'])
     # parser.add_argument('-f', '--flag', default=False, action='store_true')
+    # group = parser.add_mutually_exclusive_group()
+    # group.add_argument('--foo', action='store_true')
+    # group.add_argument('--bar', action='store_false')
     ARGS = parser.parse_args()
     try:
         main()
