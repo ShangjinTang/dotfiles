@@ -4,7 +4,12 @@
 #=====================================================================
 # customized exports, can be overrided in ~/.*shrc.local file
 # proxy
-export PROXY_IP="127.0.0.1:1080"
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+    # for WSL, use external(host) proxy
+    export PROXY_IP="$(cat /etc/resolv.conf |grep nameserver |cut -f 2 -d ' '):1080"
+else
+    export PROXY_IP="127.0.0.1:1080"
+fi
 export PROXY_ENABLED=1
 
 # tmux
