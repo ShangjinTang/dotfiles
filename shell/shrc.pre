@@ -23,7 +23,7 @@ export TERMINAL_THEME='light'  # Use non-transparent theme for light
 # export TERMINAL_THEME='dark'  # Use transparent theme for dark
 
 # vim extensions
-export VIM_COC_ENABLE=0
+export VIM_COC_ENABLE=1
 export VIM_CODEFMT_ENABLE=1
 
 #=====================================================================
