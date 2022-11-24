@@ -37,7 +37,8 @@ def auto_complete_flags(flags):
                     pattern_check_command += " --type cpp"
                 retval = subprocess.call(pattern_check_command,
                                          shell=True,
-                                         stdout=subprocess.DEVNULL)
+                                         stdout=subprocess.DEVNULL,
+                                         stderr=subprocess.DEVNULL)
                 if retval == 0:
                     print("add flag '{}': '{}' detected".format(flag, pattern))
                     flags += " " + flag
@@ -63,7 +64,8 @@ def main():
     if ARGS.file:
         compile_command_list.extend(ARGS.file)
     else:
-        compile_command_list.append("$(find . -iname '*.cpp' -or -iname '*.cc')")
+        compile_command_list.append(
+            "$(find . -iname '*.cpp' -or -iname '*.cc')")
     compile_command = ' '.join(compile_command_list)
 
     # Get run command
