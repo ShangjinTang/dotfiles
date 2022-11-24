@@ -168,9 +168,9 @@ function cdup_contain_file() {
 }
 alias cf="cdup_contain_file"
 
-if command -v _wf &> /dev/null; then
-    function wf() {
-        cd "$(_wf "$*")"
+if command -v _fzf_wd &> /dev/null; then
+    function fzf_wd() {
+        cd "$(_fzf_wd "$*")"
     }
 fi
 
