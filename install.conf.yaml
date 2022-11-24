@@ -102,6 +102,7 @@
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.oh-my-zsh/custom/themes/sol.zsh-theme: shell/zsh_custom/themes/sol.zsh-theme
+    ~/.config/zsh/abbreviations: configs/zsh-abbreviations
 
 # zshrc + wsl
 - defaults:

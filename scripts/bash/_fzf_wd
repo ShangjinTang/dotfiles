@@ -17,6 +17,7 @@ IFS='~' read -ra selected < <(
 	--delimiter '~' \
 	--preview "exa -T -L 1 $HOME{2..}" \
 	--preview-window 'up,75%,border-bottom,~3,+0/4' \
-	--query "$QUERY"
+	--query "$QUERY" \
+        --exit-0
 )
 [ -n "${selected[1]}" ] && echo "${HOME}${selected[1]}"
