@@ -246,9 +246,9 @@ augroup asyncrun
     nnoremap <C-\>: :call AsyncRunWith("")<Left><Left>
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
-    autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --files $(VIM_FILEPATH) --clean_output")<CR>
+    autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --file=$(VIM_FILEPATH) --clean_output")<CR>
     autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --dir=. --clean_output")<CR>
-    autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --files $(VIM_FILEPATH) --clean_output")<CR>
+    autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --file=$(VIM_FILEPATH) --clean_output")<CR>
     autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --dir=. --clean_output")<CR>
     autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
     autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
