@@ -1,18 +1,59 @@
+######################################################################
 # common commands
+
+# git commands aliases
+abbr gl="git l"
 abbr glf="git lf"
 abbr gls="git ls"
-abbr gci="git commit"
-abbr gcm="git commit -m"
-abbr gam="git commit --amend"
+
+# git commands from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
+
+abbr ga='git add'
+abbr gaa='git add --all'
+
+abbr gb="git branch"
+abbr gba="git branch -a"
+abbr gbd='git branch -d'
+
+abbr gbl='git blame -b -w'
+
+abbr gc="git commit -v"
+abbr gc!="git commit --amend"
+abbr gcn='git commit -v --no-edit'
+abbr gcn!='git commit -v --no-edit --amend'
+abbr gca='git commit -v -a'
+abbr gca!='git commit -v -a --amend'
+abbr gcan!='git commit -v -a --no-edit --amend'
+abbr gcam='git commit -a -m'
+
+abbr gcl='git clone --recurse-submodules'
+
+abbr gcf="git config --list"
+
+abbr gco="git checkout"
+abbr gcb="git checkout -b"
+
+abbr gcp='git cherry-pick'
+abbr gcpa='git cherry-pick --abort'
+abbr gcpc='git cherry-pick --continue'
+
+abbr gd="git diff"
+abbr gds="git diff --staged"
+
+abbr gp="git push"
+
+abbr gpr="git pull --rebase"
+
+abbr grs='git restore'
+abbr grst='git restore --staged'
+
 abbr gsh="git show"
+
 abbr gst="git status"
-abbr gpull="git pull --rebase"
-abbr gpush="git push"
-abbr gstash="git stash"
 
-
-
+######################################################################
 # customized commands
+
 # add 'i' for 'i'nteractive fzf commands
 abbr icsc="fzf_cscope_find_c"
 abbr icsd="fzf_cscope_find_d"
@@ -23,3 +64,5 @@ abbr igsh="fzf_git_show"
 abbr igst="fzf_git_status"
 abbr irg="fzf_rg"
 abbr iwd="fzf_wd"
+
+######################################################################
