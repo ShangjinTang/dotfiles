@@ -246,7 +246,6 @@ alias rg='rg --smart-case'
 alias v='vim'
 alias vv='vim ~/.vimrc'
 alias vs="vim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
-alias vabbr="vim ${ABBR_USER_ABBREVIATIONS_FILE}"
 
 # git
 alias g='git'
