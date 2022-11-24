@@ -4,3 +4,11 @@ SHELL_NAME=$(basename $SHELL)
 if [ ! -f ~/.${SHELL_NAME}rc.local ]; then
     touch ~/.${SHELL_NAME}rc.local
 fi
+
+# delete all broken symlinks
+CLEAN_DIRS=( ~ ~/bin )
+for clean_dir in "${CLEAN_DIRS[@]}"; do
+    if [ -d $clean_dir ]; then
+        find $clean_dir -xtype l -delete
+    fi
+done
