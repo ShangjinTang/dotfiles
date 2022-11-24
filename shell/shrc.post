@@ -1,6 +1,6 @@
 # Configurations depend on customized variables should be placed in here
 # Add customized variables in ~/.*shrc.local
- 
+
 # set theme
 settheme $TERMINAL_THEME
 
