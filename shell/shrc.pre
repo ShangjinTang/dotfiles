@@ -138,6 +138,7 @@ function cdup_contain_file() {
         fi
     fi
 }
+alias cf="cdup_contain_file"
 
 if command -v _wf &> /dev/null; then
     function wf() {
