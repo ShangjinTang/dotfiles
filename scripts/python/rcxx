@@ -76,7 +76,7 @@ if __name__ == '__main__':
                                    nargs='+',
                                    type=str,
                                    action='extend',
-                                   help="files to compile\n")
+                                   help="file(s) to compile\n")
     source_type_group.add_argument(
         '--dir',
         type=str,
