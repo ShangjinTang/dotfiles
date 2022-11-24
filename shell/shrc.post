@@ -28,7 +28,7 @@ fi
 # Tmux Auto Launch
 if [[ $TMUX_AUTO_LAUNCH == 1 ]]; then
     if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-        tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
-        tmux attach-session -t 0:1 2> /dev/null || tmux new-session -s 0
+        # tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
+        tmux attach-session -t 0:1 &> /dev/null || tmux new-session -s 0
     fi
 fi
