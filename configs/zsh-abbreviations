@@ -56,6 +56,7 @@ abbr gst="git status"
 
 #---------------------------------------------------------------------
 # add 'i' for 'i'nteractive fzf commands
+
 abbr icsc="fzf_cscope_find_c"
 abbr icsd="fzf_cscope_find_d"
 abbr icsg="fzf_cscope_find_g"
@@ -76,6 +77,25 @@ abbr rcxx20="rcxx --flags='--std=c++20'"
 abbr rcxx17="rcxx --flags='--std=c++17'"
 abbr rcxx14="rcxx --flags='--std=c++14'"
 abbr rcxx11="rcxx --flags='--std=c++11'"
+abbr rcxx03="rcxx --flags='--std=c++03'"
 abbr rcxx98="rcxx --flags='--std=c++98'"
+
+#---------------------------------------------------------------------
+# exa
+
+# default show modified time as `ls`; do not show hidden/ignored files
+abbr e='exa --long --group-directories-first --time-style=iso --git --classify --modified'
+# show [A]ll files (hidden/ignored files)
+abbr ea='exa --long --group-directories-first --time-style=iso --git --classify --modified --all'
+# sort by [M]odified
+abbr em='exa --long --group-directories-first --time-style=iso --git --classify --header --modified --sort=modified'
+# sort by [C]reated
+abbr ec='exa --long --group-directories-first --time-style=iso --git --classify --header --created --sort=created'
+# tree level
+abbr et='exa --group-directories-first --time-style=iso --git --tree'
+abbr e1='exa --group-directories-first --time-style=iso --git -1'
+abbr e2='exa --group-directories-first --time-style=iso --git --tree --level=2'
+abbr e3='exa --group-directories-first --time-style=iso --git --tree --level=3'
+abbr e4='exa --group-directories-first --time-style=iso --git --tree --level=4'
 
 ######################################################################
