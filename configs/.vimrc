@@ -129,7 +129,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     " sidebar plugins
     Plug 'preservim/nerdtree'
-    Plug 'preservim/tagbar'
     " bookmark plugin
     Plug 'MattesGroeger/vim-bookmarks'
     " comment plugin
@@ -293,7 +292,7 @@ endif
 map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
-" ### ctags / gutentags / cscope / tagbar
+" ### ctags / gutentags / cscope
 
 " ctags
 " search current directory first, then search up to home
@@ -332,17 +331,6 @@ if has("cscope")
     " nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
     nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
-
-" tagbar
-" Reference: https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
-let g:tagbar_width = max([25, winwidth(0) / 4])
-let g:tagbar_autoclose  = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_sort = 0
-let g:tagbar_compact = 2
-let g:tagbar_show_data_type = 1
-let g:tagbar_autoshowtag = 1
-let g:tagbar_autopreview = 1
 
 
 " ====================================================================
