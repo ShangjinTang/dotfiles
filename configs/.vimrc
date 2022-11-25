@@ -127,8 +127,6 @@ call plug#begin('~/.vim/plugged')
     " fzf plugins
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
-    " sidebar plugins
-    Plug 'preservim/nerdtree'
     " bookmark plugin
     Plug 'MattesGroeger/vim-bookmarks'
     " comment plugin
@@ -185,27 +183,6 @@ let g:airline_symbols.colnr = " C:"
 let g:airline_symbols.branch = "⎇"
 let g:airline_symbols.notexists = " ?"
 let g:airline_symbols.dirty = " !"
-
-" ----------------------------------------------------------
-" ### NERDTree
-" Reference: https://github.com/dmerejkowsky/vim-nerdtree/blob/master/doc/NERD_tree.txt
-let NERDTreeShowBookmarks = 1
-let NERDTreeBookmarksSort = 1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeCaseSensitiveSort = 1
-let NERDTreeChDirMode = 2
-let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', 'cscope.*$[[file]]', '^tags$[[file]]']
-
-augroup nerdtree
-    autocmd!
-    " Disable relative number for NERDTree
-    autocmd FileType nerdtree set norelativenumber
-    " Exit Vim if NERDTree is the only window remaining in the only tab.
-    autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-    " Close the tab if NERDTree is the only window remaining in it.
-    autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-augroup end
 
 " ----------------------------------------------------------
 " bracket highlighting
