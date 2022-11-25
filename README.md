@@ -4,8 +4,8 @@ Dotfiles for macOS and Linux(Ubuntu).
 
 Mainly focus on development and maintenance of the following OS:
 
-- macOS: 10.13 ~ 10.15 x86_64
-- Linux: Ubuntu 20.04 x86_64
+- macOS: 10.13 ~ 10.15 x86_64 (partial support)
+- Linux: ArchLinux
 
 Managed by [dotbot](https://github.com/anishathalye/dotbot).
 
