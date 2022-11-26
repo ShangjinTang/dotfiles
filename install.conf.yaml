@@ -14,7 +14,9 @@
       glob: true
 - link:
     ~/bin/: scripts/python/*
+- link:
     ~/bin/: scripts/bash/*
+- link:
     # submodules
     ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
     ~/.fzf: submodules/fzf
@@ -55,6 +57,7 @@
     ~/.hammerspoon: macos/hammerspoon
     ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner/custom.json
     ~/.config/clash/config.yaml: macos/clash/config.yaml
+
 
 
 # link for Linux(Ubuntu)
