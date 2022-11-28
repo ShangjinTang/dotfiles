@@ -341,19 +341,17 @@ nnoremap <silent> <leader>9 :b9<CR>      " Switch to buffer 9
 
 
 " source code plugins
-nnoremap <silent> <leader><leader> :NERDTreeToggle<CR>
-nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " fzf
-nnoremap <silent> <leader>f :FZF<CR>
+nnoremap <silent> <leader><leader> :FZF<CR>
 
 " git shortcuts, starts with <leader>g
 " fzf
-nnoremap <silent> <leader>gc :Commits<CR>
+nnoremap <silent> <leader>gl :Commits<CR>
 " vim-fugitive
 nnoremap <silent> <leader>gb :Git blame<CR>
-nnoremap <silent> <leader>gg :.Git blame<CR>
 " vim-gitgutter
+let g:gitgutter_map_keys = 0
 nnoremap <silent> <leader>g] :GitGutterNextHunk<CR>
 nnoremap <silent> <leader>g[ :GitGutterPrevHunk<CR>
 nnoremap <silent> <leader>gs :GitGutterStageHunk<CR>
