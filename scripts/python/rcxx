@@ -3,12 +3,13 @@
 import sys
 import argparse
 import os
+import subprocess
 from shutil import which
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2022 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __email__ = "shangjin.tang@gmail.com"
 
 ARGS = None  # Get argument: ARGS.arg
@@ -19,9 +20,42 @@ class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
     pass
 
 
+def auto_complete_flags(flags):
+    FLAG_PATTERN = {
+        '-pthread': "pthread.h",
+        '-fcoroutines': "coroutine",
+        '-lgtest': "gtest/gtest.h",
+        '-lgmock': "gmock/gmock.h",
+    }
+    if which('rg'):
+        for flag, pattern in FLAG_PATTERN.items():
+            if flag not in flags:
+                pattern_check_command = "rg '^#include.*{}'".format(pattern)
+                if ARGS.file:
+                    pattern_check_command += ' ' + ' '.join(ARGS.file)
+                else:
+                    pattern_check_command += " --type cpp"
+                retval = subprocess.call(pattern_check_command,
+                                         shell=True,
+                                         stdout=subprocess.DEVNULL)
+                if retval == 0:
+                    print("add flag '{}': '{}' detected".format(flag, pattern))
+                    flags += " " + flag
+    return flags
+
+
 def main():
-    if which('g++') and not which('clang++'):
+    if not ".out" in ARGS.output and '.' in ARGS.output:
+        raise Exception(
+            "Output file is allowed only with '.out' extension or no extension"
+        )
+
+    if not which('clang++'):
+        if not which('g++'):
+            raise Exception("Compiler clang++ and g++ are not found.")
         ARGS.compiler = "g++"
+
+    ARGS.flags = auto_complete_flags(ARGS.flags)
 
     compile_command_list = [ARGS.compiler, ARGS.flags, '-o', ARGS.output]
 
@@ -29,8 +63,7 @@ def main():
     if ARGS.file:
         compile_command_list.extend(ARGS.file)
     else:
-        compile_command_list.append(
-            "$(find {} -iname '*.cpp' -or -iname '*.cc')".format(ARGS.dir))
+        compile_command_list.append("$(find . -iname '*.cpp' -or -iname '*.cc')")
     compile_command = ' '.join(compile_command_list)
 
     # Get run command
@@ -55,6 +88,14 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=UltimateHelpFormatter)
     parser.add_argument(
+        'file',
+        nargs='*',
+        type=str,
+        action='extend',
+        help=
+        "file(s) to compile\nif not specified, use all cpp files under current directory\n"
+    )
+    parser.add_argument(
         '--compiler',
         default='clang++',
         choices=['clang++', 'g++'],
@@ -71,20 +112,7 @@ if __name__ == '__main__':
                         default=False,
                         action='store_true',
                         help="clean output after run\n")
-    source_type_group = parser.add_mutually_exclusive_group()
-    source_type_group.add_argument('--file',
-                                   nargs='+',
-                                   type=str,
-                                   action='extend',
-                                   help="file(s) to compile\n")
-    source_type_group.add_argument(
-        '--dir',
-        type=str,
-        help="compile all source files under directory\n"
-        "if both '--file' and '--dir' not specified, use --dir=.\n")
     ARGS = parser.parse_args()
-    if not ARGS.dir and not ARGS.dir:
-        ARGS.dir = "."
     try:
         main()
     except KeyboardInterrupt:
