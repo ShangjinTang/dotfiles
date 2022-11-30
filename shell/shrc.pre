@@ -73,6 +73,36 @@ if command -v z &> /dev/null; then
     export _Z_NO_RESOLVE_SYMLINKS=1
 fi
 
+if command -v nnn &> /dev/null; then
+    export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
+    export NNN_PLUG='p:preview-tui' # many other plugins are available here: https://github.com/jarun/nnn/tree/master/plugins
+    nn()
+    {
+        if [ -z "$TMUX" ]; then
+            nnn -e "$@"
+        else
+            nnn -e -P p "$@"
+        fi
+    }
+    n() # to cd on quit
+    {
+        if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+            echo "nnn is already running"
+            return
+        fi
+        export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+        if [ -z "$TMUX" ]; then
+            nnn -e "$@"
+        else
+            nnn -e -P p "$@"
+        fi
+        if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+        fi
+    }
+fi
+
 ######################################################################
 # FUNCTIONS
 
