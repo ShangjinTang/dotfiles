@@ -3,9 +3,18 @@
 # mkdir ~/.dotfiles.local &> /dev/null
 # pushd ~/.dotfiles.local
 
+# install nnn plugin if nnn exists
+if command -v nnn &> /dev/null; then
+    if [ -z "$(ls -A ${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins)" ]; then
+        echo "installing nnn plugins"
+        bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+    fi
+fi
+
 # create symlinks from ~/.dotfiles.local/ to ~/
 if [ -d ~/.dotfiles.local ]; then
     for file in $(find ~/.dotfiles.local -type f); do
         ln -sf $file "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
     done
 fi
+
