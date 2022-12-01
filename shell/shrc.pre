@@ -70,7 +70,8 @@ fi
 
 if command -v nnn &> /dev/null; then
     export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
-    export NNN_PLUG='p:preview-tui' # many other plugins are available here: https://github.com/jarun/nnn/tree/master/plugins
+    # nnn plugins reference: https://github.com/jarun/nnn/tree/master/plugins
+    export NNN_PLUG='d:diffs;t:fzopen;p:preview-tui;v:!code $nnn*;z:autojump'
     nn()
     {
         if [ -z "$TMUX" ]; then
