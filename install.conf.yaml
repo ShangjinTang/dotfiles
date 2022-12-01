@@ -98,6 +98,10 @@
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.oh-my-zsh/custom/themes/sol.zsh-theme: shell/zsh_custom/themes/sol.zsh-theme
+    # conditional configs
+    ~/.zshrc.wsl:
+        if: 'grep -qEi "(Microsoft|WSL)" /proc/version'
+        path: shell/shrc.wsl
 
 
 
@@ -116,6 +120,10 @@
     ~/.bashrc.pre: shell/shrc.pre
     ~/.bashrc: shell/bashrc
     ~/.bashrc.post: shell/shrc.post
+    # conditional configs
+    ~/.bashrc.wsl:
+        if: 'grep -qEi "(Microsoft|WSL)" /proc/version'
+        path: shell/shrc.wsl
 
 
 

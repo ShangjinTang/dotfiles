@@ -1,0 +1,10 @@
+# for WSL, use external(host) proxy
+export PROXY_IP="$(cat /etc/resolv.conf |grep nameserver |cut -f 2 -d ' '):1080"
+
+if ! command -v code &> /dev/null; then
+    if [ -f "/mnt/c/Program Files/Microsoft VS Code/bin/code" ]; then
+        code() {
+            "/mnt/c/Program Files/Microsoft VS Code/bin/code"
+        }
+    fi
+fi
