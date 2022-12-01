@@ -216,6 +216,9 @@ ux=38;5;001;01:ue=38;5;001:gx=38;5;001:tx=38;5;001:\
 # grep
 alias grep='grep --color=auto'
 
+# clear: do not delete scrollback buffer
+alias clear='tput -x clear'
+
 # rg
 alias rg='rg --smart-case'
 
