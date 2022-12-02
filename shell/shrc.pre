@@ -225,6 +225,7 @@ alias rg='rg --smart-case'
 # vim
 alias v='vim'
 alias vv='vim ~/.vimrc'
+alias vs="vim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
 # git
 alias g='git'
