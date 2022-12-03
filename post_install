@@ -5,9 +5,16 @@
 
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
-    if [ -z "$(ls -A ${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins)" ]; then
+    if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls ${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins)" ]; then
         echo "installing nnn plugins"
         bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+    fi
+fi
+
+# install fzf if ~/.fzf/install exists
+if ! command -v fzf &> /dev/null; then
+    if [ -f ~/.fzf/install ]; then
+        ~/.fzf/install --all
     fi
 fi
 
