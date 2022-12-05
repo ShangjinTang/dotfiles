@@ -44,9 +44,7 @@ tmux_conf_new_session_prompt=false
 
 # -- display -------------------------------------------------------------------
 
-if-shell '[ "$TERMINAL_THEME" = light ]' 'source -q ~/.tmux.conf.theme.light'
-if-shell '[ "$TERMINAL_THEME" = dark ]' 'source -q ~/.tmux.conf.theme.dark'
-if-shell '[ "$TERMINAL_THEME" = nord ]' 'source -q ~/.tmux.conf.theme.nord'
+source -q ~/.tmux.conf.theme.$TERMINAL_THEME
 
 
 # -- plugins -------------------------------------------------------------------

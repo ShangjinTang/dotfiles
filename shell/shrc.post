@@ -2,13 +2,7 @@
 # Add customized variables in ~/.*shrc.local
  
 # set theme
-if [[ $TERMINAL_THEME == 'light' ]]; then
-    setlight
-elif [[ $TERMINAL_THEME == 'dark' ]]; then
-    setdark
-elif [[ $TERMINAL_THEME == 'nord' ]]; then
-    setnord
-fi
+settheme $TERMINAL_THEME
 
 # Proxy (V2Ray)
 alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=http://$PROXY_IP"
