@@ -121,6 +121,7 @@ call plug#begin('~/.vim/plugged')
     " status bar plugins
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'arcticicestudio/nord-vim'
     " git plugins
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
@@ -461,16 +462,21 @@ if $TERMINAL_THEME == 'light'
     set background=light
     colorscheme PaperColor
     let g:airline_theme='papercolor'
-endif
-if $TERMINAL_THEME == 'dark'
+else
     set background=dark
-    colorscheme PaperColor
-    let g:airline_theme='onedark'
-
-    let t:is_transparent = 1
+    if $TERMINAL_THEME == 'dark'
+        colorscheme PaperColor
+        let g:airline_theme='onedark'
+        let t:is_transparent = 1
+    endif
+    if $TERMINAL_THEME == 'nord'
+        colorscheme nord
+        let g:airline_theme='nord'
+        let t:is_transparent = 0
+    endif
     function! Toggle_transparent_background()
         if t:is_transparent == 0
-            hi Normal guibg=#111111 ctermbg=black
+            hi Normal guibg=#444444 ctermbg=black
             let t:is_transparent = 1
         else
             hi Normal guibg=NONE ctermbg=NONE
@@ -478,7 +484,6 @@ if $TERMINAL_THEME == 'dark'
         endif
     endfunction
     call Toggle_transparent_background()
-
     nnoremap <leader>0 :call Toggle_transparent_background()<CR>
 
     highlight LineNr ctermbg=NONE guibg=NONE

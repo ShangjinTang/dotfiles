@@ -46,6 +46,18 @@ tmux_conf_new_session_prompt=false
 
 if-shell '[ "$TERMINAL_THEME" = light ]' 'source -q ~/.tmux.conf.theme.light'
 if-shell '[ "$TERMINAL_THEME" = dark ]' 'source -q ~/.tmux.conf.theme.dark'
+if-shell '[ "$TERMINAL_THEME" = nord ]' 'source -q ~/.tmux.conf.theme.nord'
+
+
+# -- plugins -------------------------------------------------------------------
+
+# List of plugins
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+# run '~/.tmux/plugins/tpm/tpm'
+
 
 # terminal title
 #   - built-in variables are:
