@@ -16,13 +16,16 @@
 cscope.*
 # ctags
 tags
-# cmake
-build/
 # coc-clangd
 .clangd/
 compile_commands.json
 
-
+# use build for cmake, scons
+build/
+# bazel
+bazel-*
+# scons
+.sconsign.dblite
 
 
 ######################################################################
