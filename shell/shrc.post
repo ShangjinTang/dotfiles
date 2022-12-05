@@ -1,14 +1,13 @@
 # Configurations depend on customized variables should be placed in here
 # Add customized variables in ~/.*shrc.local
  
-# Theme
-alias setlight="settheme light && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme"
-alias setdark="settheme dark && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme"
 # set theme
 if [[ $TERMINAL_THEME == 'light' ]]; then
     setlight
 elif [[ $TERMINAL_THEME == 'dark' ]]; then
     setdark
+elif [[ $TERMINAL_THEME == 'nord' ]]; then
+    setnord
 fi
 
 # Proxy (V2Ray)

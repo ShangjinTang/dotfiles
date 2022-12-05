@@ -29,6 +29,7 @@
     ~/.tmux.conf.local: configs/.tmux.conf.local
     ~/.tmux.conf.theme.light: configs/.tmux.conf.theme.light
     ~/.tmux.conf.theme.dark: configs/.tmux.conf.theme.dark
+    ~/.tmux.conf.theme.nord: configs/.tmux.conf.theme.nord
     ~/.clang-format: clang-format/.clang-format-10_sol-style
     ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
     # conditional configs
