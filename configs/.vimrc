@@ -475,7 +475,8 @@ else
     endif
     function! Toggle_transparent_background()
         if t:is_transparent == 0
-            hi Normal guibg=#444444 ctermbg=black
+            hi Normal ctermbg=Black
+            hi Visual ctermbg=DarkGray
             let t:is_transparent = 1
         else
             hi Normal guibg=NONE ctermbg=NONE
