@@ -312,13 +312,8 @@ fi
 ######################################################################
 
 
-
-VIRMACH_IP="47.87.136.54"
-
-
-
-alias ssh-mypc="ssh -p 7603 shangjin@$BANDWAGON_IP"
+# 
+# alias ssh-mypc="ssh -p 7603 shangjin@$BANDWAGON_IP"
 
 ######################################################################
 
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)

@@ -31,7 +31,7 @@
     ~/.tmux.conf.theme.dark: configs/.tmux.conf.theme.dark
     ~/.tmux.conf.theme.nord: configs/.tmux.conf.theme.nord
     ~/.clang-format: clang-format/.clang-format-10_sol-style
-    ~/.ssh/vps_id_rsa: ssh/vps_id_rsa
+    ~/.ssh/: ssh/*
     # conditional configs
     ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
       if: '[ -d ~/.vim/plugged/asyncrun.vim ]'
