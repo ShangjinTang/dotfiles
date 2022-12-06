@@ -6,13 +6,14 @@ import os
 import re
 
 __author__ = "Shangjin Tang"
+__email__ = "shangjin.tang@gmail.com"
 __copyright__ = "Copyright 2022 Shangjin Tang"
 __license__ = "GPL"
 __version__ = "1.0.0"
-# __date__ = "20220101"
-__email__ = "shangjin.tang@gmail.com"
 
 ARGS = None  # Get argument: ARGS.arg
+LOG_FORMAT = "%(asctime)s    %(levelname)s    %(filename)s:%(lineno)s\n\t%(message)s"
+logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
 
 
 def main():
