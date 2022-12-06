@@ -1,5 +1,5 @@
 # month date: %m/%d
-tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf.dark #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{?hostname_wsl, #{hostname_wsl}, #{hostname}} | %R "
+tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/gitmux/.gitmux.conf.dark #{pane_current_path})   | #{loadavg}/#{cpu_num} | #{hostname} | %R "
 
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
