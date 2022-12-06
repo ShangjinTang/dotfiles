@@ -356,8 +356,6 @@ tmux_conf_uninstall_plugins_on_reload=true
 # hostname_wsl() {
 #   if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
 #       echo "${WSL_DISTRO_NAME}"
-#   else
-#       echo "$(hostname)"  # requires package 'inetutils' on Arch Linux
 #   fi
 # }
 # # Shangjin add end
