@@ -40,3 +40,9 @@
 	branch = master
 	update = rebase
 	ignore = dirty
+[submodule "submodules/zsh-abbr"]
+	path = submodules/zsh-abbr
+	url = https://github.com/olets/zsh-abbr.git
+	branch = main
+	update = rebase
+	ignore = dirty

@@ -25,8 +25,9 @@ plugins=(
     fd                          ## only completion for command fd, not executable file
     wd                          ## executable: warp point (such as bookmark
     z                           ## executable: z jump
-    zsh-autosuggestions         ## command completion hint
-    zsh-syntax-highlighting     ## command highlight
+    zsh-abbr                    ## [Manual Install] command abbreviation
+    zsh-autosuggestions         ## [Manual Install] command completion hint
+    zsh-syntax-highlighting     ## [Manual Install] command highlight
     # macOS only
     forklift  # fl [<file_or_folder>]
 )
