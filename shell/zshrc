@@ -15,6 +15,9 @@ zstyle ':omz:update' mode auto
 # To fix warning: "zsh compinit: insecure directories", enter command `compaudit | xargs chmod g-w`
 autoload -Uz compinit && compinit
 
+
+# zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # ohmyzsh settings
 export ZSH=$HOME/.oh-my-zsh
 # ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
@@ -23,10 +26,11 @@ plugins=(
     # Linux and macOS
     direnv                      ## only for hook, not executable file
     fd                          ## only completion for command fd, not executable file
-    wd                          ## executable: warp point (such as bookmark
+    wd                          ## executable: warp point
     z                           ## executable: z jump
     zsh-abbr                    ## [Manual Install] command abbreviation
-    zsh-autosuggestions         ## [Manual Install] command completion hint
+    zsh-autosuggestions         ## [Manual Install] command history hint
+    zsh-completions             ## [Manual Install] addtional completion definitions for zsh
     zsh-syntax-highlighting     ## [Manual Install] command highlight
     # macOS only
     forklift  # fl [<file_or_folder>]
