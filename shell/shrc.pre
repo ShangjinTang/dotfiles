@@ -211,7 +211,7 @@ ux=38;5;001;01:ue=38;5;001:gx=38;5;001:tx=38;5;001:\
         n|nord)
             export TERMINAL_THEME="nord"
             export BAT_THEME="OneHalfDark"
-            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#4c566a"
+            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=239"
             BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
             test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
