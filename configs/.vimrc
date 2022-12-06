@@ -144,7 +144,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'google/vim-codefmt'
     Plug 'google/vim-glaive'
     " snippets
-    Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     " async run
     Plug 'skywind3000/asyncrun.vim'
