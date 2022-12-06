@@ -53,8 +53,8 @@ tmux_conf_theme_message_command_bg="brightblack"
 tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
-tmux_conf_theme_mode_fg="#000000"
-tmux_conf_theme_mode_bg="#ffff00"
+tmux_conf_theme_mode_fg="default"
+tmux_conf_theme_mode_bg="default"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
@@ -63,7 +63,7 @@ tmux_conf_theme_status_bg="default"
 tmux_conf_theme_status_attr="none"
 
 # window status style
-tmux_conf_theme_window_status_fg="default"
+tmux_conf_theme_window_status_fg="gray"
 tmux_conf_theme_window_status_bg="default"
 
 # window current status style

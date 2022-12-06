@@ -471,7 +471,7 @@ else
     if $TERMINAL_THEME == 'nord'
         colorscheme nord
         let g:airline_theme='nord'
-        let t:is_transparent = 0
+        let t:is_transparent = 1
     endif
     function! Toggle_transparent_background()
         if t:is_transparent == 0
