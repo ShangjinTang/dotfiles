@@ -50,11 +50,12 @@ source -q ~/.tmux.conf.theme.$TERMINAL_THEME
 # -- plugins -------------------------------------------------------------------
 
 # List of plugins
-# set -g @plugin 'tmux-plugins/tpm'
-# set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-# run '~/.tmux/plugins/tpm/tpm'
+run '~/.tmux/plugins/tpm/tpm'
 
 
 # terminal title
