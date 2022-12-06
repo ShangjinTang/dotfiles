@@ -1,0 +1,18 @@
+Host hostdare
+    User shangjin
+    HostName 202.91.33.184
+    Port 2222
+    IdentityFile ~/.ssh/vps_id_rsa
+
+Host bandwagon
+    User shangjin
+    HostName 80.251.218.217
+    Port 2222
+    IdentityFile ~/.ssh/vps_id_rsa
+
+Host virmach
+    User shangjin
+    HostName 47.87.136.54
+    Port 2222
+    IdentityFile ~/.ssh/vps_id_rsa
+
