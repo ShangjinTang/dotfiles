@@ -14,8 +14,9 @@ export TMUX_AUTO_LAUNCH=1
 export SKIP_SSL=1
 
 # terminal theme
-export TERMINAL_THEME='light'  # Use non-transparent theme for light
-# export TERMINAL_THEME='dark'  # Use transparent theme for dark
+export TERMINAL_THEME='nord'
+# export TERMINAL_THEME='light'
+# export TERMINAL_THEME='dark'
 
 # vim extensions
 export VIM_COC_ENABLE=1
