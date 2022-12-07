@@ -24,6 +24,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="sol"  # ZSH_THEME="robbyrussell"
 plugins=(
     # Linux and macOS
+    colored-man-pages
     copybuffer                  ## shortcut: Ctrl-O: copy current input in CLI to system clipboard
     copyfile                    ## executable: 'copyfile FILE': copy content of file to system clipboard
     copypath                    ## executable: copy current path (absolute path) to system clipboard
