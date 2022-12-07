@@ -101,10 +101,18 @@
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.oh-my-zsh/custom/themes/sol.zsh-theme: shell/zsh_custom/themes/sol.zsh-theme
-    # conditional configs
-    ~/.zshrc.wsl:
-        if: 'grep -qEi "(Microsoft|WSL)" /proc/version'
-        path: shell/shrc.wsl
+
+# zshrc + wsl
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      glob: true
+      if: '[ $(basename $SHELL) = zsh ] && grep -qEi "(Microsoft|WSL)" /proc/version'
+- link:
+    ~/.zshrc.wsl: shell/shrc.wsl
 
 
 
@@ -123,10 +131,18 @@
     ~/.bashrc.pre: shell/shrc.pre
     ~/.bashrc: shell/bashrc
     ~/.bashrc.post: shell/shrc.post
-    # conditional configs
-    ~/.bashrc.wsl:
-        if: 'grep -qEi "(Microsoft|WSL)" /proc/version'
-        path: shell/shrc.wsl
+
+# bashrc + wsl
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      glob: true
+      if: '[ $(basename $SHELL) = bash ] && grep -qEi "(Microsoft|WSL)" /proc/version'
+- link:
+    ~/.bashrc.wsl: shell/shrc.wsl
 
 
 
