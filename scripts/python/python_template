@@ -4,6 +4,7 @@ import sys
 import argparse
 import os
 import re
+import logging
 
 __author__ = "Shangjin Tang"
 __email__ = "shangjin.tang@gmail.com"
