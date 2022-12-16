@@ -234,8 +234,10 @@ alias setnord="settheme nord"
 # grep
 alias grep='grep --color=auto'
 
-# clear: do not delete scrollback buffer
-alias clear='tput -x clear'
+# clear: do not delete scrollback buffer (requires: tput version >= 6.2)
+if tput -x clear &> /dev/null; then
+    alias clear='tput -x clear'
+fi
 
 # rg
 alias rg='rg --smart-case'
