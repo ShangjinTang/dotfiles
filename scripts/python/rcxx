@@ -4,6 +4,7 @@ import sys
 import argparse
 import os
 import subprocess
+import platform
 from shutil import which
 
 __author__ = "Shangjin Tang"
@@ -76,6 +77,8 @@ def main():
     # Get clean command (optional)
     if ARGS.clean_output:
         clean_command = "rm ./{}".format(ARGS.output)
+        if platform.system() == "Darwin" and '-g' in ARGS.flags.split(): 
+            clean_command = "rm -rf ./{}".format(ARGS.output) + "{,.dSYM}"
         merged_commands_list.append(clean_command)
 
     # compile + run + clean
