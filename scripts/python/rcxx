@@ -77,7 +77,7 @@ def main():
     # Get clean command (optional)
     if ARGS.clean_output:
         clean_command = "rm ./{}".format(ARGS.output)
-        if platform.system() == "Darwin" and '-g' in ARGS.flags.split(): 
+        if platform.system() == "Darwin" and '-g' in ARGS.flags.split():
             clean_command = "rm -rf ./{}".format(ARGS.output) + "{,.dSYM}"
         merged_commands_list.append(clean_command)
 
@@ -105,8 +105,9 @@ if __name__ == '__main__':
         default='clang++',
         choices=['clang++', 'g++'],
         help="compiler to use; if clang++ is not installed, use g++\n")
-    parser.add_argument('--flags',
-                        default="-g --std=c++20",
+    parser.add_argument('-f',
+                        '--flags',
+                        default="--std=c++20",
                         help="compile flags\n")
     parser.add_argument('-o',
                         '--output',

@@ -54,6 +54,7 @@ abbr gst="git status"
 ######################################################################
 # customized commands
 
+#---------------------------------------------------------------------
 # add 'i' for 'i'nteractive fzf commands
 abbr icsc="fzf_cscope_find_c"
 abbr icsd="fzf_cscope_find_d"
@@ -64,5 +65,17 @@ abbr igsh="fzf_git_show"
 abbr igst="fzf_git_status"
 abbr irg="fzf_rg"
 abbr iwd="fzf_wd"
+
+#---------------------------------------------------------------------
+# rc / rcxx
+
+abbr rcg="rc --flags='-g'"
+abbr rcxxg="rcxx --flags='-g --std=c++20'"
+
+abbr rcxx20="rcxx --flags='--std=c++20'"
+abbr rcxx17="rcxx --flags='--std=c++17'"
+abbr rcxx14="rcxx --flags='--std=c++14'"
+abbr rcxx11="rcxx --flags='--std=c++11'"
+abbr rcxx98="rcxx --flags='--std=c++98'"
 
 ######################################################################
