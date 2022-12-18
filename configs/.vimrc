@@ -154,6 +154,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ericcurtin/CurtineIncSw.vim'
     " startup time
     Plug 'dstein64/vim-startuptime'
+    " start screen
+    Plug 'mhinz/vim-startify'
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
