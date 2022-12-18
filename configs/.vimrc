@@ -248,7 +248,7 @@ augroup end
 " code format
 if $VIM_CODEFMT_ENABLE == 1
     call glaive#Install()
-    Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/archive/vim_codefmt/google-java-format.jar --aosp')`
+    Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/configs/vim-plugins/vim-codefmt/google-java-format.jar --aosp')`
     augroup autoformat_settings
         autocmd!
         autocmd FileType bzl AutoFormatBuffer buildifier
