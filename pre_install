@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
 SHELL_NAME=$(basename $SHELL)
+
+# create ${SHELL_NAME}rc.local if not exists
 if [ ! -f ~/.${SHELL_NAME}rc.local ]; then
     touch ~/.${SHELL_NAME}rc.local
+fi
+
+# use commands from zsh-abbr abbreviations
+if [ ${SHELL_NAME} == "bash" ]; then
+    sed 's/^abbr/alias/' ~/.dotfiles/configs/zsh-plugins/zsh-abbr/abbreviations > ~/.bashrc.abbr.sh
 fi
 
 # delete all broken symlinks

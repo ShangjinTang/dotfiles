@@ -36,7 +36,7 @@
     # conditional configs
     ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
       if: '[ -d ~/.vim/plugged/asyncrun.vim ]'
-      path: configs/vim_asyncrun_runner_tmuxsol.vim
+      path: configs/vim-plugins/asyncrun.vim/runner/tmuxsol.vim
 
 
 
@@ -102,7 +102,7 @@
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.oh-my-zsh/custom/themes/sol.zsh-theme: shell/zsh_custom/themes/sol.zsh-theme
-    ~/.config/zsh/abbreviations: configs/zsh-abbreviations
+    ~/.config/zsh/abbreviations: configs/zsh-plugins/zsh-abbr/abbreviations
 
 # zshrc + wsl
 - defaults:

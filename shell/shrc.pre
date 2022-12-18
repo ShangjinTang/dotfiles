@@ -1,6 +1,5 @@
 ######################################################################
 # EXPORTS
-
 #=====================================================================
 # customized exports, can be overrided in ~/.*shrc.local file
 # proxy
@@ -21,7 +20,6 @@ export TERMINAL_THEME='light'
 # vim extensions
 export VIM_COC_ENABLE=1
 export VIM_CODEFMT_ENABLE=1
-
 #=====================================================================
 # default exports which do not suggest to modify
 
@@ -41,7 +39,16 @@ export TERM=xterm-256color
 
 # shell: zsh/bash
 export SHELL_NAME="$(basename $SHELL)"
-if [ $SHELL_NAME = "zsh" ]; then
+case ${SHELL_NAME} in
+    bash)
+        export IS_BASH=true
+        export IS_ZSH=false
+        ;;
+    zsh)
+        export IS_BASH=false
+        export IS_ZSH=true ;;
+esac
+if $IS_ZSH; then
     export ZSH_DISABLE_COMPFIX=1
     export skip_global_compinit=1
 
@@ -201,28 +208,28 @@ ux=38;5;001;01:ue=38;5;001:gx=38;5;001:tx=38;5;001:\
 *.md=38;5;000\
 "
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
-            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
-        ;;
+            $IS_ZSH && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
+            ;;
         d|dark)
             export TERMINAL_THEME="dark"
             export BAT_THEME="OneHalfDark"
-            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-        ;;
+            $IS_ZSH && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"
+            ;;
         n|nord)
             export TERMINAL_THEME="nord"
             export BAT_THEME="OneHalfDark"
-            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=239"
             BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
             test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
-        ;;
+            $IS_ZSH && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=239"
+            ;;
         *)
-        ;;
+            ;;
     esac
     alias bat="bat --theme=${BAT_THEME}"
-    source ~/.oh-my-zsh/custom/themes/sol.zsh-theme
+    $IS_ZSH && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme
 }
 alias setlight="settheme light"
 alias setdark="settheme dark"
