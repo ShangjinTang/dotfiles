@@ -98,4 +98,11 @@ abbr e2='exa --group-directories-first --time-style=iso --git --tree --level=2'
 abbr e3='exa --group-directories-first --time-style=iso --git --tree --level=3'
 abbr e4='exa --group-directories-first --time-style=iso --git --tree --level=4'
 
+#---------------------------------------------------------------------
+# rsync
+
+abbr rs="rsync -avzhP"
+abbr rsu="rsync -avzhP --update"
+abbr rsd="rsync -avzhP --delete"
+
 ######################################################################
