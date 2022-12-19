@@ -104,5 +104,11 @@ abbr e4='exa --group-directories-first --time-style=iso --git --tree --level=4'
 abbr rs="rsync -avzhP"
 abbr rsu="rsync -avzhP --update"
 abbr rsd="rsync -avzhP --delete"
+abbr rspull="rsync_ssh pull"
+abbr rspullu="rsync_ssh pull-update"
+abbr rspulld="rsync_ssh pull-delete"
+abbr rspush="rsync_ssh push"
+abbr rspushu="rsync_ssh push-update"
+abbr rspushd="rsync_ssh push-delete"
 
 ######################################################################
