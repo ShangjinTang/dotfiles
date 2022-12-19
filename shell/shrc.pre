@@ -283,8 +283,13 @@ if command -v tmux &> /dev/null; then
 
         fi
     }
-    alias tk='tmux kill-session -at 0'
     alias tl='tmux list-sessions'
+    # kill all sessions except session 0
+    alias tk='tmux kill-session -at 0 &> /dev/null || tmux kill-server'
+    # kill session 0
+    alias tk0='tmux kill-session -t 0 &> /dev/null'
+    # kill all sessions
+    alias tka='tmux kill-server'
 fi
 
 # tmuxinator
