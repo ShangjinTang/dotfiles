@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+DEBUG_FLAG=false
+
+check_env() {
+    if [ -z ${RSYNC_SSH_USER} ] || [ -z ${RSYNC_SSH_HOST} ]; then
+        echo 'Error: please set env ${RSYNC_SSH_USER} and ${RSYNC_SSH_HOST} before using this script.'
+        exit 1
+    fi
+    if [[ ${RSYNC_SSH_USR} == "root" ]]; then
+        echo "Warning: you are using root user, please use it with caution."
+    fi
+    if [ -n ${RSYNC_SSH_HOME+x} ] || [ -z ${RSYNC_SSH_HOME} ]; then
+        export RSYNC_SSH_HOME=/home/${RSYNC_SSH_USER}
+    fi
+    if [ -n ${RSYNC_SSH_PORT+x} ] || [ -z ${RSYNC_SSH_PORT} ]; then
+        export RSYNC_SSH_PORT=22
+    fi
+}
+
+rsync_to_ssh_server() {
+    local RELATIVE_PATHS="${@#$HOME/}"
+    echo "===================================================================================================="
+    for RELATIVE_PATH in $RELATIVE_PATHS; do
+        local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:~"
+        $DEBUG_FLAG && echo $RSYNC_COMMAND
+        echo "rsync: ~/${RELATIVE_PATH} (local) => ~/${RELATIVE_PATH} (remote)"
+        echo "flags: ${RSYNC_FLAGS}"
+        echo "--------------------------------------------------------------------------------"
+        if [ ! -e ~/${RELATIVE_PATH} ]; then
+            echo "Warning: the source ~/${RELATIVE_PATH} does not exist on local client, skipped."
+        else
+            eval $RSYNC_COMMAND
+        fi
+        echo "===================================================================================================="
+    done
+}
+
+rsync_from_ssh_server() {
+    local RELATIVE_PATHS="${@#$HOME/}"
+    echo "===================================================================================================="
+    for RELATIVE_PATH in $RELATIVE_PATHS; do
+        local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:~/./${RELATIVE_PATH} ~"
+        $DEBUG_FLAG && echo $RSYNC_COMMAND
+        echo "rsync: ~/${RELATIVE_PATH} (remote) => ~/${RELATIVE_PATH} (local)"
+        echo "flags: ${RSYNC_FLAGS}"
+        echo "--------------------------------------------------------------------------------"
+        if ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST} [ ! -e ${RSYNC_SSH_HOME}/${RELATIVE_PATH} ]; then
+            echo "Warning: the source ~/${RELATIVE_PATH} does not exist on remote server, skipped."
+        else
+            eval $RSYNC_COMMAND
+        fi
+        echo "===================================================================================================="
+    done
+}
+
+rsync_ssh_server() {
+    check_env
+    case $1 in
+        pull|push)
+            RSYNC_FLAGS='-avzhP'
+            ;;
+        pull-update|push-update)
+            RSYNC_FLAGS='-avzhP --update'
+            ;;
+        pull-delete|push-delete)
+            RSYNC_FLAGS='-avzhP --delete'
+            ;;
+        *)
+            echo "Error: we only allow '(pull|push)(-update|-delete)?' in first argument"
+            exit 1
+            ;;
+    esac
+    case $1 in
+        pull|pull-update|pull-delete)
+            rsync_from_ssh_server ${@:2}
+            ;;
+        push|push-update|push-delete)
+            rsync_to_ssh_server ${@:2}
+            ;;
+        *)
+            ;;
+    esac
+}
+
+print_usage() {
+    echo "Usage:"
+    echo '$0 pull|push SYNC_PATH1 [SYNC_PATH2 [SYNC_PATH3 ...]]'
+    echo '1. The envs ${RSYNC_SSH_USER} and ${RSYNC_SSH_HOST} must be set before using this script.'
+    echo '2. The envs ${RSYNC_SSH_PORT} is optional, default:22'
+    echo '3. The envs ${RSYNC_SSH_HOME} is optional, default:/home/${RSYNC_SSH_USER}'
+    echo '4. Every SYNC_PATH must be a relative path to ~ (e.g. temp) or a path contains ~ (e.g. ~/temp)'
+}
+if [ $1 == "-h" ] || [ $1 == "--help" ]; then
+    print_usage
+else
+    rsync_ssh_server $@
+fi
