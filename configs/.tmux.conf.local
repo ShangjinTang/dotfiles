@@ -274,6 +274,10 @@ bind-key -T copy-mode-vi 'C-j' select-pane -D
 bind-key -T copy-mode-vi 'C-k' select-pane -U
 bind-key -T copy-mode-vi 'C-l' select-pane -R
 
+# Disable right click (MouseDown3Pane) pop-up menu; remap it as paste-buffer
+unbind -n MouseDown3Pane
+bind -n MouseDown3Pane paste-buffer
+
 # os dependent configuration
 if '[ -f ~/.tmux.conf.local.os ]' 'source -q ~/.tmux.conf.local.os'
 
