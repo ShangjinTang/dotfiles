@@ -2,6 +2,16 @@
 
 DEBUG_FLAG=false
 
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+RESET=$(tput sgr0)
+
 check_env() {
     if [ -z ${RSYNC_SSH_USER} ] || [ -z ${RSYNC_SSH_HOST} ]; then
         echo 'Error: please set env ${RSYNC_SSH_USER} and ${RSYNC_SSH_HOST} before using this script.'
@@ -29,10 +39,10 @@ rsync_to_ssh_server() {
     for RELATIVE_PATH in $RELATIVE_PATHS; do
         let TASK_INDEX++
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}"
-        echo "($TASK_INDEX/$TASK_NUM)"
+        echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
         $DEBUG_FLAG && echo "$RSYNC_COMMAND"
         $DEBUG_FLAG && echo "--------------------------------------------------------------------------------"
-        echo "rsync: ~/${RELATIVE_PATH} (local) => ${RSYNC_SSH_HOME}/${RELATIVE_PATH} (remote)"
+        echo "rsync: ${GREEN}~/${RELATIVE_PATH}${RESET} (local) => ${MAGENTA}${RSYNC_SSH_HOME}/${RELATIVE_PATH}${RESET} (remote)"
         echo "flags: ${RSYNC_FLAGS}"
         echo "--------------------------------------------------------------------------------"
         if [ ! -e ~/${RELATIVE_PATH} ]; then
@@ -53,10 +63,10 @@ rsync_from_ssh_server() {
     for RELATIVE_PATH in $RELATIVE_PATHS; do
         let TASK_INDEX++
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}/./${RELATIVE_PATH} ~"
-        echo "($TASK_INDEX/$TASK_NUM)"
+        echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
         $DEBUG_FLAG && echo "$RSYNC_COMMAND"
         $DEBUG_FLAG && echo "--------------------------------------------------------------------------------"
-        echo "rsync: ${RSYNC_SSH_HOME}/${RELATIVE_PATH} (remote) => ~/${RELATIVE_PATH} (local)"
+        echo "rsync: ${GREEN}${RSYNC_SSH_HOME}/${RELATIVE_PATH}${RESET} (remote) => ${MAGENTA}~/${RELATIVE_PATH}${RESET} (local)"
         echo "flags: ${RSYNC_FLAGS}"
         echo "--------------------------------------------------------------------------------"
         if ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST} [ ! -e ${RSYNC_SSH_HOME}/${RELATIVE_PATH} ]; then
