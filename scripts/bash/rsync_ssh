@@ -10,10 +10,12 @@ check_env() {
     if [[ ${RSYNC_SSH_USR} == "root" ]]; then
         echo "Warning: you are using root user, please use it with caution."
     fi
-    if [ -n ${RSYNC_SSH_HOME+x} ] || [ -z ${RSYNC_SSH_HOME} ]; then
+    if [ "${RSYNC_SSH_HOME+x}" != "x" ] || [ -z ${RSYNC_SSH_HOME} ]; then
+        $DEBUG_FLAG && echo '$RSYNC_SSH_HOME is not set, set it to /home/$RSYNC_SSH_USER'
         export RSYNC_SSH_HOME=/home/${RSYNC_SSH_USER}
     fi
-    if [ -n ${RSYNC_SSH_PORT+x} ] || [ -z ${RSYNC_SSH_PORT} ]; then
+    if [ "${RSYNC_SSH_PORT+x}" != "x" ] || [ -z ${RSYNC_SSH_PORT} ]; then
+        $DEBUG_FLAG && echo '$RSYNC_SSH_PORT is not set, set it to 22'
         export RSYNC_SSH_PORT=22
     fi
 }
@@ -21,10 +23,16 @@ check_env() {
 rsync_to_ssh_server() {
     local RELATIVE_PATHS="${@#$HOME/}"
     echo "===================================================================================================="
+    local TASK_ARR=($RELATIVE_PATHS)
+    local TASK_NUM=${#TASK_ARR[@]}
+    local TASK_INDEX=0
     for RELATIVE_PATH in $RELATIVE_PATHS; do
-        local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:~"
-        $DEBUG_FLAG && echo $RSYNC_COMMAND
-        echo "rsync: ~/${RELATIVE_PATH} (local) => ~/${RELATIVE_PATH} (remote)"
+        let TASK_INDEX++
+        local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}"
+        echo "($TASK_INDEX/$TASK_NUM)"
+        $DEBUG_FLAG && echo "$RSYNC_COMMAND"
+        $DEBUG_FLAG && echo "--------------------------------------------------------------------------------"
+        echo "rsync: ~/${RELATIVE_PATH} (local) => ${RSYNC_SSH_HOME}/${RELATIVE_PATH} (remote)"
         echo "flags: ${RSYNC_FLAGS}"
         echo "--------------------------------------------------------------------------------"
         if [ ! -e ~/${RELATIVE_PATH} ]; then
@@ -39,10 +47,16 @@ rsync_to_ssh_server() {
 rsync_from_ssh_server() {
     local RELATIVE_PATHS="${@#$HOME/}"
     echo "===================================================================================================="
+    local TASK_ARR=($RELATIVE_PATHS)
+    local TASK_NUM=${#TASK_ARR[@]}
+    local TASK_INDEX=0
     for RELATIVE_PATH in $RELATIVE_PATHS; do
-        local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:~/./${RELATIVE_PATH} ~"
-        $DEBUG_FLAG && echo $RSYNC_COMMAND
-        echo "rsync: ~/${RELATIVE_PATH} (remote) => ~/${RELATIVE_PATH} (local)"
+        let TASK_INDEX++
+        local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}/./${RELATIVE_PATH} ~"
+        echo "($TASK_INDEX/$TASK_NUM)"
+        $DEBUG_FLAG && echo "$RSYNC_COMMAND"
+        $DEBUG_FLAG && echo "--------------------------------------------------------------------------------"
+        echo "rsync: ${RSYNC_SSH_HOME}/${RELATIVE_PATH} (remote) => ~/${RELATIVE_PATH} (local)"
         echo "flags: ${RSYNC_FLAGS}"
         echo "--------------------------------------------------------------------------------"
         if ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST} [ ! -e ${RSYNC_SSH_HOME}/${RELATIVE_PATH} ]; then
