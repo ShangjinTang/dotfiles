@@ -27,6 +27,7 @@ def auto_complete_flags(flags):
         '-fcoroutines': "coroutine",
         '-lgtest': "gtest/gtest.h",
         '-lgmock': "gmock/gmock.h",
+        '-lfmt': "fmt/format.h",
     }
     if which('rg'):
         for flag, pattern in FLAG_PATTERN.items():
