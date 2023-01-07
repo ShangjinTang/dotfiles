@@ -7,13 +7,18 @@ import subprocess
 import platform
 from shutil import which
 
+from rich.console import Console
+from rich.theme import Theme
+
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2022 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __email__ = "shangjin.tang@gmail.com"
 
-ARGS = None  # Get argument: ARGS.arg
+ARGS = None
+console = Console(theme=Theme(inherit=False))
+print = console.print
 
 
 class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
@@ -25,14 +30,14 @@ def auto_complete_flags(flags):
     FLAG_PATTERN = {
         '-pthread': "pthread.h",
         '-fcoroutines': "coroutine",
-        '-lgtest': "gtest/gtest.h",
-        '-lgmock': "gmock/gmock.h",
-        '-lfmt': "fmt/format.h",
+        '-lgtest': "gtest/\S+",
+        '-lgmock': "gmock/\S+",
+        '-lfmt': "fmt/\S+",
     }
     if which('rg'):
         for flag, pattern in FLAG_PATTERN.items():
             if flag not in flags:
-                pattern_check_command = "rg '^#include.*{}'".format(pattern)
+                pattern_check_command = "rg '^#include.*<{}>'".format(pattern)
                 if ARGS.file:
                     pattern_check_command += ' ' + ' '.join(ARGS.file)
                 else:
@@ -42,7 +47,8 @@ def auto_complete_flags(flags):
                                          stdout=subprocess.DEVNULL,
                                          stderr=subprocess.DEVNULL)
                 if retval == 0:
-                    print("add flag '{}': '{}' detected".format(flag, pattern))
+                    print("add auto-detected flag [magenta]'{}'[/magenta]".
+                          format(flag, pattern))
                     flags += " " + flag
     return flags
 
@@ -50,7 +56,7 @@ def auto_complete_flags(flags):
 def main():
     if not ".out" in ARGS.output and '.' in ARGS.output:
         raise Exception(
-            "Output file is allowed only with '.out' extension or no extension"
+            "Output file is allowed only with '.out' extension or no extension."
         )
 
     if not which('clang++'):
@@ -85,7 +91,7 @@ def main():
     # compile + run + clean
     merged_commands = ' && '.join(merged_commands_list)
 
-    print(merged_commands)
+    print("[green]{}[/green]".format(merged_commands))
     print('-' * 70)
     os.system(merged_commands)
     print('-' * 70)
