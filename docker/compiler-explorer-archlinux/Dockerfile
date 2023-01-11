@@ -7,13 +7,17 @@ EXPOSE 10240
 
 RUN echo "*** Installing Compiler Explorer ***" \
     && pacman -Syu wget ca-certificates nodejs npm make git vim clang make cmake --noconfirm \
-    # TODO: add libs: fmt abseil-cpp boost gtest doctest
     && pacman -Sc --noconfirm \
     && git clone https://github.com/compiler-explorer/compiler-explorer.git /compiler-explorer --depth=1 \
     && cd /compiler-explorer \
     && echo "Add missing dependencies" \
     && npm i @sentry/node \
     && npm run webpack \
+    && echo "*** Installation finished ***"
+
+RUN echo "*** Installing Libraries ***" \
+    && pacman -Syu doctest fmt gtest --noconfirm \
+    && pacman -Sc --noconfirm \
     && echo "*** Installation finished ***"
 
 ADD customized/etc/config/c.local.properties /compiler-explorer/etc/config/c.local.properties
