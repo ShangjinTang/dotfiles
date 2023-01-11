@@ -5,8 +5,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: madduci/docker-compiler-explorer:latest
-    container_name: compiler-explorer
+    image: compiler-explorer-archlinux:latest
+    container_name: compiler-explorer-archlinux
     ports:
       - 10240:10240
     networks:
