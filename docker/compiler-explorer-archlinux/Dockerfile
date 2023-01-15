@@ -5,25 +5,26 @@ LABEL maintainer="Shangjin Tang <shangjin.tang@gmail.com>" \
 
 EXPOSE 10240
 
-RUN echo "*** Installing Compiler Explorer ***" \
-    && pacman -Syu wget ca-certificates nodejs npm make git vim clang make cmake --noconfirm \
-    && pacman -Sc --noconfirm \
-    && git clone https://github.com/compiler-explorer/compiler-explorer.git /compiler-explorer --depth=1 \
+# Use customized pacman mirrorlist
+ADD ./copyfiles/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
+
+RUN echo "*** Installing essential packages ***" \
+    && pacman -Syu wget ca-certificates nodejs npm git make vim clang --noconfirm \
+    && pacman -Sc --noconfirm
+
+Run echo "*** Cloning Compiler-Explorer from github ***" \
+    && git clone https://github.com/compiler-explorer/compiler-explorer.git /compiler-explorer --depth=1
+
+Run echo "*** Add NodeJS dependencies ***" \
     && cd /compiler-explorer \
-    && echo "Add missing dependencies" \
     && npm i @sentry/node \
-    && npm run webpack \
-    && echo "*** Installation finished ***"
+    && npm run webpack
 
-RUN echo "*** Installing Libraries ***" \
+RUN echo "*** Installing C++ libraries ***" \
     && pacman -Syu doctest fmt gtest --noconfirm \
-    && pacman -Sc --noconfirm \
-    && echo "*** Installation finished ***"
+    && pacman -Sc --noconfirm
 
-ADD customized/etc/config/c.local.properties /compiler-explorer/etc/config/c.local.properties
-ADD customized/etc/config/c++.local.properties /compiler-explorer/etc/config/c++.local.properties
-ADD customized/etc/config/compiler-explorer.local.properties /compiler-explorer/etc/config/compiler-explorer.local.properties
-ADD customized/views/index.pug /compiler-explorer/views/index.pug
+COPY copyfiles/compiler-explorer/ /compiler-explorer/
 
 WORKDIR /compiler-explorer
 

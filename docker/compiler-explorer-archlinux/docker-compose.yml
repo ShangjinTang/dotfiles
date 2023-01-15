@@ -14,5 +14,5 @@ services:
     restart: on-failure
     stop_grace_period: 1m30s
 
-networks: 
+networks:
   ce_network:
