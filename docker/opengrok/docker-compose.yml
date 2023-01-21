@@ -2,7 +2,7 @@ version: "3"
 
 # More info at https://github.com/oracle/opengrok/docker/
 services:
-  opengrok:
+  opengrok-service:
     container_name: opengrok
     image: opengrok/docker:latest
     ports:
