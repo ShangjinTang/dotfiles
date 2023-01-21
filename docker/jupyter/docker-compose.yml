@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  jupyter-service:
+    container_name: jupyter
+    image: jupyter/tensorflow-notebook:latest
+    ports:
+      - "8888:8888/tcp"
