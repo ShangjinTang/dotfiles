@@ -1,12 +1,12 @@
 version: "3"
 
 services:
-  compiler-explorer:
+  compiler-explorer-service:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: compiler-explorer-archlinux:latest
-    container_name: compiler-explorer-archlinux
+    image: compiler-explorer:latest
+    container_name: compiler-explorer
     ports:
       - 10240:10240
     networks:
