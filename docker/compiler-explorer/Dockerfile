@@ -5,11 +5,14 @@ LABEL maintainer="Shangjin Tang <shangjin.tang@gmail.com>" \
 
 EXPOSE 10240
 
-# Use customized pacman mirrorlist
-# ADD ./copyfiles/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
+RUN pacman -Syu --noconfirm
+
+RUN echo "*** Update mirrorlist ***" \
+    && pacman -Sy reflector --noconfirm \
+    && reflector -c 'China' -l 200 -p https --sort rate --save /etc/pacman.d/mirrorlist
 
 RUN echo "*** Installing essential packages ***" \
-    && pacman -Syu wget ca-certificates nodejs npm git make vim clang --noconfirm \
+    && pacman -Sy wget ca-certificates nodejs npm git make vim clang --noconfirm \
     && pacman -Sc --noconfirm
 
 Run echo "*** Cloning Compiler-Explorer from github ***" \
@@ -21,7 +24,7 @@ Run echo "*** Add NodeJS dependencies ***" \
     && npm run webpack
 
 RUN echo "*** Installing C++ libraries ***" \
-    && pacman -Syu doctest fmt gtest --noconfirm \
+    && pacman -Sy doctest fmt gtest --noconfirm \
     && pacman -Sc --noconfirm
 
 COPY copyfiles/compiler-explorer/ /compiler-explorer/
