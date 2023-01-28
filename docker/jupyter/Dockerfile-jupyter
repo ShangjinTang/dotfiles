@@ -1,4 +1,4 @@
-FROM jupyter:scipy-notebook
+FROM jupyter/scipy-notebook:latest
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
