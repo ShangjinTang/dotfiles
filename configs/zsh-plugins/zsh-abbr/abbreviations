@@ -111,4 +111,16 @@ abbr rspush="rsync_ssh push"
 abbr rspushu="rsync_ssh push-update"
 abbr rspushd="rsync_ssh push-delete"
 
+#---------------------------------------------------------------------
+# docker-compose
+
+abbr dc="docker-compose"
+abbr dcup="docker-compose up"
+abbr dcupb="docker-compose up --build"
+abbr dcupd="docker-compose up -d"
+abbr dcupdb="docker-compose up -d --build"
+abbr dcstart="docker-compose start"
+abbr dcstop="docker-compose stop"
+abbr dcrestart="docker-compose restart"
+
 ######################################################################
