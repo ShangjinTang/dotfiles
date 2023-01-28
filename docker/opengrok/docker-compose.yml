@@ -3,11 +3,11 @@ version: "3"
 # More info at https://github.com/oracle/opengrok/docker/
 services:
   opengrok-service:
-    # build:
-    #   context: ./
-    #   dockerfile: Dockerfile
+    build:
+      context: ./
+      dockerfile: Dockerfile
     container_name: opengrok
-    image: opengrok/docker:latest
+    image: opengrok:latest
     ports:
       - "8080:8080/tcp"
     environment:
