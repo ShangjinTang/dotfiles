@@ -6,7 +6,7 @@ LABEL maintainer="Shangjin Tang <shangjin.tang@gmail.com>" \
 EXPOSE 10240
 
 # Use customized pacman mirrorlist
-ADD ./copyfiles/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
+# ADD ./copyfiles/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
 
 RUN echo "*** Installing essential packages ***" \
     && pacman -Syu wget ca-certificates nodejs npm git make vim clang --noconfirm \
