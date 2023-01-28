@@ -1,13 +1,17 @@
 version: "3"
 
 services:
-  jupyter-service:
+  jupyter:
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: jupyter
     image: jupyter:latest
+    container_name: jupyter
+    working_dir: /home/jovyan/jupyter-notebook
+    environment:
+      - CHOWN_HOME=yes
+      - GRANT_SUDO=yes
     ports:
       - "8888:8888/tcp"
     volumes:
-       - '~/jupyter-notebooks:/opt/notebooks'
+      - '~/jupyter-notebook:/home/jovyan/jupyter-notebook'

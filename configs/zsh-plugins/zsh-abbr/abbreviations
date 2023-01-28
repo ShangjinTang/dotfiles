@@ -8,34 +8,34 @@ abbr gls="git ls"
 
 # git commands from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
-abbr ga='git add'
-abbr gaa='git add --all'
+abbr ga="git add"
+abbr gaa="git add --all"
 
 abbr gb="git branch"
 abbr gba="git branch -a"
-abbr gbd='git branch -d'
+abbr gbd="git branch -d"
 
-abbr gbl='git blame -b -w'
+abbr gbl="git blame -b -w"
 
 abbr gc="git commit -v"
 abbr gc!="git commit --amend"
-abbr gcn='git commit -v --no-edit'
-abbr gcn!='git commit -v --no-edit --amend'
-abbr gca='git commit -v -a'
-abbr gca!='git commit -v -a --amend'
-abbr gcan!='git commit -v -a --no-edit --amend'
-abbr gcam='git commit -a -m'
+abbr gcn="git commit -v --no-edit"
+abbr gcn!="git commit -v --no-edit --amend"
+abbr gca="git commit -v -a"
+abbr gca!="git commit -v -a --amend"
+abbr gcan!="git commit -v -a --no-edit --amend"
+abbr gcam="git commit -a -m"
 
-abbr gcl='git clone --recurse-submodules'
+abbr gcl="git clone --recurse-submodules"
 
 abbr gcf="git config --list"
 
 abbr gco="git checkout"
 abbr gcb="git checkout -b"
 
-abbr gcp='git cherry-pick'
-abbr gcpa='git cherry-pick --abort'
-abbr gcpc='git cherry-pick --continue'
+abbr gcp="git cherry-pick"
+abbr gcpa="git cherry-pick --abort"
+abbr gcpc="git cherry-pick --continue"
 
 abbr gd="git diff"
 abbr gds="git diff --staged"
@@ -44,8 +44,8 @@ abbr gp="git push"
 
 abbr gpr="git pull --rebase"
 
-abbr grs='git restore'
-abbr grst='git restore --staged'
+abbr grs="git restore"
+abbr grst="git restore --staged"
 
 abbr gsh="git show"
 
@@ -84,19 +84,19 @@ abbr rcxx98="rcxx --flags='--std=c++98'"
 # exa
 
 # default show modified time as `ls`; do not show hidden/ignored files
-abbr e='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
+abbr e="exa --long --group-directories-first --time-style=long-iso --git --classify --modified"
 # show [A]ll files (hidden/ignored files)
-abbr ea='exa --long --group-directories-first --time-style=long-iso --git --classify --modified --all'
+abbr ea="exa --long --group-directories-first --time-style=long-iso --git --classify --modified --all"
 # sort by [M]odified
-abbr em='exa --long --group-directories-first --time-style=long-iso --git --classify --header --modified --sort=modified'
+abbr em="exa --long --group-directories-first --time-style=long-iso --git --classify --header --modified --sort=modified"
 # sort by [C]reated
-abbr ec='exa --long --group-directories-first --time-style=long-iso --git --classify --header --created --sort=created'
+abbr ec="exa --long --group-directories-first --time-style=long-iso --git --classify --header --created --sort=created"
 # tree level
-abbr et='exa --group-directories-first --time-style=long-iso --git --tree'
-abbr e1='exa --group-directories-first --time-style=long-iso --git -1'
-abbr e2='exa --group-directories-first --time-style=long-iso --git --tree --level=2'
-abbr e3='exa --group-directories-first --time-style=long-iso --git --tree --level=3'
-abbr e4='exa --group-directories-first --time-style=long-iso --git --tree --level=4'
+abbr et="exa --group-directories-first --time-style=long-iso --git --tree"
+abbr e1="exa --group-directories-first --time-style=long-iso --git -1"
+abbr e2="exa --group-directories-first --time-style=long-iso --git --tree --level=2"
+abbr e3="exa --group-directories-first --time-style=long-iso --git --tree --level=3"
+abbr e4="exa --group-directories-first --time-style=long-iso --git --tree --level=4"
 
 #---------------------------------------------------------------------
 # rsync
@@ -110,5 +110,19 @@ abbr rspulld="rsync_ssh pull-delete"
 abbr rspush="rsync_ssh push"
 abbr rspushu="rsync_ssh push-update"
 abbr rspushd="rsync_ssh push-delete"
+
+
+#---------------------------------------------------------------------
+# docker-compose
+
+# docker-compose commands from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/docker-compose/docker-compose.plugin.zsh
+
+abbr dco="docker-compose"
+abbr dcup="docker-compose up"
+abbr dcupb="docker-compose up --build"
+abbr dcupd="docker-compose up -d"
+abbr dcstop="docker-compose stop"
+abbr dcstart="docker-compose start"
+abbr dcrestart="docker-compose restart"
 
 ######################################################################
