@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  anaconda3-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: anaconda3
+    image: anaconda3:latest
+    ports:
+      - "8888:8888/tcp"
+    volumes:
+       - '~/jupyter-notebooks:/opt/notebooks'
