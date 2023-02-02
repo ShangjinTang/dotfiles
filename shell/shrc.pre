@@ -222,7 +222,7 @@ function settheme() {
     esac
     alias bat="bat --theme=${BAT_THEME}"
     alias ncdu="ncdu --color ${NCDU_THEME}"
-    ln -sf ~/.dotfiles/configs/.tmux.conf.theme.${TERMINAL_THEME} ~/.tmux.conf.theme
+    ln -sf ~/.dotfiles/configs/tmux/.tmux.conf.theme.${TERMINAL_THEME} ~/.tmux.conf.theme
     $IS_ZSH && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme
 }
 alias setlight="settheme light"
