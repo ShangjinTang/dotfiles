@@ -1,0 +1,12 @@
+session_name: docker
+start_directory: ~/
+windows:
+- panes:
+  - cd ~/docker/compiler-explorer && docker-compose up -d
+  window_name: compiler-explorer
+- panes:
+  - cd ~/docker/jupyter && docker-compose up -d
+  window_name: jupyter
+- panes:
+  - cd ~/docker/opengrok && docker-compose up -d
+  window_name: opengrok
