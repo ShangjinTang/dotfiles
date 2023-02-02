@@ -26,10 +26,7 @@
     ~/.vim/coc-settings.json: configs/coc-settings.json
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
-    ~/.tmux.conf.local: configs/.tmux.conf.local
-    ~/.tmux.conf.theme.light: configs/.tmux.conf.theme.light
-    ~/.tmux.conf.theme.dark: configs/.tmux.conf.theme.dark
-    ~/.tmux.conf.theme.nord: configs/.tmux.conf.theme.nord
+    ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.clang-format: clang-configs/.clang-format
     ~/.clang-tidy: clang-configs/.clang-tidy
     ~/.ssh/: ssh/*
@@ -56,8 +53,8 @@
       if: '[ $(uname) = Darwin ]'
 - link:
     ~/bin/: macos/bin/*
-    ~/.tmux.conf.local.os: configs/.tmux.conf.local.macos
-    ~/.dotfiles.os/gitmux: gitmux/gitmux.macos.amd64
+    ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.macos
+    ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.macos.amd64
     # macOS only
     ~/.hammerspoon: macos/hammerspoon
     ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner/custom.json
@@ -77,8 +74,8 @@
       glob: true
       if: '[ $(uname) = Linux ]'
 - link:
-    ~/.tmux.conf.local.os: configs/.tmux.conf.local.linux
-    ~/.dotfiles.os/gitmux: gitmux/gitmux.linux.amd64
+    ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.linux
+    ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
 
 # ArchLinux do not need manual install
 - defaults:

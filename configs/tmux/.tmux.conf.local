@@ -44,7 +44,7 @@ tmux_conf_new_session_prompt=false
 
 # -- display -------------------------------------------------------------------
 
-source -q ~/.tmux.conf.theme.$TERMINAL_THEME
+source -q ~/.tmux.conf.theme
 
 
 # -- plugins -------------------------------------------------------------------
