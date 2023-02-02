@@ -65,7 +65,7 @@
 
 
 
-# link for Linux(Ubuntu)
+# link for Linux (Ubuntu | ArchLinux)
 - shell:
   - ["", ========== Linux install ==========]
 - defaults:
@@ -77,9 +77,20 @@
       glob: true
       if: '[ $(uname) = Linux ]'
 - link:
-    ~/bin/: linux/bin/*
     ~/.tmux.conf.local.os: configs/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: gitmux/gitmux.linux.amd64
+
+# ArchLinux do not need manual install
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      glob: true
+      if: '[[ $WSL_DISTRO_NAME != Arch ]] && lsb_release -i | grep -v Arch'
+- link:
+    ~/bin/: linux/not_arch/bin/*
 
 
 
