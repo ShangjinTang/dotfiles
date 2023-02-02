@@ -16,3 +16,9 @@ Host virmach
     Port 2222
     IdentityFile ~/.ssh/vps_id_rsa
 
+Host vps
+    User sol
+    HostName 193.163.19.141
+    Port 2222
+    IdentityFile ~/.ssh/vps_id_rsa
+
