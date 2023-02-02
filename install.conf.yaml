@@ -80,7 +80,6 @@
     ~/bin/: linux/bin/*
     ~/.tmux.conf.local.os: configs/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: gitmux/gitmux.linux.amd64
-    ~/.kaggle/kaggle.json: linux/.kaggle/kaggle.json
 
 
 
