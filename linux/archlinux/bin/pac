@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+
+import logging
+import platform
+import os
+import subprocess
+import time
+import sys
+
+import typer
+from typing import List, Optional
+import hydra
+from omegaconf import DictConfig, OmegaConf
+
+LOG_FORMAT = "%(asctime)s    %(levelname)s    %(filename)s:%(lineno)s\n%(message)s"
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+
+app = typer.Typer()
+
+
+class Distribution():
+
+    @staticmethod
+    def retrive_distribution():
+        if platform.system() == 'Linux':
+            with open("/etc/os-release") as f:
+                release_info = f.read()
+                if "Arch Linux" in release_info:
+                    return "ArchLinux"
+        return False
+
+    @staticmethod
+    def is_archlinux():
+        return Distribution.retrive_distribution() == "ArchLinux"
+
+    @staticmethod
+    def fetch_install_command(packages_to_install):
+        if Distribution.is_archlinux() and packages_to_install:
+            return ArchLinux.fetch_install_command(packages_to_install)
+        return None
+
+    @staticmethod
+    def fetch_uninstall_command(packages_to_uninstall):
+        if Distribution.is_archlinux() and packages_to_uninstall:
+            return ArchLinux.fetch_uninstall_command(packages_to_uninstall)
+        return None
+
+
+class ArchLinux():
+
+    @staticmethod
+    def fetch_install_command(packages_to_install):
+        installed_packages = ArchLinux.query_installed_packages()
+        packages_to_install = packages_to_install - installed_packages
+        if not packages_to_install:
+            return None
+        logging.debug(f"{packages_to_install=}")
+        install_command = ' '.join(
+            ['sudo', 'pacman', '-Syu', *packages_to_install])
+        return install_command
+
+    @staticmethod
+    def fetch_uninstall_command(packages_to_uninstall):
+        installed_packages = ArchLinux.query_installed_packages()
+        packages_to_uninstall = packages_to_uninstall & installed_packages
+        if not packages_to_uninstall:
+            return None
+        logging.debug(f"{packages_to_uninstall=}")
+        uninstall_command = ' '.join(
+            ['sudo', 'pacman', '-Rs', *packages_to_uninstall])
+        return uninstall_command
+
+    @staticmethod
+    def query_installed_packages():
+        result = subprocess.run(['pacman', '-Qq'], stdout=subprocess.PIPE)
+        installed_packages = set(result.stdout.decode().strip().split('\n'))
+        return installed_packages
+
+
+class PackageInstaller():
+
+    def __init__(self, requirements, clean_install=False):
+        if not Distribution.is_archlinux():
+            raise Exception("Only support Arch Linux")
+        self.requirements = requirements
+        self.clean_install = clean_install
+        self.install_command = None
+        self.uninstall_command = None
+
+    def install_requirements(self):
+        if self.clean_install:
+            self.packages_to_uninstall = set(
+                k for k, v in self.requirements.items() if v == False)
+
+    def update_install_command(self):
+        packages_to_install = set(k for k, v in self.requirements.items()
+                                  if v != False)
+        self.install_command = Distribution.fetch_install_command(
+            packages_to_install)
+
+    def update_uninstall_command(self):
+        if self.clean_install:
+            print(f"{self.clean_install=}")
+            packages_to_uninstall = set(k
+                                        for k, v in self.requirements.items()
+                                        if v == False)
+            self.uninstall_command = Distribution.fetch_uninstall_command(
+                packages_to_uninstall)
+            logging.info(self.uninstall_command)
+
+    def execute_command(self):
+        self.update_uninstall_command()
+        self.update_install_command()
+        command_to_execute = " && ".join([
+            valid_command for valid_command in
+            [self.uninstall_command, self.install_command] if valid_command
+        ])
+        if not command_to_execute:
+            print("Already satisfied, no command need to be executed.")
+            return
+        logging.debug(command_to_execute)
+        print(command_to_execute)
+        time.sleep(3)
+        os.system(command_to_execute)
+
+
+def my_compose(overrides: Optional[List[str]]) -> DictConfig:
+    with hydra.initialize(version_base=None,
+                          config_path=os.path.basename(sys.argv[0]) + "-conf",
+                          job_name="my_compose_job"):
+        return hydra.compose(config_name="config", overrides=overrides)
+
+
+@app.command()
+def install(overrides: Optional[List[str]] = typer.Argument(None),
+            clean_install: bool = typer.Option(False, '--clean')):
+    logging.debug(f"Got {overrides=}")
+    cfg = my_compose(overrides)
+    logging.debug(f"Hydra config (dict):\n{cfg}")
+    logging.debug(f"Hydra config (yaml):\n{OmegaConf.to_yaml(cfg)}")
+    package_requirements = {}
+    for key, sub_dict in cfg.items():
+        package_requirements.update(sub_dict)
+    package_installer = PackageInstaller(package_requirements, clean_install)
+    package_installer.execute_command()
+
+
+@app.command()
+def clean_install(overrides: Optional[List[str]] = typer.Argument(None)):
+    install(overrides=overrides, clean_install=True)
+
+
+if __name__ == "__main__":
+    app()

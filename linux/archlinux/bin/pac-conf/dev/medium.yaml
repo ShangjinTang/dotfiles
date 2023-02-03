@@ -1,0 +1,13 @@
+defaults:
+  - min
+
+cppcheck: true
+cmake: true
+# source code viewer
+cscope: true
+ctags: true
+# debug tools
+gdb: true
+hyperfine: true
+valgrind: true
+radare2: true
