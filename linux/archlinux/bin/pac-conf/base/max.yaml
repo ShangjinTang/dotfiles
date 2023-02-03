@@ -1,0 +1,9 @@
+defaults:
+  - medium
+
+croc: true
+git-delta: true
+hexyl: true
+neofetch: false
+sd: true
+tig: true

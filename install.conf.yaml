@@ -77,6 +77,19 @@
     ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
 
+
+# ArchLinux
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      glob: true
+      if: '[[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch'
+- link:
+    ~/bin/: linux/archlinux/bin/*
+
 # ArchLinux do not need manual install
 - defaults:
     link:
