@@ -31,9 +31,6 @@
     ~/.clang-tidy: clang-configs/.clang-tidy
     ~/.ssh/: ssh/*
     # conditional configs
-    ~/.tmuxp/docker.yml:
-      if: 'command -v tmuxp'
-      path: docker/tmuxp-docker.yml
     ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
       if: '[ -d ~/.vim/plugged/asyncrun.vim ]'
       path: configs/vim-plugins/asyncrun.vim/runner/tmuxsol.vim
@@ -182,6 +179,9 @@
       if: 'command -v docker'
 - link:
     ~/docker/: docker/*
+    ~/.tmuxp/docker.yml:
+      if: 'command -v tmuxp'
+      path: docker/.tmuxp-docker.yml
 
 
 
