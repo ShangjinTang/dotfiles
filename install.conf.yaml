@@ -31,6 +31,9 @@
     ~/.clang-tidy: clang-configs/.clang-tidy
     ~/.ssh/: ssh/*
     # conditional configs
+    ~/.tigrc:
+      if: 'command -v tig'
+      path: configs/.tigrc
     ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
       if: '[ -d ~/.vim/plugged/asyncrun.vim ]'
       path: configs/vim-plugins/asyncrun.vim/runner/tmuxsol.vim
