@@ -479,11 +479,15 @@ else
     endif
     function! Toggle_transparent_background()
         if t:is_transparent == 0
-            hi Normal ctermbg=Black
-            hi Visual ctermbg=DarkGray
+            highlight Normal ctermbg=Black guibg=Black
+            highlight Visual ctermbg=DarkGray guibg=DarkGray
             let t:is_transparent = 1
         else
-            hi Normal guibg=NONE ctermbg=NONE
+            highlight Normal ctermbg=NONE guibg=NONE
+            highlight Visual ctermbg=NONE guibg=NONE
+            if $TERMINAL_THEME == 'nord'
+                highlight Comment ctermfg=Gray guifg=Gray
+            endif
             let t:is_transparent = 0
         endif
     endfunction
