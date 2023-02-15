@@ -21,4 +21,4 @@ IFS=' ' read -ra selected < <(
         --preview-window 'up,75%,border-bottom,~1,+1/4' \
         --exit-0
 )
-[ -n "${selected[0]}" ] && glf "${selected[0]}"
+[ -n "${selected[0]}" ] && fzf_git_log_follow "${selected[0]}"
