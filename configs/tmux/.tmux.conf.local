@@ -233,7 +233,7 @@ tmux_conf_copy_to_os_clipboard=false
 # >>> Shangjin customize begin >>>
 
 # increase history size
-set -g history-limit 10000
+set -g history-limit 100000
 
 # mouse mode enabled
 set -g mouse on
