@@ -1,6 +1,6 @@
 Host hostdare
     User shangjin
-    HostName 202.91.33.184
+    HostName 103.99.179.201
     Port 2222
     IdentityFile ~/.ssh/vps_id_rsa
 
