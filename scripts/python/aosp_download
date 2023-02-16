@@ -15,7 +15,7 @@ import multiprocessing
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2022 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 __date__ = "20210301"
 __email__ = "shangjin.tang@gmail.com"
 
@@ -80,8 +80,8 @@ def main():
         project = project.replace('*', '[\w\/\-\_]+')
         with open('.repo/manifests/default.xml', 'r') as manifest:
             for line in manifest:
-                if re.search('project path="({})"'.format(project), line):
-                    projects.append(re.search('project path="({})"'.format(project), line).group(1))
+                if re.search('name="({})"'.format(project), line):
+                    projects.append(re.search('name="({})"'.format(project), line).group(1))
     # print(projects)
 
     for project in projects:
