@@ -27,7 +27,7 @@ RUN echo "*** Installing C++ libraries ***" \
     && pacman -Sy doctest fmt gtest --noconfirm \
     && pacman -Sc --noconfirm
 
-COPY copyfiles/compiler-explorer/ /compiler-explorer/
+COPY copyfiles/ /
 
 WORKDIR /compiler-explorer
 
