@@ -31,12 +31,13 @@ check_env() {
 }
 
 rsync_to_ssh_server() {
-    local RELATIVE_PATHS="${@#$HOME/}"
+    local ARGS="${@}"
     echo "===================================================================================================="
-    local TASK_ARR=($RELATIVE_PATHS)
+    local TASK_ARR=($ARGS)
     local TASK_NUM=${#TASK_ARR[@]}
     local TASK_INDEX=0
-    for RELATIVE_PATH in $RELATIVE_PATHS; do
+    for ARG in $ARGS; do
+        RELATIVE_PATH=$(realpath --relative-to=$(realpath ~) $(realpath ${ARG}))
         let TASK_INDEX++
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}"
         echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
@@ -55,12 +56,13 @@ rsync_to_ssh_server() {
 }
 
 rsync_from_ssh_server() {
-    local RELATIVE_PATHS="${@#$HOME/}"
+    local ARGS="${@}"
     echo "===================================================================================================="
-    local TASK_ARR=($RELATIVE_PATHS)
+    local TASK_ARR=($ARGS)
     local TASK_NUM=${#TASK_ARR[@]}
     local TASK_INDEX=0
-    for RELATIVE_PATH in $RELATIVE_PATHS; do
+    for ARG in $ARGS; do
+        RELATIVE_PATH=$(realpath --relative-to=$(realpath ~) $(realpath ${ARG}))
         let TASK_INDEX++
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}/./${RELATIVE_PATH} ~"
         echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
