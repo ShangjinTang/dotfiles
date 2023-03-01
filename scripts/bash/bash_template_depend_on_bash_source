@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+# Link: https://github.com/ralish/bash-script-template
+# Depends on: ./bash_source
+
+# Enable xtrace if the DEBUG environment variable is set
+if [[ ${DEBUG-} =~ ^1|yes|true$ ]]; then
+    set -o xtrace       # Trace the execution of the script (debug)
+fi
+
+# Only enable these shell behaviours if we're not being sourced
+# Approach via: https://stackoverflow.com/a/28776166/8787985
+if ! (return 0 2> /dev/null); then
+    # A better class of script...
+    set -o errexit      # Exit on most errors (see the manual)
+    set -o nounset      # Disallow expansion of unset variables
+    set -o pipefail     # Use last non-zero exit code in a pipeline
+fi
+
+# Enable errtrace or the error trap handler will not work as expected
+set -o errtrace         # Ensure the error trap handler is inherited
+
+# DESC: Usage help
+# ARGS: None
+# OUTS: None
+function script_usage() {
+    cat << EOF
+Usage: $(basename "$0") [OPTION]... -i [INPUT_STRING]
+Add script usage description here.
+
+Options:
+     -h|--help                  Displays this help
+     -v|--verbose               Displays verbose output
+    -nc|--no-colour             Disables colour output
+    -cr|--cron                  Run silently unless we encounter an error
+
+Depends on file (to be sourced in this script):
+    $(realpath $(dirname "${BASH_SOURCE[0]}"))/bash_source
+EOF
+}
+
+# DESC: Parameter parser
+# ARGS: $@ (optional): Arguments provided to the script
+# OUTS: Variables indicating command-line parameters and options
+function parse_params() {
+    local param
+    while [[ $# -gt 0 ]]; do
+        param="$1"
+        shift
+        case $param in
+            -h | --help)
+                script_usage
+                exit 0
+                ;;
+            -v | --verbose)
+                verbose=true
+                ;;
+            -nc | --no-colour)
+                no_colour=true
+                ;;
+            -cr | --cron)
+                cron=true
+                ;;
+            -i | --input)
+                input=true
+                input_arg=$1
+                shift
+                ;;
+            *)
+                script_exit "Invalid parameter was provided: $param" 1
+                ;;
+        esac
+    done
+}
+
+function sample_echo() {
+    echo $1
+}
+
+# DESC: Main control flow
+# ARGS: $@ (optional): Arguments provided to the script
+# OUTS: None
+function main() {
+    trap script_trap_err ERR
+    trap script_trap_exit EXIT
+
+    script_init "$@"
+    parse_params "$@"
+    cron_init
+    colour_init
+    #lock_init system
+
+    if [[ -n ${input-} ]]; then
+        pretty_print "$(sample_echo "${input_arg}")" "$fg_red"
+    fi
+}
+
+# shellcheck source=source.sh
+source "$(dirname "${BASH_SOURCE[0]}")/bash_source"
+
+# Invoke main with args if not sourced
+# Approach via: https://stackoverflow.com/a/28776166/8787985
+if ! (return 0 2> /dev/null); then
+    main "$@"
+fi
+
+# vim: syntax=sh cc=120 tw=119 ts=4 sw=4 sts=4 et sr
