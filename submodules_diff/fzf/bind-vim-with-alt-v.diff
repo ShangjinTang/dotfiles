@@ -1,0 +1,42 @@
+diff --git a/shell/key-bindings.zsh b/shell/key-bindings.zsh
+index fe219bf..eb22a93 100644
+--- a/shell/key-bindings.zsh
++++ b/shell/key-bindings.zsh
+@@ -114,6 +114,37 @@ bindkey -M emacs '^R' fzf-history-widget
+ bindkey -M vicmd '^R' fzf-history-widget
+ bindkey -M viins '^R' fzf-history-widget
+ 
++# SolAdd begin
++# ALT-V - open the selected file path(s) with vim
++fzf-vim-widget() {
++  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
++    -o -type f -print \
++    -o -type d -print \
++    -o -type l -print 2> /dev/null | cut -b3-"}"
++  setopt localoptions pipefail no_aliases 2> /dev/null
++  local items
++  local item
++  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" $(__fzfcmd) -m "$@" | while read item; do
++    items+=$item" "
++  done
++  zle push-line # Clear buffer. Auto-restored on next prompt.
++  if [[ -z "$items" ]]; then
++    zle redisplay
++    return 0
++  fi
++  BUFFER="vim ${items}"
++  zle accept-line
++  local ret=$?
++  unset items # ensure this doesn't end up appearing in prompt expansion
++  zle reset-prompt
++  return $ret
++}
++zle     -N            fzf-vim-widget
++bindkey -M emacs '\ev' fzf-vim-widget
++bindkey -M vicmd '\ev' fzf-vim-widget
++bindkey -M viins '\ev' fzf-vim-widget
++# SolAdd end
++
+ } always {
+   eval $__fzf_key_bindings_options
+   'unset' '__fzf_key_bindings_options'
