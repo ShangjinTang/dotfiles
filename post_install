@@ -25,9 +25,27 @@ if [ -d ~/.dotfiles.local ]; then
     done
 fi
 
+# copy files from to Windows Drive C:\
 if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
     rm -rf /mnt/c/.dotfiles &> /dev/null
     if [ ! -f /mnt/c/.dotfiles ]; then
         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
     fi
 fi
+
+function apply_diff_for_submodule() {
+    local target_folder=./submodules/$1
+    local diff_list=(./submodules_diff/$1/*.diff)
+    if [[ -d $target_folder ]]; then
+        for diff_file in "${diff_list[@]}"; do
+            diff_file_realpath=$(realpath $diff_file)
+            (cd $target_folder && git reset --hard HEAD &> /dev/null && git apply $diff_file_realpath &> /dev/null)
+            if [[ $? -eq 0 ]]; then
+                echo "Apply patch $diff_file in folder $target_folder succeeded."
+            else
+                echo "Error: apply patch $diff_file in folder $target_folder failed."
+            fi
+        done
+    fi
+}
+apply_diff_for_submodule fzf
