@@ -398,4 +398,60 @@ function run_as_root() {
     fi
 }
 
+
+
+################################################################################
+# SolAdd begin
+
+# DESC: Run the function before execute a command; e.g. if $0 [$1]; then COMMAND; fi
+# ARGS: $1 (optional): A prompt string before execute the COMMAND
+# OUTS: None
+# NOTE: confirm(): user must enter "n|no" or "y|yes"
+#       confirm_default_yes(): default "yes", unless enter "n|no"
+#       confirm_default_no(): default "no", unless enter "y|yes"
+function confirm() {
+    local default_prompt="Are you sure?"
+    read -r -p "${1:-${default_prompt}} [y/n]: " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        [nN][oO]|[nN])
+            false
+            ;;
+        *)
+            confirm 'Please input' "$*"
+            ;;
+    esac
+}
+function confirm_default_yes() {
+    local default_prompt="Are you sure?"
+    read -r -p "${1:-${default_prompt}} [Y/n]: " response
+    case "$response" in
+        [nN][oO]|[nN])
+            false
+            ;;
+        *)
+            true
+            ;;
+    esac
+}
+function confirm_default_no() {
+    local default_prompt="Are you sure?"
+    read -r -p "${1:-${default_prompt}} [y/N]: " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+# SolAdd end
+################################################################################
+
+
+
 # vim: syntax=sh cc=120 tw=119 ts=4 sw=4 sts=4 et sr
