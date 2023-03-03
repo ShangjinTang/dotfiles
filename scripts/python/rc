@@ -68,8 +68,7 @@ def main():
     if ARGS.file:
         compile_command_list.extend(ARGS.file)
     else:
-        compile_command_list.append(
-            "$(find . -iname '*.cpp' -or -iname '*.cc')")
+        compile_command_list.append("$(find . -iname '*.c')")
     compile_command = ' '.join(compile_command_list)
 
     # Get run command
@@ -101,7 +100,7 @@ if __name__ == '__main__':
         type=str,
         action='extend',
         help=
-        "file(s) to compile\nif not specified, use all cpp files under current directory\n"
+        "file(s) to compile\nif not specified, use all c files under current directory\n"
     )
     parser.add_argument(
         '--compiler',
