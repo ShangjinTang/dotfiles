@@ -38,6 +38,7 @@ plugins=(
     z                           ## z jump
     # ohmyzsh built-in non-executable
     direnv                      ## creates hook for 'direnv'
+    colored-man-pages           ## add colors for 'man' command
     # ohmyzsh built-in completions
     bazel
     fd
