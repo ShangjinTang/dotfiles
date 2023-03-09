@@ -10,111 +10,105 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; For function key: < left Key | > right Key
 
 ; ================================================================================
+; 1. Environment Setting
 
-#IfWinNotActive ahk_exe mstsc.exe
+SetCapsLockState, AlwaysOff
+SetScrollLockState, AlwaysOff
 
-    ; ================================================================================
-    ; 1. Environment Setting
+; ================================================================================
+; 2. Hot String
 
-    SetCapsLockState, AlwaysOff
-    SetScrollLockState, AlwaysOff
+:*:+gmail::shangjin.tang@gmail.com
 
-    ; ================================================================================
-    ; 2. Hot String
+; ================================================================================
+; 3. Key Mapping: CapsLock as Hyper
+;    Capslock -> Hyper or Escape (alone);
+;    Shift + Capslock -> Capslock
 
-    :*:+gmail::shangjin.tang@gmail.com
+#If GetKeyState("CapsLock", "P")
+w::Up
+s::Down
+a::Left
+d::Right
+q::Home
+e::End
+r::PgUp
+f::PgDn
+z::^#Left
+x::#Tab
+c::^#Right
+t::search_clipboard("https://translate.google.com/", "?sl=auto&tl=zh-CN&text=", html_required=True)
+g::search_clipboard("https://www.google.com/", "search?q=")
+b::Run "https://www.bilibili.com/"
+y::Run "https://www.youtube.com/"
+`::^#!+`  ; Ditto: Activate Window
+1::^#!+1  ; Twinkle Tray: Brightness Down
+2::^#!+2  ; Twinkle Tray: Brightness Up
+3::^#!+3  ; Snipaste: Screenshot
+4::^#!+4  ; Snipaste: Hide/Show all the pins
+5:: +#T ; PowerToys: OCR (Text Extractor)
+\::Reload
+Space::^#!+/  ; Listary: Show Listary Toolbar
+#If
 
-    ; ================================================================================
-    ; 3. Key Mapping: CapsLock as Hyper
-    ;    Capslock -> Hyper or Escape (alone);
-    ;    Shift + Capslock -> Capslock
+*CapsLock::
+KeyWait, CapsLock
+IF A_ThisHotkey = *CapsLock
+    Send, {Escape}
+Return
 
-    #If GetKeyState("CapsLock", "P")
-    w::Up
-    s::Down
-    a::Left
-    d::Right
-    q::Home
-    e::End
-    r::PgUp
-    f::PgDn
-    z::^#Left
-    x::#Tab
-    c::^#Right
-    t::search_clipboard("https://translate.google.com/", "?sl=auto&tl=zh-CN&text=", html_required=True)
-    g::search_clipboard("https://www.google.com/", "search?q=")
-    b::Run "https://www.bilibili.com/"
-    y::Run "https://www.youtube.com/"
-    `::^#!+`  ; Ditto: Activate Window
-    1::^#!+1  ; Twinkle Tray: Brightness Down
-    2::^#!+2  ; Twinkle Tray: Brightness Up
-    3::^#!+3  ; Snipaste: Screenshot
-    4::^#!+4  ; Snipaste: Hide/Show all the pins
-    5:: +#T ; PowerToys: OCR (Text Extractor)
-    \::Reload
-    Space::^#!+/  ; Listary: Show Listary Toolbar
-    #If
-
-    *CapsLock::
-    KeyWait, CapsLock
-    IF A_ThisHotkey = *CapsLock
-        Send, {Escape}
-    Return
-
-    +CapsLock::CapsLock
++CapsLock::CapsLock
 
 
-    ; ================================================================================
-    ; 4. CapsLock + Tab -> ScrollLock
-    ; If ScrollLock on, map 1234567890-= to F1~F12
-    #If GetKeyState("CapsLock", "P")
-    Tab::SetScrollLockState % !GetKeyState("ScrollLock", "T")
-    #If
-    #If GetKeyState("ScrollLock", "T")
-    1::F1
-    2::F2
-    3::F3
-    4::F4
-    5::F5
-    6::F6
-    7::F7
-    8::F8
-    9::F9
-    0::F10
-    -::F11
-    =::F12
-    #If
+; ================================================================================
+; 4. CapsLock + Tab -> ScrollLock
+; If ScrollLock on, map 1234567890-= to F1~F12
+#If GetKeyState("CapsLock", "P")
+Tab::SetScrollLockState % !GetKeyState("ScrollLock", "T")
+#If
+#If GetKeyState("ScrollLock", "T")
+1::F1
+2::F2
+3::F3
+4::F4
+5::F5
+6::F6
+7::F7
+8::F8
+9::F9
+0::F10
+-::F11
+=::F12
+#If
 
-    ; ================================================================================
-    ; 5. Key Mapping: General
+; ================================================================================
+; 5. Key Mapping: General
 
-    ; W: WeChat
-    #w::try toggle_ahk_class("C:\Program Files (x86)\Tencent\WeChat\WeChat.exe", "WeChatMainWndForPC")
-    ; E: Netease Music
-    #e::try toggle_ahk_class("C:\Program Files (x86)\Netease\CloudMusic\cloudmusic.exe", "OrpheusBrowserHost")
-    ; R: TickTick
-    #r::Run "https://dida365.com/"
-    ; T: Terminal
-    #t::try toggle_ahk_exe("wt.exe", "WindowsTerminal.exe")
-    ; F: XYExplorer
-    #f::try toggle_ahk_exe("C:\Program Files\XYplorer\XYplorer.exe", "XYplorer.exe")
-    ; C: Chrome
-    #c::try toggle_ahk_exe("C:\Program Files\Google\Chrome\Application\chrome.exe", "chrome.exe")
-    ; V: VSCode
-    #v::try toggle_ahk_exe("C:\Program Files\Microsoft VS Code\Code.exe", "Code.exe")
-    ; N: Notion
-    #n::Run "https://www.notion.so/"
-    ; M: Miro
-    #m::Run "https://miro.com/"
+; W: WeChat
+#w::try toggle_ahk_class("C:\Program Files (x86)\Tencent\WeChat\WeChat.exe", "WeChatMainWndForPC")
+; E: Netease Music
+#e::try toggle_ahk_class("C:\Program Files (x86)\Netease\CloudMusic\cloudmusic.exe", "OrpheusBrowserHost")
+; R: TickTick
+#r::Run "https://dida365.com/"
+; T: Terminal
+#t::try toggle_ahk_exe("wt.exe", "WindowsTerminal.exe")
+; F: XYExplorer
+#f::try toggle_ahk_exe("C:\Program Files\XYplorer\XYplorer.exe", "XYplorer.exe")
+; C: Chrome
+#c::try toggle_ahk_exe("C:\Program Files\Google\Chrome\Application\chrome.exe", "chrome.exe")
+; V: VSCode
+#v::try toggle_ahk_exe("C:\Program Files\Microsoft VS Code\Code.exe", "Code.exe")
+; N: Notion
+#n::Run "https://www.notion.so/"
+; M: Miro
+#m::Run "https://miro.com/"
 
-    ; RAlt
-    >!0::Volume_Mute
-    >!-::Volume_Down
-    >!=::Volume_Up
+; RAlt
+>!0::Volume_Mute
+>!-::Volume_Down
+>!=::Volume_Up
 
-    ; ================================================================================
-
-#IfWinNotActive
+; ================================================================================
 
 ; ================================================================================
 ; 6. Key Mapping: Activate Window
