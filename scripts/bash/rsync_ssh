@@ -38,7 +38,7 @@ rsync_to_ssh_server() {
     local TASK_INDEX=0
     for ARG in $ARGS; do
         RELATIVE_PATH=$(realpath --relative-to=$(realpath ~) $(realpath ${ARG}))
-        let TASK_INDEX++
+        TASK_INDEX=$((TASK_INDEX+1))
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}"
         echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
         $DEBUG_FLAG && echo "$RSYNC_COMMAND"
@@ -62,8 +62,19 @@ rsync_from_ssh_server() {
     local TASK_NUM=${#TASK_ARR[@]}
     local TASK_INDEX=0
     for ARG in $ARGS; do
+        echo "$(dirname ${ARG})"
+        # if $ARG not exist, we create it's upper directory first, otherwise $(realpath ${ARG})) would fail
+        # TODO: remove the created directory if rsync fail
+        if [[ ! -e ${ARG} ]]; then
+            echo "local dir $(dirname ${ARG}) do not exist, create it first"
+            mkdir -p $(dirname ${ARG})
+        fi
         RELATIVE_PATH=$(realpath --relative-to=$(realpath ~) $(realpath ${ARG}))
-        let TASK_INDEX++
+        TASK_INDEX=$((TASK_INDEX+1))
+        if [[ -z ${RELATIVE_PATH} ]] || [[ ${RELATIVE_PATH} == '.' ]]; then
+            echo "${RED}Fatal: sync all files to ~ is forbidden. exit...${RESET}"
+            exit 1
+        fi
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}/./${RELATIVE_PATH} ~"
         echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
         $DEBUG_FLAG && echo "$RSYNC_COMMAND"
@@ -72,7 +83,7 @@ rsync_from_ssh_server() {
         echo "flags: ${RSYNC_FLAGS}"
         echo "--------------------------------------------------------------------------------"
         if ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST} [ ! -e ${RSYNC_SSH_HOME}/${RELATIVE_PATH} ]; then
-            echo "Warning: the source ~/${RELATIVE_PATH} does not exist on remote server, skipped."
+            echo "Warning: the source ${RSYNC_SSH_HOME}/${RELATIVE_PATH} does not exist on remote server, skipped."
         else
             eval $RSYNC_COMMAND
         fi
@@ -99,10 +110,10 @@ rsync_ssh_server() {
     esac
     case $1 in
         pull|pull-update|pull-delete)
-            rsync_from_ssh_server ${@:2}
+            rsync_from_ssh_server "${@:2}"
             ;;
         push|push-update|push-delete)
-            rsync_to_ssh_server ${@:2}
+            rsync_to_ssh_server "${@:2}"
             ;;
         *)
             ;;
@@ -120,5 +131,6 @@ print_usage() {
 if [ $1 == "-h" ] || [ $1 == "--help" ]; then
     print_usage
 else
-    rsync_ssh_server $@
+    set -e
+    rsync_ssh_server "$@"
 fi
