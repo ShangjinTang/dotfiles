@@ -98,7 +98,7 @@
       force: true
       relative: false
       glob: true
-      if: '[[ $WSL_DISTRO_NAME == Ubuntu ]] && lsb_release -i | grep Ubuntu'
+      if: '[[ $WSL_DISTRO_NAME == Ubuntu ]] || lsb_release -i | grep Ubuntu'
 - link:
     ~/bin/: linux/ubuntu/bin/*
 
