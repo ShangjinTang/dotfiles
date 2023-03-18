@@ -1,6 +1,7 @@
 defaults:
   - none
 
+# ------------------------------
 base-devel: true
 # ------------------------------
 git: true
@@ -22,3 +23,4 @@ python-pip: true
 fzf: true
 tmux: true
 ripgrep: true
+# ------------------------------

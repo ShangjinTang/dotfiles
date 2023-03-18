@@ -15,3 +15,8 @@ rsync: true
 reflector: true
 tldr: true
 github-cli: true
+# ------------------------------
+p7zip
+zip
+unzip
+# ------------------------------

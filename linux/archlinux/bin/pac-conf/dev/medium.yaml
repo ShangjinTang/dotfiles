@@ -1,13 +1,17 @@
 defaults:
   - min
 
-cppcheck: true
+# ------------------------------
 cmake: true
+# ------------------------------
 # source code viewer
 cscope: true
 ctags: true
+# ------------------------------
 # debug tools
+cppcheck: true
 gdb: true
 hyperfine: true
 valgrind: true
 radare2: true
+# ------------------------------

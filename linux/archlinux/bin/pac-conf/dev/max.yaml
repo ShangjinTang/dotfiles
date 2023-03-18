@@ -1,12 +1,15 @@
 defaults:
   - medium
 
+# ------------------------------
 # build tools
 bazel: false
 scons: false
+# ------------------------------
 # C++ third party library
 abseil-cpp: false
 fmt: false
 doctest: false
 gtest: false
 boost: false
+# ------------------------------
