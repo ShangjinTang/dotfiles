@@ -1,10 +1,14 @@
 defaults:
   - none
 
+# ------------------------------
 # C++
 clang: true
+# ------------------------------
 # vim coc
 nodejs: true
 npm: true
+# ------------------------------
 # python
 yapf: true  # python format
+# ------------------------------
