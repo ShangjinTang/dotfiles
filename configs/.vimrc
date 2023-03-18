@@ -25,7 +25,7 @@ set number                     " Show current line number on the left.
 set relativenumber             " Show relative line number of above/below lines on the left.
 set showmatch                  " Show matching brackets when text indicator is over them.
 set so=7                       " Lines padding to bottom/top while moving with j/k.
-set synmaxcol=200              " Only highlight the first 200 columns.
+set synmaxcol=240              " Only highlight the first 240 columns.
 " ### Cursor Move
 set backspace=indent,eol,start " Allow backspacing over the indent, eol and start in Insert mode.
 set whichwrap+=<,>,h,l         " Allow cursor left/right to move to the previous/next line.
@@ -326,20 +326,8 @@ noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
 nnoremap <silent> <leader>q :qa!<CR>     " Quit vim (close all buffers)
 nnoremap <silent> <leader>w :bd<CR>      " Close current buffer
 nnoremap <silent> <leader><Tab> :b#<CR>  " Switch between current buffer and previous buffer
-nnoremap <silent> <leader>{ :bf<CR>      " Switch to first buffer
-nnoremap <silent> <leader>} :bl<CR>      " Switch to last buffer
 nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
-nnoremap <silent> <leader>1 :b1<CR>      " Switch to buffer 1
-nnoremap <silent> <leader>2 :b2<CR>      " Switch to buffer 2
-nnoremap <silent> <leader>3 :b3<CR>      " Switch to buffer 3
-nnoremap <silent> <leader>4 :b4<CR>      " Switch to buffer 4
-nnoremap <silent> <leader>5 :b5<CR>      " Switch to buffer 5
-nnoremap <silent> <leader>6 :b6<CR>      " Switch to buffer 6
-nnoremap <silent> <leader>7 :b7<CR>      " Switch to buffer 7
-nnoremap <silent> <leader>8 :b8<CR>      " Switch to buffer 8
-nnoremap <silent> <leader>9 :b9<CR>      " Switch to buffer 9
-
 
 " source code plugins
 
@@ -372,12 +360,11 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 " nnoremap <silent> <C-\>:TmuxNavigatePrevious<CR>
 
 " ----------------------------------------------------------
-" Disable arrow keys, force use hjkl for cursor move
-" TODO: remove these after familiar with hjkl
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+" Uncomment below to disable arrow keys, force use hjkl for cursor move
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
+" noremap <Left> <Nop>
+" noremap <Right> <Nop>
 
 " ----------------------------------------------------------
 " ## Move lines up / down
