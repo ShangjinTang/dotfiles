@@ -22,6 +22,7 @@ compile_commands.json
 
 # use build for cmake, scons
 build/
+.build/
 # bazel
 bazel-*
 # scons
