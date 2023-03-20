@@ -209,7 +209,7 @@ function! AsyncRunWith(commands)
 endfunction
 
 function! CMakeDebugWithTarget(target)
-    call AsyncRunWith($"-cwd=<root> cmake -S . -B build && cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug --target {a:target} .. && cp compile_commands.json .. && make {a:target}")
+    call AsyncRunWith($"-cwd=<root> cmake -S . -B .build -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug && mv .build/compile_commands.json . && make {a:target} -C .build")
 endfunction
 
 " :: AsyncRun with prompt
