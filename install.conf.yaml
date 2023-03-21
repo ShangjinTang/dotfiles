@@ -86,7 +86,7 @@
       force: true
       relative: false
       glob: true
-      if: '[[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch'
+      if: '[[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch || [[ -e /etc/arch-release ]]'
 - link:
     ~/bin/: linux/archlinux/bin/*
 
