@@ -29,6 +29,7 @@ class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
 def auto_complete_flags(flags):
     FLAG_PATTERN = {
         '-pthread': "pthread.h",
+        '-ldl': "dlfcn.h",
     }
     if which('rg'):
         for flag, pattern in FLAG_PATTERN.items():
