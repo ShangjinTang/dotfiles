@@ -30,6 +30,7 @@ def auto_complete_flags(flags):
     FLAG_PATTERN = {
         '-pthread': "pthread.h",
         '-fcoroutines': "coroutine",
+        '-ldl': "dlfcn.h",
         '-lgtest': "gtest/\S+",
         '-lgmock': "gmock/\S+",
         '-lfmt': "fmt/\S+",
