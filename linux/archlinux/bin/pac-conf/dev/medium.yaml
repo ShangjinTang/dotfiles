@@ -3,6 +3,7 @@ defaults:
 
 # ------------------------------
 cmake: true
+bear: true
 # ------------------------------
 # source code viewer
 cscope: true

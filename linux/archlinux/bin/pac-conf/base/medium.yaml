@@ -16,7 +16,7 @@ reflector: true
 tldr: true
 github-cli: true
 # ------------------------------
-p7zip
-zip
-unzip
+p7zip: true
+zip: true
+unzip: true
 # ------------------------------
