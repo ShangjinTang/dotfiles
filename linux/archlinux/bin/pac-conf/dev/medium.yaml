@@ -3,11 +3,12 @@ defaults:
 
 # ------------------------------
 cmake: true
-bear: true
+llvm: true
 # ------------------------------
 # source code viewer
 cscope: true
 ctags: true
+bear: true  # generate compile_commands.json
 # ------------------------------
 # debug tools
 cppcheck: true
