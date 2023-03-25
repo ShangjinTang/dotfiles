@@ -15,37 +15,38 @@ Checks:
 
 
 # Reference: https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
-CheckOptions:
- # Cases
-  # Constants
-  - key:             readability-identifier-naming.EnumConstantCase
-    value:           UPPER_CASE
-  - key:             readability-identifier-naming.GlobalConstantCase
-    value:           UPPER_CASE
-  - key:             readability-identifier-naming.StaticConstantCase
-    value:           UPPER_CASE
-  # Classes / Structs
-  - key:             readability-identifier-naming.ClassCase
-    value:           CamelCase
-  - key:             readability-identifier-naming.StructCase
-    value:           CamelCase
-  - key:             readability-identifier-naming.ClassMemberCase
-    value:           lower_case
-  # Others
-  - key:             readability-identifier-naming.ConstexprVariableCase
-    value:           UPPER_CASE
-  - key:             readability-identifier-naming.TemplateParameterCase
-    value:           CamelCase
-  - key:             readability-identifier-naming.NamespaceCase
-    value:           lower_case
-  - key:             readability-identifier-naming.VariableCase
-    value:           lower_case
-  - key:             readability-identifier-naming.FunctionCase
-    value:           lower_case
- # Class Member Suffix
-  - key:             readability-identifier-naming.ClassMemberSuffix
-    value:           _
-  - key:             readability-identifier-naming.ProtectedMemberSuffix
-    value:           _
-  - key:             readability-identifier-naming.PrivateMemberSuffix
-    value:           _
+# Note: default disable CheckOptions for open source projects have different case styles
+# CheckOptions:
+#  # Cases
+#   # Constants
+#   - key:             readability-identifier-naming.EnumConstantCase
+#     value:           UPPER_CASE
+#   - key:             readability-identifier-naming.GlobalConstantCase
+#     value:           UPPER_CASE
+#   - key:             readability-identifier-naming.StaticConstantCase
+#     value:           UPPER_CASE
+#   # Classes / Structs
+#   - key:             readability-identifier-naming.ClassCase
+#     value:           CamelCase
+#   - key:             readability-identifier-naming.StructCase
+#     value:           CamelCase
+#   - key:             readability-identifier-naming.ClassMemberCase
+#     value:           lower_case
+#   # Others
+#   - key:             readability-identifier-naming.ConstexprVariableCase
+#     value:           UPPER_CASE
+#   - key:             readability-identifier-naming.TemplateParameterCase
+#     value:           CamelCase
+#   - key:             readability-identifier-naming.NamespaceCase
+#     value:           lower_case
+#   - key:             readability-identifier-naming.VariableCase
+#     value:           lower_case
+#   - key:             readability-identifier-naming.FunctionCase
+#     value:           lower_case
+#  # Class Member Suffix
+#   - key:             readability-identifier-naming.ClassMemberSuffix
+#     value:           _
+#   - key:             readability-identifier-naming.ProtectedMemberSuffix
+#     value:           _
+#   - key:             readability-identifier-naming.PrivateMemberSuffix
+#     value:           _
