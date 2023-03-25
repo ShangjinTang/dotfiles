@@ -18,6 +18,7 @@ cscope.*
 tags
 # coc-clangd
 .clangd/
+.cache/
 compile_commands.json
 
 # use build for cmake, scons
@@ -27,7 +28,6 @@ build/
 bazel-*
 # scons
 .sconsign.dblite
-
 
 ######################################################################
 # macOS only
