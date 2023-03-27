@@ -198,7 +198,7 @@ let g:asyncrun_bell = 1
 let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', '.workspace', 'Cargo.toml']
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', '.workspace', 'Cargo.toml', 'compile_commands.json']
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
