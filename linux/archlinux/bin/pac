@@ -56,7 +56,7 @@ class ArchLinux():
             return None
         logging.debug(f"{packages_to_install=}")
         install_command = ' '.join(
-            ['sudo', 'pacman', '-Syu', *packages_to_install])
+            ['sudo', 'pacman', '-Sy', *packages_to_install])
         return install_command
 
     @staticmethod
@@ -148,6 +148,11 @@ def install(overrides: Optional[List[str]] = typer.Argument(None),
 @app.command()
 def clean_install(overrides: Optional[List[str]] = typer.Argument(None)):
     install(overrides=overrides, clean_install=True)
+
+
+@app.command()
+def upgrade():
+    os.system("sudo pacman -Syu")
 
 
 if __name__ == "__main__":
