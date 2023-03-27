@@ -123,4 +123,9 @@ abbr dcstart="docker-compose start"
 abbr dcstop="docker-compose stop"
 abbr dcrestart="docker-compose restart"
 
+#---------------------------------------------------------------------
+# cmake
+abbr cbuild="cmakebuild"
+abbr crun="cmakebuild -t run"
+
 ######################################################################
