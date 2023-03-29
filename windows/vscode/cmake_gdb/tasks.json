@@ -1,0 +1,44 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Create build with debug symbols and compdb",
+            "command": "/usr/bin/cmake",
+            "args": [
+                "-S",
+                ".",   // CMakeLists.txt location
+                "-B",
+                ".build",   // Build result directory
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
+                "&&",
+                "cp",
+                ".build/compile_commands.json",
+                "."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Launch cmake build",
+            "command": "/usr/bin/cmake",
+            "args": [
+                "--build",
+                "." // Build cache directory
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/.build" // Build result directory
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Create build with debug symbols and compdb"
+            ]
+        }
+    ],
+    "version": "2.0.0"
+}
