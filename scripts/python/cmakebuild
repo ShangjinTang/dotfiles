@@ -49,12 +49,12 @@ def main():
         merged_commands_list.append(compile_command)
         # Copy compile_commands.json to current directory
         if "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" in ARGS.flags:
-            copy_compdb_command = "mv {}/compile_commands.json .".format(
+            copy_compdb_command = "cp {}/compile_commands.json .".format(
                 ARGS.output)
             merged_commands_list.append(copy_compdb_command)
 
-    merged_commands_list.append("make {} -C {} -j {}".format(
-        ARGS.target, ARGS.output, ARGS.jobs))
+    merged_commands_list.append("cmake --build {} --target {} -j {}".format(
+        ARGS.output, ARGS.target, ARGS.jobs))
 
     # Get clean command (optional)
     if ARGS.clean_output:
