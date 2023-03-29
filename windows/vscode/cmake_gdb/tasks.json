@@ -26,7 +26,9 @@
             "command": "/usr/bin/cmake",
             "args": [
                 "--build",
-                "." // Build cache directory
+                ".",  // Build cache directory
+                "--config",
+                "Debug"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/.build" // Build result directory
