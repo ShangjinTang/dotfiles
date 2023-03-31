@@ -160,6 +160,7 @@ call plug#begin('~/.vim/plugged')
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
     else
         " tab completion plugin (conflict with coc)
         Plug 'ervandew/supertab'
@@ -337,6 +338,10 @@ nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
 set ttimeout
 set ttimeoutlen=0
 nnoremap <silent> <leader><leader> :FZF<CR>
+
+" fzf.vim
+" set floating window to right side
+let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.9, 'xoffset': 1, 'yoffset': 0.45} }
 
 " git shortcuts, starts with <leader>g
 " fzf
@@ -538,9 +543,14 @@ else
 
     " GoTo code navigation
     nmap <silent> <C-p> <Plug>(coc-definition)
-    nmap <silent> <C-\>t <Plug>(coc-type-definition)
-    nmap <silent> <C-\>i <Plug>(coc-implementation)
-    nmap <silent> <C-\>r <Plug>(coc-references)
+    " nmap <silent> gd <Plug>(coc-definition)
+    " nmap <silent> gy <Plug>(coc-type-definition)
+    " nmap <silent> gi <Plug>(coc-implementation)
+    " nmap <silent> gr <Plug>(coc-references)
+
+    " GoTo code preview
+    nmap <silent> <C-n> :call CocAction('jumpDefinition', v:false)<CR>
+    nmap <silent> <C-m> <Plug>(coc-references)
 
     " Use K to show documentation in preview window
     nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -652,6 +662,12 @@ else
     " yank
     nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
+    " coc-fzf
+    set mouse=a
+    let g:coc_fzf_preview = 'up:90%'
+    let g:coc_fzf_preview_fullscreen = 0
+    let g:coc_fzf_location_delay = 1  " fix auto jump to first line after close floating window
+    let g:coc_fzf_opts = []
 endif
 
 " ====================================================================
