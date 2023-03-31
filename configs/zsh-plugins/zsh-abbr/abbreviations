@@ -57,17 +57,28 @@ abbr gst="git status"
 # customized commands
 
 #---------------------------------------------------------------------
-# add 'i' for 'i'nteractive fzf commands
+# cscope + fzf
 
-abbr icsc="fzf_cscope_find_c"
-abbr icsd="fzf_cscope_find_d"
-abbr icsg="fzf_cscope_find_g"
-abbr icss="fzf_cscope_find_s"
-abbr iglf="fzf_git_log_follow"
-abbr igsh="fzf_git_show"
-abbr igst="fzf_git_status"
-abbr irg="fzf_rg"
-abbr iwd="fzf_wd"
+abbr csgen="fd -e cpp -e cc -e c -e hpp -e h > cscope.files && cscope -bkq"
+abbr csc="fzf_cscope_find_c"
+abbr csd="fzf_cscope_find_d"
+abbr csg="fzf_cscope_find_g"
+abbr css="fzf_cscope_find_s"
+
+#---------------------------------------------------------------------
+# git + fzf (override the the default configs)
+
+abbr glf="fzf_git_log_follow"
+abbr gsh="fzf_git_show"
+abbr gst="fzf_git_status"
+
+#---------------------------------------------------------------------
+# ... + fzf
+
+# interactive grep
+abbr rf="fzf_rg"
+# interactive cd to warp dir
+abbr wf="fzf_wd"
 
 #---------------------------------------------------------------------
 # rc / rcxx
