@@ -147,6 +147,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'honza/vim-snippets'
     " async run
     Plug 'skywind3000/asyncrun.vim'
+    Plug 'skywind3000/asynctasks.vim'
     Plug 'preservim/vimux'
     " generate tags
     Plug 'ludovicchabant/vim-gutentags'
