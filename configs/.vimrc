@@ -663,7 +663,6 @@ else
     nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
     " coc-fzf
-    set mouse=a
     let g:coc_fzf_preview = 'up:90%'
     let g:coc_fzf_preview_fullscreen = 0
     let g:coc_fzf_location_delay = 1  " fix auto jump to first line after close floating window
