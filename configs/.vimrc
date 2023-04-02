@@ -117,6 +117,8 @@ set term=screen-256color
 "   filename-modifiers: https://vimdoc.sourceforge.net/htmldoc/cmdline.html#filename-modifiers
 
 function! ExecuteWithCurrentFile(commands)
+    " 'silent': to prevent prompt 'Press ENTER or type command to continue'
+    " 'redraw': fix screen black after executing
     execute $"silent !{a:commands} %:p" | redraw!
 endfunction
 
@@ -326,6 +328,7 @@ endif
 " ====================================================================
 " ## Key Mappings (map & noremap)
 
+noremap <Space> <Nop>
 let mapleader = "\<Space>"
 
 " Set key to toggle number & relativenumber on/off
