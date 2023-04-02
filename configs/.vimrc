@@ -111,7 +111,14 @@ endif
 
 set term=screen-256color
 
+" ===================================================================
+" Generic Functions
+" Reference:
+"   filename-modifiers: https://vimdoc.sourceforge.net/htmldoc/cmdline.html#filename-modifiers
 
+function! ExecuteWithCurrentFile(commands)
+    execute $"silent !{a:commands} %:p" | redraw!
+endfunction
 
 " ====================================================================
 " ====================================================================
@@ -332,6 +339,9 @@ nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
 
 " source code plugins
+
+" vscode
+nnoremap <silent> <leader>c :call ExecuteWithCurrentFile("code")<CR>
 
 " fzf
 " disable timeout for slow close after <Esc>
