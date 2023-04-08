@@ -28,12 +28,13 @@ class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
 
 def auto_complete_flags(flags):
     FLAG_PATTERN = {
-        '-pthread': "pthread.h",
         '-fcoroutines': "coroutine",
+        '-lbenchmark': "benchmark/\S+",
         '-ldl': "dlfcn.h",
-        '-lgtest': "gtest/\S+",
-        '-lgmock': "gmock/\S+",
         '-lfmt': "fmt/\S+",
+        '-lgmock': "gmock/\S+",
+        '-lgtest': "gtest/\S+",
+        '-pthread': "pthread.h",
     }
     if which('rg'):
         for flag, pattern in FLAG_PATTERN.items():
