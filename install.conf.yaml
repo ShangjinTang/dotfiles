@@ -27,6 +27,8 @@
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
+    ~/.rcxxflags: configs/.rcxxflags
+    ~/.rcflags: configs/.rcflags
     ~/.clang-format: clang-configs/.clang-format
     ~/.clang-tidy: clang-configs/.clang-tidy
     ~/.ssh/: ssh/*

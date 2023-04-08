@@ -1,0 +1,11 @@
+# rcxx uses .rcxxflags in current or upper dirs
+-O0
+-g
+-std=c++20
+-fno-exceptions
+-Wall
+# -Werror
+-pedantic
+# -stdlib=libc++
+# -lc++abi
+# -fno-omit-frame-pointer

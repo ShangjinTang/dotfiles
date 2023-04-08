@@ -13,7 +13,7 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2022 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 __email__ = "shangjin.tang@gmail.com"
 
 ARGS = None
@@ -26,14 +26,30 @@ class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
     pass
 
 
-def auto_complete_flags(flags):
+def get_flag_list_from_file(flag_file):
+    home_dir = os.path.expanduser("~")
+    curr_dir = os.getcwd()
+    flag_list = list()
+    while True:
+        if os.path.isfile(os.path.join(curr_dir, flag_file)):
+            with open(os.path.join(curr_dir, flag_file)) as f:
+                flag_list = list(line.strip() for line in f.readlines()
+                                 if not line.strip().startswith("#"))
+                break
+        if curr_dir == home_dir:
+            break
+        curr_dir = os.path.dirname(curr_dir)
+    return flag_list
+
+
+def get_auto_complete_flag_list(flag_list):
     FLAG_PATTERN = {
         '-ldl': "dlfcn.h",
         '-pthread': "pthread.h",
     }
     if which('rg'):
         for flag, pattern in FLAG_PATTERN.items():
-            if flag not in flags:
+            if flag not in flag_list:
                 pattern_check_command = "rg '^#include.*<{}>'".format(pattern)
                 if ARGS.file:
                     pattern_check_command += ' ' + ' '.join(ARGS.file)
@@ -46,8 +62,8 @@ def auto_complete_flags(flags):
                 if retval == 0:
                     print("add auto-detected flag [magenta]'{}'[/magenta]".
                           format(flag, pattern))
-                    flags += " " + flag
-    return flags
+                    flag_list.append(flag)
+    return flag_list
 
 
 def main():
@@ -61,9 +77,12 @@ def main():
             raise Exception("Compiler clang and gcc are not found.")
         ARGS.compiler = "gcc"
 
-    ARGS.flags = auto_complete_flags(ARGS.flags)
+    flag_list = get_flag_list_from_file(ARGS.flag_file)
+    flag_list = get_auto_complete_flag_list(flag_list)
 
-    compile_command_list = [ARGS.compiler, ARGS.flags, '-o', ARGS.output]
+    compile_command_list = [
+        ARGS.compiler, " ".join(flag_list), '-o', ARGS.output
+    ]
 
     # Generate compile command
     if ARGS.file:
@@ -108,7 +127,11 @@ if __name__ == '__main__':
         default='clang',
         choices=['clang', 'gcc'],
         help="compiler to use; if clang is not installed, use gcc\n")
-    parser.add_argument('-f', '--flags', default="", help="compile flags\n")
+    parser.add_argument(
+        '-f',
+        '--flag_file',
+        default=".rcflags",
+        help="compile flag file (recursively find up to user home dir)\n")
     parser.add_argument('-o',
                         '--output',
                         default='a.out',
