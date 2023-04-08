@@ -81,19 +81,6 @@ abbr rf="fzf_rg"
 abbr wf="fzf_wd"
 
 #---------------------------------------------------------------------
-# rc / rcxx
-
-abbr rcg="rc --flags='-g'"
-abbr rcxxg="rcxx --flags='-g --std=c++20'"
-
-abbr rcxx20="rcxx --flags='--std=c++20'"
-abbr rcxx17="rcxx --flags='--std=c++17'"
-abbr rcxx14="rcxx --flags='--std=c++14'"
-abbr rcxx11="rcxx --flags='--std=c++11'"
-abbr rcxx03="rcxx --flags='--std=c++03'"
-abbr rcxx98="rcxx --flags='--std=c++98'"
-
-#---------------------------------------------------------------------
 # exa
 
 # default show modified time as `ls`; do not show hidden/ignored files
