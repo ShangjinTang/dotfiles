@@ -5,7 +5,7 @@ defaults:
 croc: true
 git-delta: true
 hexyl: true
-neofetch: false
+neofetch: true
 sd: true
 tig: true
 # ------------------------------
