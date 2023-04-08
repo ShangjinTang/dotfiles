@@ -3,13 +3,14 @@ defaults:
 
 # ------------------------------
 # build tools
-bazel: false
-scons: false
+bazel: true
+scons: true
 # ------------------------------
 # C++ third party library
-abseil-cpp: false
-fmt: false
-doctest: false
-gtest: false
-boost: false
+abseil-cpp: true
+fmt: true
+doctest: true
+gtest: true
+boost: true
+benchmark: true
 # ------------------------------
