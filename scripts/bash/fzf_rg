@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Switch between Ripgrep launcher mode (CTRL-R) and fzf filtering mode (CTRL-F)
+# Switch between ripgrep launcher mode (CTRL-G) and fzf filtering mode (CTRL-F)
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
 INITIAL_QUERY="${*:-}"
 
@@ -8,12 +8,12 @@ IFS=: read -ra selected < <(
   FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" \
   fzf --ansi \
       --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-      --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf > )+enable-search+clear-query+rebind(ctrl-r)" \
-      --bind "ctrl-r:unbind(ctrl-r)+change-prompt(1. ripgrep > )+disable-search+reload($RG_PREFIX {q} || true)+rebind(change,ctrl-f)" \
+      --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf > )+enable-search+clear-query+rebind(ctrl-g)" \
+      --bind "ctrl-g:unbind(ctrl-g)+change-prompt(1. ripgrep > )+disable-search+reload($RG_PREFIX {q} || true)+rebind(change,ctrl-f)" \
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --delimiter : \
       --disabled \
-      --header 'CTRL-R (ripgrep)  |  CTRL-F (fzf)' \
+      --header 'CTRL-G (ripgrep)  |  CTRL-F (fzf)' \
       --prompt '1. ripgrep > ' \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,75%,border-bottom,~3,+{2}+3/4' \
