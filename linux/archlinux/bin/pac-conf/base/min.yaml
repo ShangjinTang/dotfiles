@@ -16,6 +16,7 @@ sshpass: true
 wget: true
 xclip: true
 curl: true
+inetutils: true
 # ------------------------------
 python: true
 python-pip: true
