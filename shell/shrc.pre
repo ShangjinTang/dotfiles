@@ -300,7 +300,7 @@ fi
 # fzf
 # Reference: https://man.archlinux.org/man/community/fzf/fzf.1.en
 if command -v fzf &> /dev/null; then
-    export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,alt-enter:toggle-preview"
+    export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview"
 fi
 
 ######################################################################
