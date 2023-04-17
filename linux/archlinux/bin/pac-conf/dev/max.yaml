@@ -3,16 +3,16 @@ defaults:
 
 # ------------------------------
 # bazel
-bazel: false
-libxcrypt-compat: false
+bazel: true
+libxcrypt-compat: true
 # ------------------------------
 # scons
-scons: false
+scons: true
 # ------------------------------
 # C++ third party library
 abseil-cpp: true
 benchmark: true
-boost: false
+boost: true
 doctest: true
 fmt: true
 gtest: true

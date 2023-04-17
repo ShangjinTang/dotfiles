@@ -127,6 +127,8 @@ abbr dcrestart="docker-compose restart"
 # pac
 abbr paci="pac install"
 abbr pacu="pac upgrade"
+abbr vpacbase="vim ~/bin/pac-conf/base/{min,medium,max}.yaml"
+abbr vpacdev="vim ~/bin/pac-conf/dev/{min,medium,max}.yaml"
 
 #---------------------------------------------------------------------
 # cmake
