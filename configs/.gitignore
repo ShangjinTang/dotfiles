@@ -29,6 +29,9 @@ bazel-*
 # scons
 .sconsign.dblite
 
+# python cache
+__pycache__
+
 ######################################################################
 # macOS only
 
