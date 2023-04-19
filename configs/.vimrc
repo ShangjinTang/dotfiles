@@ -262,6 +262,7 @@ if $VIM_CODEFMT_ENABLE == 1
     Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/configs/vim-plugins/vim-codefmt/google-java-format.jar --aosp')`
     augroup autoformat_settings
         autocmd!
+        " execute 'go install github.com/bazelbuild/buildtools/buildifier@latest'
         autocmd FileType bzl AutoFormatBuffer buildifier
         autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
         autocmd FileType dart AutoFormatBuffer dartfmt
@@ -269,8 +270,8 @@ if $VIM_CODEFMT_ENABLE == 1
         autocmd FileType gn AutoFormatBuffer gn
         autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
         autocmd FileType java AutoFormatBuffer google-java-format
-        autocmd FileType python AutoFormatBuffer yapf
         " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+        autocmd FileType python AutoFormatBuffer yapf
         autocmd FileType rust AutoFormatBuffer rustfmt
         autocmd FileType vue AutoFormatBuffer prettier
         autocmd FileType swift AutoFormatBuffer swift-format

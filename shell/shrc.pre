@@ -129,6 +129,7 @@ _PATHAPPEND() {
 }
 _PATHAPPEND "$HOME/bin"
 _PATHAPPEND "$HOME/.local/bin"
+_PATHAPPEND "$HOME/go/bin"
 
 #=====================================================================
 # fuctions for command line use
