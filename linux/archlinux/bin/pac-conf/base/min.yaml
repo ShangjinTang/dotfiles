@@ -8,7 +8,7 @@ git: true
 vim: true
 zsh: true
 # ------------------------------
-archlinux-keyring: true
+archlinux-keyring: true  # Solve "error: required key missing from keyring"
 mandoc: true
 net-tools: true
 openssh: true
@@ -16,7 +16,7 @@ sshpass: true
 wget: true
 xclip: true
 curl: true
-inetutils: true
+inetutils: true  # telnet
 # ------------------------------
 python: true
 python-pip: true
