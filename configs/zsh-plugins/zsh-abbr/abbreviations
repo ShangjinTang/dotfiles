@@ -66,11 +66,11 @@ abbr csg="fzf_cscope_find_g"
 abbr css="fzf_cscope_find_s"
 
 #---------------------------------------------------------------------
-# git + fzf (override the the default configs)
+# git + fzf (TODO: find better names)
 
-abbr glf="fzf_git_log_follow"
-abbr gsh="fzf_git_show"
-abbr gst="fzf_git_status"
+abbr gglf="fzf_git_log_follow"
+abbr ggsh="fzf_git_show"
+abbr ggst="fzf_git_status"
 
 #---------------------------------------------------------------------
 # ... + fzf
@@ -127,8 +127,8 @@ abbr dcrestart="docker-compose restart"
 # pac
 abbr paci="pac install"
 abbr pacu="pac upgrade"
-abbr vpacbase="vim ~/bin/pac-conf/base/{min,medium,max}.yaml"
-abbr vpacdev="vim ~/bin/pac-conf/dev/{min,medium,max}.yaml"
+abbr vpacbase="vim ~/.dotfiles/linux/archlinux/bin/pac-conf/base/{min,medium,max}.yaml"
+abbr vpacdev="vim ~/.dotfiles/linux/archlinux/bin/pac-conf/dev/{min,medium,max}.yaml"
 
 #---------------------------------------------------------------------
 # cmake
