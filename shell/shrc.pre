@@ -249,6 +249,9 @@ alias v='vim'
 alias vv='vim ~/.vimrc'
 alias vs="vim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
+# spacemacs
+alias s='emacsclient -nw -c'
+
 # git
 alias g='git'
 alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
