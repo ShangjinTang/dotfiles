@@ -52,3 +52,9 @@
 	branch = master
 	update = rebase
 	ignore = dirty
+[submodule "submodules/spacemacs"]
+	path = submodules/spacemacs
+	url = https://github.com/syl20bnr/spacemacs
+	branch = master
+	update = rebase
+	ignore = dirty
