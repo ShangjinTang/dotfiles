@@ -67,7 +67,7 @@ set encoding=utf-8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in git anyway...
 set nobackup
 set nowb
 set noswapfile
@@ -75,9 +75,9 @@ set noswapfile
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
+    set wildignore+=.git\*
 else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+    set wildignore+=*/.git/*,*/.DS_Store
 endif
 
 " No annoying sound on errors
@@ -162,6 +162,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ludovicchabant/vim-gutentags'
     " switch between header and source file
     Plug 'ericcurtin/CurtineIncSw.vim'
+    " project rooter
+    Plug 'airblade/vim-rooter'
     " startup time
     Plug 'dstein64/vim-startuptime'
     " start screen
@@ -209,7 +211,7 @@ let g:asyncrun_bell = 1
 let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.project', '.workspace', 'Cargo.toml', 'compile_commands.json']
+let g:asyncrun_rootmarks = ['.git', '.root', '.project', '.projectile', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
@@ -283,6 +285,10 @@ endif
 map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
+" ### vim-rooter
+let g:rooter_patterns = ['.git', '.root', '.project', '.projectile', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
+
+" ----------------------------------------------------------
 " ### ctags / gutentags / cscope
 
 " ctags
@@ -290,7 +296,7 @@ map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 set tags=./tags,tags;$HOME
 
 " gutentags
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project', '.workspace']
+let g:gutentags_project_root = ['.git', '.root', '.project', '.projectile', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
 let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
