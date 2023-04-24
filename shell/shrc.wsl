@@ -3,6 +3,13 @@ export PROXY_IP="$(cat /etc/resolv.conf |grep nameserver |cut -f 2 -d ' '):1080"
 
 # clip.exe required by copybuffer/copyfile/copypath
 _PATHAPPEND "/mnt/c/Windows/SysWOW64"
+# Fix copybuffer/copyfile/copypath not copy to system clipboard inside TMUX in WSL
+clipcopy () {
+    # copy to tmux clipboard; using <Prefix> Ctrl-p to paste
+    [ -n "$TMUX" ] && tmux load-buffer "${1:--}"
+    # copy to system clipboard
+    clip.exe < "${1:-/dev/stdin}"
+}
 
 if ! command -v code &> /dev/null; then
     _PATHAPPEND "/mnt/c/Program Files/Microsoft VS Code/bin"
