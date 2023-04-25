@@ -244,13 +244,26 @@ fi
 # rg
 alias rg='rg --smart-case'
 
-# vim
+# vim -> v
 alias v='vim'
 alias vv='vim ~/.vimrc'
 alias vs="vim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
-# spacemacs
-alias s='emacsclient -nw -c'
+# spacemacs / emacs -> e
+alias e='emacs -nw'
+alias ee='e ~/.spacemacs'
+
+# exa -> a
+alias exa='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
+alias a='exa'
+alias aa='exa --all'
+alias asort='exa --sort=modified'
+alias at='exa --tree'
+alias a1='exa -1'
+alias a2='exa --tree --level=2'
+alias a3='exa --tree --level=3'
+alias a4='exa --tree --level=4'
+alias a5='exa --tree --level=5'
 
 # git
 alias g='git'

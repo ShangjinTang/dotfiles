@@ -81,24 +81,6 @@ abbr rf="fzf_rg"
 abbr wf="fzf_wd"
 
 #---------------------------------------------------------------------
-# exa
-
-# default show modified time as `ls`; do not show hidden/ignored files
-abbr e='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
-# show [A]ll files (hidden/ignored files)
-abbr ea='exa --long --group-directories-first --time-style=long-iso --git --classify --modified --all'
-# sort by [M]odified
-abbr em='exa --long --group-directories-first --time-style=long-iso --git --classify --header --modified --sort=modified'
-# sort by [C]reated
-abbr ec='exa --long --group-directories-first --time-style=long-iso --git --classify --header --created --sort=created'
-# tree level
-abbr et='exa --group-directories-first --time-style=long-iso --git --tree'
-abbr e1='exa --group-directories-first --time-style=long-iso --git -1'
-abbr e2='exa --group-directories-first --time-style=long-iso --git --tree --level=2'
-abbr e3='exa --group-directories-first --time-style=long-iso --git --tree --level=3'
-abbr e4='exa --group-directories-first --time-style=long-iso --git --tree --level=4'
-
-#---------------------------------------------------------------------
 # rsync
 
 abbr rs="rsync -avzhP"
