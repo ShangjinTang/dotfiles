@@ -3,9 +3,13 @@
 " ====================================================================
 " ====================================================================
 " ## General Settings
+
+noremap <Space> <Nop>
+let mapleader = "\<Space>"
+
 filetype indent on              " Enable filetype indent.
 filetype plugin on              " Enable filetype plugin.
-set history=1000                " Sets how many lines of history VIM has to remember.
+set history=1000                " Sets how many lines of history VIM has to remember
 syntax enable
 
 " ### Indent, tab, and spaces
@@ -20,8 +24,7 @@ set shiftround                 " >> indents to next multiple of 'shiftwidth'.
 set cursorline                 " Find the current line quickly.
 set display=lastline           " Show as much as possible of the last line.
 " set list                       " Show non-printable characters.
-set matchtime=1                " Tenths of a second to show the matching parent.
-set number                     " Show current line number on the left.
+set matchtime=1                " Tenths of a second to show the matching parent.  set number                     " Show current line number on the left.
 set relativenumber             " Show relative line number of above/below lines on the left.
 set showmatch                  " Show matching brackets when text indicator is over them.
 set so=7                       " Lines padding to bottom/top while moving with j/k.
@@ -239,7 +242,7 @@ endfunction
 augroup asyncrun
     autocmd!
     " Async Command Line
-    nnoremap <C-\>: :call AsyncRunWith("")<Left><Left>
+    nnoremap <leader>as :call AsyncRunWith("")<Left><Left>
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
     autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILEPATH) --clean_output")<CR>
@@ -297,7 +300,7 @@ let g:rooter_manual_only = 1
 
 " ### CtrlSpace
 " ----------------------------------------------------------
-let g:CtrlSpaceDefaultMappingKey = ", "
+let g:CtrlSpaceDefaultMappingKey = "<F12> "
 let g:CtrlSpaceProjectRootMarkers = projectroot
 
 " ----------------------------------------------------------
@@ -347,9 +350,6 @@ endif
 " ====================================================================
 " ## Key Mappings (map & noremap)
 
-noremap <Space> <Nop>
-let mapleader = "\<Space>"
-
 " Set key to toggle number & relativenumber on/off
 noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
 
@@ -363,7 +363,7 @@ nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
 " source code plugins
 
 " vscode
-nnoremap <silent> <leader>c :call ExecuteWithCurrentFile("code")<CR>
+nnoremap <silent> <C-o>c :call ExecuteWithCurrentFile("code")<CR>
 
 " fzf
 " add ignore filter
@@ -586,8 +586,8 @@ else
     " nmap <silent> gr <Plug>(coc-references)
 
     " GoTo code preview
-    nmap <silent> <C-n> :call CocAction('jumpDefinition', v:false)<CR>
-    nmap <silent> <C-m> <Plug>(coc-references)
+    " nmap <silent> <C-n> :call CocAction('jumpDefinition', v:false)<CR>
+    " nmap <silent> <C-m> <Plug>(coc-references)
 
     " Use K to show documentation in preview window
     nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -603,12 +603,12 @@ else
     " Highlight the symbol and its references when holding the cursor
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    " Symbol renaming
-    nmap <C-\>rn <Plug>(coc-rename)
+    " Rename Symbol
+    nmap <leader>rs <Plug>(coc-rename)
 
     " Formatting selected code
-    xmap <C-\>f  <Plug>(coc-format-selected)
-    nmap <C-\>f  <Plug>(coc-format-selected)
+    xmap <leader>fmt <Plug>(coc-format-selected)
+    nmap <leader>fmt <Plug>(coc-format-selected)
 
     augroup mygroup
         autocmd!
@@ -619,24 +619,22 @@ else
     augroup end
 
     " Applying code actions to the selected code block
-    " Example: `<C-\>aap` for current paragraph
-    xmap <C-\>a  <Plug>(coc-codeaction-selected)
-    nmap <C-\>a  <Plug>(coc-codeaction-selected)
+    " Example: `<mapkey> + ap` for current paragraph
+    " xmap <leader>a  <Plug>(coc-codeaction-selected)
+    " nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-    " Remap keys for applying code actions at the cursor position
-    nmap <C-\>ac  <Plug>(coc-codeaction-cursor)
-    " Remap keys for apply code actions affect whole buffer
-    nmap <C-\>as  <Plug>(coc-codeaction-source)
-    " Apply the most preferred quickfix action to fix diagnostic on the current line
-    nmap <C-\>q  <Plug>(coc-fix-current)
+    " Code-Fix-Prompt: Remap keys for applying code actions at the cursor position
+    nmap <leader>cfp  <Plug>(coc-codeaction-cursor)
+    " Code-Fix: Apply the most preferred quickfix action to fix diagnostic on the current line
+    nmap <leader>cf  <Plug>(coc-fix-current)
 
     " Remap keys for applying refactor code actions
-    nmap <silent> <C-\>re <Plug>(coc-codeaction-refactor)
-    xmap <silent> <C-\>r  <Plug>(coc-codeaction-refactor-selected)
-    nmap <silent> <C-\>r  <Plug>(coc-codeaction-refactor-selected)
+    " nmap <silent> <C-\>re <Plug>(coc-codeaction-refactor)
+    " xmap <silent> <C-\>r  <Plug>(coc-codeaction-refactor-selected)
+    " nmap <silent> <C-\>r  <Plug>(coc-codeaction-refactor-selected)
 
-    " Run the Code Lens action on the current line
-    nmap <C-\>l  <Plug>(coc-codelens-action)
+    " " Run the Code Lens action on the current line
+    " nmap <C-\>l  <Plug>(coc-codelens-action)
 
     " Map function and class text objects
     " NOTE: Requires 'textDocument.documentSymbol' support from the language server
@@ -680,21 +678,21 @@ else
 
     " Mappings for CoCList
     " Show all diagnostics
-    nnoremap <silent><nowait> <C-\>d  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
     " Manage extensions
-    nnoremap <silent><nowait> <C-\>e  :<C-u>CocList extensions<cr>
+    nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
     " Show commands
-    nnoremap <silent><nowait> <C-\>c  :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent><nowait> <C-\>o  :<C-u>CocList outline<cr>
+    nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+    " Find symbol of current file
+    nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
     " Search workspace symbols
-    nnoremap <silent><nowait> <C-\>s  :<C-u>CocList -I symbols<cr>
+    nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
     " Do default action for next item
-    nnoremap <silent><nowait> <C-\>n  :<C-u>CocNext<CR>
+    nnoremap <silent><nowait> <leader>cn  :<C-u>CocNext<CR>
     " Do default action for previous item
-    nnoremap <silent><nowait> <C-\>N  :<C-u>CocPrev<CR>
+    nnoremap <silent><nowait> <leader>cp  :<C-u>CocPrev<CR>
     " Resume latest coc list
-    nnoremap <silent><nowait> <C-\>p  :<C-u>CocListResume<CR>
+    nnoremap <silent><nowait> <leader>cr  :<C-u>CocListResume<CR>
 
     " yank
     nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
