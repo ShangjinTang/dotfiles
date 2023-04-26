@@ -53,7 +53,7 @@ source -q ~/.tmux.conf.theme
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'laktak/extrakto'
+# set -g @plugin 'laktak/extrakto'
 set -g @extrakto_split_direction "v"
 set -g @extrakto_open_tool "cd"
 
