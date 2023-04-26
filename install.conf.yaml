@@ -33,12 +33,6 @@
     ~/.clang-tidy: clang-configs/.clang-tidy
     ~/.ssh/: ssh/*
     # conditional configs
-    ~/.emacs.d:
-      if: 'command -v emacs'
-      path: submodules/spacemacs
-    ~/.spacemacs:
-      if: 'command -v emacs'
-      path: configs/.spacemacs
     ~/.tigrc:
       if: 'command -v tig'
       path: configs/.tigrc
