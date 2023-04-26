@@ -61,6 +61,9 @@ set nrformats=bin,hex          " Do not recognize 0.. as octal number for comman
 
 " ----------------------------------------------------------
 
+" Set root for project
+let projectroot = ['.git', '.root', '.project', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf-8
 
@@ -164,6 +167,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ericcurtin/CurtineIncSw.vim'
     " project rooter
     Plug 'airblade/vim-rooter'
+    " project manager
+    Plug 'vim-ctrlspace/vim-ctrlspace'
     " startup time
     Plug 'dstein64/vim-startuptime'
     " start screen
@@ -211,7 +216,7 @@ let g:asyncrun_bell = 1
 let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
-let g:asyncrun_rootmarks = ['.git', '.root', '.project', '.projectile', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
+let g:asyncrun_rootmarks = projectroot
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
@@ -286,7 +291,14 @@ map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
 " ### vim-rooter
-let g:rooter_patterns = ['.git', '.root', '.project', '.projectile', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
+let g:rooter_patterns = projectroot
+let g:rooter_manual_only = 1
+" let g:rooter_silent_chdir = 1
+
+" ### CtrlSpace
+" ----------------------------------------------------------
+let g:CtrlSpaceDefaultMappingKey = ", "
+let g:CtrlSpaceProjectRootMarkers = projectroot
 
 " ----------------------------------------------------------
 " ### ctags / gutentags / cscope
@@ -296,7 +308,7 @@ let g:rooter_patterns = ['.git', '.root', '.project', '.projectile', '.workspace
 set tags=./tags,tags;$HOME
 
 " gutentags
-let g:gutentags_project_root = ['.git', '.root', '.project', '.projectile', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
+let g:gutentags_project_root = projectroot
 let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
@@ -354,10 +366,15 @@ nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
 nnoremap <silent> <leader>c :call ExecuteWithCurrentFile("code")<CR>
 
 " fzf
+" add ignore filter
+let $FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.cache,.vscode,.build,.clangd,build,bazel-*}/*' --glob '!{.cs_files,.project,.root,.workspace,compile_commands.json,cscope.*}' 2> /dev/null"
 " disable timeout for slow close after <Esc>
 set ttimeout
 set ttimeoutlen=0
-nnoremap <silent> <leader><leader> :FZF<CR>
+" mappings
+nnoremap <silent> <leader>ff :FZF<CR>
+nnoremap <silent> <leader>pf :execute ':FZF '.FindRootDirectory()<CR>
+
 
 " fzf.vim
 " set floating window to right side
