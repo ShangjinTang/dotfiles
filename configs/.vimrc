@@ -6,6 +6,7 @@
 
 noremap <Space> <Nop>
 let mapleader = "\<Space>"
+set timeoutlen=300
 
 filetype indent on              " Enable filetype indent.
 filetype plugin on              " Enable filetype plugin.
@@ -189,6 +190,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'dstein64/vim-startuptime'
     " start screen
     Plug 'mhinz/vim-startify'
+    " which key
+    Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -339,6 +342,13 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer({
 " ### CtrlSpace
 let g:CtrlSpaceDefaultMappingKey = "<F12> "
 let g:CtrlSpaceProjectRootMarkers = projectroot
+
+" ----------------------------------------------------------
+" ### vim-which-key
+" Reference: https://github.com/liuchengxu/vim-which-key
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
 " ----------------------------------------------------------
 " ### ctags / gutentags / cscope
