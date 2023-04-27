@@ -172,6 +172,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-rooter'
     " project manager
     Plug 'vim-ctrlspace/vim-ctrlspace'
+    " wilder in command line bar
+    Plug 'gelguy/wilder.nvim'
+        Plug 'roxma/nvim-yarp'
+        " requires "pip3 install pynvim"
+        Plug 'roxma/vim-hug-neovim-rpc'
     " startup time
     Plug 'dstein64/vim-startuptime'
     " start screen
@@ -293,13 +298,36 @@ endif
 map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
-" ### vim-rooter
+" ### vim-rooter (Use :Rooter to toggle switch to root)
 let g:rooter_patterns = projectroot
 let g:rooter_manual_only = 1
 " let g:rooter_silent_chdir = 1
 
-" ### CtrlSpace
 " ----------------------------------------------------------
+" ### wilder
+call wilder#setup({'modes': [':', '/', '?']})
+call wilder#set_option('pipeline', [
+      \   wilder#branch(
+      \     wilder#cmdline_pipeline({
+      \       'language': 'python',
+      \       'fuzzy': 1,
+      \     }),
+      \     wilder#python_search_pipeline({
+      \       'pattern': wilder#python_fuzzy_pattern(),
+      \       'sorter': wilder#python_difflib_sorter(),
+      \       'engine': 're',
+      \     }),
+      \   ),
+      \ ])
+call wilder#set_option('renderer', wilder#popupmenu_renderer({
+      \ 'highlighter': wilder#basic_highlighter(),
+      \ 'highlights': {
+      \   'accent': wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#f4468f'}]),
+      \ },
+      \ }))
+
+" ----------------------------------------------------------
+" ### CtrlSpace
 let g:CtrlSpaceDefaultMappingKey = "<F12> "
 let g:CtrlSpaceProjectRootMarkers = projectroot
 
