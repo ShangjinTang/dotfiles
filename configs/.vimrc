@@ -579,7 +579,7 @@ else
     " ----------------------------------------------------------
     " ### coc
 
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp', 'coc-clangd', 'coc-java', 'coc-python', 'coc-sh', 'coc-cmake', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-rust-analyzer']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp', 'coc-clangd', 'coc-java', 'coc-pyright', 'coc-sh', 'coc-cmake', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-rust-analyzer', 'coc-markdownlint']
 
     set updatetime=100
 
