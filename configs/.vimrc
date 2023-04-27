@@ -255,7 +255,8 @@ endfunction
 augroup asyncrun
     autocmd!
     " Async Command Line
-    nnoremap <leader>as :call AsyncRunWith("")<Left><Left>
+    nnoremap <leader>a :call AsyncRunWith("")<Left><Left>
+    nnoremap <leader>aq :VimuxCloseRunner<CR>
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
     autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILEPATH) --clean_output")<CR>
