@@ -618,7 +618,24 @@ else
     " ----------------------------------------------------------
     " ### coc
 
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp', 'coc-clangd', 'coc-java', 'coc-pyright', 'coc-sh', 'coc-cmake', 'coc-snippets', 'coc-pairs', 'coc-yank', 'coc-rust-analyzer', 'coc-markdownlint']
+    let g:coc_global_extensions = [
+        \ 'coc-vimlsp',
+        \ 'coc-clangd',
+        \ 'coc-cmake',
+        \ 'coc-java',
+        \ 'coc-pyright',
+        \ 'coc-sh',
+        \ 'coc-rust-analyzer',
+        \ 'coc-tsserver',
+        \ 'coc-yaml',
+        \ 'coc-json',
+        \ 'coc-xml',
+        \ 'coc-toml',
+        \ 'coc-markdownlint',
+        \ 'coc-snippets',
+        \ 'coc-pairs',
+        \ 'coc-yank'
+        \ ]
 
     set updatetime=100
 
