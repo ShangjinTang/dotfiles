@@ -117,6 +117,11 @@ endif
 
 set term=screen-256color
 
+" Persistent Undo
+" Note: directory must be created before use.
+set undodir=~/.cache/vim/undo
+set undofile
+
 " ===================================================================
 " Generic Functions
 " Reference:
@@ -130,6 +135,9 @@ endfunction
 
 " ====================================================================
 " ====================================================================
+"
+"oo
+"
 " ## Plugins
 " ## vim-plug from https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
