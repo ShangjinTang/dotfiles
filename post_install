@@ -33,6 +33,14 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
     fi
 fi
 
+# vim requirements
+if command -v pip3 &> /dev/null; then
+    pip3 install pynvim > /dev/null
+fi
+if [ ! -d ~/.cache/vim/undo ]; then
+    mkdir -p ~/.cache/vim/undo
+fi
+
 function apply_diff_for_submodule() {
     local target_folder=./submodules/$1
     local diff_list=(./submodules_diff/$1/*.diff)
@@ -48,4 +56,4 @@ function apply_diff_for_submodule() {
         done
     fi
 }
-apply_diff_for_submodule fzf
+apply_diff_for_submodule fzf > /dev/null
