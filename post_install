@@ -26,12 +26,12 @@ if [ -d ~/.dotfiles.local ]; then
 fi
 
 # copy files from to Windows Drive C:\
-if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
-    rm -rf /mnt/c/.dotfiles &> /dev/null
-    if [ ! -f /mnt/c/.dotfiles ]; then
-        cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
-    fi
-fi
+# if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+#     rm -rf /mnt/c/.dotfiles &> /dev/null
+#     if [ ! -f /mnt/c/.dotfiles ]; then
+#         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
+#     fi
+# fi
 
 # vim requirements
 if command -v pip3 &> /dev/null; then
