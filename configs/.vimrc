@@ -25,7 +25,8 @@ set shiftround                 " >> indents to next multiple of 'shiftwidth'.
 set cursorline                 " Find the current line quickly.
 set display=lastline           " Show as much as possible of the last line.
 " set list                       " Show non-printable characters.
-set matchtime=1                " Tenths of a second to show the matching parent.  set number                     " Show current line number on the left.
+set matchtime=1                " Tenths of a second to show the matching parent.
+set number                     " Show current line number on the left.
 set relativenumber             " Show relative line number of above/below lines on the left.
 set showmatch                  " Show matching brackets when text indicator is over them.
 set so=7                       " Lines padding to bottom/top while moving with j/k.
@@ -113,7 +114,7 @@ endif
 
 " vim patch 7.4.1799 support termguicolors (true color)
 if has("termguicolors")
-    " set termguicolors
+    set termguicolors
 endif
 
 set term=screen-256color
@@ -136,62 +137,60 @@ endfunction
 
 " ====================================================================
 " ====================================================================
-"
-"oo
-"
 " ## Plugins
-" ## vim-plug from https://github.com/junegunn/vim-plug
+" Reference: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
-    " status bar plugins
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'arcticicestudio/nord-vim'
+    " --------------------------------------------------
+    " airline (status bar) & themes
+    Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+    " vim themes
+    Plug 'arcticicestudio/nord-vim' | Plug 'NLKNguyen/papercolor-theme'
+    " bracket highlighting
+    Plug 'luochen1990/rainbow'
+    " --------------------------------------------------
     " git plugins
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
-    " fzf plugins
-    Plug 'junegunn/fzf'
-    Plug 'junegunn/fzf.vim'
-    " bookmark plugin
+    " --------------------------------------------------
+    " fuzzy finder
+    Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
+    " --------------------------------------------------
+    " project management
     Plug 'MattesGroeger/vim-bookmarks'
-    " comment plugin
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-surround'
+    Plug 'airblade/vim-rooter'
+    Plug 'vim-ctrlspace/vim-ctrlspace'
+    " --------------------------------------------------
     " use same keys navigate between tmux/vim
     Plug 'christoomey/vim-tmux-navigator'
-    " bracket highlighting
-    Plug 'luochen1990/rainbow'
-    " theme plugin
-    Plug 'NLKNguyen/papercolor-theme'
+    " async run (with tmux)
+    Plug 'skywind3000/asyncrun.vim' | Plug 'skywind3000/asynctasks.vim' | Plug 'preservim/vimux'
+    " --------------------------------------------------
+    " comment plugins
+    Plug 'tpope/vim-commentary' | Plug 'tpope/vim-surround'
+    " --------------------------------------------------
     " google code format
-    Plug 'google/vim-maktaba'
-    Plug 'google/vim-codefmt'
-    Plug 'google/vim-glaive'
-    " snippets
-    Plug 'honza/vim-snippets'
-    " async run
-    Plug 'skywind3000/asyncrun.vim'
-    Plug 'skywind3000/asynctasks.vim'
-    Plug 'preservim/vimux'
+    Plug 'google/vim-codefmt' | Plug 'google/vim-maktaba' | Plug 'google/vim-glaive'
     " generate tags
     Plug 'ludovicchabant/vim-gutentags'
-    " switch between header and source file
-    Plug 'ericcurtin/CurtineIncSw.vim'
-    " project rooter
-    Plug 'airblade/vim-rooter'
-    " project manager
-    Plug 'vim-ctrlspace/vim-ctrlspace'
-    " wilder in command line bar
-    Plug 'gelguy/wilder.nvim'
-        Plug 'roxma/nvim-yarp'
-        " requires "pip3 install pynvim"
-        Plug 'roxma/vim-hug-neovim-rpc'
-    " startup time
+    " snippets
+    Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
+    " switch between c/c++ header & source file
+    Plug 'ericcurtin/CurtineIncSw.vim', { 'for': ['c','cpp'] }
+    " --------------------------------------------------
+    " wilder in command line bar (requires: `pip3 install pynvim`)
+    Plug 'gelguy/wilder.nvim' | Plug 'roxma/nvim-yarp' | Plug 'roxma/vim-hug-neovim-rpc'
+    " --------------------------------------------------
+    " debugging for startup slow
     Plug 'dstein64/vim-startuptime'
+    " --------------------------------------------------
     " start screen
     Plug 'mhinz/vim-startify'
+    " --------------------------------------------------
     " which key
     Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+    " --------------------------------------------------
+    " " vim color generator
+    " Plug 'lifepillar/vim-colortemplate'
     " coc code completion
     if $VIM_COC_ENABLE == 1
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -307,7 +306,8 @@ endif
 
 " ----------------------------------------------------------
 " ### CurtineIncSw
-map <silent> <C-\><C-o> :call CurtineIncSw()<CR>
+" ,: language specific; is: Include Switch
+autocmd FileType c,cpp map <silent> ,is :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
 " ### vim-rooter (Use :Rooter to toggle switch to root)
@@ -398,14 +398,20 @@ endif
 " ## Key Mappings (map & noremap)
 
 " Set key to toggle number & relativenumber on/off
-noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
+" noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
+
+" vim
+nnoremap <silent> <leader>fe :e $MYVIMRC<CR>     " Edit vimrc
+nnoremap <silent> <leader>fR :so $MYVIMRC<CR>     " Reload vim without restart
 
 " vim buffer
 nnoremap <silent> <leader>q :qa!<CR>     " Quit vim (close all buffers)
 nnoremap <silent> <leader>w :bd<CR>      " Close current buffer
-nnoremap <silent> <leader><Tab> :b#<CR>  " Switch between current buffer and previous buffer
+nnoremap <silent> <leader>b<Tab> :b#<CR>  " Switch between current buffer and previous buffer
 nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
+nnoremap <silent> <leader>bp :bp<CR>      " Switch to previous buffer
 nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
+nnoremap <silent> <leader>bn :bn<CR>      " Switch to next buffer
 
 " source code plugins
 
@@ -418,18 +424,39 @@ let $FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.gi
 " disable timeout for slow close after <Esc>
 set ttimeout
 set ttimeoutlen=0
-" mappings
-nnoremap <silent> <leader>ff :FZF<CR>
+" Rg
+nnoremap <silent> <leader>rg :Rg<CR>
+" Help
+nnoremap <silent> <leader>H :Helptags<CR>
+" Project/Folder File search & open
 nnoremap <silent> <leader>pf :execute ':FZF '.FindRootDirectory()<CR>
-
+nnoremap <silent> <leader>ff :FZF<CR>
+" Project/Buffer Search
+nnoremap <silent> <leader>ps :Lines<CR>
+nnoremap <silent> <leader>bs :BLines<CR>
+" Project/Buffer Tag search
+nnoremap <silent> <leader>pt :Tags<CR>
+nnoremap <silent> <leader>bt :BTags<CR>
+" Buffer Switch
+nnoremap <silent> <leader>bb :Buffers<CR>
 
 " fzf.vim
-" set floating window to right side
-let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.9, 'xoffset': 1, 'yoffset': 0.45} }
+" set floating window
+if exists('$TMUX')
+    let g:fzf_layout = { 'tmux': '-r40%' }
+else
+    let g:fzf_layout = { 'window': { 'width': 0.4, 'height': 0.9, 'xoffset': 1, 'yoffset': 0.45} }
+endif
+let g:fzf_preview_window = ['up,80%', 'ctrl-/']
 
 " git shortcuts, starts with <leader>g
 " fzf
+" git commits in this repository
 nnoremap <silent> <leader>gl :Commits<CR>
+" git commits for current file
+nnoremap <silent> <leader>gf :BCommits<CR>
+" git diff
+nnoremap <silent> <leader>gd :GFiles?<CR>
 " vim-fugitive
 nnoremap <silent> <leader>gb :Git blame<CR>
 " vim-gitgutter
@@ -464,6 +491,7 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " ----------------------------------------------------------
 " ## Quick Replace
+nnoremap <leader>ss :.,$s@<C-R>=expand("<cword>")<CR>@@gc<Left><Left>
 " replace current word from current line to last line (confirm required)
 nnoremap <leader>sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
 nnoremap <leader>sW :.,$s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
@@ -633,8 +661,8 @@ else
     " nmap <silent> gr <Plug>(coc-references)
 
     " GoTo code preview
-    " nmap <silent> <C-n> :call CocAction('jumpDefinition', v:false)<CR>
-    " nmap <silent> <C-m> <Plug>(coc-references)
+    nmap <silent> <leader>cd :call CocAction('jumpDefinition', v:false)<CR>
+    nmap <silent> <leader>cr <Plug>(coc-references)
 
     " Use K to show documentation in preview window
     nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -733,7 +761,7 @@ else
     " Find symbol of current file
     nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
     " Search workspace symbols
-    nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+    " nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
     " Do default action for next item
     nnoremap <silent><nowait> <leader>cn  :<C-u>CocNext<CR>
     " Do default action for previous item
