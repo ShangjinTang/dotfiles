@@ -6,7 +6,7 @@
 
 noremap <Space> <Nop>
 let mapleader = "\<Space>"
-set timeoutlen=300
+set timeoutlen=200
 
 filetype indent on              " Enable filetype indent.
 filetype plugin on              " Enable filetype plugin.
@@ -263,7 +263,7 @@ endfunction
 augroup asyncrun
     autocmd!
     " Async Command Line
-    nnoremap <leader>a :call AsyncRunWith("")<Left><Left>
+    nnoremap <leader>as :call AsyncRunWith("")<Left><Left>
     nnoremap <leader>aq :VimuxCloseRunner<CR>
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
@@ -352,9 +352,95 @@ let g:CtrlSpaceProjectRootMarkers = projectroot
 " ----------------------------------------------------------
 " ### vim-which-key
 " Reference: https://github.com/liuchengxu/vim-which-key
+autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+
+let g:which_key_map = {
+            \ '[' : 'left buffer',
+            \ ']' : 'right buffer',
+            \ 'h' : 'vim help',
+            \ 'q' : 'force quit (without write)',
+            \ 'w' : 'close current buffer',
+            \ 'y' : 'yank history',
+            \ 'z' : 'zen mode',
+            \ }
+
+let g:which_key_map.a = {
+            \ 'name' : '+asyncrun',
+            \ 's' : 'asyncrun',
+            \ 'q' : 'quit asyncrun',
+            \ }
+
+let g:which_key_map.b = {
+            \ 'name' : '+buffer',
+            \ 'b' : "switch to a buffer using fzf",
+            \ 'd' : "delete buffer",
+            \ 'f' : "first buffer",
+            \ 'l' : "last buffer",
+            \ 'n' : "next buffer",
+            \ 'p' : "previous buffer",
+            \ 's' : "search lines in all buffers",
+            \ 't' : "search tags in current buffer",
+            \ }
+
+let g:which_key_map.c = {
+            \ 'name' : '+coc',
+            \ 'c' : "CocList commands",
+            \ 'd' : "CocList diagnostics",
+            \ 'e' : "CocList extensions",
+            \ 'f' : "fix current",
+            \ 'a' : "coc code action",
+            \ 'n' : "CocNext",
+            \ 'p' : "CocPrev",
+            \ 'o' : "CocList outline",
+            \ 'r' : "coc reformat code",
+            \ 's' : "coc rename symbol",
+            \ }
+
+let g:which_key_map.f = {
+            \ 'name' : '+file',
+            \ 'f' : 'find/open file under current dir and subdirs',
+            \ 'g' : 'grep under current dir and subdirs',
+            \ 'e' : 'edit ~/.vimrc',
+            \ 'R' : 'Reload ~/.vimrc',
+            \ }
+
+let g:which_key_map.g = {
+            \ 'name' : '+git',
+            \ 'd' : 'git diff',
+            \ 'f' : 'git log --follow (current file)',
+            \ 'l' : 'git log',
+            \ 'b' : "git blame (current file)",
+            \ 'u' : "undo hunk",
+            \ 's' : "stage hunk",
+            \ 'p' : "preview hunk",
+            \ '[' : "prev hunk",
+            \ ']' : "next hunk",
+            \ }
+
+let g:which_key_map.o = {
+            \ 'name' : '+openwith',
+            \ 'c' : 'open current file with vim',
+            \ }
+
+let g:which_key_map.p = {
+            \ 'name' : '+project',
+            \ 'f' : 'find/open file under current project',
+            \ 't' : "search tags in current project",
+            \ }
+
+let g:which_key_map.s = {
+            \ 'name' : '+substitute',
+            \ 's' : "word",
+            \ 'w' : "entire word (from current line)",
+            \ 'W' : "entire WORD (from current line)",
+            \ 'a' : "entire word (entire file)",
+            \ 'A' : "entire WORD (entire file)",
+            \ 'v' : "words in last visual selection",
+            \ 'V' : "WORDs in last visual selection",
+            \ }
 
 " ----------------------------------------------------------
 " ### ctags / gutentags / cscope
@@ -403,26 +489,40 @@ endif
 " ====================================================================
 " ## Key Mappings (map & noremap)
 
+" Force Quit
+noremap <silent> <leader>q :qa!<CR>
+
+" Zen mode by Goyo
+noremap <silent> <leader>z :Goyo<CR>
+
 " Set key to toggle number & relativenumber on/off
-" noremap <silent> <leader>l :set nonumber! norelativenumber!<CR>
+noremap <silent> <F2> :set nonumber! norelativenumber!<CR>:GitGutterToggle<CR>
 
 " vim
-nnoremap <silent> <leader>fe :e $MYVIMRC<CR>     " Edit vimrc
-nnoremap <silent> <leader>fR :so $MYVIMRC<CR>     " Reload vim without restart
+" edit vimrc
+nnoremap <silent> <leader>fe :e $MYVIMRC<CR>
+" Reload vim without restart
+nnoremap <silent> <leader>fR :so $MYVIMRC<CR>
 
 " vim buffer
-nnoremap <silent> <leader>q :qa!<CR>     " Quit vim (close all buffers)
-nnoremap <silent> <leader>w :bd<CR>      " Close current buffer
-nnoremap <silent> <leader>b<Tab> :b#<CR>  " Switch between current buffer and previous buffer
-nnoremap <silent> <leader>[ :bp<CR>      " Switch to previous buffer
-nnoremap <silent> <leader>bp :bp<CR>      " Switch to previous buffer
-nnoremap <silent> <leader>] :bn<CR>      " Switch to next buffer
-nnoremap <silent> <leader>bn :bn<CR>      " Switch to next buffer
+" Close current buffer
+nnoremap <silent> <leader>bd :bd<CR>
+nnoremap <silent> <leader>w :bd<CR>
+" Switch to first buffer
+nnoremap <silent> <leader>bf :bf<CR>
+" Switch to last buffer
+nnoremap <silent> <leader>bl :bl<CR>
+" Switch to previous buffer
+nnoremap <silent> <leader>bp :bp<CR>
+nnoremap <silent> <leader>[ :bp<CR>
+" Switch to next buffer
+nnoremap <silent> <leader>bn :bn<CR>
+nnoremap <silent> <leader>] :bn<CR>
 
 " source code plugins
 
 " vscode
-nnoremap <silent> <C-o>c :call ExecuteWithCurrentFile("code")<CR>
+nnoremap <silent> <leader>oc :call ExecuteWithCurrentFile("code")<CR>
 
 " fzf
 " add ignore filter
@@ -430,16 +530,17 @@ let $FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.gi
 " disable timeout for slow close after <Esc>
 set ttimeout
 set ttimeoutlen=0
-" Rg
-nnoremap <silent> <leader>rg :Rg<CR>
+" File Grep
+nnoremap <silent> <leader>fg :Rg<CR>
 " Help
-nnoremap <silent> <leader>H :Helptags<CR>
+nnoremap <silent> <leader>h :Helptags<CR>
 " Project/Folder File search & open
 nnoremap <silent> <leader>pf :execute ':FZF '.FindRootDirectory()<CR>
 nnoremap <silent> <leader>ff :FZF<CR>
-" Project/Buffer Search
-nnoremap <silent> <leader>ps :Lines<CR>
-nnoremap <silent> <leader>bs :BLines<CR>
+" Search in all buffers
+nnoremap <silent> <leader>bs :Lines<CR>
+" Search in current buffer
+" nnoremap <silent> <leader>bs :BLines<CR>
 " Project/Buffer Tag search
 nnoremap <silent> <leader>pt :Tags<CR>
 nnoremap <silent> <leader>bt :BTags<CR>
@@ -701,12 +802,12 @@ else
     " Highlight the symbol and its references when holding the cursor
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    " Rename Symbol
-    nmap <leader>rs <Plug>(coc-rename)
+    " Coc rename Symbol
+    nmap <leader>cs <Plug>(coc-rename)
 
-    " Formatting selected code
-    xmap <leader>fmt <Plug>(coc-format-selected)
-    nmap <leader>fmt <Plug>(coc-format-selected)
+    " Coc Reformatting selected code
+    xmap <leader>cr <Plug>(coc-format-selected)
+    nmap <leader>cr <Plug>(coc-format-selected)
 
     augroup mygroup
         autocmd!
@@ -721,8 +822,8 @@ else
     " xmap <leader>a  <Plug>(coc-codeaction-selected)
     " nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-    " Code-Fix-Prompt: Remap keys for applying code actions at the cursor position
-    nmap <leader>cfp  <Plug>(coc-codeaction-cursor)
+    " Code-Action: Remap keys for applying code actions at the cursor position
+    nmap <leader>ca  <Plug>(coc-codeaction-cursor)
     " Code-Fix: Apply the most preferred quickfix action to fix diagnostic on the current line
     nmap <leader>cf  <Plug>(coc-fix-current)
 
@@ -790,10 +891,10 @@ else
     " Do default action for previous item
     nnoremap <silent><nowait> <leader>cp  :<C-u>CocPrev<CR>
     " Resume latest coc list
-    nnoremap <silent><nowait> <leader>cr  :<C-u>CocListResume<CR>
+    " nnoremap <silent><nowait> <leader>cr  :<C-u>CocListResume<CR>
 
     " yank
-    nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+    nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
 
     " coc-fzf
     let g:coc_fzf_preview = 'up:90%'

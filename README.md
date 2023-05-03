@@ -149,8 +149,7 @@ Note: Terminal colors (tmux/vim) are based on light theme.
 ### vim with [vim-plug](https://github.com/junegunn/vim-plug)
 
 - non-developer plugins:
-  - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
-  - [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
+  - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline) & [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
   - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
   - [junegunn/fzf](https://github.com/junegunn/fzf)
   - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
