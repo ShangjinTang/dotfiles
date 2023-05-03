@@ -183,8 +183,14 @@ call plug#begin('~/.vim/plugged')
     " debugging for startup slow
     Plug 'dstein64/vim-startuptime'
     " --------------------------------------------------
+    " restore last place while opening same file
+    Plug 'farmergreg/vim-lastplace'
+    " --------------------------------------------------
     " start screen
     Plug 'mhinz/vim-startify'
+    " --------------------------------------------------
+    " writing focus
+    Plug 'junegunn/goyo.vim', { 'on': ['Goyo', 'Goyo!'] }
     " --------------------------------------------------
     " which key
     Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
