@@ -492,8 +492,48 @@ endif
 " Force Quit
 noremap <silent> <leader>q :qa!<CR>
 
-" Zen mode by Goyo
+" Goyo
+" toggle Zen mode
+" Note: TmuxNavigate not working under zen mode
 noremap <silent> <leader>z :Goyo<CR>
+let g:goyo_width = 120
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    " silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  " Goyo auto disables GitGutter and line numbers, enable them again
+  silent GitGutterEnable
+  set number
+  set relativenumber
+  " Quit Vim if this is the only remaining buffer
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    " silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Set key to toggle number & relativenumber on/off
 noremap <silent> <F2> :set nonumber! norelativenumber!<CR>:GitGutterToggle<CR>
