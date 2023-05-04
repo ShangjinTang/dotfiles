@@ -191,6 +191,9 @@ call plug#begin('~/.vim/plugged')
     " writing focus
     Plug 'junegunn/goyo.vim', { 'on': ['Goyo', 'Goyo!'] }
     " --------------------------------------------------
+    " directory tree
+    Plug 'preservim/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
+    " --------------------------------------------------
     " which key
     Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
     " --------------------------------------------------
@@ -226,6 +229,30 @@ let g:airline_symbols.colnr = " C:"
 let g:airline_symbols.branch = "⎇"
 let g:airline_symbols.notexists = " ?"
 let g:airline_symbols.dirty = " !"
+
+" ----------------------------------------------------------
+" ----------------------------------------------------------
+" ### NERDTree
+" Reference: https://github.com/dmerejkowsky/vim-nerdtree/blob/master/doc/NERD_tree.txt
+let NERDTreeShowBookmarks = 1
+let NERDTreeBookmarksSort = 1
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeCaseSensitiveSort = 1
+let NERDTreeChDirMode = 2
+let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', 'cscope.*$[[file]]', '^tags$[file[]]']
+
+augroup nerdtree
+    autocmd!
+    " Disable relative number for NERDTree
+    autocmd FileType nerdtree set norelativenumber
+    " Exit Vim if NERDTree is the only window remaining in the only tab.
+    autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+    " Close the tab if NERDTree is the only window remaining in it.
+    autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree' && b:NERDTree.isTabTree()) | quit | endif
+augroup end
+autocmd FileType nerdtree set norelativenumber
+nnoremap <leader><leader> :NERDTreeToggle<CR>
 
 " ----------------------------------------------------------
 " bracket highlighting
@@ -351,6 +378,7 @@ nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
+" Note: <leader><leader> not works after timeout, so not added here
 let g:which_key_map = {
             \ '[' : 'left buffer',
             \ ']' : 'right buffer',
