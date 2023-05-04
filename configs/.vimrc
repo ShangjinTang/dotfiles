@@ -409,14 +409,15 @@ let g:which_key_map.b = {
 
 let g:which_key_map.c = {
             \ 'name' : '+coc',
+            \ 'a' : "coc code action",
             \ 'c' : "CocList commands",
             \ 'd' : "CocList diagnostics",
             \ 'e' : "CocList extensions",
             \ 'f' : "fix current",
-            \ 'a' : "coc code action",
+            \ 'j' : "jump to definition",
             \ 'n' : "CocNext",
-            \ 'p' : "CocPrev",
             \ 'o' : "CocList outline",
+            \ 'p' : "CocPrev",
             \ 'r' : "coc reformat code",
             \ 's' : "coc rename symbol",
             \ }
@@ -847,7 +848,7 @@ else
     " nmap <silent> gr <Plug>(coc-references)
 
     " GoTo code preview
-    nmap <silent> <leader>cd :call CocAction('jumpDefinition', v:false)<CR>
+    nmap <silent> <leader>cj :call CocAction('jumpDefinition', v:false)<CR>
     nmap <silent> <leader>cr <Plug>(coc-references)
 
     " Use K to show documentation in preview window
