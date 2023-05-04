@@ -158,7 +158,6 @@ call plug#begin('~/.vim/plugged')
     " project management
     Plug 'MattesGroeger/vim-bookmarks'
     Plug 'airblade/vim-rooter'
-    Plug 'vim-ctrlspace/vim-ctrlspace'
     " --------------------------------------------------
     " use same keys navigate between tmux/vim
     Plug 'christoomey/vim-tmux-navigator'
@@ -343,11 +342,6 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer({
       \   'accent': wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#f4468f'}]),
       \ },
       \ }))
-
-" ----------------------------------------------------------
-" ### CtrlSpace
-let g:CtrlSpaceDefaultMappingKey = "<F12> "
-let g:CtrlSpaceProjectRootMarkers = projectroot
 
 " ----------------------------------------------------------
 " ### vim-which-key
