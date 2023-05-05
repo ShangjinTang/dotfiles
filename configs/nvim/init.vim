@@ -3,6 +3,7 @@ source ~/.config/nvim/plug.vim
 lua require("LunarVim.init")
 lua require("vim-init")
 lua require("plug-coc")
+lua require("plug-dap-cpp")
 lua require("plug-telescope")
 lua require("plug-which-key")
 lua require("plug-wilder")
