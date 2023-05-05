@@ -57,3 +57,4 @@ function apply_diff_for_submodule() {
     fi
 }
 apply_diff_for_submodule fzf > /dev/null
+apply_diff_for_submodule LunarVim > /dev/null
