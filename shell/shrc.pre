@@ -244,10 +244,10 @@ fi
 # rg
 alias rg='rg --smart-case'
 
-# vim -> v
-alias v='vim'
-alias vv='vim ~/.vimrc'
-alias vs="vim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
+# nvim -> v
+alias v='nvim'
+alias vv='nvim ~/.config/nvim/{*.vim,lua/*.lua}'
+alias vs="nvim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
 # exa -> e
 alias exa='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
