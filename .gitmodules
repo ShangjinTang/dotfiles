@@ -52,3 +52,6 @@
 	branch = master
 	update = rebase
 	ignore = dirty
+[submodule "submodules/LunarVim"]
+	path = submodules/LunarVim
+	url = https://github.com/LunarVim/LunarVim
