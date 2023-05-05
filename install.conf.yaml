@@ -18,7 +18,11 @@
     ~/bin/: scripts/bash/*
 - link:
     # submodules
-    ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
+    # ~/.vim/autoload/plug.vim: submodules/vim-plug/plug.vim
+    ~/.config/nvim/: configs/nvim/**
+    ~/.config/nvim/lua/: configs/nvim/lua/**
+    ~/.config/nvim/lua/LunarVim: submodules/LunarVim
+    ~/.local/share/nvim/site/autoload/plug.vim: submodules/vim-plug/plug.vim
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
