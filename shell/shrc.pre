@@ -18,7 +18,6 @@ export TERMINAL_THEME='light'
 # export TERMINAL_THEME='dark'
 
 # vim extensions
-export VIM_COC_ENABLE=1
 export VIM_CODEFMT_ENABLE=1
 #=====================================================================
 # default exports which do not suggest to modify

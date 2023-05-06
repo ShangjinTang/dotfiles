@@ -389,40 +389,27 @@ endif
 " ====================================================================
 " ====================================================================
 
-if $VIM_COC_ENABLE == 0
-    " ----------------------------------------------------------
-    " ### SuperTab
-    " Do not create new space after select completion by <Space>
-    inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
-    " Do not create new line after select completion by <Enter>
-    let g:SuperTabCrMapping = 1
+let g:coc_global_extensions = [
+    \ 'coc-vimlsp',
+    \ 'coc-clangd',
+    \ 'coc-cmake',
+    \ 'coc-java',
+    \ 'coc-pyright',
+    \ 'coc-sh',
+    \ 'coc-rust-analyzer',
+    \ 'coc-tsserver',
+    \ 'coc-yaml',
+    \ 'coc-json',
+    \ 'coc-xml',
+    \ 'coc-toml',
+    \ 'coc-markdownlint',
+    \ 'coc-snippets',
+    \ 'coc-pairs',
+    \ 'coc-yank'
+    \ ]
 
-else
-    " ----------------------------------------------------------
-    " ### coc
-
-    let g:coc_global_extensions = [
-        \ 'coc-vimlsp',
-        \ 'coc-clangd',
-        \ 'coc-cmake',
-        \ 'coc-java',
-        \ 'coc-pyright',
-        \ 'coc-sh',
-        \ 'coc-rust-analyzer',
-        \ 'coc-tsserver',
-        \ 'coc-yaml',
-        \ 'coc-json',
-        \ 'coc-xml',
-        \ 'coc-toml',
-        \ 'coc-markdownlint',
-        \ 'coc-snippets',
-        \ 'coc-pairs',
-        \ 'coc-yank'
-        \ ]
-
-    " coc-fzf
-    let g:coc_fzf_preview = 'up:90%'
-    let g:coc_fzf_preview_fullscreen = 0
-    let g:coc_fzf_location_delay = 1  " fix auto jump to first line after close floating window
-    let g:coc_fzf_opts = []
-endif
+" coc-fzf
+let g:coc_fzf_preview = 'up:90%'
+let g:coc_fzf_preview_fullscreen = 0
+let g:coc_fzf_location_delay = 1  " fix auto jump to first line after close floating window
+let g:coc_fzf_opts = []
