@@ -10,12 +10,18 @@ call plug#begin()
     " nvim zen-mode
     Plug 'folke/zen-mode.nvim', { 'on': ['ZenMode', 'ZenMode!'] }
     " --------------------------------------------------
+    " nvim bufferline
+    Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | Plug 'nvim-tree/nvim-web-devicons'
+    " --------------------------------------------------
+    " nvim yanky
+    Plug 'gbprod/yanky.nvim'
+    " --------------------------------------------------
     " --------------------------------------------------
     " --------------------------------------------------
     " vim themes
-    Plug 'arcticicestudio/nord-vim'
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'navarasu/onedark.nvim'
+    Plug 'arcticicestudio/nord-vim'
     " bracket highlighting
     Plug 'luochen1990/rainbow'
     " --------------------------------------------------
@@ -52,9 +58,6 @@ call plug#begin()
     " --------------------------------------------------
     " restore last place while opening same file
     Plug 'farmergreg/vim-lastplace'
-    " --------------------------------------------------
-    " start screen
-    Plug 'mhinz/vim-startify'
     " --------------------------------------------------
     " directory tree
     Plug 'preservim/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
