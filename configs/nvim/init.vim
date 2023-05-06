@@ -7,7 +7,10 @@ lua require("plug-telescope")
 lua require("plug-which-key")
 lua require("plug-zen-mode")
 
+" clangd requires: clang>=11
 lua require("lspconfig").clangd.setup{}
+" vimls requires: `npm install -g vim-language-server`
+lua require("lspconfig").vimls.setup{}
 
 noremap <Space> <Nop>
 
@@ -88,14 +91,14 @@ let g:asyncrun_rootmarks = projectroot
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
-        execute $"AsyncRun -mode=term -pos=tmuxsol {a:commands}"
+        execute 'AsyncRun -mode=term -pos=tmuxsol ' . a:commands
     else
-        execute $"AsyncRun -mode=term {a:commands}"
+        execute 'AsyncRun -mode=term ' . a:commands
     endif
 endfunction
 
 function! CMakeDebugWithTarget(target)
-    call AsyncRunWith($"-cwd=<root> cmakebuild -t {a:target}")
+    call AsyncRunWith('-cwd=<root> cmakebuild -t ' . a:target)
 endfunction
 
 " :: AsyncRun with prompt
@@ -153,11 +156,6 @@ if $VIM_CODEFMT_ENABLE == 1
         autocmd FileType swift AutoFormatBuffer swift-format
     augroup end
 endif
-
-" ----------------------------------------------------------
-" ### CurtineIncSw
-" ,: language specific; is: Include Switch
-autocmd FileType c,cpp map <silent> ,is :call CurtineIncSw()<CR>
 
 " ----------------------------------------------------------
 " ### vim-rooter (Use :Rooter to toggle switch to root)
