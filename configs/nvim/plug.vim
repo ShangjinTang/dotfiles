@@ -57,14 +57,6 @@ call plug#begin()
     " directory tree
     Plug 'preservim/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
     " --------------------------------------------------
-    " " vim color generator
-    " Plug 'lifepillar/vim-colortemplate'
     " coc code completion
-    if $VIM_COC_ENABLE == 1
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
-    else
-        " tab completion plugin (conflict with coc)
-        Plug 'ervandew/supertab'
-    endif
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} | Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 call plug#end()
