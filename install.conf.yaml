@@ -27,7 +27,6 @@
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
     ~/.vimrc: configs/.vimrc
-    ~/.vim/coc-settings.json: configs/coc-settings.json
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local

@@ -58,7 +58,4 @@ call plug#begin()
     " --------------------------------------------------
     " directory tree
     Plug 'preservim/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
-    " --------------------------------------------------
-    " coc code completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release'} | Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 call plug#end()

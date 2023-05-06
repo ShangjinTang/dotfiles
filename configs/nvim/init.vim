@@ -2,11 +2,12 @@ source ~/.config/nvim/plug.vim
 
 lua require("LunarVim.init")
 lua require("vim-init")
-lua require("plug-coc")
 lua require("plug-dap-cpp")
 lua require("plug-telescope")
 lua require("plug-which-key")
 lua require("plug-zen-mode")
+
+lua require("lspconfig").clangd.setup{}
 
 noremap <Space> <Nop>
 
@@ -184,7 +185,7 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 " cscope
-" use capitalize key binding; lowercase is for vim-coc
+" use capitalize key binding; lowercase is for nvim lsp
 " Reference: http://cscope.sourceforge.net/cscope_vim_tutorial.html
 if has("cscope")
     set cscopetag
@@ -389,27 +390,3 @@ endif
 " ====================================================================
 " ====================================================================
 
-let g:coc_global_extensions = [
-    \ 'coc-vimlsp',
-    \ 'coc-clangd',
-    \ 'coc-cmake',
-    \ 'coc-java',
-    \ 'coc-pyright',
-    \ 'coc-sh',
-    \ 'coc-rust-analyzer',
-    \ 'coc-tsserver',
-    \ 'coc-yaml',
-    \ 'coc-json',
-    \ 'coc-xml',
-    \ 'coc-toml',
-    \ 'coc-markdownlint',
-    \ 'coc-snippets',
-    \ 'coc-pairs',
-    \ 'coc-yank'
-    \ ]
-
-" coc-fzf
-let g:coc_fzf_preview = 'up:90%'
-let g:coc_fzf_preview_fullscreen = 0
-let g:coc_fzf_location_delay = 1  " fix auto jump to first line after close floating window
-let g:coc_fzf_opts = []
