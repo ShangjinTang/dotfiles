@@ -187,7 +187,8 @@ endif
 noremap <silent> <leader>q :qa!<CR>
 
 " Set key to toggle number & relativenumber on/off
-noremap <silent> <F2> :set nonumber! norelativenumber!<CR>:GitGutterToggle<CR>
+noremap <silent> <F2> :set nonumber! norelativenumber!<CR>
+
 
 " vim
 " edit vimrc
@@ -210,14 +211,6 @@ nnoremap <silent> <leader>gf :BCommits<CR>
 nnoremap <silent> <leader>gd :GFiles?<CR>
 " vim-fugitive
 nnoremap <silent> <leader>gb :Git blame<CR>
-" vim-gitgutter
-let g:gitgutter_map_keys = 0
-nnoremap <silent> <leader>g] :GitGutterNextHunk<CR>
-nnoremap <silent> <leader>g[ :GitGutterPrevHunk<CR>
-nnoremap <silent> <leader>gs :GitGutterStageHunk<CR>
-nnoremap <silent> <leader>gu :GitGutterUndoHunk<CR>
-nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR>
-
 
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
@@ -294,10 +287,8 @@ augroup inserttoggle
     " disable line numbers in insert mode
     autocmd InsertEnter * set nonumber
     autocmd InsertEnter * set norelativenumber
-    autocmd InsertEnter * :GitGutterSignsDisable
     autocmd InsertLeave * set number
     autocmd InsertLeave * set relativenumber
-    autocmd InsertLeave * :GitGutterSignsEnable
 augroup end
 
 augroup misc
