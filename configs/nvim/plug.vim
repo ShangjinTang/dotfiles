@@ -1,11 +1,15 @@
 " Reference: https://github.com/junegunn/vim-plug
 call plug#begin()
+    " ======================================================================
+    " 1. nvim lua plugins (in LunarVim)
     " --------------------------------------------------
     " nvim telescope
-    Plug 'nvim-telescope/telescope.nvim' | Plug 'nvim-lua/plenary.nvim'
-    " --------------------------------------------------
+    " Plug 'nvim-telescope/telescope.nvim' | Plug 'nvim-lua/plenary.nvim'
+    " " --------------------------------------------------
     " nvim which-key
-    Plug 'folke/which-key.nvim'
+    " Plug 'folke/which-key.nvim'
+    " ======================================================================
+    " 2. nvim lua plugins (not in LunarVim)
     " --------------------------------------------------
     " nvim zen-mode
     Plug 'folke/zen-mode.nvim', { 'on': ['ZenMode', 'ZenMode!'] }
@@ -15,8 +19,8 @@ call plug#begin()
     " --------------------------------------------------
     " nvim yanky
     Plug 'gbprod/yanky.nvim'
-    " --------------------------------------------------
-    " --------------------------------------------------
+    " ======================================================================
+    " 3. vim script plugins
     " --------------------------------------------------
     " vim themes
     Plug 'NLKNguyen/papercolor-theme'
