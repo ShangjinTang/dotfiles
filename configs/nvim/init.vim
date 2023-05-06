@@ -360,7 +360,7 @@ if $TERMINAL_THEME == 'light'
 else
     set background=dark
     if $TERMINAL_THEME == 'dark'
-        colorscheme PaperColor
+        colorscheme onedark
         let t:is_transparent = 1
     endif
     if $TERMINAL_THEME == 'nord'

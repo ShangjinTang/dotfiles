@@ -13,7 +13,9 @@ call plug#begin()
     " --------------------------------------------------
     " --------------------------------------------------
     " vim themes
-    Plug 'arcticicestudio/nord-vim' | Plug 'NLKNguyen/papercolor-theme'
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'NLKNguyen/papercolor-theme'
+    Plug 'navarasu/onedark.nvim'
     " bracket highlighting
     Plug 'luochen1990/rainbow'
     " --------------------------------------------------
