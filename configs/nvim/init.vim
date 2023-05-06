@@ -155,46 +155,12 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-" cscope
-" use capitalize key binding; lowercase is for nvim lsp
-" Reference: http://cscope.sourceforge.net/cscope_vim_tutorial.html
-if has("cscope")
-    set cscopetag
-    set csto=1
-    if filereadable("cscope.out")
-        cs add cscope.out
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-    set cscopeverbose
-
-    nnoremap <C-\>S :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>G :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>C :cs find c <C-R>=expand("<cword>")<CR><CR>
-    " nnoremap <C-\>T :cs find t <C-R>=expand("<cword>")<CR><CR>
-    " nnoremap <C-\>E :cs find e <C-R>=expand("<cword>")<CR><CR>
-    " nnoremap <C-\>F :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    " nnoremap <C-\>I :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-\>D :cs find d <C-R>=expand("<cword>")<CR><CR>
-endif
-
-
 " ====================================================================
 " ====================================================================
 " ## Key Mappings (map & noremap)
 
-" Force Quit
-noremap <silent> <leader>q :qa!<CR>
-
 " Set key to toggle number & relativenumber on/off
 noremap <silent> <F2> :set nonumber! norelativenumber!<CR>
-
-
-" vim
-" edit vimrc
-nnoremap <silent> <leader>fe :e $MYVIMRC<CR>
-" Reload vim without restart
-nnoremap <silent> <leader>fR :so $MYVIMRC<CR>
 
 " source code plugins
 
