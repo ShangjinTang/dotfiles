@@ -1,5 +1,5 @@
 " Reference: https://github.com/junegunn/vim-plug
-call plug#begin('~/.vim/plugged')
+call plug#begin()
     " --------------------------------------------------
     " nvim telescope
     Plug 'nvim-telescope/telescope.nvim' | Plug 'nvim-lua/plenary.nvim'
@@ -11,15 +11,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'folke/zen-mode.nvim', { 'on': ['ZenMode', 'ZenMode!'] }
     " --------------------------------------------------
     " --------------------------------------------------
-    " --------------------------------------------------
-    " wilder in command line bar (requires: `pip3 install pynvim`)
-    function! UpdateRemotePlugins(...)
-        " Needed to refresh runtime files
-        let &rtp=&rtp
-        UpdateRemotePlugins
-    endfunction
-    Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-    Plug 'roxma/nvim-yarp' | Plug 'roxma/vim-hug-neovim-rpc'
     " --------------------------------------------------
     " airline (status bar) & themes
     Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'

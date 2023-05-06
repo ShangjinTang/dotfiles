@@ -6,7 +6,6 @@ lua require("plug-coc")
 lua require("plug-dap-cpp")
 lua require("plug-telescope")
 lua require("plug-which-key")
-lua require("plug-wilder")
 lua require("plug-zen-mode")
 
 noremap <Space> <Nop>
