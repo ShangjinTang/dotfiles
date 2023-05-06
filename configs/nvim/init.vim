@@ -23,11 +23,6 @@ else
     set wildignore+=*/.git/*,*/.DS_Store
 endif
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
@@ -41,11 +36,6 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
-" vim patch 7.4.1799 support termguicolors (true color)
-if has("termguicolors")
-    set termguicolors
-endif
-
 " ===================================================================
 " Generic Functions
 " Reference:
@@ -56,27 +46,6 @@ function! ExecuteWithCurrentFile(commands)
     " 'redraw': fix screen black after executing
     execute $"silent !{a:commands} %:p" | redraw!
 endfunction
-
-" ----------------------------------------------------------
-" ### airline
-" Reference: https://github.com/vim-airline/vim-airline/blob/master/doc/airline.txt
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'  " show filepath on filenames comflict
-let g:airline#extensions#tabline#fnamemod = ':t'  " only show filename (if filenames not comflict). use `:help filename-modifiers` to check all available options
-let g:airline#extensions#tabline#buffer_nr_show = 1  " show file buffer number (index)
-let g:airline#extensions#tabline#buffer_nr_format = '%s '
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.whitespace = ""
-let g:airline_symbols.readonly = "[readonly]"
-let g:airline_symbols.maxlinenr = ""
-let g:airline_symbols.linenr = " L:"
-let g:airline_symbols.colnr = " C:"
-let g:airline_symbols.branch = "⎇"
-let g:airline_symbols.notexists = " ?"
-let g:airline_symbols.dirty = " !"
 
 " ----------------------------------------------------------
 " ----------------------------------------------------------

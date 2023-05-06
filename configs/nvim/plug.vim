@@ -12,8 +12,6 @@ call plug#begin()
     " --------------------------------------------------
     " --------------------------------------------------
     " --------------------------------------------------
-    " airline (status bar) & themes
-    Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
     " vim themes
     Plug 'arcticicestudio/nord-vim' | Plug 'NLKNguyen/papercolor-theme'
     " bracket highlighting
