@@ -19,36 +19,14 @@ noremap <Space> <Nop>
 " Set root for project
 let projectroot = ['.git', '.root', '.project', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
 
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*
-else
-    set wildignore+=*/.git/*,*/.DS_Store
-endif
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
 " ===================================================================
 " Generic Functions
 " Reference:
 "   filename-modifiers: https://vimdoc.sourceforge.net/htmldoc/cmdline.html#filename-modifiers
 
-function! ExecuteWithCurrentFile(commands)
+function! OpenCurrentFileWith(commands)
     " 'silent': to prevent prompt 'Press ENTER or type command to continue'
-    " 'redraw': fix screen black after executing
-    execute $"silent !{a:commands} %:p" | redraw!
+    execute 'silent !' . a:commands . ' ' . expand('%:p')
 endfunction
 
 " ----------------------------------------------------------
@@ -74,11 +52,6 @@ augroup nerdtree
 augroup end
 autocmd FileType nerdtree set norelativenumber
 nnoremap <leader><leader> :NERDTreeToggle<CR>
-
-" ----------------------------------------------------------
-" bracket highlighting
-let g:rainbow_conf = {'ctermfgs': [162, 166, 28, 24, 91]}
-let g:rainbow_active = 1
 
 " ----------------------------------------------------------
 " async run
@@ -225,16 +198,7 @@ nnoremap <silent> <leader>fR :so $MYVIMRC<CR>
 " source code plugins
 
 " vscode
-nnoremap <silent> <leader>oc :call ExecuteWithCurrentFile("code")<CR>
-
-" fzf.vim
-" set floating window
-if exists('$TMUX')
-    let g:fzf_layout = { 'tmux': '-r40%' }
-else
-    let g:fzf_layout = { 'window': { 'width': 0.4, 'height': 0.9, 'xoffset': 1, 'yoffset': 0.45} }
-endif
-let g:fzf_preview_window = ['up,80%', 'ctrl-/']
+nnoremap <silent> <leader>oc :call OpenCurrentFileWith("code")<CR>
 
 " git shortcuts, starts with <leader>g
 " fzf
@@ -262,13 +226,6 @@ nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 " nnoremap <silent> <C-\>:TmuxNavigatePrevious<CR>
-
-" ----------------------------------------------------------
-" Uncomment below to disable arrow keys, force use hjkl for cursor move
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
-" noremap <Left> <Nop>
-" noremap <Right> <Nop>
 
 " ----------------------------------------------------------
 " ## Move lines up / down

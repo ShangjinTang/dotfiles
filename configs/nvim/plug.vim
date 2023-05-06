@@ -22,8 +22,6 @@ call plug#begin()
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'navarasu/onedark.nvim'
     Plug 'arcticicestudio/nord-vim'
-    " bracket highlighting
-    Plug 'luochen1990/rainbow'
     " --------------------------------------------------
     " git plugins
     Plug 'tpope/vim-fugitive'
