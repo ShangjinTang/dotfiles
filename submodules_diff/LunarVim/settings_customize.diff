@@ -1,0 +1,13 @@
+diff --git a/lua/lvim/config/settings.lua b/lua/lvim/config/settings.lua
+index c31a90c0..9b51bb34 100644
+--- a/lua/lvim/config/settings.lua
++++ b/lua/lvim/config/settings.lua
+@@ -12,7 +12,7 @@ M.load_default_options = function()
+ 
+   local default_options = {
+     backup = false, -- creates a backup file
+-    clipboard = "unnamedplus", -- allows neovim to access the system clipboard
++    -- clipboard = "unnamedplus", -- allows neovim to access the system clipboard
+     cmdheight = 1, -- more space in the neovim command line for displaying messages
+     completeopt = { "menuone", "noselect" },
+     conceallevel = 0, -- so that `` is visible in markdown files
