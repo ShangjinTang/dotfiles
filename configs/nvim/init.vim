@@ -144,17 +144,6 @@ noremap <silent> <F2> :set nonumber! norelativenumber!<CR>
 " vscode
 nnoremap <silent> <leader>oc :call OpenCurrentFileWith("code")<CR>
 
-" git shortcuts, starts with <leader>g
-" fzf
-" git commits in this repository
-nnoremap <silent> <leader>gl :Commits<CR>
-" git commits for current file
-nnoremap <silent> <leader>gf :BCommits<CR>
-" git diff
-nnoremap <silent> <leader>gd :GFiles?<CR>
-" vim-fugitive
-nnoremap <silent> <leader>gb :Git blame<CR>
-
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
