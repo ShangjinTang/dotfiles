@@ -38,7 +38,7 @@ call plug#begin()
     Plug 'skywind3000/asyncrun.vim' | Plug 'skywind3000/asynctasks.vim' | Plug 'preservim/vimux'
     " --------------------------------------------------
     " comment plugins
-    Plug 'tpope/vim-commentary' | Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-surround'
     " --------------------------------------------------
     " google code format
     Plug 'google/vim-codefmt' | Plug 'google/vim-maktaba' | Plug 'google/vim-glaive'
