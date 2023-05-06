@@ -25,8 +25,6 @@ call plug#begin()
     " --------------------------------------------------
     " git plugins
     Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
-    " --------------------------------------------------
     " fuzzy finder
     Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
     " --------------------------------------------------
