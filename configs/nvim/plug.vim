@@ -50,8 +50,6 @@ call plug#begin()
     Plug 'ludovicchabant/vim-gutentags'
     " snippets
     Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-    " switch between c/c++ header & source file
-    Plug 'ericcurtin/CurtineIncSw.vim', { 'for': ['c','cpp'] }
     " --------------------------------------------------
     " debugging for startup slow
     Plug 'dstein64/vim-startuptime'

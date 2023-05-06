@@ -39,8 +39,8 @@
     ~/.tigrc:
       if: 'command -v tig'
       path: configs/.tigrc
-    ~/.vim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
-      if: '[ -d ~/.vim/plugged/asyncrun.vim ]'
+    ~/.local/share/nvim/plugged/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
+      if: '[ -d  ~/.local/share/nvim/plugged/asyncrun.vim ]'
       path: configs/vim-plugins/asyncrun.vim/runner/tmuxsol.vim
 
 
