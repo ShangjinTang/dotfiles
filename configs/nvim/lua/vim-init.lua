@@ -73,3 +73,4 @@ vim.opt.ffs = 'unix,dos,mac'
 -- ### Persistent Undo
 vim.opt.undodir = vim.fn.expand("~/.cache/nvim/undo")
 vim.opt.undofile = true
+
