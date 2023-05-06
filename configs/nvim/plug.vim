@@ -52,7 +52,4 @@ call plug#begin()
     " --------------------------------------------------
     " restore last place while opening same file
     Plug 'farmergreg/vim-lastplace'
-    " --------------------------------------------------
-    " directory tree
-    Plug 'preservim/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
 call plug#end()
