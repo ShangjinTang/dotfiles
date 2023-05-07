@@ -5,7 +5,8 @@ local wk = require("which-key")
 -- <leader><leader> is already registered as "Toggle Terminal" in LunarVim terminal.lua
 
 wk.register({
-    ["<leader>c"] = { name = "+Cscope" },
+    ["<leader>c"] = { name = "+Cscope" }, -- cscope_maps.nvim
+    ["<leader>y"] = { "<cmd>Telescope yank_history<cr>", "Yank History" },
 })
 
 wk.register({
@@ -22,7 +23,6 @@ wk.register({
     ["<leader>]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
     ["<leader><tab>"] = { "<cmd>b#<cr>", "Switch between buffers" },
     ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit" },
-    -- ["<leader>w"] = { "<cmd>bd<cr>", "Close Buffer" },
     ["<leader>z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 })
 
