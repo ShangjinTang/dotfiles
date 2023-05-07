@@ -13,7 +13,7 @@ if [ ${SHELL_NAME} == "bash" ]; then
 fi
 
 # delete all broken symlinks
-CLEAN_DIRS=( ~ ~/bin ~/.config/nvim ~/.config/nvim/lua)
+CLEAN_DIRS=( ~ ~/bin ~/.config/nvim ~/.config/nvim/lua )
 for CLEAN_DIR in "${CLEAN_DIRS[@]}"; do
     if [ -d ${CLEAN_DIR} ]; then
         find ${CLEAN_DIR} -maxdepth 1 -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} +
