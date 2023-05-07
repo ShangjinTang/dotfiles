@@ -17,6 +17,9 @@ call plug#begin()
     " nvim bufferline
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | Plug 'nvim-tree/nvim-web-devicons'
     " --------------------------------------------------
+    " cscope tags
+    Plug 'dhananjaylatkar/cscope_maps.nvim'
+    " --------------------------------------------------
     " nvim yanky
     Plug 'gbprod/yanky.nvim'
     " --------------------------------------------------
