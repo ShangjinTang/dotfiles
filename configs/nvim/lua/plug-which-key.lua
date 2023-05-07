@@ -84,6 +84,6 @@ wk.register({
 
 wk.register({
     ["<leader>w"] = { name = "+word" },
-    ["<leader>ws"] = { name = "word substitude from current selection" },
-    ["<leader>wS"] = { name = "word substitude from first line" },
+    ["<leader>ws"] = { name = "word substitute from current selection" },
+    ["<leader>wS"] = { name = "word substitute from first line" },
 })
