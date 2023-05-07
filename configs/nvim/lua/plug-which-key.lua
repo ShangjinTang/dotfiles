@@ -20,7 +20,7 @@ wk.register({
     ["<leader>]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
     ["<leader><tab>"] = { "<cmd>b#<cr>", "Switch between buffers" },
     ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit" },
-    ["<leader>w"] = { "<cmd>bd<cr>", "Close Buffer" },
+    -- ["<leader>w"] = { "<cmd>bd<cr>", "Close Buffer" },
     ["<leader>z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 })
 
@@ -78,4 +78,10 @@ wk.register({
         end,
         "Project Live Grep",
     },
+})
+
+wk.register({
+    ["<leader>w"] = { name = "+word" },
+    ["<leader>ws"] = { name = "word substitude from current selection" },
+    ["<leader>wS"] = { name = "word substitude from first line" },
 })

@@ -20,6 +20,9 @@ call plug#begin()
     " cscope tags
     Plug 'dhananjaylatkar/cscope_maps.nvim'
     " --------------------------------------------------
+    " quick substitute (such as siw)
+    Plug 'gbprod/substitute.nvim'
+    " --------------------------------------------------
     " nvim yanky
     Plug 'gbprod/yanky.nvim'
     " --------------------------------------------------
