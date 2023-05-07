@@ -233,37 +233,9 @@ augroup end
 " ====================================================================
 " ## Terminal Background
 
-if $TERMINAL_THEME == 'light'
-    set background=light
-    colorscheme PaperColor
-else
-    set background=dark
-    if $TERMINAL_THEME == 'dark'
-        colorscheme onedark
-        let t:is_transparent = 1
-    endif
-    if $TERMINAL_THEME == 'nord'
-        colorscheme nord
-        let t:is_transparent = 1
-    endif
-    function! Toggle_transparent_background()
-        if t:is_transparent == 0
-            highlight Normal ctermbg=Black guibg=Black
-            let t:is_transparent = 1
-        else
-            highlight Normal ctermbg=NONE guibg=NONE
-            if $TERMINAL_THEME == 'nord'
-                highlight Comment ctermfg=Gray guifg=Gray
-            endif
-            let t:is_transparent = 0
-        endif
-    endfunction
-    call Toggle_transparent_background()
-    nnoremap <leader>0 :call Toggle_transparent_background()<CR>
-
-    highlight LineNr ctermbg=NONE guibg=NONE
-    highlight clear SignColumn
-endif
+set background=light
+colorscheme onedark
+let t:is_transparent = 0
 
 " ====================================================================
 " ====================================================================
