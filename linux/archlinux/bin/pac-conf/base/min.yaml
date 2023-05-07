@@ -6,6 +6,7 @@ base-devel: true
 # ------------------------------
 git: true
 vim: true
+neovim: true
 zsh: true
 # ------------------------------
 archlinux-keyring: true  # Solve "error: required key missing from keyring"

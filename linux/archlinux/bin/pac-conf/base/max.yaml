@@ -4,6 +4,7 @@ defaults:
 # ------------------------------
 croc: true
 git-delta: true
+lazygit: true
 hexyl: true
 neofetch: true
 sd: true
