@@ -112,6 +112,13 @@ fi
 #=====================================================================
 # functions for local use
 
+_DIRCREATE() {
+    for arg in "$@"; do
+        if [ ! -d "$arg" ]; then
+            mkdir -p "$arg"
+        fi
+    done
+}
 _PATHPREPEND() {
     for arg in "$@"; do
         if [ -d "$arg" ] && [[ ":$PATH:" != *":$arg:"* ]]; then
@@ -126,9 +133,11 @@ _PATHAPPEND() {
         fi
     done
 }
-_PATHAPPEND "$HOME/bin"
-_PATHAPPEND "$HOME/.local/bin"
-_PATHAPPEND "$HOME/go/bin"
+_PATHAPPEND ~/bin
+_PATHAPPEND ~/.local/bin
+_PATHAPPEND ~/go/bin
+_DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
+_DIRCREATE ~/.cache/vim/undo
 
 #=====================================================================
 # fuctions for command line use

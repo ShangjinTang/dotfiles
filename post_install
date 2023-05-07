@@ -33,9 +33,13 @@ fi
 #     fi
 # fi
 
-# vim requirements
-if [ ! -d ~/.cache/vim/undo ]; then
-    mkdir -p ~/.cache/vim/undo
+# nvim requirements
+echo "checking nvim requirements ..."
+if command -v python3 &> /dev/null; then
+    if [[ ! $(python3 -m pip show pynvim) ]]; then
+        echo "installing pynvim ..."
+        python3 -m pip install --user pynvim > /dev/null
+    fi
 fi
 
 function apply_diff_for_submodule() {
