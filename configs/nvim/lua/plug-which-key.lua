@@ -3,6 +3,16 @@
 local wk = require("which-key")
 
 wk.register({
+  ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
+  ["K"] = { vim.lsp.buf.hover, "Hover" },
+  ["<leader>c"] = { name = "+code" },
+  ["<leader>cd"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
+  ["<leader>ci"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
+  ["<leader>ct"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
+  ["<leader>cr"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
+})
+
+wk.register({
     ["<leader>["] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
     ["<leader>]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
     ["<leader><tab>"] = { "<cmd>b#<cr>", "Switch between buffers" },
@@ -24,7 +34,8 @@ wk.register({
 wk.register({
     ["<leader>f"] = { name = "+file" },
     ["<leader>ff"] = { "<cmd>Telescope find_files previewer=false<cr>", "Find File" },
-    ["<leader>fg"] = { "<cmd>Telescope live_grep<cr>", "File Grep" },
+    ["<leader>fw"] = { "<cmd>Telescope grep_string<cr>", "File Grep Current Word" },
+    ["<leader>fg"] = { "<cmd>Telescope live_grep<cr>", "File Live Grep" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
 })
@@ -50,5 +61,18 @@ wk.register({
         function()
             require("telescope.builtin").find_files({ cwd = vim.api.nvim_eval('FindRootDirectory()') })
         end,
-        "Find Project File", },
+        "Find Project File",
+    },
+    ["<leader>pw"] = {
+      function()
+          require("telescope.builtin").grep_string({ cwd = vim.api.nvim_eval('FindRootDirectory()') })
+      end,
+      "Project Grep Current Word",
+    },
+    ["<leader>pg"] = {
+      function()
+          require("telescope.builtin").live_grep({ cwd = vim.api.nvim_eval('FindRootDirectory()') })
+      end,
+      "Project Live Grep",
+    },
 })
