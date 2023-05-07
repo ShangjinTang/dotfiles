@@ -58,7 +58,7 @@ function! AsyncRunWith(commands)
     if exists("$TMUX")
         execute 'AsyncRun -mode=term -pos=tmuxsol ' . a:commands
     else
-        execute 'AsyncRun -mode=term ' . a:commands
+        execute 'AsyncRun -mode=term -rows=10 ' . a:commands
     endif
 endfunction
 
@@ -76,24 +76,24 @@ augroup asyncrun
     autocmd!
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
-    autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILEPATH) --clean_output")<CR>
-    autocmd FileType c nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --clean_output")<CR>
-    autocmd FileType cpp nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx $(VIM_FILEPATH) --clean_output")<CR>
-    autocmd FileType cpp nnoremap <silent> <C-\>2 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --clean_output")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
-    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <C-\>3 :call CMakeDebugWithTarget("all")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <C-\>4 :call CMakeDebugWithTarget("run")<CR>
-    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <C-\>4 :call CMakeDebugWithTarget("run")<CR>
-    autocmd FileType c,cpp nnoremap <C-\>5 :call CMakeDebugWithTarget("")<Left><Left>
-    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <C-\>5 :call CMakeDebugWithTarget("")<Left><Left>
+    autocmd FileType c nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILEPATH) --clean_output")<CR>
+    autocmd FileType c nnoremap <silent> <leader>a2 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --clean_output")<CR>
+    autocmd FileType cpp nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx $(VIM_FILEPATH) --clean_output")<CR>
+    autocmd FileType cpp nnoremap <silent> <leader>a2 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --clean_output")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <leader>a3 :call CMakeDebugWithTarget("all")<CR>
+    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <leader>a3 :call CMakeDebugWithTarget("all")<CR>
+    autocmd FileType c,cpp nnoremap <silent> <leader>a4 :call CMakeDebugWithTarget("run")<CR>
+    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <leader>a4 :call CMakeDebugWithTarget("run")<CR>
+    autocmd FileType c,cpp nnoremap <leader>a5 :call CMakeDebugWithTarget("")<Left><Left>
+    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <leader>a5 :call CMakeDebugWithTarget("")<Left><Left>
     " Rust
-    autocmd FileType rust nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
-    autocmd FileType rust nnoremap <silent> <C-\>3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
-    autocmd FileType rust nnoremap <silent> <C-\>4 :call AsyncRunWith("-cwd=<root> cargo run")<CR>
+    autocmd FileType rust nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
+    autocmd FileType rust nnoremap <silent> <leader>a3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
+    autocmd FileType rust nnoremap <silent> <leader>a4 :call AsyncRunWith("-cwd=<root> cargo run")<CR>
     " Python3
-    autocmd FileType python nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); python3 $(VIM_FILEPATH)")<CR>
+    autocmd FileType python nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); python3 $(VIM_FILEPATH)")<CR>
     " Bash
-    autocmd FileType bash nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); bash $(VIM_FILEPATH)")<CR>
+    autocmd FileType bash nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); bash $(VIM_FILEPATH)")<CR>
 augroup end
 
 " ----------------------------------------------------------
@@ -157,7 +157,7 @@ nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
 nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
-" nnoremap <silent> <C-\>:TmuxNavigatePrevious<CR>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 
 " ----------------------------------------------------------
 " ## Move lines up / down
@@ -169,10 +169,8 @@ vnoremap K :m '<-2<CR>gv=gv
 " " ## Replace selected word/WORD
 " replace current word from current line to last line (confirm required)
 nnoremap <leader>ws :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-nnoremap <leader>Ws :.,$s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
 " replace current word from first line to last line (confirm required)
 nnoremap <leader>wS :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-nnoremap <leader>WS :%s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
