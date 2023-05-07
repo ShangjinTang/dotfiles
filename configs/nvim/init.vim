@@ -31,6 +31,22 @@ EOF
 
 noremap <Space> <Nop>
 
+" let y<motion> copy to system clipboard inside WSL (non TMUX)
+if !exists("$TMUX") && exists("$WSL_DISTRO_NAME")
+    let g:clipboard = {
+                \   'name': 'WslClipboard',
+                \   'copy': {
+                \      '+': 'clip.exe',
+                \      '*': 'clip.exe',
+                \    },
+                \   'paste': {
+                \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+                \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+                \   },
+                \   'cache_enabled': 0,
+                \ }
+endif
+
 " ----------------------------------------------------------
 
 " Set root for project
