@@ -34,9 +34,27 @@ fi
 # fi
 
 # nvim requirements
+echo "checking ArchLinux 'pac' requirements ..."
+if command -v pac &> /dev/null; then
+    if command -v python3 &> /dev/null; then
+        if [[ ! $(python3 -m pip show hydra-core) ]] &> /dev/null ; then
+            echo "installing hydra-core ..."
+            python3 -m pip install --user hydra-core > /dev/null
+        fi
+    fi
+    if command -v python3 &> /dev/null; then
+        if [[ ! $(python3 -m pip show typer) ]] &> /dev/null ; then
+            echo "installing 'typer[all]' ..."
+            python3 -m pip install --user 'typer[all]' > /dev/null
+        fi
+    fi
+fi
+
+
+# nvim requirements
 echo "checking nvim requirements ..."
 if command -v python3 &> /dev/null; then
-    if [[ ! $(python3 -m pip show pynvim) ]]; then
+    if [[ ! $(python3 -m pip show pynvim) ]] &> /dev/null ; then
         echo "installing pynvim ..."
         python3 -m pip install --user pynvim > /dev/null
     fi
