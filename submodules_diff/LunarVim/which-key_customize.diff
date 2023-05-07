@@ -1,0 +1,66 @@
+diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
+index 2ab47b05..717aaa1c 100644
+--- a/lua/lvim/core/which-key.lua
++++ b/lua/lvim/core/which-key.lua
+@@ -104,24 +104,24 @@ M.config = function()
+     },
+     mappings = {
+       [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
+-      ["w"] = { "<cmd>w!<CR>", "Save" },
+-      ["q"] = { "<cmd>confirm q<CR>", "Quit" },
++      -- ["w"] = { "<cmd>w!<CR>", "Save" },
++      -- ["q"] = { "<cmd>confirm q<CR>", "Quit" },
+       ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
+-      ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
+-      ["f"] = {
+-        function()
+-          require("lvim.core.telescope.custom-finders").find_project_files { previewer = false }
+-        end,
+-        "Find File",
+-      },
++      -- ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
++      -- ["f"] = {
++      --   function()
++      --     require("lvim.core.telescope.custom-finders").find_project_files { previewer = false }
++      --   end,
++      --   "Find File",
++      -- },
+       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+       ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+       b = {
+         name = "Buffers",
+         j = { "<cmd>BufferLinePick<cr>", "Jump" },
+         f = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+-        b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
+-        n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
++        -- b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
++        -- n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
+         W = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
+         -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
+         e = {
+@@ -159,7 +159,7 @@ M.config = function()
+         q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
+         U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
+       },
+-      p = {
++      P = {
+         name = "Plugins",
+         i = { "<cmd>Lazy install<cr>", "Install" },
+         s = { "<cmd>Lazy sync<cr>", "Sync" },
+@@ -282,13 +282,13 @@ M.config = function()
+         name = "Search",
+         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+         c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+-        f = { "<cmd>Telescope find_files<cr>", "Find File" },
++        -- f = { "<cmd>Telescope find_files<cr>", "Find File" },
+         h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+         H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
+         M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+-        r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
++        -- r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+         R = { "<cmd>Telescope registers<cr>", "Registers" },
+-        t = { "<cmd>Telescope live_grep<cr>", "Text" },
++        -- t = { "<cmd>Telescope live_grep<cr>", "Text" },
+         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+         C = { "<cmd>Telescope commands<cr>", "Commands" },
+         l = { "<cmd>Telescope resume<cr>", "Resume last search" },
