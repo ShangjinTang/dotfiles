@@ -1,3 +1,4 @@
 defaults:
   - base: max  # options: none / min / medium / max
   - dev: min  # options: none / min / medium / max
+  - gpu: none  # options: none / wsl
