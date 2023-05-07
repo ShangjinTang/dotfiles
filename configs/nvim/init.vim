@@ -1,6 +1,9 @@
 source ~/.config/nvim/plug.vim
 
 lua require("LunarVim.init")
+
+lua require("cscope_maps").setup({cscope = {use_telescope = true}})
+
 lua require("vim-init")
 lua require("plug-dap-cpp")
 lua require("plug-which-key")
