@@ -19,13 +19,12 @@ call plug#begin()
     " --------------------------------------------------
     " nvim yanky
     Plug 'gbprod/yanky.nvim'
+    " --------------------------------------------------
+    " nvim themes
+    Plug 'navarasu/onedark.nvim'
+    Plug 'shaunsingh/nord.nvim'
     " ======================================================================
     " 3. vim script plugins
-    " --------------------------------------------------
-    " vim themes
-    Plug 'NLKNguyen/papercolor-theme'
-    Plug 'navarasu/onedark.nvim'
-    Plug 'arcticicestudio/nord-vim'
     " --------------------------------------------------
     " git plugins
     Plug 'tpope/vim-fugitive'
