@@ -41,6 +41,12 @@ if command -v python3 &> /dev/null; then
         python3 -m pip install --user pynvim > /dev/null
     fi
 fi
+if command -v npm &> /dev/null; then
+    if ! command -v vim-language-server &> /dev/null; then
+        echo "installing vim-language-server ..."
+        npm install -g vim-language-server > /dev/null
+    fi
+fi
 
 function apply_diff_for_submodule() {
     local target_folder=./submodules/$1
