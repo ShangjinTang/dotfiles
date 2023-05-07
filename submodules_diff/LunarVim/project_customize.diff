@@ -1,28 +1,34 @@
 diff --git a/lua/lvim/core/project.lua b/lua/lvim/core/project.lua
-index 17473c55..47c57904 100644
+index 17473c55..be2acf83 100644
 --- a/lua/lvim/core/project.lua
 +++ b/lua/lvim/core/project.lua
-@@ -23,7 +23,22 @@ function M.config()
+@@ -11,7 +11,8 @@ function M.config()
+     ---@usage set to true to disable setting the current-woriking directory
+     --- Manual mode doesn't automatically change your root directory, so you have
+     --- the option to manually do so using `:ProjectRoot` command.
+-    manual_mode = false,
++    -- manual_mode = false,
++    manual_mode = true,
+ 
+     ---@usage Methods of detecting the root directory
+     --- Allowed values: **"lsp"** uses the native neovim lsp
+@@ -23,7 +24,8 @@ function M.config()
  
      -- All the patterns used to detect root dir, when **"pattern"** is in
      -- detection_methods
 -    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
-+    patterns = {
-+      ".git",
-+      "_darcs",
-+      ".hg",
-+      ".bzr",
-+      ".svn",
-+      "Makefile",
-+      "package.json",
-+      "pom.xml",
-+      ".root",
-+      ".project",
-+      ".workspace",
-+      "WORKSPACE",
-+      "Cargo.toml",
-+      "compile_commands.json",
-+    },
++    -- patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
++    patterns = { ".git", ".root", ".project", ".workspace", "WORKSPACE", "Cargo.toml", "compile_commands.json" },
  
      -- Table of lsp clients to ignore by name
      -- eg: { "efm", ... }
+@@ -38,7 +40,8 @@ function M.config()
+ 
+     -- When set to false, you will get a message when project.nvim changes your
+     -- directory.
+-    silent_chdir = true,
++    -- silent_chdir = true,
++    silent_chdir = false,
+ 
+     -- What scope to change the directory, valid options are
+     -- * global (default)
