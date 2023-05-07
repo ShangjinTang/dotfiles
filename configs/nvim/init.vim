@@ -37,7 +37,7 @@ EOF
 
 noremap <Space> <Nop>
 
-" let y<motion> copy to system clipboard inside WSL (non TMUX)
+" connect [vim clipboard] <-> [system clipboard] inside WSL (non TMUX)
 if !exists("$TMUX") && exists("$WSL_DISTRO_NAME")
     let g:clipboard = {
                 \   'name': 'WslClipboard',
