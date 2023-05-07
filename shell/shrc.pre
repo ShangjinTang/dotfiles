@@ -147,7 +147,7 @@ _PATHAPPEND ~/go/bin
 _DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
 
 # Creating nvim persistent undo directory
-_DIRCREATE ~/.cache/vim/undo
+_DIRCREATE ~/.cache/nvim/undo
 
 #=====================================================================
 # fuctions for command line use
