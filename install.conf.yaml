@@ -26,7 +26,6 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-    ~/.vimrc: configs/.vimrc
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
