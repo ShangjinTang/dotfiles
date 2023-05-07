@@ -2,17 +2,30 @@ source ~/.config/nvim/plug.vim
 
 lua require("LunarVim.init")
 
-lua require("cscope_maps").setup({cscope = {use_telescope = true}})
+lua << EOF
+    require("cscope_maps").setup({
+        cscope = {
+            use_telescope = true
+        }
+    })
 
-lua require("vim-init")
-lua require("plug-dap-cpp")
-lua require("plug-which-key")
-lua require("plug-zen-mode")
+    require("substitute").setup({
+    })
+    vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
+    vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
+    vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
+    vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
 
-" clangd requires: clang>=11
-lua require("lspconfig").clangd.setup{}
-" vimls requires: `npm install -g vim-language-server`
-lua require("lspconfig").vimls.setup{}
+    -- clangd requires: clang>=11
+    require("lspconfig").clangd.setup({})
+    -- vimls requires: `npm install -g vim-language-server`
+    require("lspconfig").vimls.setup({})
+
+    require("vim-init")
+    require("plug-dap-cpp")
+    require("plug-which-key")
+    require("plug-zen-mode")
+EOF
 
 noremap <Space> <Nop>
 
@@ -153,17 +166,13 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " ----------------------------------------------------------
-" " ## Quick Replace
-" nnoremap <leader>ss :.,$s@<C-R>=expand("<cword>")<CR>@@gc<Left><Left>
-" " replace current word from current line to last line (confirm required)
-" nnoremap <leader>sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-" nnoremap <leader>sW :.,$s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
-" " replace current word from first line to last line (confirm required)
-" nnoremap <leader>sa :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-" nnoremap <leader>sA :%s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
-" " replace current word in last visual selection
-" nnoremap <leader>sv :%s@\%V\<<C-R>=expand("<cword>")<CR>\>@@g<Left><Left>
-" nnoremap <leader>sV :%s@\%V\<<C-R>=expand("<cWORD>")<CR>\>@@g<Left><Left>
+" " ## Replace selected word/WORD
+" replace current word from current line to last line (confirm required)
+nnoremap <leader>ws :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+nnoremap <leader>Ws :.,$s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
+" replace current word from first line to last line (confirm required)
+nnoremap <leader>wS :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+nnoremap <leader>WS :%s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
