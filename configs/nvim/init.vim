@@ -3,7 +3,6 @@ source ~/.config/nvim/plug.vim
 lua require("LunarVim.init")
 lua require("vim-init")
 lua require("plug-dap-cpp")
-lua require("plug-telescope")
 lua require("plug-which-key")
 lua require("plug-zen-mode")
 
@@ -59,9 +58,6 @@ endfunction
 " 5: "make <target>" in <root> directory
 augroup asyncrun
     autocmd!
-    " Async Command Line
-    nnoremap <leader>as :call AsyncRunWith("")<Left><Left>
-    nnoremap <leader>aq :VimuxCloseRunner<CR>
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
     autocmd FileType c nnoremap <silent> <C-\>1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILEPATH) --clean_output")<CR>
@@ -139,11 +135,6 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " Set key to toggle number & relativenumber on/off
 noremap <silent> <F2> :set nonumber! norelativenumber!<CR>
 
-" source code plugins
-
-" vscode
-nnoremap <silent> <leader>oc :call OpenCurrentFileWith("code")<CR>
-
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
@@ -159,17 +150,17 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " ----------------------------------------------------------
-" ## Quick Replace
-nnoremap <leader>ss :.,$s@<C-R>=expand("<cword>")<CR>@@gc<Left><Left>
-" replace current word from current line to last line (confirm required)
-nnoremap <leader>sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-nnoremap <leader>sW :.,$s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
-" replace current word from first line to last line (confirm required)
-nnoremap <leader>sa :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-nnoremap <leader>sA :%s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
-" replace current word in last visual selection
-nnoremap <leader>sv :%s@\%V\<<C-R>=expand("<cword>")<CR>\>@@g<Left><Left>
-nnoremap <leader>sV :%s@\%V\<<C-R>=expand("<cWORD>")<CR>\>@@g<Left><Left>
+" " ## Quick Replace
+" nnoremap <leader>ss :.,$s@<C-R>=expand("<cword>")<CR>@@gc<Left><Left>
+" " replace current word from current line to last line (confirm required)
+" nnoremap <leader>sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+" nnoremap <leader>sW :.,$s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
+" " replace current word from first line to last line (confirm required)
+" nnoremap <leader>sa :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+" nnoremap <leader>sA :%s@\<<C-R>=expand("<cWORD>")<CR>\>@@gc<Left><Left><Left>
+" " replace current word in last visual selection
+" nnoremap <leader>sv :%s@\%V\<<C-R>=expand("<cword>")<CR>\>@@g<Left><Left>
+" nnoremap <leader>sV :%s@\%V\<<C-R>=expand("<cWORD>")<CR>\>@@g<Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
