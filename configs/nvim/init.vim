@@ -18,10 +18,16 @@ lua << EOF
     require("yanky").setup({})
     require("telescope").load_extension("yank_history")
 
-    -- clangd requires: clang>=11
+    -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    -- c/c++, requires: clang>=11
     require("lspconfig").clangd.setup({})
-    -- vimls requires: `npm install -g vim-language-server`
+    -- vim, requires: `npm install -g vim-language-server`
     require("lspconfig").vimls.setup({})
+    -- python, requires: `npm install -g pyright`
+    require("lspconfig").pyright.setup({})
+    -- bash, requires: `npm install -g bash-language-server`
+    require("lspconfig").bashls.setup({})
+    vim.g.python_host_prog = vim.fn.expand('/user/bin/python3')
 
     require("vim-init")
     require("plug-dap-cpp")
