@@ -34,8 +34,8 @@ fi
 # fi
 
 # nvim requirements
-echo "checking ArchLinux 'pac' requirements ..."
 if command -v pac &> /dev/null; then
+    echo "checking ArchLinux 'pac' requirements ..."
     if command -v python3 &> /dev/null; then
         if [[ ! $(python3 -m pip show hydra-core) ]] &> /dev/null ; then
             echo "installing hydra-core ..."
