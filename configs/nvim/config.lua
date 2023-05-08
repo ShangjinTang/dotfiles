@@ -97,13 +97,40 @@ lvim.builtin.treesitter.auto_install = true
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
     
-    -- Reference: https://github.com/navarasu/onedark.nvim
+    -- Themes
     {
         "navarasu/onedark.nvim",
         config = function()
             require("onedark").setup({
             })
             require('onedark').load()
+        end
+    },
+    {
+        "shaunsingh/nord.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        cmd = "colorscheme nord",
+        dependencies = {
+            "nvim-lualine/lualine.nvim",
+            "akinsho/bufferline.nvim",
+        },
+        config = function()
+            require('lualine').setup({
+                options = {
+                    theme = 'nord'
+                }
+            })
+            local highlights = require("nord").bufferline.highlights({
+                italic = true,
+                bold = true,
+            })
+            require("bufferline").setup({
+                options = {
+                    separator_style = "thin",
+                },
+                highlights = highlights,
+            })
         end
     },
 
