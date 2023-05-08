@@ -1,0 +1,24 @@
+[One Dark]
+text=abb2bf
+text(bold)=abb2bf
+background=1e2127
+black=1e2127
+black(bold)=1e2127
+blue=61afef
+blue(bold)=61afef
+cyan=56b6c2
+cyan(bold)=56b6c2
+green=98c379
+green(bold)=98c379
+magenta=c678dd
+magenta(bold)=c678dd
+red=e06c75
+red(bold)=e06c75
+white=828791
+white(bold)=e6efff
+yellow=d19a66
+yellow(bold)=d19a66
+[Names]
+name0=One Dark
+count=1
+
