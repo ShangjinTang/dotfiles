@@ -27,7 +27,7 @@ lua << EOF
     require("lspconfig").pyright.setup({})
     -- bash, requires: `npm install -g bash-language-server`
     require("lspconfig").bashls.setup({})
-    vim.g.python_host_prog = vim.fn.expand('/user/bin/python3')
+    vim.g.python_host_prog = vim.fn.expand('/usr/bin/python3')
 
     require("vim-init")
     require("plug-dap-cpp")
