@@ -281,6 +281,9 @@ alias e5='exa --tree --level=5'
 
 # git
 alias g='git'
+if command -v lazygit &> /dev/null; then
+    alias gg='lazygit'
+fi
 alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
 alias cdgitroot='cd $(git rev-parse --show-cdup)'
 
