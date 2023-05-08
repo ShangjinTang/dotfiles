@@ -5,7 +5,6 @@ call plug#begin()
     " nvim plugins
     " --------------------------------------------------
     " nvim themes
-    Plug 'navarasu/onedark.nvim'
     Plug 'shaunsingh/nord.nvim'
     " ======================================================================
     " vim script plugins

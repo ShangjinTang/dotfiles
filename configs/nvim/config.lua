@@ -97,6 +97,18 @@ lvim.builtin.treesitter.auto_install = true
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
     
+    -- Reference: https://github.com/navarasu/onedark.nvim
+    {
+        "navarasu/onedark.nvim",
+        config = function()
+            require("onedark").setup({
+            })
+            require('onedark').load()
+        end
+    },
+
+    -----------------------------------------------------------------
+
     -- Reference: https://github.com/kylechui/nvim-surround
     {
         "kylechui/nvim-surround",
