@@ -131,12 +131,12 @@ font:
     family: FiraCode Nerd Font Mono
     style: Bold Italic
 
-  size: 18
+  size: 11
 
-shell:
-  program: ssh
-  args:
-    - 172.19.40.49
+# shell:
+#   program: ssh
+#   args:
+#     - 192,168.199.199
 
 window:
   opacity: 0.8
