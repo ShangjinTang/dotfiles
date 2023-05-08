@@ -14,7 +14,7 @@ tmux:
     clear: '#[fg=default]'
     state: '#[fg=#d70000,bold]'
     branch: '#[fg=#98c379,bold]'
-    divergence: '#[fg=828791]'
+    divergence: '#[fg=#828791]'
     remote: '#[fg=#828791]'
     staged: '#[fg=#98c379,bold]'
     conflict: '#[fg=#b2b2b2,bold]'
