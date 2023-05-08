@@ -12,17 +12,15 @@ export TMUX_AUTO_LAUNCH=1
 # security setting
 export SKIP_SSL=1
 
-# terminal theme
-# export TERMINAL_THEME='light'
+# terminal theme: light | dark | nord
 export TERMINAL_THEME='dark'
-# export TERMINAL_THEME='nord'
 
 # vim extensions
 export VIM_CODEFMT_ENABLE=1
 #=====================================================================
 # default exports which do not suggest to modify
 
-export EDITOR=vim
+export EDITOR=nvim
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
