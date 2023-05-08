@@ -137,8 +137,10 @@ _PATHAPPEND() {
 _PATHAPPEND ~/bin
 _PATHAPPEND ~/.local/bin
 
-# For go packages, such as bazel buildifier
+# For go binaries, such as bazel 'buildifier'
 _PATHAPPEND ~/go/bin
+# For cargo binaries, such as lua format tool 'stylua'
+_PATHAPPEND ~/.cargo/bin
 
 # Creating npm local directory for nvim lsp
 # Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
