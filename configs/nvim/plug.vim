@@ -2,10 +2,7 @@
 call plug#begin()
 
     " ======================================================================
-    " nvim plugins (not in LunarVim)
-    " --------------------------------------------------
-    " nvim bufferline
-    Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | Plug 'nvim-tree/nvim-web-devicons'
+    " nvim plugins
     " --------------------------------------------------
     " cscope tags
     Plug 'dhananjaylatkar/cscope_maps.nvim'

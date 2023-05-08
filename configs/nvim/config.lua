@@ -96,14 +96,9 @@ lvim.builtin.treesitter.auto_install = true
 
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
+    
+    -- Reference: https://github.com/kylechui/nvim-surround
     {
-        -- Reference: https://github.com/folke/trouble.nvim
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-    },
-
-    {
-        -- Reference: https://github.com/kylechui/nvim-surround
         "kylechui/nvim-surround",
         version = "*",
         event = "VeryLazy",
@@ -113,8 +108,28 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/akinsho/bufferline.nvim
     {
-        -- Reference: https://github.com/gelguy/wilder.nvim
+        "akinsho/bufferline.nvim",
+        version = "*",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            vim.opt.termguicolors = true
+            require("bufferline").setup({
+            })
+        end
+    },
+
+    -- Reference: https://github.com/folke/trouble.nvim
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
+
+    -- Reference: https://github.com/gelguy/wilder.nvim
+    {
         "gelguy/wilder.nvim",
         lazy = true,
         event = { "VeryLazy", "CmdlineEnter" },
@@ -197,8 +212,8 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/folke/zen-mode.nvim
     {
-        -- Reference: https://github.com/folke/zen-mode.nvim
         "folke/zen-mode.nvim",
         lazy = true,
         event = "VeryLazy",
