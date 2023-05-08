@@ -100,9 +100,17 @@ lvim.plugins = {
     -- Themes
     {
         "navarasu/onedark.nvim",
+        dependencies = {
+            "nvim-lualine/lualine.nvim",
+        },
         config = function()
             require("onedark").setup({
             })
+            require('lualine').setup {
+                options = {
+                  theme = 'onedark'
+                }
+            }
             require('onedark').load()
         end
     },
