@@ -37,7 +37,6 @@ lua << EOF
     require("vim-init")
     require("plug-dap-cpp")
     require("plug-which-key")
-    require("plug-zen-mode")
 EOF
 
 noremap <Space> <Nop>
