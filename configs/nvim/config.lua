@@ -122,6 +122,20 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
+    {
+        "dhananjaylatkar/cscope_maps.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        dependencies = {
+            "which-key.nvim",
+        },
+        config = function()
+            require("cscope_maps").setup({
+            })
+        end
+    },
+
     -- Reference: https://github.com/folke/trouble.nvim
     {
         "folke/trouble.nvim",
