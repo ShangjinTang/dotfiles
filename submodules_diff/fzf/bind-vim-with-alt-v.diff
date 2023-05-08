@@ -1,5 +1,5 @@
 diff --git a/shell/key-bindings.zsh b/shell/key-bindings.zsh
-index fe219bf..eb22a93 100644
+index fe219bf..91cb825 100644
 --- a/shell/key-bindings.zsh
 +++ b/shell/key-bindings.zsh
 @@ -114,6 +114,37 @@ bindkey -M emacs '^R' fzf-history-widget
@@ -7,8 +7,8 @@ index fe219bf..eb22a93 100644
  bindkey -M viins '^R' fzf-history-widget
  
 +# SolAdd begin
-+# ALT-V - open the selected file path(s) with vim
-+fzf-vim-widget() {
++# ALT-V - open the selected file path(s) with vim / nvim
++fzf-nvim-widget() {
 +  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
 +    -o -type f -print \
 +    -o -type d -print \
@@ -24,17 +24,17 @@ index fe219bf..eb22a93 100644
 +    zle redisplay
 +    return 0
 +  fi
-+  BUFFER="vim ${items}"
++  BUFFER="v ${items}"
 +  zle accept-line
 +  local ret=$?
 +  unset items # ensure this doesn't end up appearing in prompt expansion
 +  zle reset-prompt
 +  return $ret
 +}
-+zle     -N            fzf-vim-widget
-+bindkey -M emacs '\ev' fzf-vim-widget
-+bindkey -M vicmd '\ev' fzf-vim-widget
-+bindkey -M viins '\ev' fzf-vim-widget
++zle     -N            fzf-v-widget
++bindkey -M emacs '\ev' fzf-v-widget
++bindkey -M vicmd '\ev' fzf-v-widget
++bindkey -M viins '\ev' fzf-v-widget
 +# SolAdd end
 +
  } always {
