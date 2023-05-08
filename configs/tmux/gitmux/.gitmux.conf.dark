@@ -13,15 +13,15 @@ tmux:
   styles:
     clear: '#[fg=default]'
     state: '#[fg=#d70000,bold]'
-    branch: '#[fg=#ff5faf,bold]'
-    remote: '#[fg=#808080]'
-    staged: '#[fg=#5faf00,bold]'
-    conflict: '#[fg=#eeeeee,bold]'
-    modified: '#[fg=#eeeeee,bold]'
-    untracked: '#[fg=#ff5faf,bold]'
-    stashed: '#[fg=#0087af,bold]'
-    clean: '#[fg=#5faf00,bold]'
-    divergence: '#[fg=eeeeee]'
+    branch: '#[fg=#98c379,bold]'
+    divergence: '#[fg=828791]'
+    remote: '#[fg=#828791]'
+    staged: '#[fg=#98c379,bold]'
+    conflict: '#[fg=#b2b2b2,bold]'
+    modified: '#[fg=#e06c75,bold]'
+    untracked: '#[fg=#e06c75,bold]'
+    stashed: '#[fg=#61afef,bold]'
+    clean: '#[fg=#98c379,bold]'
   layout: [branch, .. , remote-branch, divergence, ' - ', flags]
   options:
     branch_max_len: 0
