@@ -2,14 +2,9 @@
 call plug#begin()
 
     " ======================================================================
-    " nvim plugins
-    " --------------------------------------------------
-    " nvim themes
-    Plug 'shaunsingh/nord.nvim'
-    " ======================================================================
     " vim script plugins
     " --------------------------------------------------
-    " git plugins
+    " git plugin
     Plug 'tpope/vim-fugitive'
     " fuzzy finder
     Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
