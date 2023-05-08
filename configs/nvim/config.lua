@@ -136,6 +136,16 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/gbprod/substitute.nvim
+    {
+        "gbprod/substitute.nvim",
+        lazy = true,
+        config = function()
+            require("substitute").setup({
+            })
+        end
+    },
+
     -- Reference: https://github.com/folke/trouble.nvim
     {
         "folke/trouble.nvim",

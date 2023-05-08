@@ -4,9 +4,6 @@ call plug#begin()
     " ======================================================================
     " nvim plugins
     " --------------------------------------------------
-    " quick substitute (such as siw)
-    Plug 'gbprod/substitute.nvim'
-    " --------------------------------------------------
     " nvim themes
     Plug 'navarasu/onedark.nvim'
     Plug 'shaunsingh/nord.nvim'
