@@ -212,6 +212,18 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/gbprod/yanky.nvim
+    {
+        "gbprod/yanky.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        cmd = "Telescope yank_history",
+        config = function()
+            require("yanky").setup({
+            })
+        end
+    },
+
     -- Reference: https://github.com/folke/zen-mode.nvim
     {
         "folke/zen-mode.nvim",
