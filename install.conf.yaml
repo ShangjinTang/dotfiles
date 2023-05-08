@@ -63,6 +63,7 @@
     ~/.hammerspoon: macos/hammerspoon
     ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner/custom.json
     ~/.config/clash/config.yaml: macos/clash/config.yaml
+    ~/Library/Application Support/lazygit/config.yml: configs/lazygit/config.yml
 
 
 
@@ -80,6 +81,7 @@
 - link:
     ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
+    ~/.config/lazygit/config.yml: configs/lazygit/config.yml
 
 
 # ArchLinux
