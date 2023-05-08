@@ -10,9 +10,6 @@ call plug#begin()
     " quick substitute (such as siw)
     Plug 'gbprod/substitute.nvim'
     " --------------------------------------------------
-    " nvim yanky
-    Plug 'gbprod/yanky.nvim'
-    " --------------------------------------------------
     " nvim themes
     Plug 'navarasu/onedark.nvim'
     Plug 'shaunsingh/nord.nvim'
