@@ -1,18 +1,8 @@
 " Reference: https://github.com/junegunn/vim-plug
 call plug#begin()
+
     " ======================================================================
-    " 1. nvim lua plugins (in LunarVim)
-    " --------------------------------------------------
-    " nvim telescope
-    " Plug 'nvim-telescope/telescope.nvim' | Plug 'nvim-lua/plenary.nvim'
-    " " --------------------------------------------------
-    " nvim which-key
-    " Plug 'folke/which-key.nvim'
-    " ======================================================================
-    " 2. nvim lua plugins (not in LunarVim)
-    " --------------------------------------------------
-    " nvim zen-mode
-    Plug 'folke/zen-mode.nvim', { 'on': ['ZenMode', 'ZenMode!'] }
+    " nvim plugins (not in LunarVim)
     " --------------------------------------------------
     " nvim bufferline
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | Plug 'nvim-tree/nvim-web-devicons'
@@ -30,7 +20,7 @@ call plug#begin()
     Plug 'navarasu/onedark.nvim'
     Plug 'shaunsingh/nord.nvim'
     " ======================================================================
-    " 3. vim script plugins
+    " vim script plugins
     " --------------------------------------------------
     " git plugins
     Plug 'tpope/vim-fugitive'

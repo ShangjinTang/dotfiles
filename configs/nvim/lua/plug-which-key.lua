@@ -55,8 +55,13 @@ wk.register({
 })
 
 wk.register({
+    ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
+    ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
+})
+
+wk.register({
     ["<leader>o"] = { name = "+Open with" },
-    ["<leader>oc"] = { "<cmd>call OpenCurrentFileWith('code')<cr>", "Open with vscode" },
+    ["<leader>oc"] = { "<cmd>call OpenCurrentFileWith('code')<cr>", "Open with VsCode" },
 })
 
 wk.register({

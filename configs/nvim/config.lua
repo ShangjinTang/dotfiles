@@ -96,10 +96,11 @@ lvim.builtin.treesitter.auto_install = true
 
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
-    -- {
-    --   "folke/trouble.nvim",
-    --   cmd = "TroubleToggle",
-    -- },
+    {
+        -- Reference: https://github.com/folke/trouble.nvim
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
 
     {
         -- Reference: https://github.com/kylechui/nvim-surround
@@ -116,7 +117,7 @@ lvim.plugins = {
         -- Reference: https://github.com/gelguy/wilder.nvim
         "gelguy/wilder.nvim",
         lazy = true,
-        event = "CmdlineEnter",
+        event = { "VeryLazy", "CmdlineEnter" },
         dependencies = {
             "romgrk/fzy-lua-native",
         },
@@ -193,6 +194,18 @@ lvim.plugins = {
                 ['/'] = wildmenu_renderer,
                 substitute = wildmenu_renderer,
             }))
+        end
+    },
+
+    {
+        -- Reference: https://github.com/folke/zen-mode.nvim
+        "folke/zen-mode.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        cmd = "ZenMode",
+        config = function()
+            require("zen-mode").setup({
+            })
         end
     },
 }
