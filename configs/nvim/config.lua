@@ -118,7 +118,6 @@ lvim.plugins = {
         "shaunsingh/nord.nvim",
         lazy = true,
         event = "VeryLazy",
-        cmd = "colorscheme nord",
         dependencies = {
             "nvim-lualine/lualine.nvim",
             "akinsho/bufferline.nvim",
