@@ -46,9 +46,6 @@ call plug#begin()
     " async run (with tmux)
     Plug 'skywind3000/asyncrun.vim' | Plug 'skywind3000/asynctasks.vim' | Plug 'preservim/vimux'
     " --------------------------------------------------
-    " comment plugins
-    Plug 'tpope/vim-surround'
-    " --------------------------------------------------
     " google code format
     Plug 'google/vim-codefmt' | Plug 'google/vim-maktaba' | Plug 'google/vim-glaive'
     " generate tags
