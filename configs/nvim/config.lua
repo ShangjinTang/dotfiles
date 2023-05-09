@@ -201,6 +201,7 @@ lvim.plugins = {
         end
     },
 
+    -- TODO: move vim-codefmt from plug.vim to here
     -- -- Reference: https://github.com/google/vim-codefmt
     -- {
     --     "google/vim-codefmt",
@@ -222,6 +223,32 @@ lvim.plugins = {
                 use_telescope = true,
             })
         end
+    },
+
+    -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
+    {
+        "theHamsta/nvim-dap-virtual-text",
+        event = "VeryLazy",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("nvim-dap-virtual-text").setup({
+            })
+        end
+    },
+
+    -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
+    {
+        "nvim-telescope/telescope-dap.nvim",
+        event = "VeryLazy",
+        cmd = "Telescope dap",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-treesitter/nvim-treesitter",
+            "folke/which-key.nvim",
+        },
     },
 
     -- Reference: https://github.com/tpope/vim-fugitive
@@ -296,7 +323,7 @@ lvim.plugins = {
         "honza/vim-snippets",
         event = "VeryLazy",
         dependencies = {
-	    "SirVer/ultisnips",
+            "SirVer/ultisnips",
         },
     },
 
