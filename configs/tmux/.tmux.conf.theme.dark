@@ -34,17 +34,17 @@ tmux_conf_theme_pane_border_style=thin
 # pane borders colours:
 # pane 分隔线颜色配置
 tmux_conf_theme_pane_border="#878787"
-tmux_conf_theme_pane_active_border="#d787d7"
+tmux_conf_theme_pane_active_border="#c678dd"
 
 # pane indicator colours
 # pane 指示器颜色配置 (Ctrl-b q)
 tmux_conf_theme_pane_indicator="#878787"
-tmux_conf_theme_pane_active_indicator="#d787d7"
+tmux_conf_theme_pane_active_indicator="#c678dd"
 
 # status line message style
 # 命令响应颜色配置 (如 Ctrl-b r)
 tmux_conf_theme_message_fg="#303030"
-tmux_conf_theme_message_bg="#87d787"
+tmux_conf_theme_message_bg="#98c379"
 tmux_conf_theme_message_attr="none"
 
 # status line command style (<prefix> : Escape)
@@ -68,12 +68,12 @@ tmux_conf_theme_window_status_bg="default"
 
 # window current status style
 tmux_conf_theme_window_status_current_fg="#303030"
-tmux_conf_theme_window_status_current_bg="#87d787"
+tmux_conf_theme_window_status_current_bg="#98c379"
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="default"
 tmux_conf_theme_window_status_activity_bg="default"
-tmux_conf_theme_window_status_activity_attr="underscore"
+tmux_conf_theme_window_status_activity_attr="none"
 
 # window bell status style
 tmux_conf_theme_window_status_bell_fg="#ffff00"
@@ -82,20 +82,20 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 # 上一次 tab 颜色配置
-tmux_conf_theme_window_status_last_fg="#87d787"
+tmux_conf_theme_window_status_last_fg="#98c379"
 tmux_conf_theme_window_status_last_bg="default"
-tmux_conf_theme_window_status_last_attr="bold"
+tmux_conf_theme_window_status_last_attr="none"
 
 # status left style
 # 状态栏左侧颜色
 tmux_conf_theme_status_left_fg="#303030,#303030,#b2b2b2"
-tmux_conf_theme_status_left_bg="#87d787,#d787d7,default"
+tmux_conf_theme_status_left_bg="#98c379,#c678dd,default"
 tmux_conf_theme_status_left_attr="none,none,none"
 
 # status right style
 # 状态栏右侧颜色
-tmux_conf_theme_status_right_fg="#000000,#303030,#303030,#b2b2b2"
-tmux_conf_theme_status_right_bg="default,#87d787,#d787d7,default"
+tmux_conf_theme_status_right_fg="#000000,#98c379,#c678dd,#abb2bf"
+tmux_conf_theme_status_right_bg="default,default,default,default"
 tmux_conf_theme_status_right_attr="none,none,none,none"
 
 # pairing indicator
