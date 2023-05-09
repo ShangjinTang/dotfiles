@@ -291,7 +291,7 @@ lvim.plugins = {
 
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
     {
-        "williamboman/mason-lspconfig.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
         event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim",
@@ -299,6 +299,40 @@ lvim.plugins = {
         config = function()
             require("mason").setup({
             })
+            require("mason-lspconfig").setup({
+            })
+            -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+            require("lspconfig").clangd.setup({})
+            require("lspconfig").vimls.setup({})
+            require("lspconfig").lua_ls.setup({})
+            require("lspconfig").pyright.setup({})
+            require("lspconfig").bashls.setup({})
+        end
+    },
+
+    -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        config = function()
+            require("mason-nvim-dap").setup({
+                -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+                ensure_installed = { "python", "cppdbg" }
+            })
+        end
+    },
+
+    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
+    {
+        "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        config = function()
             require("mason-lspconfig").setup({
             })
             -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
