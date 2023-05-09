@@ -116,7 +116,7 @@ lvim.plugins = {
             })
             require('lualine').setup {
                 options = {
-                    theme = 'onedark'
+                    theme = 'onedark',
                 },
             }
             local bufferline = require('bufferline')
@@ -194,6 +194,15 @@ lvim.plugins = {
             })
         end
     },
+
+    -- -- Reference: https://github.com/google/vim-codefmt
+    -- {
+    --     "google/vim-codefmt",
+    --     dependencies = {
+    --         "google/vim-glaive",
+    --         "google/vim-maktaba",
+    --     },
+    -- },
 
     -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
     {
@@ -273,6 +282,18 @@ lvim.plugins = {
     -- Reference: https://github.com/gbprod/airblade/vim-rooter
     {
         "airblade/vim-rooter",
+        event = "VeryLazy",
+    },
+
+    -- Reference: https://github.com/honza/vim-snippets
+    {
+        "honza/vim-snippets",
+        event = "VeryLazy",
+    },
+
+    -- Reference: https://github.com/SirVer/ultisnips
+    {
+        "SirVer/ultisnips",
         event = "VeryLazy",
     },
 
@@ -447,6 +468,12 @@ lvim.plugins = {
             require("zen-mode").setup({
             })
         end
+    },
+
+    -- Reference: https://github.com/ludovicchabant/vim-gutentags
+    {
+        "ludovicchabant/vim-gutentags",
+        event = "VeryLazy",
     },
 }
 
