@@ -25,9 +25,6 @@ call plug#begin()
     " snippets
     Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
     " --------------------------------------------------
-    " debugging for startup slow
-    Plug 'dstein64/vim-startuptime'
-    " --------------------------------------------------
     " restore last place while opening same file
     Plug 'farmergreg/vim-lastplace'
 call plug#end()
