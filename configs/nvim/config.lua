@@ -105,6 +105,7 @@ lvim.plugins = {
         priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
+            "akinsho/bufferline.nvim",
         },
         config = function()
             require("onedark").setup({
@@ -114,6 +115,13 @@ lvim.plugins = {
                     theme = 'onedark'
                 },
             }
+            local bufferline = require('bufferline')
+            bufferline.setup({
+                options = {
+                    separator_style = "thin",
+                    style_preset = bufferline.style_preset.no_italic,
+                },
+            })
             require("which-key").setup({
                 window = {
                     border = "single",
@@ -124,32 +132,32 @@ lvim.plugins = {
         end
     },
 
-    {
-        "shaunsingh/nord.nvim",
-        lazy = true,
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-lualine/lualine.nvim",
-            "akinsho/bufferline.nvim",
-        },
-        config = function()
-            require('lualine').setup({
-                options = {
-                    theme = 'nord'
-                }
-            })
-            local highlights = require("nord").bufferline.highlights({
-                italic = true,
-                bold = true,
-            })
-            require("bufferline").setup({
-                options = {
-                    separator_style = "thin",
-                },
-                highlights = highlights,
-            })
-        end
-    },
+    -- {
+    --     "shaunsingh/nord.nvim",
+    --     lazy = true,
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "nvim-lualine/lualine.nvim",
+    --         "akinsho/bufferline.nvim",
+    --     },
+    --     config = function()
+    --         require('lualine').setup({
+    --             options = {
+    --                 theme = 'nord'
+    --             }
+    --         })
+    --         local highlights = require("nord").bufferline.highlights({
+    --             italic = true,
+    --             bold = true,
+    --         })
+    --         require("bufferline").setup({
+    --             options = {
+    --                 separator_style = "thin",
+    --             },
+    --             highlights = highlights,
+    --         })
+    --     end
+    -- },
 
     -----------------------------------------------------------------
 
