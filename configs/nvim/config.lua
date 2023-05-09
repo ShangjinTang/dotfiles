@@ -113,6 +113,10 @@ lvim.plugins = {
         },
         config = function()
             require("onedark").setup({
+                transparent = true,
+                lualine = {
+                    transparent = true,
+                },
             })
             require('lualine').setup {
                 options = {
@@ -122,6 +126,8 @@ lvim.plugins = {
             local bufferline = require('bufferline')
             bufferline.setup({
                 options = {
+                    diagnostics = "nvim_lsp",
+                    offsets = { { filetype = "NvimTree", text = "File Explorer", } },
                     separator_style = "thin",
                     style_preset = bufferline.style_preset.no_italic,
                 },
