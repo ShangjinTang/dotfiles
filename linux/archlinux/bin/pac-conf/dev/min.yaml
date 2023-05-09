@@ -8,7 +8,6 @@ clang: true
 # nvim
 nodejs: true
 npm: true
-lua-language-server: true
 # ------------------------------
 # python
 yapf: true  # python format
