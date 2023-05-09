@@ -24,7 +24,4 @@ call plug#begin()
     Plug 'ludovicchabant/vim-gutentags'
     " snippets
     Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-    " --------------------------------------------------
-    " restore last place while opening same file
-    Plug 'farmergreg/vim-lastplace'
 call plug#end()
