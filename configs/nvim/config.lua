@@ -98,10 +98,14 @@ lvim.builtin.treesitter.auto_install = true
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
 
+    -- Plugins will be lazy-loaded when one of the following is true:
+    --   - The plugin only exists as a dependency in your spec
+    --   - It has an event, cmd, ft or keys key
+    --   - lazy = true
+
     -- Themes
     {
         "navarasu/onedark.nvim",
-        lazy = false,
         priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
@@ -134,7 +138,6 @@ lvim.plugins = {
 
     -- {
     --     "shaunsingh/nord.nvim",
-    --     lazy = true,
     --     event = "VeryLazy",
     --     dependencies = {
     --         "nvim-lualine/lualine.nvim",
@@ -164,13 +167,18 @@ lvim.plugins = {
     -- Reference: https://github.com/skywind3000/asyncrun.vim
     {
         "skywind3000/asyncrun.vim",
-        lazy = true,
         event = "VeryLazy",
         cmd = "AsyncRun",
         dependencies = {
             "skywind3000/asynctasks.vim",
             "preservim/vimux",
         },
+    },
+
+    -- Reference: https://github.com/MattesGroeger/vim-bookmarks
+    {
+        "MattesGroeger/vim-bookmarks",
+        event = "VeryLazy",
     },
 
     -- Reference: https://github.com/akinsho/bufferline.nvim
@@ -190,7 +198,6 @@ lvim.plugins = {
     -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
     {
         "dhananjaylatkar/cscope_maps.nvim",
-        lazy = true,
         event = "VeryLazy",
         dependencies = {
             "which-key.nvim",
@@ -205,7 +212,6 @@ lvim.plugins = {
     -- Reference: https://github.com/tpope/vim-fugitive
     {
         "tpope/vim-fugitive",
-        lazy = true,
         event = "VeryLazy",
         cmd = { "Git", "G" },
     },
@@ -213,7 +219,6 @@ lvim.plugins = {
     -- Reference: https://github.com/tpope/vim-fugitive
     {
         "junegunn/fzf.vim",
-        lazy = true,
         event = "VeryLazy",
         cmd = { "Files", "GFiles", "Buffers", "Colors", "Rg", "Lines", "BLines", "Tags", "BTags", "Marks", "Windows",
             "Locate", "History", "Snippets", "Commits", "BCommits", "Commands", "Maps", "Helptags", "Filetypes" },
@@ -222,7 +227,6 @@ lvim.plugins = {
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
-        lazy = false,
         config = function()
             require("nvim-lastplace").setup({
             })
@@ -232,7 +236,6 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/noice.nvim
     {
         "folke/noice.nvim",
-        lazy = false,
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
@@ -331,7 +334,6 @@ lvim.plugins = {
     -- Reference: https://github.com/gelguy/wilder.nvim
     {
         "gelguy/wilder.nvim",
-        lazy = true,
         event = { "VeryLazy", "CmdlineEnter" },
         dependencies = {
             "romgrk/fzy-lua-native",
@@ -415,7 +417,6 @@ lvim.plugins = {
     -- Reference: https://github.com/gbprod/yanky.nvim
     {
         "gbprod/yanky.nvim",
-        lazy = true,
         event = "VeryLazy",
         cmd = "Telescope yank_history",
         config = function()
@@ -428,7 +429,6 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/zen-mode.nvim
     {
         "folke/zen-mode.nvim",
-        lazy = true,
         event = "VeryLazy",
         cmd = "ZenMode",
         config = function()
