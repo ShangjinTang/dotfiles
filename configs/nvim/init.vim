@@ -1,5 +1,3 @@
-source ~/.config/nvim/plug.vim
-
 lua require("LunarVim.init")
 
 lua << EOF
@@ -27,6 +25,11 @@ lua << EOF
     require("plug-which-key")
 
 EOF
+
+call plug#begin()
+    " google code format
+    Plug 'google/vim-codefmt' | Plug 'google/vim-maktaba' | Plug 'google/vim-glaive'
+call plug#end()
 
 noremap <Space> <Nop>
 
