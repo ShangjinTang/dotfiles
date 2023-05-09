@@ -20,7 +20,8 @@ abbr gbd='git branch -d'
 abbr gbl='git blame -b -w'
 
 abbr gc="git commit -v"
-abbr gc!="git commit --amend"
+abbr gcm="git commit -m"
+abbr gc!="git commit -v --amend"
 abbr gcn='git commit -v --no-edit'
 abbr gcn!='git commit -v --no-edit --amend'
 abbr gca='git commit -v -a'
@@ -66,11 +67,12 @@ abbr csg="fzf_cscope_find_g"
 abbr css="fzf_cscope_find_s"
 
 #---------------------------------------------------------------------
-# git + fzf (TODO: find better names)
+# git + fzf
 
-abbr gglf="fzf_git_log_follow"
-abbr ggsh="fzf_git_show"
-abbr ggst="fzf_git_status"
+abbr Glf="fzf_git_log_follow"
+abbr Gsh="fzf_git_show"
+abbr Gst="fzf_git_status"
+abbr Gd="fzf_git_status"
 
 #---------------------------------------------------------------------
 # ... + fzf
