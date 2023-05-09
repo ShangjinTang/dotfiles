@@ -1,6 +1,5 @@
 local dap = require('dap')
 
--- Requires: ':MasonInstall cpptools'
 dap.adapters.cppdbg = {
     id = 'cppdbg',
     type = 'executable',
