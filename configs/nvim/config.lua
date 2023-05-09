@@ -161,15 +161,16 @@ lvim.plugins = {
 
     -----------------------------------------------------------------
 
-    -- Reference: https://github.com/kylechui/nvim-surround
+    -- Reference: https://github.com/skywind3000/asyncrun.vim
     {
-        "kylechui/nvim-surround",
-        version = "*",
+        "skywind3000/asyncrun.vim",
+        lazy = true,
         event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({
-            })
-        end
+        cmd = "AsyncRun",
+        dependencies = {
+            "skywind3000/asynctasks.vim",
+            "preservim/vimux",
+        },
     },
 
     -- Reference: https://github.com/akinsho/bufferline.nvim
@@ -256,10 +257,17 @@ lvim.plugins = {
         config = function()
             require("substitute").setup({
             })
-            vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
-            vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
-            vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
-            vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
+        end
+    },
+
+    -- Reference: https://github.com/kylechui/nvim-surround
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+            })
         end
     },
 

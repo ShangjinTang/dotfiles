@@ -5,6 +5,15 @@ local wk = require("which-key")
 -- <leader><leader> is already registered as "Toggle Terminal" in LunarVim terminal.lua
 
 wk.register({
+    ["s"] = { require('substitute').operator, "Substitute Operator" },
+    ["ss"] = { require('substitute').line, "Substitute Line" },
+    ["S"] = { require('substitute').line, "Substitute to End of Line" },
+})
+wk.register({
+    ["s"] = { require('substitute').operator, "Substitute Operator" },
+}, { mode = "v" })
+
+wk.register({
     ["<leader>c"] = { name = "+Cscope" }, -- cscope_maps.nvim
     ["<leader>y"] = { "<cmd>Telescope yank_history<cr>", "Yank History" },
 })
