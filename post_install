@@ -59,15 +59,6 @@ if command -v python3 &> /dev/null; then
         python3 -m pip install --user pynvim > /dev/null
     fi
 fi
-if command -v npm &> /dev/null; then
-    LS_PACKAGES=( vim-language-server pyright bash-language-server )
-    for LS_PACKAGE in "${LS_PACKAGES[@]}"; do
-        if ! command -v ${LS_PACKAGE} &> /dev/null; then
-            echo "installing ${LS_PACKAGE} ..."
-            npm install -g ${LS_PACKAGE} > /dev/null
-        fi
-    done
-fi
 
 function apply_diff_for_submodule() {
     local target_folder=./submodules/$1

@@ -289,6 +289,27 @@ lvim.plugins = {
             "Locate", "History", "Snippets", "Commits", "BCommits", "Commands", "Maps", "Helptags", "Filetypes" },
     },
 
+    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
+    {
+        "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        config = function()
+            require("mason").setup({
+            })
+            require("mason-lspconfig").setup({
+            })
+            -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+            require("lspconfig").clangd.setup({})
+            require("lspconfig").vimls.setup({})
+            require("lspconfig").lua_ls.setup({})
+            require("lspconfig").pyright.setup({})
+            require("lspconfig").bashls.setup({})
+        end
+    },
+
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
