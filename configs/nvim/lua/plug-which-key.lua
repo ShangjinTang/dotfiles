@@ -7,7 +7,7 @@ local wk = require("which-key")
 wk.register({
     ["s"] = { require('substitute').operator, "Substitute Operator" },
     ["ss"] = { require('substitute').line, "Substitute Line" },
-    ["S"] = { require('substitute').line, "Substitute to End of Line" },
+    ["S"] = { require('substitute').eol, "Substitute to End of Line" },
 })
 wk.register({
     ["s"] = { require('substitute').operator, "Substitute Operator" },
