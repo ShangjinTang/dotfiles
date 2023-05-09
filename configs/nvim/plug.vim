@@ -4,8 +4,6 @@ call plug#begin()
     " ======================================================================
     " vim script plugins
     " --------------------------------------------------
-    " git plugin
-    Plug 'tpope/vim-fugitive'
     " fuzzy finder
     Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
     " --------------------------------------------------

@@ -202,6 +202,14 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/tpope/vim-fugitive
+    {
+        "tpope/vim-fugitive",
+        lazy = true,
+        event = "VeryLazy",
+        cmd = { "Git", "G" },
+    },
+
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
