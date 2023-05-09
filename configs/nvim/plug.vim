@@ -4,8 +4,6 @@ call plug#begin()
     " ======================================================================
     " vim script plugins
     " --------------------------------------------------
-    " fuzzy finder
-    Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
     " --------------------------------------------------
     " project management
     Plug 'MattesGroeger/vim-bookmarks'

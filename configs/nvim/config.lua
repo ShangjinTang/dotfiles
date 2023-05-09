@@ -210,6 +210,15 @@ lvim.plugins = {
         cmd = { "Git", "G" },
     },
 
+    -- Reference: https://github.com/tpope/vim-fugitive
+    {
+        "junegunn/fzf.vim",
+        lazy = true,
+        event = "VeryLazy",
+        cmd = { "Files", "GFiles", "Buffers", "Colors", "Rg", "Lines", "BLines", "Tags", "BTags", "Marks", "Windows",
+            "Locate", "History", "Snippets", "Commits", "BCommits", "Commands", "Maps", "Helptags", "Filetypes" },
+    },
+
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
