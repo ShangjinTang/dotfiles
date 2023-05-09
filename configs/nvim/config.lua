@@ -268,6 +268,18 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/folke/todo-comments.nvim
+    {
+        "folke/todo-comments.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("todo-comments").setup({
+            })
+        end
+    },
+
     -- Reference: https://github.com/kylechui/nvim-surround
     {
         "kylechui/nvim-surround",

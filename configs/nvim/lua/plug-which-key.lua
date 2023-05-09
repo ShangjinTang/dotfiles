@@ -37,6 +37,7 @@ wk.register({
 
 wk.register({
     ["<leader>a"] = { name = "+AsyncRun" },
+    -- FIXME: this cannot work as <cmd> should end with <>
     ["<leader>as"] = { "<cmd>call AsyncRunWith('')<left><left>", "Asyncrun Command" },
     ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit Asyncrun Window" },
 })
