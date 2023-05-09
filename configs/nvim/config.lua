@@ -101,6 +101,8 @@ lvim.plugins = {
     -- Themes
     {
         "navarasu/onedark.nvim",
+        lazy = false,
+        priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
         },
@@ -110,11 +112,18 @@ lvim.plugins = {
             require('lualine').setup {
                 options = {
                   theme = 'onedark'
-                }
+                },
             }
+            require("which-key").setup({
+                window = {
+                    border = "single",
+                    winblend = 20,
+                },
+            })
             require('onedark').load()
         end
     },
+
     {
         "shaunsingh/nord.nvim",
         lazy = true,
@@ -189,7 +198,7 @@ lvim.plugins = {
         "ethanholz/nvim-lastplace",
         lazy = false,
         config = function()
-            require("cscope_maps").setup({
+            require("nvim-lastplace").setup({
             })
         end
     },
