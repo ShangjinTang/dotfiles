@@ -30,6 +30,7 @@ export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
 # xterm-256 color chart:
 #   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 export TERM=xterm-256color
+# True Color for TMUX
 export COLORTERM=truecolor
 
 # shell: zsh/bash
@@ -41,7 +42,8 @@ case ${SHELL_NAME} in
         ;;
     zsh)
         export IS_BASH=false
-        export IS_ZSH=true ;;
+        export IS_ZSH=true
+        ;;
 esac
 if $IS_ZSH; then
     export ZSH_DISABLE_COMPFIX=1

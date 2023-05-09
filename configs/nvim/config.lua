@@ -291,16 +291,13 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 
-    -- Reference: https://github.com/honza/vim-snippets
+    -- Reference: https://github.com/SirVer/ultisnips
     {
         "honza/vim-snippets",
         event = "VeryLazy",
-    },
-
-    -- Reference: https://github.com/SirVer/ultisnips
-    {
-        "SirVer/ultisnips",
-        event = "VeryLazy",
+        dependencies = {
+	    "SirVer/ultisnips",
+        },
     },
 
     -- Reference: https://github.com/gbprod/substitute.nvim
