@@ -9,6 +9,8 @@ lua << EOF
     require("lspconfig").clangd.setup({})
     -- vim, requires: `npm install -g vim-language-server`
     require("lspconfig").vimls.setup({})
+    -- lua, requires: `pacman -Sy lua-language-server` (ArchLinux)
+    require("lspconfig").lua_ls.setup({})
     -- python, requires: `npm install -g pyright`
     require("lspconfig").pyright.setup({})
     -- bash, requires: `npm install -g bash-language-server`
