@@ -4,9 +4,7 @@ call plug#begin()
     " ======================================================================
     " vim script plugins
     " --------------------------------------------------
-    " --------------------------------------------------
     " project management
-    Plug 'MattesGroeger/vim-bookmarks'
     Plug 'airblade/vim-rooter'
     " --------------------------------------------------
     " use same keys navigate between tmux/vim
