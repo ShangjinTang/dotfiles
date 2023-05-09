@@ -8,7 +8,7 @@ index fe219bf..91cb825 100644
  
 +# SolAdd begin
 +# ALT-V - open the selected file path(s) with vim / nvim
-+fzf-nvim-widget() {
++fzf-v-widget() {
 +  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
 +    -o -type f -print \
 +    -o -type d -print \
