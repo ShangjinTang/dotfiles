@@ -183,30 +183,14 @@ lvim.plugins = {
         end
     },
 
-
-    -- Reference: https://github.com/dstein64/vim-startuptime
+    -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
-        "dstein64/vim-startuptime",
-        cmd = "StartupTime",
-        init = function()
-            vim.g.startuptime_tries = 10
-        end,
-    },
-
-    -- Reference: https://github.com/gbprod/substitute.nvim
-    {
-        "gbprod/substitute.nvim",
-        lazy = true,
+        "ethanholz/nvim-lastplace",
+        lazy = false,
         config = function()
-            require("substitute").setup({
+            require("cscope_maps").setup({
             })
         end
-    },
-
-    -- Reference: https://github.com/folke/trouble.nvim
-    {
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
     },
 
     -- Reference: https://github.com/folke/noice.nvim
@@ -245,6 +229,31 @@ lvim.plugins = {
                 },
             })
         end
+    },
+
+    -- Reference: https://github.com/gbprod/substitute.nvim
+    {
+        "gbprod/substitute.nvim",
+        lazy = true,
+        config = function()
+            require("substitute").setup({
+            })
+        end
+    },
+
+    -- Reference: https://github.com/folke/trouble.nvim
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
+
+    -- Reference: https://github.com/dstein64/vim-startuptime
+    {
+        "dstein64/vim-startuptime",
+        cmd = "StartupTime",
+        init = function()
+            vim.g.startuptime_tries = 10
+        end,
     },
 
     -- Reference: https://github.com/gelguy/wilder.nvim
