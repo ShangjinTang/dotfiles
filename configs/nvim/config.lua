@@ -270,6 +270,12 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/gbprod/airblade/vim-rooter
+    {
+        "airblade/vim-rooter",
+        event = "VeryLazy",
+    },
+
     -- Reference: https://github.com/gbprod/substitute.nvim
     {
         "gbprod/substitute.nvim",
@@ -278,6 +284,12 @@ lvim.plugins = {
             require("substitute").setup({
             })
         end
+    },
+
+    -- Reference: https://github.com/gbprod/christoomey/vim-tmux-navigator
+    {
+        "christoomey/vim-tmux-navigator",
+        event = "VeryLazy",
     },
 
     -- Reference: https://github.com/folke/todo-comments.nvim
