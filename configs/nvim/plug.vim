@@ -15,8 +15,6 @@ call plug#begin()
     " --------------------------------------------------
     " use same keys navigate between tmux/vim
     Plug 'christoomey/vim-tmux-navigator'
-    " async run (with tmux)
-    Plug 'skywind3000/asyncrun.vim' | Plug 'skywind3000/asynctasks.vim' | Plug 'preservim/vimux'
     " --------------------------------------------------
     " google code format
     Plug 'google/vim-codefmt' | Plug 'google/vim-maktaba' | Plug 'google/vim-glaive'
