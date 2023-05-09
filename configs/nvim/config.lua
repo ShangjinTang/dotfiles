@@ -25,7 +25,8 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- -- Change theme settings
--- lvim.colorscheme = "lunar"
+lvim.colorscheme = "onedark"
+lvim.transparent_window = true
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -206,6 +207,44 @@ lvim.plugins = {
     {
         "folke/trouble.nvim",
         cmd = "TroubleToggle",
+    },
+
+    -- Reference: https://github.com/folke/noice.nvim
+    {
+        "folke/noice.nvim",
+        lazy = false,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = function()
+            require("notify").setup({
+                background_colour = "#282A36"
+            })
+            require("noice").setup({
+                cmdline = {
+                    view = "cmdline",
+                    enable = false,
+                },
+                messages = {
+                    enable = false,
+                },
+                lsp = {
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true,
+                    },
+                },
+                presets = {
+                    bottom_search = false, -- use a classic bottom cmdline for search
+                    command_palette = false, -- position the cmdline and popupmenu together
+                    long_message_to_split = false, -- long messages will be sent to a split
+                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false, -- add a border to hover docs and signature help
+                },
+            })
+        end
     },
 
     -- Reference: https://github.com/gelguy/wilder.nvim
