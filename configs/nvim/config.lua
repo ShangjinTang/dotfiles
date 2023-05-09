@@ -95,6 +95,29 @@ lvim.builtin.treesitter.auto_install = true
 --   },
 -- }
 
+lvim.builtin.telescope.pickers = {
+    find_files = {
+        layout_config = {
+            width = { 0.8, max = 120 },
+        },
+    },
+    git_files = {
+        layout_config = {
+            width = { 0.8, max = 120 },
+        },
+    },
+    grep_string = {
+        layout_config = {
+            width = { 0.8, max = 120 },
+        },
+    },
+    live_grep = {
+        layout_config = {
+            width = { 0.8, max = 120 },
+        },
+    },
+}
+
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
 
