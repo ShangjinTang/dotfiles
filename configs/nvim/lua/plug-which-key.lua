@@ -56,11 +56,7 @@ wk.register({
 })
 
 wk.register({
-    ["<leader>D"] = { name = "+Telescope Dap" },
-    ["<leader>Dc"] = { function() require 'telescope'.extensions.dap.commands {} end, "Dap commands" },
-    ["<leader>Dl"] = { function() require 'telescope'.extensions.dap.list_breakpoints {} end, "Dap list breakpoints" },
-    ["<leader>Dv"] = { function() require 'telescope'.extensions.dap.variables {} end, "Dap variables" },
-    ["<leader>Df"] = { function() require 'telescope'.extensions.dap.frames {} end, "Dap frames" },
+    ["<leader>D"] = { function() require 'telescope'.extensions.dap.commands {} end, "Dap commands" },
 })
 
 wk.register({
