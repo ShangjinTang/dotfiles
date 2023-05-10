@@ -12,12 +12,12 @@ tmux:
     clean: ✔
   styles:
     clear: '#[fg=default]'
-    state: '#[fg=#d70000,bold]'
+    state: '#[fg=#56b6c2,bold]'
     branch: '#[fg=#98c379,bold]'
-    divergence: '#[fg=#828791]'
-    remote: '#[fg=#828791]'
+    divergence: '#[fg=#5c6370]'
+    remote: '#[fg=#5c6370]'
     staged: '#[fg=#98c379,bold]'
-    conflict: '#[fg=#b2b2b2,bold]'
+    conflict: '#[fg=#e06c75,bold]'
     modified: '#[fg=#e06c75,bold]'
     untracked: '#[fg=#e06c75,bold]'
     stashed: '#[fg=#61afef,bold]'
