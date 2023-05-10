@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
-index 2ab47b05..ec8beae2 100644
+index 2ab47b05..22f8dc0c 100644
 --- a/lua/lvim/core/which-key.lua
 +++ b/lua/lvim/core/which-key.lua
 @@ -104,24 +104,24 @@ M.config = function()
@@ -38,11 +38,45 @@ index 2ab47b05..ec8beae2 100644
          W = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
          -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
          e = {
-@@ -159,7 +159,7 @@ M.config = function()
-         q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-         U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
+@@ -142,24 +142,24 @@ M.config = function()
+           "Sort by language",
+         },
        },
+-      d = {
+-        name = "Debug",
+-        t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+-        b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
+-        c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+-        C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
+-        d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
+-        g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
+-        i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+-        o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+-        u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+-        p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
+-        r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+-        s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
+-        q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
+-        U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
+-      },
 -      p = {
++      -- d = {
++      --     name = "Debug",
++      --     t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
++      --     b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
++      --     c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
++      --     C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
++      --     d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
++      --     g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
++      --     i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
++      --     o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
++      --     u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
++      --     p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
++      --     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
++      --     s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
++      --     q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
++      --     U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
++      -- },
 +      P = {
          name = "Plugins",
          i = { "<cmd>Lazy install<cr>", "Install" },

@@ -46,11 +46,24 @@ wk.register({
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
 
-    ["<leader>dS"] = { function()
+    ["<leader>d"] = { name = "+Dap" },
+    -- mostly follow gdb/ldb mappings
+    ["<leader>db"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "b(reakpoint)" },
+    ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "c(ontinue)" },
+    ["<leader>dr"] = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "run to cursor" },
+    ["<leader>ds"] = { "<cmd>lua require'dap'.step_into()<cr>", "s(tep) [step into]" },
+    ["<leader>dn"] = { "<cmd>lua require'dap'.step_over()<cr>", "n(ext) [step over]" },
+    ["<leader>do"] = { "<cmd>lua require'dap'.step_out()<cr>", "finish [step out]" },
+    -- DapUI
+    ["<leader>dd"] = { function()
         require 'dap'.disconnect()
         require 'dapui'.toggle({ reset = true })
-    end, "Stop" },
-
+    end, "Disconnect" },
+    ["<leader>du"] = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle Dap UI" },
+    -- Dap + Telescope
+    ["<leader>dl"] = { function() require 'telescope'.extensions.dap.list_breakpoints {} end, "Dap list breakpoints" },
+    ["<leader>dv"] = { function() require 'telescope'.extensions.dap.variables {} end, "Dap variables" },
+    ["<leader>df"] = { function() require 'telescope'.extensions.dap.frames {} end, "Dap frames" },
     ["<leader>D"] = { function() require 'telescope'.extensions.dap.commands {} end, "Dap commands" },
 
     ["<leader>gf"] = {
