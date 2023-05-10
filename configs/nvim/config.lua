@@ -224,15 +224,30 @@ lvim.plugins = {
         end
     },
 
-    -- TODO: move vim-codefmt from plug.vim to here
-    -- -- Reference: https://github.com/google/vim-codefmt
-    -- {
-    --     "google/vim-codefmt",
-    --     dependencies = {
-    --         "google/vim-glaive",
-    --         "google/vim-maktaba",
-    --     },
-    -- },
+    -- Reference: https://github.com/google/vim-codefmt
+    {
+        "google/vim-maktaba",
+        lazy = true,
+    },
+    {
+        "google/vim-glaive",
+        lazy = true,
+        dependencies = {
+            "google/vim-maktaba",
+        },
+    },
+    {
+        "google/vim-codefmt",
+        -- lazy = true,
+        dependencies = {
+            "google/vim-glaive",
+        },
+        config = function()
+            vim.cmd([[
+                call glaive#Install()
+            ]])
+        end
+    },
 
     -- Reference: https://github.com/jackMort/ChatGPT.nvim
     -- {
