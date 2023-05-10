@@ -165,32 +165,6 @@ lvim.plugins = {
         end
     },
 
-    -- {
-    --     "shaunsingh/nord.nvim",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "nvim-lualine/lualine.nvim",
-    --         "akinsho/bufferline.nvim",
-    --     },
-    --     config = function()
-    --         require('lualine').setup({
-    --             options = {
-    --                 theme = 'nord'
-    --             }
-    --         })
-    --         local highlights = require("nord").bufferline.highlights({
-    --             italic = true,
-    --             bold = true,
-    --         })
-    --         require("bufferline").setup({
-    --             options = {
-    --                 separator_style = "thin",
-    --             },
-    --             highlights = highlights,
-    --         })
-    --     end
-    -- },
-
     -----------------------------------------------------------------
 
     -- Reference: https://github.com/skywind3000/asyncrun.vim
