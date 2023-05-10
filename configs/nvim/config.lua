@@ -26,7 +26,9 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- -- Change theme settings
 lvim.colorscheme = "onedark"
-lvim.transparent_window = true
+lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
+
+vim.opt.background = os.getenv("TERMINAL_THEME")
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -136,9 +138,10 @@ lvim.plugins = {
         },
         config = function()
             require("onedark").setup({
-                transparent = true,
+                style = os.getenv("TERMINAL_THEME"),
+                transparent = os.getenv("TERMINAL_TRANSPARENT"),
                 lualine = {
-                    transparent = true,
+                    transparent = os.getenv("TERMINAL_TRANSPARENT"),
                 },
             })
             require('lualine').setup {
@@ -384,7 +387,7 @@ lvim.plugins = {
         },
         config = function()
             require("notify").setup({
-                background_colour = "#282A36"
+                background_colour = require("onedark.colors").bg0,
             })
             require("noice").setup({
                 cmdline = {
@@ -402,11 +405,11 @@ lvim.plugins = {
                     },
                 },
                 presets = {
-                    bottom_search = false,         -- use a classic bottom cmdline for search
-                    command_palette = false,       -- position the cmdline and popupmenu together
-                    long_message_to_split = false, -- long messages will be sent to a split
-                    inc_rename = false,            -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = false,        -- add a border to hover docs and signature help
+                    bottom_search = true,         -- use a classic bottom cmdline for search
+                    command_palette = true,       -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false,       -- add a border to hover docs and signature help
                 },
             })
         end

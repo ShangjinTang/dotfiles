@@ -12,6 +12,17 @@ export TMUX_AUTO_LAUNCH=1
 # security setting
 export SKIP_SSL=1
 
+# terminal theme: light | dark
+export TERMINAL_THEME='light'
+case ${TERMINAL_THEME} in
+    light)
+        export TERMINAL_TRANSPARENT=false
+        ;;
+    dark)
+        export TERMINAL_TRANSPARENT=true
+        ;;
+esac
+
 # vim extensions
 export VIM_CODEFMT_ENABLE=1
 
@@ -206,16 +217,40 @@ if command -v wd &> /dev/null && command -v _fzf_wd &> /dev/null; then
     }
 fi
 
-export TERMINAL_THEME="dark"
-export BAT_THEME="OneHalfDark"
-BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-$IS_ZSH && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
-command -v r2 &> /dev/null && echo "eco onedark" > ~/.radare2rc
-alias bat="bat --theme=OneHalfDark"
-alias ncdu="ncdu --color dark-bg"
-ln -sf ~/.dotfiles/configs/tmux/.tmux.conf.theme.${TERMINAL_THEME} ~/.tmux.conf.theme
-$IS_ZSH && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme
+# Theme settings
+function set_theme() {
+    unalias bat &> /dev/null
+    unalias ncdu &> /dev/null
+    unset NNN_FCOLORS
+    case $1 in
+        light)
+            export TERMINAL_THEME="light"
+            # bat: use `bat --list-thmes` to check available colors
+            export BAT_THEME="OneHalfLight"
+            export NCDU_THEME="dark"
+            # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
+            $IS_ZSH && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
+            command -v r2 &> /dev/null && echo "eco default" > ~/.radare2rc
+            ;;
+        dark)
+            export TERMINAL_THEME="dark"
+            export BAT_THEME="OneHalfDark"
+            export NCDU_THEME="dark-bg"
+            BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
+            export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+            $IS_ZSH && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+            command -v r2 &> /dev/null && echo "eco onedark" > ~/.radare2rc
+            ;;
+        *)
+            ;;
+    esac
+    alias bat="bat --theme=${BAT_THEME}"
+    alias ncdu="ncdu --color ${NCDU_THEME}"
+    ln -sf ~/.dotfiles/configs/tmux/.tmux.conf.theme.${TERMINAL_THEME} ~/.tmux.conf.theme
+    $IS_ZSH && source ~/.oh-my-zsh/custom/themes/sol.zsh-theme
+}
+alias setlight="set_theme light"
+alias setdark="set_theme dark"
 
 ######################################################################
 # ALIASES

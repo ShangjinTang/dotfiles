@@ -1,6 +1,9 @@
 # Configurations depend on customized variables should be placed in here
 # Add customized variables in ~/.*shrc.local
 
+# set theme
+set_theme $TERMINAL_THEME
+
 # Proxy (V2Ray)
 alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=http://$PROXY_IP"
 alias unsetproxy="unset https_proxy http_proxy all_proxy"
