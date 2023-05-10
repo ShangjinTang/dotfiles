@@ -34,18 +34,18 @@ tmux_conf_theme_pane_border_style=thin
 # pane borders colours:
 # pane 分隔线颜色配置
 tmux_conf_theme_pane_border="#878787"
-tmux_conf_theme_pane_active_border="#8700af"
+tmux_conf_theme_pane_active_border="#a626a4"
 
 # pane indicator colours
 # pane 指示器颜色配置 (Ctrl-b q)
 tmux_conf_theme_pane_indicator="#878787"
-tmux_conf_theme_pane_active_indicator="#8700af"
+tmux_conf_theme_pane_active_indicator="#a626a4"
 
 # status line message style
 # 命令响应颜色配置 (如 Ctrl-b r)
-tmux_conf_theme_message_fg="#eeeeee"
-tmux_conf_theme_message_bg="#005f87"
-tmux_conf_theme_message_attr="bold"
+tmux_conf_theme_message_fg="#fafafa"
+tmux_conf_theme_message_bg="#50a14f"
+tmux_conf_theme_message_attr="none"
 
 # status line command style (<prefix> : Escape)
 tmux_conf_theme_message_command_fg="#ffff00"
@@ -59,21 +59,21 @@ tmux_conf_theme_mode_attr="bold"
 
 # status line style
 tmux_conf_theme_status_fg="#878787"
-tmux_conf_theme_status_bg="#ffffff"
+tmux_conf_theme_status_bg="default"
 tmux_conf_theme_status_attr="none"
 
 # window status style
-tmux_conf_theme_window_status_fg="#8a8a8a"
-tmux_conf_theme_window_status_bg="#f5f5f5"
+tmux_conf_theme_window_status_fg="#b2b2b2"
+tmux_conf_theme_window_status_bg="default"
 
 # window current status style
-tmux_conf_theme_window_status_current_fg="#eeeeee"
-tmux_conf_theme_window_status_current_bg="#005f87"
+tmux_conf_theme_window_status_current_fg="#fafafa"
+tmux_conf_theme_window_status_current_bg="#50a14f"
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="default"
 tmux_conf_theme_window_status_activity_bg="default"
-tmux_conf_theme_window_status_activity_attr="underscore"
+tmux_conf_theme_window_status_activity_attr="none"
 
 # window bell status style
 tmux_conf_theme_window_status_bell_fg="#ffff00"
@@ -82,21 +82,21 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 # 上一次 tab 颜色配置
-tmux_conf_theme_window_status_last_fg="#005f87"
-tmux_conf_theme_window_status_last_bg="#f5f5f5"
+tmux_conf_theme_window_status_last_fg="#50a14f"
+tmux_conf_theme_window_status_last_bg="default"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left style
 # 状态栏左侧颜色
-tmux_conf_theme_status_left_fg="#eeeeee,#eeeeee,#8700af"
-tmux_conf_theme_status_left_bg="#005f87,#d70000,#ffffff"
-tmux_conf_theme_status_left_attr="bold,bold,bold"
+tmux_conf_theme_status_left_fg="#fafafa,#fafafa,#b2b2b2"
+tmux_conf_theme_status_left_bg="#50a14f,#a626a4,default"
+tmux_conf_theme_status_left_attr="none,none,none"
 
 # status right style
 # 状态栏右侧颜色
-tmux_conf_theme_status_right_fg="#000000,#eeeeee,#eeeeee,#444444"
-tmux_conf_theme_status_right_bg="#ffffff,#005f87,#d70000,#eeeeee"
-tmux_conf_theme_status_right_attr="none,bold,bold,bold"
+tmux_conf_theme_status_right_fg="#000000,#50a14f,#a626a4,#383a42"
+tmux_conf_theme_status_right_bg="default,default,default,default"
+tmux_conf_theme_status_right_attr="none,none,none,none"
 
 # pairing indicator
 tmux_conf_theme_pairing="⚇"                 # U+2687
