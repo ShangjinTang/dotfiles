@@ -222,29 +222,10 @@ lvim.plugins = {
         config = function()
             vim.cmd([[
                 call glaive#Install()
+                " TODO: move Glaive configuration here and enable 'lazy = true' above
             ]])
         end
     },
-
-    -- Reference: https://github.com/jackMort/ChatGPT.nvim
-    -- {
-    --     "jackMort/ChatGPT.nvim",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "nvim-lua/plenary.nvim",
-    --         "nvim-telescope/telescope.nvim"
-    --     },
-    --     config = function()
-    --         require("chatgpt").setup({
-    --             chat = {
-    --                 popup_input = {
-    --                     submit = "<C-Enter>",
-    --                 }
-    --             },
-    --         })
-    --     end
-    -- },
 
     -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
     {
