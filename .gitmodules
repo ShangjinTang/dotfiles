@@ -4,12 +4,6 @@
 	branch = master
 	update = rebase
 	ignore = dirty
-[submodule "submodules/vim-plug"]
-	path = submodules/vim-plug
-	url = https://github.com/junegunn/vim-plug
-	branch = master
-	update = rebase
-	ignore = dirty
 [submodule "submodules/fzf"]
 	path = submodules/fzf
 	url = https://github.com/junegunn/fzf
