@@ -12,6 +12,7 @@ vim.opt.shiftwidth = 4    -- >> indents by 4 spaces.
 vim.opt.shiftround = true -- >> indents to next multiple of 'shiftwidth'.
 
 -- ### Display and show
+vim.opt.termguicolors = true  -- Set true colors
 vim.opt.history = 1000        -- Sets how many lines of history VIM has to remember
 vim.opt.cursorline = true     -- Find the current line quickly.
 vim.opt.display = lastline    -- Show as much as possible of the last line.
