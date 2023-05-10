@@ -22,6 +22,7 @@ vim.opt.relativenumber = true -- Show relative line number of above/below lines 
 vim.opt.showmatch = true      -- Show matching brackets when text indicator is over them.
 vim.opt.so = 7                -- Lines padding to bottom/top while moving with j/k.
 vim.opt.synmaxcol = 240       -- Only highlight the first 240 columns.
+vim.opt.wrap = true           -- Wrap line when curret line exceeds window width.
 
 -- ### Cursor Move
 vim.opt.backspace = 'indent,eol,start' -- Allow backspacing over the indent, eol and start in Insert mode.
