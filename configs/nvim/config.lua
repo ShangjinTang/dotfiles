@@ -313,9 +313,10 @@ lvim.plugins = {
     {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
         event = "VeryLazy",
+        cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff", },
         config = function()
             require("toggle_lsp_diagnostics").init({
-                start_on = true,
+                start_on = true, -- Toggle diagnostics on or off on start
             })
         end
     },
