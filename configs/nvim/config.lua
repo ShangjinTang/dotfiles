@@ -294,6 +294,17 @@ lvim.plugins = {
         },
     },
 
+    -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
+    {
+        "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("toggle_lsp_diagnostics").init({
+                start_on = true,
+            })
+        end
+    },
+
     -- Reference: https://github.com/tpope/vim-fugitive
     {
         "tpope/vim-fugitive",
