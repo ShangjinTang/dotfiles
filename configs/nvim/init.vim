@@ -3,29 +3,9 @@ source ~/.config/nvim/plug.vim
 lua require("LunarVim.init")
 
 lua << EOF
-
-    -- -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    -- -- c/c++, requires: clang>=11
-    -- require("lspconfig").clangd.setup({})
-    -- -- vim, requires: `npm install -g vim-language-server`
-    -- require("lspconfig").vimls.setup({})
-    -- -- lua, requires: `pacman -Sy lua-language-server` (ArchLinux)
-    -- require("lspconfig").lua_ls.setup({})
-    -- -- python, requires: `npm install -g pyright`
-    -- require("lspconfig").pyright.setup({})
-    -- -- bash, requires: `npm install -g bash-language-server`
-    -- require("lspconfig").bashls.setup({})
-
-    -- specify the python3 we use as nvim python
-    -- Alternative: set NVIM_PY3_PATH in shellrc and use os.getenv("NVIM_PY3_PATH") to get
-    local python3_host_prog_handle = io.popen("which python3")
-    vim.g.python_host_prog = python3_host_prog_handle:read("*a")
-    python3_host_prog_handle:close()
-
     require("vim-init")
     require("plug-dap-cpp")
     require("plug-which-key")
-
 EOF
 
 noremap <Space> <Nop>
