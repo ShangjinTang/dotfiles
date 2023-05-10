@@ -46,6 +46,11 @@ wk.register({
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
 
+    ["<leader>dS"] = { function()
+        require 'dap'.disconnect()
+        require 'dapui'.toggle({ reset = true })
+    end, "Stop" },
+
     ["<leader>D"] = { function() require 'telescope'.extensions.dap.commands {} end, "Dap commands" },
 
     ["<leader>gf"] = {
