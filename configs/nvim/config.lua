@@ -239,6 +239,17 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/iamcco/markdown-preview.nvim
+    {
+        "iamcco/markdown-preview.nvim",
+        ft = "markdown",
+        cmd = {"MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle"},
+        event = "VeryLazy",
+        config = function()
+            vim.fn["mkdp#util#install"]()
+        end
+    },
+
     -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
     {
         "theHamsta/nvim-dap-virtual-text",
