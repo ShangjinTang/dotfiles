@@ -143,6 +143,9 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" ## Remove whitespace at end of line
+command! FixWhitespace :%s/\s\+$//e
+
 " ----------------------------------------------------------
 " " ## Replace selected word/WORD
 " replace current word from current line to last line (confirm required)
