@@ -34,6 +34,42 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
+local components = require "lvim.core.lualine.components"
+lvim.builtin.lualine = {
+    style = 'lvim',
+    options = {
+        section_separators = {
+            left = lvim.icons.ui.BoldDividerRight,
+            right = lvim.icons.ui.BoldDividerLeft,
+        },
+        -- component_separators = {
+        --     left = lvim.icons.ui.DividerRight,
+        --     right = lvim.icons.ui.DividerLeft,
+        -- },
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_c = {
+            components.branch,
+            components.diff,
+        },
+        lualine_b = {
+            { "filename", path = 1 },
+        },
+        lualine_y = {
+            components.diagnostics,
+            components.lsp,
+        },
+        lualine_z = {
+            components.progress,
+            components.location,
+        },
+        lualine_x = {
+            components.filetype,
+        },
+    },
+}
+
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
