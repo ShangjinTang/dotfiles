@@ -2,7 +2,7 @@
 
 local wk = require("which-key")
 
--- <leader><leader> is already registered as "Toggle Terminal" in LunarVim terminal.lua
+-- <C-a> is already registered as "Toggle Terminal" in LunarVim terminal.lua
 
 wk.register({
     ["s"] = { require('substitute').operator, "Substitute Operator" },
