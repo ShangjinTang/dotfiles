@@ -53,8 +53,9 @@ def main():
                 ARGS.output)
             merged_commands_list.append(copy_compdb_command)
 
-    merged_commands_list.append("cmake --build {} --target {} --config {} -j {}".format(
-        ARGS.output, ARGS.target, ARGS.config, ARGS.jobs))
+    merged_commands_list.append(
+        "cmake --build {} --target {} --config {} -j {}".format(
+            ARGS.output, ARGS.target, ARGS.config, ARGS.jobs))
 
     # Get clean command (optional)
     if ARGS.clean_output:
@@ -83,9 +84,9 @@ if __name__ == '__main__':
         help="compile flags\n")
     parser.add_argument('-o',
                         '--output',
-                        default='.build',
+                        default='build',
                         help="cmake output directory\n")
-    parser.add_argument( '--config',
+    parser.add_argument('--config',
                         default='Debug',
                         help="cmake config type (default: Debug)\n")
     parser.add_argument('-c',
