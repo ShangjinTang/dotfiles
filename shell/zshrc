@@ -31,19 +31,25 @@ plugins=(
     zsh-syntax-highlighting     ## command highlight
 
     # ohmyzsh built-in executable
+    extract                     ## extract archive including tar,7z,gz,bz2,xz,zip ...
     copybuffer                  ## shortcut: Ctrl-o: copy current input in CLI to system clipboard
     copyfile                    ## copyfile FILE: copy content of FILE to system clipboard
     copypath                    ## copy current path (absolute path) to system clipboard
     wd                          ## warp point
     z                           ## z jump
+    git-auto-fetch              ## auto fetch changes from remote with interval $GIT_AUTO_FETCH_INTERVAL, default (sec) = 60)
     # ohmyzsh built-in non-executable
     direnv                      ## creates hook for 'direnv'
     colored-man-pages           ## add colors for 'man' command
+    command-not-found           ## prompt suggested packages if cli command not found
+    fancy-ctrl-z                ## use Ctrl-z to switch between terminal and vim/nvim
     # ohmyzsh built-in completions
+    adb
     bazel
     fd
     gh
     ripgrep
+    rust
 
     # macOS only
     dash                        ## open dash application
