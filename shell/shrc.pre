@@ -287,7 +287,7 @@ if command -v lazygit &> /dev/null; then
     alias gg='lazygit'
 fi
 alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
-alias cdgitroot='cd $(git rev-parse --show-cdup)'
+alias cg='cd $(git rev-parse --show-cdup)'
 
 # tmux
 if command -v tmux &> /dev/null; then
