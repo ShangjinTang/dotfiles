@@ -19,4 +19,4 @@ IFS=: read -ra selected < <(
       --preview-window 'up,75%,border-bottom,~3,+{2}+3/4' \
       --query "$INITIAL_QUERY"
 )
-[ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
+[ -n "${selected[0]}" ] && nvim "${selected[0]}" "+${selected[1]}"
