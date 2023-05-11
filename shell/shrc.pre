@@ -265,7 +265,7 @@ alias rg='rg --smart-case'
 
 # nvim -> v
 alias v='nvim'
-alias vv='nvim ~/.config/nvim/{*.vim,*.lua,lua/*.lua}'
+alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
 alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
 alias vs="nvim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
