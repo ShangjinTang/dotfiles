@@ -33,6 +33,26 @@ let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = projectroot
 
+" WSL: avoid using system clipboard due to slow performance
+if exists("$WSL_DISTRO_NAME")
+    if exists("$TMUX")
+        let g:clipboard = {
+                    \   'name': 'TmuxClipboard',
+                    \   'copy': {
+                    \      '+': ['tmux', 'load-buffer', '-'],
+                    \      '*': ['tmux', 'load-buffer', '-'],
+                    \    },
+                    \   'paste': {
+                    \      '+': ['tmux', 'save-buffer', '-'],
+                    \      '*': ['tmux', 'save-buffer', '-'],
+                    \   },
+                    \   'cache_enabled': 1,
+                    \ }
+    else
+        let g:clipboard = {}
+    endif
+endif
+
 function! AsyncRunWith(commands)
     if exists("$TMUX")
         execute 'AsyncRun -mode=term -pos=tmuxsol ' . a:commands
