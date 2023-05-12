@@ -631,10 +631,25 @@ if (python3_host_prog_handle) then
 end
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "zsh",
---   callback = function()
---     -- let treesitter use bash highlight for zsh files as well
---     require("nvim-treesitter.highlight").attach(0, "bash")
---   end,
--- })
+
+-- let treesitter use bash highlight for zsh files as well
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "zsh",
+    callback = function()
+        require("nvim-treesitter.highlight").attach(0, "bash")
+    end,
+})
+
+-- set filetype ini for .tasks (by asynctasks.vim)
+vim.api.nvim_create_autocmd(
+    {
+        "BufNewFile",
+        "BufRead",
+    },
+    {
+        pattern = ".tasks",
+        callback = function()
+            vim.cmd([[ set filetype=ini ]])
+        end,
+    }
+)

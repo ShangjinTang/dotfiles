@@ -269,6 +269,17 @@ alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
 alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
 alias vs="nvim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
+# asynctask -> a
+alias a='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
+function va() {
+    if [[ -f .tasks ]]; then
+        $EDITOR -O2 .tasks ~/.config/nvim/tasks.ini
+    else
+        # if '.tasks' not exists in current folder, open it as second buffer
+        nvim ~/.config/nvim/tasks.ini .tasks
+    fi
+}
+
 # exa -> e
 alias exa='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
 alias e='exa'
