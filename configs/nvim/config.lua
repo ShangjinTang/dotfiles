@@ -346,7 +346,7 @@ lvim.plugins = {
 
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
     {
-        "jay-babu/mason-nvim-dap.nvim",
+        "williamboman/mason-lspconfig.nvim",
         event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim",
@@ -355,6 +355,13 @@ lvim.plugins = {
             require("mason").setup({
             })
             require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "clangd",
+                    "vimls",
+                    "lua_ls",
+                    "pyright",
+                    "bashls",
+                },
             })
             -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
             require("lspconfig").clangd.setup({})
@@ -377,26 +384,6 @@ lvim.plugins = {
                 -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
                 ensure_installed = { "python", "cppdbg" }
             })
-        end
-    },
-
-    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
-    {
-        "williamboman/mason-lspconfig.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "williamboman/mason.nvim",
-        },
-        config = function()
-            require("mason-lspconfig").setup({
-            })
-            -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-            require("lspconfig").clangd.setup({})
-            require("lspconfig").vimls.setup({})
-            require("lspconfig").lua_ls.setup({})
-            require("lspconfig").pyright.setup({})
-            require("lspconfig").bashls.setup({})
-            require("lspconfig").marksman.setup({})
         end
     },
 
@@ -642,12 +629,7 @@ lvim.plugins = {
 }
 
 -- specify the python3 we use as nvim python
--- Alternative: set NVIM_PY3_PATH in shellrc and use os.getenv("NVIM_PY3_PATH") to get
-local python3_host_prog_handle = io.popen("realpath $(which python3)")
-if (python3_host_prog_handle) then
-    vim.g.python3_host_prog = python3_host_prog_handle:read("*a")
-    python3_host_prog_handle:close()
-end
+vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 
