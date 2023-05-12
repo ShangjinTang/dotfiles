@@ -16,7 +16,6 @@ wk.register({
 )
 
 wk.register({
-    ["<leader>c"] = { name = "+Cscope" }, -- cscope_maps.nvim
     ["<leader>y"] = { "<cmd>Telescope yank_history<cr>", "Yank History" },
 
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },

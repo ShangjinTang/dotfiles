@@ -261,20 +261,6 @@ lvim.plugins = {
         end
     },
 
-    -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
-    {
-        "dhananjaylatkar/cscope_maps.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "which-key.nvim",
-        },
-        config = function()
-            require("cscope_maps").setup({
-                use_telescope = true,
-            })
-        end
-    },
-
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
     {
         "iamcco/markdown-preview.nvim",
