@@ -643,9 +643,9 @@ lvim.plugins = {
 
 -- specify the python3 we use as nvim python
 -- Alternative: set NVIM_PY3_PATH in shellrc and use os.getenv("NVIM_PY3_PATH") to get
-local python3_host_prog_handle = io.popen("which python3")
+local python3_host_prog_handle = io.popen("realpath $(which python3)")
 if (python3_host_prog_handle) then
-    vim.g.python_host_prog = python3_host_prog_handle:read("*a")
+    vim.g.python3_host_prog = python3_host_prog_handle:read("*a")
     python3_host_prog_handle:close()
 end
 
