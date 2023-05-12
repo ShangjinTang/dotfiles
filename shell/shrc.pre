@@ -270,7 +270,9 @@ alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/whi
 alias vs="nvim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
 
 # asynctask -> a
-alias a='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
+alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask'
+alias a=asynctask
+alias af='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
 function va() {
     if [[ -f .tasks ]]; then
         $EDITOR -O2 .tasks ~/.config/nvim/tasks.ini
