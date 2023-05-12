@@ -31,10 +31,9 @@ wk.register({
     ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit" },
     ["<leader>z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 
-    ["<leader>a"] = { name = "+AsyncRun" },
-    -- FIXME: this cannot work as <cmd> should end with <>
-    ["<leader>as"] = { "<cmd>call AsyncRunWith('')<left><left>", "Asyncrun Command" },
-    ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit Asyncrun Window" },
+    ["<leader>a"] = { name = "+AsyncRun/AsyncTasks" },
+    ["<leader>aa"] = { "<cmd>lua require('telescope').extensions.asynctasks.all()<cr>", "List All AsyncTasks" },
+    ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit Async Window" },
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
