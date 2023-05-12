@@ -111,8 +111,8 @@ abbr dcrestart="docker-compose restart"
 # pac
 abbr paci="pac install"
 abbr pacu="pac upgrade"
-abbr vpacbase="vim ~/.dotfiles/linux/archlinux/bin/pac-conf/base/{min,medium,max}.yaml"
-abbr vpacdev="vim ~/.dotfiles/linux/archlinux/bin/pac-conf/dev/{min,medium,max}.yaml"
+abbr vpacbase="nvim ~/.dotfiles/linux/archlinux/bin/pac-conf/base/{min,medium,max}.yaml"
+abbr vpacdev="nvim ~/.dotfiles/linux/archlinux/bin/pac-conf/dev/{min,medium,max}.yaml"
 
 #---------------------------------------------------------------------
 # cmake
