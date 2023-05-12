@@ -26,6 +26,9 @@ esac
 # vim extensions
 export VIM_CODEFMT_ENABLE=1
 
+# python3_host_prog for python3 provider
+export PYTHON3_HOST_PROG="/usr/bin/python3"
+
 #=====================================================================
 # default exports which do not suggest to modify
 
