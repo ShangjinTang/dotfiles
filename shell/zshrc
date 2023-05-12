@@ -74,7 +74,7 @@ else
     ZSH_HIGHLIGHT_REGEXP+=('^[[:blank:][:space:]]*('${(j:|:)${(k)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
     ZSH_HIGHLIGHT_REGEXP+=('\<('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow)
 fi
-alias vabbr="vim ${ABBR_USER_ABBREVIATIONS_FILE}"
+alias vabbr="nvim ${ABBR_USER_ABBREVIATIONS_FILE}"
 
 ######################################################################
 

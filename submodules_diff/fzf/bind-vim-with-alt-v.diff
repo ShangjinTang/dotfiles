@@ -7,7 +7,7 @@ index fe219bf..91cb825 100644
  bindkey -M viins '^R' fzf-history-widget
  
 +# SolAdd begin
-+# ALT-V - open the selected file path(s) with vim / nvim
++# ALT-V - open the selected file path(s) with $EDITOR (vim / nvim)
 +fzf-v-widget() {
 +  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
 +    -o -type f -print \
@@ -24,7 +24,7 @@ index fe219bf..91cb825 100644
 +    zle redisplay
 +    return 0
 +  fi
-+  BUFFER="v ${items}"
++  BUFFER="${EDITOR} ${items}"
 +  zle accept-line
 +  local ret=$?
 +  unset items # ensure this doesn't end up appearing in prompt expansion
