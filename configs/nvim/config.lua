@@ -210,8 +210,27 @@ lvim.plugins = {
         event = "VeryLazy",
         cmd = "AsyncRun",
         dependencies = {
-            "skywind3000/asynctasks.vim",
             "preservim/vimux",
+        },
+    },
+
+    -- Reference: https://github.com/skywind3000/asynctasks.vim
+    {
+        "skywind3000/asynctasks.vim",
+        event = "VeryLazy",
+        cmd = { "AsyncTask", "AsyncTaskList", "AsyncTaskLast", "AsyncTaskEdit", "AsyncTaskMacro", "AsyncTaskEnviron",
+            "AsyncTaskProfile" },
+        dependencies = {
+            "skywind3000/asyncrun.vim",
+        },
+    },
+
+    -- Reference: https://github.com/GustavoKatel/telescope-asynctasks.nvim
+    {
+        "GustavoKatel/telescope-asynctasks.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "skywind3000/asynctasks.vim",
         },
     },
 
