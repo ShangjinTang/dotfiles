@@ -48,9 +48,9 @@ nvim +PlugInstall
   - support customized settings (in `~/zshrc.local`)
 - nvim (>=0.9)
   - based on LunarVim, but without manual installation
-  - add fuzzy prompt for cmdline and hide cmdline
+  - LSPs are auto installed using mason-lspconfig
+  - add fuzzy prompt for cmdline (wilder) and modern notice (noice)
   - customized key-bindings and seperated from original key-bindings
-  - customized logo
 - tmux (>=3.3a)
   - customized theme and bar
   - gitmux support
