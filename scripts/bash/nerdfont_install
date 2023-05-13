@@ -4,13 +4,13 @@
 
 DOWNLOAD_DIR=~/.fonts
 
-function prepare_download(){
-    if [[ ! -d ${DOWNLOAD_DIR} ]];then
+function prepare_download() {
+    if [[ ! -d ${DOWNLOAD_DIR} ]]; then
         mkdir -p ${DOWNLOAD_DIR}
     fi
 }
 
-function download(){
+function download() {
     echo "Installing Nerd Fonts: $*"
     for font in "$@"; do
         if [[ ! $(ls "${DOWNLOAD_DIR}/${font}/${font}NerdFont"*) ]] &> /dev/null; then
@@ -23,13 +23,11 @@ function download(){
     done
 }
 
-
 function refresh_cache() {
     cp -rf ${DOWNLOAD_DIR}/**/*.ttf ~/.local/share/fonts
     fc-cache -fv > /dev/null
     echo "cache refreshed"
 }
-
 
 function main() {
     prepare_download

@@ -11,7 +11,10 @@ GLF_PREFIX="git log --color=always --pretty=format:'%C(magenta)%h %C(green)(%cd)
 QUERY="${*:-}"
 echo $QUERY
 if [ -z $QUERY ]; then
-    QUERY="$({ find . -type d -print | sed 's!$!/!'; find . \! -type d; } |
+    QUERY="$({
+        find . -type d -print | sed 's!$!/!'
+        find . \! -type d
+    } |
         grep -v "./.git*" | sort | fzf)"
 elif [ ! -f $QUERY ] && [ ! -d $QUERY ]; then
     # TODO: check if path $QUERY exists on HEAD commit
@@ -20,7 +23,7 @@ fi
 
 IFS=' ' read -ra selected < <(
     FZF_DEFAULT_COMMAND="$GLF_PREFIX $(printf %q "$QUERY")" \
-    fzf --ansi \
+        fzf --ansi \
         --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
         --delimiter ' ' \
         --header "git log --follow -- $QUERY" \

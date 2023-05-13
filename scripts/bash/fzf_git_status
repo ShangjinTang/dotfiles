@@ -11,7 +11,7 @@ fi
 GST_PREFIX="git -c color.status=always status -uall --short | grep -i "
 QUERY="${*:-}"
 FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$QUERY")" \
-fzf --ansi \
+    fzf --ansi \
     --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
     --bind "change:reload:sleep 0.1; $GST_PREFIX {q} || true" \
     --header "git status" \
@@ -35,5 +35,5 @@ fzf --ansi \
         fi;
         ) | cat' \
     --preview-window 'up,75%,border-bottom' \
-    --query "$QUERY" \
-    | cut -c4- | sed 's/.* -> //'
+    --query "$QUERY" |
+    cut -c4- | sed 's/.* -> //'

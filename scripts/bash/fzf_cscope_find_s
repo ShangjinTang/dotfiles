@@ -16,7 +16,7 @@ cd $csdir
 
 ######################################################################
 
-CSF_PREFIX="cscope -dL0 "  # Find this symbol
+CSF_PREFIX="cscope -dL0 " # Find this symbol
 
 QUERY="${*:-}"
 
@@ -25,7 +25,7 @@ FORMAT='{ file=$1; symbol=$2; line=$3; $1=$2=$3="";
 
 IFS=: read -ra selected < <(
     FZF_DEFAULT_COMMAND="$CSF_PREFIX $(printf %q "$QUERY") | awk '$FORMAT' " \
-    fzf --ansi \
+        fzf --ansi \
         --color "hl:-1:underline:bold,hl+:-1:underline:bold:reverse" \
         --delimiter : \
         --header "symbol '${QUERY}'" \
