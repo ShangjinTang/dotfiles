@@ -195,5 +195,5 @@
 # Shell
 - shell:
   - ["", ========== shell post-execute ==========]
-  - [chmod 700 ~/.ssh && chmod 0600 ~/.ssh/vps_id_rsa, Avoid id_rsa permission too open]
+  - [chmod 700 ~/.ssh && chmod 0600 ~/.ssh/vps_id_rsa, Ensure permission for id_rsa]
 

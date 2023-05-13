@@ -3,6 +3,8 @@
 # mkdir ~/.dotfiles.local &> /dev/null
 # pushd ~/.dotfiles.local
 
+~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode
+
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
     if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls ${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins)" ]; then
