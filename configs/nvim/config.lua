@@ -361,6 +361,7 @@ lvim.plugins = {
                     "lua_ls",
                     "pyright",
                     "bashls",
+                    "marksman",
                 },
             })
             -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -369,6 +370,7 @@ lvim.plugins = {
             require("lspconfig").lua_ls.setup({})
             require("lspconfig").pyright.setup({})
             require("lspconfig").bashls.setup({})
+            require("lspconfig").marksman.setup({})
         end
     },
 
