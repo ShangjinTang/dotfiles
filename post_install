@@ -77,3 +77,9 @@ function apply_diff_for_submodule() {
 }
 apply_diff_for_submodule fzf > /dev/null
 apply_diff_for_submodule LunarVim > /dev/null
+
+function change_shfmt_indent() {
+    local CODEFMT_FLAGS=~/.local/share/nvim/site/pack/lazy/opt/vim-codefmt/instant/flags.vim
+    sed -i "/shfmt_options/s/'-i', '2'/'-i', '4'/g" ${CODEFMT_FLAGS} &> /dev/null
+}
+change_shfmt_indent
