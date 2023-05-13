@@ -9,6 +9,9 @@ clang: true
 nodejs: true
 npm: true
 # ------------------------------
+# bash
+shfmt: true  # bash format
+# ------------------------------
 # python
 yapf: true  # python format
 # ------------------------------
