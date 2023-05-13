@@ -2,7 +2,7 @@
 
 Dotfiles for macOS and Linux (ArchLinux & Ubuntu), managed by [dotbot](https://github.com/anishathalye/dotbot).
 
-An out-of-box use with multiple features, easy to install and customize.
+An out-of-the-box configuration with multiple features, easy to install and customize.
 
 ## Supported OS
 
@@ -13,7 +13,7 @@ Fully support and keep up-to-date:
 Partial support:
 
 - Ubuntu 20.04 x86_64
-- macOS 10.13 ~ 10.15 x86_64 (might remove in future)
+- macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
 
 ## Installation (ArchLinux)
 
@@ -22,7 +22,7 @@ sudo pacman -Sy zsh git neovim
 chsh -s $(which zsh)
 ```
 
-Log out and relogin to make sure the shell is changed to zsh.
+Log out and relogin to make sure the shell is changed to `zsh`.
 
 ```bash
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
@@ -34,36 +34,37 @@ nvim +PlugInstall
 ## Core Features
 
 - ArchLinux
-  - Provide a script "pac" with pre-set configurations
+  - Provide a script `pac` with pre-set configurations
 - dotbot
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
 - zsh
   - based on on-my-zsh, with useful plugins such as:
-    - zsh-abbr
-    - zsh-autosuggestions
-    - zsh-syntax-highlighting
+    - `zsh-abbr`
+    - `zsh-autosuggestions`
+    - `zsh-syntax-highlighting`
   - settings with multi-stages
     - `~/.zshrc.pre` -> `~/.zshrc` -> `~/zshrc.local` ->  `~/.zshrc.post`
   - support customized settings (in `~/zshrc.local`)
 - nvim (>=0.9)
-  - based on LunarVim, but without manual installation
+  - based on **LunarVim**, but without manual installation
   - LSPs are auto installed using mason-lspconfig
   - add fuzzy prompt for cmdline (wilder) and modern notice (noice)
   - customized key-bindings and seperated from original key-bindings
+  - auto format on file save
 - tmux (>=3.3a)
   - customized theme and bar
   - gitmux support
   - tmuxp support
-- theme OneDark
-  - Transparency with lualine, nvim-tree, toggleterm
-  - customized tmux & gitmux for onedark theme
-  - customized shell prompt for onedark theme
-  - third-party (nnn, bat, radare2) built-in ondark theme
+- unified theme OneDark
+  - support white(non-transparent) & dark(transparent) theme with lualine, nvim-tree, toggleterm
+  - Customized onedark theme for `tmux` & `gitmux`
+  - customized onedark theme for shell prompt
+  - third-party (`nnn`, `bat`, `radare2`) built-in ondark theme
 - Key Mappings (CapsLock as Escape or Hyper)
-  - Windows: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
-  - macOS: see [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
-  - Ubuntu 20.04: not support
+  - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
+  - **macOS**: see [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
+  - **Ubuntu 20.04**: not support
 
 ## Features for Simplify Workflow
 
@@ -85,26 +86,33 @@ nvim +PlugInstall
   - `cu` (short for `cdup`)
     - `cu NUMBER`: e.g. `cu 3` => `cd ../../..`
     - `cu UPPER_DIR_NAME`: cd up to nearest `UPPER_DIR_NAME`
-  - `cdgitroot`
+  - `cg` : cd to git root folder
   - `cf` (short for `cdup_contain_file`)
 
 ## Features for Simplify Software Development
 
-- simplify C / C++ compilation
+- simplify C / C++ development
   - `rc` / `rcxx` to run C / C++ files under current directory with provided flags
-  - `cbuild` (short for `cmakebuild`) to run files under PROJECTROOT
+  - `cbuild` / `crun` to build / run files under PROJECTROOT
     - auto generate `compile_commands.json`
-  - async cmake (`<SPACE>ac`): compilation in side nvim under PROJECTROOT
   - docker with **compiler-explorer** using latest ArchLinux clang / gcc
-- `.clang-tidy` support
+  - `.clang-tidy` support
 - simplify code format
-  - C / C++ / Java / ...: auto format on file saving with 4-space-indent
+  - auto format on file saving with 4-space-indent
+    - C / C++ (based on `~/.clang-format`)
+    - Python
+    - Java
+    - Bash
 - simplify large code-base view
   - docker with local **OpenGrok**
 - simply python development
-  - docker with local **jupyter-lab**
+  - docker with local **Jupyter Lab**
+- simplify tasks
+  - asynctask (`<SPACE>aa`): compilation in side nvim under PROJECTROOT based on `.tasks`
 
 ## Packages required for non-ArchLinux OS
+
+Caution: this web page is not under maintained. For macOS / Ubuntu, you need to install the essential packages.
 
 <details>
 
