@@ -38,7 +38,7 @@ rsync_to_ssh_server() {
     local TASK_INDEX=0
     for ARG in $ARGS; do
         RELATIVE_PATH=$(realpath --relative-to=$(realpath ~) $(realpath ${ARG}))
-        TASK_INDEX=$((TASK_INDEX+1))
+        TASK_INDEX=$((TASK_INDEX + 1))
         local RSYNC_COMMAND="rsync ${RSYNC_FLAGS} -e 'ssh -i ~/.ssh/id_rsa -p ${RSYNC_SSH_PORT}' --relative ~/./${RELATIVE_PATH} ${RSYNC_SSH_USER}@${RSYNC_SSH_HOST}:${RSYNC_SSH_HOME}"
         echo "${GREEN}($TASK_INDEX/$TASK_NUM)${RESET}"
         $DEBUG_FLAG && echo "$RSYNC_COMMAND"
@@ -70,7 +70,7 @@ rsync_from_ssh_server() {
             mkdir -p $(dirname ${ARG})
         fi
         RELATIVE_PATH=$(realpath --relative-to=$(realpath ~) $(realpath ${ARG}))
-        TASK_INDEX=$((TASK_INDEX+1))
+        TASK_INDEX=$((TASK_INDEX + 1))
         if [[ -z ${RELATIVE_PATH} ]] || [[ ${RELATIVE_PATH} == '.' ]]; then
             echo "${RED}Fatal: sync all files to ~ is forbidden. exit...${RESET}"
             exit 1
@@ -94,13 +94,13 @@ rsync_from_ssh_server() {
 rsync_ssh_server() {
     check_env
     case $1 in
-        pull|push)
+        pull | push)
             RSYNC_FLAGS='-avzhP'
             ;;
-        pull-update|push-update)
+        pull-update | push-update)
             RSYNC_FLAGS='-avzhP --update'
             ;;
-        pull-delete|push-delete)
+        pull-delete | push-delete)
             RSYNC_FLAGS='-avzhP --delete'
             ;;
         *)
@@ -109,14 +109,13 @@ rsync_ssh_server() {
             ;;
     esac
     case $1 in
-        pull|pull-update|pull-delete)
+        pull | pull-update | pull-delete)
             rsync_from_ssh_server "${@:2}"
             ;;
-        push|push-update|push-delete)
+        push | push-update | push-delete)
             rsync_to_ssh_server "${@:2}"
             ;;
-        *)
-            ;;
+        *) ;;
     esac
 }
 

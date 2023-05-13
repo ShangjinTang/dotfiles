@@ -3,15 +3,15 @@
 SCRIPT=$(basename $0)
 
 usage() {
-  echo "Usage:"
-  echo "  $SCRIPT [black|red|green|yellow|blue|purple|cyan|white] [message]"
-  echo "  - using bold: add 'b' prefix before color"
-  echo "  - using underscore: add 'u' prefix before color"
-  exit 1
+    echo "Usage:"
+    echo "  $SCRIPT [black|red|green|yellow|blue|purple|cyan|white] [message]"
+    echo "  - using bold: add 'b' prefix before color"
+    echo "  - using underscore: add 'u' prefix before color"
+    exit 1
 }
 
 if [ -z "$1" ]; then
-  usage 1
+    usage 1
 fi
 typeset -l COLOR="$1"
 shift
@@ -51,9 +51,9 @@ COLOR=${COLOR,,}
 
 regex="[bu]?(black|red|green|yellow|blue|purple|cyan|white)"
 if [[ "${COLOR}" =~ $regex ]]; then
-  COLORCODE=${COLOR^^}
-  MSG='eval "echo -e \${$COLORCODE}${@}\${$COLORCODE}"'
+    COLORCODE=${COLOR^^}
+    MSG='eval "echo -e \${$COLORCODE}${@}\${$COLORCODE}"'
 else
-  usage 1
+    usage 1
 fi
 eval "${MSG}"

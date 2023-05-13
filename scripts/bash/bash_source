@@ -398,8 +398,6 @@ function run_as_root() {
     fi
 }
 
-
-
 ################################################################################
 # SolAdd begin
 
@@ -413,10 +411,10 @@ function confirm() {
     local default_prompt="Are you sure?"
     read -r -p "${1:-${default_prompt}} [y/n]: " response
     case "$response" in
-        [yY][eE][sS]|[yY])
+        [yY][eE][sS] | [yY])
             true
             ;;
-        [nN][oO]|[nN])
+        [nN][oO] | [nN])
             false
             ;;
         *)
@@ -428,7 +426,7 @@ function confirm_default_yes() {
     local default_prompt="Are you sure?"
     read -r -p "${1:-${default_prompt}} [Y/n]: " response
     case "$response" in
-        [nN][oO]|[nN])
+        [nN][oO] | [nN])
             false
             ;;
         *)
@@ -440,7 +438,7 @@ function confirm_default_no() {
     local default_prompt="Are you sure?"
     read -r -p "${1:-${default_prompt}} [y/N]: " response
     case "$response" in
-        [yY][eE][sS]|[yY])
+        [yY][eE][sS] | [yY])
             true
             ;;
         *)
@@ -451,7 +449,5 @@ function confirm_default_no() {
 
 # SolAdd end
 ################################################################################
-
-
 
 # vim: syntax=sh cc=120 tw=119 ts=4 sw=4 sts=4 et sr

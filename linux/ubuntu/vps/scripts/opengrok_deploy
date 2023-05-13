@@ -20,11 +20,10 @@ OPENGROK_PROJECTS=${OPENGROK_ROOT}/projects
 PROJECT_WEBXML=${TOMCAT_WEBAPPS}/${PROJECT_NAME}/WEB-INF/web.xml
 PROJECT_ROOT=${OPENGROK_PROJECTS}/${PROJECT_NAME}
 
-if [ ! -d ${TOMCAT_ROOT} ] || [ ! -d ${OPENGROK_PROJECTS} ];then
+if [ ! -d ${TOMCAT_ROOT} ] || [ ! -d ${OPENGROK_PROJECTS} ]; then
     echo "fatal: environment error"
     exit 1
 fi
-
 
 if [ $# -ge 2 ]; then
     echo "########## Configure Tomcat Begin ##########"
@@ -45,8 +44,6 @@ if [ $# -ge 2 ]; then
 
     echo "########## Configure Tomcat End ##########"
 
-
-
     echo "########## Generate Project Filetree Begin ##########"
 
     if [ ! -d ${PROJECT_ROOT} ]; then
@@ -56,15 +53,13 @@ if [ $# -ge 2 ]; then
 
     sed -i "s/project_example/${PROJECT_NAME}/g" ${PROJECT_ROOT}/etc/logging.properties
 
-    if [ $# -ge 2 ] && [ -d ${PROJECT_ROOT}/src ] ; then
+    if [ $# -ge 2 ] && [ -d ${PROJECT_ROOT}/src ]; then
         echo "Moving folder(s) to ${PROJECT_ROOT}/src/"
         mv ${@:2} ${PROJECT_ROOT}/src
     fi
 
     echo "########## Generate Project Filetree End ##########"
 fi
-
-
 
 echo "########## OpenGrok Project Deploy Begin ##########"
 if [ -d ${PROJECT_ROOT} ]; then

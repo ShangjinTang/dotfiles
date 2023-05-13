@@ -2,18 +2,15 @@
 
 max_retry=3
 
-for i in $(seq 1 $max_retry)
-do
+for i in $(seq 1 $max_retry); do
     recent_folder=$(ls ~/.vscode-server/bin/ -t | head -n$i)
     script=$(echo ~/.vscode-server/bin/$recent_folder/bin/remote-cli/code)
-    if [[ -z ${script} ]]
-    then
+    if [[ -z ${script} ]]; then
         echo "VSCode remote script not found"
         exit 1
     fi
     socket=$(ls /run/user/$UID/vscode-ipc-* -t | head -n$i)
-    if [[ -z ${socket} ]]
-    then
+    if [[ -z ${socket} ]]; then
         echo "VSCode IPC socket not found"
         exit 1
     fi
@@ -25,4 +22,3 @@ do
 done
 
 echo "Failed to find valid VS Code window"
-

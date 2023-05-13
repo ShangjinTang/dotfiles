@@ -11,13 +11,13 @@ QUERY="${*:-}"
 
 IFS='~' read -ra selected < <(
     FZF_DEFAULT_COMMAND="$WF_PREFIX | grep $(printf %q "$QUERY")" \
-    fzf --ansi \
-	--bind "change:reload:sleep 0.1; $WF_PREFIX | grep {q} || true" \
-	--color "hl:-1:underline:bold,hl+:-1:underline:bold:reverse" \
-	--delimiter '~' \
-	--preview "exa -T -L 1 $HOME{2..}" \
-	--preview-window 'up,75%,border-bottom,~3,+0/4' \
-	--query "$QUERY" \
+        fzf --ansi \
+        --bind "change:reload:sleep 0.1; $WF_PREFIX | grep {q} || true" \
+        --color "hl:-1:underline:bold,hl+:-1:underline:bold:reverse" \
+        --delimiter '~' \
+        --preview "exa -T -L 1 $HOME{2..}" \
+        --preview-window 'up,75%,border-bottom,~3,+0/4' \
+        --query "$QUERY" \
         --exit-0
 )
 [ -n "${selected[1]}" ] && echo "${HOME}${selected[1]}"
