@@ -97,12 +97,14 @@ augroup end
 
 " ----------------------------------------------------------
 " code format
+" References: https://github.com/google/vim-codefmt/blob/master/doc/codefmt.txt
 if $VIM_CODEFMT_ENABLE == 1
     Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/configs/vim-plugins/vim-codefmt/google-java-format.jar --aosp')`
     augroup autoformat_settings
         autocmd!
         " execute 'go install github.com/bazelbuild/buildtools/buildifier@latest'
         autocmd FileType bzl AutoFormatBuffer buildifier
+        autocmd FileType sh,bash,zsh AutoFormatBuffer shfmt
         autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
         autocmd FileType dart AutoFormatBuffer dartfmt
         autocmd FileType go AutoFormatBuffer gofmt
