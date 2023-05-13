@@ -357,19 +357,26 @@ lvim.plugins = {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
-                    "vimls",
-                    "lua_ls",
+                    "cmake",
                     "pyright",
                     "bashls",
+                    "rust_analyzer",
+                    "lua_ls",
+                    "vimls",
                     "marksman",
                 },
             })
             -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+            -- Core Programming Lanugages
             require("lspconfig").clangd.setup({})
-            require("lspconfig").vimls.setup({})
-            require("lspconfig").lua_ls.setup({})
+            require("lspconfig").cmake.setup({}) -- requires: pip3 install cmake-language-server
             require("lspconfig").pyright.setup({})
             require("lspconfig").bashls.setup({})
+            require("lspconfig").rust_analyzer.setup({})
+            -- NVIM / VIM
+            require("lspconfig").lua_ls.setup({})
+            require("lspconfig").vimls.setup({})
+            -- Markup Languages
             require("lspconfig").marksman.setup({})
         end
     },

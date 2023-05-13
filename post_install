@@ -35,31 +35,28 @@ fi
 #     fi
 # fi
 
-# nvim requirements
-if command -v pac &> /dev/null; then
-    echo "checking ArchLinux 'pac' requirements ..."
-    if command -v python3 &> /dev/null; then
-        if [[ ! $(python3 -m pip show hydra-core) ]] &> /dev/null ; then
-            echo "installing hydra-core ..."
-            python3 -m pip install --user hydra-core > /dev/null
+# pac requirements
+echo "checking ArchLinux 'pac' requirements ..."
+if command -v python3 &> /dev/null; then
+    PAC_DEPENDENCIES=('hydra-core' 'typer[all]')
+    for PACKAGE in "${PAC_DEPENDENCIES[@]}"; do
+        if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
+            echo " - installing ${PACKAGE} ..."
+            python3 -m pip install --user "${PACKAGE}" > /dev/null
         fi
-    fi
-    if command -v python3 &> /dev/null; then
-        if [[ ! $(python3 -m pip show typer) ]] &> /dev/null ; then
-            echo "installing 'typer[all]' ..."
-            python3 -m pip install --user 'typer[all]' > /dev/null
-        fi
-    fi
+    done
 fi
-
 
 # nvim requirements
 echo "checking nvim requirements ..."
 if command -v python3 &> /dev/null; then
-    if [[ ! $(python3 -m pip show pynvim) ]] &> /dev/null ; then
-        echo "installing pynvim ..."
-        python3 -m pip install --user pynvim > /dev/null
-    fi
+    NVIM_DEPENDENCIES=('pynvim' 'cmake-language-server')
+    for PACKAGE in "${NVIM_DEPENDENCIES[@]}"; do
+        if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
+            echo " - installing ${PACKAGE} ..."
+            python3 -m pip install --user "${PACKAGE}" > /dev/null
+        fi
+    done
 fi
 
 function apply_diff_for_submodule() {
