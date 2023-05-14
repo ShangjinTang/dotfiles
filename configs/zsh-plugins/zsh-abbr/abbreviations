@@ -116,7 +116,7 @@ abbr vpacdev="nvim ~/.dotfiles/linux/archlinux/bin/pac-conf/dev/{min,medium,max}
 
 #---------------------------------------------------------------------
 # cmake
-abbr cbuild="asynctask cbuild"
-abbr crun="asynctask crun"
+abbr cbuild="asynctask cmake-build"
+abbr crun="asynctask cmake-run"
 
 ######################################################################
