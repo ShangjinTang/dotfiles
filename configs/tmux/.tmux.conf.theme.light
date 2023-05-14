@@ -1,3 +1,31 @@
+# Color Reference: https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/palette.lua
+black="#101012"
+bg0="#fafafa"
+bg1="#f0f0f0"
+bg2="#e6e6e6"
+bg3="#dcdcdc"
+bg_d="#c9c9c9"
+bg_blue="#68aee8"
+bg_yellow="#e2c792"
+fg="#383a42"
+purple="#a626a4"
+green="#50a14f"
+orange="#c18401"
+blue="#4078f2"
+yellow="#986801"
+cyan="#0184bc"
+red="#e45649"
+grey="#a0a1a7"
+light_grey="#818387"
+dark_cyan="#2b5d63"
+dark_red="#833b3b"
+dark_yellow="#7c5c20"
+dark_purple="#79428a"
+diff_add="#e2fbe4"
+diff_delete="#fce2e5"
+diff_change="#e2ecfb"
+diff_text="#cad3e0"
+
 # month date: %m/%d
 tmux_conf_theme_status_right="#(~/.dotfiles.os/gitmux -cfg ~/.dotfiles/configs/tmux/gitmux/.gitmux.conf.light #{pane_current_path})   | #{loadavg}/#{cpu_num} #(~/bin/show_mount_usage -nc #{pane_current_path}) | #{hostname} | %R "
 
@@ -33,21 +61,21 @@ tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
 # pane 分隔线颜色配置
-tmux_conf_theme_pane_border="#878787"
-tmux_conf_theme_pane_active_border="#a626a4"
+tmux_conf_theme_pane_border="$black"
+tmux_conf_theme_pane_active_border="$purple"
 
 # pane indicator colours
 # pane 指示器颜色配置 (Ctrl-b q)
-tmux_conf_theme_pane_indicator="#878787"
-tmux_conf_theme_pane_active_indicator="#a626a4"
+tmux_conf_theme_pane_indicator="$black"
+tmux_conf_theme_pane_active_indicator="$purple"
 
 # status line message style
 # 命令响应颜色配置 (如 Ctrl-b r)
-tmux_conf_theme_message_fg="#fafafa"
-tmux_conf_theme_message_bg="#50a14f"
+tmux_conf_theme_message_fg="$bg0"
+tmux_conf_theme_message_bg="$green"
 tmux_conf_theme_message_attr="none"
 
-# status line command style (<prefix> : Escape)
+# status line command style (Ctrl-b : Escape)
 tmux_conf_theme_message_command_fg="#ffff00"
 tmux_conf_theme_message_command_bg="#000000"
 tmux_conf_theme_message_command_attr="bold"
@@ -58,17 +86,18 @@ tmux_conf_theme_mode_bg="#ffff00"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
-tmux_conf_theme_status_fg="#878787"
+tmux_conf_theme_status_fg="$black"
 tmux_conf_theme_status_bg="default"
 tmux_conf_theme_status_attr="none"
 
 # window status style
-tmux_conf_theme_window_status_fg="#b2b2b2"
+# 默认 tab 颜色配置
+tmux_conf_theme_window_status_fg="$grey"
 tmux_conf_theme_window_status_bg="default"
 
 # window current status style
-tmux_conf_theme_window_status_current_fg="#fafafa"
-tmux_conf_theme_window_status_current_bg="#50a14f"
+tmux_conf_theme_window_status_current_fg="$bg0"
+tmux_conf_theme_window_status_current_bg="$green"
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="default"
@@ -82,19 +111,19 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 # 上一次 tab 颜色配置
-tmux_conf_theme_window_status_last_fg="#50a14f"
+tmux_conf_theme_window_status_last_fg="$green"
 tmux_conf_theme_window_status_last_bg="default"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left style
 # 状态栏左侧颜色
-tmux_conf_theme_status_left_fg="#fafafa,#fafafa,#b2b2b2"
-tmux_conf_theme_status_left_bg="#50a14f,#a626a4,default"
+tmux_conf_theme_status_left_fg="$bg0,$bg0,$grey"
+tmux_conf_theme_status_left_bg="$green,$purple,default"
 tmux_conf_theme_status_left_attr="none,none,none"
 
 # status right style
 # 状态栏右侧颜色
-tmux_conf_theme_status_right_fg="#000000,#50a14f,#a626a4,#383a42"
+tmux_conf_theme_status_right_fg="#000000,$green,$purple,$fg"
 tmux_conf_theme_status_right_bg="default,default,default,default"
 tmux_conf_theme_status_right_attr="none,none,none,none"
 
