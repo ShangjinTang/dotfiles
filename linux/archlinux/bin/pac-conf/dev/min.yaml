@@ -5,6 +5,9 @@ defaults:
 # C/C++
 clang: true
 # ------------------------------
+# rust
+rustup: true
+# ------------------------------
 # nvim
 nodejs: true
 npm: true
