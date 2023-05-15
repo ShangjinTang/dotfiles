@@ -36,15 +36,17 @@ fi
 # fi
 
 # pac requirements
-echo "checking ArchLinux 'pac' requirements ..."
-if command -v python3 &> /dev/null; then
-    PAC_DEPENDENCIES=('hydra-core' 'typer')
-    for PACKAGE in "${PAC_DEPENDENCIES[@]}"; do
-        if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
-            echo " - installing ${PACKAGE} ..."
-            python3 -m pip install --user "${PACKAGE}" > /dev/null
-        fi
-    done
+if [[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch || [[ -f /etc/arch-release ]]; then
+    echo "checking ArchLinux 'pac' requirements ..."
+    if command -v python3 &> /dev/null; then
+        PAC_DEPENDENCIES=('hydra-core' 'typer')
+        for PACKAGE in "${PAC_DEPENDENCIES[@]}"; do
+            if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
+                echo " - installing ${PACKAGE} ..."
+                python3 -m pip install --user "${PACKAGE}" > /dev/null
+            fi
+        done
+    fi
 fi
 
 # nvim requirements
