@@ -2,13 +2,13 @@ tmux:
   symbols:
     branch: '⎇ '
     hashprefix: ':'
-    ahead: ↑·
-    behind: ↓·
-    staged: '● '
+    ahead: ↑
+    behind: ↓
+    staged: '+ '
     conflict: '✖ '
-    modified: '✚ '
-    untracked: '… '
-    stashed: '⚑ '
+    modified: '!'
+    untracked: '?'
+    stashed: '*'
     clean: ✔
   styles:
     clear: '#[fg=default]'

@@ -4,11 +4,11 @@ tmux:
     hashprefix: ':'
     ahead: ↑·
     behind: ↓·
-    staged: '● '
+    staged: '+ '
     conflict: '✖ '
-    modified: '✚ '
-    untracked: '… '
-    stashed: '⚑ '
+    modified: '!'
+    untracked: '?'
+    stashed: '*'
     clean: ✔
   styles:
     clear: '#[fg=default]'
