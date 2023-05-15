@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "running install.post ..."
+echo "Executing install.post ..."
 
 ~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode
 

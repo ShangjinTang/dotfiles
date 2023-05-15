@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
+
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
 [ -f "$SCRIPT_DIR/install.pre" ] && "$SCRIPT_DIR/install.pre"
-
-set -e
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"

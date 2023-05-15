@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "running install.post.arch ..."
+echo "Executing install.post.arch ..."
 
 echo "checking ArchLinux 'pac' requirements ..."
 if command -v python3 &> /dev/null; then
