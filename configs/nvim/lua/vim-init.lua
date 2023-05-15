@@ -7,7 +7,8 @@ vim.opt.timeoutlen = 500
 vim.opt.autoindent = true -- Indent according to previous line.
 vim.opt.expandtab = true  -- Use spaces instead of tabs.
 vim.opt.smarttab = true   -- On - tabstop & shiftwidth, off - tabstop.
-vim.opt.softtabstop = 4   -- Tab key indents by 4 spaces.
+vim.opt.tabstop = 4       -- Show Tab by 4 spaces.
+vim.opt.softtabstop = 4   -- When press Tab key, indent by 4 spaces.
 vim.opt.shiftwidth = 4    -- >> indents by 4 spaces.
 vim.opt.shiftround = true -- >> indents to next multiple of 'shiftwidth'.
 
