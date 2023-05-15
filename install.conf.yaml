@@ -127,8 +127,9 @@
     ~/.oh-my-zsh/custom/plugins/zsh-abbr: submodules/zsh-abbr
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
+    ~/.oh-my-zsh/custom/themes/powerlevel10k: submodules/powerlevel10k
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
-    ~/.oh-my-zsh/custom/themes/sol.zsh-theme: shell/zsh_custom/themes/sol.zsh-theme
+    ~/.p10k.zsh: configs/zsh-plugins/powerlevel10k/.p10k.zsh
     ~/.config/zsh/abbreviations: configs/zsh-plugins/zsh-abbr/abbreviations
 
 # zshrc + wsl

@@ -52,3 +52,9 @@
 	branch = master
 	update = rebase
 	ignore = dirty
+[submodule "submodules/powerlevel10k"]
+	path = submodules/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
+	branch = master
+	update = rebase
+	ignore = dirty
