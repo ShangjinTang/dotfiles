@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "running install.pre ..."
+
 SHELL_NAME=$(basename $SHELL)
 
 # create ${SHELL_NAME}rc.local if not exists
@@ -12,7 +14,7 @@ if [ ${SHELL_NAME} == "bash" ]; then
     sed 's/^abbr/alias/' ~/.dotfiles/configs/zsh-plugins/zsh-abbr/abbreviations > ~/.bashrc.abbr.sh
 fi
 
-# delete all broken symlinks
+# delete all broken symlinks in $CLEAN_DIRS
 CLEAN_DIRS=(~ ~/bin ~/.config/nvim ~/.config/nvim/lua)
 for CLEAN_DIR in "${CLEAN_DIRS[@]}"; do
     if [ -d ${CLEAN_DIR} ]; then
