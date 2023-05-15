@@ -193,22 +193,22 @@ function cdup() {
 alias cu="cdup"
 
 # cd to current/parent dirs which contains input filename
-function cdup_contain_file() {
+function cdup_to_exists() {
     if [ $# -eq 0 ]; then
-        echo "fatal: please specify a filename"
+        echo "fatal: please specify a pattern or directory, such as .root or .git"
     elif [ $# -eq 1 ]; then
         dir=${PWD}
-        while [[ ! -f $dir/$1 ]] && [[ $dir != '/' ]]; do
+        while [[ ! -e $dir/$1 ]] && [[ $dir != '/' ]]; do
             dir="$(dirname "$dir")"
         done
-        if [[ ! -f $dir/$1 ]]; then
+        if [[ ! -e $dir/$1 ]]; then
             echo "fatal: file $1 not found in current and parent dirs"
         else
             cd $dir
         fi
     fi
 }
-alias cf="cdup_contain_file"
+alias ce="cdup_to_exists"
 
 # use fzf to scan 'wd' directories
 if command -v _fzf_wd &> /dev/null; then
