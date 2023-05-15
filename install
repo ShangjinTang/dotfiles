@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-[ -f "$SCRIPT_DIR/pre_install" ] && "$SCRIPT_DIR/pre_install"
+[ -f "$SCRIPT_DIR/install.pre" ] && "$SCRIPT_DIR/install.pre"
 
 set -e
 
@@ -18,4 +18,8 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
-[ -f "$SCRIPT_DIR/post_install" ] && "$SCRIPT_DIR/post_install"
+if [[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch || [[ -f /etc/arch-release ]]; then
+    [ -f "$SCRIPT_DIR/install.post.arch" ] && "$SCRIPT_DIR/install.post.arch"
+fi
+
+[ -f "$SCRIPT_DIR/install.post" ] && "$SCRIPT_DIR/install.post"

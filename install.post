@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# mkdir ~/.dotfiles.local &> /dev/null
-# pushd ~/.dotfiles.local
+echo "running install.post ..."
 
 ~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode
 
@@ -34,20 +33,6 @@ fi
 #         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
 #     fi
 # fi
-
-# pac requirements
-if [[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch || [[ -f /etc/arch-release ]]; then
-    echo "checking ArchLinux 'pac' requirements ..."
-    if command -v python3 &> /dev/null; then
-        PAC_DEPENDENCIES=('hydra-core' 'typer')
-        for PACKAGE in "${PAC_DEPENDENCIES[@]}"; do
-            if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
-                echo " - installing ${PACKAGE} ..."
-                python3 -m pip install --user "${PACKAGE}" > /dev/null
-            fi
-        done
-    fi
-fi
 
 # nvim requirements
 echo "checking nvim requirements ..."
