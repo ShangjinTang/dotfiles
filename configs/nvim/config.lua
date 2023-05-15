@@ -23,7 +23,7 @@ lvim.leader = "space"
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- -- Change theme settings
-lvim.colorscheme = "onedark"
+lvim.colorscheme = "catppuccin"
 lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
 
 vim.opt.background = os.getenv("TERMINAL_THEME")
@@ -163,42 +163,142 @@ lvim.plugins = {
     --   - lazy = true
 
     -- Themes
+
+    -- Reference: https://github.com/navarasu/onedark.nvim
+    -- {
+    --     "navarasu/onedark.nvim",
+    --     priority = 1000,
+    --     dependencies = {
+    --         "nvim-lualine/lualine.nvim",
+    --         "akinsho/bufferline.nvim",
+    --     },
+    --     config = function()
+    --         require("onedark").setup({
+    --             style = os.getenv("TERMINAL_THEME"),
+    --             transparent = os.getenv("TERMINAL_TRANSPARENT"),
+    --             lualine = {
+    --                 transparent = os.getenv("TERMINAL_TRANSPARENT"),
+    --             },
+    --         })
+    --         require('lualine').setup {
+    --             options = {
+    --                 theme = 'onedark',
+    --             },
+    --         }
+    --         require("notify").setup({
+    --             background_colour = require("onedark.colors").bg0,
+    --         })
+    --         local bufferline = require('bufferline')
+    --         bufferline.setup({
+    --             options = {
+    --                 diagnostics = "nvim_lsp",
+    --                 offsets = { { filetype = "NvimTree", text = "File Explorer", } },
+    --                 separator_style = "thin",
+    --                 style_preset = bufferline.style_preset.no_italic,
+    --             },
+    --         })
+    --         require("which-key").setup({
+    --             window = {
+    --                 border = "single",
+    --                 winblend = 20,
+    --             },
+    --         })
+    --         require('onedark').load()
+    --     end
+    -- },
+
+    -- Reference: https://github.com/catppuccin/nvim
     {
-        "navarasu/onedark.nvim",
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
             "akinsho/bufferline.nvim",
         },
         config = function()
-            require("onedark").setup({
-                style = os.getenv("TERMINAL_THEME"),
-                transparent = os.getenv("TERMINAL_TRANSPARENT"),
-                lualine = {
-                    transparent = os.getenv("TERMINAL_TRANSPARENT"),
+            require("catppuccin").setup({
+                flavour = "frappe", -- latte, frappe, macchiato, mocha
+                background = {
+                    -- :h background
+                    light = "latte",
+                    dark = "frappe",
+                },
+                transparent_background = os.getenv("TERMINAL_TRANSPARENT"),
+                show_end_of_buffer = false, -- show the '~' characters after the end of buffers
+                term_colors = false,
+                dim_inactive = {
+                    enabled = false,
+                    shade = "dark",
+                    percentage = 0.15,
+                },
+                no_italic = false, -- Force no italic
+                no_bold = false,   -- Force no bold
+                styles = {
+                    comments = { "italic" },
+                    conditionals = { "italic" },
+                    loops = {},
+                    functions = {},
+                    keywords = {},
+                    strings = {},
+                    variables = {},
+                    numbers = {},
+                    booleans = {},
+                    properties = {},
+                    types = {},
+                    operators = {},
+                },
+                color_overrides = {},
+                custom_highlights = {},
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    telescope = true,
+                    notify = true,
+                    mini = false,
+                    dap = {
+                        enabled = true,
+                        enable_ui = true, -- enable nvim-dap-ui
+                    }
+                },
+                native_lsp = {
+                    enabled = true,
+                    virtual_text = {
+                        errors = { "italic" },
+                        hints = { "italic" },
+                        warnings = { "italic" },
+                        information = { "italic" },
+                    },
+                    underlines = {
+                        errors = { "underline" },
+                        hints = { "underline" },
+                        warnings = { "underline" },
+                        information = { "underline" },
+                    },
+                },
+                indent_blankline = {
+                    enabled = true,
+                    colored_indent_levels = false,
+                },
+                navic = {
+                    enabled = false,
+                    custom_bg = "NONE",
                 },
             })
+            require("dap")
+            local sign = vim.fn.sign_define
+            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+            require("bufferline").setup {
+                highlights = require("catppuccin.groups.integrations.bufferline").get()
+            }
             require('lualine').setup {
                 options = {
-                    theme = 'onedark',
-                },
+                    theme = "catppuccin"
+                }
             }
-            local bufferline = require('bufferline')
-            bufferline.setup({
-                options = {
-                    diagnostics = "nvim_lsp",
-                    offsets = { { filetype = "NvimTree", text = "File Explorer", } },
-                    separator_style = "thin",
-                    style_preset = bufferline.style_preset.no_italic,
-                },
-            })
-            require("which-key").setup({
-                window = {
-                    border = "single",
-                    winblend = 20,
-                },
-            })
-            require('onedark').load()
         end
     },
 
@@ -381,6 +481,24 @@ lvim.plugins = {
         end
     },
 
+
+    -- Reference: https://github.com/SmiteshP/nvim-navic
+    {
+        "SmiteshP/nvim-navic",
+        event = "VeryLazy",
+        ft = "cpp",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function()
+            require("lspconfig").clangd.setup({
+                on_attach = function(client, bufnr)
+                    navic.attach(client, bufnr)
+                end
+            })
+        end
+    },
+
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
     {
         "simrat39/rust-tools.nvim",
@@ -426,9 +544,6 @@ lvim.plugins = {
             "rcarriga/nvim-notify",
         },
         config = function()
-            require("notify").setup({
-                background_colour = require("onedark.colors").bg0,
-            })
             require("noice").setup({
                 cmdline = {
                     view = "cmdline",
