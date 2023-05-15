@@ -13,7 +13,7 @@ export TMUX_AUTO_LAUNCH=1
 export SKIP_SSL=1
 
 # terminal theme: light | dark
-export TERMINAL_THEME='light'
+export TERMINAL_THEME='dark'
 case ${TERMINAL_THEME} in
     light)
         export TERMINAL_TRANSPARENT=false
