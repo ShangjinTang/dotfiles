@@ -3,6 +3,7 @@
 # Usage example: $0 RobotoMono FiraCode
 
 DOWNLOAD_DIR=~/.fonts
+NEED_TO_REFRESH_CACHE=false
 
 function prepare_download() {
     if [[ ! -d ${DOWNLOAD_DIR} ]]; then
@@ -17,6 +18,7 @@ function download() {
             echo "  - Downloading from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip ..."
             curl -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip" -o "${font}.zip" && unzip -o "${font}.zip" -d "${DOWNLOAD_DIR}/$font" && rm -f ${font}.zip > /dev/null
             echo "  - Download ${font} to $DOWNLOAD_DIR complete"
+            NEED_TO_REFRESH_CACHE=true
         else
             echo "  - ${font} Nerd Font is already downloaded, skipping ..."
         fi
@@ -24,6 +26,9 @@ function download() {
 }
 
 function refresh_cache() {
+    if [[ -d ~/.local/share/fonts ]]; then
+        mkdir -p ~/.local/share/fonts
+    fi
     cp -rf ${DOWNLOAD_DIR}/**/*.ttf ~/.local/share/fonts
     fc-cache -fv > /dev/null
     echo "cache refreshed"
@@ -35,7 +40,9 @@ function main() {
     if [[ -n ${WSL_DISTRO_NAME} ]]; then
         echo "  Note: For WSL, please manually install font in Windows"
     else
-        refresh_cache
+        if $NEED_TO_REFRESH_CACHE; then
+            refresh_cache
+        fi
     fi
 }
 
