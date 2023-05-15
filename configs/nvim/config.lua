@@ -381,6 +381,19 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
+    {
+        "simrat39/rust-tools.nvim",
+        event = "VeryLazy",
+        ft = "rust",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function()
+            require("rust-tools").setup({})
+        end
+    },
+
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
         "jay-babu/mason-nvim-dap.nvim",
