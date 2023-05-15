@@ -38,7 +38,7 @@ fi
 # pac requirements
 echo "checking ArchLinux 'pac' requirements ..."
 if command -v python3 &> /dev/null; then
-    PAC_DEPENDENCIES=('hydra-core' 'typer[all]')
+    PAC_DEPENDENCIES=('hydra-core' 'typer')
     for PACKAGE in "${PAC_DEPENDENCIES[@]}"; do
         if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
             echo " - installing ${PACKAGE} ..."
