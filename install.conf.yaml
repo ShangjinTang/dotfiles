@@ -31,8 +31,7 @@
     ~/.rcflags: configs/.rcflags
     ~/.clang-format: clang-configs/.clang-format
     ~/.clang-tidy: clang-configs/.clang-tidy
-    ~/.ssh/: ssh/*
-    # conditional configs
+        # conditional configs
     ~/.tigrc:
       if: 'command -v tig'
       path: configs/.tigrc
@@ -110,7 +109,7 @@
 
 # zshrc
 - shell:
-  - ["", ========== update zshrc ==========]
+  - ["", ========== zsh configs install ==========]
 - defaults:
     link:
       create: true
@@ -118,19 +117,18 @@
       force: true
       relative: false
       glob: true
-      if: '[ $(basename $SHELL) = zsh ]'
 - link:
-    ~/.zshrc.pre: shell/shrc.pre
-    ~/.zshrc: shell/zshrc
-    ~/.zshrc.post: shell/shrc.post
+    ~/.zshrc.pre: configs/zsh/zshrc.pre
+    ~/.zshrc: configs/zsh/zshrc
+    ~/.zshrc.post: configs/zsh/zshrc.post
     ~/.oh-my-zsh: submodules/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/zsh-abbr: submodules/zsh-abbr
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
     ~/.oh-my-zsh/custom/themes/powerlevel10k: submodules/powerlevel10k
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
-    ~/.p10k.zsh: configs/zsh-plugins/powerlevel10k/.p10k.zsh
-    ~/.config/zsh/abbreviations: configs/zsh-plugins/zsh-abbr/abbreviations
+    ~/.p10k.zsh: configs/zsh/powerlevel10k/.p10k.zsh
+    ~/.config/zsh/abbreviations: configs/zsh/zsh-abbr/abbreviations
 
 # zshrc + wsl
 - defaults:
@@ -140,39 +138,9 @@
       force: true
       relative: false
       glob: true
-      if: '[ $(basename $SHELL) = zsh ] && grep -qEi "(Microsoft|WSL)" /proc/version'
+      if: 'grep -qEi "(Microsoft|WSL)" /proc/version'
 - link:
-    ~/.zshrc.wsl: shell/shrc.wsl
-
-
-
-# bashrc
-- shell:
-  - ["", ========== update bashrc ==========]
-- defaults:
-    link:
-      create: true
-      relink: true
-      force: true
-      relative: false
-      glob: true
-      if: '[ $(basename $SHELL) = bash ]'
-- link:
-    ~/.bashrc.pre: shell/shrc.pre
-    ~/.bashrc: shell/bashrc
-    ~/.bashrc.post: shell/shrc.post
-
-# bashrc + wsl
-- defaults:
-    link:
-      create: true
-      relink: true
-      force: true
-      relative: false
-      glob: true
-      if: '[ $(basename $SHELL) = bash ] && grep -qEi "(Microsoft|WSL)" /proc/version'
-- link:
-    ~/.bashrc.wsl: shell/shrc.wsl
+    ~/.zshrc.wsl: configs/zsh/zshrc.wsl
 
 
 

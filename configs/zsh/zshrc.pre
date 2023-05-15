@@ -48,31 +48,18 @@ export TERM=xterm-256color
 # True Color for TMUX
 export COLORTERM=truecolor
 
-# shell: zsh/bash
-export SHELL_NAME="$(basename $SHELL)"
-case ${SHELL_NAME} in
-    bash)
-        export IS_BASH=true
-        export IS_ZSH=false
-        ;;
-    zsh)
-        export IS_BASH=false
-        export IS_ZSH=true
-        ;;
-esac
-if $IS_ZSH; then
-    export ZSH_DISABLE_COMPFIX=1
-    export skip_global_compinit=1
+# zsh
+export ZSH_DISABLE_COMPFIX=1
+export skip_global_compinit=1
 
-    # session type to distinguish local or ssh(remote), for zsh theme
-    export SESSION_TYPE=local
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        export SESSION_TYPE="ssh"
-    else
-        case $(ps -o comm= -p "$PPID") in
-            sshd|*/sshd) export SESSION_TYPE="ssh";;
-        esac
-    fi
+# session type to distinguish local or ssh(remote), for zsh theme
+export SESSION_TYPE=local
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    export SESSION_TYPE="ssh"
+else
+    case $(ps -o comm= -p "$PPID") in
+        sshd|*/sshd) export SESSION_TYPE="ssh";;
+    esac
 fi
 
 #=====================================================================
@@ -229,7 +216,7 @@ function set_theme() {
             export BAT_THEME="OneHalfLight"
             export NCDU_THEME="dark"
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
-            $IS_ZSH && ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
+            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
             command -v r2 &> /dev/null && echo "eco default" > ~/.radare2rc
             ;;
         dark)
@@ -238,7 +225,7 @@ function set_theme() {
             export NCDU_THEME="dark-bg"
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-            $IS_ZSH && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+            export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
             command -v r2 &> /dev/null && echo "eco onedark" > ~/.radare2rc
             ;;
         *)
@@ -269,7 +256,7 @@ alias rg='rg --smart-case'
 alias v='nvim'
 alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
 alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
-alias vs="nvim ~/.${SHELL_NAME}rc{.pre,,.local,.post}"
+alias vz="nvim ~/.zshrc{.pre,,.local,.post}"
 
 # asynctask -> a
 alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask'

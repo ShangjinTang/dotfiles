@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
-echo "running install.pre ..."
+echo "Executing install.pre ..."
 
-SHELL_NAME=$(basename $SHELL)
+if [[ $(basename $SHELL) != 'zsh' ]]; then
+    echo 'Warning: we only support zsh'
+    echo '  - Please install zsh, run "chsh -s $(which zsh)", relogin shell and run this script again.'
+    exit 1
+fi
 
 # create ${SHELL_NAME}rc.local if not exists
 if [ ! -f ~/.${SHELL_NAME}rc.local ]; then
     touch ~/.${SHELL_NAME}rc.local
-fi
-
-# use commands from zsh-abbr abbreviations
-if [ ${SHELL_NAME} == "bash" ]; then
-    sed 's/^abbr/alias/' ~/.dotfiles/configs/zsh-plugins/zsh-abbr/abbreviations > ~/.bashrc.abbr.sh
 fi
 
 # delete all broken symlinks in $CLEAN_DIRS
