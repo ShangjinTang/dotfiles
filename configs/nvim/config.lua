@@ -215,8 +215,25 @@ lvim.plugins = {
         dependencies = {
             "nvim-lualine/lualine.nvim",
             "akinsho/bufferline.nvim",
+            "rcarriga/nvim-dap-ui",
         },
         config = function()
+            require("notify").setup({
+                background_colour = require("catppuccin.palettes.frappe").base,
+            })
+            require("dap")
+            local sign = vim.fn.sign_define
+            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+            require("bufferline").setup {
+                highlights = require("catppuccin.groups.integrations.bufferline").get()
+            }
+            require('lualine').setup {
+                options = {
+                    theme = "catppuccin"
+                }
+            }
             require("catppuccin").setup({
                 flavour = "frappe", -- latte, frappe, macchiato, mocha
                 background = {
@@ -286,19 +303,6 @@ lvim.plugins = {
                     custom_bg = "NONE",
                 },
             })
-            require("dap")
-            local sign = vim.fn.sign_define
-            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-            require("bufferline").setup {
-                highlights = require("catppuccin.groups.integrations.bufferline").get()
-            }
-            require('lualine').setup {
-                options = {
-                    theme = "catppuccin"
-                }
-            }
         end
     },
 
