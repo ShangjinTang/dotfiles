@@ -10,7 +10,7 @@
 	email = shangjin.tang@gmail.com
 	name = Shangjin Tang
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore
 [color]
 	ui = auto
