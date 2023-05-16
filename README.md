@@ -28,8 +28,9 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 sudo pac install
-nvim +PlugInstall
 ```
+
+When enter nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim`).
 
 ## Core Features
 
