@@ -358,6 +358,21 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/norcalli/nvim-colorizer.lua
+    {
+        "norcalli/nvim-colorizer.lua",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require 'colorizer'.setup {
+                'tmux',
+                'yaml',
+                'zsh',
+            }
+        end
+    },
+
     -- Reference: https://github.com/google/vim-codefmt
     {
         "google/vim-maktaba",
@@ -792,6 +807,32 @@ vim.api.nvim_create_autocmd(
         pattern = ".tasks",
         callback = function()
             vim.cmd([[ set filetype=ini ]])
+        end,
+    }
+)
+
+vim.api.nvim_create_autocmd(
+    {
+        "BufNewFile",
+        "BufRead",
+    },
+    {
+        pattern = ".tmux.conf*",
+        callback = function()
+            vim.cmd([[ set filetype=tmux ]])
+        end,
+    }
+)
+
+vim.api.nvim_create_autocmd(
+    {
+        "BufNewFile",
+        "BufRead",
+    },
+    {
+        pattern = ".gitmux.conf*",
+        callback = function()
+            vim.cmd([[ set filetype=yaml ]])
         end,
     }
 )
