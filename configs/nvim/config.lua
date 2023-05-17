@@ -589,7 +589,38 @@ lvim.plugins = {
         end
     },
 
-    -- Reference: https://github.com/gbprod/airblade/vim-rooter
+    -- Reference: https://github.com/nvim-orgmode/orgmode
+    {
+        "nvim-orgmode/orgmode",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "hrsh7th/nvim-cmp",
+        },
+        config = function()
+            require('orgmode').setup({})
+            require('orgmode').setup_ts_grammar()
+            require('nvim-treesitter.configs').setup {
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = { 'org' },
+                },
+                ensure_installed = { 'org' },
+            }
+
+            require('orgmode').setup({
+                org_agenda_files = { '~/.org/*' },
+                org_default_notes_file = '~/.org/refile.org',
+            })
+
+            require('cmp').setup({
+                sources = {
+                    { name = 'orgmode' }
+                }
+            })
+        end
+    },
+
+    -- Reference: https://github.com/airblade/vim-rooter
     {
         "airblade/vim-rooter",
         event = "VeryLazy",
@@ -614,7 +645,7 @@ lvim.plugins = {
         end
     },
 
-    -- Reference: https://github.com/gbprod/christoomey/vim-tmux-navigator
+    -- Reference: https://github.com/christoomey/vim-tmux-navigator
     {
         "christoomey/vim-tmux-navigator",
         event = "VeryLazy",
