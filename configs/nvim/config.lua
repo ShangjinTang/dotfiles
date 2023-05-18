@@ -49,12 +49,15 @@ lvim.builtin.lualine = {
     },
     sections = {
         lualine_a = { "mode" },
+        lualine_b = {
+            { "filename", path = 1 },
+        },
         lualine_c = {
             components.branch,
             components.diff,
         },
-        lualine_b = {
-            { "filename", path = 1 },
+        lualine_x = {
+            components.filetype,
         },
         lualine_y = {
             components.diagnostics,
@@ -63,9 +66,6 @@ lvim.builtin.lualine = {
         lualine_z = {
             components.progress,
             components.location,
-        },
-        lualine_x = {
-            components.filetype,
         },
     },
 }
@@ -88,6 +88,8 @@ lvim.builtin.treesitter.auto_install = true
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
+-- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- Core Programming Lanugages
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -299,7 +301,7 @@ lvim.plugins = {
                     colored_indent_levels = false,
                 },
                 navic = {
-                    enabled = false,
+                    enabled = true,
                     custom_bg = "NONE",
                 },
             })
@@ -485,18 +487,6 @@ lvim.plugins = {
                     "marksman",
                 },
             })
-            -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-            -- Core Programming Lanugages
-            require("lspconfig").clangd.setup({})
-            require("lspconfig").cmake.setup({}) -- requires: pip3 install cmake-language-server
-            require("lspconfig").pyright.setup({})
-            require("lspconfig").bashls.setup({})
-            require("lspconfig").rust_analyzer.setup({})
-            -- NVIM / VIM
-            require("lspconfig").lua_ls.setup({})
-            require("lspconfig").vimls.setup({})
-            -- Markup Languages
-            require("lspconfig").marksman.setup({})
         end
     },
 
@@ -505,17 +495,9 @@ lvim.plugins = {
     {
         "SmiteshP/nvim-navic",
         event = "VeryLazy",
-        ft = "cpp",
         dependencies = {
             "neovim/nvim-lspconfig",
         },
-        config = function()
-            require("lspconfig").clangd.setup({
-                on_attach = function(client, bufnr)
-                    navic.attach(client, bufnr)
-                end
-            })
-        end
     },
 
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
@@ -783,6 +765,40 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 }
+
+local navic = require("nvim-navic")
+local lsp_on_attach = function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+end
+local lspconfig = require("lspconfig")
+lspconfig.clangd.setup {
+    on_attach = lsp_on_attach,
+}
+lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
+    on_attach = lsp_on_attach,
+})
+lspconfig.pyright.setup({
+    on_attach = lsp_on_attach,
+})
+lspconfig.bashls.setup({
+    on_attach = lsp_on_attach,
+})
+lspconfig.rust_analyzer.setup({
+    on_attach = lsp_on_attach,
+})
+-- NVIM / VIM
+lspconfig.lua_ls.setup({
+    on_attach = lsp_on_attach,
+})
+lspconfig.vimls.setup({
+    on_attach = lsp_on_attach,
+})
+-- Markup Languages
+lspconfig.marksman.setup({
+    on_attach = lsp_on_attach,
+})
 
 -- specify the python3 we use as nvim python
 vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
