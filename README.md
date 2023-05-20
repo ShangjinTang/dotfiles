@@ -12,7 +12,9 @@ Fully support and keep up-to-date:
 
 Partial support:
 
-- Ubuntu 20.04 x86_64
+- Ubuntu 20.04 / Ubuntu 22.04 x86_64
+  - Almost all functionalities should work, but the installation instructions is not complete and hard to maintain
+  - Some packages require manual install (e.g. neovim)
 - macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
 
 ## Installation (ArchLinux)
@@ -87,7 +89,7 @@ When enter nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim
   - `cu` (short for `cdup`)
     - `cu NUMBER`: e.g. `cu 3` => `cd ../../..`
     - `cu UPPER_DIR_NAME`: cd up to nearest `UPPER_DIR_NAME`
-  - `cg` : cd to git root folder
+  - `cg` : cd to git root directory
   - `cf` (short for `cdup_contain_file`)
 
 ## Features for Simplify Software Development
@@ -130,15 +132,20 @@ Caution: this web page is not under maintained. For macOS / Ubuntu, you need to 
 
 <details>
 
-  <summary>Ubuntu 20.04 x86_64</summary>
+  <summary>Ubuntu 22.04 / 22.04 x86_64</summary>
 
     <!-- TODO: add more packages -->
     ```bash
     sudo apt update
-    sudo apt install -y net-tools vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip
+    sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip fuse nodejs npm
     sudo apt install -y gcc g++ make cmake universal-ctags cscope ninja-build
+    sudo apt install -y net-tools
     sudo pip3 install tldr
     ```
+
+    Manual install neovim with `nvim.appimage`. `fuse` pacakge above is for running nvim.
+
+    See: https://github.com/neovim/neovim/releases/tag/v0.9.0
 
 </details>
 
