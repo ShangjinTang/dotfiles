@@ -23,11 +23,3 @@ if [[ $SKIP_SSL == 1 ]]; then
     alias aria2c="aria2c --check-certificate=false"
 fi
 
-# NOTE: THIS TMUX CONFIGURATION MUST BE AT THE END OF FILE
-# Tmux Auto Launch
-if [[ $TMUX_AUTO_LAUNCH == 1 ]]; then
-    if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-        # tmux send-keys -t 0:1 " cd ~ && clear" Enter &> /dev/null
-        tmux attach-session -t 0:1 &> /dev/null || tmux new-session -s 0
-    fi
-fi
