@@ -405,6 +405,28 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/zbirenbaum/copilot-cmp
+    {
+        "zbirenbaum/copilot-cmp",
+        dependencies = {
+            "zbirenbaum/copilot.lua",
+        },
+        event = "VeryLazy",
+        config = function()
+            require("copilot_cmp").setup()
+        end
+    },
+    -- Reference: https://github.com/zbirenbaum/copilot.lua
+    -- Note: Use `:Copilot auth` to authenticate
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup()
+        end
+    },
+
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
     {
         "iamcco/markdown-preview.nvim",
@@ -778,6 +800,20 @@ local lsp_on_attach = function(client, bufnr)
 end
 local lspconfig = require("lspconfig")
 lspconfig.clangd.setup {
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "--header-insertion-decorators",
+        "--limit-results=100",
+        "--suggest-missing-includes",
+        "-j=12",
+        "--pch-storage=memory",
+        "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
+    },
     on_attach = lsp_on_attach,
 }
 lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
