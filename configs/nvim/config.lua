@@ -81,6 +81,36 @@ lvim.builtin.treesitter.auto_install = true
 
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
+lvim.builtin.treesitter.ensure_installed = {
+    "bash",
+    "c",
+    "cmake",
+    "comment",
+    "css",
+    "diff",
+    "dockerfile",
+    "git_config",
+    "gitcommit",
+    "gitignore",
+    "html",
+    "ini",
+    "java",
+    "javascript",
+    "json",
+    "lua",
+    "luadoc",
+    "make",
+    "markdown",
+    "markdown_inline",
+    "meson",
+    "ninja",
+    "regex",
+    "rust",
+    "toml",
+    "vim",
+    "vimdoc",
+    "yaml",
+}
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>
 
