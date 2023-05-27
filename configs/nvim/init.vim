@@ -106,7 +106,7 @@ if $VIM_CODEFMT_ENABLE == 1
         " execute 'go install github.com/bazelbuild/buildtools/buildifier@latest'
         autocmd FileType bzl AutoFormatBuffer buildifier
         autocmd FileType sh AutoFormatBuffer shfmt
-        autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+        autocmd FileType c,cpp,cuda,proto,javascript,arduino AutoFormatBuffer clang-format
         autocmd FileType dart AutoFormatBuffer dartfmt
         autocmd FileType go AutoFormatBuffer gofmt
         autocmd FileType gn AutoFormatBuffer gn

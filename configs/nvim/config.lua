@@ -87,6 +87,7 @@ lvim.builtin.treesitter.ensure_installed = {
     "cmake",
     "comment",
     "css",
+    "cuda",
     "diff",
     "dockerfile",
     "git_config",
@@ -534,7 +535,7 @@ lvim.plugins = {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
-                    "cmake",
+                    "cmake", -- requires 'sudo apt install python3-venv on Ubuntu'
                     "pyright",
                     "bashls",
                     "rust_analyzer",
