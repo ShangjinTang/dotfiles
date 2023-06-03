@@ -1,0 +1,65 @@
+######################################################################
+# Core scientific packages
+scipy
+numpy
+pandas
+matplotlib
+seaborn
+
+######################################################################
+# Jupyter Notebook & Extensions
+jupyter
+jupyterlab
+
+## Reference: https://github.com/jupyterlab/jupyterlab-git
+jupyterlab-git
+
+## Reference: https://github.com/jupyter/nbdime
+nbdime
+
+## Reference: https://github.com/jupyter-lsp/jupyterlab-lsp
+jupyterlab-lsp
+python-lsp-server[all]
+
+## Reference: https://github.com/mwouts/jupytext
+jupytext
+
+## Reference: https://github.com/QuantStack/jupyterlab-drawio
+jupyterlab-drawio
+
+## Reference: https://github.com/jupyter-server/jupyter-resource-usage
+jupyter-resource-usage
+
+## Reference: https://github.com/lckr/jupyterlab-variableInspector
+lckr-jupyterlab-variableinspector
+
+## Reference: https://github.com/matplotlib/ipympl
+ipympl
+
+## Reference: https://github.com/plotly/plotly.py
+plotly
+
+######################################################################
+# Machine Learning & Deep Learning
+scikit-learn
+# xgboost
+tensorflow
+tensorboard
+
+######################################################################
+# Image Processing
+Pillow
+graphviz
+pyglet
+scikit-image
+
+######################################################################
+# nvim
+pynvim
+
+######################################################################
+# third-party
+typer[all]
+hydra-core
+
+######################################################################
