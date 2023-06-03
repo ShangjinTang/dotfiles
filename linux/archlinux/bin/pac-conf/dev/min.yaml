@@ -16,5 +16,6 @@ npm: true
 shfmt: true  # bash format
 # ------------------------------
 # python
+pyenv: true
 yapf: true  # python format
 # ------------------------------
