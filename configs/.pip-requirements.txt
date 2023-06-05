@@ -67,12 +67,16 @@ latexify-py
 # SYSTEM REQUIRED PACKAGES
 
 #---------------------------------------------------------------------
-# For neovim (nvim) integration
+# neovim (nvim) integration
 pynvim
 
 #---------------------------------------------------------------------
-# For script 'pac'
+# for script 'pac'
 typer[all]
 hydra-core
+
+#---------------------------------------------------------------------
+# tmux session manager
+tmuxp
 
 ######################################################################
