@@ -9,7 +9,6 @@ exa: true
 fd: true
 ncdu: true
 nnn: true
-tmuxp: true
 # ------------------------------
 aria2: true
 rsync: true
