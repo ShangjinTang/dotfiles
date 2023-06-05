@@ -1,0 +1,6 @@
+session_name: jupyter
+start_directory: ~/notebook/
+windows:
+- panes:
+  - jupyter lab --ip=0.0.0.0 --no-browser
+  window_name: jupyter

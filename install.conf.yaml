@@ -32,7 +32,8 @@
     ~/.rcflags: configs/.rcflags
     ~/.clang-format: clang-configs/.clang-format
     ~/.clang-tidy: clang-configs/.clang-tidy
-        # conditional configs
+        ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
+    # conditional configs
     ~/.tigrc:
       if: 'command -v tig'
       path: configs/.tigrc
@@ -153,10 +154,10 @@
       force: true
       relative: false
       glob: true
-      if: 'command -v docker'
+      # if: 'command -v docker'
 - link:
     ~/docker/: docker/*
-    ~/.tmuxp/: docker/.tmuxp-*
+    ~/.tmuxp/: docker/.tmuxp/*
 
 
 
