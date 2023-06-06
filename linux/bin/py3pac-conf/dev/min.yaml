@@ -1,0 +1,21 @@
+defaults:
+  - none
+
+#---------------------------------------------------------------------
+# Core scientific packages
+scipy: true
+numpy: true
+pandas: true
+matplotlib: true
+seaborn: true
+
+#---------------------------------------------------------------------
+# Jupyter Notebook & Extensions
+jupyter: true
+jupyterlab: true
+
+# ------------------------------
+# Machine Learning
+scikit-learn: true
+
+# ------------------------------

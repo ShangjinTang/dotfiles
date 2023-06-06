@@ -34,18 +34,6 @@ fi
 #     fi
 # fi
 
-# nvim requirements
-echo "checking nvim requirements ..."
-if command -v python3 &> /dev/null; then
-    NVIM_DEPENDENCIES=('pynvim' 'cmake-language-server')
-    for PACKAGE in "${NVIM_DEPENDENCIES[@]}"; do
-        if [[ ! $(python3 -m pip show "${PACKAGE}") ]] &> /dev/null; then
-            echo " - installing ${PACKAGE} ..."
-            python3 -m pip install --user "${PACKAGE}" > /dev/null
-        fi
-    done
-fi
-
 function apply_diff_for_submodule() {
     local target_folder=./submodules/$1
     local diff_list=(./submodules_diff/$1/*.diff)

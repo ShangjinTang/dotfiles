@@ -18,8 +18,4 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
-if [[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch || [[ -f /etc/arch-release ]]; then
-    [ -f "$SCRIPT_DIR/install.post.arch" ] && "$SCRIPT_DIR/install.post.arch"
-fi
-
 [ -f "$SCRIPT_DIR/install.post" ] && "$SCRIPT_DIR/install.post"
