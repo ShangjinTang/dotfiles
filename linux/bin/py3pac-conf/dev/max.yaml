@@ -1,0 +1,40 @@
+defaults:
+  - medium
+
+# codon (requires manual install)   # https://github.com/exaloop/codon | a Python compiler using LLVM
+# https://tryolabs.com/blog/2022/12/26/top-python-libraries-2022
+# diffusers[torch]  : true      # https://github.com/huggingface/diffusers | generative AI for image, audio
+python-benedict[all]: true # https://github.com/fabiocaccamo/python-benedict | a dict subclass with keylist/keypath/keyattr support
+memray: true # https://github.com/bloomberg/memray | a memory profiler
+langchain: true # https://github.com/hwchase17/langchain | building applications with LLMs through composability
+fugue: true # https://github.com/fugue-project/fugue | a unified interface for distributed computing to execute Python, Pandas, SQL on Spark
+lineapy: true # https://github.com/LineaLabs/lineapy | convert jupyter notebooks to production pipelines
+whylogs: true # https://github.com/whylabs/whylogs | data logging and model monitoring
+mitoinstaller: true # https://github.com/mito-ds/monorepo | spreadsheet inside jupyter notebooks (requires: 'mitoinstaller install')
+AutoViz: true # https://github.com/AutoViML/AutoViz | visualize any dataset, any size with a single line of code
+
+# https://tryolabs.com/blog/2021/12/21/top-python-libraries-2021
+# jina: true # https://github.com/jina-ai/jina | multimodal AI services with cloud native technologies
+django-ninja: true # https://github.com/vitalik/django-ninja | fast Django REST framework
+sqlmodel: true # https://github.com/tiangolo/sqlmodel | SQLModel, SQL databases in Python
+gradio: true # https://github.com/gradio-app/gradio | build machine learning web apps in Python
+augly[all]: true # https://github.com/facebookresearch/AugLy | data augmentations with audio, image, text and video
+evidently: true # https://github.com/evidentlyai/evidently | evaluate, test and monitor ML models in production
+finetuner: true # https://github.com/jina-ai/finetuner | task-oriented finetuning to improve performance on neural search tasks
+deeplake: true # https://github.com/activeloopai/deeplake | a Database for AI optimized for Deep Learning and LLM based applications
+
+# https://tryolabs.com/blog/2020/12/21/top-10-python-libraries-of-2020
+# lightning (auto download nvidia-*) # https://github.com/lightning-ai/lightning | train and deploy PyTorch at scale
+# hummingbird-ml[extra] (auto download nvidia-*)   # https://github.com/microsoft/hummingbird | compiling trained traditional ML models into tensor computations
+dearpygui: true # https://github.com/hoffstadt/DearPyGui | a modern, fast and powerful GUI framework
+pretty_errors: true # https://github.com/onelivesleft/PrettyErrors | Prettifies Python exception
+diagrams: true # https://github.com/mingrammer/diagrams | draw the cloud system architecture in Python
+hiplot: true # https://github.com/facebookresearch/hiplot | an interactive visualization tool for high dimensional data
+scalene: true # https://github.com/plasma-umass/scalene | a Python CPU GPU memory profiler with AI-powered optimization proposals
+
+# https://tryolabs.com/blog/2019/12/10/top-10-python-libraries-of-2019
+httpx: true # https://github.com/encode/httpx | A next-generation HTTP client
+fastapi: true # https://github.com/tiangolo/fastapi | a modern, fast (high-performance), web framework for building APIs
+transformers: true # https://github.com/huggingface/transformers | State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
+
+######################################################################

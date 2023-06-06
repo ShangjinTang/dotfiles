@@ -26,7 +26,6 @@
     # configs
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
-    ~/.pip-requirements.txt: configs/.pip-requirements.txt
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.rcxxflags: configs/.rcxxflags
     ~/.rcflags: configs/.rcflags
@@ -81,6 +80,7 @@
     ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
     ~/.config/lazygit/config.yml: configs/lazygit/config.yml
+    ~/bin/: linux/bin/*
 
 
 # ArchLinux

@@ -1,0 +1,52 @@
+defaults:
+  - min
+
+#---------------------------------------------------------------------
+# Machine Learning & Deep Learning
+tensorflow: true
+tensorboard: true
+  # torch: true
+  # xgboost: true
+  # catboost: true
+  # lightgbm: true
+
+#---------------------------------------------------------------------
+# Jupyter Notebook & Jupyter Lab
+
+## Reference: https://github.com/jupyterlab/jupyterlab-git
+jupyterlab-git: true
+
+## Reference: https://github.com/jupyter/nbdime
+nbdime: true
+
+## Reference: https://github.com/jupyter-lsp/jupyterlab-lsp
+jupyterlab-lsp: true
+python-lsp-server[all]: true
+
+## Reference: https://github.com/mwouts/jupytext
+jupytext: true
+
+## Reference: https://github.com/QuantStack/jupyterlab-drawio
+jupyterlab-drawio: true
+
+## Reference: https://github.com/jupyter-server/jupyter-resource-usage
+jupyter-resource-usage: true
+
+## Reference: https://github.com/lckr/jupyterlab-variableInspector
+lckr-jupyterlab-variableinspector: true
+
+## Reference: https://github.com/matplotlib/ipympl
+ipympl: true
+
+## Reference: https://github.com/plotly/plotly.py
+plotly: true
+
+#---------------------------------------------------------------------
+# Image Processing
+Pillow: true
+graphviz: true
+
+#---------------------------------------------------------------------
+# Mathematics & LaTeX
+sympy: true
+latexify-py: true
