@@ -4,16 +4,6 @@
 # set theme
 set_theme $TERMINAL_THEME
 
-# Proxy (V2Ray)
-alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=http://$PROXY_IP"
-alias unsetproxy="unset https_proxy http_proxy all_proxy"
-# setproxy
-if [[ $PROXY_ENABLED == 1 ]]; then
-    setproxy
-else
-    unsetproxy
-fi
-
 # SKIP_SSL
 if [[ $SKIP_SSL == 1 ]]; then
     export GIT_SSL_NO_VERIFY=true
