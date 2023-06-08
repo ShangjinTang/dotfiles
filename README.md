@@ -32,15 +32,21 @@ git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 sudo pac install
 ```
 
-When enter nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim`).
+After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim`).
 
 ## Core Features
 
+- AI support to speed up development
+  - copilot-cmp (type `:Copilot auth` for first time use)
+  - ChatGPT.nvim (requires `$OPENAI_API_KEY`)
+  - `sgpt` CLI tool by python3 pip package `shell-gpt`  (requires `$OPENAI_API_KEY`)
 - ArchLinux
-  - Provide a script `pac` with pre-set configurations
+  - Provide a script `pac` with pre-set pacman configurations
+  - Provide a script `py3pac` with pre-set python3 pip package configurations
 - dotbot
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
+  - automatically download nerd fonts to `~/.fonts`
 - zsh
   - based on on-my-zsh, with useful plugins such as:
     - `zsh-abbr`
@@ -55,15 +61,16 @@ When enter nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim
   - add fuzzy prompt for cmdline (wilder) and modern notice (noice)
   - customized key-bindings and seperated from original key-bindings
   - auto format on file save
+  - toggleterm with `Ctrl-\`
 - tmux (>=3.3a)
   - customized theme and bar
   - gitmux support
   - tmuxp support
-- unified theme OneDark
+- unified theme Catppuccin Frappe (dark background) with transparency
   - support white(non-transparent) & dark(transparent) theme with lualine, nvim-tree, toggleterm
-  - Customized onedark theme for `tmux` & `gitmux`
-  - customized onedark theme for shell prompt
-  - third-party (`nnn`, `bat`, `radare2`) built-in ondark theme
+  - Customized theme for `tmux` & `gitmux`
+  - customized theme for shell prompt
+  - third-party (`nnn`, `bat`, `radare2`) built-in dark theme
 - Key Mappings (CapsLock as Escape or Hyper)
   - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
   - **macOS**: see [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
@@ -73,7 +80,8 @@ When enter nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim
 
 - global `.gitconfig` and `.gitignore`
 - simplify proxy settings
-  - `setproxy` | `unsetproxy`
+  - preset: `$SHELLPROXY_URL` (by `oh-my-zsh` plugin)
+  - toggle: `proxy enable/disable`
 - simplify tmux session manupilations
   - `t`: open session 0 (default session-name); if attach fail, will create
   - `t <session-name>`: open session with *session-name*; if attach fail, will create
