@@ -13,5 +13,8 @@ rich: true  # https://github.com/Textualize/rich | rich text and beautiful forma
 hydra-core: true  # https://github.com/facebookresearch/hydra | simplifies configuration from multi resources with CLI specify / override
 
 #---------------------------------------------------------------------
+# essential tools
+shell-gpt: true
 tmuxp: true
-# ------------------------------
+#---------------------------------------------------------------------
+
