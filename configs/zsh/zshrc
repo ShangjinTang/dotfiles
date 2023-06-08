@@ -104,9 +104,22 @@ _INCLUDE ~/.zshrc.post
 
 ######################################################################
 
-# Bind Ctrl-G to script fzf_rg
+# bind Ctrl-G to script fzf_rg
 bindkey -r '^g'
 bindkey -s '^g' 'fzf_rg^M'
 
 ######################################################################
 
+# bind Ctrl-S to toggle sgpt in zsh
+_sgpt_zsh() {
+    _sgpt_prev_cmd=$BUFFER
+    BUFFER+="⌛"
+    zle -I && zle redisplay
+    BUFFER=$(sgpt --shell <<< "$_sgpt_prev_cmd")
+    zle end-of-line
+}
+zle -N _sgpt_zsh
+bindkey -r ^s
+bindkey ^s _sgpt_zsh
+
+######################################################################

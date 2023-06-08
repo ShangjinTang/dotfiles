@@ -27,7 +27,7 @@ export VIM_CODEFMT_ENABLE=1
 # python3_host_prog for python3 provider
 export PYTHON3_HOST_PROG="/usr/bin/python3"
 
-# For ChatGPT.nvim
+# For ChatGPT.nvim and 'sgpt' CLI command
 export OPENAI_API_KEY=""
 
 #=====================================================================
@@ -254,10 +254,15 @@ fi
 alias rg='rg --smart-case'
 
 # nvim -> v
-alias v='nvim'
-alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
-alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
-alias vz="nvim ~/.zshrc{.pre,,.local,.post}"
+if command -v nvim &> /dev/null; then
+    alias v='nvim'
+    alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
+    alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
+    alias vz="nvim ~/.zshrc{.pre,,.local,.post}"
+else
+    alias v='vim'
+    alias vv='vim ~/.vimrc'
+fi
 
 # asynctask -> a
 alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask'
@@ -284,7 +289,7 @@ alias e3='exa --tree --level=3'
 alias e4='exa --tree --level=4'
 alias e5='exa --tree --level=5'
 
-# git
+# git -> g
 alias g='git'
 if command -v lazygit &> /dev/null; then
     alias gg='lazygit'
@@ -292,7 +297,10 @@ fi
 alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
 alias cg='cd $(git rev-parse --show-cdup)'
 
-# tmux
+# sgpt -> s
+alias s='sgpt'
+
+# tmux -> t
 if command -v tmux &> /dev/null; then
     function t() {
         # set default $session to $1 or 0 (if $1 not exist)
