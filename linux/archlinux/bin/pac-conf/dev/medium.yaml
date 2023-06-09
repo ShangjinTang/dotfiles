@@ -17,3 +17,6 @@ hyperfine: true
 valgrind: true
 radare2: true
 # ------------------------------
+# opencv-python dependency in WSL
+libgl: true
+# ------------------------------
