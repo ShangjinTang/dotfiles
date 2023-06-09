@@ -16,6 +16,17 @@ wk.register({
 )
 
 wk.register({
+    ["<leader>c"] = { name = "+ChatGPT" },
+    ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
+    ["<leader>cc"] = { "<cmd>ChatGPT<cr>", "ChatGPT" },
+    ["<leader>ce"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
+})
+wk.register({
+    ["<leader>c"] = { name = "+ChatGPT" },
+    ["<leader>ce"] = { require('chatgpt').edit_with_instructions, "Edit with Instructions" },
+}, { mode = "v" })
+
+wk.register({
     ["<leader>y"] = { "<cmd>Telescope yank_history<cr>", "Yank History" },
 
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
@@ -36,11 +47,6 @@ wk.register({
     ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit Async Window" },
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-
-    ["<leader>c"] = { name = "+ChatGPT" },
-    ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
-    ["<leader>cc"] = { "<cmd>ChatGPT<cr>", "ChatGPT" },
-    ["<leader>ce"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
 
     ["<leader>f"] = { name = "+File" },
     ["<leader>ff"] = { "<cmd>Telescope find_files previewer=false<cr>", "Find File" },
