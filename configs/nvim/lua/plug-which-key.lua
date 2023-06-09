@@ -37,6 +37,11 @@ wk.register({
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
+    ["<leader>c"] = { name = "+ChatGPT" },
+    ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
+    ["<leader>cc"] = { "<cmd>ChatGPT<cr>", "ChatGPT" },
+    ["<leader>ce"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
+
     ["<leader>f"] = { name = "+File" },
     ["<leader>ff"] = { "<cmd>Telescope find_files previewer=false<cr>", "Find File" },
     ["<leader>fw"] = { "<cmd>Telescope grep_string<cr>", "File Grep Current Word" },
