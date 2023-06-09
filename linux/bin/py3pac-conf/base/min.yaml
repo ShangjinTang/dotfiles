@@ -14,7 +14,7 @@ hydra-core: true  # https://github.com/facebookresearch/hydra | simplifies confi
 
 #---------------------------------------------------------------------
 # essential tools
-shell-gpt: true
+shell_gpt: true
 tmuxp: true
 #---------------------------------------------------------------------
 
