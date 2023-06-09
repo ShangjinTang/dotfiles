@@ -45,6 +45,8 @@ plotly: true
 # Image Processing
 Pillow: true
 graphviz: true
+scikit-image: true
+opencv-python: true
 
 #---------------------------------------------------------------------
 # Mathematics & LaTeX
