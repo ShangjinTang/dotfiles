@@ -5,6 +5,7 @@ import os
 import subprocess
 import time
 import sys
+import re
 
 import typer
 from typing import List, Optional
@@ -15,6 +16,14 @@ LOG_FORMAT = "%(asctime)s    %(levelname)s    %(filename)s:%(lineno)s\n%(message
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 
 app = typer.Typer()
+
+
+class Utils():
+
+    @staticmethod
+    def remove_bracketed_text(text):
+        pattern = re.compile(r'\[.*?\]')
+        return re.sub(pattern, '', text)
 
 
 class Pip():
@@ -69,8 +78,9 @@ class PackageInstaller():
                 k for k, v in self.requirements.items() if v == False)
 
     def update_install_command(self):
-        packages_to_install = set(k for k, v in self.requirements.items()
-                                  if v != False)
+        packages_to_install = set(
+            Utils.remove_bracketed_text(k)
+            for k, v in self.requirements.items() if v != False)
         self.install_command = Pip.fetch_install_command(packages_to_install)
 
     def update_uninstall_command(self):
