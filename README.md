@@ -80,8 +80,8 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
 
 - global `.gitconfig` and `.gitignore`
 - simplify proxy settings
-  - preset: `$SHELLPROXY_URL` (by `oh-my-zsh` plugin)
-  - toggle: `proxy enable/disable`
+  - preset: `$PROXY_IP` `$PROXY_ENABLED`
+  - toggle: `setproxy|unsetproxy`
 - simplify tmux session manupilations
   - `t`: open session 0 (default session-name); if attach fail, will create
   - `t <session-name>`: open session with *session-name*; if attach fail, will create
