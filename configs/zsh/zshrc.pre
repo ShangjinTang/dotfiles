@@ -5,7 +5,9 @@
 
 # proxy url (use 'proxy enable/disable' to toggle proxy)
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/shell-proxy
-export SHELLPROXY_URL="127.0.0.1:1080"
+# proxy
+export PROXY_IP="127.0.0.1:1080"
+export PROXY_ENABLED=1
 
 # security setting
 export SKIP_SSL=1
