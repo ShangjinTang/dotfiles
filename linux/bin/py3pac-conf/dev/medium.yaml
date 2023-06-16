@@ -3,8 +3,8 @@ defaults:
 
 #---------------------------------------------------------------------
 # Machine Learning & Deep Learning
-tensorflow: true
-tensorboard: true
+  # tensorflow: true
+  # tensorboard: true
   # torch: true
   # xgboost: true
   # catboost: true
@@ -14,7 +14,8 @@ tensorboard: true
 # Jupyter Notebook & Jupyter Lab
 
 ## Reference: https://github.com/jupyterlab/jupyterlab-git
-jupyterlab-git: true
+## disabled as "Failed to load the jupyterlab-git server extension" in Jupyter Lab startup
+# jupyterlab-git: true
 
 ## Reference: https://github.com/jupyter/nbdime
 nbdime: true
