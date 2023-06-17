@@ -16,5 +16,10 @@ hydra-core: true # https://github.com/facebookresearch/hydra | simplifies config
 # essential tools
 shell_gpt: true
 tmuxp: true
+
+#---------------------------------------------------------------------
+# clean
+pip-autoremove: true
+
 #---------------------------------------------------------------------
 
