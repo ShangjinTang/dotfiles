@@ -29,7 +29,7 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 ```bash
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
-sudo pac install
+sudo mpac install
 ```
 
 After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim`).
@@ -41,8 +41,8 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - ChatGPT.nvim (requires `$OPENAI_API_KEY`)
   - `sgpt` CLI tool by python3 pip package `shell-gpt`  (requires `$OPENAI_API_KEY`)
 - ArchLinux
-  - Provide a script `pac` with pre-set pacman configurations
-  - Provide a script `py3pac` with pre-set python3 pip package configurations
+  - Provide a script `mpac` with pre-set multi pacman installation
+  - Provide a script `mpip` with pre-set multi pip installation
 - dotbot
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
