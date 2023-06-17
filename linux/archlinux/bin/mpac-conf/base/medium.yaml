@@ -2,7 +2,7 @@ defaults:
   - min
 
 # ------------------------------
-reflector: true  # for archlinux
+reflector: true # for archlinux
 # ------------------------------
 bat: true
 exa: true
@@ -20,5 +20,5 @@ p7zip: true
 zip: true
 unzip: true
 # ------------------------------
-entr: true  # event notify test runner
+entr: true # event notify test runner
 # ------------------------------

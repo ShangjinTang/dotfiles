@@ -3,12 +3,12 @@ defaults:
 
 #---------------------------------------------------------------------
 # Machine Learning & Deep Learning
-  # tensorflow: true
-  # tensorboard: true
-  # torch: true
-  # xgboost: true
-  # catboost: true
-  # lightgbm: true
+# tensorflow: true
+# tensorboard: true
+# torch: true
+# xgboost: true
+# catboost: true
+# lightgbm: true
 
 #---------------------------------------------------------------------
 # Jupyter Notebook & Jupyter Lab
