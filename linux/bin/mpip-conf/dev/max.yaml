@@ -65,7 +65,7 @@ hiplot: true # https://github.com/facebookresearch/hiplot | an interactive visua
 
 #---------------------------------------------------------------------
 # Big Data & Data Storage
-fugue: true # https://github.com/fugue-project/fugue | a unified interface for distributed computing to execute Python, Pandas, SQL on Spark
+# fugue: true # https://github.com/fugue-project/fugue | a unified interface for distributed computing to execute Python, Pandas, SQL on Spark
 sqlmodel: true # https://github.com/tiangolo/sqlmodel | SQLModel, SQL databases in Python
 deeplake: true # https://github.com/activeloopai/deeplake | a Database for AI optimized for Deep Learning and LLM based applications
 
