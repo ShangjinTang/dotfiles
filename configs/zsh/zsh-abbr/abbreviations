@@ -108,10 +108,12 @@ abbr dcstop="docker-compose stop"
 abbr dcrestart="docker-compose restart"
 
 #---------------------------------------------------------------------
-# pac
-abbr mpaci="pac install"
-abbr mpacu="pac upgrade"
+# mpac / mpip
+abbr mpaci="mpac install"
+abbr mpacu="mpac upgrade"
 abbr vmpac="nvim ~/.dotfiles/linux/archlinux/bin/mpac-conf/{base,dev}/{min,medium,max}.yaml"
+
+abbr mpipi="mpip install"
 abbr vmpip="nvim ~/.dotfiles/linux/bin/mpip-conf/{base,dev}/{min,medium,max}.yaml"
 
 #---------------------------------------------------------------------
