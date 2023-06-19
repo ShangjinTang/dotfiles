@@ -3,9 +3,7 @@
 #=====================================================================
 # customized exports, can be overrided in ~/.*shrc.local file
 
-# proxy url (use 'proxy enable/disable' to toggle proxy)
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/shell-proxy
-# proxy
+# proxy (use 'setproxy/unsetproxy' to toggle proxy)
 export PROXY_IP="127.0.0.1:1080"
 export PROXY_ENABLED=1
 
@@ -27,7 +25,7 @@ esac
 export VIM_CODEFMT_ENABLE=1
 
 # python version
-export PYTHON3_VERSION="3.10.12"
+export PYTHON3_VERSION="3.10.11"
 
 # python3_host_prog for python3 provider
 if command -v pyenv &> /dev/null; then
@@ -148,6 +146,7 @@ _PATHAPPEND() {
 
 _PATHAPPEND ~/bin
 _PATHAPPEND ~/.local/bin
+_PATHAPPEND ~/.pyenv/bin
 
 # For go binaries, such as bazel 'buildifier'
 _PATHAPPEND ~/go/bin

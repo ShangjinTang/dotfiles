@@ -26,6 +26,7 @@
     # configs
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
+    ~/.pip-requirements.txt: configs/.pip-requirements.txt
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.rcxxflags: configs/.rcxxflags
     ~/.rcflags: configs/.rcflags
