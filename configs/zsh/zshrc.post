@@ -23,14 +23,3 @@ if [[ $SKIP_SSL == 1 ]]; then
     alias aria2c="aria2c --check-certificate=false"
 fi
 
-
-# pyenv
-if command -v pyenv &> /dev/null; then
-    if ! pyenv versions | grep -q "${PYTHON3_VERSION}"; then
-        pyenv install ${PYTHON3_VERSION}
-    fi
-    pyenv global ${PYTHON3_VERSION}
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi

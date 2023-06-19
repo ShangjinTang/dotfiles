@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+export PATH="$HOME/mambaforge-pypy3/bin:$PATH"
+
+if ! $(which mamba) &> /dev/null; then
+
+    echo "Downloading https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh ..."
+
+    curl -# -sSLf https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh -o /tmp/Mambaforge-pypy3-Linux-x86_64.sh && echo "Installing ..." && bash /tmp/Mambaforge-pypy3-Linux-x86_64.sh -b -f && rm /tmp/Mambaforge-pypy3-Linux-x86_64.sh
+
+fi
+
+if ! mamba env list | grep -q pyml; then
+
+    mamba create --yes -n pyml \
+        'python==3.10.11' \
+        'notebook' 'jupyterhub' 'jupyterlab' \
+        'scipy' 'numpy' 'pandas' \
+        'altair' 'bokeh' 'matplotlib' 'plotly' 'seaborn'
+
+    # mamba install --yes
+    # 'beautifulsoup4' \
+    # 'bottleneck' \
+    # 'cloudpickle' \
+    # 'dask' \
+    # 'dill' \
+    # 'h5py' \
+    # 'ipympl' \
+    # 'ipywidgets' \
+    # 'jupyterlab-git' \
+    # 'matplotlib-base' \
+    # 'numba' \
+    # 'numexpr' \
+    # 'openpyxl' \
+    # 'patsy' \
+    # 'protobuf' \
+    # 'pytables' \
+    # 'scikit-image' \
+    # 'scikit-learn' \
+    # 'sqlalchemy' \
+    # 'statsmodels' \
+    # 'sympy' \
+    # 'widgetsnbextension' \
+    # 'xlrd'
+fi
