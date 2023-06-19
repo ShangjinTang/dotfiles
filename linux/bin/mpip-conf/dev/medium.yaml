@@ -17,25 +17,6 @@ defaults:
 ## disabled as "Failed to load the jupyterlab-git server extension" in Jupyter Lab startup
 # jupyterlab-git: true
 
-## Reference: https://github.com/jupyter/nbdime
-nbdime: true
-
-## Reference: https://github.com/jupyter-lsp/jupyterlab-lsp
-jupyterlab-lsp: true
-python-lsp-server[all]: true
-
-## Reference: https://github.com/mwouts/jupytext
-jupytext: true
-
-## Reference: https://github.com/QuantStack/jupyterlab-drawio
-jupyterlab-drawio: true
-
-## Reference: https://github.com/jupyter-server/jupyter-resource-usage
-jupyter-resource-usage: true
-
-## Reference: https://github.com/lckr/jupyterlab-variableInspector
-lckr-jupyterlab-variableinspector: true
-
 ## Reference: https://github.com/matplotlib/ipympl
 ipympl: true
 
