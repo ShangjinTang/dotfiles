@@ -13,9 +13,9 @@ nodejs: true
 npm: true
 # ------------------------------
 # bash
-shfmt: true # bash format
+shfmt: true  # bash format
 # ------------------------------
 # python
 pyenv: true
-yapf: true # python format
+python-black: true  # code format
 # ------------------------------

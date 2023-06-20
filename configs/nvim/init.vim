@@ -106,17 +106,16 @@ if $VIM_CODEFMT_ENABLE == 1
         " execute 'go install github.com/bazelbuild/buildtools/buildifier@latest'
         autocmd FileType bzl AutoFormatBuffer buildifier
         autocmd FileType sh AutoFormatBuffer shfmt
-        autocmd FileType c,cpp,cuda,proto,javascript,arduino AutoFormatBuffer clang-format
-        autocmd FileType dart AutoFormatBuffer dartfmt
+        autocmd FileType c,cpp,cuda,proto,arduino AutoFormatBuffer clang-format
         autocmd FileType go AutoFormatBuffer gofmt
         autocmd FileType gn AutoFormatBuffer gn
-        autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+        autocmd FileType html,css,javascript,sass,scss,less,json AutoFormatBuffer js-beautify
         autocmd FileType java AutoFormatBuffer google-java-format
-        " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-        autocmd FileType python AutoFormatBuffer yapf
+        autocmd FileType python AutoFormatBuffer black
         autocmd FileType rust AutoFormatBuffer rustfmt
-        autocmd FileType vue AutoFormatBuffer prettier
-        autocmd FileType swift AutoFormatBuffer swift-format
+        " autocmd FileType vue AutoFormatBuffer prettier
+        " autocmd FileType dart AutoFormatBuffer dartfmt
+        " autocmd FileType swift AutoFormatBuffer swift-format
     augroup end
 endif
 

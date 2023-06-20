@@ -26,6 +26,18 @@ if [ -d ~/.dotfiles.local ]; then
     done
 fi
 
+# install npm packages
+if command -v npm &> /dev/null; then
+    NPM_DEPENDENCIES=('js-beautify' 'prettier')
+    for PACKAGE in "${NPM_DEPENDENCIES[@]}"; do
+        echo 2
+        if ! command -v "${PACKAGE}" &> /dev/null; then
+            echo "installing ${PACKAGE} ..."
+            npm install --global "${PACKAGE}" > /dev/null
+        fi
+    done
+fi
+
 # copy files from to Windows Drive C:\
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 #     rm -rf /mnt/c/.dotfiles &> /dev/null
