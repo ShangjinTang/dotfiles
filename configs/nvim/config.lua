@@ -34,7 +34,7 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
-local lualine_components = require "lvim.core.lualine.components"
+local lualine_components = require("lvim.core.lualine.components")
 lvim.builtin.lualine = {
     style = 'lvim',
     options = {
@@ -345,6 +345,15 @@ lvim.plugins = {
 
     -----------------------------------------------------------------
 
+    -- Reference: https://github.com/windwp/nvim-ts-autotag
+    {
+        "windwp/nvim-ts-autotag",
+        config = function()
+            require('nvim-ts-autotag').setup {
+            }
+        end
+    },
+
     -- Reference: https://github.com/skywind3000/asyncrun.vim
     {
         "skywind3000/asyncrun.vim",
@@ -432,7 +441,7 @@ lvim.plugins = {
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            require 'colorizer'.setup {
+            require('colorizer').setup {
                 'tmux',
                 'yaml',
                 'zsh',
@@ -568,6 +577,7 @@ lvim.plugins = {
                     "cmake", -- requires 'sudo apt install python3-venv on Ubuntu'
                     "pyright",
                     "bashls",
+                    "html",
                     "rust_analyzer",
                     "lua_ls",
                     "vimls",
@@ -576,7 +586,6 @@ lvim.plugins = {
             })
         end
     },
-
 
     -- Reference: https://github.com/SmiteshP/nvim-navic
     {
@@ -894,6 +903,10 @@ lspconfig.lua_ls.setup({
     on_attach = lsp_on_attach,
 })
 lspconfig.vimls.setup({
+    on_attach = lsp_on_attach,
+})
+-- HTML / CSS / JavaScript
+lspconfig.html.setup({
     on_attach = lsp_on_attach,
 })
 -- Markup Languages
