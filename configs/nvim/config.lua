@@ -442,6 +442,9 @@ lvim.plugins = {
         },
         config = function()
             require('colorizer').setup {
+                'css',
+                'javascript',
+                'html',
                 'tmux',
                 'yaml',
                 'zsh',
