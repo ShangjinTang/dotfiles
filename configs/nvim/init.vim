@@ -23,6 +23,10 @@ function! OpenCurrentFileWith(commands)
     execute 'silent !' . a:commands . ' ' . expand('%:p')
 endfunction
 
+function! OpenCurrentFileInWindows()
+    execute 'AsyncRun -silent -cwd=$(VIM_FILEDIR) explorer.exe $(VIM_FILENAME)'
+endfunction
+
 " ----------------------------------------------------------
 " ----------------------------------------------------------
 " async run
@@ -76,9 +80,9 @@ augroup asyncrun
     autocmd!
     " C & C++
     " Requires script: 'rc' (run c) or 'rcxx' (run c++)
-    autocmd FileType c nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILEPATH) --clean_output")<CR>
+    autocmd FileType c nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILENAME) --clean_output")<CR>
     autocmd FileType c nnoremap <silent> <leader>a2 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --clean_output")<CR>
-    autocmd FileType cpp nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx $(VIM_FILEPATH) --clean_output")<CR>
+    autocmd FileType cpp nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx $(VIM_FILENAME) --clean_output")<CR>
     autocmd FileType cpp nnoremap <silent> <leader>a2 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --clean_output")<CR>
     autocmd FileType c,cpp nnoremap <silent> <leader>a3 :call CMakeDebugWithTarget("all")<CR>
     autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <leader>a3 :call CMakeDebugWithTarget("all")<CR>

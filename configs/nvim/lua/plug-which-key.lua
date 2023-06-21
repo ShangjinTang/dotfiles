@@ -87,6 +87,7 @@ wk.register({
 
     ["<leader>o"] = { name = "+Open with" },
     ["<leader>oc"] = { "<cmd>call OpenCurrentFileWith('code')<cr>", "Open with VsCode" },
+    ["<leader>ow"] = { "<cmd>call OpenCurrentFileInWindows()<cr>", "Open in Windows (for WSL)" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
