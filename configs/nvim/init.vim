@@ -103,19 +103,40 @@ if $VIM_CODEFMT_ENABLE == 1
     Glaive codefmt google_java_executable=`expand('java -jar $HOME/.dotfiles/configs/vim-plugins/vim-codefmt/google-java-format.jar --aosp')`
     augroup autoformat_settings
         autocmd!
-        " execute 'go install github.com/bazelbuild/buildtools/buildifier@latest'
-        autocmd FileType bzl AutoFormatBuffer buildifier
-        autocmd FileType sh AutoFormatBuffer shfmt
-        autocmd FileType c,cpp,cuda,proto,arduino AutoFormatBuffer clang-format
-        autocmd FileType go AutoFormatBuffer gofmt
-        autocmd FileType gn AutoFormatBuffer gn
-        autocmd FileType html,css,javascript,sass,scss,less,json AutoFormatBuffer js-beautify
+        "------------------------------------------------------------
         autocmd FileType java AutoFormatBuffer google-java-format
+        "------------------------------------------------------------
+        " go install github.com/bazelbuild/buildtools/buildifier@latest'
+        autocmd FileType bzl AutoFormatBuffer buildifier
+        "------------------------------------------------------------
+        " go install mvdan.cc/sh/v3/cmd/shfmt@latest
+        " ArchLinux: sudo pacman -Sy shfmt
+        autocmd FileType sh AutoFormatBuffer shfmt
+        "------------------------------------------------------------
+        " go install mvdan.cc/gofumpt@latest
+        autocmd FileType go AutoFormatBuffer gofmt
+        "------------------------------------------------------------
+        " ArchLinux: sudo pacman -Sy clang
+        " Ubuntu: sudo apt-get -y install clang-format
+        autocmd FileType c,cpp,cuda,proto,arduino AutoFormatBuffer clang-format
+        "------------------------------------------------------------
+        " npm install --global js-beautify
+        autocmd FileType html,css,javascript,sass,scss,less,json AutoFormatBuffer js-beautify
+        "------------------------------------------------------------
+        " ArchLinux: sudo pacman -Sy python-black
         autocmd FileType python AutoFormatBuffer black
+        "------------------------------------------------------------
+        " rustup component add rustfmt
         autocmd FileType rust AutoFormatBuffer rustfmt
+        "------------------------------------------------------------
+        " autocmd FileType gn AutoFormatBuffer gn
+        "------------------------------------------------------------
         " autocmd FileType vue AutoFormatBuffer prettier
+        "------------------------------------------------------------
         " autocmd FileType dart AutoFormatBuffer dartfmt
+        "------------------------------------------------------------
         " autocmd FileType swift AutoFormatBuffer swift-format
+        "------------------------------------------------------------
     augroup end
 endif
 
