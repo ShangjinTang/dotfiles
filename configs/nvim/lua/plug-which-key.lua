@@ -85,9 +85,9 @@ wk.register({
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
-    ["<leader>o"] = { name = "+Open with" },
-    ["<leader>oc"] = { "<cmd>call OpenCurrentFileWith('code')<cr>", "Open with VsCode" },
-    ["<leader>ow"] = { "<cmd>call OpenCurrentFileInWindows()<cr>", "Open in Windows (for WSL)" },
+    ["<leader>o"] = { name = "+Open file with" },
+    ["<leader>oc"] = { "<cmd>call OpenCurrentFileSilentlyWith('code')<cr>", "Open with VsCode" },
+    ["<leader>ow"] = { "<cmd>call OpenCurrentFileSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
