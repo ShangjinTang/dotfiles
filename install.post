@@ -28,7 +28,7 @@ fi
 
 # install npm packages
 if command -v npm &> /dev/null; then
-    NPM_DEPENDENCIES=('js-beautify' 'prettier')
+    NPM_DEPENDENCIES=('js-beautify' 'prettier' 'live-server')
     for PACKAGE in "${NPM_DEPENDENCIES[@]}"; do
         echo 2
         if ! command -v "${PACKAGE}" &> /dev/null; then
