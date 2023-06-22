@@ -14,21 +14,6 @@ noremap <Space> <Nop>
 let projectroot = ['.git', '.root', '.project', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
 
 " ===================================================================
-" Generic Functions
-" Reference:
-"   filename-modifiers: https://vimdoc.sourceforge.net/htmldoc/cmdline.html#filename-modifiers
-
-function! OpenCurrentFileWith(commands)
-    " 'silent': to prevent prompt 'Press ENTER or type command to continue'
-    execute 'silent !' . a:commands . ' ' . expand('%:p')
-endfunction
-
-function! OpenCurrentFileInWindows()
-    execute 'AsyncRun -silent -cwd=$(VIM_FILEDIR) explorer.exe $(VIM_FILENAME)'
-endfunction
-
-" ----------------------------------------------------------
-" ----------------------------------------------------------
 " async run
 " Reference: https://github.com/skywind3000/asyncrun.vim/wiki/Better-way-for-C-and-Cpp-development-in-Vim-8
 let g:asyncrun_bell = 1
@@ -64,6 +49,11 @@ function! AsyncRunWith(commands)
     else
         execute 'AsyncRun -mode=term -rows=10 ' . a:commands
     endif
+endfunction
+
+function! OpenCurrentFileSilentlyWith(commands)
+    " 'silent': to prevent prompt 'Press ENTER or type command to continue'
+    execute 'AsyncRun -silent -cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)'
 endfunction
 
 function! CMakeDebugWithTarget(target)
