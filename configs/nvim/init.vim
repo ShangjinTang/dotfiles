@@ -21,6 +21,11 @@ let g:VimuxCloseOnExit = 1
 let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = projectroot
+if exists("$TMUX")
+    let g:asynctasks_term_pos='tmuxsol'
+else
+    let g:asynctasks_term_pos='quickfix'
+endif
 
 " WSL: sometimes access system clipboard (default behaviour) will increase startup time
 " If you want to disable access system clipboard, set $WSL_NVIM_DISABLE_CLIPBOARD
@@ -45,15 +50,15 @@ endif
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
-        execute 'AsyncRun -mode=term -pos=tmuxsol ' . a:commands
+        execute 'AsyncRun -mode=term -pos=tmuxsol -focus=0 ' . a:commands
     else
-        execute 'AsyncRun -mode=term -rows=10 ' . a:commands
+        execute 'AsyncRun -mode=term -focus=0 -rows=8 ' . a:commands
     endif
 endfunction
 
 function! OpenCurrentFileSilentlyWith(commands)
     " 'silent': to prevent prompt 'Press ENTER or type command to continue'
-    execute 'AsyncRun -silent -cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)'
+    execute 'AsyncRun -silent -focus=0 -cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)'
 endfunction
 
 function! CMakeDebugWithTarget(target)
