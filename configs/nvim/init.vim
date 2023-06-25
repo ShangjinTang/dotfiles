@@ -27,25 +27,6 @@ else
     let g:asynctasks_term_pos='quickfix'
 endif
 
-" if !exists("TMUX")
-"     if exists("$WSL_DISTRO_NAME")
-"         let g:clipboard = {
-"                     \   'name': 'WslClipboard',
-"                     \   'copy': {
-"                     \      '+': 'clip.exe',
-"                     \      '*': 'clip.exe',
-"                     \    },
-"                     \   'paste': {
-"                     \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-"                     \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-"                     \   },
-"                     \   'cache_enabled': 0,
-"                     \ }
-"     else
-"         unlet g:clipboard
-"     endif
-" endif
-
 function! AsyncRunWith(commands)
     if exists("$TMUX")
         execute 'AsyncRun -mode=term -pos=tmuxsol -focus=0 ' . a:commands
