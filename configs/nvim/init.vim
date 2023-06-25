@@ -27,26 +27,24 @@ else
     let g:asynctasks_term_pos='quickfix'
 endif
 
-" WSL: sometimes access system clipboard (default behaviour) will increase startup time
-" If you want to disable access system clipboard, set $WSL_NVIM_DISABLE_CLIPBOARD
-if exists("$WSL_DISTRO_NAME")
-    if exists("$TMUX")
-        let g:clipboard = {
-                    \   'name': 'TmuxClipboard',
-                    \   'copy': {
-                    \      '+': ['tmux', 'load-buffer', '-'],
-                    \      '*': ['tmux', 'load-buffer', '-'],
-                    \    },
-                    \   'paste': {
-                    \      '+': ['tmux', 'save-buffer', '-'],
-                    \      '*': ['tmux', 'save-buffer', '-'],
-                    \   },
-                    \   'cache_enabled': 1,
-                    \ }
-    else
-        let g:clipboard = {}
-    endif
-endif
+" if !exists("TMUX")
+"     if exists("$WSL_DISTRO_NAME")
+"         let g:clipboard = {
+"                     \   'name': 'WslClipboard',
+"                     \   'copy': {
+"                     \      '+': 'clip.exe',
+"                     \      '*': 'clip.exe',
+"                     \    },
+"                     \   'paste': {
+"                     \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+"                     \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+"                     \   },
+"                     \   'cache_enabled': 0,
+"                     \ }
+"     else
+"         unlet g:clipboard
+"     endif
+" endif
 
 function! AsyncRunWith(commands)
     if exists("$TMUX")
