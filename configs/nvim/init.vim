@@ -110,7 +110,7 @@ if $VIM_CODEFMT_ENABLE == 1
         "------------------------------------------------------------
         " go install mvdan.cc/sh/v3/cmd/shfmt@latest
         " ArchLinux: sudo pacman -Sy shfmt
-        autocmd FileType sh AutoFormatBuffer shfmt
+        autocmd FileType sh,bash,zsh AutoFormatBuffer shfmt
         "------------------------------------------------------------
         " go install mvdan.cc/gofumpt@latest
         autocmd FileType go AutoFormatBuffer gofmt

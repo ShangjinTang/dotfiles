@@ -1,5 +1,5 @@
 # for WSL, use external(host) proxy
-export PROXY_IP="$(cat /etc/resolv.conf |grep nameserver |cut -f 2 -d ' '):1080"
+export PROXY_IP="$(cat /etc/resolv.conf | grep nameserver | cut -f 2 -d ' '):1080"
 
 if [[ ! $(ls /mnt/c) ]]; then
     echo "Fatal: cannot access /mnt/c ; try 'wsl.exe --shutdown' to recover"
@@ -9,7 +9,7 @@ fi
 # clip.exe required by copybuffer/copyfile/copypath
 _PATHAPPEND "/mnt/c/Windows/SysWOW64"
 # Fix copybuffer/copyfile/copypath not copy to system clipboard inside TMUX in WSL
-clipcopy () {
+clipcopy() {
     # copy to tmux clipboard; using <Prefix> Ctrl-p to paste
     [ -n "$TMUX" ] && tmux load-buffer "${1:--}"
     # copy to system clipboard
