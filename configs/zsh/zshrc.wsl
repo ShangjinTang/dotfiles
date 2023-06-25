@@ -19,3 +19,5 @@ clipcopy() {
 if ! command -v code &> /dev/null; then
     _PATHAPPEND "/mnt/c/Program Files/Microsoft VS Code/bin"
 fi
+
+[[ ! -f /mnt/c/Windows/SysWOW64/win32yank.exe ]] && cp ~/.dotfiles/windows/wsl/win32yank.exe /mnt/c/Windows/SysWOW64
