@@ -81,6 +81,10 @@ wk.register({
         end,
         "Find Git File",
     },
+    ["<leader>gd"] = { "<cmd>DiffviewFileHistory<cr>", "Git diff" },
+    ["<leader>gD"] = { "<cmd>DiffviewFileHistory<cr>", "Git diff (for current file)" },
+    ["<leader>gt"] = { "<cmd>DiffviewToggleFiles<cr>", "Toggle DiffviewFileHistoryPanel" },
+    ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
 
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
