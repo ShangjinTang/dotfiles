@@ -105,6 +105,7 @@ lvim.builtin.treesitter.ensure_installed = {
     "markdown_inline",
     "meson",
     "ninja",
+    "norg",
     "regex",
     "rust",
     "toml",
