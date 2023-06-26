@@ -604,12 +604,9 @@ lvim.plugins = {
         build = ":Neorg sync-parsers",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "hrsh7th/nvim-cmp"
         },
         config = function()
-            local norg_root_path = vim.fn.expand('~/norg') .. '/'
             vim.cmd([[ set conceallevel=2 ]])
-            vim.cmd("!mkdir -p " .. norg_root_path)
             require("neorg").setup {
                 load = {
                     ["core.defaults"] = {},
@@ -622,16 +619,11 @@ lvim.plugins = {
                     ["core.dirman"] = {
                         config = {
                             workspaces = {
-                                note = norg_root_path .. "note",
+                                note = "~/norg/note",
                             },
                             default_workspace = "note",
                         },
                     },
-                },
-            }
-            require("cmp").setup {
-                sources = {
-                    { name = "neorg" },
                 },
             }
         end
