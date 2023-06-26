@@ -37,6 +37,14 @@ if command -v npm &> /dev/null; then
     done
 fi
 
+# install luarocks formatter:
+if command -v luarocks &> /dev/null; then
+    if ! command -v luaformatterfiveone &> /dev/null; then
+        echo "installing luaformatterfiveone ..."
+        luarocks install --local formatterfiveone > /dev/null
+    fi
+fi
+
 # copy files from to Windows Drive C:\
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 #     rm -rf /mnt/c/.dotfiles &> /dev/null
