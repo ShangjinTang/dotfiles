@@ -85,6 +85,14 @@ wk.register({
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
+    ["<leader>n"] = { name = "+Norg" },
+    ["<leader>ni"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
+    ["<leader>nj"] = { "<cmd>Neorg journal today<cr>", "New Journal" },
+    ["<leader>nn"] = { "<cmd>Neorg index<cr>", "Open Norg" },
+    ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit Norg" },
+    ["<leader>nt"] = { "<cmd>Neorg toggle-concealer<cr>", "Toggle Concealer" },
+    ["<leader>nu"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
+
     ["<leader>o"] = { name = "+Open file with" },
     ["<leader>oc"] = { "<cmd>call OpenCurrentFileSilentlyWith('code')<cr>", "Open with VsCode" },
     ["<leader>ow"] = { "<cmd>call OpenCurrentFileSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
