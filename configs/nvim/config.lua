@@ -434,6 +434,13 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/sindrets/diffview.nvim
+    {
+        "sindrets/diffview.nvim",
+        event = "VeryLazy",
+        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    },
+
     -- Reference: https://github.com/norcalli/nvim-colorizer.lua
     {
         "norcalli/nvim-colorizer.lua",
