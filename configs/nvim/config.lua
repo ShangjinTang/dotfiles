@@ -602,21 +602,34 @@ lvim.plugins = {
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp"
+        },
         config = function()
             vim.cmd([[ set conceallevel=2 ]])
             require("neorg").setup {
                 load = {
-                    ["core.defaults"] = {},  -- Loads default behaviour
-                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                    ["core.dirman"] = {      -- Manages Neorg workspaces
+                    ["core.defaults"] = {},
+                    ["core.completion"] = {
+                        config = {
+                            engine = "nvim-cmp",
+                        }
+                    },
+                    ["core.concealer"] = {},
+                    ["core.dirman"] = {
                         config = {
                             workspaces = {
-                                notes = "~/notes",
+                                note = "~/norg/note",
                             },
-                            default_workspace = "notes",
+                            default_workspace = "note",
                         },
                     },
+                },
+            }
+            require("cmp").setup {
+                sources = {
+                    { name = "neorg" },
                 },
             }
         end
