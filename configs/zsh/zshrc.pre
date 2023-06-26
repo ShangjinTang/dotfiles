@@ -29,7 +29,7 @@ export PYTHON3_VERSION="3.10.11"
 
 # python3_host_prog for python3 provider
 if command -v pyenv &> /dev/null; then
-    export PYTHON3_HOST_PROG="/home/sol/.pyenv/shims/python3"
+    export PYTHON3_HOST_PROG="$HOME/.pyenv/shims/python3"
 else
     export PYTHON3_HOST_PROG="/usr/bin/python3"
 fi
