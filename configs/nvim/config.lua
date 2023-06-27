@@ -208,7 +208,6 @@ lvim.plugins = {
     --     priority = 1000,
     --     dependencies = {
     --         "nvim-lualine/lualine.nvim",
-    --         "akinsho/bufferline.nvim",
     --     },
     --     config = function()
     --         require("onedark").setup({
@@ -225,15 +224,6 @@ lvim.plugins = {
     --         }
     --         require("notify").setup({
     --             background_colour = require("onedark.colors").bg0,
-    --         })
-    --         local bufferline = require('bufferline')
-    --         bufferline.setup({
-    --             options = {
-    --                 diagnostics = "nvim_lsp",
-    --                 offsets = { { filetype = "NvimTree", text = "File Explorer", } },
-    --                 separator_style = "thin",
-    --                 style_preset = bufferline.style_preset.no_italic,
-    --             },
     --         })
     --         require("which-key").setup({
     --             window = {
@@ -252,7 +242,6 @@ lvim.plugins = {
         priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
-            "akinsho/bufferline.nvim",
             "rcarriga/nvim-dap-ui",
         },
         config = function()
@@ -264,8 +253,9 @@ lvim.plugins = {
             sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
             sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
             sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-            require("bufferline").setup {
-                highlights = require("catppuccin.groups.integrations.bufferline").get()
+            local bufferline = require("lvim.core.bufferline")
+            bufferline.setup {
+                highlights = require("catppuccin.groups.integrations.bufferline").get(),
             }
             require('lualine').setup {
                 options = {
@@ -389,20 +379,6 @@ lvim.plugins = {
     {
         "MattesGroeger/vim-bookmarks",
         event = "VeryLazy",
-    },
-
-    -- Reference: https://github.com/akinsho/bufferline.nvim
-    {
-        "akinsho/bufferline.nvim",
-        version = "*",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            vim.opt.termguicolors = true
-            require("bufferline").setup({
-            })
-        end
     },
 
     -- Reference: https://github.com/jackMort/ChatGPT.nvim
@@ -742,6 +718,18 @@ lvim.plugins = {
         lazy = true,
         config = function()
             require("substitute").setup({
+            })
+        end
+    },
+
+    -- Reference: https://github.com/simrat39/symbols-outline.nvim
+    {
+        -- "simrat39/symbols-outline.nvim",
+        'enddeadroyal/symbols-outline.nvim',
+        branch = 'bugfix/symbol-hover-misplacement',
+        event = "VeryLazy",
+        config = function()
+            require("symbols-outline").setup({
             })
         end
     },
