@@ -622,6 +622,18 @@ lvim.plugins = {
                                 note = "~/norg/note",
                             },
                             default_workspace = "note",
+                            use_popup = false,
+                        },
+                    },
+                    ["core.qol.todo_items"] = {
+                        config = {
+                            order = {
+                                { "undone",    " " },
+                                { "pending",   "-" },
+                                { "done",      "x" },
+                                { "on_hold",   "=" },
+                                { "important", "!" },
+                            },
                         },
                     },
                 },
