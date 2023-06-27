@@ -48,6 +48,8 @@ wk.register({
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
+    ["<leader>E"] = { "<cmd>SymbolsOutline<cr>", "Symbols Explorer" },
+
     ["<leader>f"] = { name = "+File" },
     ["<leader>ff"] = { "<cmd>Telescope find_files previewer=false<cr>", "Find File" },
     ["<leader>fw"] = { "<cmd>Telescope grep_string<cr>", "File Grep Current Word" },
