@@ -135,12 +135,6 @@ nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 
-" ----------------------------------------------------------
-" ## Move lines up / down
-" Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
 " ## Remove whitespace at end of line
 command! FixWhitespace :%s/\s\+$//e
 
