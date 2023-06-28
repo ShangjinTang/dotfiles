@@ -92,8 +92,12 @@ wk.register({
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
+    ["<leader>m"] = { name = "+Markdown" },
+    ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Block" },
+    ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
+
     ["<leader>n"] = { name = "+Norg" },
-    ["<leader>nc"] = { "<cmd>Neorg toggle-concealer<cr>", "Toggle Concealer" },
+    ["<leader>nc"] = { "<cmd>Neorg keybind all core.looking-glass.magnify-code-block<cr>", "Edit Code Block" },
     ["<leader>nd"] = { "<cmd>Neorg journal today<cr>", "New Diary" },
     ["<leader>nn"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "New Note" },
     ["<leader>ni"] = { "<cmd>Neorg index<cr>", "Open Index" },
@@ -110,7 +114,6 @@ wk.register({
     ["<leader>o"] = { name = "+Open file with" },
     ["<leader>oc"] = { "<cmd>call OpenCurrentFileSilentlyWith('code')<cr>", "Open with VsCode" },
     ["<leader>ow"] = { "<cmd>call OpenCurrentFileSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
-    ["<leader>om"] = { "<cmd>MarkdownPreviewToggle<cr>", "Open with Markdown Preview" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
