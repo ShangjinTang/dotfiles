@@ -167,11 +167,11 @@ vnoremap K :m '<-2<CR>gv=gv
 command! FixWhitespace :%s/\s\+$//e
 
 " ----------------------------------------------------------
-" " ## Replace selected word/WORD
+" " ## Replace selected word
 " replace current word from current line to last line (confirm required)
-nnoremap <leader>ws :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+nnoremap <leader>Sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
 " replace current word from first line to last line (confirm required)
-nnoremap <leader>wS :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+nnoremap <leader>SW :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
 
 " ----------------------------------------------------------
 " ## Visual mode pressing * or # searches for the current selection
