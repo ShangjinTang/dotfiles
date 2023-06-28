@@ -194,15 +194,6 @@ augroup cursormovedi
     nnoremap # :set hlsearch<CR>#
 augroup end
 
-augroup inserttoggle
-    autocmd!
-    " disable line numbers in insert mode
-    autocmd InsertEnter * set nonumber
-    autocmd InsertEnter * set norelativenumber
-    autocmd InsertLeave * set number
-    autocmd InsertLeave * set relativenumber
-augroup end
-
 augroup misc
     autocmd!
     autocmd BufReadPost fugitive://* set bufhidden=delete
