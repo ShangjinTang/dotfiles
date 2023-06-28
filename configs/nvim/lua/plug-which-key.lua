@@ -153,8 +153,7 @@ function set_key_bindings()
     -- norg / markdown
     if ftype == 'norg' then
         wk.register({
-            ["<leader>ns"] = { "<cmd>Neorg keybind all core.looking-glass.magnify-code-block<cr>",
-                "Edit Selected Snippet" },
+            ["<leader>ns"] = { "<cmd>FeMaco<cr>", "Edit Selected Snippet" },
             ["<leader>nj"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
             ["<leader>nk"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>",
                 "Previous Heading" },
