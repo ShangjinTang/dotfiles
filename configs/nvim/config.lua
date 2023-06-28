@@ -498,14 +498,17 @@ lvim.plugins = {
     -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
     {
         "AckslD/nvim-FeMaco.lua",
-        ft = "markdown",
+        ft = { "markdown", "norg" },
         event = "VeryLazy",
         config = function()
             require("femaco").setup({
                 post_open_float = function(winnr)
                     vim.cmd([[ set number ]])
                     vim.cmd([[ set norelativenumber ]])
-                end
+                end,
+                ensure_newline = function(base_filetype)
+                    return true
+                end,
             })
         end
     },
