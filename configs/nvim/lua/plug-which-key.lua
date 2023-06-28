@@ -209,3 +209,19 @@ function set_key_bindings()
         }, normal_mode)
     end
 end
+
+vim.cmd('autocmd FileType * lua set_femaco_bindings()')
+function set_femaco_bindings()
+    local ftype = vim.api.nvim_buf_get_option(0, "filetype")
+    local fname = vim.fn.expand("%")
+    -- FeMaco
+    if string.match(fname, "^/tmp/lua_.+$") ~= nil then
+        wk.register({
+            ["<C-x>"] = { "<cmd>bd<cr>", "Toggle FeMaco Off" },
+        }, normal_mode)
+    elseif ftype == 'norg' or ftype == 'markdown' then
+        wk.register({
+            ["<C-x>"] = { "<cmd>FeMaco<cr>", "Toggle FeMaco On" },
+        }, normal_mode)
+    end
+end
