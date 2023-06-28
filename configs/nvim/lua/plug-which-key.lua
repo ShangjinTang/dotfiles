@@ -99,8 +99,11 @@ wk.register({
     ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit" },
     ["<leader>nj"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
     ["<leader>nk"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>", "Previous Heading" },
-    ["<leader>nm"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
-    ["<leader>nM"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
+    ["<leader>nm"] = {
+        "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
+        "Export to Markdown" },
+    ["<leader>nh"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
+    ["<leader>nH"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
     ["<C-n>"] = { "<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle<cr>", "Task Cycle" },
 
     ["<leader>o"] = { name = "+Open file with" },
