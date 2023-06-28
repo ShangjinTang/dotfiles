@@ -131,4 +131,6 @@ wk.register({
     ["<leader>w"] = { name = "+word" },
     ["<leader>ws"] = { name = "word substitute from current selection" },
     ["<leader>wS"] = { name = "word substitute from first line" },
+
+    ["<leader>S"] = { "<cmd>lua require('spectre').open()<cr>", "Open Spectre" },
 })

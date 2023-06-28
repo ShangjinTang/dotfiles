@@ -697,6 +697,20 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/nvim-pack/nvim-spectre
+    {
+        "nvim-pack/nvim-spectre",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("spectre").setup({
+                live_update = true,
+            })
+        end
+    },
+
     -- Reference: https://github.com/airblade/vim-rooter
     {
         "airblade/vim-rooter",
