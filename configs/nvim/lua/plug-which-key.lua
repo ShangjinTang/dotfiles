@@ -52,7 +52,7 @@ wk.register({
     ["<leader>w"] = { "<cmd>BufferKill<cr>", "Close Current Buffer" },
     ["<leader>z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 
-    ["<leader>a"] = { name = "+AsyncRun/AsyncTasks" },
+    ["<leader>a"] = { name = "+AsyncRun & AsyncTasks" },
     ["<leader>aa"] = { "<cmd>lua require('telescope').extensions.asynctasks.all()<cr>", "List All AsyncTasks" },
     ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit Async Window" },
 
@@ -132,12 +132,12 @@ wk.register({
         "Project Live Grep",
     },
 
-    ["<leader>S"] = { name = "+substitute" },
-    ["<leader>Sw"] = { name = "word substitute (from current selection)" },
-    ["<leader>SW"] = { name = "word substitute (from first line)" },
-    ["<leader>Ss"] = { "<cmd>lua require('spectre').open_file_search()<cr>", "Spectre (file)" },
-    ["<leader>SS"] = { "<cmd>lua require('spectre').open()<cr>", "Spectre (vim directory)" },
-})
+    ["<leader>s"] = { name = "+Search & Substitute" },
+    ["<leader>sw"] = { name = "Substitute word (from current selection)" },
+    ["<leader>sa"] = { name = "Substitute word (from first line)" },
+    ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
+
+}, normal_mode)
 
 
 
