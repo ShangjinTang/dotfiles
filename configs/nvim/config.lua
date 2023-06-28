@@ -495,6 +495,21 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
+    {
+        "AckslD/nvim-FeMaco.lua",
+        ft = "markdown",
+        event = "VeryLazy",
+        config = function()
+            require("femaco").setup({
+                post_open_float = function(winnr)
+                    vim.cmd([[ set number ]])
+                    vim.cmd([[ set norelativenumber ]])
+                end
+            })
+        end
+    },
+
     -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
     {
         "theHamsta/nvim-dap-virtual-text",
