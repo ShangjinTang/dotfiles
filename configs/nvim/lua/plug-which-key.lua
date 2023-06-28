@@ -84,7 +84,7 @@ wk.register({
         "Find Git File",
     },
     ["<leader>gd"] = { "<cmd>DiffviewFileHistory<cr>", "Git diff" },
-    ["<leader>gD"] = { "<cmd>DiffviewFileHistory<cr>", "Git diff (for current file)" },
+    ["<leader>gD"] = { "<cmd>DiffviewFileHistory %<cr>", "Git diff (for current file)" },
     ["<leader>gt"] = { "<cmd>DiffviewToggleFiles<cr>", "Toggle DiffviewFileHistoryPanel" },
     ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
 
