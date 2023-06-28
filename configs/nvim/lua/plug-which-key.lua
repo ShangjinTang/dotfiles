@@ -39,7 +39,8 @@ wk.register({
     ["<leader>["] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
     ["<leader>]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
     ["<leader><tab>"] = { "<cmd>b#<cr>", "Switch between buffers" },
-    ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit" },
+    ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit All Buffers" },
+    ["<leader>w"] = { "<cmd>BufferKill<cr>", "Close Current Buffer" },
     ["<leader>z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 
     ["<leader>a"] = { name = "+AsyncRun/AsyncTasks" },
