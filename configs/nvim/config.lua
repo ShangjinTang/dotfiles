@@ -601,6 +601,7 @@ lvim.plugins = {
                             use_popup = false,
                         },
                     },
+                    ["core.export"] = {},
                     ["core.qol.todo_items"] = {
                         config = {
                             order = {
