@@ -128,9 +128,9 @@ wk.register({
         "Project Live Grep",
     },
 
-    ["<leader>w"] = { name = "+word" },
-    ["<leader>ws"] = { name = "word substitute from current selection" },
-    ["<leader>wS"] = { name = "word substitute from first line" },
-
-    ["<leader>S"] = { "<cmd>lua require('spectre').open()<cr>", "Open Spectre" },
+    ["<leader>S"] = { name = "+substitute" },
+    ["<leader>Sw"] = { name = "word substitute (from current selection)" },
+    ["<leader>SW"] = { name = "word substitute (from first line)" },
+    ["<leader>Ss"] = { "<cmd>lua require('spectre').open_file_search()<cr>", "Spectre (file)" },
+    ["<leader>SS"] = { "<cmd>lua require('spectre').open()<cr>", "Spectre (vim directory)" },
 })
