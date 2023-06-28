@@ -35,44 +35,22 @@ function! AsyncRunWith(commands)
     endif
 endfunction
 
-function! OpenCurrentFileSilentlyWith(commands)
+function! ExecuteBufferWith(commands)
+    call AsyncRunWith('-cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)')
+endfunction
+
+function! ExecuteBufferSilentlyWith(commands)
     " 'silent': to prevent prompt 'Press ENTER or type command to continue'
-    execute 'AsyncRun -silent -focus=0 -cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)'
+    call ExecuteBufferWith('-silent ' . a:commands)
 endfunction
 
-function! CMakeDebugWithTarget(target)
-    call AsyncRunWith('-cwd=<root> cmakebuild -t ' . a:target)
+function! ExecuteInBufferDirWith(commands)
+    call AsyncRunWith('-cwd=$(VIM_FILEDIR) ' . a:commands)
 endfunction
 
-" :: AsyncRun with prompt
-" 1: compile&run single file
-" 2: compile&run files under current directory
-" 3: "make all" in <root> directory
-" 4: "make run" in <root> directory
-" 5: "make <target>" in <root> directory
-augroup asyncrun
-    autocmd!
-    " C & C++
-    " Requires script: 'rc' (run c) or 'rcxx' (run c++)
-    autocmd FileType c nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rc $(VIM_FILENAME) --clean_output")<CR>
-    autocmd FileType c nnoremap <silent> <leader>a2 :call AsyncRunWith("cd $(VIM_FILEDIR); rc --clean_output")<CR>
-    autocmd FileType cpp nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx $(VIM_FILENAME) --clean_output")<CR>
-    autocmd FileType cpp nnoremap <silent> <leader>a2 :call AsyncRunWith("cd $(VIM_FILEDIR); rcxx --clean_output")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <leader>a3 :call CMakeDebugWithTarget("all")<CR>
-    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <leader>a3 :call CMakeDebugWithTarget("all")<CR>
-    autocmd FileType c,cpp nnoremap <silent> <leader>a4 :call CMakeDebugWithTarget("run")<CR>
-    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <silent> <leader>a4 :call CMakeDebugWithTarget("run")<CR>
-    autocmd FileType c,cpp nnoremap <leader>a5 :call CMakeDebugWithTarget("")<Left><Left>
-    autocmd BufRead,BufNewFile CMakeLists.txt nnoremap <leader>a5 :call CMakeDebugWithTarget("")<Left><Left>
-    " Rust
-    autocmd FileType rust nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); rustc $(VIM_FILEPATH) && ./$(VIM_FILENOEXT) && rm ./$(VIM_FILENOEXT)")<CR>
-    autocmd FileType rust nnoremap <silent> <leader>a3 :call AsyncRunWith("-cwd=<root> cargo build")<CR>
-    autocmd FileType rust nnoremap <silent> <leader>a4 :call AsyncRunWith("-cwd=<root> cargo run")<CR>
-    " Python3
-    autocmd FileType python nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); python3 $(VIM_FILEPATH)")<CR>
-    " Bash
-    autocmd FileType bash nnoremap <silent> <leader>a1 :call AsyncRunWith("cd $(VIM_FILEDIR); bash $(VIM_FILEPATH)")<CR>
-augroup end
+function! ExecuteInRootWith(commands)
+    call AsyncRunWith('-cwd=<root> ' . a:commands)
+endfunction
 
 " ----------------------------------------------------------
 " code format

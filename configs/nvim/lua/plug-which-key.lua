@@ -1,30 +1,39 @@
 -- Reference: https://github.com/folke/which-key.nvim
 
 local wk = require("which-key")
+local normal_mode = { mode = "n" }
+local visual_mode = { mode = "v" }
 
--- <C-a> is already registered as "Toggle Terminal" in LunarVim terminal.lua
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Global Mappings: both normal mode & visual mode
 
 wk.register({
     ["s"] = { require('substitute').operator, "Substitute Operator" },
     ["ss"] = { require('substitute').line, "Substitute Line" },
     ["S"] = { require('substitute').eol, "Substitute to End of Line" },
-})
+}, normal_mode)
 wk.register({
-        ["s"] = { require('substitute').operator, "Substitute Operator" },
-    },
-    { mode = "v" }
-)
+    ["s"] = { require('substitute').operator, "Substitute Operator" },
+}, visual_mode)
+
 
 wk.register({
     ["<leader>c"] = { name = "+ChatGPT" },
     ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
     ["<leader>cc"] = { "<cmd>ChatGPT<cr>", "ChatGPT" },
     ["<leader>ce"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
-})
+}, normal_mode)
 wk.register({
     ["<leader>c"] = { name = "+ChatGPT" },
     ["<leader>ce"] = { require('chatgpt').edit_with_instructions, "Edit with Instructions" },
-}, { mode = "v" })
+}, visual_mode)
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Global Mappings: only normal mode
 
 wk.register({
     ["<leader>y"] = { "<cmd>Telescope yank_history<cr>", "Yank History" },
@@ -92,28 +101,15 @@ wk.register({
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
-    ["<leader>m"] = { name = "+Markdown" },
-    ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Block" },
-    ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
-
     ["<leader>n"] = { name = "+Norg" },
-    ["<leader>nc"] = { "<cmd>Neorg keybind all core.looking-glass.magnify-code-block<cr>", "Edit Code Block" },
     ["<leader>nd"] = { "<cmd>Neorg journal today<cr>", "New Diary" },
     ["<leader>nn"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "New Note" },
     ["<leader>ni"] = { "<cmd>Neorg index<cr>", "Open Index" },
     ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit" },
-    ["<leader>nj"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
-    ["<leader>nk"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>", "Previous Heading" },
-    ["<leader>nm"] = {
-        "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
-        "Export to Markdown" },
-    ["<leader>nh"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
-    ["<leader>nH"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
-    ["<C-n>"] = { "<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle<cr>", "Task Cycle" },
 
     ["<leader>o"] = { name = "+Open file with" },
-    ["<leader>oc"] = { "<cmd>call OpenCurrentFileSilentlyWith('code')<cr>", "Open with VsCode" },
-    ["<leader>ow"] = { "<cmd>call OpenCurrentFileSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
+    ["<leader>oc"] = { "<cmd>call ExecuteBufferSilentlyWith('code')<cr>", "Open with VsCode" },
+    ["<leader>ow"] = { "<cmd>call ExecuteBufferSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
@@ -142,3 +138,75 @@ wk.register({
     ["<leader>Ss"] = { "<cmd>lua require('spectre').open_file_search()<cr>", "Spectre (file)" },
     ["<leader>SS"] = { "<cmd>lua require('spectre').open()<cr>", "Spectre (vim directory)" },
 })
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Conditional Mappings: FileType
+
+vim.cmd('autocmd FileType * lua set_key_bindings()')
+function set_key_bindings()
+    local ftype = vim.api.nvim_buf_get_option(0, "filetype")
+    local fname = vim.fn.expand("%:t")
+
+    -- norg / markdown
+    if ftype == 'norg' then
+        wk.register({
+            ["<leader>ns"] = { "<cmd>Neorg keybind all core.looking-glass.magnify-code-block<cr>",
+                "Edit Selected Snippet" },
+            ["<leader>nj"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
+            ["<leader>nk"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>",
+                "Previous Heading" },
+            ["<leader>nh"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
+            ["<leader>nH"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
+            ["<leader>nm"] = {
+                "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
+                "Export to Markdown" },
+            ["<C-n>"] = { "<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle<cr>", "Task Cycle" },
+        }, normal_mode)
+    elseif ftype == 'markdown' then
+        wk.register({
+            ["<leader>m"] = { name = "+Markdown" },
+            ["<leader>ms"] = { "<cmd>FeMaco<cr>", "Edit Selected Snippet" },
+            ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
+        }, normal_mode)
+    end
+
+    -- program: c / cpp / python / sh / zsh
+    -- as: AsyncRun Single
+    if ftype == 'c' then
+        wk.register({
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
+        }, normal_mode)
+    elseif ftype == 'cpp' then
+        wk.register({
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
+        }, normal_mode)
+    elseif ftype == 'python' then
+        wk.register({
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },
+        }, normal_mode)
+    elseif ftype == 'sh' or ftype == 'bash' then
+        wk.register({
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('bash')<cr>", "Run (buffer)" },
+        }, normal_mode)
+    elseif ftype == 'zsh' then
+        wk.register({
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('zsh')<cr>", "Run (buffer)" },
+        }, normal_mode)
+    end
+
+    -- project: cmake / cargo
+    if ftype == 'c' or ftype == 'cpp' or fname == 'CMakeLists.txt' then
+        wk.register({
+            ["<leader>ab"] = { "<cmd>call ExecuteInRootWith('cmakebuild -t all')<cr>", "Project Build [CMake]" },
+            ["<leader>ar"] = { "<cmd>call ExecuteInRootWith('cmakebuild -t run')<cr>", "Project Run [CMake]" },
+        }, normal_mode)
+    elseif ftype == 'rust' or fname == 'Cargo.toml' then
+        wk.register({
+            ["<leader>ab"] = { "<cmd>call ExecuteInRootWith('cargo build')<cr>", "Project Build [Cargo]" },
+            ["<leader>ar"] = { "<cmd>call ExecuteInRootWith('cargo run')<cr>", "Project Run [Cargo]" },
+        }, normal_mode)
+    end
+end
