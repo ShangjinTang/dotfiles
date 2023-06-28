@@ -106,6 +106,7 @@ wk.register({
     ["<leader>o"] = { name = "+Open file with" },
     ["<leader>oc"] = { "<cmd>call OpenCurrentFileSilentlyWith('code')<cr>", "Open with VsCode" },
     ["<leader>ow"] = { "<cmd>call OpenCurrentFileSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
+    ["<leader>om"] = { "<cmd>MarkdownPreviewToggle<cr>", "Open with Markdown Preview" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
