@@ -21,8 +21,9 @@ console = Console(theme=Theme(inherit=False))
 print = console.print
 
 
-class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
-                            argparse.ArgumentDefaultsHelpFormatter):
+class UltimateHelpFormatter(
+    argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter
+):
     pass
 
 
@@ -33,10 +34,13 @@ def get_flag_list_from_file(flag_file):
     while True:
         if os.path.isfile(os.path.join(curr_dir, flag_file)):
             with open(os.path.join(curr_dir, flag_file)) as f:
-                flag_list = list(line.strip() for line in f.readlines()
-                                 if not line.strip().startswith("#"))
+                flag_list = list(
+                    line.strip()
+                    for line in f.readlines()
+                    if not line.strip().startswith("#")
+                )
                 break
-        if curr_dir == home_dir:
+        if curr_dir == home_dir or curr_dir == "/":
             break
         curr_dir = os.path.dirname(curr_dir)
     return flag_list
@@ -44,108 +48,116 @@ def get_flag_list_from_file(flag_file):
 
 def get_auto_complete_flag_list(flag_list):
     FLAG_PATTERN = {
-        '-ldl': "dlfcn.h",
-        '-pthread': "pthread.h",
+        "-ldl": "dlfcn.h",
+        "-pthread": "pthread.h",
     }
-    if which('rg'):
+    if which("rg"):
         for flag, pattern in FLAG_PATTERN.items():
             if flag not in flag_list:
                 pattern_check_command = "rg '^#include.*<{}>'".format(pattern)
                 if ARGS.file:
-                    pattern_check_command += ' ' + ' '.join(ARGS.file)
+                    pattern_check_command += " " + " ".join(ARGS.file)
                 else:
                     pattern_check_command += " --type c"
-                retval = subprocess.call(pattern_check_command,
-                                         shell=True,
-                                         stdout=subprocess.DEVNULL,
-                                         stderr=subprocess.DEVNULL)
+                retval = subprocess.call(
+                    pattern_check_command,
+                    shell=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
                 if retval == 0:
-                    print("add auto-detected flag [magenta]'{}'[/magenta]".
-                          format(flag, pattern))
+                    print(
+                        "add auto-detected flag [magenta]'{}'[/magenta]".format(
+                            flag, pattern
+                        )
+                    )
                     flag_list.append(flag)
     return flag_list
 
 
 def main():
-    if not ".out" in ARGS.output and '.' in ARGS.output:
+    if not ".out" in ARGS.output and "." in ARGS.output:
         raise Exception(
             "Output file is allowed only with '.out' extension or no extension."
         )
 
-    if not which('clang'):
-        if not which('gcc'):
+    if not which("clang"):
+        if not which("gcc"):
             raise Exception("Compiler clang and gcc are not found.")
         ARGS.compiler = "gcc"
 
     flag_list = get_flag_list_from_file(ARGS.flag_file)
     flag_list = get_auto_complete_flag_list(flag_list)
 
-    compile_command_list = [
-        ARGS.compiler, " ".join(flag_list), '-o', ARGS.output
-    ]
+    compile_command_list = [ARGS.compiler, " ".join(flag_list), "-o", ARGS.output]
 
     # Generate compile command
     if ARGS.file:
+        # Specify type for file without extension. See: `man gcc` -> search "-x language"
+        if not all(file.endswith(".cpp") or file.endswith(".cc") for file in ARGS.file):
+            compile_command_list.extend(["-x", "c"])
         compile_command_list.extend(ARGS.file)
     else:
         compile_command_list.append("$(find . -iname '*.c')")
-    compile_command = ' '.join(compile_command_list)
+    compile_command = " ".join(compile_command_list)
 
     # Get run command
-    run_command = './' + ARGS.output
+    run_command = "./" + ARGS.output
 
     merged_commands_list = [compile_command, run_command]
 
     # Get clean command (optional)
     if ARGS.clean_output:
         clean_command = "rm ./{}".format(ARGS.output)
-        if platform.system() == "Darwin" and '-g' in ARGS.flags.split():
+        if platform.system() == "Darwin" and "-g" in ARGS.flags.split():
             clean_command = "rm -rf ./{}".format(ARGS.output) + "{,.dSYM}"
         merged_commands_list.append(clean_command)
 
     # compile + run + clean
-    merged_commands = ' && '.join(merged_commands_list)
+    merged_commands = " && ".join(merged_commands_list)
 
     print("[green]{}[/green]".format(merged_commands))
-    print('-' * 70)
+    print("-" * 70)
     os.system(merged_commands)
-    print('-' * 70)
+    print("-" * 70)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(formatter_class=UltimateHelpFormatter)
     parser.add_argument(
-        'file',
-        nargs='*',
+        "file",
+        nargs="*",
         type=str,
-        action='extend',
-        help=
-        "file(s) to compile\nif not specified, use all c files under current directory\n"
+        action="extend",
+        help="file(s) to compile\nif not specified, use all c files under current directory\n",
     )
     parser.add_argument(
-        '--compiler',
-        default='clang',
-        choices=['clang', 'gcc'],
-        help="compiler to use; if clang is not installed, use gcc\n")
+        "--compiler",
+        default="clang",
+        choices=["clang", "gcc"],
+        help="compiler to use; if clang is not installed, use gcc\n",
+    )
     parser.add_argument(
-        '-f',
-        '--flag_file',
+        "-f",
+        "--flag_file",
         default=".rcflags",
-        help="compile flag file (recursively find up to user home dir)\n")
-    parser.add_argument('-o',
-                        '--output',
-                        default='a.out',
-                        help="output executable file name\n")
-    parser.add_argument('-c',
-                        '--clean_output',
-                        default=False,
-                        action='store_true',
-                        help="clean output after run\n")
+        help="compile flag file (recursively find up to user home dir)\n",
+    )
+    parser.add_argument(
+        "-o", "--output", default="a.out", help="output executable file name\n"
+    )
+    parser.add_argument(
+        "-c",
+        "--clean_output",
+        default=False,
+        action="store_true",
+        help="clean output after run\n",
+    )
     ARGS = parser.parse_args()
     try:
         main()
     except KeyboardInterrupt:
-        print('Interrupted')
+        print("Interrupted")
         try:
             sys.exit(0)
         except SystemExit:
