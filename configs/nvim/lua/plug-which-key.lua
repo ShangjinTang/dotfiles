@@ -44,7 +44,7 @@ wk.register({
 -- Global Mappings: only normal mode
 
 wk.register({
-    ["<leader>y"] = { "<cmd>Telescope yank_history<cr>", "Yank History" },
+    ["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank History (neoclip)" },
 
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["K"] = { vim.lsp.buf.hover, "Hover" },

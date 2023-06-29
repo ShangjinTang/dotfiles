@@ -954,16 +954,43 @@ lvim.plugins = {
         end
     },
 
-    -- Reference: https://github.com/gbprod/yanky.nvim
     {
-        "gbprod/yanky.nvim",
+        "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
-        cmd = "Telescope yank_history",
+        dependencies = {
+            { 'kkharji/sqlite.lua',           module = 'sqlite' },
+            { 'nvim-telescope/telescope.nvim' },
+        },
         config = function()
-            require("yanky").setup({
+            local function is_whitespace(line)
+                return vim.fn.match(line, [[^\s*$]]) ~= -1
+            end
+            local function all(tbl, check)
+                for _, entry in ipairs(tbl) do
+                    if not check(entry) then
+                        return false
+                    end
+                end
+                return true
+            end
+            require('neoclip').setup({
+                history = 10000,
+                enable_persistent_history = true,
+                continuous_sync = true,
+                on_select = {
+                    move_to_front = true,
+                },
+                on_paste = {
+                    move_to_front = true,
+                },
+                on_replay = {
+                    move_to_front = true,
+                },
+                filter = function(data)
+                    return not all(data.event.regcontents, is_whitespace)
+                end,
             })
-            require("telescope").load_extension("yank_history")
-        end
+        end,
     },
 
     -- Reference: https://github.com/ojroques/nvim-osc52
