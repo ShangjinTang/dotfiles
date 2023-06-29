@@ -833,6 +833,19 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/nvim-treesitter/nvim-treesitter-context
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("treesitter-context").setup({
+            })
+        end
+    },
+
     -- Reference: https://github.com/gelguy/wilder.nvim
     {
         "gelguy/wilder.nvim",
