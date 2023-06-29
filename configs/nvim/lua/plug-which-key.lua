@@ -2,6 +2,7 @@
 
 local wk = require("which-key")
 local normal_mode = { mode = "n" }
+local normal_mode_with_expr = { mode = "n", expr = true }
 local visual_mode = { mode = "v" }
 
 --------------------------------------------------------------------------------
@@ -30,6 +31,13 @@ wk.register({
 }, visual_mode)
 
 
+
+wk.register({
+    ["<leader>_"] = { require('osc52').copy_operator, "Copy (osc52)" },
+}, normal_mode_with_expr)
+wk.register({
+    ["<leader>_"] = { "<cmd>lua require('osc52').copy_visual()<cr>", "Copy (osc52)" },
+}, visual_mode)
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

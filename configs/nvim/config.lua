@@ -941,6 +941,12 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/ojroques/nvim-osc52
+    {
+        "ojroques/nvim-osc52",
+        event = "VeryLazy",
+    },
+
     -- Reference: https://github.com/folke/zen-mode.nvim
     {
         "folke/zen-mode.nvim",
