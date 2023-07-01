@@ -10,12 +10,12 @@ local visual_mode = { mode = "v" }
 -- Global Mappings: both normal mode & visual mode
 
 wk.register({
-    ["s"] = { require('substitute').operator, "Substitute Operator" },
-    ["ss"] = { require('substitute').line, "Substitute Line" },
-    ["S"] = { require('substitute').eol, "Substitute to End of Line" },
+    ["r"] = { require('substitute').operator, "Substitute Operator" },
+    ["rr"] = { require('substitute').line, "Substitute Line" },
+    ["R"] = { require('substitute').eol, "Substitute to End of Line" },
 }, normal_mode)
 wk.register({
-    ["s"] = { require('substitute').operator, "Substitute Operator" },
+    ["r"] = { require('substitute').operator, "Substitute Operator" },
 }, visual_mode)
 
 
