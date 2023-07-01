@@ -58,7 +58,7 @@ wk.register({
     ["<leader><tab>"] = { "<cmd>b#<cr>", "Switch between buffers" },
     ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit All Buffers" },
     ["<leader>w"] = { "<cmd>BufferKill<cr>", "Close Current Buffer" },
-    ["<leader>z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
+    ["<leader>Z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 
     ["<leader>a"] = { name = "+AsyncRun & AsyncTasks" },
     ["<leader>aa"] = { "<cmd>lua require('telescope').extensions.asynctasks.all()<cr>", "List All AsyncTasks" },
@@ -144,6 +144,17 @@ wk.register({
     ["<leader>sw"] = { name = "Substitute word (from current selection)" },
     ["<leader>sa"] = { name = "Substitute word (from first line)" },
     ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
+
+    ["<leader>z"] = { name = "Telekasten" },
+    ["<leader>zz"] = { "<cmd>Telekasten panel<cr>", "Panel" },
+    ["<leader>zf"] = { "<cmd>Telekasten find_notes<cr>", "Find notes" },
+    ["<leader>zs"] = { "<cmd>Telekasten search_notes<cr>", "Search notes" },
+    ["<leader>zt"] = { "<cmd>Telekasten goto_today<cr>", "Goto today" },
+    ["<leader>zl"] = { "<cmd>Telekasten follow_link<cr>", "Follow link" },
+    ["<leader>zn"] = { "<cmd>Telekasten new_note<cr>", "New note" },
+    ["<leader>zc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
+    ["<leader>zb"] = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
+    ["<leader>zi"] = { "<cmd>Telekasten insert_img_link<cr>", "Insert img link" },
 
 }, normal_mode)
 
