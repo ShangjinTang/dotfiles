@@ -833,6 +833,22 @@ lvim.plugins = {
         end,
     },
 
+
+    -- Reference: https://github.com/renerocksai/telekasten.nvim
+    {
+        "renerocksai/telekasten.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "renerocksai/calendar-vim",
+        },
+        config = function()
+            require("telekasten").setup({
+                home = vim.fn.expand("~/note/")
+            })
+        end
+    },
+
     -- Reference: https://github.com/nvim-neotest/neotest
     {
         "nvim-neotest/neotest",
