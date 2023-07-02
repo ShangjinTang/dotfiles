@@ -566,13 +566,11 @@ lvim.plugins = {
             "Locate", "History", "Snippets", "Commits", "BCommits", "Commands", "Maps", "Helptags", "Filetypes" },
     },
 
-    -- Reference: https://github.com/ggandor/leap.nvim
+    -- Reference: https://github.com/folke/flash.nvim
     {
-        "ggandor/leap.nvim",
+        "folke/flash.nvim",
         event = "VeryLazy",
-        config = function()
-            require('leap').add_default_mappings()
-        end
+        opts = {},
     },
 
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
