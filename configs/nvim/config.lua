@@ -495,6 +495,21 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/dhruvasagar/vim-table-mode
+    {
+        "dhruvasagar/vim-table-mode",
+        ft = "markdown",
+        event = "VeryLazy",
+        config = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "markdown",
+                callback = function()
+                    vim.cmd([[ call tablemode#Enable() ]])
+                end,
+            })
+        end
+    },
+
     -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
     {
         "AckslD/nvim-FeMaco.lua",
