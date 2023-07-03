@@ -783,12 +783,6 @@ lvim.plugins = {
         end
     },
 
-    -- Reference: https://github.com/airblade/vim-rooter
-    {
-        "airblade/vim-rooter",
-        event = "VeryLazy",
-    },
-
     -- Reference: https://github.com/SirVer/ultisnips
     {
         "honza/vim-snippets",

@@ -97,12 +97,6 @@ if $VIM_CODEFMT_ENABLE == 1
 endif
 
 " ----------------------------------------------------------
-" ### vim-rooter (Use :Rooter to toggle switch to root)
-let g:rooter_patterns = projectroot
-let g:rooter_manual_only = 1
-" let g:rooter_silent_chdir = 1
-
-" ----------------------------------------------------------
 " ### ctags / gutentags
 
 " ctags
