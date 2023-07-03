@@ -193,11 +193,18 @@ augroup end
 
 " Don't use default mappings
 let g:speeddating_no_mappings = 1
-let g:switch_custom_definitions =
-    \ [
-    \   ['( )', '(-)', '(x)', '(=)', '(!)'],
-    \   ['[ ]', '[x]']
-    \ ]
+let b:switch_custom_definitions = [ [], ]
+augroup switch_definition_on_filetype
+    autocmd!
+    autocmd FileType markdown let b:switch_custom_definitions = [
+                \ ['[ ]', '[x]'],
+                \ ['# ', '## ', '### ', '#### ', '##### ', '###### ' ],
+                \ ]
+    autocmd FileType norg let b:switch_custom_definitions = [
+                \ ['( )', '(-)', '(x)', '(=)', '(!)'],
+                \ ['* ', '** ', '*** ', '**** ', '***** ', '****** ' ],
+                \ ]
+augroup end
 
 nnoremap <silent> <Plug>(SwitchInLine) :<C-u>call SwitchLine(v:count1)<cr>
 nnoremap <silent> <Plug>(SwitchInLineReverse) :<C-u>call SwitchLineReverse(v:count1)<cr>
