@@ -170,7 +170,6 @@ function set_key_bindings()
             ["<leader>nm"] = {
                 "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
                 "Export to Markdown" },
-            ["<C-n>"] = { "<cmd>Neorg keybind all core.qol.todo_items.todo.task_cycle<cr>", "Task Cycle" },
         }, normal_mode)
     elseif ftype == 'markdown' then
         wk.register({
@@ -214,22 +213,6 @@ function set_key_bindings()
         wk.register({
             ["<leader>ab"] = { "<cmd>call ExecuteInRootWith('cargo build')<cr>", "Project Build [Cargo]" },
             ["<leader>ar"] = { "<cmd>call ExecuteInRootWith('cargo run')<cr>", "Project Run [Cargo]" },
-        }, normal_mode)
-    end
-end
-
-vim.cmd('autocmd FileType * lua set_femaco_bindings()')
-function set_femaco_bindings()
-    local ftype = vim.api.nvim_buf_get_option(0, "filetype")
-    local fname = vim.fn.expand("%")
-    -- FeMaco
-    if string.match(fname, "^/tmp/lua_.+$") ~= nil then
-        wk.register({
-            ["<C-x>"] = { "<cmd>bd<cr>", "Toggle FeMaco Off" },
-        }, normal_mode)
-    elseif ftype == 'norg' or ftype == 'markdown' then
-        wk.register({
-            ["<C-x>"] = { "<cmd>FeMaco<cr>", "Toggle FeMaco On" },
         }, normal_mode)
     end
 end

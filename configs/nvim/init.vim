@@ -194,6 +194,72 @@ augroup misc
     autocmd BufWritePre *.norg if &filetype == 'norg' | silent! call mkdir(expand('%:p:h'), 'p') | endif
 augroup end
 
+" ----------------------------------------------------------
+" switch.vim
+
+" Don't use default mappings
+let g:speeddating_no_mappings = 1
+let g:switch_custom_definitions =
+    \ [
+    \   ['( )', '(_)', '(x)', '(=)', '(!)'],
+    \   ['[ ]', '[x]']
+    \ ]
+
+nnoremap <silent> <Plug>(SwitchInLine) :<C-u>call SwitchLine(v:count1)<cr>
+nnoremap <silent> <Plug>(SwitchInLineReverse) :<C-u>call SwitchLineReverse(v:count1)<cr>
+nmap <C-a> <Plug>(SwitchInLine)
+nmap <C-x> <Plug>(SwitchInLineReverse)
+
+fun! SwitchLine(cnt)
+    let tick = b:changedtick
+    let start = getcurpos()
+    for n in range(a:cnt)
+        Switch
+    endfor
+    if b:changedtick != tick
+        return
+    endif
+    while v:true
+        let pos = getcurpos()
+        normal! w
+        if pos[1] != getcurpos()[1] || pos == getcurpos()
+            break
+        endif
+        for n in range(a:cnt)
+            Switch
+        endfor
+        if b:changedtick != tick
+            return
+        endif
+    endwhile
+    call setpos('.', start)
+endfun
+
+fun! SwitchLineReverse(cnt)
+    let tick = b:changedtick
+    let start = getcurpos()
+    for n in range(a:cnt)
+        SwitchReverse
+    endfor
+    if b:changedtick != tick
+        return
+    endif
+    while v:true
+        let pos = getcurpos()
+        normal! w
+        if pos[1] != getcurpos()[1] || pos == getcurpos()
+            break
+        endif
+        for n in range(a:cnt)
+            SwitchReverse
+        endfor
+        if b:changedtick != tick
+            return
+        endif
+    endwhile
+    call setpos('.', start)
+endfun
+
 " ====================================================================
 " ====================================================================
 
