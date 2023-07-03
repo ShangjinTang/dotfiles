@@ -114,7 +114,7 @@ wk.register({
     ["<leader>ne"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "Edit New Note" },
     ["<leader>nj"] = { "<cmd>Neorg journal today<cr>", "Journal - Today" },
     ["<leader>nJ"] = { "<cmd>Neorg journal template<cr>", "Journal - Template" },
-    ["<leader>ni"] = { "<cmd>Neorg index<cr>", "Open Index" },
+    ["<leader>no"] = { "<cmd>Neorg index<cr>", "Open Index" },
     ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit Neorg" },
 
     ["<leader>o"] = { name = "+Open file with" },
@@ -171,8 +171,8 @@ function set_key_bindings()
             ["<leader>nm"] = {
                 "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
                 "Export to Markdown" },
-            ["<leader>n@"] = { "<cmd>Telescope neorg insert_file_link<cr>", "Insert File Link" },
-            ["<leader>n#"] = { "<cmd>Telescope neorg insert_link<cr>", "Insert Link" },
+            ["<leader>ni"] = { "<cmd>Telescope neorg insert_file_link<cr>", "Insert File Link" },
+            ["<leader>nI"] = { "<cmd>Telescope neorg insert_link<cr>", "Insert Link" },
             ["<leader>n/"] = { "<cmd>Telescope neorg search_headings<cr>", "Search Headings" },
         }, normal_mode)
     elseif ftype == 'markdown' then
