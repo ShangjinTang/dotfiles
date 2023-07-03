@@ -484,6 +484,17 @@ lvim.plugins = {
         end
     },
 
+    -- Reference: https://github.com/AndrewRadev/switch.vim
+    {
+        "AndrewRadev/switch.vim",
+        dependencies = {
+            "tpope/vim-speeddating",
+        },
+        event = "VeryLazy",
+        config = function()
+        end
+    },
+
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
     {
         "iamcco/markdown-preview.nvim",
