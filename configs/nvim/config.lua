@@ -1094,6 +1094,15 @@ lspconfig.rust_analyzer.setup({
 -- NVIM / VIM
 lspconfig.lua_ls.setup({
     on_attach = lsp_on_attach,
+    settings = {
+        Lua = {
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true),
+                -- Fix keep displaying message "Do you need to configure your work environment as `luv`?" on saving .lua
+                checkThirdParty = false,
+            },
+        },
+    },
 })
 lspconfig.vimls.setup({
     on_attach = lsp_on_attach,
