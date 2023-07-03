@@ -195,7 +195,7 @@ augroup end
 let g:speeddating_no_mappings = 1
 let g:switch_custom_definitions =
     \ [
-    \   ['( )', '(_)', '(x)', '(=)', '(!)'],
+    \   ['( )', '(-)', '(x)', '(=)', '(!)'],
     \   ['[ ]', '[x]']
     \ ]
 
