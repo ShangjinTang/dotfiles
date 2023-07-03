@@ -112,8 +112,8 @@ wk.register({
     ["<leader>n"] = { name = "+Norg" },
     ["<leader>nn"] = { "<cmd>Telescope neorg find_linkable<cr>", "Find Linkable" },
     ["<leader>ne"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "Edit New Note" },
-    ["<leader>nj"] = { "<cmd>Neorg journal today<cr>", "New Journal - Today" },
-    ["<leader>nJ"] = { "<cmd>Neorg journal template<cr>", "New Journal - Template" },
+    ["<leader>nj"] = { "<cmd>Neorg journal today<cr>", "Journal - Today" },
+    ["<leader>nJ"] = { "<cmd>Neorg journal template<cr>", "Journal - Template" },
     ["<leader>ni"] = { "<cmd>Neorg index<cr>", "Open Index" },
     ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit Neorg" },
 
