@@ -612,7 +612,7 @@ lvim.plugins = {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
-                    "cmake", -- requires 'sudo apt install python3-venv on Ubuntu'
+                    "cmake",
                     "pyright",
                     "bashls",
                     "html",
@@ -664,9 +664,20 @@ lvim.plugins = {
                             },
                         },
                     },
+                    -- 'calendar' requires: nvim >= 10.0
+                    -- ["core.ui.calendar"] = {},
                 },
             }
         end
+    },
+
+    -- Reference: https://github.com/nvim-neorg/neorg-telescope
+    {
+        "nvim-neorg/neorg-telescope",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-neorg/neorg",
+        },
     },
 
     -- Reference: https://github.com/SmiteshP/nvim-navic
