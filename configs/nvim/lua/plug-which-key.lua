@@ -110,10 +110,12 @@ wk.register({
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
     ["<leader>n"] = { name = "+Norg" },
-    ["<leader>nd"] = { "<cmd>Neorg journal today<cr>", "New Diary" },
-    ["<leader>nn"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "New Note" },
+    ["<leader>nn"] = { "<cmd>Telescope neorg find_linkable<cr>", "Find Linkable" },
+    ["<leader>ne"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "Edit New Note" },
+    ["<leader>nj"] = { "<cmd>Neorg journal today<cr>", "New Journal - Today" },
+    ["<leader>nJ"] = { "<cmd>Neorg journal template<cr>", "New Journal - Template" },
     ["<leader>ni"] = { "<cmd>Neorg index<cr>", "Open Index" },
-    ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit" },
+    ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit Neorg" },
 
     ["<leader>o"] = { name = "+Open file with" },
     ["<leader>oc"] = { "<cmd>call ExecuteBufferSilentlyWith('code')<cr>", "Open with VsCode" },
@@ -161,45 +163,47 @@ function set_key_bindings()
     -- norg / markdown
     if ftype == 'norg' then
         wk.register({
-            ["<leader>ns"] = { "<cmd>FeMaco<cr>", "Edit Selected Snippet" },
-            ["<leader>nj"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
-            ["<leader>nk"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>",
-                "Previous Heading" },
+            ["<leader>nc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
+            ["<Up>"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>", "Previous Heading" },
+            ["<Down>"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
             ["<leader>nh"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
             ["<leader>nH"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
             ["<leader>nm"] = {
                 "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
                 "Export to Markdown" },
+            ["<leader>n@"] = { "<cmd>Telescope neorg insert_file_link<cr>", "Insert File Link" },
+            ["<leader>n#"] = { "<cmd>Telescope neorg insert_link<cr>", "Insert Link" },
+            ["<leader>n/"] = { "<cmd>Telescope neorg search_headings<cr>", "Search Headings" },
         }, normal_mode)
     elseif ftype == 'markdown' then
         wk.register({
             ["<leader>m"] = { name = "+Markdown" },
-            ["<leader>ms"] = { "<cmd>FeMaco<cr>", "Edit Selected Snippet" },
+            ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
             ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
         }, normal_mode)
     end
 
     -- program: c / cpp / python / sh / zsh
-    -- as: AsyncRun Single
+    -- ac: AsyncRun Code
     if ftype == 'c' then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
+            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == 'cpp' then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
+            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == 'python' then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },
+            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == 'sh' or ftype == 'bash' then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('bash')<cr>", "Run (buffer)" },
+            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('bash')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == 'zsh' then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('zsh')<cr>", "Run (buffer)" },
+            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('zsh')<cr>", "Run (buffer)" },
         }, normal_mode)
     end
 
