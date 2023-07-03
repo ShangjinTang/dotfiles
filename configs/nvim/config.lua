@@ -635,7 +635,7 @@ lvim.plugins = {
                     ["core.dirman"] = {
                         config = {
                             workspaces = {
-                                note = "~/norg/note",
+                                note = "~/note/norg",
                             },
                             default_workspace = "note",
                             use_popup = false,
@@ -853,22 +853,6 @@ lvim.plugins = {
         init = function()
             vim.g.startuptime_tries = 10
         end,
-    },
-
-
-    -- Reference: https://github.com/renerocksai/telekasten.nvim
-    {
-        "renerocksai/telekasten.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-telescope/telescope.nvim",
-            "renerocksai/calendar-vim",
-        },
-        config = function()
-            require("telekasten").setup({
-                home = vim.fn.expand("~/note/")
-            })
-        end
     },
 
     -- Reference: https://github.com/nvim-neotest/neotest
