@@ -158,8 +158,8 @@ else
 end
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-    { command = "trim_whitespace", filetypes = { "lua" } },
-    { command = "stylua" },
+    { command = "trim_whitespace"},
+    { command = "stylua", filetypes = { "lua" } },
     { command = "clang_format", filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" } },
     { command = "black", filetypes = { "python" } },
     { command = "shfmt", filetypes = { "sh", "bash", "zsh" } },
