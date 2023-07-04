@@ -61,7 +61,8 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - add fuzzy prompt for cmdline (wilder) and modern notice (noice)
   - customized key-bindings and seperated from original key-bindings
   - auto format on file save
-  - toggleterm with `Ctrl-\`
+  - toggleterm with `Ctrl-\`, `Alt-1`, `Alt-2`, `Alt-3`
+  - norg (structured note taking tool) support
 - tmux (>=3.3a)
   - customized theme and bar
   - gitmux support
@@ -108,18 +109,19 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
     - auto generate `compile_commands.json`
   - docker with **compiler-explorer** using latest ArchLinux clang / gcc
   - `.clang-tidy` support
-- simplify code format
-  - auto format on file saving with 4-space-indent
+- auto code format on save using `neoformat`
     - C / C++ (based on `~/.clang-format`)
     - Python
     - Java
     - Bash
+    - Lua
+    - ...
 - simplify large code-base view
   - docker with local **OpenGrok**
 - simply python development
   - docker with local **Jupyter Lab**
 - simplify tasks
-  - asynctask (`<SPACE>aa`): compilation in side nvim under PROJECTROOT based on `.tasks`
+  - asynctask: compilation in side nvim under PROJECTROOT based on `.tasks`
 
 ## Packages required for non-ArchLinux OS
 
