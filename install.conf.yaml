@@ -30,8 +30,8 @@
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.rcxxflags: configs/.rcxxflags
     ~/.rcflags: configs/.rcflags
-    ~/.clang-format: clang_configs/.clang-format
-    ~/.clang-tidy: clang_configs/.clang-tidy
+    ~/.clang-format: configs/clang/.clang-format
+    ~/.clang-tidy: configs/clang/.clang-tidy
         ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
     # conditional configs
     ~/.tigrc:
