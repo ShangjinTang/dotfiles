@@ -160,9 +160,6 @@ _DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONF
 # Create nvim persistent undo directory
 _DIRCREATE ~/.cache/nvim/undo
 
-# Create norg directory
-_DIRCREATE ~/norg
-
 #=====================================================================
 # fuctions for command line use
 
