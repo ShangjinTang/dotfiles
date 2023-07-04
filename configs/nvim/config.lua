@@ -1097,7 +1097,6 @@ lspconfig.lua_ls.setup({
     settings = {
         Lua = {
             workspace = {
-                library = vim.api.nvim_get_runtime_file('', true),
                 -- Fix keep displaying message "Do you need to configure your work environment as `luv`?" on saving .lua
                 checkThirdParty = false,
             },

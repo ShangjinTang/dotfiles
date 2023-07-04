@@ -31,7 +31,6 @@ wk.register({
 }, visual_mode)
 
 
-
 wk.register({
     ["<leader>_"] = { require('osc52').copy_operator, "Copy (osc52)" },
 }, normal_mode_with_expr)
