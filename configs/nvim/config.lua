@@ -349,9 +349,6 @@ lvim.plugins = {
         "skywind3000/asyncrun.vim",
         event = "VeryLazy",
         cmd = "AsyncRun",
-        dependencies = {
-            "preservim/vimux",
-        },
     },
 
     -- Reference: https://github.com/skywind3000/asynctasks.vim
