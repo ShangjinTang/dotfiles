@@ -4,11 +4,7 @@
 ]]
 -- general
 lvim.log.level = "info"
-lvim.format_on_save = {
-    enabled = true,
-    pattern = "*.lua",
-    timeout = 1000,
-}
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -143,32 +139,81 @@ lvim.builtin.treesitter.ensure_installed = {
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
--- -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "stylua" },
---   {
---     command = "prettier",
---     extra_args = { "--print-width", "100" },
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
---   {
---     command = "shellcheck",
---     args = { "--severity", "warning" },
---   },
--- }
--- local code_actions = require "lvim.lsp.null-ls.code_actions"
--- code_actions.setup {
---   {
---     exe = "eslint",
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+-- File Types: | Formatters: | Formatters Installation:
+--   c/c++/proto: clang-format: sudo pacman -Sy clang | sudo apt install -y clang-format
+--   css/html/javascript/typescript/xml/yaml/...: prettier: npm install --global prettier
+--   python: black: sudo pacman -Sy python-black | sudo apt install -y black
+--   shell/zsh: shfmt: sudo pacman -Sy shfmt | sudo apt install -y shfmt
+--   rust: rustfmt: rustup component add rustfmt
+--   lua: stylua: cargo install stylua
+--   bazel: buildifier: go install github.com/bazelbuild/buildtools/buildifier@latest
+if os.getenv("FORMAT_ON_SAVE") == "true" then
+    lvim.format_on_save = {
+        enabled = true,
+        -- pattern = "*.lua",
+        timeout = 1000,
+    }
+else
+    lvim.format_on_save.enabled = false
+end
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+    { command = "trim_whitespace", filetypes = { "lua" } },
+    { command = "stylua" },
+    { command = "clang_format", filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" } },
+    { command = "black", filetypes = { "python" } },
+    { command = "shfmt", filetypes = { "sh", "bash", "zsh" } },
+    { command = "rustfmt", filetypes = { "rust" } },
+    { command = "buildifier", filetypes = { "bzl" } },
+    {
+        command = "prettier",
+        extra_args = { "--print-width", "100" },
+        filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "css",
+            "scss",
+            "less",
+            "html",
+            "json",
+            "jsonc",
+            "yaml",
+            "markdown",
+            "markdown.mdx",
+            "graphql",
+            "handlebars",
+        },
+    },
+})
 
+-- local linters = require("lvim.lsp.null-ls.linters")
+-- linters.setup({
+--     { command = "black", filetypes = { "python" } },
+--     {
+--         command = "shellcheck",
+--         args = { "--severity", "warning" },
+--     },
+-- })
+
+-- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
+-- if os.getenv("FORMAT_ON_SAVE") == "true" then
+--     lvim.format_on_save.enabled = true
+-- else
+--     lvim.format_on_save.enabled = false
+-- end
+
+-- local code_actions = require("lvim.lsp.null-ls.code_actions")
+-- code_actions.setup({
+--     {
+--         exe = "eslint",
+--         filetypes = { "typescript", "typescriptreact" },
+--     },
+-- })
+
+-- Telescope window width & height
 lvim.builtin.telescope.pickers = {
     find_files = {
         layout_config = {
@@ -439,30 +484,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/sbdchd/neoformat
-    {
-        "sbdchd/neoformat",
-        event = "VeryLazy",
-        config = function()
-            -- Reference: https://github.com/sbdchd/neoformat#supported-filetypes
-            -- File Types: | Formatters: | Formatters Installation:
-            --   c/c++/proto: clang-format: sudo pacman -Sy clang | sudo apt install -y clang-format
-            --   css/html/javascript/typescript/xml/yaml/...: prettier: npm install --global prettier
-            --   python: black: sudo pacman -Sy python-black | sudo apt install -y black
-            --   shell/zsh: shfmt: sudo pacman -Sy shfmt | sudo apt install -y shfmt
-            --   rust: rustfmt: rustup component add rustfmt
-            --   lua: stylua: cargo install stylua
-            --   bazel: buildifier: go install github.com/bazelbuild/buildtools/buildifier@latest
-            if os.getenv("AUTO_NEOFORMAT") == "true" then
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    callback = function()
-                        vim.cmd([[ undojoin | Neoformat ]])
-                    end,
-                })
-            end
-        end,
-    },
-
     -- Reference: https://github.com/zbirenbaum/copilot-cmp
     {
         "zbirenbaum/copilot-cmp",
@@ -643,19 +664,20 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/mfussenegger/nvim-jdtls
-    {
-        "mfussenegger/nvim-jdtls",
-        event = "VeryLazy",
-        config = function()
-            require("jdtls").start_or_attach({
-                cmd = { vim.fn.expand("~/.local/bin/jdtls") },
-                root_dir = vim.fs.dirname(
-                    vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml", "gradle.build" }, { upward = true })[1]
-                ),
-            })
-        end,
-    },
+    -- -- Reference: https://github.com/mfussenegger/nvim-jdtls
+    -- {
+    --     "mfussenegger/nvim-jdtls",
+    --     event = "VeryLazy",
+    --     ft = "java",
+    --     config = function()
+    --         require("jdtls").start_or_attach({
+    --             cmd = { vim.fn.expand("~/.local/bin/jdtls") },
+    --             root_dir = vim.fs.dirname(
+    --                 vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml", "gradle.build" }, { upward = true })[1]
+    --             ),
+    --         })
+    --     end,
+    -- },
 
     -- Reference: https://github.com/nvim-neorg/neorg
     {
