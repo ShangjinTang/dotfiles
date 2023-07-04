@@ -36,7 +36,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 local lualine_components = require("lvim.core.lualine.components")
 lvim.builtin.lualine = {
-    style = 'lvim',
+    style = "lvim",
     options = {
         section_separators = {
             left = lvim.icons.ui.BoldDividerRight,
@@ -49,7 +49,7 @@ lvim.builtin.lualine = {
     },
     sections = {
         lualine_a = {
-            "mode"
+            "mode",
         },
         lualine_b = {
             lualine_components.treesitter,
@@ -254,14 +254,14 @@ lvim.plugins = {
             sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
             sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
             local bufferline = require("lvim.core.bufferline")
-            bufferline.setup {
+            bufferline.setup({
                 highlights = require("catppuccin.groups.integrations.bufferline").get(),
-            }
-            require('lualine').setup {
+            })
+            require("lualine").setup({
                 options = {
-                    theme = "catppuccin"
-                }
-            }
+                    theme = "catppuccin",
+                },
+            })
             require("catppuccin").setup({
                 flavour = "frappe", -- latte, frappe, macchiato, mocha
                 background = {
@@ -305,7 +305,7 @@ lvim.plugins = {
                     dap = {
                         enabled = true,
                         enable_ui = true, -- enable nvim-dap-ui
-                    }
+                    },
                 },
                 native_lsp = {
                     enabled = true,
@@ -331,7 +331,7 @@ lvim.plugins = {
                     custom_bg = "NONE",
                 },
             })
-        end
+        end,
     },
 
     -----------------------------------------------------------------
@@ -340,9 +340,8 @@ lvim.plugins = {
     {
         "windwp/nvim-ts-autotag",
         config = function()
-            require('nvim-ts-autotag').setup {
-            }
-        end
+            require("nvim-ts-autotag").setup({})
+        end,
     },
 
     -- Reference: https://github.com/skywind3000/asyncrun.vim
@@ -359,8 +358,15 @@ lvim.plugins = {
     {
         "skywind3000/asynctasks.vim",
         event = "VeryLazy",
-        cmd = { "AsyncTask", "AsyncTaskList", "AsyncTaskLast", "AsyncTaskEdit", "AsyncTaskMacro", "AsyncTaskEnviron",
-            "AsyncTaskProfile" },
+        cmd = {
+            "AsyncTask",
+            "AsyncTaskList",
+            "AsyncTaskLast",
+            "AsyncTaskEdit",
+            "AsyncTaskMacro",
+            "AsyncTaskEnviron",
+            "AsyncTaskProfile",
+        },
         dependencies = {
             "skywind3000/asyncrun.vim",
         },
@@ -388,7 +394,7 @@ lvim.plugins = {
         dependencies = {
             "MunifTanjim/nui.nvim",
             "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
+            "nvim-telescope/telescope.nvim",
         },
         config = function()
             require("chatgpt").setup({
@@ -396,7 +402,7 @@ lvim.plugins = {
                 chat = {
                     popup_input = {
                         submit = "<C-Enter>",
-                    }
+                    },
                 },
                 openai_params = {
                     model = "gpt-3.5-turbo",
@@ -408,7 +414,7 @@ lvim.plugins = {
                     n = 1,
                 },
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/sindrets/diffview.nvim
@@ -425,41 +431,39 @@ lvim.plugins = {
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            require('colorizer').setup {
-                'css',
-                'javascript',
-                'html',
-                'tmux',
-                'yaml',
-                'zsh',
-            }
-        end
+            require("colorizer").setup({
+                "css",
+                "javascript",
+                "html",
+                "tmux",
+                "yaml",
+                "zsh",
+            })
+        end,
     },
 
-    -- Reference: https://github.com/google/vim-codefmt
+    -- Reference: https://github.com/sbdchd/neoformat
     {
-        "google/vim-maktaba",
-        lazy = true,
-    },
-    {
-        "google/vim-glaive",
-        lazy = true,
-        dependencies = {
-            "google/vim-maktaba",
-        },
-    },
-    {
-        "google/vim-codefmt",
-        -- lazy = true,
-        dependencies = {
-            "google/vim-glaive",
-        },
+        "sbdchd/neoformat",
+        event = "VeryLazy",
         config = function()
-            vim.cmd([[
-                call glaive#Install()
-                " TODO: move Glaive configuration here and enable 'lazy = true' above
-            ]])
-        end
+            -- Reference: https://github.com/sbdchd/neoformat#supported-filetypes
+            -- File Types: | Formatters: | Formatters Installation:
+            --   c/c++/proto: clang-format: sudo pacman -Sy clang | sudo apt install -y clang-format
+            --   css/html/javascript/typescript/xml/yaml/...: prettier: npm install --global prettier
+            --   python: black: sudo pacman -Sy python-black | sudo apt install -y black
+            --   shell/zsh: shfmt: sudo pacman -Sy shfmt | sudo apt install -y shfmt
+            --   rust: rustfmt: rustup component add rustfmt
+            --   lua: stylua: cargo install stylua
+            --   bazel: buildifier: go install github.com/bazelbuild/buildtools/buildifier@latest
+            if os.getenv("AUTO_NEOFORMAT") == "true" then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    callback = function()
+                        vim.cmd([[ undojoin | Neoformat ]])
+                    end,
+                })
+            end
+        end,
     },
 
     -- Reference: https://github.com/zbirenbaum/copilot-cmp
@@ -471,7 +475,7 @@ lvim.plugins = {
         event = "VeryLazy",
         config = function()
             require("copilot_cmp").setup()
-        end
+        end,
     },
     -- Reference: https://github.com/zbirenbaum/copilot.lua
     -- Note: Use `:Copilot auth` to authenticate
@@ -481,7 +485,7 @@ lvim.plugins = {
         event = "InsertEnter",
         config = function()
             require("copilot").setup()
-        end
+        end,
     },
 
     -- Reference: https://github.com/AndrewRadev/switch.vim
@@ -492,7 +496,7 @@ lvim.plugins = {
         },
         event = "VeryLazy",
         config = function()
-        end
+        end,
     },
 
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
@@ -503,7 +507,7 @@ lvim.plugins = {
         event = "VeryLazy",
         config = function()
             vim.fn["mkdp#util#install"]()
-        end
+        end,
     },
 
     -- Reference: https://github.com/dhruvasagar/vim-table-mode
@@ -518,7 +522,7 @@ lvim.plugins = {
                     vim.cmd([[ call tablemode#Enable() ]])
                 end,
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
@@ -536,7 +540,7 @@ lvim.plugins = {
                     return true
                 end,
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
@@ -548,9 +552,8 @@ lvim.plugins = {
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require("nvim-dap-virtual-text").setup({
-            })
-        end
+            require("nvim-dap-virtual-text").setup({})
+        end,
     },
 
     -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
@@ -569,12 +572,12 @@ lvim.plugins = {
     {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
         event = "VeryLazy",
-        cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff", },
+        cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff" },
         config = function()
             require("toggle_lsp_diagnostics").init({
                 start_on = true, -- Toggle diagnostics on or off on start
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/tpope/vim-fugitive
@@ -588,8 +591,28 @@ lvim.plugins = {
     {
         "junegunn/fzf.vim",
         event = "VeryLazy",
-        cmd = { "Files", "GFiles", "Buffers", "Colors", "Rg", "Lines", "BLines", "Tags", "BTags", "Marks", "Windows",
-            "Locate", "History", "Snippets", "Commits", "BCommits", "Commands", "Maps", "Helptags", "Filetypes" },
+        cmd = {
+            "Files",
+            "GFiles",
+            "Buffers",
+            "Colors",
+            "Rg",
+            "Lines",
+            "BLines",
+            "Tags",
+            "BTags",
+            "Marks",
+            "Windows",
+            "Locate",
+            "History",
+            "Snippets",
+            "Commits",
+            "BCommits",
+            "Commands",
+            "Maps",
+            "Helptags",
+            "Filetypes",
+        },
     },
 
     -- Reference: https://github.com/folke/flash.nvim
@@ -607,12 +630,12 @@ lvim.plugins = {
             "williamboman/mason.nvim",
         },
         config = function()
-            require("mason").setup({
-            })
+            require("mason").setup({})
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
                     "cmake",
+                    "jdtls",
                     "pyright",
                     "bashls",
                     "html",
@@ -622,7 +645,7 @@ lvim.plugins = {
                     "marksman",
                 },
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/nvim-neorg/neorg
@@ -634,13 +657,13 @@ lvim.plugins = {
         },
         config = function()
             vim.cmd([[ set conceallevel=2 ]])
-            require("neorg").setup {
+            require("neorg").setup({
                 load = {
                     ["core.defaults"] = {},
                     ["core.completion"] = {
                         config = {
                             engine = "nvim-cmp",
-                        }
+                        },
                     },
                     ["core.concealer"] = {},
                     ["core.dirman"] = {
@@ -667,8 +690,8 @@ lvim.plugins = {
                     -- 'calendar' requires: nvim >= 10.0
                     -- ["core.ui.calendar"] = {},
                 },
-            }
-        end
+            })
+        end,
     },
 
     -- Reference: https://github.com/nvim-neorg/neorg-telescope
@@ -699,7 +722,7 @@ lvim.plugins = {
         },
         config = function()
             require("rust-tools").setup({})
-        end
+        end,
     },
 
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
@@ -712,18 +735,17 @@ lvim.plugins = {
         config = function()
             require("mason-nvim-dap").setup({
                 -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
-                ensure_installed = { "python", "cppdbg" }
+                ensure_installed = { "python", "cppdbg" },
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
         config = function()
-            require("nvim-lastplace").setup({
-            })
-        end
+            require("nvim-lastplace").setup({})
+        end,
     },
 
     -- Reference: https://github.com/folke/noice.nvim
@@ -757,7 +779,7 @@ lvim.plugins = {
                     lsp_doc_border = true,        -- add a border to hover docs and signature help
                 },
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/nvim-pack/nvim-spectre
@@ -780,7 +802,7 @@ lvim.plugins = {
                     },
                 },
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/SirVer/ultisnips
@@ -797,21 +819,19 @@ lvim.plugins = {
         "gbprod/substitute.nvim",
         lazy = true,
         config = function()
-            require("substitute").setup({
-            })
-        end
+            require("substitute").setup({})
+        end,
     },
 
     -- Reference: https://github.com/simrat39/symbols-outline.nvim
     {
         -- "simrat39/symbols-outline.nvim",
-        'enddeadroyal/symbols-outline.nvim',
-        branch = 'bugfix/symbol-hover-misplacement',
+        "enddeadroyal/symbols-outline.nvim",
+        branch = "bugfix/symbol-hover-misplacement",
         event = "VeryLazy",
         config = function()
-            require("symbols-outline").setup({
-            })
-        end
+            require("symbols-outline").setup({})
+        end,
     },
 
     -- Reference: https://github.com/christoomey/vim-tmux-navigator
@@ -827,9 +847,8 @@ lvim.plugins = {
             "nvim-lua/plenary.nvim",
         },
         config = function()
-            require("todo-comments").setup({
-            })
-        end
+            require("todo-comments").setup({})
+        end,
     },
 
     -- Reference: https://github.com/kylechui/nvim-surround
@@ -838,9 +857,8 @@ lvim.plugins = {
         version = "*",
         event = "VeryLazy",
         config = function()
-            require("nvim-surround").setup({
-            })
-        end
+            require("nvim-surround").setup({})
+        end,
     },
 
     -- Reference: https://github.com/folke/trouble.nvim
@@ -851,15 +869,15 @@ lvim.plugins = {
             local actions = require("telescope.actions")
             local trouble = require("trouble.providers.telescope")
             local telescope = require("telescope")
-            telescope.setup {
+            telescope.setup({
                 defaults = {
                     mappings = {
                         i = { ["<c-t>"] = trouble.open_with_trouble },
                         n = { ["<c-t>"] = trouble.open_with_trouble },
                     },
                 },
-            }
-        end
+            })
+        end,
     },
 
     -- Reference: https://github.com/dstein64/vim-startuptime
@@ -886,14 +904,13 @@ lvim.plugins = {
         config = function()
             require("neotest").setup({
                 adapters = {
-                    require("neotest-python")({
-                    }),
+                    require("neotest-python")({}),
                 },
             })
             require("neodev").setup({
                 library = { plugins = { "neotest" }, types = true },
             })
-        end
+        end,
     },
 
     -- Reference: https://github.com/nvim-treesitter/nvim-treesitter-context
@@ -904,9 +921,8 @@ lvim.plugins = {
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require("treesitter-context").setup({
-            })
-        end
+            require("treesitter-context").setup({})
+        end,
     },
 
     -- Reference: https://github.com/gelguy/wilder.nvim
@@ -917,15 +933,15 @@ lvim.plugins = {
             "romgrk/fzy-lua-native",
         },
         config = function()
-            local wilder = require('wilder')
-            wilder.setup({ modes = { ':', '/', '?' } })
+            local wilder = require("wilder")
+            wilder.setup({ modes = { ":", "/", "?" } })
 
-            wilder.set_option('pipeline', {
+            wilder.set_option("pipeline", {
                 wilder.branch(
                     wilder.python_file_finder_pipeline({
-                        file_command = { 'rg', '--files' },
-                        dir_command = { 'fd', '-td' },
-                        filters = { 'fuzzy_filter', 'difflib_sorter' },
+                        file_command = { "rg", "--files" },
+                        dir_command = { "fd", "-td" },
+                        filters = { "fuzzy_filter", "difflib_sorter" },
                     }),
                     wilder.substitute_pipeline({
                         pipeline = wilder.python_search_pipeline({
@@ -940,7 +956,9 @@ lvim.plugins = {
                         fuzzy_filter = wilder.lua_fzy_filter(),
                     }),
                     {
-                        wilder.check(function(ctx, x) return x == '' end),
+                        wilder.check(function(ctx, x)
+                            return x == ""
+                        end),
                         wilder.history(),
                     },
                     wilder.python_search_pipeline({
@@ -956,48 +974,49 @@ lvim.plugins = {
                 wilder.lua_fzy_highlighter(),
             }
 
-            local popupmenu_renderer = wilder.popupmenu_renderer(
-                wilder.popupmenu_border_theme({
-                    border = 'rounded',
-                    winblend = 20,
-                    empty_message = wilder.popupmenu_empty_message_with_spinner(),
-                    highlighter = highlighters,
-                    left = {
-                        ' ',
-                        wilder.popupmenu_devicons(),
-                        wilder.popupmenu_buffer_flags({
-                            flags = ' a + ',
-                            icons = { ['+'] = '', a = '', h = '' },
-                        }),
-                    },
-                    right = {
-                        ' ',
-                        wilder.popupmenu_scrollbar(),
-                    },
-                })
-            )
+            local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+                border = "rounded",
+                winblend = 20,
+                empty_message = wilder.popupmenu_empty_message_with_spinner(),
+                highlighter = highlighters,
+                left = {
+                    " ",
+                    wilder.popupmenu_devicons(),
+                    wilder.popupmenu_buffer_flags({
+                        flags = " a + ",
+                        icons = { ["+"] = "", a = "", h = "" },
+                    }),
+                },
+                right = {
+                    " ",
+                    wilder.popupmenu_scrollbar(),
+                },
+            }))
 
             local wildmenu_renderer = wilder.wildmenu_renderer({
                 highlighter = highlighters,
-                separator = ' · ',
-                left = { ' ', wilder.wildmenu_spinner(), ' ' },
-                right = { ' ', wilder.wildmenu_index() },
+                separator = " · ",
+                left = { " ", wilder.wildmenu_spinner(), " " },
+                right = { " ", wilder.wildmenu_index() },
             })
 
-            wilder.set_option('renderer', wilder.renderer_mux({
-                [':'] = popupmenu_renderer,
-                ['/'] = wildmenu_renderer,
-                substitute = wildmenu_renderer,
-            }))
-        end
+            wilder.set_option(
+                "renderer",
+                wilder.renderer_mux({
+                    [":"] = popupmenu_renderer,
+                    ["/"] = wildmenu_renderer,
+                    substitute = wildmenu_renderer,
+                })
+            )
+        end,
     },
 
     {
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
         dependencies = {
-            { 'kkharji/sqlite.lua',           module = 'sqlite' },
-            { 'nvim-telescope/telescope.nvim' },
+            { "kkharji/sqlite.lua",           module = "sqlite" },
+            { "nvim-telescope/telescope.nvim" },
         },
         config = function()
             local function is_whitespace(line)
@@ -1011,7 +1030,7 @@ lvim.plugins = {
                 end
                 return true
             end
-            require('neoclip').setup({
+            require("neoclip").setup({
                 history = 10000,
                 enable_persistent_history = true,
                 continuous_sync = true,
@@ -1043,9 +1062,8 @@ lvim.plugins = {
         event = "VeryLazy",
         cmd = "ZenMode",
         config = function()
-            require("zen-mode").setup({
-            })
-        end
+            require("zen-mode").setup({})
+        end,
     },
 
     -- Reference: https://github.com/ludovicchabant/vim-gutentags
@@ -1062,7 +1080,7 @@ local lsp_on_attach = function(client, bufnr)
     end
 end
 local lspconfig = require("lspconfig")
-lspconfig.clangd.setup {
+lspconfig.clangd.setup({
     cmd = {
         "clangd",
         "--background-index",
@@ -1078,9 +1096,16 @@ lspconfig.clangd.setup {
         "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
     },
     on_attach = lsp_on_attach,
-}
+})
 lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
     on_attach = lsp_on_attach,
+})
+lspconfig.jdtls.setup({
+    on_attach = lsp_on_attach,
+    cmd = { "jdtls" },
+    root_dir = function(fname)
+        return require("lspconfig").util.root_pattern("pom.xml", "gradle.build", ".git")(fname) or vim.fn.getcwd()
+    end,
 })
 lspconfig.pyright.setup({
     on_attach = lsp_on_attach,
@@ -1118,8 +1143,6 @@ lspconfig.marksman.setup({
 -- specify the python3 we use as nvim python
 vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
 
-
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
@@ -1133,69 +1156,54 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- set filetype ini for .tasks (by asynctasks.vim)
-vim.api.nvim_create_autocmd(
-    {
-        "BufNewFile",
-        "BufRead",
-    },
-    {
-        pattern = ".tasks",
-        callback = function()
-            vim.cmd([[ set filetype=ini ]])
-        end,
-    }
-)
+vim.api.nvim_create_autocmd({
+    "BufNewFile",
+    "BufRead",
+}, {
+    pattern = ".tasks",
+    callback = function()
+        vim.cmd([[ set filetype=ini ]])
+    end,
+})
 
-vim.api.nvim_create_autocmd(
-    {
-        "BufNewFile",
-        "BufRead",
-    },
-    {
-        pattern = ".tmux.conf*",
-        callback = function()
-            vim.cmd([[ set filetype=tmux ]])
-        end,
-    }
-)
+vim.api.nvim_create_autocmd({
+    "BufNewFile",
+    "BufRead",
+}, {
+    pattern = ".tmux.conf*",
+    callback = function()
+        vim.cmd([[ set filetype=tmux ]])
+    end,
+})
 
-vim.api.nvim_create_autocmd(
-    {
-        "BufNewFile",
-        "BufRead",
-    },
-    {
-        pattern = ".gitmux.conf*",
-        callback = function()
-            vim.cmd([[ set filetype=yaml ]])
-        end,
-    }
-)
+vim.api.nvim_create_autocmd({
+    "BufNewFile",
+    "BufRead",
+}, {
+    pattern = ".gitmux.conf*",
+    callback = function()
+        vim.cmd([[ set filetype=yaml ]])
+    end,
+})
 
 --------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd(
-    {
-        "InsertEnter",
-    },
-    {
-        callback = function()
-            vim.cmd([[ set nonumber ]])
-            vim.cmd([[ set norelativenumber ]])
-        end,
-    }
-)
+vim.api.nvim_create_autocmd({
+    "InsertEnter",
+}, {
+    callback = function()
+        vim.cmd([[ set nonumber ]])
+        vim.cmd([[ set norelativenumber ]])
+    end,
+})
 
-vim.api.nvim_create_autocmd(
-    {
-        "InsertLeave",
-    },
-    {
-        callback = function()
-            vim.cmd([[ set number ]])
-            vim.cmd([[ set relativenumber ]])
-        end,
-    }
-)
+vim.api.nvim_create_autocmd({
+    "InsertLeave",
+}, {
+    callback = function()
+        vim.cmd([[ set number ]])
+        vim.cmd([[ set relativenumber ]])
+    end,
+})
 
 --------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 -- Reference: https://github.com/folke/which-key.nvim
 
-local wk = require("which-key")
+local wk = require "which-key"
 local normal_mode = { mode = "n" }
 local normal_mode_with_expr = { mode = "n", expr = true }
 local visual_mode = { mode = "v" }
@@ -10,14 +10,13 @@ local visual_mode = { mode = "v" }
 -- Global Mappings: both normal mode & visual mode
 
 wk.register({
-    ["s"] = { require('substitute').operator, "Substitute Operator" },
-    ["ss"] = { require('substitute').line, "Substitute Line" },
-    ["S"] = { require('substitute').eol, "Substitute to End of Line" },
+    ["s"] = { require("substitute").operator, "Substitute Operator" },
+    ["ss"] = { require("substitute").line, "Substitute Line" },
+    ["S"] = { require("substitute").eol, "Substitute to End of Line" },
 }, normal_mode)
 wk.register({
-    ["s"] = { require('substitute').operator, "Substitute Operator" },
+    ["s"] = { require("substitute").operator, "Substitute Operator" },
 }, visual_mode)
-
 
 wk.register({
     ["<leader>c"] = { name = "+ChatGPT" },
@@ -27,12 +26,11 @@ wk.register({
 }, normal_mode)
 wk.register({
     ["<leader>c"] = { name = "+ChatGPT" },
-    ["<leader>ce"] = { require('chatgpt').edit_with_instructions, "Edit with Instructions" },
+    ["<leader>ce"] = { require("chatgpt").edit_with_instructions, "Edit with Instructions" },
 }, visual_mode)
 
-
 wk.register({
-    ["<leader>_"] = { require('osc52').copy_operator, "Copy (osc52)" },
+    ["<leader>_"] = { require("osc52").copy_operator, "Copy (osc52)" },
 }, normal_mode_with_expr)
 wk.register({
     ["<leader>_"] = { "<cmd>lua require('osc52').copy_visual()<cr>", "Copy (osc52)" },
@@ -82,16 +80,39 @@ wk.register({
     ["<leader>dn"] = { "<cmd>lua require'dap'.step_over()<cr>", "n(ext) [step over]" },
     ["<leader>do"] = { "<cmd>lua require'dap'.step_out()<cr>", "finish [step out]" },
     -- DapUI
-    ["<leader>dd"] = { function()
-        require 'dap'.disconnect()
-        require 'dapui'.toggle({ reset = true })
-    end, "Disconnect" },
+    ["<leader>dd"] = {
+        function()
+            require("dap").disconnect()
+            require("dapui").toggle { reset = true }
+        end,
+        "Disconnect",
+    },
     ["<leader>du"] = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle Dap UI" },
     -- Dap + Telescope
-    ["<leader>dl"] = { function() require 'telescope'.extensions.dap.list_breakpoints {} end, "Dap list breakpoints" },
-    ["<leader>dv"] = { function() require 'telescope'.extensions.dap.variables {} end, "Dap variables" },
-    ["<leader>df"] = { function() require 'telescope'.extensions.dap.frames {} end, "Dap frames" },
-    ["<leader>D"] = { function() require 'telescope'.extensions.dap.commands {} end, "Dap commands" },
+    ["<leader>dl"] = {
+        function()
+            require("telescope").extensions.dap.list_breakpoints {}
+        end,
+        "Dap list breakpoints",
+    },
+    ["<leader>dv"] = {
+        function()
+            require("telescope").extensions.dap.variables {}
+        end,
+        "Dap variables",
+    },
+    ["<leader>df"] = {
+        function()
+            require("telescope").extensions.dap.frames {}
+        end,
+        "Dap frames",
+    },
+    ["<leader>D"] = {
+        function()
+            require("telescope").extensions.dap.commands {}
+        end,
+        "Dap commands",
+    },
 
     ["<leader>gf"] = {
         function()
@@ -123,19 +144,19 @@ wk.register({
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
     ["<leader>pf"] = {
         function()
-            require("telescope.builtin").find_files({ cwd = vim.api.nvim_eval('FindRootDirectory()') })
+            require("telescope.builtin").find_files { cwd = vim.api.nvim_eval "FindRootDirectory()" }
         end,
         "Find Project File",
     },
     ["<leader>pw"] = {
         function()
-            require("telescope.builtin").grep_string({ cwd = vim.api.nvim_eval('FindRootDirectory()') })
+            require("telescope.builtin").grep_string { cwd = vim.api.nvim_eval "FindRootDirectory()" }
         end,
         "Project Grep Current Word",
     },
     ["<leader>pg"] = {
         function()
-            require("telescope.builtin").live_grep({ cwd = vim.api.nvim_eval('FindRootDirectory()') })
+            require("telescope.builtin").live_grep { cwd = vim.api.nvim_eval "FindRootDirectory()" }
         end,
         "Project Live Grep",
     },
@@ -144,36 +165,37 @@ wk.register({
     ["<leader>sw"] = { name = "Substitute word (from current selection)" },
     ["<leader>sa"] = { name = "Substitute word (from first line)" },
     ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
-
 }, normal_mode)
-
-
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- Conditional Mappings: FileType
 
-vim.cmd('autocmd FileType * lua set_key_bindings()')
+vim.cmd "autocmd FileType * lua set_key_bindings()"
 function set_key_bindings()
     local ftype = vim.api.nvim_buf_get_option(0, "filetype")
-    local fname = vim.fn.expand("%:t")
+    local fname = vim.fn.expand "%:t"
 
     -- norg / markdown
-    if ftype == 'norg' then
+    if ftype == "norg" then
         wk.register({
             ["<leader>nc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
-            ["<Up>"] = { "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>", "Previous Heading" },
+            ["<Up>"] = {
+                "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>",
+                "Previous Heading",
+            },
             ["<Down>"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
             ["<leader>nh"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
             ["<leader>nH"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
             ["<leader>nm"] = {
                 "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
-                "Export to Markdown" },
+                "Export to Markdown",
+            },
             ["<leader>ni"] = { "<cmd>Telescope neorg insert_file_link<cr>", "Insert File Link" },
             ["<leader>nI"] = { "<cmd>Telescope neorg insert_link<cr>", "Insert Link" },
             ["<leader>n/"] = { "<cmd>Telescope neorg search_headings<cr>", "Search Headings" },
         }, normal_mode)
-    elseif ftype == 'markdown' then
+    elseif ftype == "markdown" then
         wk.register({
             ["<leader>m"] = { name = "+Markdown" },
             ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
@@ -183,35 +205,35 @@ function set_key_bindings()
 
     -- program: c / cpp / python / sh / zsh
     -- ac: AsyncRun Code
-    if ftype == 'c' then
+    if ftype == "c" then
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
-    elseif ftype == 'cpp' then
+    elseif ftype == "cpp" then
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
-    elseif ftype == 'python' then
+    elseif ftype == "python" then
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },
         }, normal_mode)
-    elseif ftype == 'sh' or ftype == 'bash' then
+    elseif ftype == "sh" or ftype == "bash" then
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('bash')<cr>", "Run (buffer)" },
         }, normal_mode)
-    elseif ftype == 'zsh' then
+    elseif ftype == "zsh" then
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('zsh')<cr>", "Run (buffer)" },
         }, normal_mode)
     end
 
     -- project: cmake / cargo
-    if ftype == 'c' or ftype == 'cpp' or fname == 'CMakeLists.txt' then
+    if ftype == "c" or ftype == "cpp" or fname == "CMakeLists.txt" then
         wk.register({
             ["<leader>ab"] = { "<cmd>call ExecuteInRootWith('cmakebuild -t all')<cr>", "Project Build [CMake]" },
             ["<leader>ar"] = { "<cmd>call ExecuteInRootWith('cmakebuild -t run')<cr>", "Project Run [CMake]" },
         }, normal_mode)
-    elseif ftype == 'rust' or fname == 'Cargo.toml' then
+    elseif ftype == "rust" or fname == "Cargo.toml" then
         wk.register({
             ["<leader>ab"] = { "<cmd>call ExecuteInRootWith('cargo build')<cr>", "Project Build [Cargo]" },
             ["<leader>ar"] = { "<cmd>call ExecuteInRootWith('cargo run')<cr>", "Project Run [Cargo]" },

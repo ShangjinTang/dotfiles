@@ -1,9 +1,9 @@
-local dap = require('dap')
+local dap = require "dap"
 
 dap.adapters.cppdbg = {
-    id = 'cppdbg',
-    type = 'executable',
-    command = vim.fn.expand('~/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7'),
+    id = "cppdbg",
+    type = "executable",
+    command = vim.fn.expand "~/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
 }
 
 dap.configurations.cpp = {
@@ -12,9 +12,9 @@ dap.configurations.cpp = {
         type = "cppdbg",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
-        cwd = '${workspaceFolder}',
+        cwd = "${workspaceFolder}",
         stopAtEntry = true,
     },
 }

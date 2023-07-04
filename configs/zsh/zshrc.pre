@@ -22,7 +22,7 @@ case ${TERMINAL_THEME} in
 esac
 
 # vim extensions
-export VIM_CODEFMT_ENABLE=1
+export AUTO_NEOFORMAT=true
 
 # python version
 export PYTHON3_VERSION="3.10.11"
