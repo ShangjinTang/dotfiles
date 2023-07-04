@@ -32,6 +32,7 @@
     ~/.rcflags: configs/.rcflags
     ~/.clang-format: configs/clang/.clang-format
     ~/.clang-tidy: configs/clang/.clang-tidy
+    ~/.stylua.toml: configs/lua/.stylua.toml
         ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
     # conditional configs
     ~/.tigrc:

@@ -1,9 +1,9 @@
-local dap = require "dap"
+local dap = require("dap")
 
 dap.adapters.cppdbg = {
     id = "cppdbg",
     type = "executable",
-    command = vim.fn.expand "~/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+    command = vim.fn.expand("~/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7"),
 }
 
 dap.configurations.cpp = {

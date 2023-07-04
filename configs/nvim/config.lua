@@ -278,7 +278,7 @@ lvim.plugins = {
                     percentage = 0.15,
                 },
                 no_italic = false, -- Force no italic
-                no_bold = false,   -- Force no bold
+                no_bold = false, -- Force no bold
                 styles = {
                     comments = { "italic" },
                     conditionals = { "italic" },
@@ -492,8 +492,7 @@ lvim.plugins = {
             "tpope/vim-speeddating",
         },
         event = "VeryLazy",
-        config = function()
-        end,
+        config = function() end,
     },
 
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
@@ -632,7 +631,6 @@ lvim.plugins = {
                 ensure_installed = {
                     "clangd",
                     "cmake",
-                    "jdtls",
                     "pyright",
                     "bashls",
                     "html",
@@ -641,6 +639,20 @@ lvim.plugins = {
                     "vimls",
                     "marksman",
                 },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/mfussenegger/nvim-jdtls
+    {
+        "mfussenegger/nvim-jdtls",
+        event = "VeryLazy",
+        config = function()
+            require("jdtls").start_or_attach({
+                cmd = { vim.fn.expand("~/.local/bin/jdtls") },
+                root_dir = vim.fs.dirname(
+                    vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml", "gradle.build" }, { upward = true })[1]
+                ),
             })
         end,
     },
@@ -676,10 +688,10 @@ lvim.plugins = {
                     ["core.qol.todo_items"] = {
                         config = {
                             order = {
-                                { "undone",    " " },
-                                { "pending",   "-" },
-                                { "done",      "x" },
-                                { "on_hold",   "=" },
+                                { "undone", " " },
+                                { "pending", "-" },
+                                { "done", "x" },
+                                { "on_hold", "=" },
                                 { "important", "!" },
                             },
                         },
@@ -769,11 +781,11 @@ lvim.plugins = {
                     },
                 },
                 presets = {
-                    bottom_search = true,         -- use a classic bottom cmdline for search
-                    command_palette = true,       -- position the cmdline and popupmenu together
+                    bottom_search = true, -- use a classic bottom cmdline for search
+                    command_palette = true, -- position the cmdline and popupmenu together
                     long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = true,            -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = true,        -- add a border to hover docs and signature help
+                    inc_rename = true, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
             })
         end,
@@ -1012,7 +1024,7 @@ lvim.plugins = {
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
         dependencies = {
-            { "kkharji/sqlite.lua",           module = "sqlite" },
+            { "kkharji/sqlite.lua", module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
         },
         config = function()
@@ -1096,13 +1108,6 @@ lspconfig.clangd.setup({
 })
 lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
     on_attach = lsp_on_attach,
-})
-lspconfig.jdtls.setup({
-    on_attach = lsp_on_attach,
-    cmd = { "jdtls" },
-    root_dir = function(fname)
-        return require("lspconfig").util.root_pattern("pom.xml", "gradle.build", ".git")(fname) or vim.fn.getcwd()
-    end,
 })
 lspconfig.pyright.setup({
     on_attach = lsp_on_attach,
