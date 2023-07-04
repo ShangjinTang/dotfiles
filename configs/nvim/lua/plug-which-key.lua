@@ -1,6 +1,6 @@
 -- Reference: https://github.com/folke/which-key.nvim
 
-local wk = require "which-key"
+local wk = require("which-key")
 local normal_mode = { mode = "n" }
 local normal_mode_with_expr = { mode = "n", expr = true }
 local visual_mode = { mode = "v" }
@@ -83,7 +83,7 @@ wk.register({
     ["<leader>dd"] = {
         function()
             require("dap").disconnect()
-            require("dapui").toggle { reset = true }
+            require("dapui").toggle({ reset = true })
         end,
         "Disconnect",
     },
@@ -91,32 +91,32 @@ wk.register({
     -- Dap + Telescope
     ["<leader>dl"] = {
         function()
-            require("telescope").extensions.dap.list_breakpoints {}
+            require("telescope").extensions.dap.list_breakpoints({})
         end,
         "Dap list breakpoints",
     },
     ["<leader>dv"] = {
         function()
-            require("telescope").extensions.dap.variables {}
+            require("telescope").extensions.dap.variables({})
         end,
         "Dap variables",
     },
     ["<leader>df"] = {
         function()
-            require("telescope").extensions.dap.frames {}
+            require("telescope").extensions.dap.frames({})
         end,
         "Dap frames",
     },
     ["<leader>D"] = {
         function()
-            require("telescope").extensions.dap.commands {}
+            require("telescope").extensions.dap.commands({})
         end,
         "Dap commands",
     },
 
     ["<leader>gf"] = {
         function()
-            require("lvim.core.telescope.custom-finders").find_project_files { previewer = false }
+            require("lvim.core.telescope.custom-finders").find_project_files({ previewer = false })
         end,
         "Find Git File",
     },
@@ -144,19 +144,19 @@ wk.register({
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
     ["<leader>pf"] = {
         function()
-            require("telescope.builtin").find_files { cwd = vim.api.nvim_eval "FindRootDirectory()" }
+            require("telescope.builtin").find_files({ cwd = vim.api.nvim_eval("FindRootDirectory()") })
         end,
         "Find Project File",
     },
     ["<leader>pw"] = {
         function()
-            require("telescope.builtin").grep_string { cwd = vim.api.nvim_eval "FindRootDirectory()" }
+            require("telescope.builtin").grep_string({ cwd = vim.api.nvim_eval("FindRootDirectory()") })
         end,
         "Project Grep Current Word",
     },
     ["<leader>pg"] = {
         function()
-            require("telescope.builtin").live_grep { cwd = vim.api.nvim_eval "FindRootDirectory()" }
+            require("telescope.builtin").live_grep({ cwd = vim.api.nvim_eval("FindRootDirectory()") })
         end,
         "Project Live Grep",
     },
@@ -171,10 +171,10 @@ wk.register({
 --------------------------------------------------------------------------------
 -- Conditional Mappings: FileType
 
-vim.cmd "autocmd FileType * lua set_key_bindings()"
+vim.cmd("autocmd FileType * lua set_key_bindings()")
 function set_key_bindings()
     local ftype = vim.api.nvim_buf_get_option(0, "filetype")
-    local fname = vim.fn.expand "%:t"
+    local fname = vim.fn.expand("%:t")
 
     -- norg / markdown
     if ftype == "norg" then
