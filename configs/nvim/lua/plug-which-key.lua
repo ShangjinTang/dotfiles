@@ -61,7 +61,6 @@ wk.register({
 
     ["<leader>a"] = { name = "+AsyncRun & AsyncTasks" },
     ["<leader>aa"] = { "<cmd>lua require('telescope').extensions.asynctasks.all()<cr>", "List All AsyncTasks" },
-    ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit Async Window" },
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
