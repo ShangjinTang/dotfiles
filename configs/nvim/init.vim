@@ -28,11 +28,12 @@ else
 endif
 
 function! AsyncRunWith(commands)
-    if exists("$TMUX")
-        execute 'AsyncRun -mode=term -pos=tmuxsol -focus=0 ' . a:commands
-    else
-        execute 'AsyncRun -mode=term -focus=0 -rows=8 ' . a:commands
-    endif
+    " if exists("$TMUX")
+    "     execute 'AsyncRun -mode=term -pos=tmuxsol -focus=0 ' . a:commands
+    " else
+    "     execute 'AsyncRun -mode=term -pos=toggleterm -focus=0 ' . a:commands
+    " endif
+    execute 'AsyncRun -mode=term -pos=toggleterm -focus=0 ' . a:commands
 endfunction
 
 function! ExecuteBufferWith(commands)
