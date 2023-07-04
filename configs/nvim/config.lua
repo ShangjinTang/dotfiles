@@ -652,6 +652,7 @@ lvim.plugins = {
                 ensure_installed = {
                     "clangd",
                     "cmake",
+                    "jdtls",
                     "pyright",
                     "bashls",
                     "html",
@@ -663,21 +664,6 @@ lvim.plugins = {
             })
         end,
     },
-
-    -- -- Reference: https://github.com/mfussenegger/nvim-jdtls
-    -- {
-    --     "mfussenegger/nvim-jdtls",
-    --     event = "VeryLazy",
-    --     ft = "java",
-    --     config = function()
-    --         require("jdtls").start_or_attach({
-    --             cmd = { vim.fn.expand("~/.local/bin/jdtls") },
-    --             root_dir = vim.fs.dirname(
-    --                 vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml", "gradle.build" }, { upward = true })[1]
-    --             ),
-    --         })
-    --     end,
-    -- },
 
     -- Reference: https://github.com/nvim-neorg/neorg
     {
@@ -1130,6 +1116,10 @@ lspconfig.clangd.setup({
 })
 lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
     on_attach = lsp_on_attach,
+})
+lspconfig.jdtls.setup({
+    on_attach = lsp_on_attach,
+    cmd = { "jdtls" },
 })
 lspconfig.pyright.setup({
     on_attach = lsp_on_attach,
