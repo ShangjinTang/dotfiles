@@ -20,8 +20,7 @@ CSF_PREFIX="cscope -dL1 " # Find this global definition
 
 QUERY="${*:-}"
 
-FORMAT='{ file=$1; symbol=$2; line=$3; $1=$2=$3="";
-    printf "\033[35m%s\033[0m:\033[32m%s\033[0m:\t%s\n",file,line,$0; }'
+FORMAT='{ file=$1; symbol=$2; line=$3; $1=$2=$3=""; printf "\033[35m%s\033[0m:\033[32m%s\033[0m:\t%s\n",file,line,$0; }'
 
 IFS=: read -ra selected < <(
     FZF_DEFAULT_COMMAND="$CSF_PREFIX $(printf %q "$QUERY") | awk '$FORMAT' " \
