@@ -133,14 +133,6 @@ lvim.builtin.treesitter.ensure_installed = {
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
--- File Types: | Formatters: | Formatters Installation:
---   c/c++/proto: clang-format: sudo pacman -Sy clang | sudo apt install -y clang-format
---   css/html/javascript/typescript/xml/yaml/...: prettier: npm install --global prettier
---   python: black: sudo pacman -Sy python-black | sudo apt install -y black
---   shell/zsh: shfmt: sudo pacman -Sy shfmt | sudo apt install -y shfmt
---   rust: rustfmt: rustup component add rustfmt
---   lua: stylua: cargo install stylua
---   bazel: buildifier: go install github.com/bazelbuild/buildtools/buildifier@latest
 if os.getenv("FORMAT_ON_SAVE") == "true" then
     lvim.format_on_save = {
         enabled = true,
@@ -153,17 +145,28 @@ end
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
     { command = "trim_whitespace" },
+    -- cargo install stylua
     { command = "stylua", filetypes = { "lua" } },
+    -- sudo pacman -Sy clang | sudo apt install -y clang-format
     { command = "clang_format", filetypes = { "c", "cpp", "cs", "cuda", "proto" } },
+    -- npm install --global google-java-format
     { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
+    -- sudo pacman -Sy python-black | sudo apt install -y black
     { command = "black", filetypes = { "python" } },
+    -- sudo pacman -Sy shfmt | sudo apt install -y shfmt
     { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
+    -- pip install beautysh
     { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
+    -- rustup component add rustfmt
     { command = "rustfmt", filetypes = { "rust" } },
+    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
     { command = "buildifier", filetypes = { "bzl" } },
+    -- cargo install cbfmt
+    { command = "cbfmt", filetypes = { "markdown" } },
+    -- npm install --global prettier
     {
         command = "prettier",
-        extra_args = { "--print-width", "100" },
+        extra_args = { "--print-width", "120" },
         filetypes = {
             "javascript",
             "javascriptreact",
