@@ -11,13 +11,6 @@ lvim.log.level = "info"
 -- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
 lvim.leader = "space"
 
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-
--- -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-
 -- -- Change theme settings
 lvim.colorscheme = "catppuccin"
 lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
@@ -45,7 +38,8 @@ lvim.builtin.lualine = {
     },
     sections = {
         lualine_a = {
-            "mode",
+            -- "mode",
+            lualine_components.mode,
         },
         lualine_b = {
             lualine_components.treesitter,
@@ -89,6 +83,7 @@ lvim.builtin.treesitter.ensure_installed = {
     "git_config",
     "gitcommit",
     "gitignore",
+
     "html",
     "ini",
     "java",
@@ -150,6 +145,7 @@ lvim.builtin.treesitter.ensure_installed = {
 if os.getenv("FORMAT_ON_SAVE") == "true" then
     lvim.format_on_save = {
         enabled = true,
+
         -- pattern = "*.lua",
         timeout = 1000,
     }
@@ -158,7 +154,7 @@ else
 end
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-    { command = "trim_whitespace"},
+    { command = "trim_whitespace" },
     { command = "stylua", filetypes = { "lua" } },
     { command = "clang_format", filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" } },
     { command = "black", filetypes = { "python" } },
