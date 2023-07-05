@@ -31,8 +31,23 @@ if command -v npm &> /dev/null; then
     NPM_DEPENDENCIES=('prettier' 'google-java-format' 'live-server')
     for PACKAGE in "${NPM_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
-            echo "installing ${PACKAGE} ..."
+            echo "npm: installing ${PACKAGE} ..."
             npm install --global "${PACKAGE}" > /dev/null
+        fi
+    done
+    if ! command -v buildifier &> /dev/null; then
+        echo "npm: installing @bazel/buildifier ..."
+        npm install --global @bazel/buildifier > /dev/null
+    fi
+fi
+
+# install cargo packages
+if command -v cargo &> /dev/null; then
+    CARGO_DEPENDENCIES=('stylua' 'cbfmt')
+    for PACKAGE in "${CARGO_DEPENDENCIES[@]}"; do
+        if ! command -v "${PACKAGE}" &> /dev/null; then
+            echo "cargo: installing ${PACKAGE} ..."
+            cargo install "${PACKAGE}" > /dev/null
         fi
     done
 fi
