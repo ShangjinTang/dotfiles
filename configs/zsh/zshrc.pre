@@ -283,6 +283,13 @@ if command -v nvim &> /dev/null; then
     alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
     alias vz="nvim ~/.zshrc{.pre,,.local,.post}"
     alias vn="nvim ~/note/norg/index.norg"
+    function vt () {
+        if [ $# -eq 0 ]; then
+            nvim ~/temp/demo
+        elif [ $# -eq 1 ]; then
+            nvim ~/temp/demo.$1
+        fi
+    }
 else
     alias v='vim'
     alias vv='vim ~/.vimrc'
