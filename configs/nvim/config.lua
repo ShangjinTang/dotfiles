@@ -158,7 +158,7 @@ formatters.setup({
     { command = "stylua", filetypes = { "lua" } },
     { command = "clang_format", filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" } },
     { command = "black", filetypes = { "python" } },
-    { command = "shfmt", filetypes = { "sh", "bash", "zsh" } },
+    { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash", "zsh" } },
     { command = "rustfmt", filetypes = { "rust" } },
     { command = "buildifier", filetypes = { "bzl" } },
     {
