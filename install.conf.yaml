@@ -76,6 +76,7 @@
     ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.linux
     ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
     ~/.config/lazygit/config.yml: configs/lazygit/config.yml
+    ~/.config/alacritty/alacritty.yml: configs/alacritty/alacritty.yml
     ~/bin/: linux/bin/*
 
 # ArchLinux
