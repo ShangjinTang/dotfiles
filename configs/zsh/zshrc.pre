@@ -147,6 +147,9 @@ _PATHAPPEND() {
 #=====================================================================
 # Dir create
 
+# Create essential directories
+_DIRCREATE ~/bin ~/temp ~/github ~/note ~/jupyter
+
 # Create npm local directory for nvim lsp
 # Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
 _DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
