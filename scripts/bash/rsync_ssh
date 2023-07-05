@@ -94,28 +94,28 @@ rsync_from_ssh_server() {
 rsync_ssh_server() {
     check_env
     case $1 in
-    pull | push)
-        RSYNC_FLAGS='-avzhP'
-        ;;
-    pull-update | push-update)
-        RSYNC_FLAGS='-avzhP --update'
-        ;;
-    pull-delete | push-delete)
-        RSYNC_FLAGS='-avzhP --delete'
-        ;;
-    *)
-        echo "Error: we only allow '(pull|push)(-update|-delete)?' in first argument"
-        exit 1
-        ;;
+        pull | push)
+            RSYNC_FLAGS='-avzhP'
+            ;;
+        pull-update | push-update)
+            RSYNC_FLAGS='-avzhP --update'
+            ;;
+        pull-delete | push-delete)
+            RSYNC_FLAGS='-avzhP --delete'
+            ;;
+        *)
+            echo "Error: we only allow '(pull|push)(-update|-delete)?' in first argument"
+            exit 1
+            ;;
     esac
     case $1 in
-    pull | pull-update | pull-delete)
-        rsync_from_ssh_server "${@:2}"
-        ;;
-    push | push-update | push-delete)
-        rsync_to_ssh_server "${@:2}"
-        ;;
-    *) ;;
+        pull | pull-update | pull-delete)
+            rsync_from_ssh_server "${@:2}"
+            ;;
+        push | push-update | push-delete)
+            rsync_to_ssh_server "${@:2}"
+            ;;
+        *) ;;
     esac
 }
 

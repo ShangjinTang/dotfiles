@@ -66,7 +66,7 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     export SESSION_TYPE="ssh"
 else
     case $(ps -o comm= -p "$PPID") in
-        sshd|*/sshd) export SESSION_TYPE="ssh";;
+        sshd|*/sshd) export SESSION_TYPE="ssh" ;;
     esac
 fi
 
@@ -144,7 +144,25 @@ _PATHAPPEND() {
     done
 }
 
+#=====================================================================
+# Dir create
+
+# Create npm local directory for nvim lsp
+# Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
+_DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
+
+# Create nvim persistent undo directory
+_DIRCREATE ~/.cache/nvim/undo
+
+#---------------------------------------------------------------------
+# Path prepend
+
+# For 'jdtls' on ArchLinux
 _PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin
+
+#---------------------------------------------------------------------
+# Path append
+
 _PATHAPPEND ~/bin
 _PATHAPPEND ~/.local/bin
 _PATHAPPEND ~/.pyenv/bin
@@ -153,13 +171,6 @@ _PATHAPPEND ~/.pyenv/bin
 _PATHAPPEND ~/go/bin
 # For cargo binaries, such as lua format tool 'stylua'
 _PATHAPPEND ~/.cargo/bin
-
-# Create npm local directory for nvim lsp
-# Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
-_DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
-
-# Create nvim persistent undo directory
-_DIRCREATE ~/.cache/nvim/undo
 
 #=====================================================================
 # fuctions for command line use
@@ -366,4 +377,3 @@ fi
 
 
 ######################################################################
-

@@ -158,7 +158,8 @@ formatters.setup({
     { command = "clang_format", filetypes = { "c", "cpp", "cs", "cuda", "proto" } },
     { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
     { command = "black", filetypes = { "python" } },
-    { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash", "zsh" } },
+    { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
+    { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
     { command = "rustfmt", filetypes = { "rust" } },
     { command = "buildifier", filetypes = { "bzl" } },
     {
