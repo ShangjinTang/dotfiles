@@ -893,15 +893,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/dstein64/vim-startuptime
-    {
-        "dstein64/vim-startuptime",
-        cmd = "StartupTime",
-        init = function()
-            vim.g.startuptime_tries = 10
-        end,
-    },
-
     -- Reference: https://github.com/nvim-neotest/neotest
     {
         "nvim-neotest/neotest",
