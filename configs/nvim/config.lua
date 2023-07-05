@@ -144,7 +144,6 @@ lvim.builtin.treesitter.ensure_installed = {
 if os.getenv("FORMAT_ON_SAVE") == "true" then
     lvim.format_on_save = {
         enabled = true,
-
         -- pattern = "*.lua",
         timeout = 1000,
     }
@@ -601,10 +600,13 @@ lvim.plugins = {
         cmd = { "Git", "G" },
     },
 
-    -- Reference: https://github.com/tpope/vim-fugitive
+    -- Reference: https://github.com/junegunn/fzf.vim
     {
         "junegunn/fzf.vim",
         event = "VeryLazy",
+        dependencies = {
+            "junegunn/fzf",
+        },
         cmd = {
             "Files",
             "GFiles",

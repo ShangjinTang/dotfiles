@@ -70,6 +70,7 @@ wk.register({
     ["<leader>fg"] = { "<cmd>Telescope live_grep<cr>", "File Live Grep" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
+    ["<leader>ft"] = { "<cmd>Filetypes<cr>", "Set File Type" },
 
     ["<leader>d"] = { name = "+Dap" },
     -- mostly follow gdb/ldb mappings
