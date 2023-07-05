@@ -156,7 +156,8 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
     { command = "trim_whitespace" },
     { command = "stylua", filetypes = { "lua" } },
-    { command = "clang_format", filetypes = { "c", "cpp", "cs", "java", "cuda", "proto" } },
+    { command = "clang_format", filetypes = { "c", "cpp", "cs", "cuda", "proto" } },
+    { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
     { command = "black", filetypes = { "python" } },
     { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash", "zsh" } },
     { command = "rustfmt", filetypes = { "rust" } },
