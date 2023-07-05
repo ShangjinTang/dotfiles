@@ -1,0 +1,17 @@
+[languages]
+# Programming
+cpp = ["clang-format"]
+java = ["google-java-format --aosp"]
+python = ["black --fast -"]
+rust = ["rustfmt"]
+lua = ["stylua -s -"]
+# shell
+sh = ["shfmt -sr -ci -i 4"]
+bash = ["shfmt -sr -ci -i 4"]
+zsh = ["beautysh -i 4"]
+# prettier for web dev and configs
+css = ["prettier"]
+html = ["prettier"]
+javascript = ["prettier"]
+json = ["prettier"]
+yaml = ["prettier"]
