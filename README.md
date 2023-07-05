@@ -12,7 +12,7 @@ Fully support and keep up-to-date:
 
 Partial support:
 
-- Ubuntu 20.04 / Ubuntu 22.04 x86_64
+- Ubuntu 22.04 x86_64
   - Almost all functionalities should work, but the installation instructions is not complete and hard to maintain
   - Some packages require manual install (e.g. neovim)
 - macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
@@ -39,7 +39,7 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
 - AI support to speed up development
   - copilot-cmp (type `:Copilot auth` for first time use)
   - ChatGPT.nvim (requires `$OPENAI_API_KEY`)
-  - `sgpt` CLI tool by python3 pip package `shell-gpt`  (requires `$OPENAI_API_KEY`)
+  - `sgpt` CLI tool by python3 pip package `shell-gpt` (requires `$OPENAI_API_KEY`)
 - ArchLinux
   - Provide a script `mpac` with pre-set multi pacman installation
   - Provide a script `mpip` with pre-set multi pip installation
@@ -53,7 +53,7 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
     - `zsh-autosuggestions`
     - `zsh-syntax-highlighting`
   - settings with multi-stages
-    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/zshrc.local` ->  `~/.zshrc.post`
+    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/zshrc.local` -> `~/.zshrc.post`
   - support customized settings (in `~/zshrc.local`)
 - nvim (>=0.9)
   - based on **LunarVim**, but without manual installation
@@ -75,7 +75,7 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
 - Key Mappings (CapsLock as Escape or Hyper)
   - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
   - **macOS**: see [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
-  - **Ubuntu 20.04**: not support
+  - **Ubuntu 22.04**: not support
 
 ## Features for Simplify Workflow
 
@@ -85,11 +85,11 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - toggle: `setproxy|unsetproxy`
 - simplify tmux session manupilations
   - `t`: open session 0 (default session-name); if attach fail, will create
-  - `t <session-name>`: open session with *session-name*; if attach fail, will create
+  - `t <session-name>`: open session with _session-name_; if attach fail, will create
   - `tl`: list all sessions
   - `tk`: kill all sessions except session 0
 - add auto edit for fzf
-  -  use ALT-V to quick edit without typing `v xxx` (`v` is alias for `nvim`)
+  - use ALT-V to quick edit without typing `v xxx` (`v` is alias for `nvim`)
 - use zsh abbreviations to replace some alias
 - simplify `$PATH` settings
   - use `_PATHAPPEND`, `_PATHPREPEND` to modify PATHs
@@ -110,12 +110,12 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - docker with **compiler-explorer** using latest ArchLinux clang / gcc
   - `.clang-tidy` support
 - auto code format on save using `neoformat`
-    - C / C++ (based on `~/.clang-format`)
-    - Python
-    - Java
-    - Bash
-    - Lua
-    - ...
+  - C / C++ (based on `~/.clang-format`)
+  - Python
+  - Java
+  - Bash
+  - Lua
+  - ...
 - simplify large code-base view
   - docker with local **OpenGrok**
 - simply python development
@@ -139,17 +139,19 @@ Caution: this web page is not under maintained. For macOS / Ubuntu, you need to 
 
 </details>
 
-
 <details>
 
-  <summary>Ubuntu 22.04 / 22.04 x86_64</summary>
+  <summary>Ubuntu 22.04 x86_64</summary>
 
     <!-- TODO: add more packages -->
     ```bash
     sudo apt update
     sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip fuse nodejs npm
-    sudo apt install -y gcc g++ make cmake universal-ctags cscope ninja-build
+    sudo apt install -y clang clang-format libstdc++-12-dev g++ make cmake universal-ctags cscope ninja-build
+    sudo apt install -y pyenv black
+    sudo apt install -y shfmt
     sudo apt install -y net-tools
+    sudo apt install -y libgtest-dev
     sudo pip3 install tldr
     ```
 
