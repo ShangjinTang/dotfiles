@@ -144,6 +144,7 @@ _PATHAPPEND() {
     done
 }
 
+_PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin
 _PATHAPPEND ~/bin
 _PATHAPPEND ~/.local/bin
 _PATHAPPEND ~/.pyenv/bin

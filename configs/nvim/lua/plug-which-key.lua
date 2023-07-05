@@ -213,6 +213,10 @@ function set_key_bindings()
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
+    elseif ftype == "java" then
+        wk.register({
+            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('java')<cr>", "Run (buffer)" },
+        }, normal_mode)
     elseif ftype == "python" then
         wk.register({
             ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },

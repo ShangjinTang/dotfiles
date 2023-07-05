@@ -83,7 +83,6 @@ lvim.builtin.treesitter.ensure_installed = {
     "git_config",
     "gitcommit",
     "gitignore",
-
     "html",
     "ini",
     "java",
@@ -1114,7 +1113,7 @@ lspconfig.clangd.setup({
 lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
     on_attach = lsp_on_attach,
 })
-lspconfig.jdtls.setup({
+lspconfig.jdtls.setup({ -- requires: sudo apt install -y openjdk-17-jdk | sudo pacman -Sy jdk17-openjdk
     on_attach = lsp_on_attach,
     cmd = { "jdtls" },
 })
