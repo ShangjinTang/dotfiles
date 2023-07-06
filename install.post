@@ -28,7 +28,7 @@ fi
 
 # install npm packages
 if command -v npm &> /dev/null; then
-    NPM_DEPENDENCIES=('prettier' 'google-java-format' 'live-server')
+    NPM_DEPENDENCIES=('prettier' 'google-java-format' 'shellcheck' 'live-server')
     for PACKAGE in "${NPM_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
             echo "npm: installing ${PACKAGE} ..."
