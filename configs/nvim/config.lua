@@ -133,6 +133,7 @@ lvim.builtin.treesitter.ensure_installed = {
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
+-- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
 if os.getenv("FORMAT_ON_SAVE") == "true" then
     lvim.format_on_save = {
         enabled = true,
@@ -201,22 +202,15 @@ linters.setup({
     -- pip install cmakelang
     { command = "cmake-lint", filetypes = { "cmake" } },
     -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
-    { command = "shellcheck", filetypes = { "proto" }, args = { "--severity", "warning" } },
+    { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
     -- zsh
     { command = "zsh", filetypes = { "zsh" } },
 })
 
--- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
--- if os.getenv("FORMAT_ON_SAVE") == "true" then
---     lvim.format_on_save.enabled = true
--- else
---     lvim.format_on_save.enabled = false
--- end
-
 -- local code_actions = require("lvim.lsp.null-ls.code_actions")
 -- code_actions.setup({
 --     {
---         exe = "eslint",
+--         command = "eslint",
 --         filetypes = { "typescript", "typescriptreact" },
 --     },
 -- })
