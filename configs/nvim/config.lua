@@ -188,14 +188,13 @@ formatters.setup({
     },
 })
 
--- local linters = require("lvim.lsp.null-ls.linters")
--- linters.setup({
---     { command = "black", filetypes = { "python" } },
---     {
---         command = "shellcheck",
---         args = { "--severity", "warning" },
---     },
--- })
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+    {
+        command = "shellcheck",
+        args = { "--severity", "warning" },
+    },
+})
 
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
 -- if os.getenv("FORMAT_ON_SAVE") == "true" then
