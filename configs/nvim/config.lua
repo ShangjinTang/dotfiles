@@ -1132,6 +1132,10 @@ lspconfig.lua_ls.setup({
                 -- Fix keep displaying message "Do you need to configure your work environment as `luv`?" on saving .lua
                 checkThirdParty = false,
             },
+            diagnostics = {
+                -- Suppress warning: "Undefined global `vim`"
+                globals = { "vim" },
+            },
         },
     },
 })
