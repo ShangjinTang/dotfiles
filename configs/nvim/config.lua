@@ -196,12 +196,14 @@ local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
     -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
     { command = "buildifier", filetypes = { "bzl" } },
-    -- npm install @bufbuild/buf
+    -- npm install --global @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-lint", filetypes = { "cmake" } },
     -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
     { command = "shellcheck", filetypes = { "proto" }, args = { "--severity", "warning" } },
+    -- zsh
+    { command = "zsh", filetypes = { "zsh" } },
 })
 
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
