@@ -39,6 +39,10 @@ if command -v npm &> /dev/null; then
         echo "npm: installing @bazel/buildifier ..."
         npm install --global @bazel/buildifier > /dev/null
     fi
+    if ! command -v buf &> /dev/null; then
+        echo "npm: installing @bufbuild/buf ..."
+        npm install --global @bufbuild/buf > /dev/null
+    fi
 fi
 
 # install cargo packages

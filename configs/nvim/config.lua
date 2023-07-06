@@ -148,7 +148,7 @@ formatters.setup({
     -- cargo install stylua
     { command = "stylua", filetypes = { "lua" } },
     -- sudo pacman -Sy clang | sudo apt install -y clang-format
-    { command = "clang_format", filetypes = { "c", "cpp", "cs", "cuda", "proto" } },
+    { command = "clang_format", filetypes = { "c", "cpp", "cuda" } },
     -- npm install --global google-java-format
     { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
     -- sudo pacman -Sy python-black | sudo apt install -y black
@@ -163,6 +163,8 @@ formatters.setup({
     { command = "buildifier", filetypes = { "bzl" } },
     -- cargo install cbfmt
     { command = "cbfmt", filetypes = { "markdown" } },
+    -- npm install --global @bufbuild/buf
+    { command = "buf", filetypes = { "proto" } },
     -- npm install --global prettier
     {
         command = "prettier",
@@ -190,10 +192,10 @@ formatters.setup({
 
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
-    {
-        command = "shellcheck",
-        args = { "--severity", "warning" },
-    },
+    -- npm install @bufbuild/buf
+    { command = "buf", filetypes = { "proto" } },
+    -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
+    { command = "shellcheck", filetypes = { "proto" }, args = { "--severity", "warning" } },
 })
 
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
