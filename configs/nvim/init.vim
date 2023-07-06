@@ -151,62 +151,15 @@ augroup switch_definition_on_filetype
                 \ ['* ', '** ', '*** ', '**** ', '***** ', '****** ' ],
                 \ ]
 augroup end
+" Avoid issues because of us remapping <c-a> and <c-x> below
+nnoremap <Plug>SpeedDatingFallbackUp <c-a>
+nnoremap <Plug>SpeedDatingFallbackDown <c-x>
 
-nnoremap <silent> <Plug>(SwitchInLine) :<C-u>call SwitchLine(v:count1)<cr>
-nnoremap <silent> <Plug>(SwitchInLineReverse) :<C-u>call SwitchLineReverse(v:count1)<cr>
-nmap <C-a> <Plug>(SwitchInLine)
-nmap <C-x> <Plug>(SwitchInLineReverse)
-
-fun! SwitchLine(cnt)
-    let tick = b:changedtick
-    let start = getcurpos()
-    for n in range(a:cnt)
-        Switch
-    endfor
-    if b:changedtick != tick
-        return
-    endif
-    while v:true
-        let pos = getcurpos()
-        normal! w
-        if pos[1] != getcurpos()[1] || pos == getcurpos()
-            break
-        endif
-        for n in range(a:cnt)
-            Switch
-        endfor
-        if b:changedtick != tick
-            return
-        endif
-    endwhile
-    call setpos('.', start)
-endfun
-
-fun! SwitchLineReverse(cnt)
-    let tick = b:changedtick
-    let start = getcurpos()
-    for n in range(a:cnt)
-        SwitchReverse
-    endfor
-    if b:changedtick != tick
-        return
-    endif
-    while v:true
-        let pos = getcurpos()
-        normal! w
-        if pos[1] != getcurpos()[1] || pos == getcurpos()
-            break
-        endif
-        for n in range(a:cnt)
-            SwitchReverse
-        endfor
-        if b:changedtick != tick
-            return
-        endif
-    endwhile
-    call setpos('.', start)
-endfun
+" Manually invoke speeddating in case switch didn't work
+nnoremap <c-a> :if !switch#Switch() <bar>
+      \ call speeddating#increment(v:count1) <bar> endif<cr>
+nnoremap <c-x> :if !switch#Switch({'reverse': 1}) <bar>
+      \ call speeddating#increment(-v:count1) <bar> endif<cr>
 
 " ====================================================================
 " ====================================================================
-
