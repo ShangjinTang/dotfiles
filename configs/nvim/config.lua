@@ -165,6 +165,8 @@ formatters.setup({
     { command = "cbfmt", filetypes = { "markdown" } },
     -- npm install --global @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
+    -- pip install cmakelang
+    { command = "cmake-format", filetypes = { "cmake" } },
     -- npm install --global prettier
     {
         command = "prettier",
@@ -192,8 +194,12 @@ formatters.setup({
 
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
+    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+    { command = "buildifier", filetypes = { "bzl" } },
     -- npm install @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
+    -- pip install cmakelang
+    { command = "cmake-lint", filetypes = { "cmake" } },
     -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
     { command = "shellcheck", filetypes = { "proto" }, args = { "--severity", "warning" } },
 })
@@ -1106,9 +1112,6 @@ lspconfig.clangd.setup({
         "--pch-storage=memory",
         "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
     },
-    on_attach = lsp_on_attach,
-})
-lspconfig.cmake.setup({ -- requires: pip3 install cmake-language-server
     on_attach = lsp_on_attach,
 })
 lspconfig.jdtls.setup({ -- requires: sudo apt install -y openjdk-17-jdk | sudo pacman -Sy jdk17-openjdk
