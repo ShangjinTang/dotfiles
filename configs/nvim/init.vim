@@ -86,24 +86,6 @@ nnoremap <leader>sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
 nnoremap <leader>sa :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
 
 " ----------------------------------------------------------
-" ## Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-r>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-r>=@/<CR><CR>
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-" ----------------------------------------------------------
 " ## Automatically set paste mode when pasting in insert mode
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
@@ -151,6 +133,7 @@ augroup switch_definition_on_filetype
                 \ ['* ', '** ', '*** ', '**** ', '***** ', '****** ' ],
                 \ ]
 augroup end
+
 " Avoid issues because of us remapping <c-a> and <c-x> below
 nnoremap <Plug>SpeedDatingFallbackUp <c-a>
 nnoremap <Plug>SpeedDatingFallbackDown <c-x>
