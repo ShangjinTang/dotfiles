@@ -4,7 +4,10 @@ defaults:
 #---------------------------------------------------------------------
 # neovim (nvim) integration
 pynvim: true
-cmake-language-server: true
+# cmake formatter & linter
+cmakelang: true
+# zsh formatter
+beautysh: true
 
 #---------------------------------------------------------------------
 # CLI intergrations; required by script 'pac' on archlinux
@@ -16,10 +19,6 @@ hydra-core: true # https://github.com/facebookresearch/hydra | simplifies config
 # essential tools
 shell_gpt: true
 tmuxp: true
-
-#---------------------------------------------------------------------
-# zsh formatter
-beautysh: true
 
 #---------------------------------------------------------------------
 # clean
