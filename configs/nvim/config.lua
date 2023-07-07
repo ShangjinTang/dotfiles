@@ -96,6 +96,7 @@ lvim.builtin.treesitter.ensure_installed = {
     "meson",
     "ninja",
     "norg",
+    "proto",
     "regex",
     "rust",
     "toml",
