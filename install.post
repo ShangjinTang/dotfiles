@@ -28,21 +28,13 @@ fi
 
 # install npm packages
 if command -v npm &> /dev/null; then
-    NPM_DEPENDENCIES=('prettier' 'google-java-format' 'shellcheck' 'live-server')
+    NPM_DEPENDENCIES=('prettier' 'google-java-format' 'live-server')
     for PACKAGE in "${NPM_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
             echo "npm: installing ${PACKAGE} ..."
             npm install --global "${PACKAGE}" > /dev/null
         fi
     done
-    if ! command -v buildifier &> /dev/null; then
-        echo "npm: installing @bazel/buildifier ..."
-        npm install --global @bazel/buildifier > /dev/null
-    fi
-    if ! command -v buf &> /dev/null; then
-        echo "npm: installing @bufbuild/buf ..."
-        npm install --global @bufbuild/buf > /dev/null
-    fi
 fi
 
 # install cargo packages

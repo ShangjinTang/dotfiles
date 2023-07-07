@@ -147,7 +147,7 @@ end
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
     { command = "trim_whitespace" },
-    -- cargo install stylua
+    -- [BINARY] | cargo install stylua
     { command = "stylua", filetypes = { "lua" } },
     -- sudo pacman -Sy clang | sudo apt install -y clang-format
     { command = "clang_format", filetypes = { "c", "cpp", "cuda" } },
@@ -161,15 +161,15 @@ formatters.setup({
     { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
     -- rustup component add rustfmt
     { command = "rustfmt", filetypes = { "rust" } },
-    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+    -- [BINARY] | go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
     { command = "buildifier", filetypes = { "bzl" } },
-    -- cargo install cbfmt
+    -- [BINARY] | cargo install cbfmt
     { command = "cbfmt", filetypes = { "markdown" } },
-    -- npm install --global @bufbuild/buf
+    -- [BINARY] | npm install --global @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-format", filetypes = { "cmake" } },
-    -- npm install --global prettier
+    -- [BINARY] | npm install --global prettier
     {
         command = "prettier",
         extra_args = { "--print-width", "120" },
@@ -196,9 +196,9 @@ formatters.setup({
 
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
-    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+    -- [BINARY] | go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
     { command = "buildifier", filetypes = { "bzl" } },
-    -- npm install --global @bufbuild/buf
+    -- [BINARY] | npm install --global @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-lint", filetypes = { "cmake" } },
