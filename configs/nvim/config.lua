@@ -201,7 +201,7 @@ linters.setup({
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-lint", filetypes = { "cmake" } },
-    -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
+    -- [BINARY] | sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
     { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
     -- zsh
     { command = "zsh", filetypes = { "zsh" } },
