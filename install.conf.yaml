@@ -154,4 +154,8 @@
 # Shell
 - shell:
     - ["", ========== shell post-execute ==========]
-    - [chmod 700 ~/.ssh && chmod 0600 ~/.ssh/vps_id_rsa, Ensure permission for id_rsa]
+    
+    - [
+        "find ~/.dotfiles/linux/bin_compressed -type f -name '*.tar.xz' -exec tar -xJvf {} -C ~/bin \\;",
+        Extract compressed binary to ~/bin,
+      ]
