@@ -154,7 +154,7 @@ formatters.setup({
     { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
     -- sudo pacman -Sy python-black | sudo apt install -y black
     { command = "black", filetypes = { "python" } },
-    -- sudo pacman -Sy shfmt | sudo apt install -y shfmt
+    -- [BINARY] | sudo pacman -Sy shfmt | sudo apt install -y shfmt
     { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
     -- pip install beautysh
     { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
