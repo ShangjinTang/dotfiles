@@ -155,7 +155,3 @@
 - shell:
     - ["", ========== shell post-execute ==========]
     
-    - [
-        "find ~/.dotfiles/linux/bin_compressed -type f -name '*.tar.xz' -exec tar -xJvf {} -C ~/bin \\;",
-        Extract compressed binary to ~/bin,
-      ]

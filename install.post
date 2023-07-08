@@ -4,6 +4,19 @@ echo "Executing install.post ..."
 
 ~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode
 
+function extract_bin_compressed() {
+    os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
+    machine=$(uname -m | tr '[:upper:]' '[:lower:]')
+    find ~/.dotfiles/${os_name}/bin_compressed/$machine -type f -name "*.tar.xz" | while read source_tar_xz; do
+        target_decompressed=~/bin/$(basename "${source_tar_xz}" .tar.xz)
+        if [[ ! -f "$target_decompressed" || "$source_tar_xz" -nt "$target_decompressed" ]]; then
+            tar xf "$source_tar_xz" -C ~/bin --touch
+            echo "Extract $source_tar_xz to $target_decompressed"
+        fi
+    done
+}
+extract_bin_compressed
+
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
     if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls ${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins)" ]; then
