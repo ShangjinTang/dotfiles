@@ -1082,8 +1082,52 @@ lvim.plugins = {
 
     -- Reference: https://github.com/ludovicchabant/vim-gutentags
     {
-        "ludovicchabant/vim-gutentags",
+        "dhananjaylatkar/vim-gutentags",
         event = "VeryLazy",
+        dependencies = {
+            "dhananjaylatkar/cscope_maps.nvim",
+            "folke/which-key.nvim",
+            "nvim-telescope/telescope.nvim",
+            -- "ibhagwan/fzf-lua",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("cscope_maps").setup({
+                disable_maps = false,
+                skip_input_prompt = true,
+                cscope = {
+                    db_file = "./cscope.out",
+                    exec = "cscope", -- "cscope" or "gtags-cscope"
+                    picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
+                    skip_picker_for_single_result = false, -- "false" or "true"
+                    db_build_cmd_args = { "-Rbqkv" },
+                    statusline_indicator = nil,
+                },
+            })
+            -- cscope_maps
+            vim.g.gutentags_modules = { "cscope_maps" } -- This is required. Other config is optional
+            vim.g.gutentags_cscope_build_inverted_index_maps = 1
+            vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp"
+            -- gutentags
+            local tags_dir = vim.fn.expand("~/.cache/tags")
+            if vim.fn.isdirectory(tags_dir) == 0 then
+                vim.fn.mkdir(tags_dir, "p")
+            end
+            vim.g.gutentags_cache_dir = tags_dir
+            vim.g.gutentags_project_root = {
+                ".git",
+                ".root",
+                ".project",
+                ".workspace",
+                "WORKSPACE",
+                "Cargo.toml",
+                "compile_commands.json",
+                "cscope.out",
+            }
+            vim.g.gutentags_ctags_tagfile = ".tags"
+            vim.g.gutentags_ctags_extra_args = { "--fields=+niazS", "--extra=+q", "--c++-kinds=+pxI", "--c-kinds=+px" }
+            -- vim.g.gutentags_trace = 1
+        end,
     },
 }
 

@@ -19,14 +19,14 @@ wk.register({
 }, visual_mode)
 
 wk.register({
-    ["<leader>c"] = { name = "+ChatGPT" },
-    ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
-    ["<leader>cc"] = { "<cmd>ChatGPT<cr>", "ChatGPT" },
-    ["<leader>ce"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
+    ["<leader>C"] = { name = "+ChatGPT" },
+    ["<leader>Ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
+    ["<leader>Cc"] = { "<cmd>ChatGPT<cr>", "ChatGPT" },
+    ["<leader>Ce"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
 }, normal_mode)
 wk.register({
-    ["<leader>c"] = { name = "+ChatGPT" },
-    ["<leader>ce"] = { require("chatgpt").edit_with_instructions, "Edit with Instructions" },
+    ["<leader>C"] = { name = "+ChatGPT" },
+    ["<leader>Ce"] = { require("chatgpt").edit_with_instructions, "Edit with Instructions" },
 }, visual_mode)
 
 wk.register({
