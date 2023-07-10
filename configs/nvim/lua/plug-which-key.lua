@@ -127,6 +127,7 @@ wk.register({
     ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
 
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
+    ["<leader>lt"] = { "<cmd>ToggleDiag<cr>", "Toggle Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
     ["<leader>n"] = { name = "+Norg" },
