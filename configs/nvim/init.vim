@@ -101,7 +101,6 @@ augroup end
 augroup misc
     autocmd!
     autocmd BufReadPost fugitive://* set bufhidden=delete
-    autocmd BufWritePre *.norg if &filetype == 'norg' | silent! call mkdir(expand('%:p:h'), 'p') | endif
 augroup end
 
 " ----------------------------------------------------------
@@ -115,10 +114,6 @@ augroup switch_definition_on_filetype
     autocmd FileType markdown let b:switch_custom_definitions = [
                 \ ['[ ]', '[x]'],
                 \ ['# ', '## ', '### ', '#### ', '##### ', '###### ' ],
-                \ ]
-    autocmd FileType norg let b:switch_custom_definitions = [
-                \ ['( )', '(-)', '(x)', '(=)', '(!)'],
-                \ ['* ', '** ', '*** ', '**** ', '***** ', '****** ' ],
                 \ ]
 augroup end
 

@@ -62,7 +62,6 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - customized key-bindings and seperated from original key-bindings
   - auto format on file save
   - toggleterm with `Ctrl-\`, `Alt-1`, `Alt-2`, `Alt-3`
-  - norg (structured note taking tool) support
 - tmux (>=3.3a)
   - customized theme and bar
   - gitmux support

@@ -95,7 +95,6 @@ lvim.builtin.treesitter.ensure_installed = {
     "markdown_inline",
     "meson",
     "ninja",
-    "norg",
     "proto",
     "regex",
     "rust",
@@ -548,7 +547,7 @@ lvim.plugins = {
     -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
     {
         "AckslD/nvim-FeMaco.lua",
-        ft = { "markdown", "norg" },
+        ft = { "markdown" },
         event = "VeryLazy",
         config = function()
             require("femaco").setup({
@@ -669,61 +668,6 @@ lvim.plugins = {
                 },
             })
         end,
-    },
-
-    -- Reference: https://github.com/nvim-neorg/neorg
-    {
-        "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        config = function()
-            vim.cmd([[ set conceallevel=2 ]])
-            require("neorg").setup({
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.completion"] = {
-                        config = {
-                            engine = "nvim-cmp",
-                        },
-                    },
-                    ["core.concealer"] = {},
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                note = "~/note/norg",
-                            },
-                            default_workspace = "note",
-                            use_popup = false,
-                        },
-                    },
-                    ["core.export"] = {},
-                    ["core.qol.todo_items"] = {
-                        config = {
-                            order = {
-                                { "undone", " " },
-                                { "pending", "-" },
-                                { "done", "x" },
-                                { "on_hold", "=" },
-                                { "important", "!" },
-                            },
-                        },
-                    },
-                    -- 'calendar' requires: nvim >= 10.0
-                    -- ["core.ui.calendar"] = {},
-                },
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/nvim-neorg/neorg-telescope
-    {
-        "nvim-neorg/neorg-telescope",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-neorg/neorg",
-        },
     },
 
     -- Reference: https://github.com/SmiteshP/nvim-navic

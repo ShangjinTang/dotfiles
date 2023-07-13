@@ -8,7 +8,7 @@ index 17473c55..786a72a3 100644
      -- detection_methods
 -    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
 +    -- patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
-+    patterns = { ".git", ".root", ".project", ".workspace", "WORKSPACE", "Cargo.toml", "compile_commands.json", 'cscope.out', "index.norg" },
++    patterns = { ".git", ".root", ".project", ".workspace", "WORKSPACE", "Cargo.toml", "compile_commands.json", 'cscope.out' },
 
      -- Table of lsp clients to ignore by name
      -- eg: { "efm", ... }

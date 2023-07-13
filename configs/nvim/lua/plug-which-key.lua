@@ -130,14 +130,6 @@ wk.register({
     ["<leader>lt"] = { "<cmd>ToggleDiag<cr>", "Toggle Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
-    ["<leader>n"] = { name = "+Norg" },
-    ["<leader>nn"] = { "<cmd>Telescope neorg find_linkable<cr>", "Find Linkable" },
-    ["<leader>ne"] = { "<cmd>Neorg keybind all core.dirman.new.note<cr>", "Edit New Note" },
-    ["<leader>nj"] = { "<cmd>Neorg journal today<cr>", "Journal - Today" },
-    ["<leader>nJ"] = { "<cmd>Neorg journal template<cr>", "Journal - Template" },
-    ["<leader>no"] = { "<cmd>Neorg index<cr>", "Open Index" },
-    ["<leader>nq"] = { "<cmd>Neorg return<cr>", "Quit Neorg" },
-
     ["<leader>o"] = { name = "+Open file with" },
     ["<leader>oc"] = { "<cmd>call ExecuteBufferSilentlyWith('code')<cr>", "Open with VsCode" },
     ["<leader>ow"] = { "<cmd>call ExecuteBufferSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
@@ -178,26 +170,8 @@ function set_key_bindings()
     local ftype = vim.api.nvim_buf_get_option(0, "filetype")
     local fname = vim.fn.expand("%:t")
 
-    -- norg / markdown
-    if ftype == "norg" then
-        wk.register({
-            ["<leader>nc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
-            ["<Up>"] = {
-                "<cmd>Neorg keybind all core.integrations.treesitter.previous.heading<cr>",
-                "Previous Heading",
-            },
-            ["<Down>"] = { "<cmd>Neorg keybind all core.integrations.treesitter.next.heading<cr>", "Next Heading" },
-            ["<leader>nh"] = { "<cmd>Neorg inject-metadata<cr>", "Inject Metadata" },
-            ["<leader>nH"] = { "<cmd>Neorg update-metadata<cr>", "Update Metadata" },
-            ["<leader>nm"] = {
-                "<cmd>execute 'Neorg export to-file ' .. expand('%:p:r') .. '.md' | sleep 100m | execute 'e ' .. expand('%:p:r') .. '.md'<cr>",
-                "Export to Markdown",
-            },
-            ["<leader>ni"] = { "<cmd>Telescope neorg insert_file_link<cr>", "Insert File Link" },
-            ["<leader>nI"] = { "<cmd>Telescope neorg insert_link<cr>", "Insert Link" },
-            ["<leader>n/"] = { "<cmd>Telescope neorg search_headings<cr>", "Search Headings" },
-        }, normal_mode)
-    elseif ftype == "markdown" then
+    -- markdown
+    if ftype == "markdown" then
         wk.register({
             ["<leader>m"] = { name = "+Markdown" },
             ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
