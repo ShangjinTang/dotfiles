@@ -4,6 +4,7 @@ lua << EOF
     require("vim-init")
     require("plug-dap-cpp")
     require("plug-which-key")
+    require("autocmd")
 EOF
 
 noremap <Space> <Nop>
@@ -118,13 +119,13 @@ augroup switch_definition_on_filetype
 augroup end
 
 " Avoid issues because of us remapping <c-a> and <c-x> below
-nnoremap <Plug>SpeedDatingFallbackUp <c-a>
-nnoremap <Plug>SpeedDatingFallbackDown <c-x>
+nnoremap <silent> <Plug>SpeedDatingFallbackUp <c-a>
+nnoremap <silent> <Plug>SpeedDatingFallbackDown <c-x>
 
 " Manually invoke speeddating in case switch didn't work
-nnoremap <c-a> :if !switch#Switch() <bar>
+nnoremap <silent> <c-a> :if !switch#Switch() <bar>
       \ call speeddating#increment(v:count1) <bar> endif<cr>
-nnoremap <c-x> :if !switch#Switch({'reverse': 1}) <bar>
+nnoremap <silent> <c-x> :if !switch#Switch({'reverse': 1}) <bar>
       \ call speeddating#increment(-v:count1) <bar> endif<cr>
 
 " ====================================================================
