@@ -173,10 +173,33 @@ function set_key_bindings()
     -- markdown
     if ftype == "markdown" then
         wk.register({
+            ["<CR>"] = { "<cmd>MkdnEnter<cr>", "Follow or Insert Link / Header Collapse" },
+            ["<BS>"] = { "<cmd>MkdnGoBack<cr>", "Go Back" },
+            ["<S-Tab>"] = { "<cmd>MkdnPrevLink<cr>", "Previous Link" },
+            ["<Tab>"] = { "<cmd>MkdnNextLink<cr>", "Next Link" },
+            ["[["] = { "<cmd>MkdnPrevHeading<cr>", "Previous Heading" },
+            ["]]"] = { "<cmd>MkdnNextHeading<cr>", "Next Heading" },
+            ["o"] = { "<cmd>MkdnNewListItemBelowInsert<cr>", "Insert Below (list-supported)" },
+            ["O"] = { "<cmd>MkdnNewListItemAboveInsert<cr>", "Insert Above (list-supported)" },
+            ["H"] = { "<cmd>MkdnTablePrevCell<cr>", "Table - Previous Cell" },
+            ["L"] = { "<cmd>MkdnTableNextCell<cr>", "Table - Next Cell" },
             ["<leader>m"] = { name = "+Markdown" },
             ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
-            ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
+            ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle Preview" },
+            ["<leader>mx"] = { "<cmd>MkdnToggleToDo<cr>", "Toggle Todo" },
+            ["<leader>ml"] = { "<cmd>MkdnCreateLink<cr>", "Insert Link" },
+            ["<leader>mL"] = { "<cmd>MkdnCreateLinkFromClipboard<cr>", "Insert Link from Clipboard" },
+            ["<leader>mt"] = { name = "+Table" },
+            ["<leader>mtt"] = { "<cmd>MkdnTable 3 2<cr>", "Insert Table" },
+            ["<leader>mtR"] = { "<cmd>MkdnTableNewRowAbove<cr>", "Insert Row Above" },
+            ["<leader>mtr"] = { "<cmd>MkdnTableNewRowBelow<cr>", "Insert Row Below" },
+            ["<leader>mtC"] = { "<cmd>MkdnTableNewColBefore<cr>", "Insert Col Left" },
+            ["<leader>mtc"] = { "<cmd>MkdnTableNewColAfter<cr>", "Insert Col Right" },
+            ["<leader>mr"] = { "<cmd>MkdnMoveSource<cr>", "Rename Source in Link" },
         }, normal_mode)
+        wk.register({
+            ["<CR>"] = { "<cmd>MkdnEnter<cr>", "Follow or Insert Link / Header Collapse" },
+        }, visual_mode)
     end
 
     -- program: c / cpp / python / sh / zsh

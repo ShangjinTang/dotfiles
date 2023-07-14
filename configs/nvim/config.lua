@@ -171,6 +171,7 @@ formatters.setup({
     -- [BINARY] | npm install --global prettier
     {
         command = "prettier",
+        -- extra_args = { "--print-width", "120", "tabWidth", "4" },
         extra_args = { "--print-width", "120" },
         filetypes = {
             "javascript",
@@ -543,64 +544,27 @@ lvim.plugins = {
                     cursor = true,
                     folds = true,
                     links = true,
-                    maps = true,
+                    maps = false,
                     lists = true,
                     paths = true,
                     tables = true,
                     yaml = false,
                 },
-                mappings = {
-                    MkdnEnter = { { "n", "v" }, "<CR>" },
-                    MkdnTab = false,
-                    MkdnSTab = false,
-                    MkdnNextLink = { "n", "<Tab>" },
-                    MkdnPrevLink = { "n", "<S-Tab>" },
-                    MkdnNextHeading = { "n", "]]" },
-                    MkdnPrevHeading = { "n", "[[" },
-                    MkdnGoBack = { "n", "<BS>" },
-                    MkdnGoForward = { "n", "<Del>" },
-                    MkdnCreateLink = false, -- see MkdnEnter
-                    MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>p" }, -- see MkdnEnter
-                    MkdnFollowLink = false, -- see MkdnEnter
-                    MkdnDestroyLink = { "n", "<M-CR>" },
-                    MkdnTagSpan = { "v", "<M-CR>" },
-                    MkdnMoveSource = { "n", "<F2>" },
-                    MkdnYankAnchorLink = { "n", "yaa" },
-                    MkdnYankFileAnchorLink = { "n", "yfa" },
-                    MkdnIncreaseHeading = { "n", "+" },
-                    MkdnDecreaseHeading = { "n", "-" },
-                    MkdnToggleToDo = { { "n", "v" }, "<C-Space>" },
-                    MkdnNewListItem = false,
-                    MkdnNewListItemBelowInsert = { "n", "o" },
-                    MkdnNewListItemAboveInsert = { "n", "O" },
-                    MkdnExtendList = false,
-                    MkdnUpdateNumbering = { "n", "<leader>nn" },
-                    MkdnTableNextCell = { "i", "<Tab>" },
-                    MkdnTablePrevCell = { "i", "<S-Tab>" },
-                    MkdnTableNextRow = false,
-                    MkdnTablePrevRow = { "i", "<M-CR>" },
-                    MkdnTableNewRowBelow = { "n", "<leader>ir" },
-                    MkdnTableNewRowAbove = { "n", "<leader>iR" },
-                    MkdnTableNewColAfter = { "n", "<leader>ic" },
-                    MkdnTableNewColBefore = { "n", "<leader>iC" },
-                    MkdnFoldSection = { "n", "<leader>f" },
-                    MkdnUnfoldSection = { "n", "<leader>F" },
+                links = {
+                    transform_explicit = function(text)
+                        text = text:gsub(" ", "-")
+                        text = text:lower()
+                        -- text = os.date("%Y-%m-%d_") .. text
+                        return text
+                    end,
                 },
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/dhruvasagar/vim-table-mode
-    {
-        "dhruvasagar/vim-table-mode",
-        ft = "markdown",
-        event = "VeryLazy",
-        config = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "markdown",
-                callback = function()
-                    vim.cmd([[ call tablemode#Enable() ]])
-                end,
+                to_do = {
+                    symbols = { " ", "-", "x" },
+                    update_parents = true,
+                    not_started = " ",
+                    in_progress = "-",
+                    complete = "x",
+                },
             })
         end,
     },
@@ -1203,68 +1167,3 @@ lspconfig.marksman.setup({
 
 -- specify the python3 we use as nvim python
 vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
-
--- let treesitter use bash highlight for zsh files as well
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "zsh",
-    callback = function()
-        require("nvim-treesitter.highlight").attach(0, "bash")
-    end,
-})
-
--- set filetype ini for .tasks (by asynctasks.vim)
-vim.api.nvim_create_autocmd({
-    "BufNewFile",
-    "BufRead",
-}, {
-    pattern = ".tasks",
-    callback = function()
-        vim.cmd([[ set filetype=ini ]])
-    end,
-})
-
-vim.api.nvim_create_autocmd({
-    "BufNewFile",
-    "BufRead",
-}, {
-    pattern = ".tmux.conf*",
-    callback = function()
-        vim.cmd([[ set filetype=tmux ]])
-    end,
-})
-
-vim.api.nvim_create_autocmd({
-    "BufNewFile",
-    "BufRead",
-}, {
-    pattern = ".gitmux.conf*",
-    callback = function()
-        vim.cmd([[ set filetype=yaml ]])
-    end,
-})
-
---------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd({
-    "InsertEnter",
-}, {
-    callback = function()
-        vim.cmd([[ set nonumber ]])
-        vim.cmd([[ set norelativenumber ]])
-    end,
-})
-
-vim.api.nvim_create_autocmd({
-    "InsertLeave",
-}, {
-    callback = function()
-        vim.cmd([[ set number ]])
-        vim.cmd([[ set relativenumber ]])
-    end,
-})
-
---------------------------------------------------------------------------------
