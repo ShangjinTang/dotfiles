@@ -217,27 +217,14 @@ linters.setup({
 -- })
 
 -- Telescope window width & height
-lvim.builtin.telescope.pickers = {
-    find_files = {
+lvim.builtin.telescope = {
+    defaults = {
         layout_config = {
-            width = { 0.8, max = 120 },
+            width = { 0.8, max = 180 },
         },
+        layout_strategy = "vertical",
     },
-    git_files = {
-        layout_config = {
-            width = { 0.8, max = 120 },
-        },
-    },
-    grep_string = {
-        layout_config = {
-            width = { 0.8, max = 120 },
-        },
-    },
-    live_grep = {
-        layout_config = {
-            width = { 0.8, max = 120 },
-        },
-    },
+    pickers = {},
 }
 
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
