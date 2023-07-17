@@ -170,7 +170,6 @@ wk.register({
     ["<leader>zc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
     ["<leader>zb"] = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
     ["<leader>zi"] = { "<cmd>Telekasten insert_img_link<cr>", "Insert img link" },
-
 }, normal_mode)
 
 --------------------------------------------------------------------------------
@@ -252,6 +251,13 @@ function set_key_bindings()
         wk.register({
             ["<leader>ab"] = { "<cmd>call ExecuteInRootWith('cargo build')<cr>", "Project Build [Cargo]" },
             ["<leader>ar"] = { "<cmd>call ExecuteInRootWith('cargo run')<cr>", "Project Run [Cargo]" },
+        }, normal_mode)
+    end
+
+    -- for telekasten calendar; do not use default 'BufferKill' would open next buffer
+    if ftype == "calendar" then
+        wk.register({
+            ["<leader>w"] = { "<cmd>q<cr>", "Close Current Buffer" },
         }, normal_mode)
     end
 end
