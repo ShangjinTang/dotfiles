@@ -44,6 +44,7 @@ lvim.builtin.lualine = {
         lualine_b = {
             lualine_components.treesitter,
             { "filename", path = 1 },
+            { "filetype", icon_only = true },
         },
         lualine_c = {
             lualine_components.branch,
@@ -54,12 +55,12 @@ lvim.builtin.lualine = {
             lualine_components.lsp,
         },
         lualine_y = {
-            lualine_components.filetype,
+            function()
+                return lvim.icons.ui.Project .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            end,
         },
         lualine_z = {
             "progress",
-            -- lualine_components.progress,
-            -- lualine_components.location,
         },
     },
 }
