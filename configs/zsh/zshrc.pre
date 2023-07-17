@@ -289,6 +289,7 @@ if command -v nvim &> /dev/null; then
             nvim ~/temp/demo.$1
         fi
     }
+    alias vm="nvim ~/note/index.md"
 else
     alias v='vim'
     alias vv='vim ~/.vimrc'
