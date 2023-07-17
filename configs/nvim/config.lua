@@ -1135,7 +1135,7 @@ lspconfig.lua_ls.setup({
             },
             diagnostics = {
                 -- Suppress warning: "Undefined global `vim`"
-                globals = { "vim" },
+                globals = { "vim", "lvim" },
             },
         },
     },
