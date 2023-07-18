@@ -253,6 +253,74 @@ function set_key_bindings()
         }, normal_mode)
     end
 
+    -- cscope_maps.nvim
+    if ftype == "c" or ftype == "cpp" or ftype == "java" then
+        wk.register({
+            ["<leader>c"] = { name = "Cscope" },
+            ["<leader>cs"] = {
+                function()
+                    vim.api.nvim_command("Cscope find s " .. vim.fn.expand("<cword>"))
+                end,
+                "Find this symbol",
+            },
+            ["<leader>cg"] = {
+                function()
+                    vim.api.nvim_command("Cscope find g " .. vim.fn.expand("<cword>"))
+                end,
+                "Find this global definition",
+            },
+            ["<leader>cd"] = {
+                function()
+                    vim.api.nvim_command("Cscope find d " .. vim.fn.expand("<cword>"))
+                end,
+                "Find functions called by this function",
+            },
+            ["<leader>cc"] = {
+                function()
+                    vim.api.nvim_command("Cscope find c " .. vim.fn.expand("<cword>"))
+                end,
+                "Find functions calling this function",
+            },
+            ["<leader>ct"] = {
+                function()
+                    vim.api.nvim_command("Cscope find t " .. vim.fn.expand("<cword>"))
+                end,
+                "Find this text string",
+            },
+            ["<leader>ce"] = {
+                function()
+                    vim.api.nvim_command("Cscope find e " .. vim.fn.expand("<cword>"))
+                end,
+                "Find this egrep pattern",
+            },
+            ["<leader>cf"] = {
+                function()
+                    vim.api.nvim_command("Cscope find f " .. vim.fn.expand("<cword>"))
+                end,
+                "Find this file",
+            },
+            ["<leader>ci"] = {
+                function()
+                    vim.api.nvim_command("Cscope find i " .. vim.fn.expand("<cword>"))
+                end,
+                "Find files #including this file",
+            },
+            ["<leader>ca"] = {
+                function()
+                    vim.api.nvim_command("Cscope find a " .. vim.fn.expand("<cword>"))
+                end,
+                "Find assignments to this symbol",
+            },
+            ["<leader>cb"] = { "<cmd>Cscope build<cr>", "build cscope database" },
+            -- ["Ctrl-]"] = {
+            --     function()
+            --         vim.api.nvim_command("Cstag" .. vim.fn.expand("<cword>"))
+            --     end,
+            --     "Cstag find this symbol",
+            -- },
+        })
+    end
+
     -- for telekasten calendar; do not use default 'BufferKill' would open next buffer
     if ftype == "calendar" then
         wk.register({

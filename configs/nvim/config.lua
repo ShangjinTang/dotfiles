@@ -1065,7 +1065,7 @@ lvim.plugins = {
         },
         config = function()
             require("cscope_maps").setup({
-                disable_maps = false,
+                disable_maps = true,
                 skip_input_prompt = true,
                 cscope = {
                     db_file = "./cscope.out",
