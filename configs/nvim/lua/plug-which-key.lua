@@ -160,16 +160,13 @@ wk.register({
     ["<leader>sa"] = { name = "Substitute word (from first line)" },
     ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
 
-    ["<leader>z"] = { name = "Telekasten" },
-    ["<leader>zz"] = { "<cmd>Telekasten panel<cr>", "Panel" },
-    ["<leader>zf"] = { "<cmd>Telekasten find_notes<cr>", "Find notes" },
-    ["<leader>zs"] = { "<cmd>Telekasten search_notes<cr>", "Search notes" },
-    ["<leader>zt"] = { "<cmd>Telekasten goto_today<cr>", "Goto today" },
-    ["<leader>zl"] = { "<cmd>Telekasten follow_link<cr>", "Follow link" },
-    ["<leader>zn"] = { "<cmd>Telekasten new_note<cr>", "New note" },
-    ["<leader>zc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
-    ["<leader>zb"] = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
-    ["<leader>zi"] = { "<cmd>Telekasten insert_img_link<cr>", "Insert img link" },
+    ["<leader>m"] = { name = "Markdown (Telekasten)" },
+    ["<leader>mf"] = { "<cmd>Telekasten find_notes<cr>", "Find Notes" },
+    ["<leader>mg"] = { "<cmd>Telekasten search_notes<cr>", "Live Grep in Notes" },
+    ["<leader>mt"] = { "<cmd>Telekasten goto_today<cr>", "Goto Today" },
+    ["<leader>mw"] = { "<cmd>Telekasten goto_thisweek<cr>", "Goto This Week" },
+    ["<leader>mn"] = { "<cmd>Telekasten new_note<cr>", "New Note" },
+    ["<leader>mc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
 }, normal_mode)
 
 --------------------------------------------------------------------------------
@@ -194,19 +191,21 @@ function set_key_bindings()
             ["O"] = { "<cmd>MkdnNewListItemAboveInsert<cr>", "Insert Above (list-supported)" },
             ["H"] = { "<cmd>MkdnTablePrevCell<cr>", "Table - Previous Cell" },
             ["L"] = { "<cmd>MkdnTableNextCell<cr>", "Table - Next Cell" },
-            ["<leader>m"] = { name = "+Markdown" },
-            ["<leader>mc"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
+            ["<leader>m"] = { name = "Markdown & Telekasten" },
+            ["<leader>mm"] = { "<cmd>Telekasten panel<cr>", "Telekasten Panel" },
+            ["<leader>ms"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
             ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle Preview" },
             ["<leader>mx"] = { "<cmd>MkdnToggleToDo<cr>", "Toggle Todo" },
-            ["<leader>ml"] = { "<cmd>MkdnCreateLink<cr>", "Insert Link" },
-            ["<leader>mL"] = { "<cmd>MkdnCreateLinkFromClipboard<cr>", "Insert Link from Clipboard" },
-            ["<leader>mt"] = { name = "+Table" },
-            ["<leader>mtt"] = { "<cmd>MkdnTable 3 2<cr>", "Insert Table" },
-            ["<leader>mtR"] = { "<cmd>MkdnTableNewRowAbove<cr>", "Insert Row Above" },
-            ["<leader>mtr"] = { "<cmd>MkdnTableNewRowBelow<cr>", "Insert Row Below" },
-            ["<leader>mtC"] = { "<cmd>MkdnTableNewColBefore<cr>", "Insert Col Left" },
-            ["<leader>mtc"] = { "<cmd>MkdnTableNewColAfter<cr>", "Insert Col Right" },
             ["<leader>mr"] = { "<cmd>MkdnMoveSource<cr>", "Rename Source in Link" },
+            ["<leader>mb"] = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
+            ["<leader>mi"] = { name = "+Insert" },
+            ["<leader>mit"] = { "<cmd>MkdnTable 3 2<cr>", "Insert Table" },
+            ["<leader>miR"] = { "<cmd>MkdnTableNewRowAbove<cr>", "Insert Row Above" },
+            ["<leader>mir"] = { "<cmd>MkdnTableNewRowBelow<cr>", "Insert Row Below" },
+            ["<leader>miC"] = { "<cmd>MkdnTableNewColBefore<cr>", "Insert Col Left" },
+            ["<leader>mic"] = { "<cmd>MkdnTableNewColAfter<cr>", "Insert Col Right" },
+            ["<leader>mil"] = { "<cmd>Telekasten insert_link<cr>", "Insert link" },
+            ["<leader>mii"] = { "<cmd>Telekasten insert_img_link<cr>", "Insert img link" },
         }, normal_mode)
         wk.register({
             ["<CR>"] = { "<cmd>MkdnEnter<cr>", "Follow or Insert Link / Header Collapse" },
@@ -214,30 +213,30 @@ function set_key_bindings()
     end
 
     -- program: c / cpp / python / sh / zsh
-    -- ac: AsyncRun Code
+    -- as: AsyncRun Code: Snippet / Single File
     if ftype == "c" then
         wk.register({
-            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "cpp" then
         wk.register({
-            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "java" then
         wk.register({
-            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('java')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('java')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "python" then
         wk.register({
-            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('python')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "sh" or ftype == "bash" then
         wk.register({
-            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('bash')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('bash')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "zsh" then
         wk.register({
-            ["<leader>ac"] = { "<cmd>call ExecuteBufferWith('zsh')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('zsh')<cr>", "Run (buffer)" },
         }, normal_mode)
     end
 
@@ -257,7 +256,7 @@ function set_key_bindings()
     -- for telekasten calendar; do not use default 'BufferKill' would open next buffer
     if ftype == "calendar" then
         wk.register({
-            ["<leader>w"] = { "<cmd>q<cr>", "Close Current Buffer" },
+            ["<leader>w"] = { "<cmd>bd<cr>", "Close Current Buffer" },
         }, normal_mode)
     end
 end
