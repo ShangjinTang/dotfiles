@@ -167,6 +167,11 @@ wk.register({
     ["<leader>mw"] = { "<cmd>Telekasten goto_thisweek<cr>", "Goto This Week" },
     ["<leader>mn"] = { "<cmd>Telekasten new_note<cr>", "New Note" },
     ["<leader>mc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
+
+    ["zR"] = { require("ufo").openAllFolds, "Open All Folds" },
+    ["zM"] = { require("ufo").closeAllFolds, "Close All Folds" },
+    ["zr"] = { require("ufo").openFoldsExceptKinds, "Open Folds except Kinds" },
+    ["zm"] = { require("ufo").closeFoldsWith, "Close Folds With <num> (e.g. 1zm)" },
 }, normal_mode)
 
 --------------------------------------------------------------------------------
