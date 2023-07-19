@@ -27,13 +27,16 @@ function! AsyncRunWith(commands)
     execute 'AsyncRun -mode=term -pos=toggleterm -focus=0 ' . a:commands
 endfunction
 
+function! AsyncRunSilentlyWith(commands)
+    execute 'AsyncRun -mode=term -pos=hide -close ' . a:commands
+endfunction
+
 function! ExecuteBufferWith(commands)
     call AsyncRunWith('-cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)')
 endfunction
 
 function! ExecuteBufferSilentlyWith(commands)
-    " 'silent': to prevent prompt 'Press ENTER or type command to continue'
-    call ExecuteBufferWith('-silent ' . a:commands)
+    call AsyncRunSilentlyWith('-cwd=$(VIM_FILEDIR) ' . a:commands . ' $(VIM_FILENAME)')
 endfunction
 
 function! ExecuteInBufferDirWith(commands)
