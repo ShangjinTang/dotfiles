@@ -62,12 +62,27 @@ wk.register({
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
-    ["<leader>E"] = { "<cmd>SymbolsOutline<cr>", "Symbols Explorer" },
+    ["<leader>E"] = { "<cmd>lua require('lir.float').toggle()<cr>", "Float Explorer" },
 
     ["<leader>f"] = { name = "+File" },
-    ["<leader>ff"] = { "<cmd>Telescope find_files previewer=false<cr>", "Find File" },
-    ["<leader>fw"] = { "<cmd>Telescope grep_string<cr>", "File Grep Current Word" },
-    ["<leader>fg"] = { "<cmd>Telescope live_grep<cr>", "File Live Grep" },
+    ["<leader>ff"] = {
+        function()
+            require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:h") })
+        end,
+        "Find File",
+    },
+    ["<leader>fw"] = {
+        function()
+            require("telescope.builtin").grep_string({ cwd = vim.fn.expand("%:h") })
+        end,
+        "Grep Current Word",
+    },
+    ["<leader>fg"] = {
+        function()
+            require("telescope.builtin").live_grep({ cwd = vim.fn.expand("%:h") })
+        end,
+        "Live Grep",
+    },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
     ["<leader>ft"] = { "<cmd>Filetypes<cr>", "Set File Type" },
@@ -159,6 +174,8 @@ wk.register({
     ["<leader>sw"] = { name = "Substitute word (from current selection)" },
     ["<leader>sa"] = { name = "Substitute word (from first line)" },
     ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
+
+    ["<leader>S"] = { "<cmd>SymbolsOutline<cr>", "Symbols Explorer" },
 
     ["<leader>m"] = { name = "Markdown (Telekasten)" },
     ["<leader>mf"] = { "<cmd>Telekasten find_notes<cr>", "Find Notes" },
