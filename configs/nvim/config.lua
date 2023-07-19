@@ -222,6 +222,11 @@ lvim.builtin.telescope = {
     },
     pickers = {},
 }
+lvim.lsp.buffer_mappings = {
+    normal_mode = {},
+    insert_mode = {},
+    visual_mode = {},
+}
 
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
