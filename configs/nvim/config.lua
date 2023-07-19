@@ -1063,6 +1063,23 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 
+    -- Reference: https://github.com/kevinhwang91/nvim-ufo
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = {
+            "kevinhwang91/promise-async",
+        },
+        event = "VeryLazy",
+        config = function()
+            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+            vim.o.foldcolumn = "1"
+            vim.o.foldenable = true
+            vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevelstart = 99
+            require("ufo").setup({})
+        end,
+    },
+
     -- Reference: https://github.com/folke/zen-mode.nvim
     {
         "folke/zen-mode.nvim",
