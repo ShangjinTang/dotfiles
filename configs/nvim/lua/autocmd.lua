@@ -74,4 +74,12 @@ vim.api.nvim_create_autocmd({
     end,
 })
 
+vim.api.nvim_create_autocmd({
+    "BufWrite",
+}, {
+    pattern = "test_*.py",
+    callback = function()
+        require("neotest").run.run(vim.fn.expand("%"))
+    end,
+})
 --------------------------------------------------------------------------------
