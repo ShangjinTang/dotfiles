@@ -716,6 +716,24 @@ lvim.plugins = {
             require("mason-nvim-dap").setup({
                 -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
                 ensure_installed = { "python", "cppdbg" },
+                handlers = {
+                    function(config)
+                        -- Keep original functionality
+                        require("mason-nvim-dap").default_setup(config)
+                    end,
+                    -- requires: python3 -m pip install debugpy
+                    python = function(config)
+                        config.adapters = {
+                            type = "executable",
+                            command = vim.fn["exepath"]("python3"),
+                            args = {
+                                "-m",
+                                "debugpy.adapter",
+                            },
+                        }
+                        require("mason-nvim-dap").default_setup(config) -- don't forget this!
+                    end,
+                },
             })
         end,
     },
