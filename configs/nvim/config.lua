@@ -110,11 +110,6 @@ lvim.builtin.treesitter.ensure_installed = {
 -- --- disable automatic installation of servers
 -- lvim.lsp.installer.setup.automatic_installation = false
 
--- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
--- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
 -- LSP: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 -- Core Programming Lanugages
 
@@ -669,14 +664,13 @@ lvim.plugins = {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
-                    "cmake",
                     "jdtls",
                     "pyright",
                     "bashls",
-                    "html",
                     "rust_analyzer",
                     "lua_ls",
                     "vimls",
+                    "html",
                     "marksman",
                 },
             })
@@ -692,7 +686,7 @@ lvim.plugins = {
         },
     },
 
-    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
+    -- Reference: https://github.com/simrat39/rust-tools.nvim
     {
         "simrat39/rust-tools.nvim",
         event = "VeryLazy",
@@ -890,6 +884,15 @@ lvim.plugins = {
             require("telekasten").setup({
                 home = vim.fn.expand("~/note/"),
             })
+        end,
+    },
+
+    -- Reference: https://github.com/folke/neodev.nvim
+    {
+        "folke/neodev.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("neodev").setup({})
         end,
     },
 
@@ -1127,8 +1130,22 @@ local lsp_on_attach = function(client, bufnr)
         navic.attach(client, bufnr)
     end
 end
-local lspconfig = require("lspconfig")
-lspconfig.clangd.setup({
+
+-- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
+-- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+    "clangd",
+    "jdtls",
+    "pyright",
+    "bashls",
+    "rust_analyzer",
+    "lua_ls",
+    "vimls",
+    "html",
+    "marksman",
+})
+local lspmanager = require("lvim.lsp.manager")
+lspmanager.setup("clangd", {
     cmd = {
         "clangd",
         "--background-index",
@@ -1145,44 +1162,39 @@ lspconfig.clangd.setup({
     },
     on_attach = lsp_on_attach,
 })
-lspconfig.jdtls.setup({ -- requires: sudo apt install -y openjdk-17-jdk | sudo pacman -Sy jdk17-openjdk
+lspmanager.setup("jdtls", { -- requires: sudo apt install -y openjdk-17-jdk | sudo pacman -Sy jdk17-openjdk
     on_attach = lsp_on_attach,
     cmd = { "jdtls" },
 })
-lspconfig.pyright.setup({
+lspmanager.setup("pyright", {
     on_attach = lsp_on_attach,
 })
-lspconfig.bashls.setup({
+lspmanager.setup("bashls", {
     on_attach = lsp_on_attach,
 })
-lspconfig.rust_analyzer.setup({
+lspmanager.setup("rust_analyzer", {
     on_attach = lsp_on_attach,
 })
 -- NVIM / VIM
-lspconfig.lua_ls.setup({
+lspmanager.setup("lua_ls", {
     on_attach = lsp_on_attach,
     settings = {
         Lua = {
-            workspace = {
-                -- Fix keep displaying message "Do you need to configure your work environment as `luv`?" on saving .lua
-                checkThirdParty = false,
-            },
-            diagnostics = {
-                -- Suppress warning: "Undefined global `vim`"
-                globals = { "vim", "lvim" },
+            completion = {
+                callSnippet = "Replace",
             },
         },
     },
 })
-lspconfig.vimls.setup({
+lspmanager.setup("vimls", {
     on_attach = lsp_on_attach,
 })
 -- HTML / CSS / JavaScript
-lspconfig.html.setup({
+lspmanager.setup("html", {
     on_attach = lsp_on_attach,
 })
 -- Markup Languages
-lspconfig.marksman.setup({
+lspmanager.setup("marksman", {
     on_attach = lsp_on_attach,
 })
 
