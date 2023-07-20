@@ -426,38 +426,6 @@ lvim.plugins = {
         },
     },
 
-    -- Reference: https://github.com/rmagatti/auto-session
-    {
-        "rmagatti/auto-session",
-        config = function()
-            require("auto-session").setup({
-                log_level = "error",
-                auto_session_enable_last_session = false,
-                auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-                auto_session_enabled = true,
-                auto_save_enabled = true,
-                auto_restore_enabled = true,
-                auto_session_suppress_dirs = { "~/", "/" },
-                auto_session_use_git_branch = nil,
-                -- the configs below are lua only
-                bypass_session_save_file_types = nil,
-                session_lens = {
-                    load_on_setup = true,
-                    theme_conf = { winblend = 20, border = true },
-                    previewer = false,
-                },
-            })
-            -- auto_save_enabled not working, use autocmd to save on quit
-            vim.api.nvim_create_autocmd({
-                "QuitPre",
-            }, {
-                callback = function()
-                    vim.cmd([[ SessionSave ]])
-                end,
-            })
-        end,
-    },
-
     -- Reference: https://github.com/MattesGroeger/vim-bookmarks
     {
         "MattesGroeger/vim-bookmarks",
