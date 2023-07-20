@@ -155,19 +155,19 @@ wk.register({
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
     ["<leader>pf"] = {
         function()
-            require("telescope.builtin").find_files()
+            require("telescope.builtin").find_files({ cwd = require("project_nvim.project").get_project_root() })
         end,
         "Find Project File",
     },
     ["<leader>pw"] = {
         function()
-            require("telescope.builtin").grep_string()
+            require("telescope.builtin").grep_string({ cwd = require("project_nvim.project").get_project_root() })
         end,
         "Project Grep Current Word",
     },
     ["<leader>pg"] = {
         function()
-            require("telescope.builtin").live_grep()
+            require("telescope.builtin").live_grep({ cwd = require("project_nvim.project").get_project_root() })
         end,
         "Project Live Grep",
     },
