@@ -41,6 +41,8 @@ wk.register({
 -- Global Mappings: only normal mode
 
 wk.register({
+    ["<C-s>"] = { "<cmd>lua require('auto-session.session-lens').search_session()<cr>", "Search Session" },
+
     ["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank History (neoclip)" },
 
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
