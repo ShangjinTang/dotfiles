@@ -17,6 +17,19 @@ lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
 
 vim.opt.background = os.getenv("TERMINAL_THEME")
 
+lvim.builtin.project.manual_mode = false
+lvim.builtin.project.silent_chdir = false
+lvim.builtin.project.patters = {
+    ".git",
+    ".root",
+    ".project",
+    ".workspace",
+    "WORKSPACE",
+    "Cargo.toml",
+    "compile_commands.json",
+    "cscope.out",
+}
+
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
