@@ -737,6 +737,21 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/danymat/neogen
+    {
+        "danymat/neogen",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            local neogen = require("neogen")
+            neogen.setup({
+                snippet_engine = "luasnip",
+            })
+        end,
+    },
+
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
