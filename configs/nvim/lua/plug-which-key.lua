@@ -68,7 +68,15 @@ wk.register({
     ["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank History (neoclip)" },
 
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
-    ["K"] = { vim.lsp.buf.hover, "Hover" },
+    ["K"] = {
+        function()
+            local winid = require("ufo").peekFoldedLinesUnderCursor()
+            if not winid then
+                vim.lsp.buf.hover()
+            end
+        end,
+        "Hover",
+    },
     ["gd"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["gi"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
     ["gt"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
