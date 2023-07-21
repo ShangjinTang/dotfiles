@@ -77,9 +77,17 @@ vim.api.nvim_create_autocmd({
 vim.api.nvim_create_autocmd({
     "BufWrite",
 }, {
-    pattern = "test_*.py",
+    pattern = { "test_*.py", "*_test.py", "demo.py", "main.py" },
     callback = function()
         require("neotest").run.run(vim.fn.expand("%"))
+    end,
+})
+vim.api.nvim_create_autocmd({
+    "BufWrite",
+}, {
+    pattern = { "test_*.rs", "*_test.rs", "main.rs" },
+    callback = function()
+        require("neotest").run.run(vim.fn.getcwd())
     end,
 })
 --------------------------------------------------------------------------------
