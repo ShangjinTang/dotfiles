@@ -29,6 +29,7 @@ lvim.builtin.project.patters = {
     "compile_commands.json",
     "cscope.out",
 }
+lvim.builtin.lir.active = false
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -801,6 +802,42 @@ lvim.plugins = {
                     long_message_to_split = true, -- long messages will be sent to a split
                     inc_rename = true, -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = true, -- add a border to hover docs and signature help
+                },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/stevearc/oil.nvim
+    {
+        "stevearc/oil.nvim",
+        -- event = "VeryLazy",
+        config = function()
+            require("oil").setup({
+                columns = {
+                    "icon",
+                    -- "permissions",
+                    -- "size",
+                    -- "mtime",
+                },
+                buf_options = {
+                    buflisted = true,
+                    bufhidden = "hide",
+                },
+                default_file_explorer = true,
+                keymaps = {
+                    ["<CR>"] = "actions.select",
+                    ["<BS>"] = "actions.parent",
+                    ["<leader>-"] = "actions.select_split",
+                    ["<leader>|"] = "actions.select_vsplit",
+                    ["<C-t>"] = "actions.select_tab",
+                    ["<C-p>"] = "actions.preview",
+                    ["<C-c>"] = "actions.close",
+                    ["<C-l>"] = "actions.refresh",
+                    ["`"] = "actions.cd",
+                    ["~"] = "actions.tcd",
+                    ["<leader><leader>"] = "actions.open_cwd",
+                    ["<leader>?"] = "actions.show_help",
+                    ["<leader>."] = "actions.toggle_hidden",
                 },
             })
         end,

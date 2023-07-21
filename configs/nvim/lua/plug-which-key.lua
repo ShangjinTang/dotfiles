@@ -62,8 +62,6 @@ wk.register({
 
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
-    ["<leader>E"] = { "<cmd>lua require('lir.float').toggle()<cr>", "Float Explorer" },
-
     ["<leader>f"] = { name = "+File" },
     ["<leader>ff"] = {
         function()
@@ -145,9 +143,10 @@ wk.register({
     ["<leader>lt"] = { "<cmd>ToggleDiag<cr>", "Toggle Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
-    ["<leader>o"] = { name = "+Open file with" },
+    ["<leader>o"] = { name = "+Open with" },
     ["<leader>oc"] = { "<cmd>call ExecuteBufferSilentlyWith('code')<cr>", "Open with VsCode" },
     ["<leader>ow"] = { "<cmd>call ExecuteBufferSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
+    ["<leader>oo"] = { "<cmd>lua require('oil').open()<cr>", "Open with Oil" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
@@ -343,8 +342,9 @@ function set_key_bindings()
         })
     end
 
-    -- for telekasten calendar; do not use default 'BufferKill' would open next buffer
-    if ftype == "calendar" then
+    -- for telekasten calendar: do not use default 'BufferKill' would open next buffer
+    -- for oil: ’BufferKill’ not work
+    if ftype == "calendar" or ftype == "oil" then
         wk.register({
             ["<leader>w"] = { "<cmd>bd<cr>", "Close Current Buffer" },
         }, normal_mode)
