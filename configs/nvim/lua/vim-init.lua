@@ -4,6 +4,10 @@ vim.g.maplocalleader = ","
 vim.opt.timeout = true
 vim.opt.timeoutlen = 500
 
+-- ### Disable netrw for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- ### Indent, tab, and spaces
 vim.opt.autoindent = true -- Indent according to previous line.
 vim.opt.expandtab = true -- Use spaces instead of tabs.

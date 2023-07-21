@@ -34,7 +34,12 @@ lvim.builtin.lir.active = false
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.disable_netrw = true
+lvim.builtin.nvimtree.setup.view = {
+    adaptive_size = true,
+    side = "left",
+}
+lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = false
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 local lualine_components = require("lvim.core.lualine.components")
@@ -1076,12 +1081,12 @@ lvim.plugins = {
                             ["[b"] = "@block.outer",
                             ["[c"] = "@class.outer",
                         },
-                        goto_next = {
-                            ["]d"] = "@conditional.outer",
-                        },
-                        goto_previous = {
-                            ["[d"] = "@conditional.outer",
-                        },
+                        -- goto_next = {
+                        --     ["]d"] = "@conditional.outer",
+                        -- },
+                        -- goto_previous = {
+                        --     ["[d"] = "@conditional.outer",
+                        -- },
                     },
                 },
             })
