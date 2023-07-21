@@ -46,6 +46,7 @@ local lualine_components = require("lvim.core.lualine.components")
 lvim.builtin.lualine = {
     style = "lvim",
     options = {
+        theme = "catppuccin",
         section_separators = {
             left = lvim.icons.ui.BoldDividerRight,
             right = lvim.icons.ui.BoldDividerLeft,
@@ -56,6 +57,7 @@ lvim.builtin.lualine = {
         },
     },
     sections = {
+
         lualine_a = {
             -- "mode",
             lualine_components.mode,
@@ -254,44 +256,12 @@ lvim.plugins = {
     -- Plugins will be lazy-loaded when one of the following is true:
     --   - The plugin only exists as a dependency in your spec
     --   - It has an event, cmd, ft or keys key
-    --   - lazy = true
+    --   - Otherwise please specify 'lazy = true'
 
-    -- Themes
-
-    -- Reference: https://github.com/navarasu/onedark.nvim
-    -- {
-    --     "navarasu/onedark.nvim",
-    --     priority = 1000,
-    --     dependencies = {
-    --         "nvim-lualine/lualine.nvim",
-    --     },
-    --     config = function()
-    --         require("onedark").setup({
-    --             style = os.getenv("TERMINAL_THEME"),
-    --             transparent = os.getenv("TERMINAL_TRANSPARENT"),
-    --             lualine = {
-    --                 transparent = os.getenv("TERMINAL_TRANSPARENT"),
-    --             },
-    --         })
-    --         require('lualine').setup {
-    --             options = {
-    --                 theme = 'onedark',
-    --             },
-    --         }
-    --         require("notify").setup({
-    --             background_colour = require("onedark.colors").bg0,
-    --         })
-    --         require("which-key").setup({
-    --             window = {
-    --                 border = "single",
-    --                 winblend = 20,
-    --             },
-    --         })
-    --         require('onedark').load()
-    --     end
-    -- },
-
+    -- The one and the only theme: catppuccin
     -- Reference: https://github.com/catppuccin/nvim
+    -- Color Palette: https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/palettes/frappe.lua
+    -- Color API (lua): 'require("catppuccin.palettes").get_palette().<COLOR>'
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -301,24 +271,8 @@ lvim.plugins = {
             "rcarriga/nvim-dap-ui",
         },
         config = function()
-            require("notify").setup({
-                background_colour = require("catppuccin.palettes.frappe").base,
-            })
-            require("dap")
-            local sign = vim.fn.sign_define
-            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-            require("lvim.core.bufferline").setup({
-                highlights = require("catppuccin.groups.integrations.bufferline").get(),
-            })
-            require("lualine").setup({
-                options = {
-                    theme = "catppuccin",
-                },
-            })
             require("catppuccin").setup({
-                flavour = "frappe", -- latte, frappe, macchiato, mocha
+                -- flavour = "frappe", -- latte, frappe, macchiato, mocha
                 background = {
                     -- :h background
                     light = "latte",
@@ -351,41 +305,72 @@ lvim.plugins = {
                 color_overrides = {},
                 custom_highlights = {},
                 integrations = {
-                    cmp = true,
+                    alpha = true,
+                    flash = true,
                     gitsigns = true,
+                    indent_blankline = {
+                        enabled = true,
+                        colored_indent_levels = false,
+                    },
                     nvimtree = true,
-                    telescope = true,
-                    notify = true,
-                    mini = false,
+                    markdown = true,
+                    mason = true,
+                    neogit = true,
+                    neotest = true,
+                    noice = true,
+                    cmp = true,
                     dap = {
                         enabled = true,
                         enable_ui = true, -- enable nvim-dap-ui
                     },
-                },
-                native_lsp = {
-                    enabled = true,
-                    virtual_text = {
-                        errors = { "italic" },
-                        hints = { "italic" },
-                        warnings = { "italic" },
-                        information = { "italic" },
+                    native_lsp = {
+                        enabled = true,
+                        virtual_text = {
+                            errors = { "italic" },
+                            hints = { "italic" },
+                            warnings = { "italic" },
+                            information = { "italic" },
+                        },
+                        underlines = {
+                            errors = { "underline" },
+                            hints = { "underline" },
+                            warnings = { "underline" },
+                            information = { "underline" },
+                        },
+                        inlay_hints = {
+                            background = true,
+                        },
                     },
-                    underlines = {
-                        errors = { "underline" },
-                        hints = { "underline" },
-                        warnings = { "underline" },
-                        information = { "underline" },
+                    navic = {
+                        enabled = true,
+                        custom_bg = "NONE",
                     },
-                },
-                indent_blankline = {
-                    enabled = true,
-                    colored_indent_levels = false,
-                },
-                navic = {
-                    enabled = true,
-                    custom_bg = "NONE",
+                    notify = true,
+                    treesitter_context = true,
+                    treesitter = true,
+                    overseer = true,
+                    symbols_outline = true,
+                    telekasten = true,
+                    telescope = {
+                        enabled = true,
+                    },
+                    lsp_trouble = true,
+                    gitgutter = true,
+                    illuminate = true,
+                    which_key = true,
                 },
             })
+            require("notify").setup({
+                background_colour = require("catppuccin.palettes").get_palette().base,
+            })
+            require("bufferline").setup({
+                highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            })
+            require("dap")
+            local sign = vim.fn.sign_define
+            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
         end,
     },
 
