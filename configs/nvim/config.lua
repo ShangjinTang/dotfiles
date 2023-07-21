@@ -80,6 +80,7 @@ lvim.builtin.lualine = {
         },
         lualine_z = {
             "progress",
+            require("codegpt").get_status,
         },
     },
 }
@@ -460,6 +461,19 @@ lvim.plugins = {
                     n = 1,
                 },
             })
+        end,
+    },
+
+    -- Reference: https://github.com/dpayne/CodeGPT.nvim
+    {
+        "dpayne/CodeGPT.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            require("codegpt.config")
         end,
     },
 
