@@ -5,6 +5,11 @@
 -- general
 lvim.log.level = "info"
 
+-- specify the python3 we use as nvim python
+vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
+-- save "TERMINAL_THEME" ('light' / 'dark')
+vim.opt.background = os.getenv("TERMINAL_THEME")
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -14,8 +19,6 @@ lvim.leader = "space"
 -- -- Change theme settings
 lvim.colorscheme = "catppuccin"
 lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
-
-vim.opt.background = os.getenv("TERMINAL_THEME")
 
 lvim.builtin.project.manual_mode = false
 lvim.builtin.project.silent_chdir = false
@@ -82,7 +85,6 @@ lvim.builtin.lualine = {
         },
         lualine_z = {
             "progress",
-            require("codegpt").get_status,
         },
     },
 }
@@ -483,6 +485,8 @@ lvim.plugins = {
                 "tmux",
                 "yaml",
                 "zsh",
+                "json",
+                "lua",
             })
         end,
     },
@@ -837,6 +841,27 @@ lvim.plugins = {
                     ["<leader><leader>"] = "actions.open_cwd",
                     ["<leader>?"] = "actions.show_help",
                     ["<leader>."] = "actions.toggle_hidden",
+                },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/petertriho/nvim-scrollbar
+    {
+        "petertriho/nvim-scrollbar",
+        config = function()
+            local palette = require("catppuccin.palettes").get_palette()
+            require("scrollbar").setup({
+                handle = {
+                    blend = 20,
+                },
+                marks = {
+                    Search = { color = palette.base },
+                    Error = { color = palette.red },
+                    Warn = { color = palette.yellow },
+                    Info = { color = palette.blue },
+                    Hint = { color = palette.green },
+                    Misc = { color = palette.mauve },
                 },
             })
         end,
@@ -1376,6 +1401,3 @@ lspmanager.setup("html", {
 lspmanager.setup("marksman", {
     on_attach = lsp_on_attach,
 })
-
--- specify the python3 we use as nvim python
-vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
