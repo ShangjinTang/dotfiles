@@ -450,11 +450,6 @@ lvim.plugins = {
         config = function()
             require("chatgpt").setup({
                 api_key_cmd = "echo -n $OPENAI_API_KEY",
-                chat = {
-                    popup_input = {
-                        submit = "<C-Enter>",
-                    },
-                },
                 openai_params = {
                     model = "gpt-3.5-turbo",
                     frequency_penalty = 0,
