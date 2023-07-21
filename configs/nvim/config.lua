@@ -60,7 +60,6 @@ lvim.builtin.lualine = {
         },
     },
     sections = {
-
         lualine_a = {
             -- "mode",
             lualine_components.mode,
@@ -1253,17 +1252,55 @@ lvim.plugins = {
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
     {
         "kevinhwang91/nvim-ufo",
+        event = "VeryLazy",
         dependencies = {
             "kevinhwang91/promise-async",
         },
-        event = "VeryLazy",
-        config = function()
+        init = function()
             vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
             vim.o.foldcolumn = "1"
             vim.o.foldenable = true
-            vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevel = 99
             vim.o.foldlevelstart = 99
-            require("ufo").setup({})
+        end,
+        config = function(_, opts)
+            local handler = function(virtText, lnum, endLnum, width, truncate)
+                local newVirtText = {}
+                local totalLines = vim.api.nvim_buf_line_count(0)
+                local foldedLines = endLnum - lnum
+                local suffix = (" ↙️ %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+                local sufWidth = vim.fn.strdisplaywidth(suffix)
+                local targetWidth = width - sufWidth
+                local curWidth = 0
+                for _, chunk in ipairs(virtText) do
+                    local chunkText = chunk[1]
+                    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                    if targetWidth > curWidth + chunkWidth then
+                        table.insert(newVirtText, chunk)
+                    else
+                        chunkText = truncate(chunkText, targetWidth - curWidth)
+                        local hlGroup = chunk[2]
+                        table.insert(newVirtText, { chunkText, hlGroup })
+                        chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                        -- str width returned from truncate() may less than 2nd argument, need padding
+                        if curWidth + chunkWidth < targetWidth then
+                            suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+                        end
+                        break
+                    end
+                    curWidth = curWidth + chunkWidth
+                end
+                local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+                suffix = (" "):rep(rAlignAppndx) .. suffix
+                table.insert(newVirtText, { suffix, "MoreMsg" })
+                return newVirtText
+            end
+            require("ufo").setup({
+                fold_virt_text_handler = handler,
+                provider_selector = function()
+                    return { "treesitter", "indent" }
+                end,
+            })
         end,
     },
 
@@ -1288,28 +1325,10 @@ lvim.plugins = {
             -- "ibhagwan/fzf-lua",
             "nvim-tree/nvim-web-devicons",
         },
-        config = function()
-            require("cscope_maps").setup({
-                disable_maps = true,
-                skip_input_prompt = true,
-                cscope = {
-                    db_file = "./cscope.out",
-                    exec = "cscope", -- "cscope" or "gtags-cscope"
-                    picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
-                    skip_picker_for_single_result = false, -- "false" or "true"
-                    db_build_cmd_args = { "-Rbqkv" },
-                    statusline_indicator = nil,
-                },
-            })
-            -- cscope_maps
+        init = function()
             vim.g.gutentags_modules = { "cscope_maps" } -- This is required. Other config is optional
             vim.g.gutentags_cscope_build_inverted_index_maps = 1
             vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp"
-            -- gutentags
-            local tags_dir = vim.fn.expand("~/.cache/tags")
-            if vim.fn.isdirectory(tags_dir) == 0 then
-                vim.fn.mkdir(tags_dir, "p")
-            end
             vim.g.gutentags_cache_dir = tags_dir
             vim.g.gutentags_project_root = {
                 ".git",
@@ -1324,6 +1343,24 @@ lvim.plugins = {
             vim.g.gutentags_ctags_tagfile = ".tags"
             vim.g.gutentags_ctags_extra_args = { "--fields=+niazS", "--extra=+q", "--c++-kinds=+pxI", "--c-kinds=+px" }
             -- vim.g.gutentags_trace = 1
+        end,
+        config = function()
+            require("cscope_maps").setup({
+                disable_maps = true,
+                skip_input_prompt = true,
+                cscope = {
+                    db_file = "./cscope.out",
+                    exec = "cscope", -- "cscope" or "gtags-cscope"
+                    picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
+                    skip_picker_for_single_result = false, -- "false" or "true"
+                    db_build_cmd_args = { "-Rbqkv" },
+                    statusline_indicator = nil,
+                },
+            })
+            local tags_dir = vim.fn.expand("~/.cache/tags")
+            if vim.fn.isdirectory(tags_dir) == 0 then
+                vim.fn.mkdir(tags_dir, "p")
+            end
         end,
     },
 }
