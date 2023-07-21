@@ -202,13 +202,13 @@ wk.register({
     },
 
     ["<leader>s"] = { name = "+Search & Substitute" },
-    ["<leader>sw"] = { name = "Substitute word (from current selection)" },
-    ["<leader>sa"] = { name = "Substitute word (from first line)" },
+    ["<leader>sw"] = { "Substitute word (from current selection)" },
+    ["<leader>sa"] = { "Substitute word (from first line)" },
     ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
 
     ["<leader>S"] = { "<cmd>SymbolsOutline<cr>", "Symbols Explorer" },
 
-    ["<leader>m"] = { name = "Markdown (Telekasten)" },
+    ["<leader>m"] = { name = "+Markdown (Telekasten)" },
     ["<leader>mf"] = { "<cmd>Telekasten find_notes<cr>", "Find Notes" },
     ["<leader>mg"] = { "<cmd>Telekasten search_notes<cr>", "Live Grep in Notes" },
     ["<leader>mt"] = { "<cmd>Telekasten goto_today<cr>", "Goto Today" },
@@ -216,10 +216,23 @@ wk.register({
     ["<leader>mn"] = { "<cmd>Telekasten new_note<cr>", "New Note" },
     ["<leader>mc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
 
-    ["zR"] = { require("ufo").openAllFolds, "Open All Folds" },
-    ["zM"] = { require("ufo").closeAllFolds, "Close All Folds" },
-    ["zr"] = { require("ufo").openFoldsExceptKinds, "Open Folds except Kinds" },
-    ["zm"] = { require("ufo").closeFoldsWith, "Close Folds With <num> (e.g. 1zm)" },
+    ["zo"] = { "Open Fold" },
+    ["zO"] = { "Open Folds Recursively" },
+    ["zc"] = { "Close Fold" },
+    ["zC"] = { "Close Folds Recursively" },
+    ["za"] = { "Toggle Fold" },
+    ["zA"] = { "Toggle Folds Recursively" },
+    ["zd"] = { "Delete Fold (enforce open)" },
+    ["zD"] = { "Delete All Folds (enforece open)" },
+    ["zj"] = { "Move down to begin of next fold" },
+    ["zk"] = { "Move up to end of previous fold" },
+    ["zn"] = { "Disable Fold (enforce open)" },
+    ["zN"] = { "Enable Fold (enforce fold)" },
+    ["zx"] = { "Reset Fold (use current 'foldlevel')" },
+    ["zm"] = { require("ufo").closeFoldsWith, "Close All Folds (level prefix-num or 0)" },
+    ["zM"] = { require("ufo").closeAllFolds, "Close All Folds (level 0)" },
+    ["zr"] = { require("ufo").openFoldsExceptKinds, "Open Folds except Kinds (foldlevel max)" },
+    ["zR"] = { require("ufo").openAllFolds, "Open All Folds (level max)" },
 }, normal_mode)
 
 --------------------------------------------------------------------------------
@@ -244,7 +257,7 @@ function set_key_bindings()
             ["O"] = { "<cmd>MkdnNewListItemAboveInsert<cr>", "Insert Above (list-supported)" },
             ["H"] = { "<cmd>MkdnTablePrevCell<cr>", "Table - Previous Cell" },
             ["L"] = { "<cmd>MkdnTableNextCell<cr>", "Table - Next Cell" },
-            ["<leader>m"] = { name = "Markdown & Telekasten" },
+            ["<leader>m"] = { name = "+Markdown & Telekasten" },
             ["<leader>mm"] = { "<cmd>Telekasten panel<cr>", "Telekasten Panel" },
             ["<leader>ms"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
             ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle Preview" },
@@ -309,7 +322,7 @@ function set_key_bindings()
     -- cscope_maps.nvim
     if ftype == "c" or ftype == "cpp" or ftype == "java" then
         wk.register({
-            ["<leader>c"] = { name = "Cscope" },
+            ["<leader>c"] = { name = "+Cscope" },
             ["<leader>cs"] = {
                 function()
                     vim.api.nvim_command("Cscope find s " .. vim.fn.expand("<cword>"))
