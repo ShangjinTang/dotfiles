@@ -1019,12 +1019,14 @@ lvim.plugins = {
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-neotest/neotest-python",
+            "rouge8/neotest-rust",
             "folke/neodev.nvim",
         },
         config = function()
             require("neotest").setup({
                 adapters = {
                     require("neotest-python")({}),
+                    require("neotest-rust")({}),
                 },
             })
             require("neodev").setup({

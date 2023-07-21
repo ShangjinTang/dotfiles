@@ -120,5 +120,8 @@ abbr vmpip="nvim ~/.dotfiles/linux/bin/mpip-conf/{base,dev}/{min,medium,max}.yam
 # cmake
 abbr cbuild="asynctask cmake-build"
 abbr crun="asynctask cmake-run"
+abbr rsbuild="asynctask cargo-build"
+abbr rsrun="asynctask cargo-run"
+abbr rstest="asynctask cargo-test"
 
 ######################################################################

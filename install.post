@@ -57,7 +57,7 @@ if command -v cargo &> /dev/null; then
             rustup default stable
         fi
     fi
-    CARGO_DEPENDENCIES=('stylua' 'cbfmt')
+    CARGO_DEPENDENCIES=('stylua' 'cbfmt' 'cargo-nextest')
     for PACKAGE in "${CARGO_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
             echo "cargo: installing ${PACKAGE} ..."
