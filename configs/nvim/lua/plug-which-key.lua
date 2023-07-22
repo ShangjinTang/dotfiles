@@ -105,6 +105,21 @@ wk.register({
         "Hover",
     },
 
+    ["["] = { name = "+Prev" },
+    ["]"] = { name = "+Next" },
+    ["[g"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
+    ["]g"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
+    ["[d"] = {
+        "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded' }})<cr>",
+        "Prev Diagnostic",
+    },
+    ["]d"] = {
+        "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded' }})<cr>",
+        "Next Diagnostic",
+    },
+    ["[t"] = { "<cmd>lua require('todo-comments').jump_prev()<cr>", "Prev Todo-Comment" },
+    ["]t"] = { "<cmd>lua require('todo-comments').jump_next()<cr>", "Next Todo-Comment" },
+
     ["gD"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["gI"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
     ["gT"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
