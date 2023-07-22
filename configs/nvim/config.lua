@@ -405,14 +405,7 @@ lvim.plugins = {
     },
 
     -----------------------------------------------------------------
-
-    -- Reference: https://github.com/windwp/nvim-ts-autotag
-    {
-        "windwp/nvim-ts-autotag",
-        config = function()
-            require("nvim-ts-autotag").setup({})
-        end,
-    },
+    -- NOTE: AsyncRun & AsyncTasks
 
     -- Reference: https://github.com/skywind3000/asyncrun.vim
     {
@@ -448,11 +441,8 @@ lvim.plugins = {
         },
     },
 
-    -- Reference: https://github.com/MattesGroeger/vim-bookmarks
-    {
-        "MattesGroeger/vim-bookmarks",
-        event = "VeryLazy",
-    },
+    -----------------------------------------------------------------
+    -- NOTE: AI tools: ChatGPT & Copilot
 
     -- Reference: https://github.com/jackMort/ChatGPT.nvim
     {
@@ -492,6 +482,58 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/zbirenbaum/copilot-cmp
+    {
+        "zbirenbaum/copilot-cmp",
+        dependencies = {
+            "zbirenbaum/copilot.lua",
+        },
+        event = "VeryLazy",
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+    },
+    -- Reference: https://github.com/zbirenbaum/copilot.lua
+    -- Note: Use `:Copilot auth` to authenticate
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup()
+        end,
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: legacy code completion tools
+
+    -- Reference: https://github.com/danymat/neogen
+    {
+        "danymat/neogen",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            local neogen = require("neogen")
+            neogen.setup({
+                snippet_engine = "luasnip",
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/SirVer/ultisnips
+    {
+        "honza/vim-snippets",
+        event = "VeryLazy",
+        dependencies = {
+            "SirVer/ultisnips",
+        },
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: file edit enhancement
+
     -- Reference: https://github.com/monaqa/dial.nvim
     {
         "monaqa/dial.nvim",
@@ -530,354 +572,53 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/sindrets/diffview.nvim
+    -- Reference: https://github.com/nvim-pack/nvim-spectre
     {
-        "sindrets/diffview.nvim",
-        event = "VeryLazy",
-        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-    },
-
-    -- Reference: https://github.com/norcalli/nvim-colorizer.lua
-    {
-        "norcalli/nvim-colorizer.lua",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("colorizer").setup({
-                "css",
-                "javascript",
-                "html",
-                "tmux",
-                "yaml",
-                "zsh",
-                "json",
-                "lua",
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/zbirenbaum/copilot-cmp
-    {
-        "zbirenbaum/copilot-cmp",
-        dependencies = {
-            "zbirenbaum/copilot.lua",
-        },
-        event = "VeryLazy",
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
-    -- Reference: https://github.com/zbirenbaum/copilot.lua
-    -- Note: Use `:Copilot auth` to authenticate
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup()
-        end,
-    },
-
-    -- Reference: https://github.com/iamcco/markdown-preview.nvim
-    {
-        "iamcco/markdown-preview.nvim",
-        ft = "markdown",
-        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-        event = "VeryLazy",
-        config = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-    },
-
-    -- Reference: https://github.com/jakewvincent/mkdnflow.nvim
-    {
-        "jakewvincent/mkdnflow.nvim",
-        ft = "markdown",
-        event = "VeryLazy",
-        config = function()
-            require("mkdnflow").setup({
-                modules = {
-                    bib = true,
-                    buffers = true,
-                    conceal = true,
-                    cursor = true,
-                    folds = true,
-                    links = true,
-                    maps = false,
-                    lists = true,
-                    paths = true,
-                    tables = true,
-                    yaml = false,
-                },
-                links = {
-                    transform_explicit = function(text)
-                        text = text:gsub(" ", "-")
-                        text = text:lower()
-                        -- text = os.date("%Y-%m-%d_") .. text
-                        return text
-                    end,
-                },
-                to_do = {
-                    symbols = { " ", "-", "x" },
-                    update_parents = true,
-                    not_started = " ",
-                    in_progress = "-",
-                    complete = "x",
-                },
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
-    {
-        "AckslD/nvim-FeMaco.lua",
-        ft = { "markdown" },
-        event = "VeryLazy",
-        config = function()
-            require("femaco").setup({
-                post_open_float = function(winnr)
-                    vim.cmd([[ set number ]])
-                    vim.cmd([[ set norelativenumber ]])
-                end,
-                ensure_newline = function(base_filetype)
-                    return true
-                end,
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
-    {
-        "theHamsta/nvim-dap-virtual-text",
+        "nvim-pack/nvim-spectre",
         event = "VeryLazy",
         dependencies = {
-            "mfussenegger/nvim-dap",
-            "nvim-treesitter/nvim-treesitter",
+            "nvim-lua/plenary.nvim",
         },
         config = function()
-            require("nvim-dap-virtual-text").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
-    {
-        "nvim-telescope/telescope-dap.nvim",
-        event = "VeryLazy",
-        cmd = "Telescope dap",
-        dependencies = {
-            "mfussenegger/nvim-dap",
-            "nvim-treesitter/nvim-treesitter",
-            "folke/which-key.nvim",
-        },
-    },
-
-    -- Reference: https://github.com/rmagatti/goto-preview
-    {
-        "rmagatti/goto-preview",
-        event = "VeryLazy",
-        config = function()
-            require("goto-preview").setup({
-                default_mappings = false,
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
-    {
-        "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-        event = "VeryLazy",
-        cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff" },
-        config = function()
-            require("toggle_lsp_diagnostics").init({
-                start_on = true,
-                -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.config()
-                underline = true,
-                virtual_text = false,
-                update_in_insert = false,
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/tpope/vim-fugitive
-    {
-        "tpope/vim-fugitive",
-        event = "VeryLazy",
-        cmd = { "Git", "G" },
-    },
-
-    -- Reference: https://github.com/junegunn/fzf.vim
-    {
-        "junegunn/fzf.vim",
-        event = "VeryLazy",
-        dependencies = {
-            "junegunn/fzf",
-        },
-        cmd = {
-            "Files",
-            "GFiles",
-            "Buffers",
-            "Colors",
-            "Rg",
-            "Lines",
-            "BLines",
-            "Tags",
-            "BTags",
-            "Marks",
-            "Windows",
-            "Locate",
-            "History",
-            "Snippets",
-            "Commits",
-            "BCommits",
-            "Commands",
-            "Maps",
-            "Helptags",
-            "Filetypes",
-        },
-    },
-
-    -- Reference: https://github.com/folke/flash.nvim
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {},
-    },
-
-    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
-    {
-        "williamboman/mason-lspconfig.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "williamboman/mason.nvim",
-        },
-        config = function()
-            require("mason").setup({})
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "clangd",
-                    "jdtls",
-                    "pyright",
-                    "bashls",
-                    "rust_analyzer",
-                    "lua_ls",
-                    "vimls",
-                    "html",
-                    "marksman",
-                },
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/SmiteshP/nvim-navic
-    {
-        "SmiteshP/nvim-navic",
-        event = "VeryLazy",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-    },
-
-    -- Reference: https://github.com/simrat39/rust-tools.nvim
-    {
-        "simrat39/rust-tools.nvim",
-        event = "VeryLazy",
-        ft = "rust",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-        config = function()
-            require("rust-tools").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
-    {
-        "jay-babu/mason-nvim-dap.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "williamboman/mason.nvim",
-        },
-        config = function()
-            require("mason-nvim-dap").setup({
-                -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
-                ensure_installed = { "python", "cppdbg" },
-                handlers = {
-                    function(config)
-                        -- Keep original functionality
-                        require("mason-nvim-dap").default_setup(config)
-                    end,
-                    -- requires: python3 -m pip install debugpy
-                    python = function(config)
-                        config.adapters = {
-                            type = "executable",
-                            command = vim.fn["exepath"]("python3"),
-                            args = {
-                                "-m",
-                                "debugpy.adapter",
-                            },
-                        }
-                        require("mason-nvim-dap").default_setup(config) -- don't forget this!
-                    end,
-                },
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/danymat/neogen
-    {
-        "danymat/neogen",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-        config = function()
-            local neogen = require("neogen")
-            neogen.setup({
-                snippet_engine = "luasnip",
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/ethanholz/nvim-lastplace
-    {
-        "ethanholz/nvim-lastplace",
-        config = function()
-            require("nvim-lastplace").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/folke/noice.nvim
-    {
-        "folke/noice.nvim",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-        config = function()
-            require("noice").setup({
-                cmdline = {
-                    view = "cmdline",
-                    enable = false,
-                },
-                messages = {
-                    enable = false,
-                },
-                lsp = {
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true,
+            require("spectre").setup({
+                live_update = true,
+                default = {
+                    find = {
+                        cmd = "rg",
+                        options = {},
+                    },
+                    replace = {
+                        cmd = "sed",
                     },
                 },
-                presets = {
-                    bottom_search = true, -- use a classic bottom cmdline for search
-                    command_palette = true, -- position the cmdline and popupmenu together
-                    long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = true, -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = true, -- add a border to hover docs and signature help
-                },
             })
+        end,
+    },
+
+    -- Reference: https://github.com/kylechui/nvim-surround
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end,
+    },
+
+    -- Reference: https://github.com/windwp/nvim-ts-autotag
+    {
+        "windwp/nvim-ts-autotag",
+        config = function()
+            require("nvim-ts-autotag").setup({})
+        end,
+    },
+
+    -- Reference: https://github.com/gbprod/substitute.nvim
+    {
+        "gbprod/substitute.nvim",
+        lazy = true,
+        config = function()
+            require("substitute").setup({})
         end,
     },
 
@@ -914,6 +655,112 @@ lvim.plugins = {
                     ["<leader>."] = "actions.toggle_hidden",
                 },
             })
+        end,
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: file non-edit enhancement: move, highlight, show
+
+    -- Reference: https://github.com/folke/flash.nvim
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+    },
+
+    -- Reference: https://github.com/kevinhwang91/nvim-ufo
+    {
+        "kevinhwang91/nvim-ufo",
+        event = "VeryLazy",
+        dependencies = {
+            "kevinhwang91/promise-async",
+        },
+        init = function()
+            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+            vim.o.foldcolumn = "1"
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+        end,
+        config = function(_, opts)
+            local handler = function(virtText, lnum, endLnum, width, truncate)
+                local newVirtText = {}
+                local totalLines = vim.api.nvim_buf_line_count(0)
+                local foldedLines = endLnum - lnum
+                local suffix = (" ↙️ %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+                local sufWidth = vim.fn.strdisplaywidth(suffix)
+                local targetWidth = width - sufWidth
+                local curWidth = 0
+                for _, chunk in ipairs(virtText) do
+                    local chunkText = chunk[1]
+                    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                    if targetWidth > curWidth + chunkWidth then
+                        table.insert(newVirtText, chunk)
+                    else
+                        chunkText = truncate(chunkText, targetWidth - curWidth)
+                        local hlGroup = chunk[2]
+                        table.insert(newVirtText, { chunkText, hlGroup })
+                        chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                        -- str width returned from truncate() may less than 2nd argument, need padding
+                        if curWidth + chunkWidth < targetWidth then
+                            suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+                        end
+                        break
+                    end
+                    curWidth = curWidth + chunkWidth
+                end
+                local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+                suffix = (" "):rep(rAlignAppndx) .. suffix
+                table.insert(newVirtText, { suffix, "MoreMsg" })
+                return newVirtText
+            end
+            require("ufo").setup({
+                fold_virt_text_handler = handler,
+                provider_selector = function()
+                    return { "treesitter", "indent" }
+                end,
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/norcalli/nvim-colorizer.lua
+    {
+        "norcalli/nvim-colorizer.lua",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            require("colorizer").setup({
+                "css",
+                "javascript",
+                "html",
+                "tmux",
+                "yaml",
+                "zsh",
+                "json",
+                "lua",
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/folke/todo-comments.nvim
+    {
+        "folke/todo-comments.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("todo-comments").setup({})
+        end,
+    },
+
+    -- Reference: https://github.com/folke/zen-mode.nvim
+    {
+        "folke/zen-mode.nvim",
+        event = "VeryLazy",
+        cmd = "ZenMode",
+        config = function()
+            require("zen-mode").setup({})
         end,
     },
 
@@ -976,28 +823,176 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/nvim-pack/nvim-spectre
+    -- Reference: https://github.com/simrat39/symbols-outline.nvim
     {
-        "nvim-pack/nvim-spectre",
+        -- "simrat39/symbols-outline.nvim",
+        "enddeadroyal/symbols-outline.nvim",
+        branch = "bugfix/symbol-hover-misplacement",
+        event = "VeryLazy",
+        config = function()
+            require("symbols-outline").setup({})
+        end,
+    },
+
+    -- Reference: https://github.com/ethanholz/nvim-lastplace
+    {
+        "ethanholz/nvim-lastplace",
+        config = function()
+            require("nvim-lastplace").setup({})
+        end,
+    },
+
+    -- Reference: https://github.com/AckslD/nvim-neoclip.lua
+    {
+        "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
         dependencies = {
-            "nvim-lua/plenary.nvim",
+            { "kkharji/sqlite.lua", module = "sqlite" },
+            { "nvim-telescope/telescope.nvim" },
         },
         config = function()
-            require("spectre").setup({
-                live_update = true,
-                default = {
-                    find = {
-                        cmd = "rg",
-                        options = {},
-                    },
-                    replace = {
-                        cmd = "sed",
-                    },
+            local function is_whitespace(line)
+                return vim.fn.match(line, [[^\s*$]]) ~= -1
+            end
+            local function all(tbl, check)
+                for _, entry in ipairs(tbl) do
+                    if not check(entry) then
+                        return false
+                    end
+                end
+                return true
+            end
+            require("neoclip").setup({
+                history = 10000,
+                enable_persistent_history = true,
+                continuous_sync = true,
+                on_select = {
+                    move_to_front = true,
+                },
+                on_paste = {
+                    move_to_front = true,
+                },
+                on_replay = {
+                    move_to_front = true,
+                },
+                filter = function(data)
+                    return not all(data.event.regcontents, is_whitespace)
+                end,
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/christoomey/vim-tmux-navigator
+    {
+        "christoomey/vim-tmux-navigator",
+        event = "VeryLazy",
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: git
+
+    -- Reference: https://github.com/sindrets/diffview.nvim
+    {
+        "sindrets/diffview.nvim",
+        event = "VeryLazy",
+        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    },
+
+    -- Reference: https://github.com/tpope/vim-fugitive
+    {
+        "tpope/vim-fugitive",
+        event = "VeryLazy",
+        cmd = { "Git", "G" },
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: markdown
+
+    -- Reference: https://github.com/renerocksai/telekasten.nvim
+    {
+        "renerocksai/telekasten.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "renerocksai/calendar-vim",
+        },
+        config = function()
+            require("telekasten").setup({
+                home = vim.fn.expand("~/note/"),
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/jakewvincent/mkdnflow.nvim
+    {
+        "jakewvincent/mkdnflow.nvim",
+        ft = "markdown",
+        event = "VeryLazy",
+        config = function()
+            require("mkdnflow").setup({
+                modules = {
+                    bib = true,
+                    buffers = true,
+                    conceal = true,
+                    cursor = true,
+                    folds = true,
+                    links = true,
+                    maps = false,
+                    lists = true,
+                    paths = true,
+                    tables = true,
+                    yaml = false,
+                },
+                links = {
+                    transform_explicit = function(text)
+                        text = text:gsub(" ", "-")
+                        text = text:lower()
+                        -- text = os.date("%Y-%m-%d_") .. text
+                        return text
+                    end,
+                },
+                to_do = {
+                    symbols = { " ", "-", "x" },
+                    update_parents = true,
+                    not_started = " ",
+                    in_progress = "-",
+                    complete = "x",
                 },
             })
         end,
     },
+
+    -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
+    {
+        "AckslD/nvim-FeMaco.lua",
+        ft = { "markdown" },
+        event = "VeryLazy",
+        config = function()
+            require("femaco").setup({
+                post_open_float = function(winnr)
+                    vim.cmd([[ set number ]])
+                    vim.cmd([[ set norelativenumber ]])
+                end,
+                ensure_newline = function(base_filetype)
+                    return true
+                end,
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/iamcco/markdown-preview.nvim
+    {
+        "iamcco/markdown-preview.nvim",
+        ft = "markdown",
+        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+        event = "VeryLazy",
+        config = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: code runner & debugger
 
     -- Reference: https://github.com/michaelb/sniprun
     {
@@ -1029,103 +1024,62 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/SirVer/ultisnips
+    -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
-        "honza/vim-snippets",
+        "jay-babu/mason-nvim-dap.nvim",
         event = "VeryLazy",
         dependencies = {
-            "SirVer/ultisnips",
-        },
-    },
-
-    -- Reference: https://github.com/gbprod/substitute.nvim
-    {
-        "gbprod/substitute.nvim",
-        lazy = true,
-        config = function()
-            require("substitute").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/simrat39/symbols-outline.nvim
-    {
-        -- "simrat39/symbols-outline.nvim",
-        "enddeadroyal/symbols-outline.nvim",
-        branch = "bugfix/symbol-hover-misplacement",
-        event = "VeryLazy",
-        config = function()
-            require("symbols-outline").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/christoomey/vim-tmux-navigator
-    {
-        "christoomey/vim-tmux-navigator",
-        event = "VeryLazy",
-    },
-
-    -- Reference: https://github.com/folke/todo-comments.nvim
-    {
-        "folke/todo-comments.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
+            "williamboman/mason.nvim",
         },
         config = function()
-            require("todo-comments").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/kylechui/nvim-surround
-    {
-        "kylechui/nvim-surround",
-        version = "*",
-        event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/folke/trouble.nvim
-    {
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-        config = function()
-            local actions = require("telescope.actions")
-            local trouble = require("trouble.providers.telescope")
-            local telescope = require("telescope")
-            telescope.setup({
-                defaults = {
-                    mappings = {
-                        i = { ["<c-t>"] = trouble.open_with_trouble },
-                        n = { ["<c-t>"] = trouble.open_with_trouble },
-                    },
+            require("mason-nvim-dap").setup({
+                -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+                ensure_installed = { "python", "cppdbg" },
+                handlers = {
+                    function(config)
+                        -- Keep original functionality
+                        require("mason-nvim-dap").default_setup(config)
+                    end,
+                    -- requires: python3 -m pip install debugpy
+                    python = function(config)
+                        config.adapters = {
+                            type = "executable",
+                            command = vim.fn["exepath"]("python3"),
+                            args = {
+                                "-m",
+                                "debugpy.adapter",
+                            },
+                        }
+                        require("mason-nvim-dap").default_setup(config) -- don't forget this!
+                    end,
                 },
             })
         end,
     },
 
-    -- Reference: https://github.com/renerocksai/telekasten.nvim
+    -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
     {
-        "renerocksai/telekasten.nvim",
+        "theHamsta/nvim-dap-virtual-text",
         event = "VeryLazy",
         dependencies = {
-            "nvim-telescope/telescope.nvim",
-            "renerocksai/calendar-vim",
+            "mfussenegger/nvim-dap",
+            "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require("telekasten").setup({
-                home = vim.fn.expand("~/note/"),
-            })
+            require("nvim-dap-virtual-text").setup({})
         end,
     },
 
-    -- Reference: https://github.com/folke/neodev.nvim
+    -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
     {
-        "folke/neodev.nvim",
+        "nvim-telescope/telescope-dap.nvim",
         event = "VeryLazy",
-        config = function()
-            require("neodev").setup({})
-        end,
+        cmd = "Telescope dap",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-treesitter/nvim-treesitter",
+            "folke/which-key.nvim",
+        },
     },
 
     -- Reference: https://github.com/nvim-neotest/neotest
@@ -1150,6 +1104,142 @@ lvim.plugins = {
             })
             require("neodev").setup({
                 library = { plugins = { "neotest" }, types = true },
+            })
+        end,
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: cscope & ctags
+
+    -- Reference: https://github.com/ludovicchabant/vim-gutentags
+    {
+        "dhananjaylatkar/vim-gutentags",
+        event = "VeryLazy",
+        dependencies = {
+            "dhananjaylatkar/cscope_maps.nvim",
+            "folke/which-key.nvim",
+            "nvim-telescope/telescope.nvim",
+            -- "ibhagwan/fzf-lua",
+            "nvim-tree/nvim-web-devicons",
+        },
+        init = function()
+            vim.g.gutentags_modules = { "cscope_maps" } -- This is required. Other config is optional
+            vim.g.gutentags_cscope_build_inverted_index_maps = 1
+            vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp -e java"
+            vim.g.gutentags_cache_dir = tags_dir
+            vim.g.gutentags_project_root = {
+                ".git",
+                ".root",
+                ".project",
+                ".workspace",
+                "WORKSPACE",
+                "Cargo.toml",
+                "compile_commands.json",
+                "cscope.out",
+            }
+            vim.g.gutentags_ctags_tagfile = ".tags"
+            vim.g.gutentags_ctags_extra_args = { "--fields=+niazS", "--extra=+q", "--c++-kinds=+pxI", "--c-kinds=+px" }
+            -- vim.g.gutentags_trace = 1
+        end,
+        config = function()
+            require("cscope_maps").setup({
+                disable_maps = true,
+                skip_input_prompt = true,
+                cscope = {
+                    db_file = "./cscope.out",
+                    exec = "cscope", -- "cscope" or "gtags-cscope"
+                    picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
+                    skip_picker_for_single_result = false, -- "false" or "true"
+                    db_build_cmd_args = { "-Rbqkv" },
+                    statusline_indicator = nil,
+                },
+            })
+            local tags_dir = vim.fn.expand("~/.cache/tags")
+            if vim.fn.isdirectory(tags_dir) == 0 then
+                vim.fn.mkdir(tags_dir, "p")
+            end
+        end,
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: LSPs & treesitter
+
+    -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
+    {
+        "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        config = function()
+            require("mason").setup({})
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "clangd",
+                    "jdtls",
+                    "pyright",
+                    "bashls",
+                    "rust_analyzer",
+                    "lua_ls",
+                    "vimls",
+                    "html",
+                    "marksman",
+                },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/folke/neodev.nvim
+    {
+        "folke/neodev.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("neodev").setup({})
+        end,
+    },
+
+    -- Reference: https://github.com/rmagatti/goto-preview
+    {
+        "rmagatti/goto-preview",
+        event = "VeryLazy",
+        config = function()
+            require("goto-preview").setup({
+                default_mappings = false,
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/folke/trouble.nvim
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+        config = function()
+            local actions = require("telescope.actions")
+            local trouble = require("trouble.providers.telescope")
+            local telescope = require("telescope")
+            telescope.setup({
+                defaults = {
+                    mappings = {
+                        i = { ["<c-t>"] = trouble.open_with_trouble },
+                        n = { ["<c-t>"] = trouble.open_with_trouble },
+                    },
+                },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
+    {
+        "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+        event = "VeryLazy",
+        cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff" },
+        config = function()
+            require("toggle_lsp_diagnostics").init({
+                start_on = true,
+                -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.config()
+                underline = true,
+                virtual_text = false,
+                update_in_insert = false,
             })
         end,
     },
@@ -1223,6 +1313,105 @@ lvim.plugins = {
                         --     ["[d"] = "@conditional.outer",
                         -- },
                     },
+                },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/SmiteshP/nvim-navic
+    {
+        "SmiteshP/nvim-navic",
+        event = "VeryLazy",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+    },
+
+    -- Reference: https://github.com/simrat39/rust-tools.nvim
+    {
+        "simrat39/rust-tools.nvim",
+        event = "VeryLazy",
+        ft = "rust",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function()
+            require("rust-tools").setup({})
+        end,
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: nvim: project management
+
+    -- Reference: https://github.com/junegunn/fzf.vim
+    {
+        "junegunn/fzf.vim",
+        event = "VeryLazy",
+        dependencies = {
+            "junegunn/fzf",
+        },
+        cmd = {
+            "Files",
+            "GFiles",
+            "Buffers",
+            "Colors",
+            "Rg",
+            "Lines",
+            "BLines",
+            "Tags",
+            "BTags",
+            "Marks",
+            "Windows",
+            "Locate",
+            "History",
+            "Snippets",
+            "Commits",
+            "BCommits",
+            "Commands",
+            "Maps",
+            "Helptags",
+            "Filetypes",
+        },
+    },
+
+    -- Reference: https://github.com/MattesGroeger/vim-bookmarks
+    {
+        "MattesGroeger/vim-bookmarks",
+        event = "VeryLazy",
+    },
+
+    -----------------------------------------------------------------
+    -- NOTE: nvim: status line & notifications
+
+    -- Reference: https://github.com/folke/noice.nvim
+    {
+        "folke/noice.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = function()
+            require("noice").setup({
+                cmdline = {
+                    view = "cmdline",
+                    enable = false,
+                },
+                messages = {
+                    enable = false,
+                },
+                lsp = {
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true,
+                    },
+                },
+                presets = {
+                    bottom_search = true, -- use a classic bottom cmdline for search
+                    command_palette = true, -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = true, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
             })
         end,
@@ -1314,164 +1503,13 @@ lvim.plugins = {
         end,
     },
 
-    {
-        "AckslD/nvim-neoclip.lua",
-        event = "VeryLazy",
-        dependencies = {
-            { "kkharji/sqlite.lua", module = "sqlite" },
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = function()
-            local function is_whitespace(line)
-                return vim.fn.match(line, [[^\s*$]]) ~= -1
-            end
-            local function all(tbl, check)
-                for _, entry in ipairs(tbl) do
-                    if not check(entry) then
-                        return false
-                    end
-                end
-                return true
-            end
-            require("neoclip").setup({
-                history = 10000,
-                enable_persistent_history = true,
-                continuous_sync = true,
-                on_select = {
-                    move_to_front = true,
-                },
-                on_paste = {
-                    move_to_front = true,
-                },
-                on_replay = {
-                    move_to_front = true,
-                },
-                filter = function(data)
-                    return not all(data.event.regcontents, is_whitespace)
-                end,
-            })
-        end,
-    },
+    -----------------------------------------------------------------
+    -- NOTE: uncategorized
 
     -- Reference: https://github.com/ojroques/nvim-osc52
     {
         "ojroques/nvim-osc52",
         event = "VeryLazy",
-    },
-
-    -- Reference: https://github.com/kevinhwang91/nvim-ufo
-    {
-        "kevinhwang91/nvim-ufo",
-        event = "VeryLazy",
-        dependencies = {
-            "kevinhwang91/promise-async",
-        },
-        init = function()
-            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-            vim.o.foldcolumn = "1"
-            vim.o.foldlevel = 99
-            vim.o.foldlevelstart = 99
-            vim.o.foldenable = true
-        end,
-        config = function(_, opts)
-            local handler = function(virtText, lnum, endLnum, width, truncate)
-                local newVirtText = {}
-                local totalLines = vim.api.nvim_buf_line_count(0)
-                local foldedLines = endLnum - lnum
-                local suffix = (" ↙️ %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
-                local sufWidth = vim.fn.strdisplaywidth(suffix)
-                local targetWidth = width - sufWidth
-                local curWidth = 0
-                for _, chunk in ipairs(virtText) do
-                    local chunkText = chunk[1]
-                    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                    if targetWidth > curWidth + chunkWidth then
-                        table.insert(newVirtText, chunk)
-                    else
-                        chunkText = truncate(chunkText, targetWidth - curWidth)
-                        local hlGroup = chunk[2]
-                        table.insert(newVirtText, { chunkText, hlGroup })
-                        chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                        -- str width returned from truncate() may less than 2nd argument, need padding
-                        if curWidth + chunkWidth < targetWidth then
-                            suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-                        end
-                        break
-                    end
-                    curWidth = curWidth + chunkWidth
-                end
-                local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
-                suffix = (" "):rep(rAlignAppndx) .. suffix
-                table.insert(newVirtText, { suffix, "MoreMsg" })
-                return newVirtText
-            end
-            require("ufo").setup({
-                fold_virt_text_handler = handler,
-                provider_selector = function()
-                    return { "treesitter", "indent" }
-                end,
-            })
-        end,
-    },
-
-    -- Reference: https://github.com/folke/zen-mode.nvim
-    {
-        "folke/zen-mode.nvim",
-        event = "VeryLazy",
-        cmd = "ZenMode",
-        config = function()
-            require("zen-mode").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/ludovicchabant/vim-gutentags
-    {
-        "dhananjaylatkar/vim-gutentags",
-        event = "VeryLazy",
-        dependencies = {
-            "dhananjaylatkar/cscope_maps.nvim",
-            "folke/which-key.nvim",
-            "nvim-telescope/telescope.nvim",
-            -- "ibhagwan/fzf-lua",
-            "nvim-tree/nvim-web-devicons",
-        },
-        init = function()
-            vim.g.gutentags_modules = { "cscope_maps" } -- This is required. Other config is optional
-            vim.g.gutentags_cscope_build_inverted_index_maps = 1
-            vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp -e java"
-            vim.g.gutentags_cache_dir = tags_dir
-            vim.g.gutentags_project_root = {
-                ".git",
-                ".root",
-                ".project",
-                ".workspace",
-                "WORKSPACE",
-                "Cargo.toml",
-                "compile_commands.json",
-                "cscope.out",
-            }
-            vim.g.gutentags_ctags_tagfile = ".tags"
-            vim.g.gutentags_ctags_extra_args = { "--fields=+niazS", "--extra=+q", "--c++-kinds=+pxI", "--c-kinds=+px" }
-            -- vim.g.gutentags_trace = 1
-        end,
-        config = function()
-            require("cscope_maps").setup({
-                disable_maps = true,
-                skip_input_prompt = true,
-                cscope = {
-                    db_file = "./cscope.out",
-                    exec = "cscope", -- "cscope" or "gtags-cscope"
-                    picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
-                    skip_picker_for_single_result = false, -- "false" or "true"
-                    db_build_cmd_args = { "-Rbqkv" },
-                    statusline_indicator = nil,
-                },
-            })
-            local tags_dir = vim.fn.expand("~/.cache/tags")
-            if vim.fn.isdirectory(tags_dir) == 0 then
-                vim.fn.mkdir(tags_dir, "p")
-            end
-        end,
     },
 }
 
