@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
-index 7d442a2b..810c3c0c 100644
+index 7d442a2b..f77cd6ed 100644
 --- a/lua/lvim/core/which-key.lua
 +++ b/lua/lvim/core/which-key.lua
 @@ -104,24 +104,24 @@ M.config = function()
@@ -81,7 +81,7 @@ index 7d442a2b..810c3c0c 100644
          name = "Plugins",
          i = { "<cmd>Lazy install<cr>", "Install" },
          s = { "<cmd>Lazy sync<cr>", "Sync" },
-@@ -207,8 +207,8 @@ M.config = function()
+@@ -207,17 +207,25 @@ M.config = function()
        l = {
          name = "LSP",
          a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -92,7 +92,26 @@ index 7d442a2b..810c3c0c 100644
          f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
          i = { "<cmd>LspInfo<cr>", "Info" },
          I = { "<cmd>Mason<cr>", "Mason Info" },
-@@ -282,13 +282,13 @@ M.config = function()
++        -- j = {
++        --   "<cmd>lua vim.diagnostic.goto_next()<cr>",
++        --   "Next Diagnostic",
++        -- },
++        -- k = {
++        --   "<cmd>lua vim.diagnostic.goto_prev()<cr>",
++        --   "Prev Diagnostic",
++        -- },
+         j = {
+-          "<cmd>lua vim.diagnostic.goto_next()<cr>",
++          "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded' }})<cr>",
+           "Next Diagnostic",
+         },
+         k = {
+-          "<cmd>lua vim.diagnostic.goto_prev()<cr>",
++          "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded' }})<cr>",
+           "Prev Diagnostic",
+         },
+         l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+@@ -282,13 +290,13 @@ M.config = function()
          name = "Search",
          b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
          c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
