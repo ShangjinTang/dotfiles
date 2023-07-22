@@ -119,17 +119,24 @@ wk.register({
     },
     ["[t"] = { "<cmd>lua require('todo-comments').jump_prev()<cr>", "Prev Todo-Comment" },
     ["]t"] = { "<cmd>lua require('todo-comments').jump_next()<cr>", "Next Todo-Comment" },
+    ["[m"] = { "<cmd>BookmarkPrev<cr>", "Prev Bookmark" },
+    ["]m"] = { "<cmd>BookmarkNext<cr>", "Next Bookmark" },
 
     ["gD"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["gI"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
     ["gT"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
     ["gR"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
-
     ["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", "(Preview) Goto References" },
     ["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", "(Preview) Goto Implementation" },
     ["gt"] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<cr>", "(Preview) Goto Type Definition" },
     ["gr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<cr>", "(Preview) Goto References" },
     ["gp"] = { "<cmd>lua require('goto-preview').close_all_win()<cr>", "(Preview) Close Window" },
+
+    ["mm"] = { "<cmd>BookmarkToggle<cr>", "Bookmark Toggle" },
+    ["ma"] = { "<cmd>BookmarkShowAll<cr>", "Bookmark Show All" },
+    ["mi"] = { "<cmd>BookmarkAnnotate<cr>", "Bookmark Annotate" },
+    ["mx"] = { "<cmd>BookmarkClearAll<cr>", "Bookmark Clear All" },
+    ["mc"] = { "<cmd>BookmarkClear<cr>", "Bookmark Clear" },
 
     ["<leader>["] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
     ["<leader>]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
