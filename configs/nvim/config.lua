@@ -1378,6 +1378,9 @@ lvim.plugins = {
     {
         "MattesGroeger/vim-bookmarks",
         event = "VeryLazy",
+        init = function()
+            vim.g.bookmark_no_default_key_mappings = 1
+        end,
     },
 
     -----------------------------------------------------------------
