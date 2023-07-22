@@ -316,8 +316,6 @@ function set_key_bindings()
         wk.register({
             ["<CR>"] = { "<cmd>MkdnEnter<cr>", "Follow or Insert Link / Header Collapse" },
             ["<BS>"] = { "<cmd>MkdnGoBack<cr>", "Go Back" },
-            ["<S-Tab>"] = { "<cmd>MkdnPrevLink<cr>", "Previous Link" },
-            ["<Tab>"] = { "<cmd>MkdnNextLink<cr>", "Next Link" },
             ["[["] = { "<cmd>MkdnPrevHeading<cr>", "Previous Heading" },
             ["]]"] = { "<cmd>MkdnNextHeading<cr>", "Next Heading" },
             ["o"] = { "<cmd>MkdnNewListItemBelowInsert<cr>", "Insert Below (list-supported)" },
