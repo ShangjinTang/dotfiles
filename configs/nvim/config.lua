@@ -2,27 +2,51 @@
  THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
  `lvim` is the global options object
 ]]
--- general
-lvim.log.level = "info"
+----------------------------------------------------------------------
+-- General Settings
 
+-- vim options
 -- specify the python3 we use as nvim python
 vim.g.python3_host_prog = os.getenv("PYTHON3_HOST_PROG")
 -- save "TERMINAL_THEME" ('light' / 'dark')
 vim.opt.background = os.getenv("TERMINAL_THEME")
 
--- to disable icons and use a minimalist setup, uncomment the following
--- lvim.use_icons = false
-
--- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
+lvim.log.level = "info"
 lvim.leader = "space"
 
--- -- Change theme settings
+-- themes
 lvim.colorscheme = "catppuccin"
 lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
 
+-- to disable icons and use a minimalist setup, uncomment the following
+-- lvim.use_icons = false
+
+----------------------------------------------------------------------
+-- Simple builtin configs
+
+-- Dashboard (based on alpha.nvim)
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
+
+-- Git Blame Virtual Text at Current Line
+lvim.builtin.gitsigns.opts.current_line_blame = true
+
+-- Disable lir for oil.nvim
+lvim.builtin.lir.active = false
+
+-- Nvim Tree
+lvim.builtin.nvimtree.setup.disable_netrw = true
+lvim.builtin.nvimtree.setup.view = {
+    adaptive_size = true,
+    side = "left",
+}
+lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = false
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+
+-- Project Settings
 lvim.builtin.project.manual_mode = false
 lvim.builtin.project.silent_chdir = false
-lvim.builtin.project.patters = {
+lvim.builtin.project.patterns = {
     ".git",
     ".root",
     ".project",
@@ -32,18 +56,9 @@ lvim.builtin.project.patters = {
     "compile_commands.json",
     "cscope.out",
 }
-lvim.builtin.lir.active = false
 
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.disable_netrw = true
-lvim.builtin.nvimtree.setup.view = {
-    adaptive_size = true,
-    side = "left",
-}
-lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = false
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+----------------------------------------------------------------------
+-- lualine
 
 local lualine_components = require("lvim.core.lualine.components")
 lvim.builtin.lualine = {
@@ -87,6 +102,9 @@ lvim.builtin.lualine = {
         },
     },
 }
+
+----------------------------------------------------------------------
+-- treesitter
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
@@ -151,6 +169,9 @@ lvim.builtin.treesitter.ensure_installed = {
 --   --Enable completion triggered by <c-x><c-o>
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
+
+----------------------------------------------------------------------
+-- null-ls
 
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
 if os.getenv("FORMAT_ON_SAVE") == "true" then
@@ -235,6 +256,9 @@ linters.setup({
 --     },
 -- })
 
+----------------------------------------------------------------------
+-- telescope
+
 -- Telescope window width & height
 lvim.builtin.telescope = {
     defaults = {
@@ -250,6 +274,9 @@ lvim.lsp.buffer_mappings = {
     insert_mode = {},
     visual_mode = {},
 }
+
+----------------------------------------------------------------------
+-- plugins
 
 -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
@@ -1402,6 +1429,9 @@ lvim.plugins = {
         end,
     },
 }
+
+----------------------------------------------------------------------
+-- LSP
 
 local navic = require("nvim-navic")
 local lsp_on_attach = function(client, bufnr)
