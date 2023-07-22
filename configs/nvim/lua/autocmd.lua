@@ -90,4 +90,5 @@ vim.api.nvim_create_autocmd({
         require("neotest").run.run(vim.fn.getcwd())
     end,
 })
+
 --------------------------------------------------------------------------------
