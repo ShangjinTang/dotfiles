@@ -1523,6 +1523,15 @@ lvim.plugins = {
         "ojroques/nvim-osc52",
         event = "VeryLazy",
     },
+
+    -- Reference: https://github.com/rafcamlet/nvim-luapad
+    {
+        "rafcamlet/nvim-luapad",
+        event = "VeryLazy",
+        config = function()
+            require("luapad").setup({})
+        end,
+    },
 }
 
 ----------------------------------------------------------------------
