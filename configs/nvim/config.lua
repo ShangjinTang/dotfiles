@@ -1549,6 +1549,16 @@ lvim.plugins = {
             require("luapad").setup({})
         end,
     },
+
+    -- NOTE: dropbar requires nvim >= 0.10.0
+    -- Reference: https://github.com/Bekaboo/dropbar.nvim
+    -- {
+    --     "Bekaboo/dropbar.nvim",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("dropbar").setup({})
+    --     end,
+    -- },
 }
 
 ----------------------------------------------------------------------
