@@ -72,19 +72,19 @@ wk.register({
     ["<C-y>"] = { "Scroll Up (a few lines)" },
     ["<C-e>"] = { "Scroll Down (a few lines)" },
 
-    ["<S-Left>"] = {
+    ["gH"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>H", true, true, true), "n", true)<CR>',
         "Window: Move to left",
     },
-    ["<S-Right>"] = {
+    ["gL"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>L", true, true, true), "n", true)<CR>',
         "Window: Move to right",
     },
-    ["<S-Up>"] = {
+    ["gK"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>K", true, true, true), "n", true)<CR>',
         "Window: Move to top",
     },
-    ["<S-Down>"] = {
+    ["gJ"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true), "n", true)<CR>',
         "Window: Move to bottom",
     },
