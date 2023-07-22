@@ -108,29 +108,5 @@ augroup misc
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup end
 
-" ----------------------------------------------------------
-" switch.vim
-
-" Don't use default mappings
-let g:speeddating_no_mappings = 1
-let b:switch_custom_definitions = [ [], ]
-augroup switch_definition_on_filetype
-    autocmd!
-    autocmd FileType markdown let b:switch_custom_definitions = [
-                \ ['[ ]', '[x]'],
-                \ ['# ', '## ', '### ', '#### ', '##### ', '###### ' ],
-                \ ]
-augroup end
-
-" Avoid issues because of us remapping <c-a> and <c-x> below
-nnoremap <silent> <Plug>SpeedDatingFallbackUp <c-a>
-nnoremap <silent> <Plug>SpeedDatingFallbackDown <c-x>
-
-" Manually invoke speeddating in case switch didn't work
-nnoremap <silent> <c-a> :if !switch#Switch() <bar>
-      \ call speeddating#increment(v:count1) <bar> endif<cr>
-nnoremap <silent> <c-x> :if !switch#Switch({'reverse': 1}) <bar>
-      \ call speeddating#increment(-v:count1) <bar> endif<cr>
-
 " ====================================================================
 " ====================================================================

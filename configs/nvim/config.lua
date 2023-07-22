@@ -490,6 +490,44 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/monaqa/dial.nvim
+    {
+        "monaqa/dial.nvim",
+        event = "VeryLazy",
+        config = function()
+            local augend = require("dial.augend")
+            require("dial.config").augends:register_group({
+                default = {
+                    augend.integer.alias.decimal_int,
+                    augend.integer.alias.hex,
+                    augend.date.alias["%Y/%m/%d"],
+                    augend.date.alias["%Y-%m-%d"],
+                    augend.date.alias["%m/%d"],
+                    augend.date.alias["%H:%M"],
+                    augend.constant.alias.bool,
+                    -- augend.constant.new({
+                    --     elements = { "and", "or" },
+                    --     word = true, -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
+                    --     cyclic = true, -- "or" is incremented into "and".
+                    -- }),
+                    -- augend.constant.new({
+                    --     elements = { "&&", "||" },
+                    --     word = false,
+                    --     cyclic = true,
+                    -- }),
+                },
+            })
+            vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), { noremap = true })
+            vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), { noremap = true })
+            vim.keymap.set("n", "g<C-a>", require("dial.map").inc_gnormal(), { noremap = true })
+            vim.keymap.set("n", "g<C-x>", require("dial.map").dec_gnormal(), { noremap = true })
+            vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), { noremap = true })
+            vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), { noremap = true })
+            vim.keymap.set("v", "g<C-a>", require("dial.map").inc_gvisual(), { noremap = true })
+            vim.keymap.set("v", "g<C-x>", require("dial.map").dec_gvisual(), { noremap = true })
+        end,
+    },
+
     -- Reference: https://github.com/sindrets/diffview.nvim
     {
         "sindrets/diffview.nvim",
@@ -537,16 +575,6 @@ lvim.plugins = {
         config = function()
             require("copilot").setup()
         end,
-    },
-
-    -- Reference: https://github.com/AndrewRadev/switch.vim
-    {
-        "AndrewRadev/switch.vim",
-        dependencies = {
-            "tpope/vim-speeddating",
-        },
-        event = "VeryLazy",
-        config = function() end,
     },
 
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
