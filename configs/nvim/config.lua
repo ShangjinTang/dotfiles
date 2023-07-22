@@ -1438,7 +1438,7 @@ lvim.plugins = {
         init = function()
             vim.g.gutentags_modules = { "cscope_maps" } -- This is required. Other config is optional
             vim.g.gutentags_cscope_build_inverted_index_maps = 1
-            vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp"
+            vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp -e java"
             vim.g.gutentags_cache_dir = tags_dir
             vim.g.gutentags_project_root = {
                 ".git",

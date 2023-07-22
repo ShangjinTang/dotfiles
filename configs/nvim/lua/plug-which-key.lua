@@ -281,6 +281,14 @@ wk.register({
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+-- Global Mappings: only normal mode
+
+wk.register({
+    ["<Bslash>"] = { "SnipRun" },
+}, visual_mode)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Conditional Mappings: FileType
 
 vim.cmd("autocmd FileType * lua set_key_bindings()")
@@ -366,62 +374,62 @@ function set_key_bindings()
     -- cscope_maps.nvim
     if ftype == "c" or ftype == "cpp" or ftype == "java" then
         wk.register({
-            ["<leader>c"] = { name = "+Cscope" },
-            ["<leader>cs"] = {
+            ["<Bslash>"] = { name = "+Cscope" },
+            ["<Bslash>s"] = {
                 function()
                     vim.api.nvim_command("Cscope find s " .. vim.fn.expand("<cword>"))
                 end,
                 "Find this symbol",
             },
-            ["<leader>cg"] = {
+            ["<Bslash>g"] = {
                 function()
                     vim.api.nvim_command("Cscope find g " .. vim.fn.expand("<cword>"))
                 end,
                 "Find this global definition",
             },
-            ["<leader>cd"] = {
+            ["<Bslash>d"] = {
                 function()
                     vim.api.nvim_command("Cscope find d " .. vim.fn.expand("<cword>"))
                 end,
                 "Find functions called by this function",
             },
-            ["<leader>cc"] = {
+            ["<Bslash>c"] = {
                 function()
                     vim.api.nvim_command("Cscope find c " .. vim.fn.expand("<cword>"))
                 end,
                 "Find functions calling this function",
             },
-            ["<leader>ct"] = {
+            ["<Bslash>t"] = {
                 function()
                     vim.api.nvim_command("Cscope find t " .. vim.fn.expand("<cword>"))
                 end,
                 "Find this text string",
             },
-            ["<leader>ce"] = {
+            ["<Bslash>e"] = {
                 function()
                     vim.api.nvim_command("Cscope find e " .. vim.fn.expand("<cword>"))
                 end,
                 "Find this egrep pattern",
             },
-            ["<leader>cf"] = {
+            ["<Bslash>f"] = {
                 function()
                     vim.api.nvim_command("Cscope find f " .. vim.fn.expand("<cword>"))
                 end,
                 "Find this file",
             },
-            ["<leader>ci"] = {
+            ["<Bslash>i"] = {
                 function()
                     vim.api.nvim_command("Cscope find i " .. vim.fn.expand("<cword>"))
                 end,
                 "Find files #including this file",
             },
-            ["<leader>ca"] = {
+            ["<Bslash>a"] = {
                 function()
                     vim.api.nvim_command("Cscope find a " .. vim.fn.expand("<cword>"))
                 end,
                 "Find assignments to this symbol",
             },
-            ["<leader>cb"] = { "<cmd>Cscope build<cr>", "build cscope database" },
+            ["<Bslash>b"] = { "<cmd>Cscope build<cr>", "build cscope database" },
             -- ["Ctrl-]"] = {
             --     function()
             --         vim.api.nvim_command("Cstag" .. vim.fn.expand("<cword>"))
