@@ -888,6 +888,15 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 
+    -- Reference: https://github.com/nvim-focus/focus.nvim
+    {
+        "nvim-focus/focus.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("focus").setup({})
+        end,
+    },
+
     -----------------------------------------------------------------
     -- NOTE: git
 
