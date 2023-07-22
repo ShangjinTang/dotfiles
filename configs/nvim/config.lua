@@ -670,6 +670,17 @@ lvim.plugins = {
         },
     },
 
+    -- Reference: https://github.com/rmagatti/goto-preview
+    {
+        "rmagatti/goto-preview",
+        event = "VeryLazy",
+        config = function()
+            require("goto-preview").setup({
+                default_mappings = false,
+            })
+        end,
+    },
+
     -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",

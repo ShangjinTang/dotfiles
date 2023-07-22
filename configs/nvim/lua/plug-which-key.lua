@@ -72,6 +72,27 @@ wk.register({
     ["<C-y>"] = { "Scroll Up (a few lines)" },
     ["<C-e>"] = { "Scroll Down (a few lines)" },
 
+    ["<S-Left>"] = {
+        '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>H", true, true, true), "n", true)<CR>',
+        "Window: Move to left",
+    },
+    ["<S-Right>"] = {
+        '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>L", true, true, true), "n", true)<CR>',
+        "Window: Move to right",
+    },
+    ["<S-Up>"] = {
+        '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>K", true, true, true), "n", true)<CR>',
+        "Window: Move to top",
+    },
+    ["<S-Down>"] = {
+        '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true), "n", true)<CR>',
+        "Window: Move to bottom",
+    },
+    -- [""] = {
+    --     '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>T", true, true, true), "n", true)<CR>',
+    --     "Window: Move to new tab",
+    -- },
+
     ["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank History (neoclip)" },
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["K"] = {
@@ -83,10 +104,17 @@ wk.register({
         end,
         "Hover",
     },
-    ["gd"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
-    ["gi"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
-    ["gt"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
-    ["gr"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
+
+    ["gD"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
+    ["gI"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
+    ["gT"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
+    ["gR"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
+
+    ["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", "(Preview) Goto References" },
+    ["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", "(Preview) Goto Implementation" },
+    ["gt"] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<cr>", "(Preview) Goto Type Definition" },
+    ["gr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<cr>", "(Preview) Goto References" },
+    ["gp"] = { "<cmd>lua require('goto-preview').close_all_win()<cr>", "(Preview) Close Window" },
 
     ["<leader>["] = { "<cmd>BufferLineCyclePrev<cr>", "Previous Buffer" },
     ["<leader>]"] = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
