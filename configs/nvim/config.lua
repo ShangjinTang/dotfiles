@@ -845,6 +845,44 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/karb94/neoscroll.nvim
+    {
+        "karb94/neoscroll.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("neoscroll").setup({
+                mappings = {
+                    "<C-u>",
+                    "<C-d>",
+                    "<C-b>",
+                    "<C-f>",
+                    "<C-y>",
+                    "<C-e>",
+                    "zt",
+                    "zz",
+                    "zb",
+                    -- Add PageUp & PageDown
+                    "<PageUp>",
+                    "<PageDown>",
+                },
+            })
+            local t = {}
+            t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
+            t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+            t["<C-b>"] = { "scroll", { "-vim.api.nvim_win_get_height(0)", "true", "450" } }
+            t["<C-f>"] = { "scroll", { "vim.api.nvim_win_get_height(0)", "true", "450" } }
+            t["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
+            t["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
+            t["zt"] = { "zt", { "250" } }
+            t["zz"] = { "zz", { "250" } }
+            t["zb"] = { "zb", { "250" } }
+            -- Add PageUp & PageDown
+            t["<PageUp>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
+            t["<PageDown>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+            require("neoscroll.config").set_mappings(t)
+        end,
+    },
+
     -- Reference: https://github.com/petertriho/nvim-scrollbar
     {
         "petertriho/nvim-scrollbar",
