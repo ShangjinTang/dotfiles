@@ -216,6 +216,7 @@ wk.register({
     ["<leader>mn"] = { "<cmd>Telekasten new_note<cr>", "New Note" },
     ["<leader>mc"] = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
 
+    ["z"] = { name = "+Fold / Redraw" },
     ["zo"] = { "Open Fold" },
     ["zO"] = { "Open Folds Recursively" },
     ["zc"] = { "Close Fold" },
@@ -228,11 +229,19 @@ wk.register({
     ["zk"] = { "Move up to end of previous fold" },
     ["zn"] = { "Disable Fold (enforce open)" },
     ["zN"] = { "Enable Fold (enforce fold)" },
-    ["zx"] = { "Reset Fold (use current 'foldlevel')" },
+    ["zv"] = { "View Current Fold" },
+    ["zx"] = { "Reset Fold and View Current Fold (apply 'foldlevel')" },
+    ["zX"] = { "Reset Fold (apply 'foldlevel')" },
     ["zm"] = { require("ufo").closeFoldsWith, "Close All Folds (level prefix-num or 0)" },
     ["zM"] = { require("ufo").closeAllFolds, "Close All Folds (level 0)" },
     ["zr"] = { require("ufo").openFoldsExceptKinds, "Open Folds except Kinds (foldlevel max)" },
     ["zR"] = { require("ufo").openAllFolds, "Open All Folds (level max)" },
+    ["zt"] = { "Top Redraw" },
+    -- ["z<CR>"] = { "Top Redraw (cursor move to '^')" },
+    ["zz"] = { "Center Redraw" },
+    -- ["z."] = { "Center Redraw (cursor move to '^')" },
+    ["zb"] = { "Bottom Redraw" },
+    -- ["z-"] = { "Bottom Redraw (cursor move to '^')" },
 }, normal_mode)
 
 --------------------------------------------------------------------------------
