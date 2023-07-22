@@ -658,6 +658,24 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/Pocco81/auto-save.nvim
+    {
+        "Pocco81/auto-save.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("auto-save").setup({
+                enable = true,
+                execution_message = {
+                    message = function() -- message to print on save
+                        -- return ("AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"))
+                        return ""
+                    end,
+                },
+                trigger_events = { "InsertLeave" },
+            })
+        end,
+    },
+
     -----------------------------------------------------------------
     -- NOTE: file non-edit enhancement: move, highlight, show
 
@@ -665,7 +683,6 @@ lvim.plugins = {
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        opts = {},
     },
 
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
