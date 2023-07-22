@@ -206,7 +206,8 @@ wk.register({
     ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
 
     ["<leader>ld"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Buffer Diagnostics" },
-    ["<leader>lt"] = { "<cmd>ToggleDiag<cr>", "Toggle Diagnostics" },
+    ["<leader>lt"] = { "<cmd>ToggleDiag<cr>", "Toggle on/off Default Diagnostics" },
+    ["<leader>lT"] = { "<cmd>ToggleDiagOn<cr>", "Toggle on All Diagnostics" },
     ["<leader>lD"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 
     ["<leader>o"] = { name = "+Open with" },

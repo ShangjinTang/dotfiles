@@ -690,7 +690,11 @@ lvim.plugins = {
         cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff" },
         config = function()
             require("toggle_lsp_diagnostics").init({
-                start_on = true, -- Toggle diagnostics on or off on start
+                start_on = true,
+                -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.config()
+                underline = true,
+                virtual_text = false,
+                update_in_insert = false,
             })
         end,
     },
