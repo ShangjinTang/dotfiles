@@ -65,8 +65,14 @@ wk.register({
 -- Global Mappings: only normal mode
 
 wk.register({
-    ["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank History (neoclip)" },
+    ["<C-b>"] = { "Scroll Backward (1 Screen)" },
+    ["<C-f>"] = { "Scroll Forward (1 Screen)" },
+    ["<C-u>"] = { "Scroll Up (1/2 Screen)" },
+    ["<C-d>"] = { "Scroll Down (1/2 Screen)" },
+    ["<C-y>"] = { "Scroll Up (a few lines)" },
+    ["<C-e>"] = { "Scroll Down (a few lines)" },
 
+    ["<leader>y"] = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank History (neoclip)" },
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["K"] = {
         function()
