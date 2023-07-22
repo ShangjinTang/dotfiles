@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
-index 7d442a2b..f77cd6ed 100644
+index 7d442a2b..f62f5db1 100644
 --- a/lua/lvim/core/which-key.lua
 +++ b/lua/lvim/core/which-key.lua
 @@ -104,24 +104,24 @@ M.config = function()
@@ -81,7 +81,17 @@ index 7d442a2b..f77cd6ed 100644
          name = "Plugins",
          i = { "<cmd>Lazy install<cr>", "Install" },
          s = { "<cmd>Lazy sync<cr>", "Sync" },
-@@ -207,17 +207,25 @@ M.config = function()
+@@ -183,7 +183,8 @@ M.config = function()
+         g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
+         j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
+         k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
+-        l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
++        -- l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
++        l = { "<cmd>lua require 'gitsigns'.blame_line({ full = true })<cr>", "Blame" },
+         p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+         r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+         R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+@@ -207,17 +208,25 @@ M.config = function()
        l = {
          name = "LSP",
          a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -111,7 +121,7 @@ index 7d442a2b..f77cd6ed 100644
            "Prev Diagnostic",
          },
          l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-@@ -282,13 +290,13 @@ M.config = function()
+@@ -282,13 +291,13 @@ M.config = function()
          name = "Search",
          b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
          c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
