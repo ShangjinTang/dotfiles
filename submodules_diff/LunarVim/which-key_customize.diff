@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
-index 7d442a2b..a1097f6d 100644
+index 7d442a2b..538f4f5f 100644
 --- a/lua/lvim/core/which-key.lua
 +++ b/lua/lvim/core/which-key.lua
 @@ -104,24 +104,24 @@ M.config = function()
@@ -91,7 +91,7 @@ index 7d442a2b..a1097f6d 100644
 +        -- j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
 +        -- k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
 +        -- l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-+        l = { "<cmd>lua require 'gitsigns'.blame_line({ full =true)<cr>", "Blame" },
++        l = { "<cmd>lua require 'gitsigns'.blame_line({ full =true })<cr>", "Blame" },
          p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
          r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
          R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
