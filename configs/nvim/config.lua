@@ -31,7 +31,7 @@ lvim.builtin.alpha.mode = "dashboard"
 -- Git Blame Virtual Text at Current Line
 lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.current_line_blame_formatter =
-    "  <abbrev_sha>  <author>, <author_time:%Y-%m-%d> - <summary>"
+    "   <abbrev_sha>  <author>, <author_time:%Y-%m-%d> - <summary>"
 
 -- Disable lir for oil.nvim
 lvim.builtin.lir.active = false
@@ -1232,8 +1232,9 @@ lvim.plugins = {
                         close = "<C-c>k",
                     },
                 },
-                implement = {
+                lightbulb = {
                     enable = true,
+                    sign = false,
                 },
             })
         end,
