@@ -1563,6 +1563,23 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/kevinhwang91/nvim-bqf
+    {
+        "kevinhwang91/nvim-bqf",
+        event = "VeryLazy",
+        dependencies = {
+            "junegunn/fzf",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("bqf").setup({
+                preview = {
+                    winblend = 0, -- transparent background
+                },
+            })
+        end,
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
