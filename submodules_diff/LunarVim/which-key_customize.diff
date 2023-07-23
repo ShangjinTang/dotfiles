@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
-index 7d442a2b..5700eefb 100644
+index 7d442a2b..a1097f6d 100644
 --- a/lua/lvim/core/which-key.lua
 +++ b/lua/lvim/core/which-key.lua
 @@ -104,24 +104,24 @@ M.config = function()
@@ -95,12 +95,15 @@ index 7d442a2b..5700eefb 100644
          p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
          r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
          R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-@@ -207,19 +208,19 @@ M.config = function()
+@@ -206,23 +207,25 @@ M.config = function()
+       },
        l = {
          name = "LSP",
-         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 -        d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
 -        w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
++        -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
++        a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
 +        -- d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
 +        -- w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
          f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
@@ -124,8 +127,13 @@ index 7d442a2b..5700eefb 100644
 +        -- },
          l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
          q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-         r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-@@ -282,13 +283,13 @@ M.config = function()
+-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
++        -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
++        r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+         S = {
+           "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+@@ -282,13 +285,13 @@ M.config = function()
          name = "Search",
          b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
          c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
