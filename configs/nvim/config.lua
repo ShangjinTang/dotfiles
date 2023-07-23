@@ -1618,6 +1618,12 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/ThePrimeagen/vim-be-good
+    {
+        "ThePrimeagen/vim-be-good",
+        event = "VeryLazy",
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
