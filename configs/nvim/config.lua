@@ -665,6 +665,7 @@ lvim.plugins = {
     {
         "folke/flash.nvim",
         event = "VeryLazy",
+        opts = {},
     },
 
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
