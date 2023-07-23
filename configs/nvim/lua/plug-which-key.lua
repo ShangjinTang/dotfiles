@@ -72,19 +72,19 @@ wk.register({
     ["<C-y>"] = { "Scroll Up (a few lines)" },
     ["<C-e>"] = { "Scroll Down (a few lines)" },
 
-    ["gH"] = {
+    ["<S-Left>"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>H", true, true, true), "n", true)<CR>',
         "Window: Move to left",
     },
-    ["gL"] = {
+    ["<S-Right>"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>L", true, true, true), "n", true)<CR>',
         "Window: Move to right",
     },
-    ["gK"] = {
+    ["<S-Up>"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>K", true, true, true), "n", true)<CR>',
         "Window: Move to top",
     },
-    ["gJ"] = {
+    ["<S-Down>"] = {
         '<Cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true), "n", true)<CR>',
         "Window: Move to bottom",
     },
@@ -99,7 +99,8 @@ wk.register({
         function()
             local winid = require("ufo").peekFoldedLinesUnderCursor()
             if not winid then
-                vim.lsp.buf.hover()
+                -- vim.lsp.buf.hover()
+                vim.api.nvim_command("Lspsaga hover_doc")
             end
         end,
         "Hover",
@@ -110,11 +111,13 @@ wk.register({
     ["[g"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
     ["]g"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
     ["[d"] = {
-        "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded' }})<cr>",
+        -- "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded' }})<cr>",
+        "<cmd>Lspsaga diagnostic_jump_prev<cr>",
         "Prev Diagnostic",
     },
     ["]d"] = {
-        "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded' }})<cr>",
+        -- "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded' }})<cr>",
+        "<cmd>Lspsaga diagnostic_jump_next<cr>",
         "Next Diagnostic",
     },
     ["[t"] = { "<cmd>lua require('todo-comments').jump_prev()<cr>", "Prev Todo-Comment" },
@@ -122,15 +125,13 @@ wk.register({
     ["[m"] = { "<cmd>BookmarkPrev<cr>", "Prev Bookmark" },
     ["]m"] = { "<cmd>BookmarkNext<cr>", "Next Bookmark" },
 
-    ["gD"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
-    ["gI"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
-    ["gT"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
-    ["gR"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
-    ["gd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", "(Preview) Goto References" },
-    ["gi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", "(Preview) Goto Implementation" },
-    ["gt"] = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<cr>", "(Preview) Goto Type Definition" },
-    ["gr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<cr>", "(Preview) Goto References" },
-    ["gp"] = { "<cmd>lua require('goto-preview').close_all_win()<cr>", "(Preview) Close Window" },
+    -- ["gd"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
+    ["gd"] = { "<cmd>Lspsaga peek_definition<cr>", "Lspsaga Peek Definition" },
+    ["gi"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
+    -- ["gt"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
+    ["gt"] = { "<cmd>Lspsaga peek_type_definition<cr>", "Lspsaga Peek Type Definition" },
+    ["gr"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
+    ["gl"] = { "<cmd>Lspsaga finder tyd+def+ref+imp<cr>", "Lspsaga Finder" },
 
     ["mm"] = { "<cmd>BookmarkToggle<cr>", "Bookmark Toggle" },
     ["ma"] = { "<cmd>BookmarkShowAll<cr>", "Bookmark Show All" },

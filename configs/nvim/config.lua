@@ -1197,23 +1197,53 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/nvimdev/lspsaga.nvim
+    {
+        "nvimdev/lspsaga.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            -- See: https://github.com/nvimdev/lspsaga.nvim/blob/main/lua/lspsaga/init.lua
+            require("lspsaga").setup({
+                finder = {
+                    methods = {
+                        tyd = "textDocument/typeDefinition",
+                    },
+                    keys = {
+                        shuttle = "<Tab>",
+                        toggle_or_open = "<CR>",
+                        vsplit = "|",
+                        split = "-",
+                        tabe = "+",
+                        quit = "q",
+                        close = "<C-c>k",
+                    },
+                },
+                definition = {
+                    keys = {
+                        edit = "<CR>",
+                        vsplit = "|",
+                        split = "-",
+                        tabe = "+",
+                        quit = "q",
+                        close = "<C-c>k",
+                    },
+                },
+                implement = {
+                    enable = true,
+                },
+            })
+        end,
+    },
+
     -- Reference: https://github.com/folke/neodev.nvim
     {
         "folke/neodev.nvim",
         event = "VeryLazy",
         config = function()
             require("neodev").setup({})
-        end,
-    },
-
-    -- Reference: https://github.com/rmagatti/goto-preview
-    {
-        "rmagatti/goto-preview",
-        event = "VeryLazy",
-        config = function()
-            require("goto-preview").setup({
-                default_mappings = false,
-            })
         end,
     },
 
