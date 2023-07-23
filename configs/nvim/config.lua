@@ -298,7 +298,6 @@ lvim.plugins = {
         priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
-            "rcarriga/nvim-dap-ui",
         },
         config = function()
             require("catppuccin").setup({
@@ -396,11 +395,6 @@ lvim.plugins = {
             require("bufferline").setup({
                 highlights = require("catppuccin.groups.integrations.bufferline").get(),
             })
-            require("dap")
-            local sign = vim.fn.sign_define
-            sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-            sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-            sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
         end,
     },
 
@@ -410,14 +404,12 @@ lvim.plugins = {
     -- Reference: https://github.com/skywind3000/asyncrun.vim
     {
         "skywind3000/asyncrun.vim",
-        event = "VeryLazy",
         cmd = "AsyncRun",
     },
 
     -- Reference: https://github.com/skywind3000/asynctasks.vim
     {
         "skywind3000/asynctasks.vim",
-        event = "VeryLazy",
         cmd = {
             "AsyncTask",
             "AsyncTaskList",
@@ -435,7 +427,7 @@ lvim.plugins = {
     -- Reference: https://github.com/GustavoKatel/telescope-asynctasks.nvim
     {
         "GustavoKatel/telescope-asynctasks.nvim",
-        event = "VeryLazy",
+        lazy = true,
         dependencies = {
             "skywind3000/asynctasks.vim",
         },
@@ -485,10 +477,10 @@ lvim.plugins = {
     -- Reference: https://github.com/zbirenbaum/copilot-cmp
     {
         "zbirenbaum/copilot-cmp",
+        event = "VeryLazy",
         dependencies = {
             "zbirenbaum/copilot.lua",
         },
-        event = "VeryLazy",
         config = function()
             require("copilot_cmp").setup()
         end,
@@ -510,7 +502,7 @@ lvim.plugins = {
     -- Reference: https://github.com/danymat/neogen
     {
         "danymat/neogen",
-        event = "VeryLazy",
+        cmd = "Neogen",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
@@ -537,7 +529,7 @@ lvim.plugins = {
     -- Reference: https://github.com/monaqa/dial.nvim
     {
         "monaqa/dial.nvim",
-        event = "VeryLazy",
+        keys = { { "<C-a>" }, { "<C-x>" } },
         config = function()
             local augend = require("dial.augend")
             require("dial.config").augends:register_group({
@@ -575,7 +567,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-pack/nvim-spectre
     {
         "nvim-pack/nvim-spectre",
-        event = "VeryLazy",
+        cmd = "Spectre",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
@@ -608,6 +600,7 @@ lvim.plugins = {
     -- Reference: https://github.com/windwp/nvim-ts-autotag
     {
         "windwp/nvim-ts-autotag",
+        ft = { "php", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "markdown", "xml" },
         config = function()
             require("nvim-ts-autotag").setup({})
         end,
@@ -616,7 +609,7 @@ lvim.plugins = {
     -- Reference: https://github.com/gbprod/substitute.nvim
     {
         "gbprod/substitute.nvim",
-        lazy = true,
+        event = "VeryLazy",
         config = function()
             require("substitute").setup({})
         end,
@@ -625,7 +618,7 @@ lvim.plugins = {
     -- Reference: https://github.com/stevearc/oil.nvim
     {
         "stevearc/oil.nvim",
-        -- event = "VeryLazy",
+        lazy = false, -- to make "nvim ." work
         config = function()
             require("oil").setup({
                 columns = {
@@ -665,7 +658,7 @@ lvim.plugins = {
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        opts = {},
+        config = true,
     },
 
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
@@ -726,6 +719,7 @@ lvim.plugins = {
     -- Reference: https://github.com/norcalli/nvim-colorizer.lua
     {
         "norcalli/nvim-colorizer.lua",
+        ft = { "css", "javascript", "html", "tmux", "yaml", "zsh", "json", "lua", "markdown" },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
@@ -739,6 +733,7 @@ lvim.plugins = {
                 "zsh",
                 "json",
                 "lua",
+                "markdown",
             })
         end,
     },
@@ -746,6 +741,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/todo-comments.nvim
     {
         "folke/todo-comments.nvim",
+        event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
@@ -757,7 +753,6 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/zen-mode.nvim
     {
         "folke/zen-mode.nvim",
-        event = "VeryLazy",
         cmd = "ZenMode",
         config = function()
             require("zen-mode").setup({})
@@ -805,6 +800,7 @@ lvim.plugins = {
     -- Reference: https://github.com/petertriho/nvim-scrollbar
     {
         "petertriho/nvim-scrollbar",
+        event = "VeryLazy",
         config = function()
             local palette = require("catppuccin.palettes").get_palette()
             require("scrollbar").setup({
@@ -828,6 +824,7 @@ lvim.plugins = {
         -- "simrat39/symbols-outline.nvim",
         "enddeadroyal/symbols-outline.nvim",
         branch = "bugfix/symbol-hover-misplacement",
+        cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
         event = "VeryLazy",
         config = function()
             require("symbols-outline").setup({})
@@ -837,6 +834,7 @@ lvim.plugins = {
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
+        lazy = false,
         config = function()
             require("nvim-lastplace").setup({})
         end,
@@ -925,14 +923,12 @@ lvim.plugins = {
     {
         "sindrets/diffview.nvim",
         event = "VeryLazy",
-        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     },
 
     -- Reference: https://github.com/tpope/vim-fugitive
     {
         "tpope/vim-fugitive",
         event = "VeryLazy",
-        cmd = { "Git", "G" },
     },
 
     -----------------------------------------------------------------
@@ -957,7 +953,6 @@ lvim.plugins = {
     {
         "jakewvincent/mkdnflow.nvim",
         ft = "markdown",
-        event = "VeryLazy",
         config = function()
             require("mkdnflow").setup({
                 modules = {
@@ -996,7 +991,6 @@ lvim.plugins = {
     {
         "AckslD/nvim-FeMaco.lua",
         ft = { "markdown" },
-        event = "VeryLazy",
         config = function()
             require("femaco").setup({
                 post_open_float = function(winnr)
@@ -1014,8 +1008,6 @@ lvim.plugins = {
     {
         "iamcco/markdown-preview.nvim",
         ft = "markdown",
-        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-        event = "VeryLazy",
         config = function()
             vim.fn["mkdp#util#install"]()
         end,
@@ -1027,7 +1019,7 @@ lvim.plugins = {
     -- Reference: https://github.com/michaelb/sniprun
     {
         "michaelb/sniprun",
-        event = "VeryLazy",
+        cmd = "SnipRun",
         build = "sh ./install.sh 1",
         config = function()
             require("sniprun").setup({
@@ -1057,9 +1049,10 @@ lvim.plugins = {
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
         "jay-babu/mason-nvim-dap.nvim",
-        event = "VeryLazy",
+        ft = { "python", "c", "cpp" },
         dependencies = {
             "williamboman/mason.nvim",
+            "theHamsta/nvim-dap-virtual-text",
         },
         config = function()
             require("mason-nvim-dap").setup({
@@ -1090,9 +1083,8 @@ lvim.plugins = {
     -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
     {
         "theHamsta/nvim-dap-virtual-text",
-        event = "VeryLazy",
+        ft = { "python", "c", "cpp" },
         dependencies = {
-            "mfussenegger/nvim-dap",
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
@@ -1103,20 +1095,21 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
     {
         "nvim-telescope/telescope-dap.nvim",
-        event = "VeryLazy",
-        cmd = "Telescope dap",
+        ft = { "python", "c", "cpp" },
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-treesitter/nvim-treesitter",
             "folke/which-key.nvim",
         },
+        config = function()
+            require("telescope").load_extension("dap")
+        end,
     },
 
     -- Reference: https://github.com/nvim-neotest/neotest
     {
         "nvim-neotest/neotest",
-        event = "VeryLazy",
-        ft = "python",
+        ft = { "python", "rust" },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
@@ -1160,7 +1153,7 @@ lvim.plugins = {
     -- Reference: https://github.com/ludovicchabant/vim-gutentags
     {
         "dhananjaylatkar/vim-gutentags",
-        event = "VeryLazy",
+        ft = { "c", "cpp", "java" },
         dependencies = {
             "dhananjaylatkar/cscope_maps.nvim",
             "folke/which-key.nvim",
@@ -1238,6 +1231,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvimdev/lspsaga.nvim
     {
         "nvimdev/lspsaga.nvim",
+        event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "nvim-tree/nvim-web-devicons",
@@ -1280,7 +1274,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/neodev.nvim
     {
         "folke/neodev.nvim",
-        event = "VeryLazy",
+        ft = "lua",
         config = function()
             require("neodev").setup({})
         end,
@@ -1289,7 +1283,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/trouble.nvim
     {
         "folke/trouble.nvim",
-        cmd = "TroubleToggle",
+        event = "VeryLazy",
         config = function()
             local actions = require("telescope.actions")
             local trouble = require("trouble.providers.telescope")
@@ -1308,7 +1302,6 @@ lvim.plugins = {
     -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-        event = "VeryLazy",
         cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff" },
         config = function()
             require("toggle_lsp_diagnostics").init({
@@ -1410,7 +1403,6 @@ lvim.plugins = {
     -- Reference: https://github.com/simrat39/rust-tools.nvim
     {
         "simrat39/rust-tools.nvim",
-        event = "VeryLazy",
         ft = "rust",
         dependencies = {
             "neovim/nvim-lspconfig",
@@ -1430,28 +1422,6 @@ lvim.plugins = {
         dependencies = {
             "junegunn/fzf",
         },
-        cmd = {
-            "Files",
-            "GFiles",
-            "Buffers",
-            "Colors",
-            "Rg",
-            "Lines",
-            "BLines",
-            "Tags",
-            "BTags",
-            "Marks",
-            "Windows",
-            "Locate",
-            "History",
-            "Snippets",
-            "Commits",
-            "BCommits",
-            "Commands",
-            "Maps",
-            "Helptags",
-            "Filetypes",
-        },
     },
 
     -- Reference: https://github.com/MattesGroeger/vim-bookmarks
@@ -1469,6 +1439,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/noice.nvim
     {
         "folke/noice.nvim",
+        lazy = false,
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
@@ -1503,7 +1474,7 @@ lvim.plugins = {
     -- Reference: https://github.com/gelguy/wilder.nvim
     {
         "gelguy/wilder.nvim",
-        event = { "VeryLazy", "CmdlineEnter" },
+        event = "VeryLazy",
         dependencies = {
             "romgrk/fzy-lua-native",
         },
@@ -1598,7 +1569,7 @@ lvim.plugins = {
     -- Reference: https://github.com/rafcamlet/nvim-luapad
     {
         "rafcamlet/nvim-luapad",
-        event = "VeryLazy",
+        cmd = "Luapad",
         config = function()
             require("luapad").setup({})
         end,
@@ -1624,7 +1595,7 @@ lvim.plugins = {
     -- Reference: https://github.com/ThePrimeagen/vim-be-good
     {
         "ThePrimeagen/vim-be-good",
-        event = "VeryLazy",
+        cmd = "VimBeGood",
     },
 
     -- NOTE: dropbar requires nvim >= 0.10.0

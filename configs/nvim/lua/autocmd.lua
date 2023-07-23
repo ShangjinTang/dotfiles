@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd({
     "BufNewFile",
     "BufRead",
 }, {
-    pattern = "*.md, *,markdown",
+    pattern = "*.md",
     callback = function()
         vim.opt.tabstop = 2
         vim.opt.softtabstop = 2
