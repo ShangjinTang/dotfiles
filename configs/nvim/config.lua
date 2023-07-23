@@ -1114,6 +1114,22 @@ lvim.plugins = {
             require("neodev").setup({
                 library = { plugins = { "neotest" }, types = true },
             })
+            vim.api.nvim_create_autocmd({
+                "BufWrite",
+            }, {
+                pattern = { "test_*.py", "*_test.py" },
+                callback = function()
+                    require("neotest").run.run(vim.fn.expand("%"))
+                end,
+            })
+            vim.api.nvim_create_autocmd({
+                "BufWrite",
+            }, {
+                pattern = { "test_*.rs", "*_test.rs" },
+                callback = function()
+                    require("neotest").run.run(vim.fn.getcwd())
+                end,
+            })
         end,
     },
 
