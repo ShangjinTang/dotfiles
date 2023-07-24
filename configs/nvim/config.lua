@@ -989,9 +989,10 @@ lvim.plugins = {
     -- Reference: https://github.com/michaelb/sniprun
     {
         "michaelb/sniprun",
-        cmd = "SnipRun",
+        event = "VeryLazy",
         build = "sh ./install.sh 1",
         config = function()
+            local palette = require("catppuccin.palettes").get_palette()
             require("sniprun").setup({
                 display = {
                     "Classic", --# display results in the command-line  area
@@ -1004,15 +1005,13 @@ lvim.plugins = {
                     -- "NvimNotify", --# display with the nvim-notify plugin
                     -- "Api"                      --# return output to a programming interface
                 },
-                -- Catppuccin theme color
                 snipruncolors = {
-                    SniprunVirtualTextOk = { bg = "#ca9ee6", fg = "#000000" },
-                    SniprunFloatingWinOk = { fg = "#ca9ee6" },
-                    SniprunVirtualTextErr = { bg = "#e78284", fg = "#000000" },
-                    SniprunFloatingWinErr = { fg = "#e78284" },
+                    SniprunVirtualTextOk = { bg = palette.mauve, fg = "#000000" },
+                    SniprunFloatingWinOk = { fg = palette.mauve },
+                    SniprunVirtualTextErr = { bg = palette.red, fg = "#000000" },
+                    SniprunFloatingWinErr = { fg = palette.red },
                 },
             })
-            vim.api.nvim_set_keymap("v", "<Bslash>", "<Plug>SnipRun", { silent = true })
         end,
     },
 
@@ -1381,6 +1380,7 @@ lvim.plugins = {
         },
         config = function()
             require("rust-tools").setup({})
+            require("rust-tools").inlay_hints.disable()
         end,
     },
 
