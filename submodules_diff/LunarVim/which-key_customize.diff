@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
-index 7d442a2b..538f4f5f 100644
+index 7d442a2b..25c85349 100644
 --- a/lua/lvim/core/which-key.lua
 +++ b/lua/lvim/core/which-key.lua
 @@ -104,24 +104,24 @@ M.config = function()
@@ -95,7 +95,18 @@ index 7d442a2b..538f4f5f 100644
          p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
          r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
          R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-@@ -206,23 +207,25 @@ M.config = function()
+@@ -199,30 +200,32 @@ M.config = function()
+           "<cmd>Telescope git_bcommits<cr>",
+           "Checkout commit(for current file)",
+         },
+-        d = {
+-          "<cmd>Gitsigns diffthis HEAD<cr>",
+-          "Git Diff",
+-        },
++        -- d = {
++        --   "<cmd>Gitsigns diffthis HEAD<cr>",
++        --   "Git Diff",
++        -- },
        },
        l = {
          name = "LSP",

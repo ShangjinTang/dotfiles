@@ -154,19 +154,28 @@ wk.register({
     ["<leader>f"] = { name = "+File" },
     ["<leader>ff"] = {
         function()
-            require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:h") })
+            require("telescope.builtin").find_files({
+                cwd = vim.fn.expand("%:h"),
+                previewer = false,
+            })
         end,
         "Find File",
     },
     ["<leader>fw"] = {
         function()
-            require("telescope.builtin").grep_string({ cwd = vim.fn.expand("%:h") })
+            require("telescope.builtin").grep_string({
+                cwd = vim.fn.expand("%:h"),
+                previewer = true,
+            })
         end,
         "Grep Current Word",
     },
     ["<leader>fg"] = {
         function()
-            require("telescope.builtin").live_grep({ cwd = vim.fn.expand("%:h") })
+            require("telescope.builtin").live_grep({
+                cwd = vim.fn.expand("%:h"),
+                previewer = true,
+            })
         end,
         "Live Grep",
     },
@@ -175,6 +184,12 @@ wk.register({
     ["<leader>ft"] = { "<cmd>Filetypes<cr>", "Set File Type" },
 
     ["<leader>d"] = { name = "+Dap" },
+    ["<leader>dd"] = {
+        function()
+            require("telescope").extensions.dap.commands({})
+        end,
+        "Dap commands",
+    },
     -- mostly follow gdb/ldb mappings
     ["<leader>db"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "b(reakpoint)" },
     ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "c(ontinue)" },
@@ -183,7 +198,7 @@ wk.register({
     ["<leader>dn"] = { "<cmd>lua require'dap'.step_over()<cr>", "n(ext) [step over]" },
     ["<leader>do"] = { "<cmd>lua require'dap'.step_out()<cr>", "finish [step out]" },
     -- DapUI
-    ["<leader>dd"] = {
+    ["<leader>dq"] = {
         function()
             require("dap").disconnect()
             require("dapui").toggle({ reset = true })
@@ -210,12 +225,8 @@ wk.register({
         end,
         "Dap frames",
     },
-    ["<leader>D"] = {
-        function()
-            require("telescope").extensions.dap.commands({})
-        end,
-        "Dap commands",
-    },
+
+    ["<leader>E"] = { "<cmd>SymbolsOutline<cr>", "Symbols Explorer" },
 
     ["<leader>gf"] = {
         function()
@@ -223,9 +234,11 @@ wk.register({
         end,
         "Find Git File",
     },
-    ["<leader>gd"] = { "<cmd>DiffviewFileHistory<cr>", "Git diff" },
-    ["<leader>gD"] = { "<cmd>DiffviewFileHistory %<cr>", "Git diff (for current file)" },
-    ["<leader>gt"] = { "<cmd>DiffviewToggleFiles<cr>", "Toggle DiffviewFileHistoryPanel" },
+
+    ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
+    ["<leader>gq"] = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
+    ["<leader>gh"] = { "<cmd>DiffviewFileHistory %<cr>", "Diffview History - Current File" },
+    ["<leader>gt"] = { "<cmd>DiffviewToggleFiles<cr>", "Diffview Toggle Files" },
     ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
     ["<leader>gv"] = { "<cmd>lua require('gitsigns').toggle_current_line_blame()<cr>", "Toggle virtual text" },
 
@@ -243,19 +256,28 @@ wk.register({
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
     ["<leader>pf"] = {
         function()
-            require("telescope.builtin").find_files({ cwd = require("project_nvim.project").get_project_root() })
+            require("telescope.builtin").find_files({
+                cwd = require("project_nvim.project").get_project_root(),
+                previewer = false,
+            })
         end,
         "Find Project File",
     },
     ["<leader>pw"] = {
         function()
-            require("telescope.builtin").grep_string({ cwd = require("project_nvim.project").get_project_root() })
+            require("telescope.builtin").grep_string({
+                cwd = require("project_nvim.project").get_project_root(),
+                previewer = true,
+            })
         end,
         "Project Grep Current Word",
     },
     ["<leader>pg"] = {
         function()
-            require("telescope.builtin").live_grep({ cwd = require("project_nvim.project").get_project_root() })
+            require("telescope.builtin").live_grep({
+                cwd = require("project_nvim.project").get_project_root(),
+                previewer = true,
+            })
         end,
         "Project Live Grep",
     },
@@ -264,8 +286,6 @@ wk.register({
     ["<leader>sw"] = { "Substitute word (from current selection)" },
     ["<leader>sa"] = { "Substitute word (from first line)" },
     ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
-
-    ["<leader>S"] = { "<cmd>SymbolsOutline<cr>", "Symbols Explorer" },
 
     ["<leader>m"] = { name = "+Markdown (Telekasten)" },
     ["<leader>mf"] = { "<cmd>Telekasten find_notes<cr>", "Find Notes" },
