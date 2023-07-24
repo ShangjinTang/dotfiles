@@ -1672,9 +1672,10 @@ lspmanager.setup("pyright", {
 lspmanager.setup("bashls", {
     on_attach = lsp_on_attach,
 })
-lspmanager.setup("rust_analyzer", {
-    on_attach = lsp_on_attach,
-})
+-- -- rust_analyzer is auto configured in rust-tools.nvim
+-- lspmanager.setup("rust_analyzer", {
+--     on_attach = lsp_on_attach,
+-- })
 -- NVIM / VIM
 lspmanager.setup("lua_ls", {
     on_attach = lsp_on_attach,
