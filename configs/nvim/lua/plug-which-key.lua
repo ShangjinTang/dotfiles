@@ -236,9 +236,10 @@ wk.register({
     },
 
     ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
-    ["<leader>gq"] = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
+    ["<leader>gD"] = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
     ["<leader>gh"] = { "<cmd>DiffviewFileHistory %<cr>", "Diffview History - Current File" },
-    ["<leader>gt"] = { "<cmd>DiffviewToggleFiles<cr>", "Diffview Toggle Files" },
+    ["<leader>gH"] = { "<cmd>DiffviewFileHistory %<cr>", "Diffview History - All Files" },
+    ["<leader>g<Tab>"] = { "<cmd>DiffviewToggleFiles<cr>", "Diffview Toggle Files" },
     ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
     ["<leader>gv"] = { "<cmd>lua require('gitsigns').toggle_current_line_blame()<cr>", "Toggle virtual text" },
 
@@ -250,7 +251,7 @@ wk.register({
     ["<leader>o"] = { name = "+Open with" },
     ["<leader>oc"] = { "<cmd>call ExecuteBufferSilentlyWith('code')<cr>", "Open with VsCode" },
     ["<leader>ow"] = { "<cmd>call ExecuteBufferSilentlyWith('explorer.exe')<cr>", "Open with Windows Explorer" },
-    ["<leader>oo"] = { "<cmd>lua require('oil').open()<cr>", "Open with Oil" },
+    ["<leader>oo"] = { "<cmd>lua require('oil').open()<cr>", "Open directory with Oil" },
 
     ["<leader>p"] = { name = "+Project" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Recent Projects" },
