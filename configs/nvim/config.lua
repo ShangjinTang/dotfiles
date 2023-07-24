@@ -39,7 +39,7 @@ lvim.builtin.lir.active = false
 -- Nvim Tree
 lvim.builtin.nvimtree.setup.disable_netrw = true
 lvim.builtin.nvimtree.setup.view = {
-    adaptive_size = true,
+    adaptive_size = false,
     side = "left",
 }
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = false
