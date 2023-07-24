@@ -35,10 +35,6 @@
     ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.stylua.toml: configs/lua/.stylua.toml
         ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
-    # conditional configs
-    ~/.tigrc:
-      if: "command -v tig"
-      path: configs/.tigrc
 
 # link for macOS
 - shell:
