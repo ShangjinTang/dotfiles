@@ -1395,15 +1395,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/SmiteshP/nvim-navic
-    {
-        "SmiteshP/nvim-navic",
-        event = "VeryLazy",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-    },
-
     -- Reference: https://github.com/simrat39/rust-tools.nvim
     {
         "simrat39/rust-tools.nvim",
@@ -1631,25 +1622,11 @@ lvim.plugins = {
 ----------------------------------------------------------------------
 -- LSP
 
-local navic = require("nvim-navic")
-local lsp_on_attach = function(client, bufnr)
-    if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-    end
-end
-
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
     "clangd",
-    "jdtls",
-    "pyright",
-    "bashls",
-    "rust_analyzer",
     "lua_ls",
-    "vimls",
-    "html",
-    "marksman",
 })
 local lspmanager = require("lvim.lsp.manager")
 lspmanager.setup("clangd", {
@@ -1667,25 +1644,8 @@ lspmanager.setup("clangd", {
         "--pch-storage=memory",
         "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
     },
-    on_attach = lsp_on_attach,
 })
-lspmanager.setup("jdtls", { -- requires: sudo apt install -y openjdk-17-jdk | sudo pacman -Sy jdk17-openjdk
-    on_attach = lsp_on_attach,
-    cmd = { "jdtls" },
-})
-lspmanager.setup("pyright", {
-    on_attach = lsp_on_attach,
-})
-lspmanager.setup("bashls", {
-    on_attach = lsp_on_attach,
-})
--- -- rust_analyzer is auto configured in rust-tools.nvim
--- lspmanager.setup("rust_analyzer", {
---     on_attach = lsp_on_attach,
--- })
--- NVIM / VIM
 lspmanager.setup("lua_ls", {
-    on_attach = lsp_on_attach,
     settings = {
         Lua = {
             completion = {
@@ -1693,15 +1653,4 @@ lspmanager.setup("lua_ls", {
             },
         },
     },
-})
-lspmanager.setup("vimls", {
-    on_attach = lsp_on_attach,
-})
--- HTML / CSS / JavaScript
-lspmanager.setup("html", {
-    on_attach = lsp_on_attach,
-})
--- Markup Languages
-lspmanager.setup("marksman", {
-    on_attach = lsp_on_attach,
 })
