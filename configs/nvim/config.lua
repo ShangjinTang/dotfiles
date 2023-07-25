@@ -15,7 +15,6 @@ lvim.log.level = "info"
 lvim.leader = "space"
 
 -- themes
-lvim.colorscheme = "catppuccin"
 lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
 
 -- to disable icons and use a minimalist setup, uncomment the following
@@ -66,7 +65,6 @@ local lualine_components = require("lvim.core.lualine.components")
 lvim.builtin.lualine = {
     style = "lvim",
     options = {
-        theme = "catppuccin",
         section_separators = {
             left = lvim.icons.ui.BoldDividerRight,
             right = lvim.icons.ui.BoldDividerLeft,
@@ -395,6 +393,8 @@ lvim.plugins = {
             require("bufferline").setup({
                 highlights = require("catppuccin.groups.integrations.bufferline").get(),
             })
+            lvim.colorscheme = "catppuccin"
+            lvim.builtin.lualine.options.theme = "catppuccin"
         end,
     },
 
