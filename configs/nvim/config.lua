@@ -1636,6 +1636,7 @@ lvim.plugins = {
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
     "clangd",
     "lua_ls",
+    "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
 })
 local lspmanager = require("lvim.lsp.manager")
 lspmanager.setup("clangd", {
