@@ -1608,6 +1608,15 @@ lvim.plugins = {
         cmd = "VimBeGood",
     },
 
+    -- Reference: https://github.com/stevearc/dressing.nvim
+    {
+        "stevearc/dressing.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("dressing").setup({})
+        end,
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
