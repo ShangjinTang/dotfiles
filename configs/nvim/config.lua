@@ -1664,3 +1664,4 @@ lspmanager.setup("lua_ls", {
         },
     },
 })
+lspmanager.setup("marksman", {})
