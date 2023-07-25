@@ -984,36 +984,7 @@ lvim.plugins = {
     },
 
     -----------------------------------------------------------------
-    -- NOTE: code runner & debugger
-
-    -- Reference: https://github.com/michaelb/sniprun
-    {
-        "michaelb/sniprun",
-        event = "VeryLazy",
-        build = "sh ./install.sh 1",
-        config = function()
-            local palette = require("catppuccin.palettes").get_palette()
-            require("sniprun").setup({
-                display = {
-                    "Classic", --# display results in the command-line  area
-                    "VirtualTextOk", --# display ok results as virtual text (multiline is shortened)
-                    -- "VirtualText", --# display results as virtual text
-                    "TempFloatingWindow", --# display results in a floating window
-                    -- "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
-                    -- "Terminal", --# display results in a vertical split
-                    -- "TerminalWithCode", --# display results and code history in a vertical split
-                    -- "NvimNotify", --# display with the nvim-notify plugin
-                    -- "Api"                      --# return output to a programming interface
-                },
-                snipruncolors = {
-                    SniprunVirtualTextOk = { bg = palette.mauve, fg = "#000000" },
-                    SniprunFloatingWinOk = { fg = palette.mauve },
-                    SniprunVirtualTextErr = { bg = palette.red, fg = "#000000" },
-                    SniprunFloatingWinErr = { fg = palette.red },
-                },
-            })
-        end,
-    },
+    -- NOTE: mason debuggers, code runners
 
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
@@ -1026,7 +997,7 @@ lvim.plugins = {
         config = function()
             require("mason-nvim-dap").setup({
                 -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
-                ensure_installed = { "python", "cppdbg" },
+                ensure_installed = { "python", "codelldb" },
                 handlers = {
                     function(config)
                         -- Keep original functionality
@@ -1072,6 +1043,35 @@ lvim.plugins = {
         },
         config = function()
             require("telescope").load_extension("dap")
+        end,
+    },
+
+    -- Reference: https://github.com/michaelb/sniprun
+    {
+        "michaelb/sniprun",
+        event = "VeryLazy",
+        build = "sh ./install.sh 1",
+        config = function()
+            local palette = require("catppuccin.palettes").get_palette()
+            require("sniprun").setup({
+                display = {
+                    "Classic", --# display results in the command-line  area
+                    "VirtualTextOk", --# display ok results as virtual text (multiline is shortened)
+                    -- "VirtualText", --# display results as virtual text
+                    "TempFloatingWindow", --# display results in a floating window
+                    -- "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
+                    -- "Terminal", --# display results in a vertical split
+                    -- "TerminalWithCode", --# display results and code history in a vertical split
+                    -- "NvimNotify", --# display with the nvim-notify plugin
+                    -- "Api"                      --# return output to a programming interface
+                },
+                snipruncolors = {
+                    SniprunVirtualTextOk = { bg = palette.mauve, fg = "#000000" },
+                    SniprunFloatingWinOk = { fg = palette.mauve },
+                    SniprunVirtualTextErr = { bg = palette.red, fg = "#000000" },
+                    SniprunFloatingWinErr = { fg = palette.red },
+                },
+            })
         end,
     },
 
@@ -1170,7 +1170,7 @@ lvim.plugins = {
     },
 
     -----------------------------------------------------------------
-    -- NOTE: LSPs & treesitter
+    -- NOTE: mason LSPs, mason null-ls, treesitter
 
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
     {
@@ -1180,18 +1180,53 @@ lvim.plugins = {
             "williamboman/mason.nvim",
         },
         config = function()
-            require("mason").setup({})
             require("mason-lspconfig").setup({
+                -- See: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
                 ensure_installed = {
-                    "clangd",
-                    "jdtls",
-                    "pyright",
                     "bashls",
-                    "rust_analyzer",
-                    "lua_ls",
-                    "vimls",
+                    "clangd",
                     "html",
+                    "jdtls",
+                    "jsonls",
+                    "lua_ls",
                     "marksman",
+                    "pyright",
+                    "rust_analyzer",
+                    "vimls",
+                    "yamlls",
+                },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/jay-babu/mason-null-ls.nvim
+    {
+        "jay-babu/mason-null-ls.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        config = function()
+            require("mason-null-ls").setup({
+                -- See: https://mason-registry.dev/registry/list
+                ensure_installed = {
+                    -- Formatters & Linters
+                    "buf",
+                    "buildifier",
+                    "cmakelang",
+                    -- Formatters
+                    "beautysh",
+                    "black",
+                    "cbfmt",
+                    "clang_format",
+                    "google_java_format",
+                    "prettier",
+                    "rustfmt",
+                    "shfmt",
+                    "stylua",
+                    "trim_whitespace",
+                    -- Linters
+                    "shellcheck",
                 },
             })
         end,
