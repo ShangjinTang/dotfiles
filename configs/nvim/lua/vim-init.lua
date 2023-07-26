@@ -67,17 +67,6 @@ vim.opt.nrformats = "bin,hex" -- Do not recognize 0.. as octal number for comman
 -- ### Use Unix as the standard file type
 vim.opt.ffs = "unix,dos,mac"
 
--- ### Turn backup off, since most stuff is in git anyway...
--- vim.opt.nobackup = true
--- vim.opt.nowb = true
--- vim.opt.noswapfile = true
-
--- ### No annoying sound on errors
--- vim.opt.noerrorbells = true
--- vim.opt.novisualbell = true
--- vim.opt.t_vb = ''
--- vim.opt.tm = 500
-
 -- ### Persistent Undo
 vim.opt.undodir = vim.fn.expand("~/.cache/nvim/undo")
 vim.opt.undofile = true
