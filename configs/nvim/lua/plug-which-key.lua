@@ -10,12 +10,12 @@ local visual_mode = { mode = "v" }
 -- Global Mappings: both normal mode & visual mode
 
 wk.register({
-    ["s"] = { require("substitute").operator, "Substitute Operator" },
-    ["ss"] = { require("substitute").line, "Substitute Line" },
-    ["S"] = { require("substitute").eol, "Substitute to End of Line" },
+    ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute Operator" },
+    ["ss"] = { "<cmd>lua require('substitute').line()<cr>", "Substitute Line" },
+    ["S"] = { "<cmd>lua require('substitute').eol()<cr>", "Substitute to End of Line" },
 }, normal_mode)
 wk.register({
-    ["s"] = { require("substitute").operator, "Substitute Operator" },
+    ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute Operator" },
 }, visual_mode)
 
 wk.register({
@@ -54,7 +54,7 @@ wk.register({
 }, visual_mode)
 
 wk.register({
-    ["<leader>_"] = { require("osc52").copy_operator, "Copy (osc52)" },
+    ["<leader>_"] = { "<cmd>lua require('osc52').copy_operator()<cr>", "Copy (osc52)" },
 }, normal_mode_with_expr)
 wk.register({
     ["<leader>_"] = { "<cmd>lua require('osc52').copy_visual()<cr>", "Copy (osc52)" },
@@ -97,11 +97,8 @@ wk.register({
     ["<C-p>"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["K"] = {
         function()
-            local winid = require("ufo").peekFoldedLinesUnderCursor()
-            if not winid then
-                -- vim.lsp.buf.hover()
-                vim.api.nvim_command("Lspsaga hover_doc")
-            end
+            -- vim.lsp.buf.hover()
+            vim.api.nvim_command("Lspsaga hover_doc")
         end,
         "Hover",
     },
@@ -312,10 +309,10 @@ wk.register({
     ["zv"] = { "View Current Fold" },
     ["zx"] = { "Reset Fold and View Current Fold (apply 'foldlevel')" },
     ["zX"] = { "Reset Fold (apply 'foldlevel')" },
-    ["zm"] = { require("ufo").closeFoldsWith, "Close All Folds (level prefix-num or 0)" },
-    ["zM"] = { require("ufo").closeAllFolds, "Close All Folds (level 0)" },
-    ["zr"] = { require("ufo").openFoldsExceptKinds, "Open Folds except Kinds (foldlevel max)" },
-    ["zR"] = { require("ufo").openAllFolds, "Open All Folds (level max)" },
+    ["zm"] = { "<cmd>lua require('ufo').closeFoldsWith()<cr>", "Close All Folds (level prefix-num or 0)" },
+    ["zM"] = { "<cmd>lua require('ufo').closeAllFolds()<cr>", "Close All Folds (level 0)" },
+    ["zr"] = { "<cmd>lua require('ufo').openFoldsExceptKinds()<cr>", "Open Folds except Kinds (foldlevel max)" },
+    ["zR"] = { "<cmd>lua require('ufo').openAllFolds()<cr>", "Open All Folds (level max)" },
     ["zt"] = { "Top Redraw" },
     -- ["z<CR>"] = { "Top Redraw (cursor move to '^')" },
     ["zz"] = { "Center Redraw" },
