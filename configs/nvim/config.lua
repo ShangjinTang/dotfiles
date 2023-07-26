@@ -17,25 +17,25 @@ lvim.leader = "space"
 -- themes
 lvim.transparent_window = os.getenv("TERMINAL_TRANSPARENT")
 
--- to disable icons and use a minimalist setup, uncomment the following
+-- icons
 -- lvim.use_icons = false
 
 ----------------------------------------------------------------------
 -- Simple builtin configs
 
--- Dashboard (based on alpha.nvim)
+-- alpha
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 
--- Git Blame Virtual Text at Current Line
+-- gitsigns: git blame virtual text at current line
 lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.current_line_blame_formatter =
     "   <abbrev_sha>  <author>, <author_time:%Y-%m-%d> - <summary>"
 
--- Disable lir for oil.nvim
+-- lir: disabled for conflict with oil.nvim
 lvim.builtin.lir.active = false
 
--- Nvim Tree
+-- nvim-tree
 lvim.builtin.nvimtree.setup.disable_netrw = true
 lvim.builtin.nvimtree.setup.view = {
     adaptive_size = false,
@@ -44,7 +44,7 @@ lvim.builtin.nvimtree.setup.view = {
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = false
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
--- Project Settings
+-- project
 lvim.builtin.project.manual_mode = false
 lvim.builtin.project.silent_chdir = false
 lvim.builtin.project.patterns = {
@@ -112,7 +112,6 @@ lvim.builtin.treesitter.auto_install = true
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
--- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
 lvim.builtin.treesitter.ensure_installed = {
     "bash",
     "c",
@@ -283,10 +282,12 @@ lvim.plugins = {
 
     -- Plugins will be lazy-loaded when one of the following is true:
     --   - The plugin only exists as a dependency in your spec
-    --   - It has an event, cmd, ft or keys key
+    --   - It has an 'event', 'cmd', 'ft' or 'keys' key
     --   - Otherwise please specify 'lazy = true'
 
-    -- The one and the only theme: catppuccin
+    -----------------------------------------------------------------
+    -- NOTE: theme catppuccin
+
     -- Reference: https://github.com/catppuccin/nvim
     -- Color Palette: https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/palettes/frappe.lua
     -- Color API (lua): 'require("catppuccin.palettes").get_palette().<COLOR>'
@@ -623,9 +624,6 @@ lvim.plugins = {
             require("oil").setup({
                 columns = {
                     "icon",
-                    -- "permissions",
-                    -- "size",
-                    -- "mtime",
                 },
                 buf_options = {
                     buflisted = true,
@@ -1632,6 +1630,7 @@ lvim.plugins = {
 
 ----------------------------------------------------------------------
 -- LSP
+-- Note: this section should after section 'lvim.plugins' to resolve dependencies correctly
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
