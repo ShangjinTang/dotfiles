@@ -989,7 +989,7 @@ lvim.plugins = {
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
         "jay-babu/mason-nvim-dap.nvim",
-        ft = { "python", "c", "cpp" },
+        ft = { "python", "c", "cpp", "rust" },
         dependencies = {
             "williamboman/mason.nvim",
             "theHamsta/nvim-dap-virtual-text",
@@ -997,11 +997,11 @@ lvim.plugins = {
         config = function()
             require("mason-nvim-dap").setup({
                 -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
-                ensure_installed = { "python", "codelldb" },
+                ensure_installed = { "python", "cppdbg" },
                 handlers = {
                     function(config)
                         -- Keep original functionality
-                        require("mason-nvim-dap").default_setup(config)
+                        -- require("mason-nvim-dap").default_setup(config)
                     end,
                     -- requires: python3 -m pip install debugpy
                     python = function(config)
@@ -1017,13 +1017,16 @@ lvim.plugins = {
                     end,
                 },
             })
+            local dap = require("dap")
+            dap.configurations.c = dap.configurations.cpp
+            dap.configurations.rust = dap.configurations.cpp
         end,
     },
 
     -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
     {
         "theHamsta/nvim-dap-virtual-text",
-        ft = { "python", "c", "cpp" },
+        ft = { "python", "c", "cpp", "rust" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
@@ -1035,7 +1038,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
     {
         "nvim-telescope/telescope-dap.nvim",
-        ft = { "python", "c", "cpp" },
+        ft = { "python", "c", "cpp", "rust" },
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-treesitter/nvim-treesitter",
