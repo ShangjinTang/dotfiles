@@ -2,7 +2,6 @@ lua require("LunarVim.init")
 
 lua << EOF
     require("vim-init")
-    require("plug-dap-cpp")
     require("plug-which-key")
     -- Note: autocmd should be placed at end of plugins
     require("autocmd")

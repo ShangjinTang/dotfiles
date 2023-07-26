@@ -997,11 +997,10 @@ lvim.plugins = {
         config = function()
             require("mason-nvim-dap").setup({
                 -- See: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
-                ensure_installed = { "python", "cppdbg" },
+                ensure_installed = { "python", "cppdbg", "codelldb" },
                 handlers = {
                     function(config)
-                        -- Keep original functionality
-                        -- require("mason-nvim-dap").default_setup(config)
+                        require("mason-nvim-dap").default_setup(config)
                     end,
                     -- requires: python3 -m pip install debugpy
                     python = function(config)
