@@ -1181,19 +1181,29 @@ lvim.plugins = {
         },
         config = function()
             require("mason-lspconfig").setup({
-                -- See: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+                -- See:
+                --   https://github.com/williamboman/mason-lspconfig.nvim/tree/main#available-lsp-servers
+                --   https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
                 ensure_installed = {
-                    "bashls",
-                    "clangd",
-                    "html",
-                    "jdtls",
-                    "jsonls",
-                    "lua_ls",
-                    "marksman",
-                    "pyright",
-                    "rust_analyzer",
-                    "vimls",
-                    "yamlls",
+                    "asm_lsp", -- Assembly (GAS/NASM, GO)
+                    "bashls", -- Bash
+                    "clangd", -- C/C++
+                    "dockerls", -- Docker
+                    "docker_compose_language_service", -- Docker Compose
+                    "jdtls", -- Java
+                    "jsonls", -- JSON
+                    "lua_ls", -- Lua
+                    "marksman", -- Markdown
+                    "pyright", -- Python
+                    "rust_analyzer", -- Rust
+                    "taplo", -- TOML
+                    "vimls", -- VimL
+                    "lemminx", -- XML
+                    "yamlls", -- YAML
+                    -- FrontEnd
+                    "cssls", -- CSS
+                    "html", -- HTML
+                    "tsserver", -- TypeScript
                 },
             })
         end,
@@ -1665,4 +1675,7 @@ lspmanager.setup("lua_ls", {
         },
     },
 })
+-- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
+--   { "markdown", "rst", "plaintext", "toml", "proto" }
 lspmanager.setup("marksman", {})
+lspmanager.setup("taplo", {})
