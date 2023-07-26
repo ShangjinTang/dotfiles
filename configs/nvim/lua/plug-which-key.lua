@@ -238,7 +238,7 @@ wk.register({
     ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
     ["<leader>gD"] = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
     ["<leader>gh"] = { "<cmd>DiffviewFileHistory %<cr>", "Diffview History - Current File" },
-    ["<leader>gH"] = { "<cmd>DiffviewFileHistory %<cr>", "Diffview History - All Files" },
+    ["<leader>gH"] = { "<cmd>DiffviewFileHistory<cr>", "Diffview History - All Files" },
     ["<leader>g<Tab>"] = { "<cmd>DiffviewToggleFiles<cr>", "Diffview Toggle Files" },
     ["<leader>gL"] = { "<cmd>Git blame<cr>", "Git blame (for all lines)" },
     ["<leader>gv"] = { "<cmd>lua require('gitsigns').toggle_current_line_blame()<cr>", "Toggle virtual text" },
