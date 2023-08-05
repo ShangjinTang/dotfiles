@@ -126,7 +126,8 @@ appLaunch:setConfigs({
   {key = 'W', name = "WeChat", id = "com.tencent.xinWeChat"},  -- fixed
   {key = 'E', name = "NeteaseMusic", id = "com.netease.163music"},  -- fixed
   {key = 'R', name = "TickTick", id = "com.TickTick.task.mac"},
-  {key = 'T', name = "Terminal", id = "com.apple.Terminal"},  -- system fixed
+  -- {key = 'T', name = "Terminal", id = "com.apple.Terminal"},  -- system fixed
+  {key = 'T', name = "iTerm", id = "com.googlecode.iterm2"},
   -- {key = 'Y', name = "", id = ""},
   {key = 'U', name = "App Cleaner", id = "com.nektony.App-Cleaner-SII"},
   {key = 'I', name = "IINA", id = "com.colliderli.iina"},
@@ -135,7 +136,8 @@ appLaunch:setConfigs({
   {key = 'A', name = "Launchpad", id = "com.apple.launchpad.launcher"},  -- system fixed
   {key = 'S', name = "System Preferences", id = "com.apple.systempreferences"},  -- system fixed
   -- {key = 'D', name = "", id = ""},  -- used for mapping Alt+D to F11 (show desktop)
-  {key = 'F', name = "ForkLift", id = "com.binarynights.ForkLift-3"},  -- fixed (optional: Finder/com.apple.finder)
+  -- {key = 'F', name = "ForkLift", id = "com.binarynights.ForkLift-3"},
+  {key = 'F', name = "Finder", id = "com.apple.finder"},  -- system fixed
   -- {key = 'G', name = "", id = ""},
   {key = 'H', name = "HazeOver", id = "com.pointum.hazeover"},  -- fixed
   -- {key = 'J', name = "", id = ""},
