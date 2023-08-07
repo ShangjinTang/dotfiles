@@ -1316,14 +1316,14 @@ lvim.plugins = {
     -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-        cmd = { "ToggleDiag", "ToggleDiagDefault", "ToggleDiagOn", "ToggleDiagOff" },
+        event = "LspAttach",
         config = function()
             require("toggle_lsp_diagnostics").init({
                 start_on = true,
                 -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.config()
                 underline = true,
                 virtual_text = false,
-                update_in_insert = false,
+                update_in_insert = true,
             })
         end,
     },
