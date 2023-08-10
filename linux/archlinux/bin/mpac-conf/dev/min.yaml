@@ -12,12 +12,8 @@ rustup: true
 nodejs: true
 npm: true
 # ------------------------------
-# bash
-shfmt: true # bash format
-# ------------------------------
 # python
 pyenv: true
-python-black: true # code format
 # ------------------------------
 # java 17 (required by jdtls)
 jdk17-openjdk: true
