@@ -60,8 +60,8 @@ plugins=(
     rust
 
     # macOS only
-    dash                        ## open dash application
-    forklift                    ## open with forklift: fl [<file_or_folder>]
+    # dash                        ## open dash application
+    # forklift                    ## open with forklift: fl [<file_or_folder>]
 )
 
 source $ZSH/oh-my-zsh.sh
