@@ -5,11 +5,11 @@ defaults:
 reflector: true # for archlinux
 # ------------------------------
 bat: true
+btop: true
 duf: true
 exa: true
 fd: true
 httpie: true
-htop: true
 ncdu: true
 nnn: true
 # ------------------------------
