@@ -44,7 +44,7 @@ plugins=(
     copyfile                    ## copyfile FILE: copy content of FILE to system clipboard
     copypath                    ## copy current path (absolute path) to system clipboard
     wd                          ## warp point
-    z                           ## z jump
+    # z                           ## z jump
     git-auto-fetch              ## auto fetch changes from remote with interval $GIT_AUTO_FETCH_INTERVAL, default (sec) = 60)
     # ohmyzsh built-in non-executable
     direnv                      ## creates hook for 'direnv'
@@ -71,6 +71,11 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 _INCLUDE ~/.p10k.zsh
+
+# zoxide: a rust implementation for z / autojump
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
 
 # zsh-abbr highlight
 # this configuration cannot be moved to other files (e.g. ~/.zshrc.post)
