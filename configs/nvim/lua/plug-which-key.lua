@@ -154,28 +154,31 @@ wk.register({
         function()
             require("telescope.builtin").find_files({
                 cwd = vim.fn.expand("%:h"),
+                prompt_title = "Find Folder Files",
                 previewer = false,
             })
         end,
-        "Find File",
+        "Find Folder Files",
     },
     ["<leader>fw"] = {
         function()
             require("telescope.builtin").grep_string({
                 cwd = vim.fn.expand("%:h"),
+                prompt_title = "Find Folder Current Word",
                 previewer = true,
             })
         end,
-        "Grep Current Word",
+        "Find Folder Current Word",
     },
     ["<leader>fg"] = {
         function()
             require("telescope.builtin").live_grep({
                 cwd = vim.fn.expand("%:h"),
+                prompt_title = "Folder Grep",
                 previewer = true,
             })
         end,
-        "Live Grep",
+        "Folder Grep",
     },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
@@ -228,9 +231,12 @@ wk.register({
 
     ["<leader>gf"] = {
         function()
-            require("lvim.core.telescope.custom-finders").find_project_files({ previewer = false })
+            require("lvim.core.telescope.custom-finders").find_project_files({
+                prompt_title = "Find Git Files",
+                previewer = false,
+            })
         end,
-        "Find Git File",
+        "Find Git Files",
     },
 
     ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
@@ -257,28 +263,31 @@ wk.register({
         function()
             require("telescope.builtin").find_files({
                 cwd = require("project_nvim.project").get_project_root(),
+                prompt_title = "Find Project Files",
                 previewer = false,
             })
         end,
-        "Find Project File",
+        "Find Project Files",
     },
     ["<leader>pw"] = {
         function()
             require("telescope.builtin").grep_string({
                 cwd = require("project_nvim.project").get_project_root(),
+                prompt_title = "Find Project Current Word",
                 previewer = true,
             })
         end,
-        "Project Grep Current Word",
+        "Find Project Current Word",
     },
     ["<leader>pg"] = {
         function()
             require("telescope.builtin").live_grep({
                 cwd = require("project_nvim.project").get_project_root(),
+                prompt_title = "Project Grep",
                 previewer = true,
             })
         end,
-        "Project Live Grep",
+        "Project Grep",
     },
 
     ["<leader>s"] = { name = "+Search & Substitute" },
