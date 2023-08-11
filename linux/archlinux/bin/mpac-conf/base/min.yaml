@@ -25,4 +25,5 @@ python-pip: true
 fzf: true
 tmux: true
 ripgrep: true
+zoxide: true
 # ------------------------------
