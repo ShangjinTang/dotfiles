@@ -1578,6 +1578,21 @@ lvim.plugins = {
     },
 
     -----------------------------------------------------------------
+    -- NOTE: CLI integrations
+
+    -- Reference: https://github.com/jvgrootveld/telescope-zoxide
+    {
+        "jvgrootveld/telescope-zoxide",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+        },
+        event = "VeryLazy",
+        config = function()
+            require("telescope").load_extension("zoxide")
+        end,
+    },
+
+    -----------------------------------------------------------------
     -- NOTE: uncategorized
 
     -- Reference: https://github.com/ojroques/nvim-osc52

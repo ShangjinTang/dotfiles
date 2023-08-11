@@ -141,6 +141,7 @@ wk.register({
     ["<leader><tab>"] = { "<cmd>b#<cr>", "Switch between buffers" },
     ["<leader>q"] = { "<cmd>qa!<cr>", "Force Quit All Buffers" },
     ["<leader>w"] = { "<cmd>BufferKill<cr>", "Close Current Buffer" },
+    ["<leader>z"] = { "<cmd>lua require('telescope').extensions.zoxide.list({})<cr>", "Zoxide" },
     ["<leader>Z"] = { "<cmd>ZenMode<cr>", "Zen Mode" },
 
     ["<leader>a"] = { name = "+AsyncRun & AsyncTasks" },
