@@ -334,7 +334,7 @@ lvim.plugins = {
                 custom_highlights = {},
                 integrations = {
                     alpha = true,
-                    flash = true,
+                    flash = false,
                     gitsigns = true,
                     indent_blankline = {
                         enabled = true,
@@ -656,7 +656,16 @@ lvim.plugins = {
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        config = true,
+        dependencies = {
+            "catppuccin/nvim",
+        },
+        config = function()
+            require("catppuccin").setup({
+                integrations = {
+                    flash = true,
+                },
+            })
+        end,
     },
 
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
