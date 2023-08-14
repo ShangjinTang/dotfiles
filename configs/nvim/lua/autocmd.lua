@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd({
 
 vim.api.nvim_create_autocmd({ "CursorHold", "LspAttach" }, {
     callback = function()
-        if os.getenv("SHOW_LINE_DIAG") == "true" and vim.lsp.buf.server_ready() then
+        if os.getenv("SHOW_LINE_DIAG") == "true" and vim.lsp.buf.server_ready() and vim.diagnostic.config().float then
             -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.open_float()
             vim.diagnostic.open_float({
                 scope = "cursor",
