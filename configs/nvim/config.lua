@@ -657,7 +657,7 @@ lvim.plugins = {
         "folke/flash.nvim",
         event = "VeryLazy",
         dependencies = {
-            "catppuccin/nvim",
+            { "catppuccin/nvim", name = "catppuccin" },
         },
         config = function()
             require("catppuccin").setup({
