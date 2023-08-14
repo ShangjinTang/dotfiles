@@ -124,11 +124,13 @@ wk.register({
 
     -- ["gd"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
     ["gd"] = { "<cmd>Lspsaga peek_definition<cr>", "Lspsaga Peek Definition" },
-    ["gi"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
+    ["gr"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
+    ["gI"] = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
+    ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
+    ["L"] = { "<cmd>Lspsaga finder tyd+def+ref+imp<cr>", "Lspsaga Finder" },
     -- ["gt"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
     ["gt"] = { "<cmd>Lspsaga peek_type_definition<cr>", "Lspsaga Peek Type Definition" },
-    ["gr"] = { "<cmd>Telescope lsp_references<cr>", "Goto References" },
-    ["gl"] = { "<cmd>Lspsaga finder tyd+def+ref+imp<cr>", "Lspsaga Finder" },
 
     ["mm"] = { "<cmd>BookmarkToggle<cr>", "Bookmark Toggle" },
     ["ma"] = { "<cmd>BookmarkShowAll<cr>", "Bookmark Show All" },
