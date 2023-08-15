@@ -88,7 +88,7 @@ def main():
 
     if not which("clang++"):
         if not which("g++"):
-            raise Exception("Compiler clang++ and g++ are not found.")
+            raise Exception("Compiler clang++ / g++ not found.")
         ARGS.compiler = "g++"
 
     flag_list = get_flag_list_from_file(ARGS.flag_file)

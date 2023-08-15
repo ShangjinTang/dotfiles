@@ -55,4 +55,7 @@ __pycache__
 .vscode/
 .idea/
 
+######################################################################
+# Programming output file/cache
 
+a.out

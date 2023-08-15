@@ -83,7 +83,7 @@ def main():
 
     if not which("clang"):
         if not which("gcc"):
-            raise Exception("Compiler clang and gcc are not found.")
+            raise Exception("Compiler clang / gcc is not found.")
         ARGS.compiler = "gcc"
 
     flag_list = get_flag_list_from_file(ARGS.flag_file)
