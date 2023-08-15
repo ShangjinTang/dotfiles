@@ -438,42 +438,42 @@ lvim.plugins = {
     -- NOTE: AI tools: ChatGPT & Copilot
 
     -- Reference: https://github.com/jackMort/ChatGPT.nvim
-    {
-        "jackMort/ChatGPT.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
-        config = function()
-            require("chatgpt").setup({
-                api_key_cmd = "echo -n $OPENAI_API_KEY",
-                openai_params = {
-                    model = "gpt-3.5-turbo",
-                    frequency_penalty = 0,
-                    presence_penalty = 0,
-                    max_tokens = 2048,
-                    temperature = 0,
-                    top_p = 1,
-                    n = 1,
-                },
-            })
-        end,
-    },
+    -- {
+    --     "jackMort/ChatGPT.nvim",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "MunifTanjim/nui.nvim",
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-telescope/telescope.nvim",
+    --     },
+    --     config = function()
+    --         require("chatgpt").setup({
+    --             api_key_cmd = "echo -n $OPENAI_API_KEY",
+    --             openai_params = {
+    --                 model = "gpt-3.5-turbo",
+    --                 frequency_penalty = 0,
+    --                 presence_penalty = 0,
+    --                 max_tokens = 2048,
+    --                 temperature = 0,
+    --                 top_p = 1,
+    --                 n = 1,
+    --             },
+    --         })
+    --     end,
+    -- },
 
     -- Reference: https://github.com/dpayne/CodeGPT.nvim
-    {
-        "dpayne/CodeGPT.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "MunifTanjim/nui.nvim",
-        },
-        config = function()
-            require("codegpt.config")
-        end,
-    },
+    -- {
+    --     "dpayne/CodeGPT.nvim",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "MunifTanjim/nui.nvim",
+    --     },
+    --     config = function()
+    --         require("codegpt.config")
+    --     end,
+    -- },
 
     -- Reference: https://github.com/zbirenbaum/copilot-cmp
     {
