@@ -18,40 +18,40 @@ wk.register({
     ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute Operator" },
 }, visual_mode)
 
-wk.register({
-    ["<leader>C"] = { "<cmd>ChatGPT<cr>", "ChatGPT Prompt" },
-    ["<leader>c"] = { name = "+ChatGPT Commands" },
-    ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
-    ["<leader>cc"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
-    -- Code Edit / Replace / Append
-    ["<leader>ct"] = { "<cmd>ChatGPTRun add_tests<cr>", "Add Code Tests" },
-    ["<leader>cd"] = { "<cmd>ChatGPTRun docstring<cr>", "Add Code Docs" },
-    ["<leader>cg"] = { "<cmd>ChatGPTRun complete_code<cr>", "Code Generate" },
-    ["<leader>cf"] = { "<cmd>ChatGPTRun fix_bugs<cr>", "Code Fix" },
-    ["<leader>co"] = { "<cmd>ChatGPTRun optimize_code<cr>", "Code Optimize" },
-    -- Display
-    ["<leader>ce"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Explain" },
-    -- Chat
-    ["<leader>ck"] = { "<cmd>ChatGPTRun keywords<cr>", "Keywords" },
-    ["<leader>cr"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Readability Analysis" },
-}, normal_mode)
-wk.register({
-    ["<leader>C"] = { "<cmd>ChatGPT<cr>", "ChatGPT Prompt" },
-    ["<leader>c"] = { name = "+ChatGPT Commands" },
-    ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
-    ["<leader>cc"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
-    -- Code Edit / Replace / Append
-    ["<leader>ct"] = { "<cmd>ChatGPTRun add_tests<cr>", "Add Code Tests" },
-    ["<leader>cd"] = { "<cmd>ChatGPTRun docstring<cr>", "Add Code Docs" },
-    ["<leader>cg"] = { "<cmd>ChatGPTRun complete_code<cr>", "Code Generate" },
-    ["<leader>cf"] = { "<cmd>ChatGPTRun fix_bugs<cr>", "Code Fix" },
-    ["<leader>co"] = { "<cmd>ChatGPTRun optimize_code<cr>", "Code Optimize" },
-    -- Display
-    ["<leader>ce"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Explain" },
-    -- Chat
-    ["<leader>ck"] = { "<cmd>ChatGPTRun keywords<cr>", "Keywords" },
-    ["<leader>cr"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Readability Analysis" },
-}, visual_mode)
+-- wk.register({
+--     ["<leader>C"] = { "<cmd>ChatGPT<cr>", "ChatGPT Prompt" },
+--     ["<leader>c"] = { name = "+ChatGPT Commands" },
+--     ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
+--     ["<leader>cc"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
+--     -- Code Edit / Replace / Append
+--     ["<leader>ct"] = { "<cmd>ChatGPTRun add_tests<cr>", "Add Code Tests" },
+--     ["<leader>cd"] = { "<cmd>ChatGPTRun docstring<cr>", "Add Code Docs" },
+--     ["<leader>cg"] = { "<cmd>ChatGPTRun complete_code<cr>", "Code Generate" },
+--     ["<leader>cf"] = { "<cmd>ChatGPTRun fix_bugs<cr>", "Code Fix" },
+--     ["<leader>co"] = { "<cmd>ChatGPTRun optimize_code<cr>", "Code Optimize" },
+--     -- Display
+--     ["<leader>ce"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Explain" },
+--     -- Chat
+--     ["<leader>ck"] = { "<cmd>ChatGPTRun keywords<cr>", "Keywords" },
+--     ["<leader>cr"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Readability Analysis" },
+-- }, normal_mode)
+-- wk.register({
+--     ["<leader>C"] = { "<cmd>ChatGPT<cr>", "ChatGPT Prompt" },
+--     ["<leader>c"] = { name = "+ChatGPT Commands" },
+--     ["<leader>ca"] = { "<cmd>ChatGPTActAs<cr>", "Act as ..." },
+--     ["<leader>cc"] = { "<cmd>ChatGPTEditWithInstructions<cr>", "Edit with Instructions" },
+--     -- Code Edit / Replace / Append
+--     ["<leader>ct"] = { "<cmd>ChatGPTRun add_tests<cr>", "Add Code Tests" },
+--     ["<leader>cd"] = { "<cmd>ChatGPTRun docstring<cr>", "Add Code Docs" },
+--     ["<leader>cg"] = { "<cmd>ChatGPTRun complete_code<cr>", "Code Generate" },
+--     ["<leader>cf"] = { "<cmd>ChatGPTRun fix_bugs<cr>", "Code Fix" },
+--     ["<leader>co"] = { "<cmd>ChatGPTRun optimize_code<cr>", "Code Optimize" },
+--     -- Display
+--     ["<leader>ce"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Explain" },
+--     -- Chat
+--     ["<leader>ck"] = { "<cmd>ChatGPTRun keywords<cr>", "Keywords" },
+--     ["<leader>cr"] = { "<cmd>ChatGPTRun explain_code<cr>", "Code Readability Analysis" },
+-- }, visual_mode)
 
 wk.register({
     ["<leader>_"] = { "<cmd>lua require('osc52').copy_operator()<cr>", "Copy (osc52)" },
