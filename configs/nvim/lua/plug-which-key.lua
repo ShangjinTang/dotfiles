@@ -353,8 +353,6 @@ function set_key_bindings()
     -- markdown
     if ftype == "markdown" then
         wk.register({
-            ["<CR>"] = { "<cmd>MkdnEnter<cr>", "Follow or Insert Link / Header Collapse" },
-            ["<BS>"] = { "<cmd>MkdnGoBack<cr>", "Go Back" },
             ["<leader>mk"] = { "<cmd>MkdnPrevHeading<cr>", "Prev Heading" },
             ["<leader>mj"] = { "<cmd>MkdnNextHeading<cr>", "Next Heading" },
             ["<leader>mo"] = { "<cmd>MkdnNewListItemBelowInsert<cr>", "Insert Below (list-supported)" },
