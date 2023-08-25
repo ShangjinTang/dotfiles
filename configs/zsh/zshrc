@@ -50,6 +50,7 @@ plugins=(
     direnv                      ## creates hook for 'direnv'
     colored-man-pages           ## add colors for 'man' command
     command-not-found           ## prompt suggested packages if cli command not found
+    fancy-ctrl-z                ## use Ctrl-z to switch between terminal and vim/nvim
     # ohmyzsh built-in completions
     adb
     bazel
