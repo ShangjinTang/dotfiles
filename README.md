@@ -14,7 +14,7 @@ Partial support:
 
 - Ubuntu 22.04 x86_64
   - Almost all functionalities should work, but the installation instructions is not complete and hard to maintain
-  - Some packages require manual install (e.g. neovim)
+  - Some packages require manual install (e.g. `neovim` / `tmux`)
 - macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
 
 ## Installation (ArchLinux)
@@ -145,41 +145,25 @@ Caution: this web page is not under maintained. For macOS / Ubuntu, you need to 
     <!-- TODO: add more packages -->
     ```bash
     sudo apt update
-    sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip fuse nodejs npm
-    sudo apt install -y clang clang-format libstdc++-12-dev g++ make cmake universal-ctags cscope ninja-build
-    sudo apt install -y pyenv black
-    sudo apt install -y shfmt
-    sudo apt install -y net-tools
-    sudo apt install -y libgtest-dev
-    sudo pip3 install tldr
+    sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip fuse pkg-config python3-venv pyenv net-tools
+    sudo apt install -y clang clang-format libstdc++-12-dev gcc g++ make cmake universal-ctags cscope ninja-build
+    sudo apt install -y libgtest-dev openjdk-17-jdk
+    pip3 install pynvim tldr
     ```
 
     Manual install neovim with `nvim.appimage`. `fuse` pacakge above is for running nvim.
 
     See: https://github.com/neovim/neovim/releases/tag/v0.9.0
 
-</details>
+    Install nodejs/npm:
 
-## How to ...
+    ```bash
+    cd ~
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+    sudo apt -y install nodejs
+    ```
 
-<details>
-
-  <summary>How to customize dotfiles</summary>
-
-    1. Add configuration files
-    2. Edit `install.conf.yaml` to create symlink
-    3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation
-    4. Add files in `~/.dotfiles.local/` for local override
-    - Step 1: Create files in .dotfiles.local with same archtecture in home directory
-    - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
-    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
-    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
-
-</details>
-
-<details>
-
-  <summary>How to install tmux</summary>
+    Install tmux:
 
     ```bash
     sudo apt remove tmux
@@ -193,15 +177,13 @@ Caution: this web page is not under maintained. For macOS / Ubuntu, you need to 
 
 </details>
 
-<details>
+## Customization
 
-  <summary>How to install nodejs/npm</summary>
-
-    ```bash
-    wget https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
-    sudo tar xvf node-v16.17.0-linux-x64.tar.xz -C /opt/
-    sudo mv /opt/node-v16.17.0-linux-x64 /opt/node
-    rm node-v16.17.0-linux-x64.tar.xz
-    ```
-
-</details>
+1. Add configuration files
+2. Edit `install.conf.yaml` to create symlink
+3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation
+4. Add files in `~/.dotfiles.local/` for local override
+   - Step 1: Create files in .dotfiles.local with same architecture in home directory
+   - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
+   - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
+   - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
