@@ -391,7 +391,7 @@ lvim.plugins = {
             require("notify").setup({
                 background_colour = require("catppuccin.palettes").get_palette().base,
             })
-            require("bufferline").setup({
+            require("lvim.core.bufferline").setup({
                 highlights = require("catppuccin.groups.integrations.bufferline").get(),
             })
             lvim.colorscheme = "catppuccin"
