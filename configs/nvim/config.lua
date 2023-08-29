@@ -185,7 +185,7 @@ end
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
     { command = "trim_whitespace" },
-    -- [BINARY] | cargo install stylua
+    -- cargo install stylua
     { command = "stylua", filetypes = { "lua" } },
     -- sudo pacman -Sy clang | sudo apt install -y clang-format
     { command = "clang_format", filetypes = { "c", "cpp", "cuda" } },
@@ -193,21 +193,21 @@ formatters.setup({
     { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
     -- sudo pacman -Sy python-black | sudo apt install -y black
     { command = "black", filetypes = { "python" } },
-    -- [BINARY] | sudo pacman -Sy shfmt | sudo apt install -y shfmt
+    -- sudo pacman -Sy shfmt | sudo apt install -y shfmt
     { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
     -- pip install beautysh
     { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
     -- rustup component add rustfmt
     { command = "rustfmt", filetypes = { "rust" } },
-    -- [BINARY] | go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
     { command = "buildifier", filetypes = { "bzl" } },
-    -- [BINARY] | cargo install cbfmt
+    -- cargo install cbfmt
     { command = "cbfmt", filetypes = { "markdown" } },
-    -- [BINARY] | npm install --global @bufbuild/buf
+    -- npm install --global @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-format", filetypes = { "cmake" } },
-    -- [BINARY] | npm install --global prettier
+    -- npm install --global prettier
     {
         command = "prettier",
         -- extra_args = { "--print-width", "120", "tabWidth", "4" },
@@ -235,13 +235,15 @@ formatters.setup({
 
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
-    -- [BINARY] | go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
     { command = "buildifier", filetypes = { "bzl" } },
-    -- [BINARY] | npm install --global @bufbuild/buf
+    -- npm install --global @bufbuild/buf
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-lint", filetypes = { "cmake" } },
-    -- [BINARY] | sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
+    -- npm install --global jsonlint
+    { command = "jsonlint", filetypes = { "json" } },
+    -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
     { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
     -- zsh
     { command = "zsh", filetypes = { "zsh" } },
@@ -1200,7 +1202,6 @@ lvim.plugins = {
                     "dockerls", -- Docker
                     "docker_compose_language_service", -- Docker Compose
                     "jdtls", -- Java
-                    "jsonls", -- JSON
                     "lua_ls", -- Lua
                     "marksman", -- Markdown
                     "pyright", -- Python
@@ -1239,6 +1240,7 @@ lvim.plugins = {
                     "cbfmt",
                     "clang_format",
                     "google_java_format",
+                    "jsonlint",
                     "prettier",
                     "rustfmt",
                     "shfmt",
