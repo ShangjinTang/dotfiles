@@ -6,7 +6,7 @@ echo "Executing install.post ..."
 
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
-    if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls ${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins)" ]; then
+    if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls "${XDG_CONFIG_HOME:-$HOME/.config}"/nnn/plugins)" ]; then
         echo "installing nnn plugins"
         bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
     fi
@@ -15,15 +15,15 @@ fi
 # install fzf if ~/.fzf/install exists
 if ! command -v fzf &> /dev/null; then
     if [ -f ~/.fzf/install ]; then
-        ~/.fzf/install --all
+        ~/.fzf/install --all --no-bash --no-fish
     fi
 fi
 
 # create symlinks from ~/.dotfiles.local/ to ~/
 if [ -d ~/.dotfiles.local ]; then
-    for file in $(find ~/.dotfiles.local -type f); do
-        ln -sf $file "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
-    done
+    while IFS= read -r -d '' file; do
+        ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
+    done < <(find ~/.dotfiles.local -type f -print0)
 fi
 
 # install cargo packages
@@ -56,13 +56,13 @@ fi
 # fi
 
 function apply_diff_for_submodule() {
-    local target_folder=./submodules/$1
-    local diff_list=(./submodules_diff/$1/*.diff)
-    if [[ -d $target_folder ]]; then
-        (cd $target_folder && git reset --hard HEAD &> /dev/null)
+    local target_folder=./submodules/"$1"
+    local diff_list=(./submodules_diff/"$1"/*.diff)
+    if [[ -d "$target_folder" ]]; then
+        (cd "$target_folder" && git reset --hard HEAD &> /dev/null)
         for diff_file in "${diff_list[@]}"; do
-            diff_file_realpath=$(realpath $diff_file)
-            (cd $target_folder && git apply $diff_file_realpath &> /dev/null)
+            diff_file_realpath=$(realpath "$diff_file")
+            (cd "$target_folder" && git apply "$diff_file_realpath" &> /dev/null)
             if [[ $? -eq 0 ]]; then
                 echo "Apply patch $diff_file in folder $target_folder succeeded."
             else
