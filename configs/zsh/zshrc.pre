@@ -22,8 +22,9 @@ case ${TERMINAL_THEME} in
 esac
 
 # vim extensions
-export FORMAT_ON_SAVE=true
-export SHOW_LINE_DIAG=true
+export NVIM_FORMAT_ON_SAVE=true
+export NVIM_SHOW_DIAG_ON_HOVER=true
+export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="warn"  # error/warn/info/hint
 
 # python version
 export PYTHON3_VERSION="3.10.11"

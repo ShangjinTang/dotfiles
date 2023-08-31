@@ -58,15 +58,24 @@ vim.api.nvim_create_autocmd({
 
 vim.api.nvim_create_autocmd({ "CursorHold", "LspAttach" }, {
     callback = function()
-        if os.getenv("SHOW_LINE_DIAG") == "true" and vim.lsp.buf.server_ready() and vim.diagnostic.config().float then
-            -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.open_float()
-            vim.diagnostic.open_float({
-                scope = "cursor",
-                severity = { min = vim.diagnostic.severity.WARN, max = vim.diagnostic.severity.ERROR },
-                header = "", -- Default: "Diagnostic:"
-                source = true, -- Whether show LSP (e.g. "Pyright: ") at beginning
-                border = "rounded",
-            })
+        local diagnostic_serverity_map = {
+            error = vim.diagnostic.severity.ERROR,
+            warn = vim.diagnostic.severity.WARN,
+            info = vim.diagnostic.severity.INFO,
+            hint = vim.diagnostic.severity.HINT,
+        }
+        if os.getenv("NVIM_SHOW_DIAG_ON_HOVER") == "true" then
+            local severity = diagnostic_serverity_map[os.getenv("NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN")]
+            if severity and vim.lsp.buf.server_ready() and vim.diagnostic.config().float then
+                -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.open_float()
+                vim.diagnostic.open_float({
+                    scope = "cursor",
+                    severity = { min = severity, max = vim.diagnostic.severity.ERROR },
+                    header = "", -- Default: "Diagnostic:"
+                    source = true, -- Whether show LSP (e.g. "Pyright: ") at beginning
+                    border = "rounded",
+                })
+            end
         end
     end,
 })

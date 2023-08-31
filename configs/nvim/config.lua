@@ -173,7 +173,7 @@ lvim.builtin.treesitter.ensure_installed = {
 -- null-ls
 
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
-if os.getenv("FORMAT_ON_SAVE") == "true" then
+if os.getenv("NVIM_FORMAT_ON_SAVE") == "true" then
     lvim.format_on_save = {
         enabled = true,
         -- pattern = "*.lua",
