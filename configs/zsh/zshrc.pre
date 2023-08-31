@@ -62,27 +62,12 @@ export COLORTERM=truecolor
 export ZSH_DISABLE_COMPFIX=1
 export skip_global_compinit=1
 
-# session type to distinguish local or ssh(remote), for zsh theme
-export SESSION_TYPE=local
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    export SESSION_TYPE="ssh"
-else
-    case $(ps -o comm= -p "$PPID") in
-        sshd|*/sshd) export SESSION_TYPE="ssh" ;;
-    esac
-fi
-
 #=====================================================================
 # exports for specific command line tool
 
 # cmake
 if command -v cmake &> /dev/null; then
     export CMAKE_EXPORT_COMPILE_COMMANDS=1
-fi
-
-# https://github.com/rupa/z
-if command -v z &> /dev/null; then
-    export _Z_NO_RESOLVE_SYMLINKS=1
 fi
 
 if command -v nnn &> /dev/null; then
