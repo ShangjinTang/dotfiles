@@ -1,19 +1,15 @@
 # Reference: https://clang.llvm.org/extra/clang-tidy/checks/list.html
-Checks:
-    -*,
-    clang-analyzer-*,
-    cppcoreguidelines-*, -cppcoreguidelines-owning-memory,
-    google-*,
-    -header
-    hicpp-*,
-    llvm-*, -llvm-header-guard,
-    misc-*,
-    modernize-*, -modernize-use-trailing-return-type,
-    performance-*,
-    readability-*, -readability-identifier-length,
-
-
-
+Checks: -*,
+  clang-analyzer-*,
+  cppcoreguidelines-*, -cppcoreguidelines-owning-memory, -cppcoreguidelines-avoid-do-while,
+  google-*,
+  -header
+  hicpp-*,
+  llvm-*, -llvm-header-guard,
+  misc-*,
+  modernize-*, -modernize-use-trailing-return-type,
+  performance-*,
+  readability-*, -readability-identifier-length,
 # Reference: https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
 # Note: default disable CheckOptions for open source projects have different case styles
 # CheckOptions:
