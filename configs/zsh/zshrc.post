@@ -13,6 +13,25 @@ if [[ $PROXY_ENABLED == 1 ]]; then
 else
     unsetproxy
 fi
+# check connection (with & without proxy)
+check_connection() {
+    (
+        if command -v https &> /dev/null; then
+            setproxy
+            if ! https --print=h https://www.google.com 2> /dev/null | grep "HTTP/1.1 200 OK" &> /dev/null; then
+                echo "Connection to Google [proxy enabled]: failed"
+            else
+                echo "Connection to Google [proxy enabled]: succeeded"
+            fi
+            unsetproxy
+            if ! https --print=h https://www.aliyun.com 2> /dev/null | grep "HTTP/1.1 200 OK" &> /dev/null; then
+                echo "Connection to Aliyun [proxy disabled]: failed"
+            else
+                echo "Connection to Aliyun [proxy disabled]: succeeded"
+            fi
+        fi
+    )
+}
 
 # SKIP_SSL
 if [[ $SKIP_SSL == 1 ]]; then
