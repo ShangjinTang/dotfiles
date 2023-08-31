@@ -8,6 +8,7 @@ git: true
 vim: true
 neovim: true
 zsh: true
+direnv: true
 # ------------------------------
 archlinux-keyring: true # Solve "error: required key missing from keyring"
 mandoc: true
