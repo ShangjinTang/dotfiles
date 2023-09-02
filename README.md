@@ -187,3 +187,22 @@ Caution: this web page is not under maintained. For macOS / Ubuntu, you need to 
    - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
+
+## Tips & Issue Fix
+
+### nvim
+
+#### nvim plugins
+
+Sometimes you need to update plugins to fix plugin issues by executing `LvimSyncCorePlugins` in nvim.
+
+#### nvim treesitter
+
+Sometimes you need to update treesitter to fix it's issues by executing `:TSUpdate` in nvim.
+
+This can solve issues, e.g.:
+
+```plain
+treesitter/highlighter: Error executing lua:
+.../share/nvim/runtime/lua/vim/treesitter/query.lua:161: query: invalid node type at position
+```
