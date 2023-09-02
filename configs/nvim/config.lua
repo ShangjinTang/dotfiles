@@ -477,27 +477,27 @@ lvim.plugins = {
     --     end,
     -- },
 
-    -- Reference: https://github.com/zbirenbaum/copilot-cmp
-    {
-        "zbirenbaum/copilot-cmp",
-        event = "VeryLazy",
-        dependencies = {
-            "zbirenbaum/copilot.lua",
-        },
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
-    -- Reference: https://github.com/zbirenbaum/copilot.lua
-    -- Note: Use `:Copilot auth` to authenticate
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup()
-        end,
-    },
+    -- -- Reference: https://github.com/zbirenbaum/copilot-cmp
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "zbirenbaum/copilot.lua",
+    --     },
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end,
+    -- },
+    -- -- Reference: https://github.com/zbirenbaum/copilot.lua
+    -- -- Note: Use `:Copilot auth` to authenticate
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup()
+    --     end,
+    -- },
 
     -----------------------------------------------------------------
     -- NOTE: legacy code completion tools
