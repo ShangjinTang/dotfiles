@@ -5,8 +5,24 @@
 set_theme $TERMINAL_THEME
 
 # Proxy (V2Ray)
-alias setproxy="export https_proxy=http://$PROXY_IP http_proxy=http://$PROXY_IP all_proxy=http://$PROXY_IP HTTPS_PROXY=http://$PROXY_IP HTTP_PROXY=http://$PROXY_IP ALL_PROXY=http://$PROXY_IP"
-alias unsetproxy="unset https_proxy http_proxy all_proxy HTTPS_PROXY HTTP_PROXY ALL_PROXY"
+setproxy() {
+    export https_proxy=http://$PROXY_IP
+    export http_proxy=http://$PROXY_IP
+    export all_proxy=http://$PROXY_IP
+    export HTTPS_PROXY=http://$PROXY_IP
+    export HTTP_PROXY=http://$PROXY_IP
+    export ALL_PROXY=http://$PROXY_IP
+}
+
+unsetproxy() {
+    unset https_proxy
+    unset http_proxy
+    unset all_proxy
+    unset HTTPS_PROXY
+    unset HTTP_PROXY
+    unset ALL_PROXY
+}
+
 # setproxy
 if [[ $PROXY_ENABLED == 1 ]]; then
     setproxy
