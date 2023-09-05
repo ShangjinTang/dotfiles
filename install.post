@@ -2,7 +2,7 @@
 
 echo "Executing install.post ..."
 
-~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode
+~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode Mononoki VictorMono # IosevkaTerm JetbrainsMono UbuntuMono MPlus
 
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
