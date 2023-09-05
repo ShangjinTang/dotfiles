@@ -993,6 +993,19 @@ lvim.plugins = {
     },
 
     -----------------------------------------------------------------
+    -- NOTE: C & C++
+
+    -- Reference: https://github.com/jakemason/ouroboros.nvim
+    {
+        "jakemason/ouroboros",
+        ft = { "c", "cpp" },
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    },
+
+    -----------------------------------------------------------------
     -- NOTE: mason debuggers, code runners
 
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim

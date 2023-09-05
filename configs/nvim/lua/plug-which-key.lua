@@ -489,6 +489,12 @@ function set_key_bindings()
         })
     end
 
+    if ftype == "c" or ftype == "cpp" then
+        wk.register({
+            ["g<Tab>"] = { "<cmd>Ouroboros<cr>", "Switch .h <-> .c/.cpp" },
+        })
+    end
+
     -- for telekasten calendar: do not use default 'BufferKill' would open next buffer
     -- for oil: ’BufferKill’ not work
     if ftype == "calendar" or ftype == "oil" then
