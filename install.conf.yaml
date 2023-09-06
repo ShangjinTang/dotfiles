@@ -35,6 +35,7 @@
     ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.stylua.toml: configs/lua/.stylua.toml
         ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
+    ~/.cargo/config.toml: configs/cargo/config.toml
 
 # link for macOS
 - shell:
