@@ -24,18 +24,19 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-    ~/.gitconfig: configs/.gitconfig
+        ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
+    ~/.config/gh/: configs/gh/*
     ~/.pip-requirements.txt: configs/.pip-requirements.txt
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
-    ~/.rcxxflags: configs/.rcxxflags
-    ~/.rcflags: configs/.rcflags
     ~/.clang-format: configs/clang/.clang-format
     ~/.clang-tidy: configs/clang/.clang-tidy
     ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.stylua.toml: configs/lua/.stylua.toml
-        ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
+    ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
     ~/.cargo/config.toml: configs/cargo/config.toml
+    ~/.rcxxflags: configs/.rcxxflags
+    ~/.rcflags: configs/.rcflags
 
 # link for macOS
 - shell:
