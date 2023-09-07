@@ -70,6 +70,12 @@ if command -v cmake &> /dev/null; then
     export CMAKE_EXPORT_COMPILE_COMMANDS=1
 fi
 
+# cscope
+if command -v cscope &> /dev/null; then
+    alias cscope="cscope -f ./cscope.out"
+fi
+
+# nnn
 if command -v nnn &> /dev/null; then
     export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
     # nnn plugins reference: https://github.com/jarun/nnn/tree/master/plugins
