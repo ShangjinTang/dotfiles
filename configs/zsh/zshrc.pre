@@ -313,6 +313,7 @@ if command -v lazygit &> /dev/null; then
     alias gg='lazygit'
 fi
 alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
+alias gspristine='git submodule deinit --force --all && git submodule update --init'
 alias cg='cd $(git rev-parse --show-cdup)'
 
 # sgpt -> s
