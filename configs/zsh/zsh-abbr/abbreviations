@@ -117,11 +117,11 @@ abbr mpipi="mpip install"
 abbr vmpip="nvim ~/.dotfiles/linux/bin/mpip-conf/{base,dev}/{min,medium,max}.yaml"
 
 #---------------------------------------------------------------------
-# cmake
-abbr cbuild="asynctask cmake-build"
-abbr crun="asynctask cmake-run"
-abbr rsbuild="asynctask cargo-build"
-abbr rsrun="asynctask cargo-run"
-abbr rstest="asynctask cargo-test"
+# cmake / cargo
+abbr cmakeb="asynctask cmake-build"
+abbr cmaker="asynctask cmake-run"
+abbr cargob="asynctask cargo-build"
+abbr cargor="asynctask cargo-run"
+abbr cargot="asynctask cargo-test"
 
 ######################################################################

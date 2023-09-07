@@ -21,6 +21,7 @@ let g:asyncrun_bell = 1
 let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = projectroot
 let g:asynctasks_term_pos='toggleterm'
+let g:asynctasks_term_reuse = 1
 
 function! AsyncRunWith(commands)
     execute 'AsyncRun -mode=term -pos=toggleterm -focus=0 ' . a:commands
