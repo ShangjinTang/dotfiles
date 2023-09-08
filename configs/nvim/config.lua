@@ -87,6 +87,10 @@ lvim.builtin.lualine = {
         lualine_c = {
             lualine_components.branch,
             lualine_components.diff,
+            {
+                require("noice").api.statusline.mode.get,
+                cond = require("noice").api.statusline.mode.has,
+            },
         },
         lualine_x = {
             lualine_components.diagnostics,
