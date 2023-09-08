@@ -247,6 +247,8 @@ linters.setup({
     { command = "cmake-lint", filetypes = { "cmake" } },
     -- npm install --global jsonlint
     { command = "jsonlint", filetypes = { "json" } },
+    -- pip install pylint
+    { command = "pylint", filetypes = { "python" } },
     -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
     { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
     -- zsh
@@ -1264,6 +1266,7 @@ lvim.plugins = {
                     "stylua",
                     "trim_whitespace",
                     -- Linters
+                    "pylint",
                     "shellcheck",
                 },
             })
