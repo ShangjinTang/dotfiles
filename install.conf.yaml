@@ -34,6 +34,7 @@
     ~/.clang-tidy: configs/clang/.clang-tidy
     ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.stylua.toml: configs/lua/.stylua.toml
+    ~/.tmuxp/clash.yml: configs/tmuxp/clash.yml
     ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
     ~/.cargo/config.toml: configs/cargo/config.toml
     ~/.rcxxflags: configs/.rcxxflags
