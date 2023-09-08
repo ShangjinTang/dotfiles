@@ -283,6 +283,7 @@ if command -v nvim &> /dev/null; then
         fi
     }
     alias vm="nvim ~/note/index.md"
+    alias vclash="nvim ~/.config/clash/config.yaml"
 else
     alias v='vim'
     alias vv='vim ~/.vimrc'
