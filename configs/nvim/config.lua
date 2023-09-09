@@ -1218,6 +1218,7 @@ lvim.plugins = {
                     "asm_lsp", -- Assembly (GAS/NASM, GO)
                     "bashls", -- Bash
                     "clangd", -- C/C++
+                    "cmake", -- CMake
                     "dockerls", -- Docker
                     "docker_compose_language_service", -- Docker Compose
                     "jdtls", -- Java
