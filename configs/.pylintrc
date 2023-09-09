@@ -67,12 +67,13 @@ ignored-modules=
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-#init-hook=
+# NOTE: fix pylint 'import-error' for pip installed packages when using pyenv
+init-hook="import subprocess, sys; sys.path.append('{}/lib/python{}/site-packages'.format(subprocess.check_output(['pyenv', 'prefix']).decode().strip(), '{}.{}'.format(sys.version_info.major, sys.version_info.minor)))"
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use, and will cap the count on Windows to
 # avoid hangs.
-jobs=1
+jobs=0
 
 # Control the amount of potential inferred values when inferring a single
 # object. This can help the performance when dealing with large functions or
@@ -190,7 +191,8 @@ good-names=i,
            k,
            ex,
            Run,
-           _
+           _,
+           f
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
@@ -428,7 +430,8 @@ disable=raw-checker-failed,
         suppressed-message,
         useless-suppression,
         deprecated-pragma,
-        use-symbolic-message-instead
+        use-symbolic-message-instead,
+        missing-docstring
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
