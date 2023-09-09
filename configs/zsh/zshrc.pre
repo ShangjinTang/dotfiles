@@ -73,6 +73,7 @@ fi
 # cscope
 if command -v cscope &> /dev/null; then
     alias cscope="cscope -f ./cscope.out"
+    alias cscopebuild="fd -e cpp -e cc -e c -e hpp -e h -e java > cscope.files && cscope -bkqv"
 fi
 
 # nnn
@@ -210,9 +211,9 @@ function cdup_to_exists() {
 alias ce="cdup_to_exists"
 
 # use fzf to scan 'wd' directories
-if command -v _fzf_wd &> /dev/null; then
-    function fzf_wd() {
-        cd "$(_fzf_wd "$*")"
+if command -v _wdi &> /dev/null; then
+    function wdi() {
+        cd "$(_wdi "$*")"
     }
 fi
 
@@ -287,7 +288,7 @@ fi
 # asynctask -> a
 alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask'
 alias a=asynctask
-alias af='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
+alias ai='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
 function va() {
     if [[ -f .tasks ]]; then
         nvim -O2 .tasks ~/.config/nvim/tasks.ini

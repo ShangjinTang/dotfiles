@@ -58,31 +58,6 @@ abbr gst="git status"
 # customized commands
 
 #---------------------------------------------------------------------
-# cscope + fzf
-
-abbr csgen="fd -e cpp -e cc -e c -e hpp -e h > cscope.files && cscope -bkq"
-abbr csc="fzf_cscope_find_c"
-abbr csd="fzf_cscope_find_d"
-abbr csg="fzf_cscope_find_g"
-abbr css="fzf_cscope_find_s"
-
-#---------------------------------------------------------------------
-# git + fzf
-
-abbr Glf="fzf_git_log_follow"
-abbr Gsh="fzf_git_show"
-abbr Gst="fzf_git_status"
-abbr Gd="fzf_git_status"
-
-#---------------------------------------------------------------------
-# ... + fzf
-
-# interactive grep
-abbr rf="fzf_rg"
-# interactive cd to warp dir
-abbr wf="fzf_wd"
-
-#---------------------------------------------------------------------
 # rsync
 
 abbr rs="rsync -avzhP"
