@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# dependencies: fzf, gshi
+
 if [[ $(git rev-parse HEAD 2>&1 > /dev/null) ]]; then
     echo "fatal: Not a git repository"
     exit 1
@@ -32,4 +34,4 @@ IFS=' ' read -ra selected < <(
         --no-sort \
         --exit-0
 )
-[ -n "${selected[0]}" ] && fzf_git_show "${selected[0]}"
+[ -n "${selected[0]}" ] && gshi "${selected[0]}"

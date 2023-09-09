@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# dependencies: fzf, delta
+
 if [[ $(git rev-parse HEAD 2>&1 > /dev/null) ]]; then
     echo "fatal: Not a git repository"
     exit 1
@@ -10,13 +12,14 @@ fi
 
 GST_PREFIX="git -c color.status=always status -uall --short | grep -i "
 QUERY="${*:-}"
-FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$QUERY")" \
-    fzf --ansi \
-    --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
-    --bind "change:reload:sleep 0.1; $GST_PREFIX {q} || true" \
-    --header "git status" \
-    --disabled \
-    --preview '(
+IFS=' ' read -ra selected < <(
+    FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$QUERY")" \
+        fzf --ansi \
+        --bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview \
+        --bind "change:reload:sleep 0.1; $GST_PREFIX {q} || true" \
+        --header "git status" \
+        --disabled \
+        --preview '(
         if [ $(git diff --staged -- {-1} | wc -l) -ne 0 ]; then
             echo ">>>>>> Changes to be committed:\n";
             git diff --staged --color=always -- {-1} | sed 1,4d;
@@ -34,6 +37,21 @@ FZF_DEFAULT_COMMAND="$GST_PREFIX $(printf %q "$QUERY")" \
             echo "\n<<<<<< Untracked file\n";
         fi;
         ) | cat' \
-    --preview-window 'up,75%,border-bottom' \
-    --query "$QUERY" |
-    cut -c4- | sed 's/.* -> //'
+        --preview-window 'up,75%,border-bottom' \
+        --query "$QUERY" |
+        cut -c4- | sed 's/.* -> //'
+)
+
+if [ -n "${selected[0]}" ]; then
+    if [ $(git diff --staged -- "${selected[0]}" | wc -l) -ne 0 ]; then
+        echo -e "\n>>>>>> Changes to be committed:"
+        git diff --staged "${selected[0]}" | delta -s
+        echo -e "<<<<<< Changes to be committed\n"
+    fi
+
+    if [ $(git diff -- "${selected[0]}" | wc -l) -ne 0 ]; then
+        echo -e "\n>>>>>> Changes not staged for commit:"
+        git diff "${selected[0]}" | delta -s
+        echo -e "<<<<<< Changes not staged for commit\n"
+    fi
+fi
