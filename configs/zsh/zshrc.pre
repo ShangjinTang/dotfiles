@@ -161,12 +161,7 @@ _PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin
 
 _PATHAPPEND ~/bin
 _PATHAPPEND ~/.local/bin
-_PATHAPPEND ~/.pyenv/bin
-
-# For go binaries, such as bazel 'buildifier'
-_PATHAPPEND ~/go/bin
-# For cargo binaries, such as lua format tool 'stylua'
-_PATHAPPEND ~/.cargo/bin
+_PATHAPPEND ~/.local/share/nvim/mason/bin
 
 #=====================================================================
 # fuctions for command line use
