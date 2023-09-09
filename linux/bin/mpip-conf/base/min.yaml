@@ -4,10 +4,6 @@ defaults:
 #---------------------------------------------------------------------
 # neovim (nvim) integration
 pynvim: true
-# cmake formatter & linter
-cmakelang: true
-# zsh formatter
-beautysh: true
 
 #---------------------------------------------------------------------
 # CLI intergrations; required by script 'pac' on archlinux
