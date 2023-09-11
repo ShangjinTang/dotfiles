@@ -211,6 +211,8 @@ formatters.setup({
     { command = "buf", filetypes = { "proto" } },
     -- pip install cmakelang
     { command = "cmake-format", filetypes = { "cmake" } },
+    -- pip install xmlformatter
+    { command = "xmlformat", filetypes = { "xml" } },
     -- npm install --global prettier
     {
         command = "prettier",
@@ -1266,6 +1268,7 @@ lvim.plugins = {
                     "shfmt",
                     "stylua",
                     "trim_whitespace",
+                    "xmlformatter",
                     -- Linters
                     "pylint",
                     "shellcheck",
