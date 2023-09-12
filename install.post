@@ -2,7 +2,7 @@
 
 echo "Executing install.post ..."
 
-~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode Mononoki VictorMono # IosevkaTerm JetbrainsMono UbuntuMono MPlus
+~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode Mononoki # VictorMono IosevkaTerm JetbrainsMono UbuntuMono MPlus
 
 function extract_bin_compressed() {
     os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
