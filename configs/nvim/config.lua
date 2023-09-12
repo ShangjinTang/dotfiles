@@ -188,7 +188,6 @@ else
 end
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-    { command = "trim_whitespace" },
     -- cargo install stylua
     { command = "stylua", filetypes = { "lua" } },
     -- sudo pacman -Sy clang | sudo apt install -y clang-format
@@ -1267,7 +1266,6 @@ lvim.plugins = {
                     "rustfmt",
                     "shfmt",
                     "stylua",
-                    "trim_whitespace",
                     "xmlformatter",
                     -- Linters
                     "pylint",
