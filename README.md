@@ -117,7 +117,7 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - ...
 - simplify large code-base view
   - docker with local **OpenGrok**
-- simply python development
+- simplify python development
   - docker with local **Jupyter Lab**
 - simplify tasks
   - asynctask: compilation in side nvim under PROJECTROOT based on `.tasks`
