@@ -1697,8 +1697,18 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
     "lua_ls",
     "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
 })
+
 local lspmanager = require("lvim.lsp.manager")
+
 lspmanager.setup("clangd", {
+    filetypes = {
+        "c",
+        "cpp",
+        "objc",
+        "objcpp",
+        "cuda",
+        -- "proto",
+    },
     cmd = {
         "clangd",
         "--background-index",
@@ -1714,6 +1724,7 @@ lspmanager.setup("clangd", {
         "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
     },
 })
+
 lspmanager.setup("lua_ls", {
     settings = {
         Lua = {
@@ -1723,6 +1734,7 @@ lspmanager.setup("lua_ls", {
         },
     },
 })
+
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
 --   { "markdown", "rst", "plaintext", "toml", "proto" }
 lspmanager.setup("marksman", {})
