@@ -1,5 +1,5 @@
 diff --git a/lua/lvim/core/lualine/components.lua b/lua/lvim/core/lualine/components.lua
-index a6593619..3f37f08c 100644
+index a6593619..4fd803f7 100644
 --- a/lua/lvim/core/lualine/components.lua
 +++ b/lua/lvim/core/lualine/components.lua
 @@ -18,6 +18,15 @@ if lvim.colorscheme == "lunar" then
@@ -31,19 +31,3 @@ index a6593619..3f37f08c 100644
      },
      cond = nil,
    },
-@@ -116,7 +125,14 @@ return {
-       -- add formatter
-       local formatters = require "lvim.lsp.null-ls.formatters"
-       local supported_formatters = formatters.list_registered(buf_ft)
--      vim.list_extend(buf_client_names, supported_formatters)
-+      -- vim.list_extend(buf_client_names, supported_formatters)
-+      local filtered_client_names = {}
-+      for _, name in ipairs(supported_formatters) do
-+        if name ~= "trim_whitespace" then
-+          table.insert(filtered_client_names, name)
-+        end
-+      end
-+      vim.list_extend(buf_client_names, filtered_client_names)
- 
-       -- add linter
-       local linters = require "lvim.lsp.null-ls.linters"
