@@ -161,6 +161,7 @@ _PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin
 # Path append
 
 _PATHAPPEND ~/bin
+_PATHAPPEND ~/.pyenv/bin
 _PATHAPPEND ~/.cargo/bin
 _PATHAPPEND ~/.go/bin
 _PATHAPPEND ~/.local/bin
