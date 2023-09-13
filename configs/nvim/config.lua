@@ -196,6 +196,8 @@ formatters.setup({
     { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
     -- sudo pacman -Sy python-black | sudo apt install -y black
     { command = "black", filetypes = { "python" } },
+    -- pip install isort
+    { command = "isort", filetypes = { "python" } },
     -- sudo pacman -Sy shfmt | sudo apt install -y shfmt
     { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
     -- pip install beautysh
@@ -1261,6 +1263,7 @@ lvim.plugins = {
                     "cbfmt",
                     "clang_format",
                     "google_java_format",
+                    "isort",
                     "jsonlint",
                     "prettier",
                     "rustfmt",
