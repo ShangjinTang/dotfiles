@@ -6,16 +6,20 @@ An out-of-the-box configuration with multiple features, easy to install and cust
 
 ## Supported OS
 
-Fully support and keep up-to-date:
+Fully supported and keep up-to-date:
 
 - ArchLinux x86_64 (also supported in WSL2)
 
-Partial support:
+Partial supported:
 
 - Ubuntu 22.04 x86_64
-  - Almost all functionalities should work, but the installation instructions is not complete and hard to maintain
+  - Almost all functionalities should work, but the installation instructions is not complete and hard to maintain across different Ubuntu distributions
   - Some packages require manual install (e.g. `neovim` / `tmux`)
 - macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
+
+Not supported yet:
+
+- macOS arm64
 
 ## Installation (ArchLinux)
 
@@ -73,7 +77,7 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
   - third-party (`nnn`, `bat`, `radare2`) built-in dark theme
 - Key Mappings (CapsLock as Escape or Hyper)
   - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
-  - **macOS**: see [hammerspoon readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
+  - **macOS**: see [Hammerspoon Readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
   - **Ubuntu 22.04**: not support
 
 ## Features for Simplify Workflow
@@ -122,61 +126,6 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
 - simplify tasks
   - asynctask: compilation in side nvim under PROJECTROOT based on `.tasks`
 
-## Packages required for non-ArchLinux OS
-
-Caution: this web page is not under maintained. For macOS / Ubuntu, you need to install the essential packages.
-
-<details>
-
-  <summary>macOS x86_64</summary>
-
-    <!-- TODO: add more packages -->
-    ```bash
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
-    brew install sshpass vim git tmux zsh curl wget tree reattach-to-user-namespace tldr
-    ```
-
-</details>
-
-<details>
-
-  <summary>Ubuntu 22.04 x86_64</summary>
-
-    <!-- TODO: add more packages -->
-    ```bash
-    sudo apt update
-    sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync python3-pip fuse pkg-config python3-venv pyenv net-tools
-    sudo apt install -y clang clang-format libstdc++-12-dev gcc g++ make cmake universal-ctags cscope ninja-build
-    sudo apt install -y libgtest-dev openjdk-17-jdk
-    pip3 install pynvim tldr
-    ```
-
-    Manual install neovim with `nvim.appimage`. `fuse` pacakge above is for running nvim.
-
-    See: https://github.com/neovim/neovim/releases/tag/v0.9.0
-
-    Install nodejs/npm:
-
-    ```bash
-    cd ~
-    curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-    sudo apt -y install nodejs
-    ```
-
-    Install tmux:
-
-    ```bash
-    sudo apt remove tmux
-    sudo apt install libevent-dev ncurses-dev build-essential bison pkg-config
-    wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
-    tar zxvf tmux-3.3a.tar.gz && cd tmux-3.3a
-    ./configure
-    make -j16 && sudo make install
-    cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
-    ```
-
-</details>
-
 ## Customization
 
 1. Add configuration files
@@ -187,6 +136,69 @@ Caution: this web page is not under maintained. For macOS / Ubuntu, you need to 
    - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
+
+## Packages required for non-ArchLinux OS
+
+### Ubuntu 22.04 x86_64
+
+```bash
+sudo apt update
+sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip fuse pkg-config python3-venv net-tools zoxide
+sudo apt install -y clang clangd clang-format clang-tidy libstdc++-12-dev gcc g++ make cmake universal-ctags cscope ninja-build
+sudo apt install -y libgtest-dev openjdk-17-jdk
+curl https://pyenv.run | bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+```
+
+Manual download neovim binary from [Neovim Releases](https://github.com/neovim/neovim/releases).
+`fuse` pacakge above is an essential dependency for running nvim.
+
+```bash
+NVIM_VERSION=v0.9.2
+
+wget https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage
+mkdir ~/bin
+mv ./nvim.appimage ~/bin/nvim
+chmod 755 ~/bin/nvim
+```
+
+Install [nodejs/npm](https://github.com/nodesource/distributions):
+
+```bash
+NODE_MAJOR=20 # 16/18/20
+
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt-get update
+sudo apt-get install nodejs -y
+```
+
+Install tmux:
+
+```bash
+sudo apt remove tmux
+sudo apt install libevent-dev ncurses-dev build-essential bison pkg-config
+wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
+tar zxvf tmux-3.3a.tar.gz && cd tmux-3.3a
+./configure
+make -j16 && sudo make install
+cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
+```
+
+### macOS x86_64
+
+**Caution: this page is not under maintained. For macOS, you need to install some essential packages.**
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+brew install sshpass vim git tmux zsh curl wget tree reattach-to-user-namespace tldr
+```
+
+### macOS arm64
+
+I do not have a macOS arm64 computer. Might update this further.
 
 ## Tips & Issue Fix
 
