@@ -1,0 +1,25 @@
+######################################################################
+# TensorFlow Repositories
+
+- repository: tensorflow/tensorflow
+  directory: ~/github/tensorflow
+  gitflags: --depth=1 -b v2.13.0
+
+- repository: tensorflow/models
+  directory: ~/github/tensorflow_models
+  gitflags: --depth=1
+
+- repository: tensorflow/tflite-micro
+  directory: ~/github/tensorflow_tflite-micro
+  gitflags: --depth=1
+
+- repository: tensorflow/examples
+  directory: ~/github/tensorflow_examples
+  gitflags: --depth=1
+######################################################################
+# PyTorch Repositories
+
+- repository: pytorch/pytorch
+  directory: ~/github/pytorch
+  gitflags: --depth=1
+######################################################################
