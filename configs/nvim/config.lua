@@ -1694,6 +1694,7 @@ lvim.plugins = {
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
     "clangd",
+    "pyright",
     "lua_ls",
     "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
 })
@@ -1724,6 +1725,8 @@ lspmanager.setup("clangd", {
         "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
     },
 })
+
+lspmanager.setup("pyright", {})
 
 lspmanager.setup("lua_ls", {
     settings = {
