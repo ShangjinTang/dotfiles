@@ -9,19 +9,17 @@ An out-of-the-box configuration with multiple features, easy to install and cust
 Fully supported and keep up-to-date:
 
 - ArchLinux x86_64 (also supported in WSL2)
+  - script `mpac install` to install all essential packages
+- Ubuntu 22.04 x86_64 (also supported in WSL2)
+  - only focus on one recently LTS version, because the installation steps are hard to maintain across different Ubuntu distributions
 
-Partial supported:
+Partially supported:
 
-- Ubuntu 22.04 x86_64
-  - Almost all functionalities should work, but the installation instructions is not complete and hard to maintain across different Ubuntu distributions
-  - Some packages require manual install (e.g. `neovim` / `tmux`)
 - macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
 
-Not supported yet:
+## Installation
 
-- macOS arm64
-
-## Installation (ArchLinux)
+### Arch Linux x86_64
 
 ```bash
 sudo pacman -Sy zsh git neovim
@@ -33,10 +31,75 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 ```bash
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
+
+pip3 install hydra-core "typer[all]" rich pynvim
 sudo mpac install
 ```
 
-After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.nvim`).
+### Ubuntu 22.04 x86_64
+
+```bash
+sudo apt update
+sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip python3-venv net-tools zoxide
+sudo apt install -y clang clangd clang-format clang-tidy libstdc++-12-dev gcc g++ make cmake pkg-config universal-ctags cscope ninja-build
+sudo apt install -y build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev libgtest-dev
+sudo apt install -y openjdk-17-jdk
+curl https://pyenv.run | bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+```
+
+#### install neovim on Ubuntu 22.04 x86_64
+
+Manual download neovim binary from [Neovim Releases](https://github.com/neovim/neovim/releases).
+`fuse` package is an essential dependency for running nvim.
+
+```bash
+NVIM_VERSION=v0.9.2
+
+sudo apt install -y fuse
+wget https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage
+mkdir ~/bin
+mv ./nvim.appimage ~/bin/nvim
+chmod 755 ~/bin/nvim
+```
+
+#### Install [nodejs/npm](https://github.com/nodesource/distributions) on Ubuntu 22.04 x86_64
+
+```bash
+NODE_MAJOR=20 # 16/18/20
+
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt-get update
+sudo apt-get install nodejs -y
+```
+
+#### Install tmux on Ubuntu 22.04 x86_64
+
+```bash
+TMUX_VERSION=3.3a
+
+sudo apt remove tmux
+sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config
+wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
+tar zxvf tmux-${TMUX_VERSION}.tar.gz && cd tmux-${TMUX_VERSION}
+./configure
+make -j16 && sudo make install
+cd .. && rm -rf tmux-${TMUX_VERSION} tmux-${TMUX_VERSION}.tar.gz
+```
+
+## NVIM Plugins Installation
+
+1. Entering nvim, and wait the plugins to be installed.
+
+- First install: LunarVim plugins
+- Second install cycle: Customized plugins
+
+2. Execute `:UpdateRemotePlugins` (for `wilder.nvim`).
+
+Note: NVIM sometimes might be buggy, because some error just appears in the first-time installation. Scroll to bottom to see some fix tips.
 
 ## Core Features
 
@@ -137,69 +200,6 @@ After entering nvim the first time, execute `:UpdateRemotePlugins` (for `wilder.
    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
 
-## Packages required for non-ArchLinux OS
-
-### Ubuntu 22.04 x86_64
-
-```bash
-sudo apt update
-sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip fuse pkg-config python3-venv net-tools zoxide
-sudo apt install -y clang clangd clang-format clang-tidy libstdc++-12-dev gcc g++ make cmake universal-ctags cscope ninja-build
-sudo apt install -y libgtest-dev openjdk-17-jdk
-curl https://pyenv.run | bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-```
-
-Manual download neovim binary from [Neovim Releases](https://github.com/neovim/neovim/releases).
-`fuse` pacakge above is an essential dependency for running nvim.
-
-```bash
-NVIM_VERSION=v0.9.2
-
-wget https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage
-mkdir ~/bin
-mv ./nvim.appimage ~/bin/nvim
-chmod 755 ~/bin/nvim
-```
-
-Install [nodejs/npm](https://github.com/nodesource/distributions):
-
-```bash
-NODE_MAJOR=20 # 16/18/20
-
-sudo apt-get install -y ca-certificates curl gnupg
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-sudo apt-get update
-sudo apt-get install nodejs -y
-```
-
-Install tmux:
-
-```bash
-sudo apt remove tmux
-sudo apt install libevent-dev ncurses-dev build-essential bison pkg-config
-wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
-tar zxvf tmux-3.3a.tar.gz && cd tmux-3.3a
-./configure
-make -j16 && sudo make install
-cd .. && rm -rf tmux-3.3a tmux-3.3a.tar.gz
-```
-
-### macOS x86_64
-
-**Caution: this page is not under maintained. For macOS, you need to install some essential packages.**
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
-brew install sshpass vim git tmux zsh curl wget tree reattach-to-user-namespace tldr
-```
-
-### macOS arm64
-
-I do not have a macOS arm64 computer. Might update this further.
-
 ## Tips & Issue Fix
 
 ### nvim
@@ -212,9 +212,9 @@ Sometimes you need to update plugins to fix plugin issues by executing `LvimSync
 
 Sometimes you need to update treesitter to fix it's issues by executing `:TSUpdate` in nvim.
 
-This can solve issues, e.g.:
+This can solve issue as below:
 
 ```plain
 treesitter/highlighter: Error executing lua:
-.../share/nvim/runtime/lua/vim/treesitter/query.lua:161: query: invalid node type at position
+.../share/nvim/runtime/lua/vim/treesitter/query.lua:161: query: invalid node type at position XXX
 ```
