@@ -1,25 +1,79 @@
-######################################################################
-# TensorFlow Repositories
+############################################################
+############################################################
+# Machine Learning Repositories
 
+# CUDA Samples
+- repository: NVIDIA/cuda-samples
+  directory: ~/gh/ml/cuda-samples
+  gitflags:
+    depth: 1
+    branch: v12.2
+
+# OnnxRuntime
+- repository: microsoft/onnxruntime
+  directory: ~/gh/ml/onnxruntime
+  gitflags:
+    depth: 1
+    branch: v1.15.1
+
+# PyTorch
+- repository: pytorch/pytorch
+  directory: ~/gh/ml/pytorch
+  gitflags:
+    depth: 1
+    branch: v2.0.1
+
+# TensorFlow Repositories
 - repository: tensorflow/tensorflow
-  directory: ~/github/tensorflow
-  gitflags: --depth=1 -b v2.13.0
+  directory: ~/gh/ml/tensorflow
+  gitflags:
+    depth: 1
+    branch: v2.13.0
 
 - repository: tensorflow/models
-  directory: ~/github/tensorflow_models
-  gitflags: --depth=1
-
-- repository: tensorflow/tflite-micro
-  directory: ~/github/tensorflow_tflite-micro
-  gitflags: --depth=1
+  directory: ~/gh/ml/tensorflow_models
+  gitflags:
+    depth: 1
+    branch: v2.13.0
 
 - repository: tensorflow/examples
-  directory: ~/github/tensorflow_examples
-  gitflags: --depth=1
-######################################################################
-# PyTorch Repositories
+  directory: ~/gh/ml/tensorflow_examples
+  gitflags:
+    depth: 1
+- repository: tensorflow/tflite-micro
+  directory: ~/gh/ml/tensorflow_tflite-micro
+  gitflags:
+    depth: 1
 
-- repository: pytorch/pytorch
-  directory: ~/github/pytorch
-  gitflags: --depth=1
-######################################################################
+# TVM
+- repository: apache/tvm
+  directory: ~/gh/ml/tvm
+  gitflags:
+    depth: 1
+    branch: v0.13.0
+# ############################################################
+# ############################################################
+# # My Own Repositories
+
+- repository: knowledge-base-cpp
+  directory: ~/gh/my/cpp
+  gitflags:
+    depth: 1
+- repository: knowledge-base-rust
+  directory: ~/gh/my/rust
+  gitflags:
+    depth: 1
+- repository: knowledge-base-python
+  directory: ~/gh/my/python
+  gitflags:
+    depth: 1
+- repository: knowledge-base-bash
+  directory: ~/gh/my/bash
+  gitflags:
+    depth: 1
+- repository: bazel
+  directory: ~/gh/my/bazel
+  gitflags:
+    depth: 1
+############################################################
+############################################################
