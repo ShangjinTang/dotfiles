@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import subprocess
+from typing import List, Optional
+
+import yaml
+from pydantic import BaseModel
+from rich.console import Console
+from rich.theme import Theme
+
+__author__ = "Shangjin Tang"
+__copyright__ = "Copyright 2023 Shangjin Tang"
+__license__ = "GPL"
+__version__ = "1.0.0"
+__email__ = "shangjin.tang@gmail.com"
+
+console = Console(theme=Theme(inherit=False))
+cprint = console.print
+
+DEFAULT_FILE_PATH = "~/.gh_repos.yaml"
+
+
+class RepositoryInfo(BaseModel):
+    repository: str
+    directory: Optional[str] = None
+    gitflags: Optional[str] = None
+
+
+def parse_yaml_file(file_path: str) -> List[RepositoryInfo]:
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = yaml.safe_load(file)
+
+    repositories = []
+    for repo in data:
+        repository = repo["repository"]
+        directory = repo.get("directory")
+        gitflags = repo.get("gitflags")
+        repositories.append(
+            RepositoryInfo(
+                repository=repository, directory=directory, gitflags=gitflags
+            )
+        )
+
+    return repositories
+
+
+def clone_repositories(repositories: List[RepositoryInfo]):
+    for repo in repositories:
+        command = f"gh repo clone {repo.repository}"
+        if repo.directory:
+            command += f" {repo.directory}"
+        if repo.gitflags:
+            command += f" -- {repo.gitflags}"
+
+        cprint(f"[green]{command}[/green]")
+        subprocess.run(command, shell=True, check=False)
+
+
+def generate_yaml_template(file_path: str):
+    repositories = [
+        RepositoryInfo(
+            repository="tensorflow/tensorflow",
+            directory="~/github/tensorflow",
+            gitflags="--depth=1 -b v2.13.0",
+        ),
+        RepositoryInfo(
+            repository="tensorflow/models",
+            directory="~/github/tensorflow_models",
+            gitflags="--depth=1",
+        ),
+    ]
+
+    data = [repo.model_dump() for repo in repositories]
+    template = yaml.dump(data, sort_keys=False)
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(template)
+
+
+def main(args):
+    file_path = os.path.expanduser(args.file)
+
+    if file_path == DEFAULT_FILE_PATH and not os.path.exists(DEFAULT_FILE_PATH):
+        generate_yaml_template(DEFAULT_FILE_PATH)
+        print(f"Generated empty YAML template at {DEFAULT_FILE_PATH}")
+        return
+
+    repositories = parse_yaml_file(file_path)
+    clone_repositories(repositories)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-f",
+        "--file",
+        default="~/.gh_repos.yaml",
+        help="Specify the file to read repositories from",
+    )
+
+    main(parser.parse_args())
