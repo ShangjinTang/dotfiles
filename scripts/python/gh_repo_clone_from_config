@@ -2,7 +2,9 @@
 
 import argparse
 import os
+import shutil
 import subprocess
+import typing
 from typing import List, Optional
 
 import yaml
@@ -13,7 +15,7 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console()
@@ -22,10 +24,15 @@ cprint = console.print
 DEFAULT_FILE_PATH = "~/.gh_repos.yaml"
 
 
+class GitFlags(BaseModel):
+    depth: Optional[int] = None
+    branch: Optional[str] = None
+
+
 class RepositoryInfo(BaseModel):
     repository: str
-    directory: Optional[str] = None
-    gitflags: Optional[str] = None
+    directory: str
+    gitflags: Optional[GitFlags] = None
 
 
 def parse_yaml_file(file_path: str) -> List[RepositoryInfo]:
@@ -36,7 +43,12 @@ def parse_yaml_file(file_path: str) -> List[RepositoryInfo]:
     for repo in data:
         repository = repo["repository"]
         directory = repo.get("directory")
-        gitflags = repo.get("gitflags")
+        gitflags_data = repo.get("gitflags")
+        gitflags = None
+        if gitflags_data and isinstance(gitflags_data, dict):
+            depth = gitflags_data.get("depth")
+            branch = gitflags_data.get("branch")
+            gitflags = GitFlags(depth=depth, branch=branch)
         repositories.append(
             RepositoryInfo(
                 repository=repository, directory=directory, gitflags=gitflags
@@ -46,49 +58,158 @@ def parse_yaml_file(file_path: str) -> List[RepositoryInfo]:
     return repositories
 
 
-def clone_repositories(repositories: List[RepositoryInfo]):
-    for repo in repositories:
-        command = f"gh repo clone {repo.repository}"
-        if repo.directory:
-            command += f" {repo.directory}"
-        if repo.gitflags:
-            command += f" -- {repo.gitflags}"
-
-        cprint(f"[green]{command}[/green]")
-        subprocess.run(command, shell=True, check=False)
+def force_delete_directory(directory: str):
+    directory_expanduser = os.path.expanduser(directory)
+    if os.path.exists(directory_expanduser):
+        assert directory_expanduser != os.path.expanduser("~")
+        shutil.rmtree(directory_expanduser)
+        print(f"Directory '{directory}' is deleted.")
 
 
-def generate_yaml_template(file_path: str):
-    repositories = [
-        RepositoryInfo(
-            repository="tensorflow/tensorflow",
-            directory="~/github/tensorflow",
-            gitflags="--depth=1 -b v2.13.0",
-        ),
-        RepositoryInfo(
-            repository="tensorflow/models",
-            directory="~/github/tensorflow_models",
-            gitflags="--depth=1",
-        ),
-    ]
+def check_git_repository_status(directory):
+    try:
+        git_status_output = subprocess.check_output(
+            ["git", "status", "--porcelain"], cwd=directory
+        ).decode("utf-8")
+        if git_status_output.strip():
+            return False
 
-    data = [repo.model_dump() for repo in repositories]
-    template = yaml.dump(data, sort_keys=False)
+        git_stash_output = subprocess.check_output(
+            ["git", "stash", "list"], cwd=directory
+        ).decode("utf-8")
+        if git_stash_output.strip():
+            return False
 
-    with open(file_path, "w", encoding="utf-8") as file:
-        file.write(template)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+def clone_repositories(repositories: List[RepositoryInfo], flag_sync: bool):
+    repo_counts = len(repositories)
+    for repo_index, repo in enumerate(repositories):
+        if isinstance(repo, dict):
+            repo = RepositoryInfo(**repo)
+        repository = repo.repository
+        directory = repo.directory
+        directory_expanduser = os.path.expanduser(directory)
+        gitflags = repo.gitflags
+        branch = repo.gitflags.branch if repo.gitflags else None
+        depth = repo.gitflags.depth if repo.gitflags else None
+
+        assert repository
+        assert directory
+
+        cprint(f"\[{repo_index+1}/{repo_counts}]", "=" * 80)
+        cprint(
+            f"[magenta]Syncing github repository '{repository}' to directory '{directory}'[/magenta]"
+        )
+
+        command_list = ["gh", "repo", "clone", repository, directory_expanduser]
+        if gitflags:
+            command_list.append("--")
+            if depth:
+                command_list.append(f"--depth={depth}")
+            if branch:
+                command_list.append(f"--branch={branch}")
+        if not os.path.exists(directory_expanduser):
+            cprint(f"[green]{' '.join(command_list)}[/green]")
+            subprocess.run(command_list, check=False)
+            continue
+        if not flag_sync:
+            print(f"Skipping existing directory {directory}")
+            continue
+        if branch:
+            existing_branches = subprocess.run(
+                ["git", "branch"],
+                cwd=directory_expanduser,
+                capture_output=True,
+                text=True,
+            ).stdout
+            existing_tags = subprocess.run(
+                ["git", "tag"], cwd=directory_expanduser, capture_output=True, text=True
+            ).stdout
+            if branch in existing_branches:
+                print(
+                    f"Skipping sync for repository '{repo.repository}' as branch '{branch}' already exists."
+                )
+                continue
+            if branch in existing_tags:
+                print(
+                    f"Skipping sync for repository '{repo.repository}' as tag '{branch}' already exists."
+                )
+                continue
+        if gitflags and gitflags.branch:
+            branch = gitflags.branch
+
+            # Check if the repository has the specified branch
+            output = subprocess.run(
+                ["git", "branch", "--list", branch],
+                cwd=directory,
+                capture_output=True,
+                text=True,
+            )
+            if output.returncode == 0 and output.stdout.strip() == f"* {branch}":
+                cprint(
+                    f"[green]Repository {repository} already on branch {branch}. Skipping sync.[/green]"
+                )
+                continue
+
+            # Check if there are local changes or staged changes
+            if not check_git_repository_status(directory):
+                cprint(
+                    f"[yellow]Repository {repository} has local changes or staged changes. Skipping sync.[/yellow]"
+                )
+                continue
+
+            # Delete the directory and clone the repository with the specified branch
+            force_delete_directory(directory)
+            cprint(f"[green]{' '.join(command_list)}[/green]")
+            subprocess.run(
+                command_list,
+                check=False,
+            )
+        else:
+            # Check if there are local changes or staged changes
+            if os.path.exists(directory) and not check_git_repository_status(directory):
+                cprint(
+                    f"[yellow]Repository {repository} has local changes or staged changes. Skipping sync.",
+                )
+                continue
+
+            # Delete the directory and clone the repository
+            force_delete_directory(directory)
+            cprint(f"[green]{' '.join(command_list)}[/green]")
+            subprocess.run(
+                command_list,
+                check=False,
+            )
 
 
 def main(args):
-    file_path = os.path.expanduser(args.file)
+    if args.file == DEFAULT_FILE_PATH and not os.path.exists(
+        os.path.expanduser(DEFAULT_FILE_PATH)
+    ):
+        print(
+            f"""
+Please create file {DEFAULT_FILE_PATH} with repository configs as below:
 
-    if file_path == DEFAULT_FILE_PATH and not os.path.exists(DEFAULT_FILE_PATH):
-        generate_yaml_template(DEFAULT_FILE_PATH)
-        print(f"Generated empty YAML template at {DEFAULT_FILE_PATH}")
+- repository: gh_user1/gh_repo1  # essential field
+  directory: ~/gh/gh_repo1  # essential field
+  gitflags:  # optional
+    depth: 1  # optional
+    branch: v1.0.0  # optional
+
+- repository: gh_user2/gh_repo2  # essential field
+  directory: ~/gh/gh_repo2  # essential field
+"""
+        )
         return
 
+    file_path = os.path.expanduser(args.file)
     repositories = parse_yaml_file(file_path)
-    clone_repositories(repositories)
+
+    clone_repositories(repositories, args.sync)
 
 
 if __name__ == "__main__":
@@ -98,6 +219,13 @@ if __name__ == "__main__":
         "--file",
         default="~/.gh_repos.yaml",
         help="Specify the file to read repositories from",
+    )
+    parser.add_argument(
+        "-s",
+        "--sync",
+        action="store_true",
+        default=False,
+        help="Try sync even if the directory already exists",
     )
 
     main(parser.parse_args())
