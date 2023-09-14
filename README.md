@@ -40,8 +40,8 @@ sudo mpac install
 
 ```bash
 sudo apt update
-sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip python3-venv net-tools zoxide
-sudo apt install -y clang clangd clang-format clang-tidy libstdc++-12-dev gcc g++ make cmake pkg-config universal-ctags cscope ninja-build
+sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip python3-venv net-tools p7zip-full zoxide
+sudo apt install -y clang clangd clang-format clang-tidy llvm llvm-dev libstdc++-12-dev gcc g++ make cmake pkg-config universal-ctags cscope ninja-build
 sudo apt install -y build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev libgtest-dev
 sudo apt install -y openjdk-17-jdk
 curl https://pyenv.run | bash
@@ -217,4 +217,40 @@ This can solve issue as below:
 ```plain
 treesitter/highlighter: Error executing lua:
 .../share/nvim/runtime/lua/vim/treesitter/query.lua:161: query: invalid node type at position XXX
+```
+
+## Desktop Software
+
+### Ubuntu 22.04 x86_64 Desktop
+
+#### Gnome Tweaks
+
+```bash
+sudo add-apt-repository universe
+sudo apt install gnome-tweaks
+```
+
+CapsLock as esc: Tweaks -> Keyboard & Mouse -> Additional Layout Options -> Caps Lock behaviour
+
+Font: Tweaks -> Fonts
+
+#### Install CopyQ on Ubuntu 22.04 x86_64
+
+```bash
+sudo add-apt-repository ppa:hluk/copyq
+sudo apt update
+sudo apt install copyq
+```
+
+#### Install [vscode](https://code.visualstudio.com/docs/setup/linux) on Ubuntu 22.04 x86_64
+
+```bash
+sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+sudo apt install apt-transport-https
+sudo apt update
+sudo apt install code
 ```
