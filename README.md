@@ -11,7 +11,7 @@ Fully supported and keep up-to-date:
 - ArchLinux x86_64 (also supported in WSL2)
   - script `mpac install` to install all essential packages
 - Ubuntu 22.04 x86_64 (also supported in WSL2)
-  - only focus on one recently LTS version, because the installation steps are hard to maintain across different Ubuntu distributions
+  - only focus on one recently LTS version, because the installation steps are hard to maintain across different Ubuntu versions
 
 Partially supported:
 
@@ -40,12 +40,27 @@ sudo mpac install
 
 ```bash
 sudo apt update
+sudo apt install zsh git
+chsh -s $(which zsh)
+```
+
+Log out and relogin to make sure the shell is changed to `zsh`.
+
+```bash
+sudo apt update
 sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip python3-venv net-tools p7zip-full zoxide
 sudo apt install -y clang clangd clang-format clang-tidy llvm llvm-dev libstdc++-12-dev gcc g++ make cmake pkg-config universal-ctags cscope ninja-build
 sudo apt install -y build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev libgtest-dev
 sudo apt install -y openjdk-17-jdk
 curl https://pyenv.run | bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+```
+
+```bash
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
+~/.dotfiles/install && source ~/.zshrc
+
+pip3 install hydra-core "typer[all]" rich pynvim
 ```
 
 #### install neovim on Ubuntu 22.04 x86_64

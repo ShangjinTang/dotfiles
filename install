@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 
-set -e
+# Colors
+export red='\033[0;31m'
+export green='\033[0;32m'
+export yellow='\033[0;33m'
+export blue='\033[0;34m'
+export magenta='\033[0;35m'
+export cyan='\033[0;36m'
+export clear='\033[0m'
 
+set -e
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
+echo -e "${yellow}======================================================================${clear}"
+echo -e "${yellow}1. Executing install.pre ...${clear}"
+
 [ -f "$SCRIPT_DIR/install.pre" ] && "$SCRIPT_DIR/install.pre"
+
+echo -e "${yellow}======================================================================${clear}"
+echo -e "${yellow}2. Executing install ...${clear}"
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
@@ -18,4 +32,9 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
+echo -e "${yellow}======================================================================${clear}"
+echo -e "${yellow}3. Executing install.post ...${clear}"
+
 [ -f "$SCRIPT_DIR/install.post" ] && "$SCRIPT_DIR/install.post"
+
+echo -e "${yellow}======================================================================${clear}"
