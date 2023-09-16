@@ -8,12 +8,11 @@ import sys
 from shutil import which
 
 from rich.console import Console
-from rich.theme import Theme
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console()

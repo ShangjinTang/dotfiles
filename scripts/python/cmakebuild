@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
+# TODO: fix issue reported by linters
 
-import sys
 import argparse
-import os
-import subprocess
-import platform
 import multiprocessing
+import os
+import sys
 from shutil import which
 
 from rich.console import Console
@@ -14,95 +13,98 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __email__ = "shangjin.tang@gmail.com"
 
-ARGS = None
 console = Console(theme=Theme(inherit=False))
-print = console.print
+cprint = console.print
 
 
-class UltimateHelpFormatter(argparse.RawTextHelpFormatter,
-                            argparse.ArgumentDefaultsHelpFormatter):
+class UltimateHelpFormatter(
+    argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter
+):
     pass
 
 
 def auto_complete_flags(flags):
-    if "-DCMAKE_EXPORT_COMPILE_COMMANDS" not in ARGS.flags:
-        ARGS.flags += " -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
-    if "-DCMAKE_BUILD_TYPE" not in ARGS.flags:
-        ARGS.flags += " -DCMAKE_BUILD_TYPE={}".format(ARGS.config)
+    if "-DCMAKE_EXPORT_COMPILE_COMMANDS" not in flags:
+        flags += " -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
+    if "-DCMAKE_BUILD_TYPE" not in flags:
+        flags += " -DCMAKE_BUILD_TYPE={}".format(args.config)
     return flags
 
 
-def main():
-    if not which('cmake'):
-        raise Exception("CMake not found. Please install it first.")
+def main(args):
+    if not which("cmake"):
+        raise EnvironmentError("'cmake' is not found. Please install it first.")
 
-    ARGS.flags = auto_complete_flags(ARGS.flags)
+    complete_flags = auto_complete_flags(args.flags)
 
     # Generate cmake command
-    compile_command = "cmake -S . -B {}".format(ARGS.output)
+    compile_command = "cmake -S . -B {}".format(args.output)
     merged_commands_list = []
-    if ARGS.flags:
-        compile_command += " " + ARGS.flags
+    if complete_flags:
+        compile_command += " " + complete_flags
         merged_commands_list.append(compile_command)
         # Copy compile_commands.json to current directory
-        if "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" in ARGS.flags:
-            copy_compdb_command = "cp {}/compile_commands.json .".format(
-                ARGS.output)
+        if "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" in complete_flags:
+            copy_compdb_command = "cp {}/compile_commands.json .".format(args.output)
             merged_commands_list.append(copy_compdb_command)
 
     merged_commands_list.append(
         "cmake --build {} --target {} --config {} -j {}".format(
-            ARGS.output, ARGS.target, ARGS.config, ARGS.jobs))
+            args.output, args.target, args.config, args.jobs
+        )
+    )
 
     # Get clean command (optional)
-    if ARGS.clean_output:
-        clean_command = "rm ./{}".format(ARGS.output)
+    if args.clean_output:
+        clean_command = "rm ./{}".format(args.output)
         merged_commands_list.append(clean_command)
 
     # cmake + copy compdb + clean
-    merged_commands = ' && '.join(merged_commands_list)
+    merged_commands = " && ".join(merged_commands_list)
 
-    print("[green]{}[/green]".format(merged_commands))
-    print('-' * 70)
+    cprint("[green]{}[/green]".format(merged_commands))
+    cprint("-" * 70)
     os.system(merged_commands)
-    print('-' * 70)
+    cprint("-" * 70)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(formatter_class=UltimateHelpFormatter)
-    parser.add_argument('-t',
-                        '--target',
-                        default='all',
-                        help="target command for cmake")
     parser.add_argument(
-        '-f',
-        '--flags',
+        "-t", "--target", default="all", help="target command for cmake"
+    )
+    parser.add_argument(
+        "-f",
+        "--flags",
         default="-DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug",
-        help="compile flags\n")
-    parser.add_argument('-o',
-                        '--output',
-                        default='build',
-                        help="cmake output directory\n")
-    parser.add_argument('--config',
-                        default='Debug',
-                        help="cmake config type (default: Debug)\n")
-    parser.add_argument('-c',
-                        '--clean_output',
-                        default=False,
-                        action='store_true',
-                        help="clean output directory after execution\n")
-    parser.add_argument('-j',
-                        '--jobs',
-                        default="{}".format(multiprocessing.cpu_count()),
-                        help="parallel thread count for make\n")
-    ARGS = parser.parse_args()
+        help="compile flags\n",
+    )
+    parser.add_argument(
+        "-o", "--output", default="build", help="cmake output directory\n"
+    )
+    parser.add_argument(
+        "--config", default="Debug", help="cmake config type (default: Debug)\n"
+    )
+    parser.add_argument(
+        "-c",
+        "--clean_output",
+        default=False,
+        action="store_true",
+        help="clean output directory after execution\n",
+    )
+    parser.add_argument(
+        "-j",
+        "--jobs",
+        default="{}".format(multiprocessing.cpu_count()),
+        help="parallel thread count for make\n",
+    )
     try:
-        main()
+        main(parser.parse_args())
     except KeyboardInterrupt:
-        print('Interrupted')
+        cprint("Interrupted")
         try:
             sys.exit(0)
         except SystemExit:

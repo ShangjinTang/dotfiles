@@ -8,12 +8,11 @@ import sys
 from shutil import which
 
 from rich.console import Console
-from rich.theme import Theme
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.4.0"
+__version__ = "1.4.1"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console()
@@ -136,7 +135,10 @@ if __name__ == "__main__":
         "--compiler",
         default="clang++",
         choices=["clang++", "g++"],
-        help="compiler to use; if clang++ is not installed, use g++\n",) parser.add_argument( "-f",
+        help="compiler to use; if clang++ is not installed, use g++\n",
+    )
+    parser.add_argument(
+        "-f",
         "--flag_file",
         default=".rcxxflags",
         help="compile flag file (recursively find up to user home dir)\n",
