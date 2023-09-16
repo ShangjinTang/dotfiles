@@ -12,15 +12,15 @@ function prepare_download() {
 }
 
 function download() {
-    echo "Installing Nerd Fonts: $*"
+    # echo "Installing Nerd Fonts: $*"
     for font in "$@"; do
         if [[ ! $(ls "${DOWNLOAD_DIR}/${font}/${font}NerdFont"*) ]] &> /dev/null; then
-            echo "  - Downloading from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip ..."
+            echo "- Downloading from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip to $DOWNLOAD_DIR ..."
             curl -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip" -o "${font}.zip" && unzip -o "${font}.zip" -d "${DOWNLOAD_DIR}/$font" && rm -f ${font}.zip > /dev/null
-            echo "  - Download ${font} to $DOWNLOAD_DIR complete"
+            echo "- Download ${font} to $DOWNLOAD_DIR complete"
             NEED_TO_REFRESH_CACHE=true
         else
-            echo "  - ${font} Nerd Font is already downloaded, skipping ..."
+            echo "- ${font} Nerd Font is already downloaded to ~/.fonts, skipping ..."
         fi
     done
 }
@@ -38,7 +38,7 @@ function main() {
     prepare_download
     download $@
     if [[ -n ${WSL_DISTRO_NAME} ]]; then
-        echo "  Note: For WSL, please manually install font in Windows"
+        echo "Note: For WSL, please manually install fonts in Windows"
     else
         if $NEED_TO_REFRESH_CACHE; then
             refresh_cache

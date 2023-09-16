@@ -1,22 +1,33 @@
 #!/usr/bin/env bash
 
-echo "Executing install.pre ..."
+# Colors
+export red='\033[0;31m'
+export green='\033[0;32m'
+export yellow='\033[0;33m'
+export blue='\033[0;34m'
+export magenta='\033[0;35m'
+export cyan='\033[0;36m'
+export clear='\033[0m'
 
 if [[ $(basename $SHELL) != 'zsh' ]]; then
-    echo 'Warning: we only support zsh'
-    echo '  - Please install zsh, run "chsh -s $(which zsh)", relogin shell and run this script again.'
+    echo -e "${red}Warning: we only support zsh${clear}"
+    echo "${red}  - Please install zsh, run 'chsh -s $(which zsh)', relogin shell and run this script again.${clear}"
     exit 1
 fi
 
-# create ${SHELL_NAME}rc.local if not exists
-if [ ! -f ~/.${SHELL_NAME}rc.local ]; then
-    touch ~/.${SHELL_NAME}rc.local
+# create ~/.zshrc.local if not exists
+if [ ! -f ~/.zshrc.local ]; then
+    echo -e "${blue}----------------------------------------------------------------------${clear}"
+    echo -e "${blue}Creating ~/.zshrc.local ...${clear}"
+    touch ~/.zshrc.local
 fi
 
 # delete all broken symlinks in $CLEAN_DIRS
 CLEAN_DIRS=(~ ~/bin ~/.config/nvim ~/.config/nvim/lua)
+echo -e "${blue}----------------------------------------------------------------------${clear}"
+echo -e "${blue}Deleting broken symlinks ...${clear}"
 for CLEAN_DIR in "${CLEAN_DIRS[@]}"; do
     if [ -d ${CLEAN_DIR} ]; then
-        find ${CLEAN_DIR} -maxdepth 1 -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} +
+        find ${CLEAN_DIR} -maxdepth 1 -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} + && echo "- Deleting broken symlinks in ${CLEAN_DIR} succeeded"
     fi
 done

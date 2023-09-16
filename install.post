@@ -1,17 +1,32 @@
 #!/usr/bin/env bash
 
-echo "Executing install.post ..."
+# Colors
+export red='\033[0;31m'
+export green='\033[0;32m'
+export yellow='\033[0;33m'
+export blue='\033[0;34m'
+export magenta='\033[0;35m'
+export cyan='\033[0;36m'
+export clear='\033[0m'
 
-~/.dotfiles/scripts/bash/nerdfont_install RobotoMono FiraCode Mononoki VictorMono # IosevkaTerm JetbrainsMono UbuntuMono MPlus
+if command -v nerdfont_install &> /dev/null; then
+    echo -e "${blue}----------------------------------------------------------------------${clear}"
+    echo -e "${blue}Installing nerdfonts ...${clear}"
+    nerdfont_install RobotoMono FiraCode Mononoki VictorMono # IosevkaTerm JetbrainsMono UbuntuMono MPlus
+fi
 
 function extract_bin_compressed() {
     os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
     arch=$(uname -m | tr '[:upper:]' '[:lower:]')
-    find ~/.dotfiles/${os_name}/bin_compressed/${arch} -type f -name "*.tar.xz" | while read source_tar_xz; do
+    find ~/.dotfiles/"${os_name}"/bin_compressed/"${arch}" -type f -name "*.tar.xz" | while read -r source_tar_xz; do
+        echo -e "${blue}----------------------------------------------------------------------${clear}"
+        echo -e "${blue}Extracting pre-built binaries ...${clear}"
         target_decompressed=~/bin/$(basename "${source_tar_xz}" .tar.xz)
         if [[ ! -f "$target_decompressed" || "$source_tar_xz" -nt "$target_decompressed" ]]; then
             tar xf "$source_tar_xz" -C ~/bin --touch
-            echo "Extract $source_tar_xz to $target_decompressed"
+            echo " - extracted $source_tar_xz to $target_decompressed"
+        else
+            echo " - $target_decompressed exists and is newer than the pre-built one, extracting is skipped."
         fi
     done
 }
@@ -20,7 +35,8 @@ extract_bin_compressed
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
     if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls "${XDG_CONFIG_HOME:-$HOME/.config}"/nnn/plugins)" ]; then
-        echo "installing nnn plugins"
+        echo -e "${blue}----------------------------------------------------------------------${clear}"
+        echo -e "${blue}Installing nnn plugins ...${clear}"
         bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
     fi
 fi
@@ -28,40 +44,61 @@ fi
 # install fzf if ~/.fzf/install exists
 if ! command -v fzf &> /dev/null; then
     if [ -f ~/.fzf/install ]; then
+        echo -e "${blue}----------------------------------------------------------------------${clear}"
+        echo -e "${blue}Installing fzf ...${clear}"
         ~/.fzf/install --all --no-bash --no-fish
     fi
 fi
 
 # create symlinks from ~/.dotfiles.local/ to ~/
 if [ -d ~/.dotfiles.local ]; then
+    echo -e "${blue}----------------------------------------------------------------------${clear}"
+    echo -e "${blue}Create symlinks from ~/.dotfiles.local/ to ~/${clear}"
     while IFS= read -r -d '' file; do
         ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
     done < <(find ~/.dotfiles.local -type f -print0)
 fi
 
-# install cargo packages
-if command -v cargo &> /dev/null; then
-    if ! cargo &> /dev/null; then
-        if command -v rustup &> /dev/null; then
-            rustup default stable
+# install rustup components / cargo packages
+if command -v rustup &> /dev/null; then
+    # install rustup components
+    echo -e "${blue}----------------------------------------------------------------------${clear}"
+    echo -e "${blue}Checking rustup requirements ...${clear}"
+    components=("cargo" "rustfmt")
+    for component in "${components[@]}"; do
+        if ! rustup component list --installed | grep -q "$component"; then
+            echo "- Installing $component..."
+            rustup component add "$component"
+        else
+            echo "- $component is already installed."
         fi
+    done
+    if ! command -v cargo &> /dev/null; then
+        rustup default stable
     fi
+    # install cargo packages
+    echo -e "${blue}----------------------------------------------------------------------${clear}"
+    echo -e "${blue}Checking cargo requirements ...${clear}"
     CARGO_DEPENDENCIES=('cargo-nextest')
     for PACKAGE in "${CARGO_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
-            echo "cargo: installing ${PACKAGE} ..."
+            echo "- cargo: installing ${PACKAGE} ..."
             cargo install "${PACKAGE}" > /dev/null
+        else
+            echo "- ${PACKAGE} is already installed."
         fi
     done
 fi
 
 # 'jdtls': lsp for java
 if ! command -v jdtls &> /dev/null; then
+    echo -e "${blue}----------------------------------------------------------------------${clear}"
+    echo -e "${blue}Installing jdtls ...${clear}"
     curl https://raw.githubusercontent.com/eruizc-dev/jdtls-launcher/master/install.sh | bash
 fi
 
-# copy files from to Windows Drive C:\
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+#     echo -e "${blue}Copy windows configs to Windows Drive C:\ ...${clear}"
 #     rm -rf /mnt/c/.dotfiles &> /dev/null
 #     if [ ! -f /mnt/c/.dotfiles ]; then
 #         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
@@ -69,20 +106,31 @@ fi
 # fi
 
 function apply_diff_for_submodule() {
-    local target_folder=./submodules/"$1"
-    local diff_list=(./submodules_diff/"$1"/*.diff)
-    if [[ -d "$target_folder" ]]; then
-        (cd "$target_folder" && git reset --hard HEAD &> /dev/null)
-        for diff_file in "${diff_list[@]}"; do
-            diff_file_realpath=$(realpath "$diff_file")
-            (cd "$target_folder" && git apply "$diff_file_realpath" &> /dev/null)
-            if [[ $? -eq 0 ]]; then
-                echo "Apply patch $diff_file in folder $target_folder succeeded."
-            else
-                echo "Error: apply patch $diff_file in folder $target_folder failed."
-            fi
-        done
-    fi
+    for folder in "$@"; do
+        local target_folder=./submodules/"$folder"
+        local diff_list=(./submodules_diff/"$folder"/*.diff)
+        if [[ -d "$target_folder" ]]; then
+            echo "- applying diffs to repository $target_folder"
+            (cd "$target_folder" && git reset --hard HEAD &> /dev/null)
+            for diff_file in "${diff_list[@]}"; do
+                diff_file_realpath=$(realpath "$diff_file")
+                if (cd "$target_folder" && git apply "$diff_file_realpath" &> /dev/null); then
+                    echo "  - Info : applying $diff_file succeeded"
+                else
+                    echo "  - Error: applying $diff_file failed"
+                fi
+            done
+        fi
+    done
 }
-apply_diff_for_submodule fzf > /dev/null
-apply_diff_for_submodule LunarVim > /dev/null
+echo -e "${blue}----------------------------------------------------------------------${clear}"
+echo -e "${blue}Executing apply_diff_for_submodule ...${clear}"
+apply_diff_for_submodule fzf LunarVim
+
+if python3 -V | grep "$PYTHON3_VERSION" &> /dev/null; then
+    if grep "$PYTHON3_VERSION" ~/.pip-requirements.txt &> /dev/null; then
+        echo -e "${blue}----------------------------------------------------------------------${clear}"
+        echo -e "${blue}Installing python3 packages from ~/.pip-requirements.txt${clear}"
+        python3 -m pip install -r ~/.pip-requirements.txt > /dev/null && echo "- Installing python3 packages from ~/.pip-requirements.txt succeeded"
+    fi
+fi
