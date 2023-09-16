@@ -1,78 +1,87 @@
+# This file is used for script ~/bin/gh_repo_clone_from_config
+# When you run the script, it will automatically sync the repos below.
+# Syntax:
+# - repository: <ESSENTIAL>
+#   directory: <ESSENTIAL>
+#   gitflags: <OPTIONAL>
+#     depth: <OPTIONAL>
+#     branch: <OPTIONAL>
+#
 ############################################################
 ############################################################
 # Machine Learning Repositories
 
 # CUDA Samples
 - repository: NVIDIA/cuda-samples
-  directory: ~/gh/ml/cuda-samples
+  directory: ~/github/machinelearning/cuda-samples
   gitflags:
     depth: 1
     branch: v12.2
 
 # OnnxRuntime
 - repository: microsoft/onnxruntime
-  directory: ~/gh/ml/onnxruntime
+  directory: ~/github/machinelearning/onnxruntime
   gitflags:
     depth: 1
     branch: v1.15.1
 
 # PyTorch
 - repository: pytorch/pytorch
-  directory: ~/gh/ml/pytorch
+  directory: ~/github/machinelearning/pytorch
   gitflags:
     depth: 1
     branch: v2.0.1
 
 # TensorFlow Repositories
 - repository: tensorflow/tensorflow
-  directory: ~/gh/ml/tensorflow
+  directory: ~/github/machinelearning/tensorflow
   gitflags:
     depth: 1
     branch: v2.13.0
 
 - repository: tensorflow/models
-  directory: ~/gh/ml/tensorflow_models
+  directory: ~/github/machinelearning/tensorflow_models
   gitflags:
     depth: 1
     branch: v2.13.0
 
 - repository: tensorflow/examples
-  directory: ~/gh/ml/tensorflow_examples
+  directory: ~/github/machinelearning/tensorflow_examples
   gitflags:
     depth: 1
 - repository: tensorflow/tflite-micro
-  directory: ~/gh/ml/tensorflow_tflite-micro
+  directory: ~/github/machinelearning/tensorflow_tflite-micro
   gitflags:
     depth: 1
 
 # TVM
 - repository: apache/tvm
-  directory: ~/gh/ml/tvm
+  directory: ~/github/machinelearning/tvm
   gitflags:
     depth: 1
     branch: v0.13.0
 # ############################################################
 # ############################################################
-# # My Own Repositories
+# # myrepos Own Repositories
 
 - repository: knowledge-base-cpp
-  directory: ~/gh/my/cpp
+  directory: ~/github/myrepos/cpp
   gitflags:
     depth: 1
 - repository: knowledge-base-rust
-  directory: ~/gh/my/rust
+  directory: ~/github/myrepos/rust
   gitflags:
     depth: 1
 - repository: knowledge-base-python
-  directory: ~/gh/my/python
+  directory: ~/github/myrepos/python
   gitflags:
     depth: 1
 - repository: knowledge-base-bash
-  directory: ~/gh/my/bash
+  directory: ~/github/myrepos/bash
   gitflags:
     depth: 1
 - repository: bazel
-  directory: ~/gh/my/bazel
+  directory: ~/github/myrepos/bazel
   gitflags:
     depth: 1
 ############################################################
