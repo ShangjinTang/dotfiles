@@ -4,13 +4,11 @@ import argparse
 import os
 import shutil
 import subprocess
-import typing
 from typing import List, Optional
 
 import yaml
 from pydantic import BaseModel
 from rich.console import Console
-from rich.theme import Theme
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"

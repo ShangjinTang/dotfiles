@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034
 
 # Colors
-export red='\033[0;31m'
-export green='\033[0;32m'
-export yellow='\033[0;33m'
-export blue='\033[0;34m'
-export magenta='\033[0;35m'
-export cyan='\033[0;36m'
-export clear='\033[0m'
+RESET=$(tput sgr0)
+# shellcheck disable=SC2034
+RED=$(tput setaf 1)
+# shellcheck disable=SC2034
+GREEN=$(tput setaf 2)
+# shellcheck disable=SC2034
+YELLOW=$(tput setaf 3)
+# shellcheck disable=SC2034
+BLUE=$(tput setaf 4)
+# shellcheck disable=SC2034
+MAGENTA=$(tput setaf 5)
+# shellcheck disable=SC2034
+CYAN=$(tput setaf 6)
 
 if command -v nerdfont_install &> /dev/null; then
-    echo -e "${blue}----------------------------------------------------------------------${clear}"
-    echo -e "${blue}Installing nerdfonts ...${clear}"
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    echo -e "${BLUE}Installing nerdfonts ...${RESET}"
     nerdfont_install RobotoMono FiraCode Mononoki VictorMono # IosevkaTerm JetbrainsMono UbuntuMono MPlus
 fi
 
@@ -19,8 +26,8 @@ function extract_bin_compressed() {
     os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
     arch=$(uname -m | tr '[:upper:]' '[:lower:]')
     find ~/.dotfiles/"${os_name}"/bin_compressed/"${arch}" -type f -name "*.tar.xz" | while read -r source_tar_xz; do
-        echo -e "${blue}----------------------------------------------------------------------${clear}"
-        echo -e "${blue}Extracting pre-built binaries ...${clear}"
+        echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+        echo -e "${BLUE}Extracting pre-built binaries ...${RESET}"
         target_decompressed=~/bin/$(basename "${source_tar_xz}" .tar.xz)
         if [[ ! -f "$target_decompressed" || "$source_tar_xz" -nt "$target_decompressed" ]]; then
             tar xf "$source_tar_xz" -C ~/bin --touch
@@ -35,8 +42,8 @@ extract_bin_compressed
 # install nnn plugin if nnn exists
 if command -v nnn &> /dev/null; then
     if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls "${XDG_CONFIG_HOME:-$HOME/.config}"/nnn/plugins)" ]; then
-        echo -e "${blue}----------------------------------------------------------------------${clear}"
-        echo -e "${blue}Installing nnn plugins ...${clear}"
+        echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+        echo -e "${BLUE}Installing nnn plugins ...${RESET}"
         bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
     fi
 fi
@@ -44,16 +51,16 @@ fi
 # install fzf if ~/.fzf/install exists
 if ! command -v fzf &> /dev/null; then
     if [ -f ~/.fzf/install ]; then
-        echo -e "${blue}----------------------------------------------------------------------${clear}"
-        echo -e "${blue}Installing fzf ...${clear}"
+        echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+        echo -e "${BLUE}Installing fzf ...${RESET}"
         ~/.fzf/install --all --no-bash --no-fish
     fi
 fi
 
 # create symlinks from ~/.dotfiles.local/ to ~/
 if [ -d ~/.dotfiles.local ]; then
-    echo -e "${blue}----------------------------------------------------------------------${clear}"
-    echo -e "${blue}Create symlinks from ~/.dotfiles.local/ to ~/${clear}"
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    echo -e "${BLUE}Create symlinks from ~/.dotfiles.local/ to ~/${RESET}"
     while IFS= read -r -d '' file; do
         ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
     done < <(find ~/.dotfiles.local -type f -print0)
@@ -62,8 +69,8 @@ fi
 # install rustup components / cargo packages
 if command -v rustup &> /dev/null; then
     # install rustup components
-    echo -e "${blue}----------------------------------------------------------------------${clear}"
-    echo -e "${blue}Checking rustup requirements ...${clear}"
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    echo -e "${BLUE}Checking rustup requirements ...${RESET}"
     components=("cargo" "rustfmt")
     for component in "${components[@]}"; do
         if ! rustup component list --installed | grep -q "$component"; then
@@ -77,8 +84,8 @@ if command -v rustup &> /dev/null; then
         rustup default stable
     fi
     # install cargo packages
-    echo -e "${blue}----------------------------------------------------------------------${clear}"
-    echo -e "${blue}Checking cargo requirements ...${clear}"
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    echo -e "${BLUE}Checking cargo requirements ...${RESET}"
     CARGO_DEPENDENCIES=('cargo-nextest')
     for PACKAGE in "${CARGO_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
@@ -92,13 +99,13 @@ fi
 
 # 'jdtls': lsp for java
 if ! command -v jdtls &> /dev/null; then
-    echo -e "${blue}----------------------------------------------------------------------${clear}"
-    echo -e "${blue}Installing jdtls ...${clear}"
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    echo -e "${BLUE}Installing jdtls ...${RESET}"
     curl https://raw.githubusercontent.com/eruizc-dev/jdtls-launcher/master/install.sh | bash
 fi
 
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
-#     echo -e "${blue}Copy windows configs to Windows Drive C:\ ...${clear}"
+#     echo -e "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
 #     rm -rf /mnt/c/.dotfiles &> /dev/null
 #     if [ ! -f /mnt/c/.dotfiles ]; then
 #         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
@@ -123,14 +130,16 @@ function apply_diff_for_submodule() {
         fi
     done
 }
-echo -e "${blue}----------------------------------------------------------------------${clear}"
-echo -e "${blue}Executing apply_diff_for_submodule ...${clear}"
+echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+echo -e "${BLUE}Executing apply_diff_for_submodule ...${RESET}"
 apply_diff_for_submodule fzf LunarVim
 
-if python3 -V | grep "$PYTHON3_VERSION" &> /dev/null; then
-    if grep "$PYTHON3_VERSION" ~/.pip-requirements.txt &> /dev/null; then
-        echo -e "${blue}----------------------------------------------------------------------${clear}"
-        echo -e "${blue}Installing python3 packages from ~/.pip-requirements.txt${clear}"
-        python3 -m pip install -r ~/.pip-requirements.txt > /dev/null && echo "- Installing python3 packages from ~/.pip-requirements.txt succeeded"
-    fi
-fi
+# if python3 -V | grep "$PYTHON3_VERSION" &> /dev/null; then
+#     if grep "$PYTHON3_VERSION" ~/.pip-requirements.txt &> /dev/null; then
+#         echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+#         echo -e "${BLUE}Installing python3 packages from ~/.pip-requirements.txt${RESET}"
+#         python3 -m pip install -r ~/.pip-requirements.txt > /dev/null && echo "- Installing python3 packages from ~/.pip-requirements.txt succeeded"
+#     fi
+# fi
+
+# vim: syntax=sh cc=80,120 tw=119 ts=4 sw=4 sts=4 et sr

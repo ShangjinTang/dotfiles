@@ -1,29 +1,28 @@
 #!/usr/bin/env python3
 
-import sys
 import argparse
-import os
-import re
 import logging
+import os
+import sys
 
 __author__ = "Shangjin Tang"
 __email__ = "shangjin.tang@gmail.com"
-__copyright__ = "Copyright 2022 Shangjin Tang"
+__copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
 __version__ = "1.0.0"
 
-ARGS = None  # Get argument: ARGS.arg
 LOG_FORMAT = "%(asctime)s    %(levelname)s    %(filename)s:%(lineno)s\n\t%(message)s"
 logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
 
 
-def main():
+def main(args):
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        formatter_class=argparse.RawDescriptionHelpFormatter, description="")
+        formatter_class=argparse.RawDescriptionHelpFormatter, description=""
+    )
     # Sample configurations:
     # parser.add_argument('-d', '--dir', default=".")
     # parser.add_argument('-p', '--project', default="", choices=['projectA', 'projectB'])
@@ -31,11 +30,10 @@ if __name__ == '__main__':
     # group = parser.add_mutually_exclusive_group()
     # group.add_argument('--foo', action='store_true')
     # group.add_argument('--bar', action='store_false')
-    ARGS = parser.parse_args()
     try:
-        main()
+        main(parser.parse_args())
     except KeyboardInterrupt:
-        print('Interrupted')
+        print("Interrupted")
         try:
             sys.exit(0)
         except SystemExit:

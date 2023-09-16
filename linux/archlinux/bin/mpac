@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 
 import logging
-import platform
 import os
+import platform
 import subprocess
-import time
 import sys
-
-import typer
+import time
 from typing import List, Optional
+
 import hydra
+import typer
 from omegaconf import DictConfig, OmegaConf
+
+__author__ = "Shangjin Tang"
+__copyright__ = "Copyright 2023 Shangjin Tang"
+__license__ = "GPL"
+__version__ = "1.0.0"
+__email__ = "shangjin.tang@gmail.com"
 
 LOG_FORMAT = "%(asctime)s    %(levelname)s    %(filename)s:%(lineno)s\n%(message)s"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
@@ -22,7 +28,7 @@ class Distribution:
     @staticmethod
     def retrive_distribution():
         if platform.system() == "Linux":
-            with open("/etc/os-release") as f:
+            with open("/etc/os-release", encoding="utf-8") as f:
                 release_info = f.read()
                 if "Arch Linux" in release_info:
                     return "ArchLinux"
@@ -68,7 +74,7 @@ class ArchLinux:
 
     @staticmethod
     def query_installed_packages():
-        result = subprocess.run(["pacman", "-Qq"], stdout=subprocess.PIPE)
+        result = subprocess.run(["pacman", "-Qq"], stdout=subprocess.PIPE, check=False)
         installed_packages = set(result.stdout.decode().strip().split("\n"))
         return installed_packages
 
@@ -76,22 +82,24 @@ class ArchLinux:
 class PackageInstaller:
     def __init__(self, requirements, clean_install=False):
         if not Distribution.is_archlinux():
-            raise Exception("Only support Arch Linux")
+            raise OSError("Only support Arch Linux")
         self.requirements = requirements
         self.clean_install = clean_install
         self.install_command = None
         self.uninstall_command = None
+        self.packages_to_uninstall = None
 
     def install_requirements(self):
         if self.clean_install:
             self.packages_to_uninstall = set(
-                k for k, v in self.requirements.items() if v == False
+                k for k, v in self.requirements.items() if v is False
             )
 
     def update_install_command(self):
-        packages_to_install = set(k for k, v in self.requirements.items() if v != False)
+        packages_to_install = set(k for k, v in self.requirements.items() if v is True)
         self.install_command = Distribution.fetch_install_command(packages_to_install)
-        # update archlinux-keyring before install to avoid error "invalid or corrupted package (PGP signature)"
+        # update archlinux-keyring before install to avoid error
+        # "invalid or corrupted package (PGP signature)"
         if self.install_command:
             self.install_command = (
                 "sudo pacman -Sy archlinux-keyring --noconfirm && "
@@ -102,7 +110,7 @@ class PackageInstaller:
         if self.clean_install:
             print(f"{self.clean_install=}")
             packages_to_uninstall = set(
-                k for k, v in self.requirements.items() if v == False
+                k for k, v in self.requirements.items() if v is False
             )
             self.uninstall_command = Distribution.fetch_uninstall_command(
                 packages_to_uninstall
@@ -147,7 +155,7 @@ def install(
     logging.debug(f"Hydra config (dict):\n{cfg}")
     logging.debug(f"Hydra config (yaml):\n{OmegaConf.to_yaml(cfg)}")
     package_requirements = {}
-    for key, sub_dict in cfg.items():
+    for _, sub_dict in cfg.items():
         package_requirements.update(sub_dict)
     package_installer = PackageInstaller(package_requirements, clean_install)
     package_installer.execute_command()
