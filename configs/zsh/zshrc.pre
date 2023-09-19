@@ -294,10 +294,10 @@ alias a=asynctask
 alias ai='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
 function va() {
     if [[ -f .tasks ]]; then
-        nvim -O2 .tasks ~/.config/nvim/tasks.ini
+        nvim -O2 .tasks.ini ~/.config/nvim/tasks.ini
     else
         # if '.tasks' not exists in current folder, open it as second buffer
-        nvim ~/.config/nvim/tasks.ini .tasks
+        nvim ~/.config/nvim/tasks.ini .tasks.ini
     fi
 }
 
