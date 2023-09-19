@@ -19,7 +19,7 @@ CYAN=$(tput setaf 6)
 if command -v nerdfont_install &> /dev/null; then
     echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
     echo -e "${BLUE}Installing nerdfonts ...${RESET}"
-    nerdfont_install RobotoMono FiraCode Mononoki VictorMono JetbrainsMono # IosevkaTerm UbuntuMono MPlus
+    nerdfont_install RobotoMono FiraCode Mononoki VictorMono JetbrainsMono # Meslo IosevkaTerm UbuntuMono MPlus
 fi
 
 function extract_bin_compressed() {
