@@ -39,4 +39,4 @@ for CLEAN_DIR in "${CLEAN_DIRS[@]}"; do
     fi
 done
 
-# vim: syntax=sh cc=80,120 tw=119 ts=4 sw=4 sts=4 et sr
+# vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr
