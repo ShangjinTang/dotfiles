@@ -9,17 +9,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- set filetype ini for .tasks (by asynctasks.vim)
-vim.api.nvim_create_autocmd({
-    "BufNewFile",
-    "BufRead",
-}, {
-    pattern = ".tasks",
-    callback = function()
-        vim.cmd([[ set filetype=ini ]])
-    end,
-})
-
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd({

@@ -18,13 +18,24 @@ let projectroot = ['.git', '.root', '.project', '.workspace', 'WORKSPACE', 'Carg
 " async run
 " Reference: https://github.com/skywind3000/asyncrun.vim/wiki/Better-way-for-C-and-Cpp-development-in-Vim-8
 let g:asyncrun_bell = 1
+let g:VimuxCloseOnExit = 1
+let g:VimuxRunnerName = "vimuxout"
 let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = projectroot
-let g:asynctasks_term_pos='toggleterm'
 let g:asynctasks_term_reuse = 1
+let g:asynctasks_config_name = '.task.ini'
+if exists("$TMUX")
+    let g:asynctasks_term_pos='tmuxsol'
+else
+    let g:asynctasks_term_pos='toggleterm'
+endif
 
 function! AsyncRunWith(commands)
-    execute 'AsyncRun -mode=term -pos=toggleterm -focus=0 ' . a:commands
+    if exists("$TMUX")
+        execute 'AsyncRun -mode=term -pos=tmuxsol -focus=0 ' . a:commands
+    else
+        execute 'AsyncRun -mode=term -pos=toggleterm -focus=0 ' . a:commands
+    endif
 endfunction
 
 function! AsyncRunSilentlyWith(commands)
