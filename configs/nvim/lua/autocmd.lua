@@ -20,26 +20,6 @@ vim.api.nvim_create_autocmd({
     end,
 })
 
-vim.api.nvim_create_autocmd({
-    "BufNewFile",
-    "BufRead",
-}, {
-    pattern = ".tmux.conf*",
-    callback = function()
-        vim.cmd([[ set filetype=tmux ]])
-    end,
-})
-
-vim.api.nvim_create_autocmd({
-    "BufNewFile",
-    "BufRead",
-}, {
-    pattern = ".gitmux.conf*",
-    callback = function()
-        vim.cmd([[ set filetype=yaml ]])
-    end,
-})
-
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd({
