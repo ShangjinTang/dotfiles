@@ -2,8 +2,8 @@
 Checks: -*,
   clang-analyzer-*,
   cppcoreguidelines-*, -cppcoreguidelines-owning-memory, -cppcoreguidelines-avoid-do-while,
-  google-*,
-  -header
+  google-*, -google-readability-todo,
+  -header,
   hicpp-*,
   llvm-*, -llvm-header-guard,
   misc-*,
