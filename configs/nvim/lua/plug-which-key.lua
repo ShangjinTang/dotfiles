@@ -390,7 +390,7 @@ function set_key_bindings()
         }, normal_mode)
     elseif ftype == "cpp" then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcxx --clean-output')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcpp --clean-output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "java" then
         wk.register({

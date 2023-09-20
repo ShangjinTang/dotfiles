@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+"""
+Dependencies:
+    Python packages:
+        python3 -m pip install "typer[all]"
+
+    Binaries:
+        rg: https://github.com/BurntSushi/ripgrep
+        fd: https://github.com/sharkdp/fd
+"""
 
 import os
 import platform
@@ -67,10 +76,10 @@ def get_auto_complete_flag_list(file: List[str], flag_list: List[str]) -> List[s
 
 def compile_run_clean(
     file: List[str],
-    compiler: str = "clang",
-    flag_file: str = ".rcflags",
-    output: str = "a.out",
-    clean_output: bool = False,
+    compiler: str,
+    flag_file: str,
+    output: str,
+    clean_output: bool,
 ) -> None:
     if not output.endswith(".out") and "." in output:
         raise ValueError(
@@ -97,7 +106,7 @@ def compile_run_clean(
         # Get all C files under the current directory
         source_files = [file for file in os.listdir(".") if file.endswith(".c")]
         if not source_files:
-            cprint("No C files found in the current directory.")
+            cprint("[red]No C files found in the current directory.[/red]")
             return
         compile_command_list.extend(source_files)
     compile_command = " ".join(compile_command_list)
@@ -123,38 +132,40 @@ def compile_run_clean(
     print("-" * 70)
 
 
-app = typer.Typer()
+app = typer.Typer(add_completion=False)
 
 
-@app.command()
+@app.command(
+    help="rc(Run C): A script to compile, build, run source files for C language"
+)
 def run(
     file: List[str] = typer.Argument(
         None,
-        help="File(s) to compile. If not specified, use all c files under current directory.",
+        help="File(s) to compile; if not specified, use all C files under current directory",
     ),
     compiler: str = typer.Option(
         "clang",
         "--compiler",
         "-c",
-        help="Compiler to use; if clang is not installed, use gcc.",
+        help="Compiler to use; if clang is not installed, use gcc",
     ),
     flag_file: str = typer.Option(
         ".rcflags",
         "--flag-file",
         "-f",
-        help="Compile flag file (recursively find up to user home dir).",
+        help="Compile flag file (recursively find up to user home dir)",
     ),
     output: str = typer.Option(
         "a.out",
         "--output-file",
         "-o",
-        help="Output executable file name.",
+        help="Output executable file name",
     ),
     clean_output: bool = typer.Option(
         False,
         "--clean-output",
         "-c",
-        help="Clean output after run.",
+        help="Clean output file after run",
     ),
 ) -> None:
     try:
