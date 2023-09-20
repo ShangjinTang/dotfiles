@@ -386,11 +386,11 @@ function set_key_bindings()
     -- as: AsyncRun Code: Snippet / Single File
     if ftype == "c" then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rc --clean_output')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rc --clean-output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "cpp" then
         wk.register({
-            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcxx --clean_output')<cr>", "Run (buffer)" },
+            ["<leader>as"] = { "<cmd>call ExecuteBufferWith('rcxx --clean-output')<cr>", "Run (buffer)" },
         }, normal_mode)
     elseif ftype == "java" then
         wk.register({
