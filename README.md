@@ -185,8 +185,8 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 ## Features for Simplify Software Development
 
 - simplify C / C++ development
-  - `rc` / `rcxx` to run C / C++ files under current directory with provided flags
-  - `cbuild` / `crun` to build / run files under PROJECTROOT
+  - `rc` / `rcpp` to run C / C++ files under current directory with provided flags
+  - `cmakeb` / `cmaker` to build / run cmake projects under PROJECTROOT
     - auto generate `compile_commands.json`
   - docker with **compiler-explorer** using latest ArchLinux clang / gcc
   - `.clang-tidy` support
