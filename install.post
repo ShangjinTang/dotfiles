@@ -97,13 +97,6 @@ if command -v rustup &> /dev/null; then
     done
 fi
 
-# 'jdtls': lsp for java
-if ! command -v jdtls &> /dev/null; then
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-    echo -e "${BLUE}Installing jdtls ...${RESET}"
-    curl https://raw.githubusercontent.com/eruizc-dev/jdtls-launcher/master/install.sh | bash
-fi
-
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 #     echo -e "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
 #     rm -rf /mnt/c/.dotfiles &> /dev/null
