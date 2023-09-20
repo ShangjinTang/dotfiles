@@ -32,7 +32,7 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-pip3 install hydra-core "typer[all]" rich pynvim
+pip3 install hydra-core "typer[all]" pynvim
 sudo mpac install
 ```
 
@@ -48,10 +48,6 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 
 ```bash
 sudo apt update
-sudo apt install -y vim git zsh curl wget tree xclip aria2 ripgrep tree rsync httpie python3-pip python3-venv net-tools p7zip-full zoxide
-sudo apt install -y clang clangd clang-format clang-tidy llvm llvm-dev libstdc++-12-dev gcc g++ make cmake pkg-config universal-ctags cscope ninja-build
-sudo apt install -y build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev libgtest-dev
-sudo apt install -y openjdk-17-jdk
 curl https://pyenv.run | bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
@@ -60,7 +56,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-pip3 install hydra-core "typer[all]" rich pynvim
+pip3 install hydra-core "typer[all]" pynvim
+sudo mapt install
 ```
 
 #### install neovim on Ubuntu 22.04 x86_64
@@ -103,6 +100,56 @@ tar zxvf tmux-${TMUX_VERSION}.tar.gz && cd tmux-${TMUX_VERSION}
 ./configure
 make -j16 && sudo make install
 cd .. && rm -rf tmux-${TMUX_VERSION} tmux-${TMUX_VERSION}.tar.gz
+```
+
+#### Install bazel on Ubuntu 22.04 x86_64
+
+```bash
+sudo apt install apt-transport-https curl gnupg -y
+curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel-archive-keyring.gpg
+sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+sudo apt update && sudo apt install bazel
+```
+
+Install specific version of bazel (optional):
+
+```bash
+BAZEL_VERSION=6.3.2
+
+sudo apt update && sudo apt install bazel-${BAZEL_VERSION}
+sudo ln -s /usr/bin/bazel-${BAZEL_VERSION} /usr/bin/bazel
+```
+
+#### Install delta on Ubuntu 22.04 x86_64
+
+```bash
+TMUX_VERSION=0.16.5
+wget https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta-musl_${DELTA_VERSION}_amd64.deb
+sudo dpkg -i git-delta-musl_${DELTA_VERSION}_amd64.deb
+rm git-delta-musl_${DELTA_VERSION}_amd64.deb
+```
+
+#### Install lazygit on Ubuntu 22.04 x86_64
+
+```bash
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+rm lazygit.tar.gz lazygit
+```
+
+#### Install sd on Ubuntu 22.04 x86_64
+
+```bash
+cargo install sd
+```
+
+#### Install croc on Ubuntu 22.04 x86_64
+
+```bash
+curl https://getcroc.schollz.com | bash
 ```
 
 ## NVIM Plugins Installation

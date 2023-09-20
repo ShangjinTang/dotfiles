@@ -106,6 +106,10 @@
       if: "[[ $WSL_DISTRO_NAME == Ubuntu ]] || lsb_release -i | grep Ubuntu"
 - link:
     ~/bin/: linux/ubuntu/bin/*
+    # conditional configs
+    ~/bin/:
+      if: "[[ $(lsb_release -rs) == '22.04' ]]"
+      path: linux/ubuntu/22.04/bin/*
 
 # zshrc
 - shell:
