@@ -20,11 +20,11 @@ cprint = console.print
 
 FLAG_PATTERN = {
     "-fcoroutines": "coroutine",
-    "-lbenchmark": "benchmark/\S+",  # pylint: disable=anomalous-backslash-in-string
+    "-lbenchmark": "benchmark/\S+",
     "-ldl": "dlfcn.h",
-    "-lfmt": "fmt/\S+",  # pylint: disable=anomalous-backslash-in-string
-    "-lgmock": "gmock/\S+",  # pylint: disable=anomalous-backslash-in-string
-    "-lgtest": "gtest/\S+",  # pylint: disable=anomalous-backslash-in-string
+    "-lfmt": "fmt/\S+",
+    "-lgmock": "gmock/\S+",
+    "-lgtest": "gtest/\S+",
     "-pthread": "pthread.h",
 }
 
