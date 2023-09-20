@@ -30,7 +30,7 @@ export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="warn"  # error/warn/info/hint
 export PYTHON3_VERSION="3.10.11"
 
 # python3_host_prog for python3 provider
-if command -v pyenv &> /dev/null; then
+if command -v pyenv &> /dev/null || [[ -f ~/.pyenv/bin/pyenv ]]; then
     export PYTHON3_HOST_PROG="$HOME/.pyenv/shims/python3"
 else
     export PYTHON3_HOST_PROG="/usr/bin/python3"
