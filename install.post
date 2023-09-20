@@ -86,7 +86,7 @@ if command -v rustup &> /dev/null; then
     # install cargo packages
     echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
     echo -e "${BLUE}Checking cargo requirements ...${RESET}"
-    CARGO_DEPENDENCIES=('cargo-nextest')
+    CARGO_DEPENDENCIES=('cargo-nextest' 'sd' 'exa')
     for PACKAGE in "${CARGO_DEPENDENCIES[@]}"; do
         if ! command -v "${PACKAGE}" &> /dev/null; then
             echo "- cargo: installing ${PACKAGE} ..."

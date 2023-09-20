@@ -1,0 +1,27 @@
+defaults:
+  - medium
+
+# ------------------------------
+# build tool: scons
+scons: true
+# ------------------------------
+# build tool: meson
+meson: true
+# ------------------------------
+# C/C++ third party library
+libabsl-dev: true
+libbenchmark-dev: true
+libboost-dev: true
+doctest: true
+libfmt-dev: true
+libgtest-dev: true
+# ------------------------------
+# dev libs
+zlib1g-dev: true
+libffi-dev: true
+libssl-dev: true
+libbz2-dev: true
+libreadline-dev: true
+libsqlite3-dev: true
+liblzma-dev: true
+# ------------------------------

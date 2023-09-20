@@ -1,0 +1,22 @@
+defaults:
+  - min
+
+# ------------------------------
+cmake: true
+llvm: true
+llvm-dev: true
+libstdc++-12-dev: true
+pkg-config: true
+ninja-build: true
+# ------------------------------
+# source code viewer
+cscope: true
+universal-ctags: true
+bear: true # generate compile_commands.json
+# ------------------------------
+# debug tools
+cppcheck: true
+gdb: true
+hyperfine: true
+valgrind: true
+# ------------------------------

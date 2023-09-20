@@ -88,6 +88,10 @@ abbr mpaci="mpac install"
 abbr mpacu="mpac upgrade"
 abbr vmpac="nvim ~/.dotfiles/linux/archlinux/bin/mpac-conf/{base,dev}/{min,medium,max}.yaml"
 
+abbr mapti="mapt install"
+abbr maptu="mapt upgrade"
+abbr vmapt="nvim ~/.dotfiles/linux/ubuntu/$(lsb_release -rs)/bin/mapt-conf/{base,dev}/{min,medium,max}.yaml"
+
 abbr mpipi="mpip install"
 abbr vmpip="nvim ~/.dotfiles/linux/bin/mpip-conf/{base,dev}/{min,medium,max}.yaml"
 
