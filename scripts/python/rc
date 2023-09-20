@@ -71,7 +71,7 @@ def get_auto_complete_flag_list(file, flag_list):
 
 
 def main(args):
-    if not ".out" in args.output and "." in args.output:
+    if not args.output.endswith(".out") and "." in args.output:
         raise ValueError(
             "Output file is allowed only with '.out' extension or no extension."
         )

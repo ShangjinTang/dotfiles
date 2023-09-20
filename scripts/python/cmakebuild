@@ -26,11 +26,11 @@ class UltimateHelpFormatter(
     pass
 
 
-def auto_complete_flags(flags):
+def auto_complete_flags(flags, config):
     if "-DCMAKE_EXPORT_COMPILE_COMMANDS" not in flags:
         flags += " -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
     if "-DCMAKE_BUILD_TYPE" not in flags:
-        flags += " -DCMAKE_BUILD_TYPE={}".format(args.config)
+        flags += " -DCMAKE_BUILD_TYPE={}".format(config)
     return flags
 
 
@@ -38,7 +38,7 @@ def main(args):
     if not which("cmake"):
         raise EnvironmentError("'cmake' is not found. Please install it first.")
 
-    complete_flags = auto_complete_flags(args.flags)
+    complete_flags = auto_complete_flags(args.flags, args.config)
 
     # Generate cmake command
     compile_command = "cmake -S . -B {}".format(args.output)
