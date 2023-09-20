@@ -293,7 +293,7 @@ alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/async
 alias task=asynctask
 alias taski='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
 function vtask() {
-    if [[ -f .tasks ]]; then
+    if [[ -f ".tasks.ini" ]]; then
         nvim -O2 .tasks.ini ~/.config/nvim/tasks.ini
     else
         # if '.tasks.ini' not exists in current folder, open it as second buffer
