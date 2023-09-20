@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 
-import argparse
 import os
 import platform
 import subprocess
 import sys
 from shutil import which
+from typing import List
 
+import typer
 from rich.console import Console
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.4.1"
+__version__ = "2.0.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console()
@@ -24,24 +25,18 @@ FLAG_PATTERN = {
 }
 
 
-class UltimateHelpFormatter(
-    argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter
-):
-    pass
-
-
-def get_flag_list_from_file(flag_file):
+def get_flag_list_from_file(flag_file: str) -> List[str]:
     home_dir = os.path.expanduser("~")
     curr_dir = os.getcwd()
     flag_list = []
     while True:
         if os.path.isfile(os.path.join(curr_dir, flag_file)):
             with open(os.path.join(curr_dir, flag_file), encoding="UTF-8") as f:
-                flag_list = list(
+                flag_list = [
                     line.strip()
                     for line in f.readlines()
                     if not line.strip().startswith("#")
-                )
+                ]
                 break
         if curr_dir in (home_dir, "/"):
             break
@@ -49,7 +44,7 @@ def get_flag_list_from_file(flag_file):
     return flag_list
 
 
-def get_auto_complete_flag_list(file, flag_list):
+def get_auto_complete_flag_list(file: List[str], flag_list: List[str]) -> List[str]:
     if which("rg"):
         for flag, pattern in FLAG_PATTERN.items():
             if flag not in flag_list:
@@ -70,42 +65,53 @@ def get_auto_complete_flag_list(file, flag_list):
     return flag_list
 
 
-def main(args):
-    if not args.output.endswith(".out") and "." in args.output:
+def compile_run_clean(
+    file: List[str],
+    compiler: str = "clang",
+    flag_file: str = ".rcflags",
+    output: str = "a.out",
+    clean_output: bool = False,
+) -> None:
+    if not output.endswith(".out") and "." in output:
         raise ValueError(
             "Output file is allowed only with '.out' extension or no extension."
         )
 
-    if not which("clang"):
+    if not which(compiler):
         if not which("gcc"):
-            raise EnvironmentError("Compiler clang / gcc is not found.")
-        args.compiler = "gcc"
+            raise EnvironmentError("Compiler clang / gcc not found.")
+        compiler = "gcc"
 
-    flag_list = get_flag_list_from_file(args.flag_file)
-    flag_list = get_auto_complete_flag_list(args.file, flag_list)
+    flag_list = get_flag_list_from_file(flag_file)
+    flag_list = get_auto_complete_flag_list(file, flag_list)
 
-    compile_command_list = [args.compiler, " ".join(flag_list), "-o", args.output]
+    compile_command_list = [compiler, " ".join(flag_list), "-o", output]
 
     # Generate compile command
-    if args.file:
+    if file:
         # Specify type for file without extension. See: `man gcc` -> search "-x language"
-        if not all(file.endswith(".c") for file in args.file):
+        if not all(file.endswith(".c") for file in file):
             compile_command_list.extend(["-x", "c"])
-        compile_command_list.extend(args.file)
+        compile_command_list.extend(file)
     else:
-        compile_command_list.append("$(find . -iname '*.c')")
+        # Get all C files under the current directory
+        source_files = [file for file in os.listdir(".") if file.endswith(".c")]
+        if not source_files:
+            cprint("No C files found in the current directory.")
+            return
+        compile_command_list.extend(source_files)
     compile_command = " ".join(compile_command_list)
 
     # Get run command
-    run_command = f"./{args.output}"
+    run_command = f"./{output}"
 
     merged_commands_list = [compile_command, run_command]
 
     # Get clean command (optional)
-    if args.clean_output:
-        clean_command = f"rm ./{args.output}"
-        if platform.system() == "Darwin" and "-g" in args.flags.split():
-            clean_command = f"rm -rf ./{args.output}" + "{,.dSYM}"
+    if clean_output:
+        clean_command = f"rm ./{output}"
+        if platform.system() == "Darwin" and "-g" in flag_list:
+            clean_command = f"rm -rf ./{output}" + "{,.dSYM}"
         merged_commands_list.append(clean_command)
 
     # compile + run + clean
@@ -117,42 +123,49 @@ def main(args):
     print("-" * 70)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(formatter_class=UltimateHelpFormatter)
-    parser.add_argument(
-        "file",
-        nargs="*",
-        type=str,
-        action="extend",
-        help="file(s) to compile\nif not specified, use all c files under current directory\n",
-    )
-    parser.add_argument(
+app = typer.Typer()
+
+
+@app.command()
+def run(
+    file: List[str] = typer.Argument(
+        None,
+        help="File(s) to compile. If not specified, use all c files under current directory.",
+    ),
+    compiler: str = typer.Option(
+        "clang",
         "--compiler",
-        default="clang",
-        choices=["clang", "gcc"],
-        help="compiler to use; if clang is not installed, use gcc\n",
-    )
-    parser.add_argument(
-        "-f",
-        "--flag_file",
-        default=".rcflags",
-        help="compile flag file (recursively find up to user home dir)\n",
-    )
-    parser.add_argument(
-        "-o", "--output", default="a.out", help="output executable file name\n"
-    )
-    parser.add_argument(
         "-c",
-        "--clean_output",
-        default=False,
-        action="store_true",
-        help="clean output after run\n",
-    )
+        help="Compiler to use; if clang is not installed, use gcc.",
+    ),
+    flag_file: str = typer.Option(
+        ".rcflags",
+        "--flag-file",
+        "-f",
+        help="Compile flag file (recursively find up to user home dir).",
+    ),
+    output: str = typer.Option(
+        "a.out",
+        "--output-file",
+        "-o",
+        help="Output executable file name.",
+    ),
+    clean_output: bool = typer.Option(
+        False,
+        "--clean-output",
+        "-c",
+        help="Clean output after run.",
+    ),
+) -> None:
     try:
-        main(parser.parse_args())
+        compile_run_clean(file, compiler, flag_file, output, clean_output)
     except KeyboardInterrupt:
         print("Interrupted")
         try:
             sys.exit(0)
         except SystemExit:
             os._exit(0)
+
+
+if __name__ == "__main__":
+    app()
