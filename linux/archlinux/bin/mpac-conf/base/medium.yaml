@@ -16,7 +16,6 @@ nnn: true
 aria2: true
 rsync: true
 # ------------------------------
-tldr: true
 github-cli: true
 # ------------------------------
 p7zip: true

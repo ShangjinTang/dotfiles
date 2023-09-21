@@ -13,7 +13,6 @@ nnn: true
 aria2: true
 rsync: true
 # ------------------------------
-tldr: true
 gh: true
 # ------------------------------
 p7zip-full: true
