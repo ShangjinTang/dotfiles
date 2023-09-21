@@ -99,7 +99,10 @@ function check_and_install_cargo_packages() {
         echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}cargo${RESET} available"
         # echo "${BLUE}Checking cargo requirements ...${RESET}"
         for PACKAGE in "$@"; do
-            if ! command -v "${PACKAGE}" &> /dev/null; then
+            # If the binary is already installed (e.g. pacman), should not build it in cargo
+            # Double check with 'cargo install --list' for some packages, e.g. tealdeer -> tdlr
+            if ! command -v "$PACKAGE" &> /dev/null &&
+                ! cargo install --list | grep -qw "$PACKAGE" &> /dev/null; then
                 echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
                 cargo install "${PACKAGE}" > /dev/null
             else
@@ -230,7 +233,7 @@ print_separate_line &&
     check_and_install_rustup_components cargo rustfmt rust-analyzer
 
 print_separate_line &&
-    check_and_install_cargo_packages cargo-nextest exa sd
+    check_and_install_cargo_packages cargo-nextest exa sd tealdeer
 
 print_separate_line &&
     check_and_install_npm_packages "live-server" "@bazel/bazelisk"

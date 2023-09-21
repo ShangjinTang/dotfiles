@@ -161,8 +161,9 @@ _PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin
 # Path append
 
 _PATHAPPEND ~/bin
-_PATHAPPEND ~/.pyenv/bin
+# cargo packages are much faster, do not modify it's order
 _PATHAPPEND ~/.cargo/bin
+_PATHAPPEND ~/.pyenv/bin
 _PATHAPPEND ~/.go/bin
 _PATHAPPEND ~/.local/bin
 _PATHAPPEND ~/.local/share/nvim/mason/bin
