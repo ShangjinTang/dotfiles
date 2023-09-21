@@ -27,4 +27,4 @@ IFS=' ' read -ra selected < <(
         --preview-window 'up,75%,border-bottom,~1,+1/4' \
         --exit-0
 )
-[ -n "${selected[0]}" ] && git show $QUERY_HASH --color=always --oneline -- "${selected[0]}" | delta -s
+[ -n "${selected[0]}" ] && git show $QUERY_HASH --color=always --oneline -- "${selected[0]}" | delta --diff-so-fancy -s

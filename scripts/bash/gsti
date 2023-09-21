@@ -45,13 +45,13 @@ IFS=' ' read -ra selected < <(
 if [ -n "${selected[0]}" ]; then
     if [ $(git diff --staged -- "${selected[0]}" | wc -l) -ne 0 ]; then
         echo -e "\n>>>>>> Changes to be committed:"
-        git diff --staged "${selected[0]}" | delta -s
+        git diff --staged "${selected[0]}" | delta --diff-so-fancy -s
         echo -e "<<<<<< Changes to be committed\n"
     fi
 
     if [ $(git diff -- "${selected[0]}" | wc -l) -ne 0 ]; then
         echo -e "\n>>>>>> Changes not staged for commit:"
-        git diff "${selected[0]}" | delta -s
+        git diff "${selected[0]}" | delta --diff-so-fancy -s
         echo -e "<<<<<< Changes not staged for commit\n"
     fi
 fi
