@@ -11,7 +11,20 @@
 	name = Shangjin Tang
 [core]
 	editor = nvim
+	pager = delta
 	excludesfile = ~/.gitignore
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	diff-so-fancy = true
+	side-by-side = true
+	line-numbers = false
+	# use n and N to move between diff sections (files & hunks)
+	navigate = true
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
 [color]
 	ui = auto
 [credential]
@@ -27,5 +40,7 @@
 	required = true
 [init]
 	defaultBranch = master
-[remote "origin"]
-#	fetch = +refs/heads/*:refs/remotes/origin/*
+# [remote "origin"]
+# 	fetch = +refs/heads/*:refs/remotes/origin/*
+
+# vim: ft=gitconfig syntax=gitconfig ts=4 sw=4 sts=4 noet sr
