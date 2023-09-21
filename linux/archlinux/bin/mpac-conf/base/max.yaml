@@ -6,6 +6,5 @@ croc: true
 git-delta: true
 lazygit: true
 hexyl: true
-neofetch: true
 tokei: true
 # ------------------------------
