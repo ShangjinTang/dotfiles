@@ -12,6 +12,8 @@ fd: true
 httpie: true
 ncdu: true
 nnn: true
+procs: true
+sd: true
 # ------------------------------
 aria2: true
 rsync: true
