@@ -14,94 +14,108 @@ BLUE=$(tput setaf 4)
 MAGENTA=$(tput setaf 5)
 # shellcheck disable=SC2034
 CYAN=$(tput setaf 6)
+# shellcheck disable=SC2034
+ITALIC=$(tput sitm)
+# shellcheck disable=SC2034
+BOLD=$(tput bold)
+# shellcheck disable=SC2034
+ITALIC=$(tput sitm)
+# shellcheck disable=SC2034
+BOLD=$(tput bold)
 
-if command -v nerdfont_install &> /dev/null; then
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-    echo -e "${BLUE}Installing nerdfonts ...${RESET}"
-    nerdfont_install RobotoMono FiraCode Mononoki VictorMono JetBrainsMono # ComicShannsMono Meslo IosevkaTerm UbuntuMono MPlus
-fi
-
-function extract_bin_compressed() {
-    os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
-    arch=$(uname -m | tr '[:upper:]' '[:lower:]')
-    find ~/.dotfiles/"${os_name}"/bin_compressed/"${arch}" -type f -name "*.tar.xz" | while read -r source_tar_xz; do
-        echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-        echo -e "${BLUE}Extracting pre-built binaries ...${RESET}"
-        target_decompressed=~/bin/$(basename "${source_tar_xz}" .tar.xz)
-        if [[ ! -f "$target_decompressed" || "$source_tar_xz" -nt "$target_decompressed" ]]; then
-            tar xf "$source_tar_xz" -C ~/bin --touch
-            echo " - extracted $source_tar_xz to $target_decompressed"
-        else
-            echo " - $target_decompressed exists and is newer than the pre-built one, extracting is skipped."
-        fi
-    done
+function print_separate_line() {
+    echo "${BLUE}----------------------------------------------------------------------${RESET}"
 }
-extract_bin_compressed
 
-# install nnn plugin if nnn exists
-if command -v nnn &> /dev/null; then
-    if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] || [ -z "$(ls "${XDG_CONFIG_HOME:-$HOME/.config}"/nnn/plugins)" ]; then
-        echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-        echo -e "${BLUE}Installing nnn plugins ...${RESET}"
-        bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+# check & install nerdfonts
+function install_nerdfonts() {
+    if command -v nerdfont_install &> /dev/null; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}nerdfont_install${RESET} available"
+        echo "${BLUE}Installing nerdfonts ...${RESET}"
+        nerdfont_install "$@"
+    else
+        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}nerdfont_install${RESET} not available"
     fi
-fi
+}
 
-# install fzf if ~/.fzf/install exists
-if ! command -v fzf &> /dev/null; then
-    if [ -f ~/.fzf/install ]; then
-        echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-        echo -e "${BLUE}Installing fzf ...${RESET}"
-        ~/.fzf/install --all --no-bash --no-fish
-    fi
-fi
-
-# create symlinks from ~/.dotfiles.local/ to ~/
-if [ -d ~/.dotfiles.local ]; then
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-    echo -e "${BLUE}Create symlinks from ~/.dotfiles.local/ to ~/${RESET}"
-    while IFS= read -r -d '' file; do
-        ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
-    done < <(find ~/.dotfiles.local -type f -print0)
-fi
-
-# install rustup components / cargo packages
-if command -v rustup &> /dev/null; then
-    # install rustup components
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-    echo -e "${BLUE}Checking rustup requirements ...${RESET}"
-    components=("cargo" "rustfmt" "rust-analyzer")
-    for component in "${components[@]}"; do
-        if ! rustup component list --installed | grep -q "$component"; then
-            echo "- Installing $component..."
-            rustup component add "$component"
+# check & install nnn plugin
+function install_nnn_plugins() {
+    if command -v nnn &> /dev/null; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}nnn${RESET} available"
+        if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] ||
+            [ -z "$(ls "${XDG_CONFIG_HOME:-$HOME/.config}"/nnn/plugins)" ]; then
+            bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)" &&
+                echo " - ${BOLD}${GREEN}OK${RESET} nnn plugins install succeeded" ||
+                echo " - ${BOLD}${ERROR}ERROR${RESET} nnn plugins install failed"
         else
-            echo "- $component is already installed."
+            echo " - ${BOLD}${GREEN}OK${RESET} nnn plugins already installed"
         fi
-    done
-    if ! command -v cargo &> /dev/null; then
-        rustup default stable
+    else
+        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}nnn${RESET} not available"
     fi
-    # install cargo packages
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-    echo -e "${BLUE}Checking cargo requirements ...${RESET}"
-    CARGO_DEPENDENCIES=('cargo-nextest' 'sd' 'exa')
-    for PACKAGE in "${CARGO_DEPENDENCIES[@]}"; do
-        if ! command -v "${PACKAGE}" &> /dev/null; then
-            echo "- cargo: installing ${PACKAGE} ..."
-            cargo install "${PACKAGE}" > /dev/null
-        else
-            echo "- ${PACKAGE} is already installed."
-        fi
-    done
-fi
+}
 
-# install npm packages
+# check & install fzf
+function check_and_install_fzf() {
+    if command -v fzf &> /dev/null; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}fzf${RESET} available"
+    else
+        echo "${BOLD}${RED}ERROR${RESET} ${MAGENTA}fzf${RESET} not available"
+        if [ -f ~/.fzf/install ]; then
+            echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.fzf/install${RESET} available"
+            echo "${BLUE}Installing fzf ...${RESET}"
+            ~/.fzf/install --all --no-bash --no-fish
+        else
+            echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.fzf/install${RESET} not available"
+        fi
+    fi
+}
+
+# check & install rustup components
+function check_and_install_rustup_components() {
+    if command -v rustup &> /dev/null; then
+        # install rustup components
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}rustup${RESET} available"
+        # echo "${BLUE}Checking rustup requirements ...${RESET}"
+        for COMPONENT in "$@"; do
+            if ! rustup component list --installed | grep -q "$COMPONENT"; then
+                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$COMPONENT${RESET} ..."
+                rustup component add "$COMPONENT"
+            else
+                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$COMPONENT${RESET} available"
+            fi
+        done
+        if ! command -v cargo &> /dev/null; then
+            rustup default stable
+        fi
+    else
+        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}rustup${RESET} not available"
+    fi
+}
+
+# check & install cargo packages
+function check_and_install_cargo_packages() {
+    if command -v cargo &> /dev/null; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}cargo${RESET} available"
+        # echo "${BLUE}Checking cargo requirements ...${RESET}"
+        for PACKAGE in "$@"; do
+            if ! command -v "${PACKAGE}" &> /dev/null; then
+                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
+                cargo install "${PACKAGE}" > /dev/null
+            else
+                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$PACKAGE${RESET} available"
+            fi
+        done
+    else
+        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}cargo${RESET} not available"
+    fi
+}
+
+# check & install npm packages
 function check_and_install_npm_packages() {
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
     if command -v npm &> /dev/null; then
-        echo -e "${GREEN}OK${RESET} ${MAGENTA}npm${RESET} available $(npm -v)"
-        echo -e "${BLUE}Checking npm requirements ...${RESET}"
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}npm${RESET} available $(npm -v)"
+        # echo "${BOLD}${BLUE}Checking npm requirements ...${RESET}"
         for PACKAGE in "$@"; do
             local INSTALL_PACKAGE="$PACKAGE"
             # PACKAGE: [<@scope>/]<name>[@<tag>] -> INSTALL_PACKAGE: <name>[@<tag>]
@@ -109,54 +123,117 @@ function check_and_install_npm_packages() {
                 INSTALL_PACKAGE="${PACKAGE##*/}"
             fi
             if ! command -v "$INSTALL_PACKAGE" &> /dev/null; then
-                echo "npm: installing $PACKAGE ..."
+                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
                 npm install --global "$PACKAGE" > /dev/null
             else
-                echo "- $PACKAGE is already installed."
+                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$PACKAGE${RESET} available"
             fi
         done
     else
-        echo -e "${RED}ERROR${RESET} ${MAGENTA}npm${RESET} not available"
+        echo "${BOLD}${RED}ERROR${RESET} ${MAGENTA}npm${RESET} not available"
     fi
 }
-check_and_install_npm_packages "live-server" "@bazel/bazelisk"
 
-# if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
-#     echo -e "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
-#     rm -rf /mnt/c/.dotfiles &> /dev/null
-#     if [ ! -f /mnt/c/.dotfiles ]; then
-#         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
-#     fi
-# fi
+# extract prebuilt binaries from ~/.dotfiles/"${os_name}"/bin_compressed/"${arch}"/*.tar.xz to ~/bin
+function extract_bin_compressed() {
+    os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
+    arch=$(uname -m | tr '[:upper:]' '[:lower:]')
+    compressed_dir=~/.dotfiles/"${os_name}"/bin_compressed/"${arch}"
+    find ${compressed_dir} -type f -name "*.tar.xz" | while read -r source_tar_xz; do
+        echo "${BLUE}Extracting prebuilt binaries to ~/bin ...${RESET}"
+        target_decompressed=~/bin/$(basename "${source_tar_xz}" .tar.xz)
+        source_relative=$(echo "$source_tar_xz" | sed "s|^$HOME|~|")
+        target_relative=$(echo "$target_decompressed" | sed "s|^$HOME|~|")
+        if [[ ! -f "$target_decompressed" || "$source_tar_xz" -nt "$target_decompressed" ]]; then
+            tar xf "$source_tar_xz" -C ~/bin --touch &&
+                echo " - ${BOLD}${GREEN}OK${RESET} extracted ${CYAN}$source_relative${RESET} to ${CYAN}$target_relative${RESET} succeeded" ||
+                echo " - ${BOLD}${ERROR}ERROR${RESET} extracted ${CYAN}$source_relative${RESET} to ${CYAN}$target_relative${RESET} failed"
+        else
+            echo " - ${BOLD}${GREEN}OK${RESET} ${MAGENTA}${target_relative}${RESET} is up to date."
+        fi
+    done
+}
 
+# create symlinks from ~/.dotfiles.local/ to ~/
+function create_dotfiles_symlinks_from_local() {
+    if [ -d ~/.dotfiles.local ]; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.local${RESET} exists"
+        echo "${BLUE}Create symlinks from ~/.dotfiles.local/ to ~/${RESET}"
+        while IFS= read -r -d '' file; do
+            ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
+        done < <(find ~/.dotfiles.local -type f -print0)
+    else
+        echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.local${RESET} not exists"
+    fi
+}
+print_separate_line
+create_dotfiles_symlinks_from_local
+
+# apply diff files in ~/.dotfiles/submodules_diff/<MODULE_NAME> to ~/.dotfiles/submodules/<MODULE_NAME>
 function apply_diff_for_submodule() {
+    echo "${BLUE}Executing apply_diff_for_submodule ...${RESET}"
     for folder in "$@"; do
+        local source_folder=./submodules_diff/"$folder"
+        local diff_list=("$source_folder"/*.diff)
         local target_folder=./submodules/"$folder"
-        local diff_list=(./submodules_diff/"$folder"/*.diff)
         if [[ -d "$target_folder" ]]; then
-            echo "- applying diffs to repository $target_folder"
+            echo "- applying diffs from ${CYAN}${source_folder}${RESET} to repository ${CYAN}$target_folder${RESET}"
             (cd "$target_folder" && git reset --hard HEAD &> /dev/null)
             for diff_file in "${diff_list[@]}"; do
                 diff_file_realpath=$(realpath "$diff_file")
                 if (cd "$target_folder" && git apply "$diff_file_realpath" &> /dev/null); then
-                    echo "  - Info : applying $diff_file succeeded"
+                    echo "  - ${BOLD}${GREEN}OK${RESET} applying ${CYAN}$(basename $diff_file)${RESET} succeeded"
                 else
-                    echo "  - Error: applying $diff_file failed"
+                    echo "  - ${BOLD}${RED}ERROR${RESET} applying ${CYAN}$(basename $diff_file)${RESET} failed"
                 fi
             done
         fi
     done
 }
-echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-echo -e "${BLUE}Executing apply_diff_for_submodule ...${RESET}"
-apply_diff_for_submodule fzf LunarVim
 
 # if python3 -V | grep "$PYTHON3_VERSION" &> /dev/null; then
 #     if grep "$PYTHON3_VERSION" ~/.pip-requirements.txt &> /dev/null; then
-#         echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-#         echo -e "${BLUE}Installing python3 packages from ~/.pip-requirements.txt${RESET}"
-#         python3 -m pip install -r ~/.pip-requirements.txt > /dev/null && echo "- Installing python3 packages from ~/.pip-requirements.txt succeeded"
+#         echo "${BLUE}Installing python3 packages from ~/.pip-requirements.txt${RESET}"
+#         python3 -m pip install -r ~/.pip-requirements.txt > /dev/null &&
+#             echo "- Installing python3 packages from ~/.pip-requirements.txt succeeded"
 #     fi
 # fi
 
+# function copy_from_wsl_to_windows() {
+# if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+#     echo "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
+#     rm -rf /mnt/c/.dotfiles &> /dev/null
+#     if [ ! -f /mnt/c/.dotfiles ]; then
+#         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
+#     fi
+# fi
+# }
+
+################################################################################
+
+print_separate_line &&
+    install_nerdfonts RobotoMono FiraCode Mononoki VictorMono JetBrainsMono # ComicShannsMono Meslo IosevkaTerm UbuntuMono MPlus
+
+print_separate_line &&
+    apply_diff_for_submodule fzf LunarVim
+
+print_separate_line &&
+    extract_bin_compressed
+
+print_separate_line &&
+    install_nnn_plugins
+
+print_separate_line &&
+    check_and_install_fzf
+
+print_separate_line &&
+    check_and_install_rustup_components cargo rustfmt rust-analyzer
+
+print_separate_line &&
+    check_and_install_cargo_packages cargo-nextest exa sd
+
+print_separate_line &&
+    check_and_install_npm_packages "live-server" "@bazel/bazelisk"
+
+################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr

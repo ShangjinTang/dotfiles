@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Colors
+RESET=$(tput sgr0)
+# RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+# YELLOW=$(tput setaf 3)
+# BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+# ITALIC=$(tput sitm)
+BOLD=$(tput bold)
+
 # Usage example: $0 RobotoMono FiraCode
 
 DOWNLOAD_DIR=~/.fonts
@@ -15,12 +26,14 @@ function download() {
     # echo "Installing Nerd Fonts: $*"
     for font in "$@"; do
         if [[ ! $(ls "${DOWNLOAD_DIR}/${font}/${font}NerdFont"*) ]] &> /dev/null; then
-            echo "- Downloading from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip to $DOWNLOAD_DIR ..."
-            curl -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip" -o "${font}.zip" && unzip -o "${font}.zip" -d "${DOWNLOAD_DIR}/$font" && rm -f ${font}.zip > /dev/null
-            echo "- Download ${font} to $DOWNLOAD_DIR complete"
+            echo "- ${BOLD}${CYAN}INFO${RESET} Downloading from https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip to ${DOWNLOAD_DIR} ..."
+            curl -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/${font}.zip" -o "${font}.zip" && unzip -o "${font}.zip" -d "${DOWNLOAD_DIR}/$font" && rm -f ${font}.zip > /dev/null &&
+                echo "- ${BOLD}${CYAN}INFO${RESET} Downloading ${BOLD}${MAGENTA}${font} Nerd Font${RESET} to ${DOWNLOAD_DIR} succeeded" ||
+                echo "- ${BOLD}${RED}ERROR${RESET} Downloading ${BOLD}${MAGENTA}${font} Nerd Font${RESET} to ${DOWNLOAD_DIR} failed"
             NEED_TO_REFRESH_CACHE=true
         else
-            echo "- ${font} Nerd Font is already downloaded to ~/.fonts, skipping ..."
+            DOWNLOAD_DIR_RELATIVE=$(echo "$DOWNLOAD_DIR" | sed "s|^$HOME|~|")
+            echo "- ${BOLD}${GREEN}OK${RESET} ${BOLD}${MAGENTA}${font} Nerd Font${RESET} is already downloaded to ${CYAN}${DOWNLOAD_DIR_RELATIVE}${RESET}, skipping ..."
         fi
     done
 }
@@ -30,15 +43,16 @@ function refresh_cache() {
         mkdir -p ~/.local/share/fonts
     fi
     cp -rf ${DOWNLOAD_DIR}/**/*.ttf ~/.local/share/fonts
-    fc-cache -fv > /dev/null
-    echo "cache refreshed"
+    fc-cache -fv > /dev/null &&
+        echo "- ${BOLD}${GREEN}OK${RESET} Font cache refreshed succeeded" ||
+        echo "- ${BOLD}${RED}ERROR${RESET} Font cache refreshed failed"
 }
 
 function main() {
     prepare_download
     download $@
     if [[ -n ${WSL_DISTRO_NAME} ]]; then
-        echo "Note: For WSL, please manually install fonts in Windows"
+        echo "${BOLD}${CYAN}NOTE${RESET} For WSL, please manually install fonts in Windows"
     else
         if $NEED_TO_REFRESH_CACHE; then
             refresh_cache

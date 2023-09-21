@@ -14,17 +14,21 @@ BLUE=$(tput setaf 4)
 MAGENTA=$(tput setaf 5)
 # shellcheck disable=SC2034
 CYAN=$(tput setaf 6)
+# shellcheck disable=SC2034
+ITALIC=$(tput sitm)
+# shellcheck disable=SC2034
+BOLD=$(tput bold)
 
 set -e
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-echo -e "${YELLOW}======================================================================${RESET}"
-echo -e "${YELLOW}1. Executing install.pre ...${RESET}"
+echo "${YELLOW}======================================================================${RESET}"
+echo "${YELLOW}1. Executing install.pre ...${RESET}"
 
 [ -f "$SCRIPT_DIR/install.pre" ] && "$SCRIPT_DIR/install.pre"
 
-echo -e "${YELLOW}======================================================================${RESET}"
-echo -e "${YELLOW}2. Executing install ...${RESET}"
+echo "${YELLOW}======================================================================${RESET}"
+echo "${YELLOW}2. Executing install ...${RESET}"
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
@@ -38,11 +42,12 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
-echo -e "${YELLOW}======================================================================${RESET}"
-echo -e "${YELLOW}3. Executing install.post ...${RESET}"
+echo "${YELLOW}======================================================================${RESET}"
+echo "${YELLOW}3. Executing install.post ...${RESET}"
 
 [ -f "$SCRIPT_DIR/install.post" ] && "$SCRIPT_DIR/install.post"
 
-echo -e "${YELLOW}======================================================================${RESET}"
+echo "${YELLOW}======================================================================${RESET}"
 
+################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr
