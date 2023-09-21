@@ -233,7 +233,7 @@ print_separate_line &&
     check_and_install_rustup_components cargo rustfmt rust-analyzer
 
 print_separate_line &&
-    check_and_install_cargo_packages cargo-nextest exa procs sd tealdeer tokei
+    check_and_install_cargo_packages cargo-nextest exa macchina procs sd tealdeer tokei
 
 print_separate_line &&
     check_and_install_npm_packages "live-server" "@bazel/bazelisk"
