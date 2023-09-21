@@ -14,28 +14,46 @@ BLUE=$(tput setaf 4)
 MAGENTA=$(tput setaf 5)
 # shellcheck disable=SC2034
 CYAN=$(tput setaf 6)
+# shellcheck disable=SC2034
+ITALIC=$(tput sitm)
+# shellcheck disable=SC2034
+BOLD=$(tput bold)
 
-if [[ $(basename $SHELL) != 'zsh' ]]; then
-    echo -e "${RED}Warning: we only support zsh${RESET}"
-    echo "${RED}  - Please install zsh, run 'chsh -s $(which zsh)', relogin shell and run this script again.${RESET}"
-    exit 1
-fi
-
-# create ~/.zshrc.local if not exists
-if [ ! -f ~/.zshrc.local ]; then
-    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-    echo -e "${BLUE}Creating ~/.zshrc.local ...${RESET}"
-    touch ~/.zshrc.local
-fi
+function print_separate_line() {
+    echo "${BLUE}----------------------------------------------------------------------${RESET}"
+}
 
 # delete all broken symlinks in $CLEAN_DIRS
-CLEAN_DIRS=(~ ~/bin ~/.config/nvim ~/.config/nvim/lua)
-echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
-echo -e "${BLUE}Deleting broken symlinks ...${RESET}"
-for CLEAN_DIR in "${CLEAN_DIRS[@]}"; do
-    if [ -d ${CLEAN_DIR} ]; then
-        find ${CLEAN_DIR} -maxdepth 1 -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} + && echo "- Deleting broken symlinks in ${CLEAN_DIR} succeeded"
-    fi
-done
+function delete_broken_symlinks() {
+    echo "${BLUE}Deleting broken symlinks ...${RESET}"
+    for CLEAN_DIR in "$@"; do
+        if [ -d ${CLEAN_DIR} ]; then
+            CLEAN_DIR_RELATIVE=$(echo "$CLEAN_DIR" | sed "s|^$HOME|~|")
+            find ${CLEAN_DIR} -maxdepth 1 -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} + &&
+                echo "- ${BOLD}${GREEN}OK${RESET} Deleting broken symlinks in ${CYAN}${CLEAN_DIR_RELATIVE}${RESET} succeeded" ||
+                echo "- ${BOLD}${RED}ERROR${RESET} Deleting broken symlinks in ${CYAN}${CLEAN_DIR_RELATIVE}${RESET} failed"
+        fi
+    done
+}
 
+################################################################################
+
+print_separate_line
+# NOTE: do not place this block inside function; otherwise it won't exit
+if [[ $(basename $SHELL) != 'zsh' ]]; then
+    echo "${BOLD}${RED}CRITICAL${RESET}: current shell is not zsh"
+    echo "- Please install zsh, run '${BOLD}${MAGENTA}chsh -s $(which zsh)${RESET}', relogin shell and run this script again."
+    exit 1
+else
+    echo "${BOLD}${GREEN}OK${RESET}: current shell is zsh"
+    # create ~/.zshrc.local if not exists
+    if [ ! -f ~/.zshrc.local ]; then
+        touch ~/.zshrc.local && echo "- ${BOLD}${CYAN}INFO${RESET} ~/.zshrc.local created"
+    fi
+fi
+
+print_separate_line
+delete_broken_symlinks ~ ~/bin ~/.config/nvim ~/.config/nvim/lua
+
+################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr
