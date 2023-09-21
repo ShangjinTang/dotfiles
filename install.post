@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2034
 
 # Colors
 RESET=$(tput sgr0)
@@ -96,6 +95,31 @@ if command -v rustup &> /dev/null; then
         fi
     done
 fi
+
+# install npm packages
+function check_and_install_npm_packages() {
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    if command -v npm &> /dev/null; then
+        echo -e "${GREEN}OK${RESET} ${MAGENTA}npm${RESET} available $(npm -v)"
+        echo -e "${BLUE}Checking npm requirements ...${RESET}"
+        for PACKAGE in "$@"; do
+            local INSTALL_PACKAGE="$PACKAGE"
+            # PACKAGE: [<@scope>/]<name>[@<tag>] -> INSTALL_PACKAGE: <name>[@<tag>]
+            if [[ "$PACKAGE" == *"/"* ]]; then
+                INSTALL_PACKAGE="${PACKAGE##*/}"
+            fi
+            if ! command -v "$INSTALL_PACKAGE" &> /dev/null; then
+                echo "npm: installing $PACKAGE ..."
+                npm install --global "$PACKAGE" > /dev/null
+            else
+                echo "- $PACKAGE is already installed."
+            fi
+        done
+    else
+        echo -e "${RED}ERROR${RESET} ${MAGENTA}npm${RESET} not available"
+    fi
+}
+check_and_install_npm_packages "live-server" "@bazel/bazelisk"
 
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 #     echo -e "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"

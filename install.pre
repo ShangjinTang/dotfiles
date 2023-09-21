@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2034
 
 # Colors
 RESET=$(tput sgr0)
@@ -24,15 +23,15 @@ fi
 
 # create ~/.zshrc.local if not exists
 if [ ! -f ~/.zshrc.local ]; then
-    echo -e "${blue}----------------------------------------------------------------------${RESET}"
-    echo -e "${blue}Creating ~/.zshrc.local ...${RESET}"
+    echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+    echo -e "${BLUE}Creating ~/.zshrc.local ...${RESET}"
     touch ~/.zshrc.local
 fi
 
 # delete all broken symlinks in $CLEAN_DIRS
 CLEAN_DIRS=(~ ~/bin ~/.config/nvim ~/.config/nvim/lua)
-echo -e "${blue}----------------------------------------------------------------------${RESET}"
-echo -e "${blue}Deleting broken symlinks ...${RESET}"
+echo -e "${BLUE}----------------------------------------------------------------------${RESET}"
+echo -e "${BLUE}Deleting broken symlinks ...${RESET}"
 for CLEAN_DIR in "${CLEAN_DIRS[@]}"; do
     if [ -d ${CLEAN_DIR} ]; then
         find ${CLEAN_DIR} -maxdepth 1 -type l -exec sh -c 'for x; do [ -e "$x" ] || rm "$x"; done' _ {} + && echo "- Deleting broken symlinks in ${CLEAN_DIR} succeeded"
