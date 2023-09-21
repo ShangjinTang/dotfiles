@@ -102,25 +102,6 @@ make -j16 && sudo make install
 cd .. && rm -rf tmux-${TMUX_VERSION} tmux-${TMUX_VERSION}.tar.gz
 ```
 
-#### Install bazel on Ubuntu 22.04 x86_64
-
-```bash
-sudo apt install apt-transport-https curl gnupg -y
-curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel-archive-keyring.gpg
-sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
-sudo apt update && sudo apt install bazel
-```
-
-Install specific version of bazel (optional):
-
-```bash
-BAZEL_VERSION=6.3.2
-
-sudo apt update && sudo apt install bazel-${BAZEL_VERSION}
-sudo ln -s /usr/bin/bazel-${BAZEL_VERSION} /usr/bin/bazel
-```
-
 #### Install delta on Ubuntu 22.04 x86_64
 
 ```bash
