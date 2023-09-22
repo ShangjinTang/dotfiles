@@ -76,6 +76,18 @@ if command -v cscope &> /dev/null; then
     alias cscopebuild="fd -e cpp -e cc -e c -e hpp -e h -e java > cscope.files && cscope -bkqv"
 fi
 
+# macchina
+if [ -f ~/.config/macchina/themes/Lithium.toml ]; then
+    alias macchina="macchina --theme Lithium"
+    # alias override: check ip on the first non 'lo' (loopback) interface by 'ifconfig'
+    if command -v ifconfig &> /dev/null; then
+        local network_interface=$(ifconfig | grep -o '^[^ ]\+' | cut -d ":" -f 1 | grep -v 'lo' | head -n 1)
+        if [ -n ${network_interface} ]; then
+            alias macchina="macchina --theme Lithium -i ${network_interface}"
+        fi
+    fi
+fi
+
 # nnn
 if command -v nnn &> /dev/null; then
     export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews

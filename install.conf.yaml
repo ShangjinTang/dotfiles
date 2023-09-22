@@ -27,6 +27,7 @@
         ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
     ~/.config/gh/: configs/gh/*
+    ~/.config/macchina/themes: configs/macchina/themes
     ~/.config/clash/config.yaml: configs/clash/config.yaml
     ~/.pip-requirements.txt: configs/.pip-requirements.txt
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
