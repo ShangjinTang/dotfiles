@@ -32,7 +32,7 @@
 [push]
 	default = current
 [http]
-	sslverify = false
+	sslVerify = false
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
