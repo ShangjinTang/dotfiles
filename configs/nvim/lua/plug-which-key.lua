@@ -151,38 +151,58 @@ wk.register({
     ["<leader>al"] = { "<cmd>AsyncTaskLast<cr>", "Run Last AsyncTask" },
     ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit AsyncTask Window (TMUX)" },
 
-    ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+    ["<leader>bf"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find Files in Buffers" },
+    ["<leader>bw"] = {
+        function()
+            require("telescope.builtin").grep_string({
+                prompt_title = "Find Current Word in Buffers",
+                grep_open_files = true,
+                previewer = true,
+            })
+        end,
+        "Find Current Word in Buffers",
+    },
+    ["<leader>bg"] = {
+        function()
+            require("telescope.builtin").live_grep({
+                prompt_title = "Grep in Buffers",
+                grep_open_files = true,
+                previewer = true,
+            })
+        end,
+        "Grep in Buffers",
+    },
 
     ["<leader>f"] = { name = "+File" },
     ["<leader>ff"] = {
         function()
             require("telescope.builtin").find_files({
                 cwd = vim.fn.expand("%:h"),
-                prompt_title = "Find Folder Files",
+                prompt_title = "Find Files in Current File Dir",
                 previewer = false,
             })
         end,
-        "Find Folder Files",
+        "Find Files in Current File Dir",
     },
     ["<leader>fw"] = {
         function()
             require("telescope.builtin").grep_string({
                 cwd = vim.fn.expand("%:h"),
-                prompt_title = "Find Folder Current Word",
+                prompt_title = "Find Current Word in Current File Dir",
                 previewer = true,
             })
         end,
-        "Find Folder Current Word",
+        "Find Current Word in Current File Dir",
     },
     ["<leader>fg"] = {
         function()
             require("telescope.builtin").live_grep({
                 cwd = vim.fn.expand("%:h"),
-                prompt_title = "Folder Grep",
+                prompt_title = "Grep in Current File Dir",
                 previewer = true,
             })
         end,
-        "Folder Grep",
+        "Grep in Current File Dir",
     },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles previewer=true<cr>", "Open Recent File" },
     ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
@@ -236,11 +256,11 @@ wk.register({
     ["<leader>gf"] = {
         function()
             require("lvim.core.telescope.custom-finders").find_project_files({
-                prompt_title = "Find Git Files",
+                prompt_title = "Find Files in Git",
                 previewer = false,
             })
         end,
-        "Find Git Files",
+        "Find Files in Git",
     },
 
     ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
@@ -277,21 +297,21 @@ wk.register({
         function()
             require("telescope.builtin").grep_string({
                 cwd = require("project_nvim.project").get_project_root(),
-                prompt_title = "Find Project Current Word",
+                prompt_title = "Find Current Word in Project",
                 previewer = true,
             })
         end,
-        "Find Project Current Word",
+        "Find Current Word in Project",
     },
     ["<leader>pg"] = {
         function()
             require("telescope.builtin").live_grep({
                 cwd = require("project_nvim.project").get_project_root(),
-                prompt_title = "Project Grep",
+                prompt_title = "Grep in Project",
                 previewer = true,
             })
         end,
-        "Project Grep",
+        "Grep in Project",
     },
 
     ["<leader>s"] = { name = "+Search & Substitute" },
