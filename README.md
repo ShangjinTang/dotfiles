@@ -102,15 +102,6 @@ make -j16 && sudo make install
 cd .. && rm -rf tmux-${TMUX_VERSION} tmux-${TMUX_VERSION}.tar.gz
 ```
 
-#### Install delta on Ubuntu 22.04 x86_64
-
-```bash
-TMUX_VERSION=0.16.5
-wget https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta-musl_${DELTA_VERSION}_amd64.deb
-sudo dpkg -i git-delta-musl_${DELTA_VERSION}_amd64.deb
-rm git-delta-musl_${DELTA_VERSION}_amd64.deb
-```
-
 #### Install lazygit on Ubuntu 22.04 x86_64
 
 ```bash
