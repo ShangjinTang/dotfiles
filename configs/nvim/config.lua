@@ -1709,7 +1709,9 @@ lvim.plugins = {
                 autoload_mode = config.AutoloadMode.CurrentDir, -- [ Disabled / CurrentDir / LastSession ]: autoload when 'nvim' without arguments
                 autosave_last_session = true,
                 autosave_ignore_not_normal = true,
-                autosave_ignore_dirs = { vim.fn.expand("~") },
+                autosave_ignore_dirs = {
+                    vim.fn.expand("~"),
+                },
                 autosave_ignore_filetypes = {
                     "alpha",
                     "gitcommit",
@@ -1729,8 +1731,9 @@ lvim.plugins = {
                 pattern = "SessionLoadPost",
                 callback = function()
                     vim.notify("Session Loaded")
-                    -- require("nvim-tree.api").tree.toggle()
-                    -- require("nvim-tree.api").tree.toggle_no_buffer_filter()
+                    if os.getenv("NVIM_AUTO_OPEN_NVIM_TREE") == "true" and vim.go.columns >= 120 then
+                        require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
+                    end
                 end,
             })
         end,
