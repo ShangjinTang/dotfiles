@@ -92,7 +92,7 @@
       force: true
       relative: false
       glob: true
-      if: "[[ $WSL_DISTRO_NAME == Arch ]] || lsb_release -i | grep Arch || [[ -f /etc/arch-release ]]"
+      if: "[[ $(cat /etc/os-release) =~ 'ID=arch' ]]"
 - link:
     ~/bin/: linux/archlinux/bin/*
 
@@ -104,7 +104,7 @@
       force: true
       relative: false
       glob: true
-      if: "[[ $WSL_DISTRO_NAME == Ubuntu ]] || lsb_release -i | grep Ubuntu"
+      if: "[[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]"
 - link:
     ~/bin/: linux/ubuntu/bin/*
     # conditional configs
