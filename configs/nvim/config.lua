@@ -36,13 +36,20 @@ lvim.builtin.gitsigns.opts.current_line_blame_formatter =
 lvim.builtin.lir.active = false
 
 -- nvim-tree
+
 lvim.builtin.nvimtree.setup.disable_netrw = true
 lvim.builtin.nvimtree.setup.view = {
     adaptive_size = false,
     side = "left",
+    width = math.floor(vim.go.columns / 5),
+    float = {
+        enable = vim.go.columns < 120,
+        quit_on_focus_loss = false,
+    },
 }
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = false
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.filters.dotfiles = true
 
 -- project
 lvim.builtin.project.manual_mode = false
