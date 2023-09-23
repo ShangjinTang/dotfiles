@@ -1534,6 +1534,14 @@ lvim.plugins = {
                     lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
             })
+            -- override the lualine configuration
+            lvim.builtin.lualine.sections.lualine_a = {
+                lualine_components.mode,
+                {
+                    require("noice").api.statusline.mode.get,
+                    cond = require("noice").api.statusline.mode.has,
+                },
+            }
         end,
     },
 
