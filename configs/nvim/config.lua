@@ -1731,9 +1731,6 @@ lvim.plugins = {
                 pattern = "SessionLoadPost",
                 callback = function()
                     vim.notify("Session Loaded")
-                    if os.getenv("NVIM_AUTO_OPEN_NVIM_TREE") == "true" and vim.go.columns >= 120 then
-                        require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
-                    end
                 end,
             })
         end,
