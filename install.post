@@ -232,8 +232,15 @@ print_separate_line &&
 print_separate_line &&
     check_and_install_rustup_components cargo rustfmt rust-analyzer
 
-print_separate_line &&
-    check_and_install_cargo_packages cargo-nextest git-delta exa macchina procs sd tealdeer tokei
+print_separate_line
+
+# we use distribution specific, cargo install package takes time
+if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
+    check_and_install_cargo_packages cargo-nextest macchina tealdeer
+elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] &> /dev/null; then
+    check_and_install_cargo_packages cargo-nextest macchina tealdeer \
+        git-delta exa procs sd tokei
+fi
 
 print_separate_line &&
     check_and_install_npm_packages "live-server" "@bazel/bazelisk"
