@@ -1681,49 +1681,41 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/olimorris/persisted.nvim
+    -- Reference: https://github.com/Shatur/neovim-session-manager
     {
-        "olimorris/persisted.nvim",
-        event = "VeryLazy",
+        "Shatur/neovim-session-manager",
+        -- Autoload not works if "lazy = true"
+        lazy = false,
         config = function()
-            require("persisted").setup({
-                save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
-                silent = false, -- silent nvim message when sourcing session file
-                use_git_branch = true, -- create session files based on the branch of the git enabled repository
-                -- WARNING: "autosave = true" seems cannot work properly, no idea how to resolve it yet.
-                autosave = false, -- automatically save session files when exiting Neovim
-                -- function to determine if a session should be autosaved
-                should_autosave = function()
-                    -- do not autosave if the alpha dashboard is the current filetype
-                    if vim.bo.filetype == "alpha" then
-                        return false
-                    end
-                    return true
-                end,
-                autoload = false, -- automatically load the session for the cwd on Neovim startup
-                on_autoload_no_session = nil, -- function to run when `autoload = true` but there is no session to load
-                follow_cwd = true, -- change session file name to match current working directory if it changes
-                allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
-                ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
-                telescope = { -- options for the telescope extension
-                    reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
+            local session_manager = require("session_manager")
+            local config = require("session_manager.config")
+            session_manager.setup({
+                sessions_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
+                autoload_mode = config.AutoloadMode.CurrentDir, -- [ Disabled / CurrentDir / LastSession ]: autoload when 'nvim' without arguments
+                autosave_last_session = true,
+                autosave_ignore_not_normal = true,
+                autosave_ignore_dirs = { vim.fn.expand("~") },
+                autosave_ignore_filetypes = {
+                    "alpha",
+                    "gitcommit",
+                    "gitrebase",
                 },
+                autosave_ignore_buftypes = {},
+                autosave_only_in_session = false,
+                max_path_length = 0,
             })
-            require("telescope").load_extension("persisted")
-            vim.api.nvim_create_autocmd({
-                "User",
-            }, {
-                pattern = "PersistedSavePost",
+            vim.api.nvim_create_autocmd({ "User" }, {
+                pattern = "SessionSavePost",
                 callback = function()
                     vim.notify("Session Saved")
                 end,
             })
-            vim.api.nvim_create_autocmd({
-                "User",
-            }, {
-                pattern = "PersistedLoadPost",
+            vim.api.nvim_create_autocmd({ "User" }, {
+                pattern = "SessionLoadPost",
                 callback = function()
-                    vim.notify("Session Restored")
+                    vim.notify("Session Loaded")
+                    -- require("nvim-tree.api").tree.toggle()
+                    -- require("nvim-tree.api").tree.toggle_no_buffer_filter()
                 end,
             })
         end,

@@ -151,9 +151,7 @@ wk.register({
     ["<leader>al"] = { "<cmd>AsyncTaskLast<cr>", "Run Last AsyncTask" },
     ["<leader>aq"] = { "<cmd>VimuxCloseRunner<cr>", "Quit AsyncTask Window (TMUX)" },
 
-    ["<leader>bb"] = { "<cmd>Telescope persisted<cr>", "Show Saved Sessions" },
-    ["<leader>bs"] = { "<cmd>SessionSave<cr>", "Session Save" },
-    ["<leader>br"] = { "<cmd>SessionLoad<cr>", "Session Restore" },
+    ["<leader>bb"] = { "<cmd>SessionManager load_session<cr>", "Show Saved Sessions" },
     ["<leader>bf"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find Files in Buffers" },
     ["<leader>bw"] = {
         function()
