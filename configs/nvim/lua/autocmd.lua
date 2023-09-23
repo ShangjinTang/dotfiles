@@ -23,30 +23,6 @@ vim.api.nvim_create_autocmd({
     end,
 })
 
-local function open_nvim_tree(data)
-    local is_real_file = vim.fn.filereadable(data.file) == 1
-    local is_no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-    local is_special_filetypes = vim.bo[data.buf].ft == "alpha" or vim.bo[data.buf].ft == "gitcommit"
-    local is_directory = vim.fn.isdirectory(data.file) == 1
-    if vim.go.columns < 120 then
-        return
-    end
-    if not is_real_file and not is_no_name then
-        return
-    end
-    if is_special_filetypes then
-        return
-    end
-    if is_directory then
-        return
-    end
-    require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
-end
-
-if os.getenv("NVIM_AUTO_OPEN_NVIM_TREE") == "true" then
-    vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-end
-
 --------------------------------------------------------------------------------
 
 if os.getenv("NVIM_SHOW_DIAG_ON_HOVER") == "true" then

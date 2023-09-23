@@ -23,7 +23,6 @@ esac
 
 # nvim extensions
 export NVIM_FORMAT_ON_SAVE=true
-export NVIM_AUTO_OPEN_NVIM_TREE=true
 export NVIM_SHOW_DIAG_ON_HOVER=true
 export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="warn"  # error/warn/info/hint
 
