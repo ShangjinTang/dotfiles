@@ -1,0 +1,37 @@
+diff --git a/lib/directories.zsh b/lib/directories.zsh
+index 8927a56a..6e05dd1c 100644
+--- a/lib/directories.zsh
++++ b/lib/directories.zsh
+@@ -34,7 +34,7 @@ function d () {
+ compdef _dirs d
+ 
+ # List directory contents
+-alias lsa='ls -lah'
+-alias l='ls -lah'
+-alias ll='ls -lh'
+-alias la='ls -lAh'
++# alias lsa='ls -lah'
++# alias l='ls -lah'
++# alias ll='ls -lh'
++# alias la='ls -lAh'
+diff --git a/lib/theme-and-appearance.zsh b/lib/theme-and-appearance.zsh
+index 585e969d..5c3fa1a8 100644
+--- a/lib/theme-and-appearance.zsh
++++ b/lib/theme-and-appearance.zsh
+@@ -70,11 +70,11 @@ case "$OSTYPE" in
+       && alias ls='gls --color=tty'
+     ;;
+   *)
+-    if test-ls-args ls --color; then
+-      alias ls='ls --color=tty'
+-    elif test-ls-args ls -G; then
+-      alias ls='ls -G'
+-    fi
++    # if test-ls-args ls --color; then
++    #   alias ls='ls --color=tty'
++    # elif test-ls-args ls -G; then
++    #   alias ls='ls -G'
++    # fi
+     ;;
+ esac
+ 
