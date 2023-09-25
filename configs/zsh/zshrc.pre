@@ -305,19 +305,27 @@ function vtask() {
     fi
 }
 
-# eza -> e
-if command -v eza &> /dev/null; then
-    alias e='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --git-ignore --classify --modified --icons'
-    alias ea='e --all'
-    alias el='e --long'
-    alias eal='e --all --long'
-    alias ela='e --all --long'
-    alias et='e --tree --no-git'
-    alias e1='et -1'
-    alias e2='et --level=2'
-    alias e3='et --level=3'
-    alias e4='et --level=4'
-    alias e5='et --level=5'
+# lsd -> l
+if command -v lsd &> /dev/null; then
+    alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M'"
+    alias ls="lsd --group-directories-first --date='+%Y-%m-%d %H:%M:%S'"
+    alias l="lsd --git"
+    alias la="lsd -Ah"
+    alias ll="lsd -lh --git"
+    alias lal="lsd -lAh --git"
+    alias lla="lsd -lAh --git"
+    alias l1="lsd -1"
+    alias l2="lsd --tree --depth=2"
+    alias l3="lsd --tree --depth=3"
+    alias l4="lsd --tree --depth=4"
+    alias l5="lsd --tree --depth=5"
+else
+    alias ls='ls --color=auto'
+    alias l='ls --color=auto'
+    alias la="ls -ah"
+    alias ll="ls -lh"
+    alias lla="ls -lah"
+    alias lal="ls -lah"
 fi
 
 # git -> g
