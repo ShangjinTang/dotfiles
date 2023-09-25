@@ -59,7 +59,7 @@
       glob: true
       if: "[ $(uname) = Darwin ]"
 - link:
-    ~/bin/: macos/bin/*
+    # ~/bin/: macos/bin/*
     ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.macos
     ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.macos.amd64
     # macOS only
