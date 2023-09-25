@@ -23,6 +23,7 @@ github-cli: true
 p7zip: true
 zip: true
 unzip: true
+ouch: true
 # ------------------------------
 entr: true # event notify test runner
 # ------------------------------
