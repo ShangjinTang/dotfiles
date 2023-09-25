@@ -239,7 +239,7 @@ if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
     check_and_install_cargo_packages cargo-nextest macchina tealdeer
 elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] &> /dev/null; then
     check_and_install_cargo_packages cargo-nextest macchina tealdeer \
-        dua-cli eza git-delta ouch procs sd tokei
+        bat dua-cli eza git-delta ouch procs sd tokei
 fi
 
 print_separate_line &&
