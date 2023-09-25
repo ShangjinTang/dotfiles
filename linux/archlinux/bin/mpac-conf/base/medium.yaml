@@ -10,7 +10,7 @@ duf: true
 exa: true
 fd: true
 httpie: true
-ncdu: true
+dua-cli: true
 nnn: true
 procs: true
 sd: true
