@@ -7,7 +7,6 @@ btop: true
 duf: true
 fd-find: true
 httpie: true
-ncdu: true
 nnn: true
 # ------------------------------
 aria2: true

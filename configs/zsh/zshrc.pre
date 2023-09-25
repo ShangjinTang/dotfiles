@@ -236,14 +236,12 @@ fi
 # Theme settings
 function set_theme() {
     unalias bat &> /dev/null
-    unalias ncdu &> /dev/null
     unset NNN_FCOLORS
     case $1 in
         light)
             export TERMINAL_THEME="light"
             # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfLight"
-            export NCDU_THEME="dark"
             export PROCS_THEME="light"
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
@@ -252,7 +250,6 @@ function set_theme() {
         dark)
             export TERMINAL_THEME="dark"
             export BAT_THEME="OneHalfDark"
-            export NCDU_THEME="dark-bg"
             export PROCS_THEME="dark"
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
@@ -263,7 +260,6 @@ function set_theme() {
             ;;
     esac
     alias bat="bat --theme=${BAT_THEME}"
-    alias ncdu="ncdu --color ${NCDU_THEME}"
     alias procs="procs --theme ${PROCS_THEME}"
     ln -sf ~/.dotfiles/configs/tmux/.tmux.conf.theme.${TERMINAL_THEME} ~/.tmux.conf.theme
 }

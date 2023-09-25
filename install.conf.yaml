@@ -106,7 +106,7 @@
       glob: true
       if: "[[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]"
 - link:
-    ~/bin/: linux/ubuntu/bin/*
+    # ~/bin/: linux/ubuntu/bin/*
     # conditional configs
     ~/bin/:
       if: "[[ $(lsb_release -rs) == '22.04' ]]"
