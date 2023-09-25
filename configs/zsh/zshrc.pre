@@ -77,7 +77,7 @@ if command -v cscope &> /dev/null; then
 fi
 
 # macchina
-if [ -f ~/.config/macchina/themes/Lithium.toml ]; then
+if command -v macchina &> /dev/null && [ -f ~/.config/macchina/themes/Lithium.toml ]; then
     alias macchina="macchina --theme Lithium"
     # alias override: check ip on the first non 'lo' (loopback) interface by 'ifconfig'
     if command -v ifconfig &> /dev/null; then
@@ -273,9 +273,6 @@ alias setdark="set_theme dark"
 ######################################################################
 # ALIASES
 
-# grep
-alias grep='grep --color=auto'
-
 # clear: do not delete scrollback buffer (requires: tput version >= 6.2)
 if tput -x clear &> /dev/null; then
     alias clear='tput -x clear'
@@ -290,18 +287,8 @@ if command -v nvim &> /dev/null; then
     alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
     alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
     alias vz="nvim ~/.zshrc{.pre,,.local,.post}"
-    function demo () {
-        if [ $# -eq 0 ]; then
-            nvim ~/temp/demo
-        elif [ $# -eq 1 ]; then
-            nvim ~/temp/demo.$1
-        fi
-    }
     alias vm="nvim ~/note/index.md"
     alias vclash="nvim ~/.config/clash/config.yaml"
-else
-    alias v='vim'
-    alias vv='vim ~/.vimrc'
 fi
 
 # asynctask -> task
@@ -318,28 +305,32 @@ function vtask() {
 }
 
 # exa -> e
-alias exa='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
-alias e='exa'
-alias ea='exa --all'
-alias esort='exa --sort=modified'
-alias et='exa --tree'
-alias e1='exa -1'
-alias e2='exa --tree --level=2'
-alias e3='exa --tree --level=3'
-alias e4='exa --tree --level=4'
-alias e5='exa --tree --level=5'
+if command -v exa &> /dev/null; then
+    alias exa='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
+    alias e='exa'
+    alias ea='exa --all'
+    alias esort='exa --sort=modified'
+    alias et='exa --tree'
+    alias e1='exa -1'
+    alias e2='exa --tree --level=2'
+    alias e3='exa --tree --level=3'
+    alias e4='exa --tree --level=4'
+    alias e5='exa --tree --level=5'
+fi
 
 # git -> g
-alias g='git'
-if command -v lazygit &> /dev/null; then
-    alias gg='lazygit'
+if command -v git &> /dev/null; then
+    alias g='git'
+    alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
+    alias gspristine='git submodule deinit --force --all && git submodule update --init'
+    alias cg='cd $(git rev-parse --show-cdup)'
+    if command -v lazygit &> /dev/null; then
+        alias gg='lazygit'
+    fi
 fi
-alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
-alias gspristine='git submodule deinit --force --all && git submodule update --init'
-alias cg='cd $(git rev-parse --show-cdup)'
 
 # sgpt -> s
-alias s='sgpt'
+# alias s='sgpt'
 
 # tmux -> t
 if command -v tmux &> /dev/null; then
@@ -372,11 +363,6 @@ if command -v tmux &> /dev/null; then
     alias tk0='tmux kill-session -t 0 &> /dev/null'
     # kill all sessions
     alias tka='tmux kill-server'
-fi
-
-# tmuxinator
-if command -v tmuxinator &> /dev/null; then
-    alias mux=tmuxinator
 fi
 
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
