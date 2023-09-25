@@ -300,18 +300,18 @@ function vtask() {
     fi
 }
 
-# exa -> e
-if command -v exa &> /dev/null; then
-    alias exa='exa --long --group-directories-first --time-style=long-iso --git --classify --modified'
-    alias e='exa'
-    alias ea='exa --all'
-    alias esort='exa --sort=modified'
-    alias et='exa --tree'
-    alias e1='exa -1'
-    alias e2='exa --tree --level=2'
-    alias e3='exa --tree --level=3'
-    alias e4='exa --tree --level=4'
-    alias e5='exa --tree --level=5'
+# eza -> e
+if command -v eza &> /dev/null; then
+    alias eza='eza --long --group-directories-first --time-style=long-iso --git --classify --modified'
+    alias e='eza'
+    alias ea='eza --all'
+    alias esort='eza --sort=modified'
+    alias et='eza --tree'
+    alias e1='eza -1'
+    alias e2='eza --tree --level=2'
+    alias e3='eza --tree --level=3'
+    alias e4='eza --tree --level=4'
+    alias e5='eza --tree --level=5'
 fi
 
 # git -> g
