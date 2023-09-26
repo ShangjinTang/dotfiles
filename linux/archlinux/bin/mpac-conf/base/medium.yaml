@@ -14,6 +14,7 @@ dua-cli: true
 nnn: true
 procs: true
 sd: true
+pueue: true
 # ------------------------------
 aria2: true
 rsync: true
