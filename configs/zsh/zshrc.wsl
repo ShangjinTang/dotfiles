@@ -1,7 +1,7 @@
 # for WSL, use external(host) proxy
 export PROXY_IP="$(cat /etc/resolv.conf | grep nameserver | cut -f 2 -d ' '):1080"
 
-if [[ ! $(ls /mnt/c) ]]; then
+if [[ ! -d /mnt/c ]]; then
     echo "Fatal: cannot access /mnt/c ; try 'wsl.exe --shutdown' to recover"
     exit 1
 fi
