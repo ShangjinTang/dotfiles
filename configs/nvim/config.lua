@@ -1735,6 +1735,28 @@ lvim.plugins = {
         end,
     },
 
+    {
+        "Marskey/telescope-sg",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+        },
+        config = function()
+            require("telescope").setup({
+                extensions = {
+                    ast_grep = {
+                        command = {
+                            "sg",
+                            "--json=stream",
+                        },
+                        grep_open_files = false,
+                        lang = nil,
+                    },
+                },
+            })
+            require("telescope").load_extension("ast_grep")
+        end,
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
