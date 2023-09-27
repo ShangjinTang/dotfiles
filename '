@@ -245,7 +245,7 @@ elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] && [[ $(lsb_release -rs) == '22
 else
     echo "Current OS is not supported."
     if [[ $(uname -m) != "x86_64" ]]; then
-        echo "You can check & download x86_64 prebuilt binaries in below link:"
+        echo "You can check & download prebuilt binaries in below link:"
         echo "    https://github.com/ShangjinTang/cli-prebuilts"
     fi
 fi
