@@ -345,7 +345,7 @@ fi
 # sgpt -> s
 # alias s='sgpt'
 
-if command -v tmux &> /dev/null; then
+if command -v pueue &> /dev/null; then
     alias p='pueue'
 fi
 
