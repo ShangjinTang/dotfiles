@@ -236,10 +236,12 @@ print_separate_line
 
 # we use distribution specific, cargo install package takes time
 if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
-    check_and_install_cargo_packages ast-grep cargo-nextest macchina tealdeer
+    check_and_install_cargo_packages cargo-nextest \
+        astgrep macchina tealdeer
 elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] &> /dev/null; then
-    check_and_install_cargo_packages ast-grep cargo-nextest macchina tealdeer \
-        bat dua-cli git-delta lsd ouch procs pueue sd tokei
+    check_and_install_cargo_packages cargo-nextest \
+        astgrep macchina tealdeer \
+        bat dua-cli git-delta lsd ouch procs pueue sd tokei watchexec-cli
 fi
 
 print_separate_line &&
