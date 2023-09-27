@@ -9,7 +9,7 @@ Procedure Example:
 - 3. unzip to binary `clash-linux-amd64-*`, and delete the original zipped file
 - 4. rename the binary, e.g. `clash`
 - 5. change permission to 0755
-- 6. use `compress_to_tar_xz.sh` to compress it
+- 6. run command `tar -cJvf clash.tar.xz clash` to compress it
 - 7. `~/.dotfiles/install` and the compressed file would be extracted to `~/bin/clash`
 
 Note:
