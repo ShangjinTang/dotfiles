@@ -52,6 +52,10 @@ else
     fi
 fi
 
+if [[ $(uname -m) != "x86_64" ]]; then
+    echo "${BOLD}${YELLOW}WARNING${RESET}: hardware $(uname -m) might not be well supported"
+fi
+
 print_separate_line
 delete_broken_symlinks ~ ~/bin ~/.config/nvim ~/.config/nvim/lua
 
