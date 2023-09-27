@@ -27,4 +27,5 @@ unzip: true
 ouch: true
 # ------------------------------
 entr: true # event notify test runner
+watchexec: true
 # ------------------------------

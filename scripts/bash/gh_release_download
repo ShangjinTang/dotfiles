@@ -148,6 +148,7 @@ function try_download() {
     fi
 }
 
+# shellcheck disable=2086
 function cp_elf_executable_from_download() {
     local PATTERN=$1
     local BINARY=$2
@@ -157,10 +158,10 @@ function cp_elf_executable_from_download() {
     cp -f $DOWNLOAD_DIR/$PATTERN $INSTALL_DIR/$BINARY
 }
 
+# shellcheck disable=2086
 function extract_tar_gz_from_download() {
     local PATTERN=$1
     local BINARY=$2
-    # shellcheck disable=2086
     verbose_print "  - [FileType] .tar.gz"
     if [[ $BINARY == "lazygit" ]] || [[ $BINARY == "tokei" ]]; then
         verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=0 --wildcards \"${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
@@ -171,6 +172,17 @@ function extract_tar_gz_from_download() {
     fi
 }
 
+# shellcheck disable=2086
+function extract_tar_xz_from_download() {
+    local PATTERN=$1
+    local BINARY=$2
+    # shellcheck disable=2086
+    verbose_print "  - [FileType] .tar.xz | .tar.gz"
+    verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards \"*/${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
+    tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards "*/${BINARY}" -C $INSTALL_DIR
+}
+
+# shellcheck disable=2086
 function extract_zip_from_download() {
     local PATTERN=$1
     local BINARY=$2
@@ -194,12 +206,19 @@ function start_download_install_binary_with_repo() {
         print_separate_line_with_optional_arg "$BINARY"
         try_download "$REPO" "$PATTERN"
         if [[ -n ${install-} ]]; then
-            if [[ $PATTERN == *.tar.gz ]]; then
+            if [[ $PATTERN == *.tar.gz ]] || [[ $PATTERN == *.tar.xz ]]; then
                 extract_tar_gz_from_download "$PATTERN" "$BINARY"
+                install_done_flag=true
+            elif [[ $PATTERN == *.zip ]]; then
+                extract_zip_from_download "$PATTERN" "$BINARY"
                 install_done_flag=true
             elif file $DOWNLOAD_DIR/$PATTERN | grep "ELF" &> /dev/null; then
                 cp_elf_executable_from_download "$PATTERN" "$BINARY"
                 install_done_flag=true
+            else
+                pretty_print "  - [FileType] UNRECOGNIZED" "$fg_red"
+                install_done_flag=false
+                exit 1
             fi
             if $install_done_flag; then
                 chmod 0755 "$INSTALL_DIR/$BINARY" && pretty_print "- [Install] OK"
@@ -292,6 +311,9 @@ function main() {
 
     # tokei: https://github.com/XAMPPRocky/tokei/releases/latest
     start_download_install_binary_with_repo "tokei" "XAMPPRocky/tokei" "tokei-x86_64-unknown-linux-gnu.tar.gz"
+
+    # tokei: https://github.com/watchexec/watchexec/releases/latest
+    start_download_install_binary_with_repo "watchexec" "watchexec/watchexec" "watchexec-*-x86_64-unknown-linux-musl.tar.xz"
 }
 
 # shellcheck source=source.sh
