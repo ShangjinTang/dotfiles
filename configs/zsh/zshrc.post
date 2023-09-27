@@ -58,6 +58,11 @@ if [[ $SKIP_SSL == 1 ]]; then
     alias aria2c="aria2c --check-certificate=false"
 fi
 
+# pueued
+if command -v pueued &> /dev/null && [[ $PUEUED_AUTO_START == 1 ]]; then
+    pueued -d &> /dev/null
+fi
+
 # pyenv
 if command -v pyenv &> /dev/null; then
     if [ -n "${PYTHON3_VERSION}" ]; then
