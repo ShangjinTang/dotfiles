@@ -84,5 +84,9 @@
   directory: ~/github/myrepos/bazel
   gitflags:
     depth: 1
+# - repository: cli-prebuilts
+#   directory: ~/github/myrepos/cli-prebuilts
+#   gitflags:
+#     depth: 1
 ############################################################
 ############################################################
