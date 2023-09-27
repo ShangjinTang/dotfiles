@@ -10,6 +10,9 @@ export PROXY_ENABLED=1
 # security setting
 export SKIP_SSL=1
 
+# pueued
+export PUEUED_AUTO_START=1
+
 # terminal theme: light | dark
 export TERMINAL_THEME='dark'
 case ${TERMINAL_THEME} in
@@ -341,6 +344,10 @@ fi
 
 # sgpt -> s
 # alias s='sgpt'
+
+if command -v tmux &> /dev/null; then
+    alias p='pueue'
+fi
 
 # tmux -> t
 if command -v tmux &> /dev/null; then
