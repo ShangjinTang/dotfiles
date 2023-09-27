@@ -144,7 +144,7 @@ function try_download() {
         verbose_print "- [Executing] gh release download --dir $DOWNLOAD_DIR --repo $1 --pattern $2" "$fg_cyan"
         gh release download --dir "$DOWNLOAD_DIR" --repo "$REPO" --pattern "$PATTERN"
     else
-        pretty_print "- [Exists] $PATTERN" "$fg_blue"
+        pretty_print "- [Exists] ~/.gh_releases/download/$PATTERN" "$fg_blue"
     fi
 }
 
@@ -159,27 +159,17 @@ function cp_elf_executable_from_download() {
 }
 
 # shellcheck disable=2086
-function extract_tar_gz_from_download() {
+function extract_targz_tarxz_from_download() {
     local PATTERN=$1
     local BINARY=$2
     verbose_print "  - [FileType] .tar.gz"
     if [[ $BINARY == "lazygit" ]] || [[ $BINARY == "tokei" ]]; then
         verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=0 --wildcards \"${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
-        tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=0 --wildcards "${BINARY}" -C $INSTALL_DIR
+        tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=0 --wildcards "${BINARY}" -C $INSTALL_DIR --touch
     else
         verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards \"*/${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
-        tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards "*/${BINARY}" -C $INSTALL_DIR
+        tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards "*/${BINARY}" -C $INSTALL_DIR --touch
     fi
-}
-
-# shellcheck disable=2086
-function extract_tar_xz_from_download() {
-    local PATTERN=$1
-    local BINARY=$2
-    # shellcheck disable=2086
-    verbose_print "  - [FileType] .tar.xz | .tar.gz"
-    verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards \"*/${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
-    tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards "*/${BINARY}" -C $INSTALL_DIR
 }
 
 # shellcheck disable=2086
@@ -190,9 +180,11 @@ function extract_zip_from_download() {
     if [[ $BINARY == "ast-grep" ]]; then
         rm -f $INSTALL_DIR/$BINARY &&
             unzip -j $DOWNLOAD_DIR/$PATTERN sg -d $INSTALL_DIR &> /dev/null &&
-            mv $INSTALL_DIR/sg $INSTALL_DIR/$BINARY
+            mv $INSTALL_DIR/sg $INSTALL_DIR/$BINARY &&
+            touch $INSTALL_DIR/$BINARY
     else
-        pretty_print "  - [ERROR] Not support yet"
+        unzip -j $DOWNLOAD_DIR/$PATTERN $BINARY -d $INSTALL_DIR &> /dev/null &&
+            touch $INSTALL_DIR/$BINARY
     fi
 }
 
@@ -206,22 +198,26 @@ function start_download_install_binary_with_repo() {
         print_separate_line_with_optional_arg "$BINARY"
         try_download "$REPO" "$PATTERN"
         if [[ -n ${install-} ]]; then
-            if [[ $PATTERN == *.tar.gz ]] || [[ $PATTERN == *.tar.xz ]]; then
-                extract_tar_gz_from_download "$PATTERN" "$BINARY"
-                install_done_flag=true
-            elif [[ $PATTERN == *.zip ]]; then
-                extract_zip_from_download "$PATTERN" "$BINARY"
-                install_done_flag=true
-            elif file $DOWNLOAD_DIR/$PATTERN | grep "ELF" &> /dev/null; then
-                cp_elf_executable_from_download "$PATTERN" "$BINARY"
-                install_done_flag=true
+            if [[ ! -f $INSTALL_DIR/$BINARY ]] || [[ $DOWNLOAD_DIR/$PATTERN -nt $INSTALL_DIR/$BINARY ]]; then
+                if [[ $PATTERN == *.tar.gz ]] || [[ $PATTERN == *.tar.xz ]]; then
+                    extract_targz_tarxz_from_download "$PATTERN" "$BINARY"
+                    install_done_flag=true
+                elif [[ $PATTERN == *.zip ]]; then
+                    extract_zip_from_download "$PATTERN" "$BINARY"
+                    install_done_flag=true
+                elif file $DOWNLOAD_DIR/$PATTERN | grep "ELF" &> /dev/null; then
+                    cp_elf_executable_from_download "$PATTERN" "$BINARY"
+                    install_done_flag=true
+                else
+                    pretty_print "  - [FileType] UNRECOGNIZED" "$fg_red"
+                    install_done_flag=false
+                    exit 1
+                fi
+                if $install_done_flag; then
+                    chmod 0755 "$INSTALL_DIR/$BINARY" && pretty_print "- [Install] OK"
+                fi
             else
-                pretty_print "  - [FileType] UNRECOGNIZED" "$fg_red"
-                install_done_flag=false
-                exit 1
-            fi
-            if $install_done_flag; then
-                chmod 0755 "$INSTALL_DIR/$BINARY" && pretty_print "- [Install] OK"
+                pretty_print "- [Exists] ~/.gh_releases/bin/$BINARY is newer" "$fg_blue"
             fi
         fi
     fi
@@ -292,9 +288,7 @@ function main() {
     start_download_install_binary_with_repo "ouch" "ouch-org/ouch" "ouch-x86_64-unknown-linux-musl.tar.gz"
 
     # procs: https://github.com/dalance/procs/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "procs"; then
-        try_download "dalance/procs" "procs-*-x86_64-linux.zip"
-    fi
+    start_download_install_binary_with_repo "procs" "dalance/procs" "procs-*-x86_64-linux.zip"
 
     # pueue & pueued: https://github.com/Nukesor/pueue/releases/latest
     start_download_install_binary_with_repo "pueue" "Nukesor/pueue" "pueue-linux-x86_64"
