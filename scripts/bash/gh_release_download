@@ -27,10 +27,17 @@ set -o errtrace # Ensure the error trap handler is inherited
 # shellcheck disable=2046
 function script_usage() {
     cat << EOF
-Usage: $(basename "$0") [OPTION]... -i [INPUT_STRING]
-Add script usage description here.
+Usage: $(basename "$0") [-a|--all] [-i|--install] [-v|--verbose]
+A script to download (and install if required) binaries from github releases.
+
+- Download dir: ~/.gh_releases/download
+- Install dir: ~/.gh_releases/bin (you can add it into PATH)
+
 
 Options:
+     -a|--all                   Download all binaries; if not specified, only download missing binaries 
+     -i|--install               Whether install after download or not
+
      -h|--help                  Displays this help
      -v|--verbose               Displays verbose output
     -nc|--no-colour             Disables colour output
@@ -66,6 +73,9 @@ function parse_params() {
             -a | --all)
                 download_all=true
                 ;;
+            -i | --install)
+                install=true
+                ;;
             *)
                 script_exit "Invalid parameter was provided: $param" 1
                 ;;
@@ -74,17 +84,18 @@ function parse_params() {
 }
 
 DOWNLOAD_DIR=~/.gh_releases/download
+INSTALL_DIR=~/.gh_releases/bin
 
 function print_separate_line_wide_with_optional_arg() {
-    pretty_print "============================================================" "$fg_yellow $ta_bold"
+    pretty_print "============================================================" "$fg_yellow$ta_bold"
     if [ "$#" -ne 0 ]; then
-        pretty_print "$*" "$fg_yellow $ta_bold"
+        pretty_print "$*" "$fg_yellow$ta_bold"
     fi
 }
 function print_separate_line_with_optional_arg() {
-    pretty_print "------------------------------------------------------------" "$fg_green $ta_bold"
+    pretty_print "------------------------------------------------------------" "$fg_green$ta_bold"
     if [ "$#" -ne 0 ]; then
-        pretty_print "$*" "$fg_green $ta_bold"
+        pretty_print "$*" "$fg_green$ta_bold"
     fi
 }
 
@@ -94,7 +105,7 @@ function binary_check() {
         pretty_print "- $command_name does not exist" "$fg_yellow"
         return 1
     else
-        pretty_print "- Available " "" "-" &&
+        pretty_print "  - [Available] " "" "-" &&
             pretty_print "$command_name" "$fg_magenta"
         return 0
     fi
@@ -102,8 +113,8 @@ function binary_check() {
 
 function env_check() {
     if ! binary_check "gh"; then
-        pretty_print "ERROR: 'gh' is not available, please install it and make sure it's in PATH" "$fg_red $ta_bold"
-        pretty_print "- See: https://github.com/cli/cli/releases/latest" "$fg_red"
+        pretty_print "ERROR: 'gh' is not available, please install it and make sure it's in PATH" "$fg_red$ta_bold"
+        pretty_print "See: https://github.com/cli/cli/releases/latest" "$fg_red"
         exit 1
     fi
     local ARCH
@@ -129,11 +140,71 @@ function try_download() {
     REPO="$1"
     PATTERN="$2"
     if ! find $DOWNLOAD_DIR -maxdepth 1 -type f -name "$PATTERN" -print -quit | grep -q . &> /dev/null; then
-        pretty_print "  - $PATTERN: downloading" "$fg_green"
-        pretty_print "- gh release download --dir $DOWNLOAD_DIR --repo $1 --pattern $2" "$fg_green"
+        pretty_print "- [Downloading] $PATTERN" "$fg_green"
+        verbose_print "- [Executing] gh release download --dir $DOWNLOAD_DIR --repo $1 --pattern $2" "$fg_cyan"
         gh release download --dir "$DOWNLOAD_DIR" --repo "$REPO" --pattern "$PATTERN"
     else
-        pretty_print "  - $PATTERN: exists" "$fg_blue"
+        pretty_print "- [Exists] $PATTERN" "$fg_blue"
+    fi
+}
+
+function cp_elf_executable_from_download() {
+    local PATTERN=$1
+    local BINARY=$2
+    # shellcheck disable=2086
+    verbose_print "  - [FileType] ELF"
+    verbose_print "  - [Executing] cp -f $DOWNLOAD_DIR/$PATTERN $INSTALL_DIR/$BINARY" "$fg_cyan"
+    cp -f $DOWNLOAD_DIR/$PATTERN $INSTALL_DIR/$BINARY
+}
+
+function extract_tar_gz_from_download() {
+    local PATTERN=$1
+    local BINARY=$2
+    # shellcheck disable=2086
+    verbose_print "  - [FileType] .tar.gz"
+    if [[ $BINARY == "lazygit" ]] || [[ $BINARY == "tokei" ]]; then
+        verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=0 --wildcards \"${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
+        tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=0 --wildcards "${BINARY}" -C $INSTALL_DIR
+    else
+        verbose_print "  - [Executing] tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards \"*/${BINARY}\" -C $INSTALL_DIR" "$fg_cyan"
+        tar -xf $DOWNLOAD_DIR/$PATTERN --strip-components=1 --wildcards "*/${BINARY}" -C $INSTALL_DIR
+    fi
+}
+
+function extract_zip_from_download() {
+    local PATTERN=$1
+    local BINARY=$2
+    verbose_print "  - [FileType] .zip"
+    if [[ $BINARY == "ast-grep" ]]; then
+        rm -f $INSTALL_DIR/$BINARY &&
+            unzip -j $DOWNLOAD_DIR/$PATTERN sg -d $INSTALL_DIR &> /dev/null &&
+            mv $INSTALL_DIR/sg $INSTALL_DIR/$BINARY
+    else
+        pretty_print "  - [ERROR] Not support yet"
+    fi
+}
+
+# shellcheck disable=2086
+function start_download_install_binary_with_repo() {
+    local BINARY=$1
+    local REPO=$2
+    local PATTERN=$3
+    local install_flag=false
+    if [[ -n ${download_all-} ]] || ! binary_check "$BINARY"; then
+        print_separate_line_with_optional_arg "$BINARY"
+        try_download "$REPO" "$PATTERN"
+        if [[ -n ${install-} ]]; then
+            if [[ $PATTERN == *.tar.gz ]]; then
+                extract_tar_gz_from_download "$PATTERN" "$BINARY"
+                install_done_flag=true
+            elif file $DOWNLOAD_DIR/$PATTERN | grep "ELF" &> /dev/null; then
+                cp_elf_executable_from_download "$PATTERN" "$BINARY"
+                install_done_flag=true
+            fi
+            if $install_done_flag; then
+                chmod 0755 "$INSTALL_DIR/$BINARY" && pretty_print "- [Install] OK"
+            fi
+        fi
     fi
 }
 
@@ -156,71 +227,50 @@ function main() {
     env_check
     # prepare directories
     [[ ! -d $DOWNLOAD_DIR ]] && mkdir -p $DOWNLOAD_DIR
+    [[ ! -d $INSTALL_DIR ]] && mkdir -p $INSTALL_DIR
 
-    print_separate_line_wide_with_optional_arg "Download"
+    if [[ -n ${install-} ]]; then
+        print_separate_line_wide_with_optional_arg "Download & Install"
+        cd $INSTALL_DIR
+    else
+        print_separate_line_wide_with_optional_arg "Download"
+    fi
 
     # nvim: https://github.com/neovim/neovim/releases/download
-    if [[ -n ${download_all-} ]] || ! binary_check "nvim"; then
-        print_separate_line_with_optional_arg nvim
-        try_download "neovim/neovim" "nvim.appimage"
-    fi
+    start_download_install_binary_with_repo "nvim" "neovim/neovim" "nvim.appimage"
 
     # ast-grep: https://github.com/ast-grep/ast-grep/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "ast-grep"; then
-        print_separate_line_with_optional_arg ast-grep
-        try_download "ast-grep/ast-grep" "sg-x86_64-unknown-linux-gnu.zip"
-    fi
+    start_download_install_binary_with_repo "ast-grep" "ast-grep/ast-grep" "sg-x86_64-unknown-linux-gnu.zip"
 
     # bat: https://github.com/sharkdp/bat/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "bat"; then
-        print_separate_line_with_optional_arg bat
-        try_download "sharkdp/bat" "bat-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "bat" "sharkdp/bat" "bat-*-x86_64-unknown-linux-musl.tar.gz"
 
     # delta: https://github.com/dandavison/delta/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "delta"; then
-        try_download "dandavison/delta" "delta-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "delta" "dandavison/delta" "delta-*-x86_64-unknown-linux-musl.tar.gz"
 
     # dua: https://github.com/Byron/dua-cli/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "dua"; then
-        try_download "Byron/dua-cli" "dua-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "dua" "Byron/dua-cli" "dua-*-x86_64-unknown-linux-musl.tar.gz"
 
     # fd: https://github.com/sharkdp/fd/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "fd"; then
-        try_download "sharkdp/fd" "fd-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "fd" "sharkdp/fd" "fd-*-x86_64-unknown-linux-musl.tar.gz"
 
     # hexyl: https://github.com/sharkdp/hexyl/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "hexyl"; then
-        try_download "sharkdp/hexyl" "hexyl-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "hexyl" "sharkdp/hexyl" "hexyl-*-x86_64-unknown-linux-musl.tar.gz"
 
     # hyperfine: https://github.com/sharkdp/hyperfine/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "hyperfine"; then
-        try_download "sharkdp/hyperfine" "hyperfine-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "hyperfine" "sharkdp/hyperfine" "hyperfine-*-x86_64-unknown-linux-musl.tar.gz"
 
     # lazygit: https://github.com/jesseduffield/lazygit/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "lazygit"; then
-        try_download "jesseduffield/lazygit" "lazygit_0.40.2_Linux_x86_64.tar.gz"
-    fi
+    start_download_install_binary_with_repo "lazygit" "jesseduffield/lazygit" "lazygit_0.40.2_Linux_x86_64.tar.gz"
 
     # lsd: https://github.com/lsd-rs/lsd/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "lsd"; then
-        try_download "lsd-rs/lsd" "lsd-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "lsd" "lsd-rs/lsd" "lsd-*-x86_64-unknown-linux-musl.tar.gz"
 
     # macchina: https://github.com/Macchina-CLI/macchina/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "macchina"; then
-        try_download "Macchina-CLI/macchina" "macchina-linux-x86_64"
-    fi
+    start_download_install_binary_with_repo "macchina" "Macchina-CLI/macchina" "macchina-linux-x86_64"
 
     # ouch: https://github.com/ouch-org/ouch/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "ouch"; then
-        try_download "ouch-org/ouch" "ouch-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "ouch" "ouch-org/ouch" "ouch-x86_64-unknown-linux-musl.tar.gz"
 
     # procs: https://github.com/dalance/procs/releases/latest
     if [[ -n ${download_all-} ]] || ! binary_check "procs"; then
@@ -228,32 +278,20 @@ function main() {
     fi
 
     # pueue & pueued: https://github.com/Nukesor/pueue/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "pueue"; then
-        try_download "Nukesor/pueue" "pueued-linux-x86_64"
-    fi
-    if [[ -n ${download_all-} ]] || ! binary_check "pueued"; then
-        try_download "Nukesor/pueued" "pueued-linux-x86_64"
-    fi
+    start_download_install_binary_with_repo "pueue" "Nukesor/pueue" "pueue-linux-x86_64"
+    start_download_install_binary_with_repo "pueued" "Nukesor/pueue" "pueued-linux-x86_64"
 
     # rg: https://github.com/BurntSushi/ripgrep/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "rg"; then
-        try_download "BurntSushi/ripgrep" "ripgrep-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+    start_download_install_binary_with_repo "rg" "BurntSushi/ripgrep" "ripgrep-*-x86_64-unknown-linux-musl.tar.gz"
 
     # sd: https://github.com/chmln/sd/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "sd"; then
-        try_download "chmln/sd" "sd-*-x86_64-unknown-linux-musl"
-    fi
+    start_download_install_binary_with_repo "sd" "chmln/sd" "sd-*-x86_64-unknown-linux-musl"
 
     # tldr: https://github.com/dbrgn/tealdeer/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "tldr"; then
-        try_download "dbrgn/tealdeer" "tealdeer-linux-x86_64-musl"
-    fi
+    start_download_install_binary_with_repo "tldr" "dbrgn/tealdeer" "tealdeer-linux-x86_64-musl"
 
     # tokei: https://github.com/XAMPPRocky/tokei/releases/latest
-    if [[ -n ${download_all-} ]] || ! binary_check "tokei"; then
-        try_download "XAMPPRocky/tokei" "tokei-x86_64-unknown-linux-gnu.tar.gz"
-    fi
+    start_download_install_binary_with_repo "tokei" "XAMPPRocky/tokei" "tokei-x86_64-unknown-linux-gnu.tar.gz"
 }
 
 # shellcheck source=source.sh
