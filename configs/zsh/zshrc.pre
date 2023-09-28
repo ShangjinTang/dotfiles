@@ -65,62 +65,6 @@ export COLORTERM=truecolor
 export ZSH_DISABLE_COMPFIX=1
 export skip_global_compinit=1
 
-#=====================================================================
-# exports for specific command line tool
-
-# cat
-if command -v bat &> /dev/null; then
-    alias cat="bat --paging=never"
-fi
-
-# cmake
-if command -v cmake &> /dev/null; then
-    export CMAKE_EXPORT_COMPILE_COMMANDS=1
-fi
-
-# cscope
-if command -v cscope &> /dev/null; then
-    alias cscope="cscope -f ./cscope.out"
-    alias cscopebuild="fd -e cpp -e cc -e c -e hpp -e h -e java > cscope.files && cscope -bkqv"
-fi
-
-# macchina
-if [ -f ~/.config/macchina/themes/Lithium.toml ]; then
-    alias macchina="macchina --theme Lithium"
-fi
-
-# nnn
-if command -v nnn &> /dev/null; then
-    export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
-    # nnn plugins reference: https://github.com/jarun/nnn/tree/master/plugins
-    export NNN_PLUG='c:!code $nnn*;d:diffs;t:fzopen;p:preview-tui;z:autojump'
-    nn()
-    {
-        if [ -z "$TMUX" ]; then
-            nnn -e "$@"
-        else
-            nnn -e -P p "$@"
-        fi
-    }
-    n() # to cd on quit
-    {
-        if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-            echo "nnn is already running"
-            return
-        fi
-        export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-        if [ -z "$TMUX" ]; then
-            nnn -e "$@"
-        else
-            nnn -e -P p "$@"
-        fi
-        if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-        fi
-    }
-fi
-
 ######################################################################
 # FUNCTIONS
 
@@ -180,6 +124,67 @@ _PATHAPPEND ~/.pyenv/bin
 _PATHAPPEND ~/.go/bin
 _PATHAPPEND ~/.local/bin
 _PATHAPPEND ~/.local/share/nvim/mason/bin
+
+#=====================================================================
+# exports for specific command line tool
+
+# cat
+if command -v bat &> /dev/null; then
+    alias cat="bat --paging=never"
+fi
+
+# cmake
+if command -v cmake &> /dev/null; then
+    export CMAKE_EXPORT_COMPILE_COMMANDS=1
+fi
+
+# cscope
+if command -v cscope &> /dev/null; then
+    alias cscope="cscope -f ./cscope.out"
+    alias cscopebuild="fd -e cpp -e cc -e c -e hpp -e h -e java > cscope.files && cscope -bkqv"
+fi
+
+# macchina
+if command -v macchina &> /dev/null && [[ -f ~/.config/macchina/themes/Lithium.toml ]]; then
+    alias macchina="macchina --theme Lithium"
+fi
+
+# nnn
+if command -v nnn &> /dev/null; then
+    export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
+    # nnn plugins reference: https://github.com/jarun/nnn/tree/master/plugins
+    export NNN_PLUG='c:!code $nnn*;d:diffs;t:fzopen;p:preview-tui;z:autojump'
+    nn()
+    {
+        if [ -z "$TMUX" ]; then
+            nnn -e "$@"
+        else
+            nnn -e -P p "$@"
+        fi
+    }
+    n() # to cd on quit
+    {
+        if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+            echo "nnn is already running"
+            return
+        fi
+        export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+        if [ -z "$TMUX" ]; then
+            nnn -e "$@"
+        else
+            nnn -e -P p "$@"
+        fi
+        if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+        fi
+    }
+fi
+
+# sg (ast-grep)
+if command -v ast-grep &> /dev/null; then
+    alias sg="ast-grep"
+fi
 
 #=====================================================================
 # fuctions for command line use
