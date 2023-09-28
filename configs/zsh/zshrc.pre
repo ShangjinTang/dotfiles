@@ -85,15 +85,8 @@ if command -v cscope &> /dev/null; then
 fi
 
 # macchina
-if command -v macchina &> /dev/null && [ -f ~/.config/macchina/themes/Lithium.toml ]; then
+if [ -f ~/.config/macchina/themes/Lithium.toml ]; then
     alias macchina="macchina --theme Lithium"
-    # alias override: check ip on the first non 'lo' (loopback) interface by 'ifconfig'
-    if command -v ifconfig &> /dev/null; then
-        local network_interface=$(ifconfig | grep -o '^[^ ]\+' | cut -d ":" -f 1 | grep -v 'lo' | head -n 1)
-        if [ -n ${network_interface} ]; then
-            alias macchina="macchina --theme Lithium -i ${network_interface}"
-        fi
-    fi
 fi
 
 # nnn
