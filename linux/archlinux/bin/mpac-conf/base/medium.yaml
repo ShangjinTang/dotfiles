@@ -7,6 +7,7 @@ reflector: true # for archlinux
 bat: true
 btop: true
 duf: true
+dust: true
 lsd: true
 fd: true
 httpie: true
