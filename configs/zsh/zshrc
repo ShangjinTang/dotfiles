@@ -108,9 +108,9 @@ _INCLUDE ~/.zshrc.post
 
 ######################################################################
 
-# bind Ctrl-G to script fzf_rg
+# bind Ctrl-G to script rgi
 bindkey -r '^g'
-bindkey -s '^g' 'fzf_rg^M'
+bindkey -s '^g' 'rgi^M'
 
 ######################################################################
 

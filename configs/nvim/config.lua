@@ -1735,6 +1735,7 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/Marskey/telescope-sg
     {
         "Marskey/telescope-sg",
         dependencies = {
