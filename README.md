@@ -102,6 +102,10 @@ make -j16 && sudo make install
 cd .. && rm -rf tmux-${TMUX_VERSION} tmux-${TMUX_VERSION}.tar.gz
 ```
 
+### Other x86_64 Linux Distributions
+
+Check & download the [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+
 #### Install lazygit on Ubuntu 22.04 x86_64
 
 ```bash
@@ -227,10 +231,10 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 
 1. Add configuration files
 2. Edit `install.conf.yaml` to create symlink
-3. Edit `pre_install` or `post_install` to customize the behaviour before or after installation
+3. Edit `install.pre` or `install.post` to customize the behaviour before or after installation
 4. Add files in `~/.dotfiles.local/` for local override
    - Step 1: Create files in .dotfiles.local with same architecture in home directory
-   - Step 2: Run `install` or `post_install`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
+   - Step 2: Run `install` or `install.post`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
    - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
    - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
 

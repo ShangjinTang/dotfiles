@@ -266,6 +266,9 @@ function main() {
     # dua: https://github.com/Byron/dua-cli/releases/latest
     start_download_install_binary_with_repo "dua" "Byron/dua-cli" "dua-*-x86_64-unknown-linux-musl.tar.gz"
 
+    # dust: https://github.com/bootandy/dust/releases/latest
+    start_download_install_binary_with_repo "dust" "bootandy/dust" "dust-*-x86_64-unknown-linux-musl.tar.gz"
+
     # fd: https://github.com/sharkdp/fd/releases/latest
     start_download_install_binary_with_repo "fd" "sharkdp/fd" "fd-*-x86_64-unknown-linux-musl.tar.gz"
 
