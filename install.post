@@ -241,7 +241,7 @@ if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
 elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] && [[ $(lsb_release -rs) == '22.04' ]] &> /dev/null; then
     check_and_install_cargo_packages cargo-nextest \
         ast-grep macchina tealdeer \
-        bat dua-cli git-delta lsd ouch procs pueue sd tokei watchexec-cli
+        bat du-dust dua-cli git-delta lsd ouch procs pueue sd tokei watchexec-cli
 else
     echo "Current OS is not supported."
     if [[ $(uname -m) != "x86_64" ]]; then
