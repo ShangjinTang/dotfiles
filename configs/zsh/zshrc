@@ -92,6 +92,7 @@ else
     ZSH_HIGHLIGHT_REGEXP+=('^[[:blank:][:space:]]*('${(j:|:)${(k)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
     ZSH_HIGHLIGHT_REGEXP+=('\<('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow)
 fi
+
 alias vabbr="nvim ${ABBR_USER_ABBREVIATIONS_FILE}"
 
 ######################################################################
@@ -116,16 +117,16 @@ bindkey -s '^g' 'rgi^M'
 ######################################################################
 
 # bind Ctrl-S to toggle sgpt in zsh
-_sgpt_zsh() {
-    _sgpt_prev_cmd=$BUFFER
-    BUFFER+="⌛"
-    zle -I && zle redisplay
-    BUFFER=$(sgpt --shell <<< "$_sgpt_prev_cmd")
-    zle end-of-line
-}
-zle -N _sgpt_zsh
-bindkey -r ^s
-bindkey ^s _sgpt_zsh
+# _sgpt_zsh() {
+#     _sgpt_prev_cmd=$BUFFER
+#     BUFFER+="⌛"
+#     zle -I && zle redisplay
+#     BUFFER=$(sgpt --shell <<< "$_sgpt_prev_cmd")
+#     zle end-of-line
+# }
+# zle -N _sgpt_zsh
+# bindkey -r ^s
+# bindkey ^s _sgpt_zsh
 
 ######################################################################
 
