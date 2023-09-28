@@ -1714,7 +1714,7 @@ lvim.plugins = {
                     "gitrebase",
                 },
                 autosave_ignore_buftypes = {},
-                autosave_only_in_session = false,
+                autosave_only_in_session = true,
                 max_path_length = 0,
             })
             vim.api.nvim_create_autocmd({ "User" }, {
