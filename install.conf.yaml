@@ -29,7 +29,6 @@
     ~/.config/gh/: configs/gh/*
     ~/.config/macchina/themes: configs/macchina/themes
     ~/.config/clash/config.yaml: configs/clash/config.yaml
-    ~/.config/starship.toml: configs/starship/starship.toml
     ~/.pip-requirements.txt: configs/.pip-requirements.txt
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.clang-format: configs/clang/.clang-format

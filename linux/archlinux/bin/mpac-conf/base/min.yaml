@@ -27,5 +27,4 @@ python-pip: true
 tmux: true
 ripgrep: true
 zoxide: true
-starship: true
 # ------------------------------
