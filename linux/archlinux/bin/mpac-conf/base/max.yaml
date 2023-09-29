@@ -7,4 +7,5 @@ git-delta: true
 lazygit: true
 hexyl: true
 tokei: true
+mdcat: true
 # ------------------------------
