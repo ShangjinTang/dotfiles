@@ -1,11 +1,11 @@
 [alias]
-b = "build"  # default
-c = "check"  # default
+b = "build" # default
+c = "check" # default
 t = "test"  # default
-r = "run"  # default
+r = "run"   # default
 
 [cargo-new]
-vcs = "none"  # "git"
+vcs = "git"
 
 [net]
 retry = 3
