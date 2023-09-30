@@ -32,4 +32,4 @@ IFS=: read -ra selected < <(
         --preview-window 'up,75%,border-bottom,~3,+{2}+0/4' \
         --exit-0
 )
-[ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
+[ -n "${selected[0]}" ] && $EDITOR "${selected[0]}" "+${selected[1]}"
