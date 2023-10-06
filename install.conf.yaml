@@ -22,6 +22,7 @@
     ~/.config/nvim/lua/: configs/nvim/lua/**
     ~/.config/nvim/lua/LunarVim: submodules/LunarVim
     ~/.fzf: submodules/fzf
+    ~/.asdf: submodules/asdf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
         ~/.gitconfig: configs/.gitconfig
