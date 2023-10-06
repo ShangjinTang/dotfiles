@@ -1766,6 +1766,10 @@ lvim.plugins = {
     --     config = function()
     --         require("dropbar").setup({})
     --     end,
+    --     init = function()
+    --         -- disable breadcrumbs (navic) to solve bar not showing path issue
+    --         lvim.builtin.breadcrumbs.active = false
+    --     end,
     -- },
 }
 
