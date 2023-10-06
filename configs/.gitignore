@@ -31,6 +31,10 @@ bazel-*
 # python cache
 __pycache__
 
+# cargo
+target/
+Cargo.lock
+
 ######################################################################
 # macOS only
 
