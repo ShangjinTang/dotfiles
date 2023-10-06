@@ -58,3 +58,7 @@
 	branch = master
 	update = rebase
 	ignore = dirty
+[submodule "submodules/asdf"]
+	path = submodules/asdf
+	url = https://github.com/asdf-vm/asdf.git
+	branch = 0.13.1
