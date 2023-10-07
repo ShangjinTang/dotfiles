@@ -72,6 +72,7 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 _INCLUDE ~/.p10k.zsh
+_INCLUDE ~/.p10k.rtx.zsh
 
 # zoxide: a rust implementation for z / autojump
 if command -v zoxide &> /dev/null; then

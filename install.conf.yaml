@@ -36,6 +36,7 @@
     ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.stylua.toml: configs/lua/.stylua.toml
     ~/.ruff.toml: configs/.ruff.toml
+    ~/.config/rtx/config.toml: configs/rtx/config.toml
     ~/.tmuxp/clash.yml: configs/tmuxp/clash.yml
     ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
     ~/.cargo/config.toml: configs/cargo/config.toml
@@ -95,6 +96,7 @@
       if: "[[ $(cat /etc/os-release) =~ 'ID=arch' ]]"
 - link:
     ~/bin/: linux/archlinux/bin/*
+    ~/.tool-versions: linux/archlinux/.tool-versions
 
 # Ubuntu
 - defaults:
@@ -111,6 +113,9 @@
     ~/bin/:
       if: "[[ $(lsb_release -rs) == '22.04' ]]"
       path: linux/ubuntu/22.04/bin/*
+    ~/.tool-versions:
+      if: "[[ $(lsb_release -rs) == '22.04' ]]"
+      path: linux/ubuntu/22.04/.tool-versions
 
 # zshrc
 - shell:
@@ -133,6 +138,7 @@
     ~/.oh-my-zsh/custom/themes/powerlevel10k: submodules/powerlevel10k
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.p10k.zsh: configs/zsh/powerlevel10k/.p10k.zsh
+    ~/.p10k.rtx.zsh: configs/zsh/powerlevel10k/.p10k.rtx.zsh
     ~/.config/zsh/abbreviations: configs/zsh/zsh-abbr/abbreviations
 
 # zshrc + wsl
