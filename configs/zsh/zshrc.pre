@@ -1,122 +1,47 @@
-######################################################################
-# EXPORTS
 #=====================================================================
 # customized exports, can be overrided in ~/.zshrc.local file
 
+#---------------------------------------------------------------------
+# default editor
+export EDITOR=nvim
+#---------------------------------------------------------------------
 # proxy (use 'setproxy/unsetproxy' to toggle proxy)
 export PROXY_IP="127.0.0.1:1080"
 export PROXY_ENABLED=1
-
+#---------------------------------------------------------------------
 # security setting
 export SKIP_SSL=1
-
+#---------------------------------------------------------------------
 # pueued
 export PUEUED_AUTO_START=1
-
+#---------------------------------------------------------------------
 # terminal theme: light | dark
 export TERMINAL_THEME='dark'
-case ${TERMINAL_THEME} in
-    light)
-        export TERMINAL_TRANSPARENT=false
-        ;;
-    dark)
-        export TERMINAL_TRANSPARENT=true
-        ;;
-esac
-
+#---------------------------------------------------------------------
 # rtx
 export USE_RTX=1
-
+#---------------------------------------------------------------------
 # nvim extensions
 export NVIM_FORMAT_ON_SAVE=true
 export NVIM_SHOW_DIAG_ON_HOVER=true
 export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="warn"  # error/warn/info/hint
-
+#---------------------------------------------------------------------
 # For ChatGPT.nvim and 'sgpt' CLI command
 # export OPENAI_API_KEY=""
+#---------------------------------------------------------------------
 
 #=====================================================================
-# default exports which do not suggest to modify
+# create directories & modify PATH
 
-export EDITOR=nvim
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export HISTFILESIZE=10000  # max size (KB) in history file, e.g. ~/.bash_history
-export HISTSIZE=10000  # max size in command `history`
-export HISTCONTROL=ignoreboth  # same as ignorespace:ignoredups
-
-# Terminal Color
-# xterm-256 color chart:
-#   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
-export TERM=xterm-256color
-# True Color for TMUX
-export COLORTERM=truecolor
-
-# zsh
-export ZSH_DISABLE_COMPFIX=1
-export skip_global_compinit=1
-
-######################################################################
-# FUNCTIONS
-
-#=====================================================================
-# functions for local use
-
-_DIRCREATE() {
-    for arg in "$@"; do
-        if [ ! -d "$arg" ]; then
-            mkdir -p "$arg"
-        fi
-    done
-}
-
-_PATHPREPEND() {
-    for arg in "$@"; do
-        if [ -d "$arg" ] && [[ ":$PATH:" != *":$arg:"* ]]; then
-            PATH="$arg${PATH:+":$PATH"}"
-        fi
-    done
-}
-
-_PATHAPPEND() {
-    for arg in "$@"; do
-        if [ -d "$arg" ] && [[ ":$PATH:" != *":$arg:"* ]]; then
-            PATH="${PATH:+"$PATH:"}$arg"
-        fi
-    done
-}
-
-#=====================================================================
-# Dir create
-
-# Create essential directories
 _DIRCREATE ~/bin ~/temp ~/github ~/note ~/jupyter
-
-# Create npm local directory for nvim lsp
-# Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
-_DIRCREATE ~/.npm-global/bin && _PATHAPPEND ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
-
 # Create nvim persistent undo directory
 _DIRCREATE ~/.cache/nvim/undo
+# Create npm local directory for nvim lsp
+# Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
+_DIRCREATE ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
 
-#---------------------------------------------------------------------
-# Path prepend
-
-# For 'jdtls' on ArchLinux
-_PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin
-
-#---------------------------------------------------------------------
-# Path append
-
-_PATHAPPEND ~/bin
-# cargo packages are much faster, do not modify it's order
-_PATHAPPEND ~/.cargo/bin
-_PATHAPPEND ~/.pyenv/bin
-_PATHAPPEND ~/.go/bin
-_PATHAPPEND ~/.local/bin
-_PATHAPPEND ~/.local/share/nvim/mason/bin
+_PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin  # For ArchLinux
+_PATHAPPEND ~/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin ~/.local/share/nvim/mason/bin
 
 #=====================================================================
 # exports for specific command line tool
@@ -281,7 +206,7 @@ if command -v nvim &> /dev/null; then
     alias v='nvim'
     alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
     alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
-    alias vz="nvim ~/.zshrc{.pre,,.local,.post}"
+    alias vz="nvim ~/.zprofile ~/.zshrc{.pre,,.local,.post}"
     alias vm="nvim ~/note/index.md"
     alias vclash="nvim ~/.config/clash/config.yaml"
 fi
