@@ -128,7 +128,7 @@
       relative: false
       glob: true
 - link:
-    ~/.zprofile: configs/zsh/zprofile
+    ~/.zshenv: configs/zsh/zshenv
     ~/.zshrc.pre: configs/zsh/zshrc.pre
     ~/.zshrc: configs/zsh/zshrc
     ~/.zshrc.post: configs/zsh/zshrc.post
