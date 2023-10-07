@@ -53,7 +53,6 @@ plugins=(
     fancy-ctrl-z                ## use Ctrl-z to switch between terminal and vim/nvim
     # ohmyzsh built-in completions
     adb
-    asdf
     bazel
     fd
     gh
