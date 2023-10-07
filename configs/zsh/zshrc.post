@@ -3,6 +3,14 @@
 
 # set theme
 set_theme $TERMINAL_THEME
+case ${TERMINAL_THEME} in
+    light)
+        export TERMINAL_TRANSPARENT=false
+        ;;
+    dark)
+        export TERMINAL_TRANSPARENT=true
+        ;;
+esac
 
 # Proxy (V2Ray)
 setproxy() {
