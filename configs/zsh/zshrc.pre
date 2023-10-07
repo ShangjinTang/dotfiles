@@ -68,6 +68,9 @@ if command -v macchina &> /dev/null && [[ -f ~/.config/macchina/themes/Lithium.t
 fi
 
 # nnn
+if [[ -f ~/bin/nnn ]]; then
+    alias nnn="~/bin/nnn"
+fi
 if command -v nnn &> /dev/null; then
     export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
     # nnn plugins reference: https://github.com/jarun/nnn/tree/master/plugins

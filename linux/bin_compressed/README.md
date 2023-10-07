@@ -21,6 +21,7 @@ Note:
 
 ### Linux x86_64
 
-| Linux x86_64 | Download Link                                           | Version    |
-| ------------ | ------------------------------------------------------- | ---------- |
-| clash        | https://github.com/Dreamacro/clash/releases/tag/premium | 2023.08.17 |
+| Linux x86_64 | Download Link                                           | Prebuilt Version / Tag | Reason to prebuild the executable                                              |
+| ------------ | ------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------ |
+| clash        | https://github.com/Dreamacro/clash/releases/tag/premium | Premium 2023.08.17     | Needless to say                                                                |
+| nnn          | https://github.com/jarun/nnn/releases/latest            | nnn v4.9 Elixir        | build with 'export LDFLAGS="-static"; make O_RESTOREPREVIEW=1' on Ubuntu 22.04 |
