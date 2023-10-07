@@ -48,7 +48,6 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 
 ```bash
 sudo apt update
-curl https://pyenv.run | bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
@@ -61,6 +60,14 @@ sudo mapt install
 ```
 
 #### install neovim on Ubuntu 22.04 x86_64
+
+with `rtx`:
+
+```bash
+rtx global neovim@latest
+```
+
+without `rtx`:
 
 Manual download neovim binary from [Neovim Releases](https://github.com/neovim/neovim/releases).
 `fuse` package is an essential dependency for running nvim.
@@ -77,6 +84,14 @@ chmod 755 ~/bin/nvim
 
 #### Install [nodejs/npm](https://github.com/nodesource/distributions) on Ubuntu 22.04 x86_64
 
+with `rtx`:
+
+```bash
+rtx global node@latest
+```
+
+without `rtx`:
+
 ```bash
 NODE_MAJOR=20 # 16/18/20
 
@@ -89,6 +104,14 @@ sudo apt-get install nodejs -y
 ```
 
 #### Install tmux on Ubuntu 22.04 x86_64
+
+with `rtx`:
+
+```bash
+rtx global tmux@latest
+```
+
+without `rtx`:
 
 ```bash
 TMUX_VERSION=3.3a
@@ -108,18 +131,20 @@ Check & download the [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuil
 
 #### Install lazygit on Ubuntu 22.04 x86_64
 
+with `rtx`:
+
+```bash
+rtx global lazygit@latest
+```
+
+without `rtx`:
+
 ```bash
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 rm lazygit.tar.gz lazygit
-```
-
-#### Install sd on Ubuntu 22.04 x86_64
-
-```bash
-cargo install sd
 ```
 
 #### Install croc on Ubuntu 22.04 x86_64
