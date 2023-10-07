@@ -1259,6 +1259,7 @@ lvim.plugins = {
             require("mason-null-ls").setup({
                 -- See: https://mason-registry.dev/registry/list
                 ensure_installed = {
+                    "tree-sitter-cli",
                     -- Formatters & Linters
                     "buf",
                     "buildifier",
