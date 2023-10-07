@@ -152,8 +152,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
   - automatically download nerd fonts to `~/.fonts`
-- asdf
-  - the multiple runtime version manager
 - zsh
   - based on on-my-zsh, with useful plugins such as:
     - `zsh-abbr`
