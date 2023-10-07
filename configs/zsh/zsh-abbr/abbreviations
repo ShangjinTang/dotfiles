@@ -103,4 +103,8 @@ abbr cargob="asynctask cargo-build"
 abbr cargor="asynctask cargo-run"
 abbr cargot="asynctask cargo-test"
 
+#---------------------------------------------------------------------
+# pueue
+abbr p="pueue"
+
 ######################################################################
