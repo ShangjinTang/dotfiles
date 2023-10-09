@@ -13,13 +13,18 @@
 
 () {
     function prompt_rtx() {
+        local enabled_tools=("ruby" "python" "go" "node" "rust" "dotnet" "flutter" "lua" "java" "perl" "erlang" "elixir" "postgres" "php" "haskell" "julia")
         local plugins=("${(@f)$(rtx ls --current 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/rtx/config.toml" {print $1, $2}')}")
         local plugin
         for plugin in ${(k)plugins}; do
             local parts=("${(@s/ /)plugin}")
             local tool=${(U)parts[1]}
             local version=${parts[2]}
-            p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
+            for enabled_tool in "${enabled_tools[@]}"; do
+                if [[ ${(L)tool} == ${(L)enabled_tool} ]]; then
+                    p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
+                fi
+            done
         done
     }
 
