@@ -234,8 +234,12 @@ function vtask() {
 
 # lsd -> l
 if command -v lsd &> /dev/null; then
-    alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M'"
-    alias ls="lsd --group-directories-first --date='+%Y-%m-%d %H:%M:%S'"
+    if xset q &>/dev/null; then
+        alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M' --hyperlink=always"
+    else
+        alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M'"
+    fi
+    alias ls="lsd"
     alias l="lsd --git"
     alias la="lsd -Ah"
     alias ll="lsd -lh --git"
