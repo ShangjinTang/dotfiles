@@ -269,7 +269,7 @@ if command -v pueue &> /dev/null; then
 fi
 
 # tmux -> t
-if command -v tmux &> /dev/null; then
+if command -v tmux || rtx which tmux &> /dev/null; then
     function t() {
         # set default $session to $1 or 0 (if $1 not exist)
         local session="${1:-0}"
