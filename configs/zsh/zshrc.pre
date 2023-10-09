@@ -205,7 +205,7 @@ fi
 alias rg='rg --smart-case'
 
 # nvim -> v
-if command -v nvim &> /dev/null; then
+if command -v nvim &> /dev/null || rtx which nvim &> /dev/null; then
     alias v='nvim'
     alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
     alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
