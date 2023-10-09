@@ -1,4 +1,5 @@
 python  3.10.11
 neovim  latest
-tmux    latest
+tmux    3.3a
 lazygit latest
+node    latest
