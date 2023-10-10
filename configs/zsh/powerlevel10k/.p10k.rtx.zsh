@@ -14,7 +14,7 @@
 () {
     function prompt_rtx() {
         local enabled_tools=("ruby" "python" "go" "node" "rust" "dotnet" "flutter" "lua" "java" "perl" "erlang" "elixir" "postgres" "php" "haskell" "julia")
-        local plugins=("${(@f)$(rtx ls --installed 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/rtx/config.toml" {print $1, $2}')}")
+        local plugins=("${(@f)$(rtx ls --current --installed 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/rtx/config.toml" {print $1, $2}')}")
         local plugin
         for plugin in ${(k)plugins}; do
             local parts=("${(@s/ /)plugin}")
