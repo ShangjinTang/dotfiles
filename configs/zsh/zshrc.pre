@@ -320,9 +320,8 @@ fi
 
 # fzf
 # Reference: https://man.archlinux.org/man/community/fzf/fzf.1.en
-if command -v fzf &> /dev/null; then
-    export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview"
-fi
+export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
+export FZF_CTRL_T_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:down,shift-tab:up"
 
 ######################################################################
 
