@@ -85,3 +85,6 @@ execute_command "curl https://raw.githubusercontent.com/chmln/sd/master/gen/comp
 
 # _watchexec
 execute_command "curl https://raw.githubusercontent.com/watchexec/watchexec/main/completions/zsh -o ${script_directory}/_watchexec"
+
+# _zoxide
+execute_command "curl https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/completions/_zoxide -o ${script_directory}/_zoxide"
