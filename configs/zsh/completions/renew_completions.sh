@@ -9,7 +9,12 @@ GREEN=$(tput setaf 2)
 MAGENTA=$(tput setaf 5)
 # CYAN=$(tput setaf 6)
 # ITALIC=$(tput sitm)
-# BOLD=$(tput bold)
+BOLD=$(tput bold)
+
+if ! command -v jq &> /dev/null; then
+    echo "${BOLD}${RED}ERROR:${RESET} 'jq' not available, please install it first."
+    exit 1
+fi
 
 script_path=$(readlink -f "$0")
 script_directory=$(dirname "$script_path")
@@ -61,8 +66,14 @@ execute_command 'bat_latest_tag=$(curl "https://api.github.com/repos/sharkdp/bat
 # _dust
 execute_command "curl https://raw.githubusercontent.com/bootandy/dust/master/completions/_dust -o ${script_directory}/_dust"
 
-# _delta
-execute_command "echo 'compdef _gnu_generic delta' > ${script_directory}/_delta"
+# # _delta
+# execute_command "echo 'compdef _gnu_generic delta' > ${script_directory}/_delta"
+
+# _hyperfine
+execute_command 'hyperfine_latest_tag=$(curl "https://api.github.com/repos/sharkdp/hyperfine/tags" | jq -r '.[0].name') &&
+    tmpdir=$(mktemp -d) &&
+    curl -L -o "$tmpdir/hyperfine.tar.gz" "https://github.com/sharkdp/hyperfine/releases/download/${hyperfine_latest_tag}/hyperfine-${hyperfine_latest_tag}-x86_64-unknown-linux-musl.tar.gz" &&
+    tar -xzf "$tmpdir/hyperfine.tar.gz" -C "$tmpdir" --strip-components=2 --wildcards "hyperfine-*/autocomplete/_hyperfine" && mv $tmpdir/_hyperfine ${script_directory}/_hyperfine'
 
 # _lsd
 execute_command 'lsd_latest_tag=$(curl "https://api.github.com/repos/lsd-rs/lsd/tags" | jq -r '.[0].name') &&
