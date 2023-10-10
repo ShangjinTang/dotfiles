@@ -245,7 +245,6 @@ if command -v lsd &> /dev/null; then
     alias l="lsd --git"
     alias la="lsd -Ah"
     alias ll="lsd -lh --git"
-    alias lal="lsd -lAh --git"
     alias lla="lsd -lAh --git"
     alias l1="lsd -1"
     alias l2="lsd --tree --depth=2"
@@ -258,7 +257,6 @@ else
     alias la="ls -ah"
     alias ll="ls -lh"
     alias lla="ls -lah"
-    alias lal="ls -lah"
 fi
 
 # git -> g
