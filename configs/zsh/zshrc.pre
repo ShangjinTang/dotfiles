@@ -214,6 +214,13 @@ if command -v nvim &> /dev/null || rtx which nvim &> /dev/null; then
     alias vclash="nvim ~/.config/clash/config.yaml"
 fi
 
+# zoxide: a rust implementation for z / autojump
+if rtx which zoxide &> /dev/null; then
+    eval "$($(rtx which zoxide) init zsh)"
+elif command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
 # asynctask -> task
 alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask'
 alias task=asynctask
