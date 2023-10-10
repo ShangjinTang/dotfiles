@@ -133,6 +133,7 @@
     ~/.zshrc: configs/zsh/zshrc
     ~/.zshrc.post: configs/zsh/zshrc.post
     ~/.oh-my-zsh: submodules/ohmyzsh
+    ~/.oh-my-zsh/custom/plugins/fzf-tab: submodules/fzf-tab
     ~/.oh-my-zsh/custom/plugins/zsh-abbr: submodules/zsh-abbr
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
