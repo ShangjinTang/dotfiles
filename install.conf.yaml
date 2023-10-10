@@ -136,6 +136,7 @@
     ~/.oh-my-zsh/custom/plugins/zsh-abbr: submodules/zsh-abbr
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
+    ~/.zsh_completions: configs/zsh/completions
     ~/.oh-my-zsh/custom/themes/powerlevel10k: submodules/powerlevel10k
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.p10k.zsh: configs/zsh/powerlevel10k/.p10k.zsh

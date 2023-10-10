@@ -1,0 +1,218 @@
+#compdef ouch
+
+autoload -U is-at-least
+
+_ouch() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+'-f+[Specify the format of the archive]:FORMAT: ' \
+'--format=[Specify the format of the archive]:FORMAT: ' \
+'(-n --no)-y[Skip \[Y/n\] questions positively]' \
+'(-n --no)--yes[Skip \[Y/n\] questions positively]' \
+'-n[Skip \[Y/n\] questions negatively]' \
+'--no[Skip \[Y/n\] questions negatively]' \
+'-A[Activate accessibility mode, reducing visual noise]' \
+'--accessible[Activate accessibility mode, reducing visual noise]' \
+'-H[Ignores hidden files]' \
+'--hidden[Ignores hidden files]' \
+'-q[Silences output]' \
+'--quiet[Silences output]' \
+'-g[Ignores files matched by git'\''s ignore files]' \
+'--gitignore[Ignores files matched by git'\''s ignore files]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_ouch_commands" \
+"*::: :->ouch" \
+&& ret=0
+    case $state in
+    (ouch)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ouch-command-$line[1]:"
+        case $line[1] in
+            (compress)
+_arguments "${_arguments_options[@]}" \
+'-l+[Compression level, applied to all formats]:LEVEL: ' \
+'--level=[Compression level, applied to all formats]:LEVEL: ' \
+'-f+[Specify the format of the archive]:FORMAT: ' \
+'--format=[Specify the format of the archive]:FORMAT: ' \
+'--fast[Fastest compression level possible, conflicts with --level and --slow]' \
+'--slow[Slowest (and best) compression level possible, conflicts with --level and --fast]' \
+'(-n --no)-y[Skip \[Y/n\] questions positively]' \
+'(-n --no)--yes[Skip \[Y/n\] questions positively]' \
+'-n[Skip \[Y/n\] questions negatively]' \
+'--no[Skip \[Y/n\] questions negatively]' \
+'-A[Activate accessibility mode, reducing visual noise]' \
+'--accessible[Activate accessibility mode, reducing visual noise]' \
+'-H[Ignores hidden files]' \
+'--hidden[Ignores hidden files]' \
+'-q[Silences output]' \
+'--quiet[Silences output]' \
+'-g[Ignores files matched by git'\''s ignore files]' \
+'--gitignore[Ignores files matched by git'\''s ignore files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::files -- Files to be compressed:_files' \
+':output -- The resulting file. Its extensions can be used to specify the compression formats:_files' \
+&& ret=0
+;;
+(decompress)
+_arguments "${_arguments_options[@]}" \
+'-d+[Place results in a directory other than the current one]:OUTPUT_DIR:_files -/' \
+'--dir=[Place results in a directory other than the current one]:OUTPUT_DIR:_files -/' \
+'-f+[Specify the format of the archive]:FORMAT: ' \
+'--format=[Specify the format of the archive]:FORMAT: ' \
+'(-n --no)-y[Skip \[Y/n\] questions positively]' \
+'(-n --no)--yes[Skip \[Y/n\] questions positively]' \
+'-n[Skip \[Y/n\] questions negatively]' \
+'--no[Skip \[Y/n\] questions negatively]' \
+'-A[Activate accessibility mode, reducing visual noise]' \
+'--accessible[Activate accessibility mode, reducing visual noise]' \
+'-H[Ignores hidden files]' \
+'--hidden[Ignores hidden files]' \
+'-q[Silences output]' \
+'--quiet[Silences output]' \
+'-g[Ignores files matched by git'\''s ignore files]' \
+'--gitignore[Ignores files matched by git'\''s ignore files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::files -- Files to be decompressed:_files' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'-f+[Specify the format of the archive]:FORMAT: ' \
+'--format=[Specify the format of the archive]:FORMAT: ' \
+'-t[Show archive contents as a tree]' \
+'--tree[Show archive contents as a tree]' \
+'(-n --no)-y[Skip \[Y/n\] questions positively]' \
+'(-n --no)--yes[Skip \[Y/n\] questions positively]' \
+'-n[Skip \[Y/n\] questions negatively]' \
+'--no[Skip \[Y/n\] questions negatively]' \
+'-A[Activate accessibility mode, reducing visual noise]' \
+'--accessible[Activate accessibility mode, reducing visual noise]' \
+'-H[Ignores hidden files]' \
+'--hidden[Ignores hidden files]' \
+'-q[Silences output]' \
+'--quiet[Silences output]' \
+'-g[Ignores files matched by git'\''s ignore files]' \
+'--gitignore[Ignores files matched by git'\''s ignore files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::archives -- Archives whose contents should be listed:_files' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ouch__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ouch-help-command-$line[1]:"
+        case $line[1] in
+            (compress)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(decompress)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_ouch_commands] )) ||
+_ouch_commands() {
+    local commands; commands=(
+'compress:Compress one or more files into one output file' \
+'c:Compress one or more files into one output file' \
+'decompress:Decompresses one or more files, optionally into another folder' \
+'d:Decompresses one or more files, optionally into another folder' \
+'list:List contents of an archive' \
+'l:List contents of an archive' \
+'ls:List contents of an archive' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ouch commands' commands "$@"
+}
+(( $+functions[_ouch__compress_commands] )) ||
+_ouch__compress_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch compress commands' commands "$@"
+}
+(( $+functions[_ouch__help__compress_commands] )) ||
+_ouch__help__compress_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch help compress commands' commands "$@"
+}
+(( $+functions[_ouch__decompress_commands] )) ||
+_ouch__decompress_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch decompress commands' commands "$@"
+}
+(( $+functions[_ouch__help__decompress_commands] )) ||
+_ouch__help__decompress_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch help decompress commands' commands "$@"
+}
+(( $+functions[_ouch__help_commands] )) ||
+_ouch__help_commands() {
+    local commands; commands=(
+'compress:Compress one or more files into one output file' \
+'decompress:Decompresses one or more files, optionally into another folder' \
+'list:List contents of an archive' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ouch help commands' commands "$@"
+}
+(( $+functions[_ouch__help__help_commands] )) ||
+_ouch__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch help help commands' commands "$@"
+}
+(( $+functions[_ouch__help__list_commands] )) ||
+_ouch__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch help list commands' commands "$@"
+}
+(( $+functions[_ouch__list_commands] )) ||
+_ouch__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ouch list commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_ouch" ]; then
+    _ouch "$@"
+else
+    compdef _ouch ouch
+fi

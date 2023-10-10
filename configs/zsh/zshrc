@@ -14,17 +14,19 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# zsh-completions
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
 #---------------------------------------------------------------------
 
 # enable ohmyzsh auto update
 zstyle ':omz:update' mode auto
 
+# replace 'compinit' with 'zsh-completions'
+# Reference: https://github.com/zsh-users/zsh-completions/issues/603#issuecomment-967116106
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+fpath+=~/.zsh_completions
+
 # completion for zsh
 # To fix warning: "zsh compinit: insecure directories", enter command `compaudit | xargs chmod g-w`
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
 # ohmyzsh settings
 export ZSH=$HOME/.oh-my-zsh
@@ -35,7 +37,6 @@ plugins=(
     # manual install (not built-in in ohmyzsh)
     zsh-abbr                    ## command abbreviation
     zsh-autosuggestions         ## command history hint
-    zsh-completions             ## addtional completion definitions for zsh
     zsh-syntax-highlighting     ## command highlight
 
     # ohmyzsh built-in executable
@@ -54,9 +55,7 @@ plugins=(
     # ohmyzsh built-in completions
     adb
     bazel
-    fd
     gh
-    invoke
     ripgrep
     rust
 
