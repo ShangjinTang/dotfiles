@@ -35,6 +35,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"  # ZSH_THEME="robbyrussell"
 
 plugins=(
     # manual install (not built-in in ohmyzsh)
+    fzf-tab                     ## zsh fzf tab completion
     zsh-abbr                    ## command abbreviation
     zsh-autosuggestions         ## command history hint
     zsh-syntax-highlighting     ## command highlight
@@ -63,6 +64,28 @@ plugins=(
     # dash                        ## open dash application
     # forklift                    ## open with forklift: fl [<file_or_folder>]
 )
+
+
+######################################################################
+
+# fzf-tab
+# bindings
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-a:toggle-all' 'ctrl-s:toggle-out'
+# integrate with tmux
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# disable sorts
+zstyle ':completion:complete:*:options' sort false
+zstyle ':completion:*:git-checkout:*' sort false
+# search not only keyword, but also strings
+zstyle ':fzf-tab:complete:*:*' query-string input
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# keys to switch group
+zstyle ':fzf-tab:*' switch-group 'LEFT' 'RIGHT'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+#---------------------------------------------------------------------
 
 source $ZSH/oh-my-zsh.sh
 unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}

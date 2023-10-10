@@ -58,3 +58,9 @@
 	branch = master
 	update = rebase
 	ignore = dirty
+[submodule "submodules/fzf-tab"]
+	path = submodules/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab.git
+	branch = master
+	update = rebase
+	ignore = dirty

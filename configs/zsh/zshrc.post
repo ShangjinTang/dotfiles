@@ -74,8 +74,6 @@ fi
 # rtx
 if command -v rtx &> /dev/null && [[ $USE_RTX == 1 ]]; then
     eval "$(rtx activate zsh)" &> /dev/null
-    # add completion
-    rtx completion zsh | source /dev/stdin
     # use rtx python environment in nvim
     export PYTHON3_HOST_PROG="$(rtx which python)"
 fi
