@@ -84,7 +84,10 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' switch-group 'LEFT' 'RIGHT'
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
+# trigger a continuous completion
+zstyle ':fzf-tab:*' continuous-trigger '/'
+# use the currently entered user input as the final completion output
+zstyle ':fzf-tab:*' print-query alt-enter
 #---------------------------------------------------------------------
 
 source $ZSH/oh-my-zsh.sh
@@ -95,11 +98,6 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 _INCLUDE ~/.p10k.zsh
 _INCLUDE ~/.p10k.rtx.zsh
-
-# zoxide: a rust implementation for z / autojump
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init zsh)"
-fi
 
 # zsh-abbr highlight
 # this configuration cannot be moved to other files (e.g. ~/.zshrc.post)
