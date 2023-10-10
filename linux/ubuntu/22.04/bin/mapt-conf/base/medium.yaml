@@ -5,7 +5,6 @@ defaults:
 bat: true
 btop: true
 duf: true
-fd-find: true
 httpie: true
 # nnn: true
 # ------------------------------
