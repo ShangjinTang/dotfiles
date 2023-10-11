@@ -236,7 +236,7 @@ function vtask() {
 
 # lsd -> l
 if command -v lsd &> /dev/null; then
-    if xset q &>/dev/null; then
+    if xset q &>/dev/null && ! grep -qEi "WSL" /proc/version; then
         alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M' --hyperlink=always"
     else
         alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M'"
