@@ -1,6 +1,6 @@
 python  3.10.11
-neovim  latest
+neovim  0.9.4
 tmux    3.3a
-lazygit latest
-node    latest
-zoxide  latest
+lazygit 0.40.2
+node    20.8.0
+zoxide  0.9.2
