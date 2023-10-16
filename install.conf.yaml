@@ -24,12 +24,10 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-        ~/.gitconfig: configs/.gitconfig
+    ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
-    ~/.config/gh/: configs/gh/*
+    ~/.config/gh/config.yml: configs/gh/config.yml
     ~/.config/macchina/themes: configs/macchina/themes
-    ~/.config/clash/config.yaml: configs/clash/config.yaml
-    ~/.pip-requirements.txt: configs/.pip-requirements.txt
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.clang-format: configs/clang/.clang-format
     ~/.clang-tidy: configs/clang/.clang-tidy
@@ -168,8 +166,3 @@
 - link:
     ~/docker/: docker/*
     ~/.tmuxp/: docker/.tmuxp/*
-
-# Shell
-- shell:
-    - ["", ========== shell post-execute ==========]
-    

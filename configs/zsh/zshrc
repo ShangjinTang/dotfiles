@@ -113,8 +113,6 @@ else
     ZSH_HIGHLIGHT_REGEXP+=('\<('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow)
 fi
 
-alias vabbr="nvim ${ABBR_USER_ABBREVIATIONS_FILE}"
-
 ######################################################################
 
 _INCLUDE ~/.fzf.zsh
@@ -126,6 +124,7 @@ _INCLUDE ~/.zshrc.wsl
 ######################################################################
 
 _INCLUDE ~/.zshrc.local
+_INCLUDE ~/.zshrc.private
 _INCLUDE ~/.zshrc.post
 
 ######################################################################

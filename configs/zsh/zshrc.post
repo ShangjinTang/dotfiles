@@ -66,37 +66,19 @@ if [[ $SKIP_SSL == 1 ]]; then
     alias aria2c="aria2c --check-certificate=false"
 fi
 
-# pueued
+# pueued auto start
 if command -v pueued &> /dev/null && [[ $PUEUED_AUTO_START == 1 ]]; then
     pueued -d &> /dev/null
 fi
 
-# rtx
+# rtx init
 if command -v rtx &> /dev/null && [[ $USE_RTX == 1 ]]; then
     eval "$(rtx activate zsh)" &> /dev/null
     # use rtx python environment in nvim
     export PYTHON3_HOST_PROG="$(rtx which python)"
 fi
 
+# if $PYTHON3_HOST_PROG not configured, use default python3 for nvim
 if [[ -z ${PYTHON3_HOST_PROG} ]]; then
     export PYTHON3_HOST_PROG="$(which python3)"
 fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('\"$HOME\"/mambaforge-pypy3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/mambaforge-pypy3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/mambaforge-pypy3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/mambaforge-pypy3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "$HOME/mambaforge-pypy3/etc/profile.d/mamba.sh" ]; then
-    . "$HOME/mambaforge-pypy3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<

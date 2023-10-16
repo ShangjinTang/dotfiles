@@ -1,23 +1,54 @@
 # dotfiles
 
-Dotfiles for macOS and Linux (ArchLinux & Ubuntu), managed by [dotbot](https://github.com/anishathalye/dotbot).
+Dotfiles for ArchLinux x86_64 & Ubuntu x86_64, managed by [dotbot](https://github.com/anishathalye/dotbot).
 
 An out-of-the-box configuration with multiple features, easy to install and customize.
+
+**PRs are welcome.**
+
+Notes:
+
+1. **It's not a light-weight configuration; and only support for zsh & nvim.**
+2. **Recommend to use a proxy in China Mainland, set `PROXY_IP` and `PROXY_ENABLED`.**
+3. **There is no uninstall script yet.**. I suggest you to run inside docker to see if it meets your needs.
+4. **Always clone this version with a tagged/release version, e.g. v3.0.0.**
 
 ## Supported OS
 
 Fully supported and keep up-to-date:
 
-- ArchLinux x86_64 (also supported in WSL2)
-  - script `mpac install` to install all essential packages
-- Ubuntu 22.04 x86_64 (also supported in WSL2)
-  - only focus on one recently LTS version, because the installation steps are hard to maintain across different Ubuntu versions
+- **ArchLinux x86_64** (also supported in WSL2)
+- **Ubuntu 22.04 x86_64** (also supported in WSL2)
+  only focus on one recently LTS version, because the required tools/packages are hard to maintain across different Ubuntu versions.
 
 Partially supported:
 
-- macOS 10.13 ~ 10.15 x86_64 (might be removed in the future)
+- **Other Ubuntu x86_64 Versions**
+  - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with full features enabled
+    - see: [How to Install on an Oldschool Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
+  - Essential Packages:
+    - executables: **zsh**, **rustup & cargo**, **rtx**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
+    - python3 packages: **pynvim**
+  - You can download in executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+
+Poorly supported:
+
+- macOS 10.13 ~ 10.15 x86_64 (might be removed in the future).
 
 ## Installation
+
+If you have a proxy, recommend to set proxy before installlation.
+
+```bash
+vim ~/.zshrc.local
+```
+
+```bash
+export PROXY_IP="127.0.0.1:7890"
+export PROXY_ENABLED=1
+```
+
+For more customized environments, see [zshrc.pre](https://github.com/ShangjinTang/dotfiles/blob/master/configs/zsh/zshrc.pre)
 
 ### Arch Linux x86_64
 
@@ -29,11 +60,17 @@ chsh -s $(which zsh)
 Log out and relogin to make sure the shell is changed to `zsh`.
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.0.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-pip3 install hydra-core "typer[all]" pynvim
-sudo mpac install
+# recommend to use rtx to control python versions
+rtx global python@3.10 # or 'rtx global python@latest'
+
+# Essential: support for python plugins in Nvim
+pip3 install pynvim
+
+# install the pre-defined packages
+pip3 install hydra-core "typer[all]" && sudo mpac install
 ```
 
 ### Ubuntu 22.04 x86_64
@@ -52,139 +89,69 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v1.0.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-pip3 install hydra-core "typer[all]" pynvim
-sudo mapt install
-```
-
-#### install neovim on Ubuntu 22.04 x86_64
-
-with `rtx`:
-
-```bash
+# Essential packages
 rtx global neovim@latest
-```
-
-without `rtx`:
-
-Manual download neovim binary from [Neovim Releases](https://github.com/neovim/neovim/releases).
-`fuse` package is an essential dependency for running nvim.
-
-```bash
-NVIM_VERSION=v0.9.2
-
-sudo apt install -y fuse
-wget https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage
-mkdir ~/bin
-mv ./nvim.appimage ~/bin/nvim
-chmod 755 ~/bin/nvim
-```
-
-#### Install [nodejs/npm](https://github.com/nodesource/distributions) on Ubuntu 22.04 x86_64
-
-with `rtx`:
-
-```bash
 rtx global node@latest
-```
-
-without `rtx`:
-
-```bash
-NODE_MAJOR=20 # 16/18/20
-
-sudo apt-get install -y ca-certificates curl gnupg
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-sudo apt-get update
-sudo apt-get install nodejs -y
-```
-
-#### Install tmux on Ubuntu 22.04 x86_64
-
-with `rtx`:
-
-```bash
-rtx global tmux@latest
-```
-
-without `rtx`:
-
-```bash
-TMUX_VERSION=3.3a
-
-sudo apt remove tmux
-sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config
-wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
-tar zxvf tmux-${TMUX_VERSION}.tar.gz && cd tmux-${TMUX_VERSION}
-./configure
-make -j16 && sudo make install
-cd .. && rm -rf tmux-${TMUX_VERSION} tmux-${TMUX_VERSION}.tar.gz
-```
-
-### Other x86_64 Linux Distributions
-
-Check & download the [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
-
-#### Install lazygit on Ubuntu 22.04 x86_64
-
-with `rtx`:
-
-```bash
+rtx global tmux@3.3a
 rtx global lazygit@latest
+rtx global zoxide@latest
+# recommend to use rtx to control python versions
+rtx global python@3.10 # or 'rtx global python@latest'
+
+# Essential: support for python plugins in Nvim
+pip3 install pynvim
+
+# install the pre-defined packages
+pip3 install hydra-core "typer[all]" && sudo mapt install
 ```
 
-without `rtx`:
+### Other Ubuntu x86_64 Versions
 
-```bash
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin
-rm lazygit.tar.gz lazygit
-```
-
-#### Install croc on Ubuntu 22.04 x86_64
-
-```bash
-curl https://getcroc.schollz.com | bash
-```
+Refer to installation above.
+For some essential binaries, use [rtx](https://github.com/jdx/rtx) and [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## NVIM Plugins Installation
 
 1. Entering nvim, and wait the plugins to be installed.
 
-- First install: LunarVim plugins
-- Second install cycle: Customized plugins
+- First install cycle: LunarVim plugins
+- Second install cycle: Additional plugins
 
-2. Execute `:UpdateRemotePlugins` (for `wilder.nvim`).
+2. **Execute `:UpdateRemotePlugins`**.
 
-Note: NVIM sometimes might be buggy, because some error just appears in the first-time installation. Scroll to bottom to see some fix tips.
+Note: NVIM sometimes might be buggy, because some error just appears in the first-time installation. Scroll down to bottom to see some fixes & tips.
 
 ## Core Features
 
-- AI support to speed up development
-  - copilot-cmp (type `:Copilot auth` for first time use)
-  - ChatGPT.nvim (requires `$OPENAI_API_KEY`)
-  - `sgpt` CLI tool by python3 pip package `shell-gpt` (requires `$OPENAI_API_KEY`)
-- ArchLinux
+- AI support to speed up development inside NVIM
+  - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
+  - NIVM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
+  - CLI tool: [sgpt](https://github.com/TheR1D/shell_gpt) (requires `$OPENAI_API_KEY`)
+- ArchLinux x86_64 Packages
   - Provide a script `mpac` with pre-set multi pacman installation
+- Ubuntu 22.04 x86_64 Packages
+  - Provide a script `mapt` with pre-set multi apt installation
+- Python3 Packages
   - Provide a script `mpip` with pre-set multi pip installation
-- dotbot
+- [dotbot](https://github.com/anishathalye/dotbot)
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
   - automatically download nerd fonts to `~/.fonts`
-- zsh
-  - based on on-my-zsh, with useful plugins such as:
+- zsh based on [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+  - useful plugins such as:
+    - `fzf-tab`
     - `zsh-abbr`
     - `zsh-autosuggestions`
     - `zsh-syntax-highlighting`
   - settings with multi-stages
-    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/zshrc.local` -> `~/.zshrc.post`
+    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.local` -> `~/.zshrc.post`
   - support customized settings (in `~/zshrc.local`)
+- [rtx](https://github.com/jdx/rtx)
+  - `rtx` is like `asdf`, but much more fast and user-friendly
+  - use `~/.tool-versions` to install essential packages
 - nvim (>=0.9)
   - based on **LunarVim**, but without manual installation
   - LSPs are auto installed using mason-lspconfig
@@ -201,7 +168,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - Customized theme for `tmux` & `gitmux`
   - customized theme for shell prompt
   - third-party (`nnn`, `bat`, `radare2`) built-in dark theme
-- Key Mappings (CapsLock as Escape or Hyper)
+- Key Mappings (Gui Only) (CapsLock as Escape or Hyper)
   - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
   - **macOS**: see [Hammerspoon Readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
   - **Ubuntu 22.04**: not support
@@ -228,7 +195,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
     - `cu NUMBER`: e.g. `cu 3` => `cd ../../..`
     - `cu UPPER_DIR_NAME`: cd up to nearest `UPPER_DIR_NAME`
   - `cg` : cd to git root directory
-  - `cf` (short for `cdup_contain_file`)
+  - `ce` (short for `cdup_to_exists`)
 
 ## Features for Simplify Software Development
 
@@ -249,23 +216,38 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - docker with local **OpenGrok**
 - simplify python development
   - docker with local **Jupyter Lab**
-- simplify tasks
-  - asynctask: compilation in side nvim under PROJECTROOT based on `.tasks`
+- simplify nvim tasks
+  - asynctask: compilation inside nvim under PROJECTROOT based on `.tasks`
+
+### Machine Learning Framework Install (Ubuntu 22.04 x86_64)
+
+```bash
+~/bin/mamba_create_env_pyml
+conda activate pyml
+```
+
+Then follow [Gist TF_Torch_GPU_Installation](https://gist.github.com/ShangjinTang/e19d6c03334957f0f72ae59c0583d647).
 
 ## Customization
 
 1. Add configuration files
 2. Edit `install.conf.yaml` to create symlink
 3. Edit `install.pre` or `install.post` to customize the behaviour before or after installation
-4. Add files in `~/.dotfiles.local/` for local override
-   - Step 1: Create files in .dotfiles.local with same architecture in home directory
-   - Step 2: Run `install` or `install.post`, symlinks will created from ~/ to ~/.dotfiles.local/, e.g.
-   - /.gitconfig (generated symlink) -> ~/.dotfiles.local/.gitconfig (created in Step 1)
-   - ~/bin/rg (generated symlink) -> ~/.dotfiles.local/bin/rg (created in Step 1)
+4. For configurations override, see [How to Create Override Configurations](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Create-Override-Configurations)
 
 ## Tips & Issue Fix
 
+### rtx
+
+- If you do not have a proxy, you might occur this issue in China Mainland. `rtx install python` is downloading from https://www.python.org, maybe the download is slow.
+- If you have issue with `rtx` package, please remove the issue package from `.tool-versions` and manually install it.
+- If you need to use a different version in a folder, use `rtx local <some-package>@<version-number>`
+- `rtx` support all [asdf-plugins](https://github.com/asdf-vm/asdf-plugins)
+
 ### nvim
+
+1. You always need to use `:UpdateRemotePlugins` in nvim after python environment changes.
+2. `pynvim` must be installed in current python.
 
 #### nvim plugins
 
@@ -282,38 +264,16 @@ treesitter/highlighter: Error executing lua:
 .../share/nvim/runtime/lua/vim/treesitter/query.lua:161: query: invalid node type at position XXX
 ```
 
-## Desktop Software
+#### mason
 
-### Ubuntu 22.04 x86_64 Desktop
+Sometimes you have python binaries in `~/.local/share/nvim/mason/bin`,
 
-#### Gnome Tweaks
+But cannot execute, e.g. `black` `isort`. And nvim prints error or warning.
 
-```bash
-sudo add-apt-repository universe
-sudo apt install gnome-tweaks
+This is often due to python version/environment changes.
+
+```python
+rm -rf ~/.local/share/nvim/mason
 ```
 
-CapsLock as esc: Tweaks -> Keyboard & Mouse -> Additional Layout Options -> Caps Lock behaviour
-
-Font: Tweaks -> Fonts
-
-#### Install CopyQ on Ubuntu 22.04 x86_64
-
-```bash
-sudo add-apt-repository ppa:hluk/copyq
-sudo apt update
-sudo apt install copyq
-```
-
-#### Install [vscode](https://code.visualstudio.com/docs/setup/linux) on Ubuntu 22.04 x86_64
-
-```bash
-sudo apt-get install wget gpg
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
-sudo apt install apt-transport-https
-sudo apt update
-sudo apt install code
-```
+Then open nvim to do a fresh install.

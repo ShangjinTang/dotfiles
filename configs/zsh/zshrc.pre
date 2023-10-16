@@ -1,30 +1,41 @@
 #=====================================================================
-# customized exports, can be overrided in ~/.zshrc.local file
+# default configs which do not suggest to modify
+# for 0/1 pairs, 0 -> disable; 1 -> enable
 
 #---------------------------------------------------------------------
 # default editor
 export EDITOR=nvim
+
+#---------------------------------------------------------------------
+# rtx is an 'asdf'-like tool to install other binaries, but more user-friendly and fast
+# rtx global config: ~/.tool-versions
+# DO NOT suggest to modify this unless you are on an offline server
+export USE_RTX=1
+
+#=====================================================================
+# customized exports, can be overrided in ~/.zshrc.private or ~/.zshrc.local
+# if need to config different for specific directories, you can use tool 'direnv'
+
 #---------------------------------------------------------------------
 # proxy (use 'setproxy/unsetproxy' to toggle proxy)
 export PROXY_IP="127.0.0.1:1080"
-export PROXY_ENABLED=1
+export PROXY_ENABLED=0
 #---------------------------------------------------------------------
-# security setting
-export SKIP_SSL=1
+# disable security setting to avoid some downlink issues
+export SKIP_SSL=0
 #---------------------------------------------------------------------
 # pueued
-export PUEUED_AUTO_START=1
+export PUEUED_AUTO_START=0
 #---------------------------------------------------------------------
 # terminal theme: light | dark
 export TERMINAL_THEME='dark'
 #---------------------------------------------------------------------
-# rtx
-export USE_RTX=1
-#---------------------------------------------------------------------
 # nvim extensions
-export NVIM_FORMAT_ON_SAVE=true
-export NVIM_SHOW_DIAG_ON_HOVER=true
-export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="warn"  # error/warn/info/hint
+# auto format or not
+export NVIM_FORMAT_ON_SAVE=false
+# show diag on hover or not
+export NVIM_SHOW_DIAG_ON_HOVER=false
+export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error/warn/info/hint
 #---------------------------------------------------------------------
 # For ChatGPT.nvim and 'sgpt' CLI command
 # export OPENAI_API_KEY=""
@@ -33,7 +44,8 @@ export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="warn"  # error/warn/info/hint
 #=====================================================================
 # create directories & modify PATH
 
-_DIRCREATE ~/bin ~/temp ~/github ~/note ~/jupyter
+# Create ~/bin
+_DIRCREATE ~/bin
 # Create nvim persistent undo directory
 _DIRCREATE ~/.cache/nvim/undo
 # Create npm local directory for nvim lsp
@@ -58,8 +70,8 @@ fi
 
 # cscope
 if command -v cscope &> /dev/null; then
+    # use same generate files as `cscope_maps.nvim`
     alias cscope="cscope -f ./cscope.out"
-    alias cscopebuild="fd -e cpp -e cc -e c -e hpp -e h -e java > cscope.files && cscope -bkqv"
 fi
 
 # macchina
@@ -204,35 +216,12 @@ fi
 # rg
 alias rg='rg --smart-case'
 
-# nvim -> v
-if command -v nvim &> /dev/null || rtx which nvim &> /dev/null; then
-    alias v='nvim'
-    alias vv='nvim ~/.config/nvim/{*.lua,*.vim,lua/*.lua}'
-    alias vk='nvim ~/.config/nvim/lua/{plug-which-key.lua,LunarVim/lua/lvim/core/which-key.lua}'
-    alias vz="nvim ~/.zshenv ~/.zshrc{.pre,,.local,.post} -c bnext"
-    alias vm="nvim ~/note/index.md"
-    alias vclash="nvim ~/.config/clash/config.yaml"
-fi
-
 # zoxide: a rust implementation for z / autojump
 if rtx which zoxide &> /dev/null; then
     eval "$($(rtx which zoxide) init zsh)"
 elif command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
-
-# asynctask -> task
-alias asynctask='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask'
-alias task=asynctask
-alias taski='~/.local/share/nvim/site/pack/lazy/opt/asynctasks.vim/bin/asynctask -f'
-function vtask() {
-    if [[ -f ".tasks.ini" ]]; then
-        nvim -O2 .tasks.ini ~/.config/nvim/tasks.ini
-    else
-        # if '.tasks.ini' not exists in current folder, open it as second buffer
-        nvim ~/.config/nvim/tasks.ini .tasks.ini
-    fi
-}
 
 # lsd -> l
 if command -v lsd &> /dev/null; then
@@ -259,22 +248,14 @@ else
     alias lla="ls -lah"
 fi
 
+# nvim -> v
+if command -v nvim &> /dev/null || rtx which nvim &> /dev/null; then
+    alias v='nvim'
+fi
+
 # git -> g
 if command -v git &> /dev/null; then
     alias g='git'
-    alias gpristine='git reset --hard && git clean -dfx -e "cscope*" -e "tags"'
-    alias gspristine='git submodule deinit --force --all && git submodule update --init'
-    alias cg='cd $(git rev-parse --show-toplevel)'
-    if command -v lazygit &> /dev/null; then
-        alias gg='lazygit'
-    fi
-fi
-
-# sgpt -> s
-# alias s='sgpt'
-
-if command -v pueue &> /dev/null; then
-    alias p='pueue'
 fi
 
 # tmux -> t
@@ -318,13 +299,9 @@ fi
 
 # fzf
 # Reference: https://man.archlinux.org/man/community/fzf/fzf.1.en
+# Use same keybindings as `fzf-tab` tool
 export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
 export FZF_CTRL_T_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:down,shift-tab:up"
 export FZF_CTRL_R_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
-
-######################################################################
-
-
-
 
 ######################################################################

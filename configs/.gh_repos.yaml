@@ -8,85 +8,18 @@
 #     branch: <OPTIONAL>
 #
 ############################################################
-############################################################
-# Machine Learning Repositories
+# Example:
 
-# CUDA Samples
-- repository: NVIDIA/cuda-samples
-  directory: ~/github/machinelearning/cuda-samples
-  gitflags:
-    depth: 1
-    branch: v12.2
-
-# OnnxRuntime
-- repository: microsoft/onnxruntime
-  directory: ~/github/machinelearning/onnxruntime
-  gitflags:
-    depth: 1
-    branch: v1.15.1
-
-# PyTorch
-- repository: pytorch/pytorch
-  directory: ~/github/machinelearning/pytorch
-  gitflags:
-    depth: 1
-    branch: v2.0.1
-
-# TensorFlow Repositories
+# TensorFlow
 - repository: tensorflow/tensorflow
   directory: ~/github/machinelearning/tensorflow
   gitflags:
     depth: 1
     branch: v2.13.0
 
-- repository: tensorflow/models
-  directory: ~/github/machinelearning/tensorflow_models
-  gitflags:
-    depth: 1
-    branch: v2.13.0
-
+# TensorFlow examples
 - repository: tensorflow/examples
   directory: ~/github/machinelearning/tensorflow_examples
   gitflags:
     depth: 1
-- repository: tensorflow/tflite-micro
-  directory: ~/github/machinelearning/tensorflow_tflite-micro
-  gitflags:
-    depth: 1
-
-# TVM
-- repository: apache/tvm
-  directory: ~/github/machinelearning/tvm
-  gitflags:
-    depth: 1
-    branch: v0.13.0
-# ############################################################
-# ############################################################
-# # myrepos Own Repositories
-
-- repository: knowledge-base-cpp
-  directory: ~/github/myrepos/cpp
-  gitflags:
-    depth: 1
-- repository: knowledge-base-rust
-  directory: ~/github/myrepos/rust
-  gitflags:
-    depth: 1
-- repository: knowledge-base-python
-  directory: ~/github/myrepos/python
-  gitflags:
-    depth: 1
-- repository: knowledge-base-bash
-  directory: ~/github/myrepos/bash
-  gitflags:
-    depth: 1
-- repository: bazel
-  directory: ~/github/myrepos/bazel
-  gitflags:
-    depth: 1
-# - repository: cli-prebuilts
-#   directory: ~/github/myrepos/cli-prebuilts
-#   gitflags:
-#     depth: 1
-############################################################
 ############################################################

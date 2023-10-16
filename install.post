@@ -168,20 +168,30 @@ function extract_bin_compressed() {
     done
 }
 
-# create symlinks from ~/.dotfiles.local/ to ~/
+# create symlinks from ~/.dotfiles.private/ to ~/
+function create_dotfiles_symlinks_from_private() {
+    if [ -d ~/.dotfiles.private ]; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.private${RESET} exists"
+        echo "${BLUE}Create symlinks from ~/.dotfiles.private/ to ~/${RESET}"
+        while IFS= read -r -d '' file; do
+            ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.private\///')"
+        done < <(find ~/.dotfiles.private -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.private/README.md" -print0)
+    else
+        echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.private${RESET} not exists"
+    fi
+}
+
 function create_dotfiles_symlinks_from_local() {
     if [ -d ~/.dotfiles.local ]; then
         echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.local${RESET} exists"
         echo "${BLUE}Create symlinks from ~/.dotfiles.local/ to ~/${RESET}"
         while IFS= read -r -d '' file; do
             ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
-        done < <(find ~/.dotfiles.local -type f -print0)
+        done < <(find ~/.dotfiles.local -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.local/README.md" -print0)
     else
         echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.local${RESET} not exists"
     fi
 }
-print_separate_line
-create_dotfiles_symlinks_from_local
 
 # apply diff files in ~/.dotfiles/submodules_diff/<MODULE_NAME> to ~/.dotfiles/submodules/<MODULE_NAME>
 function apply_diff_for_submodule() {
@@ -205,14 +215,6 @@ function apply_diff_for_submodule() {
     done
 }
 
-# if python3 -V | grep "$PYTHON3_VERSION" &> /dev/null; then
-#     if grep "$PYTHON3_VERSION" ~/.pip-requirements.txt &> /dev/null; then
-#         echo "${BLUE}Installing python3 packages from ~/.pip-requirements.txt${RESET}"
-#         python3 -m pip install -r ~/.pip-requirements.txt > /dev/null &&
-#             echo "- Installing python3 packages from ~/.pip-requirements.txt succeeded"
-#     fi
-# fi
-
 # function copy_from_wsl_to_windows() {
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 #     echo "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
@@ -233,6 +235,12 @@ print_separate_line &&
 
 print_separate_line &&
     extract_bin_compressed
+
+print_separate_line &&
+    create_dotfiles_symlinks_from_private
+
+print_separate_line &&
+    create_dotfiles_symlinks_from_local
 
 print_separate_line &&
     install_nnn_plugins
