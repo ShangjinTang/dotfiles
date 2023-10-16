@@ -99,3 +99,6 @@ execute_command "curl https://raw.githubusercontent.com/watchexec/watchexec/main
 
 # _zoxide
 execute_command "curl https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/completions/_zoxide -o ${script_directory}/_zoxide"
+
+# _cht
+execute_command "curl https://cht.sh/:zsh > ${script_directory}/_cht"

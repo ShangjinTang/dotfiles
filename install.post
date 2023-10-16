@@ -71,6 +71,17 @@ function check_and_install_fzf() {
     fi
 }
 
+# check & install cht
+function check_and_install_cht() {
+    if command -v cht &> /dev/null; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}cht${RESET} available"
+    else
+        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}cht${RESET} not available"
+        echo "${BLUE}Installing cht ...${RESET}"
+        curl -s https://cht.sh/:cht.sh > ~/bin/cht && chmod 755 ~/bin/cht
+    fi
+}
+
 # check & install rustup components
 function check_and_install_rustup_components() {
     if command -v rustup &> /dev/null; then
@@ -228,6 +239,9 @@ print_separate_line &&
 
 print_separate_line &&
     check_and_install_fzf
+
+print_separate_line &&
+    check_and_install_cht
 
 print_separate_line &&
     check_and_install_rustup_components cargo rustfmt rust-analyzer
