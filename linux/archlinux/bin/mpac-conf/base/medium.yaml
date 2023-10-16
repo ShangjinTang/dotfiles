@@ -22,6 +22,8 @@ rsync: true
 # ------------------------------
 github-cli: true
 # ------------------------------
+jq: true
+# ------------------------------
 p7zip: true
 zip: true
 unzip: true
