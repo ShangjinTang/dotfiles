@@ -58,6 +58,19 @@ _PATHAPPEND ~/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin ~/.local
 #=====================================================================
 # exports for specific command line tool
 
+# fzf
+# Reference: https://man.archlinux.org/man/community/fzf/fzf.1.en
+# Use same keybindings as `fzf-tab` tool
+export FZF_CTRL_T_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:down,shift-tab:up"
+export FZF_CTRL_R_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
+# "FZF_DEFAULT_OPTS" is set in theme settings
+export FZF_DEFAULT_OPTS_WITHOUT_THEME="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
+# Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
+if command -v rg &> /dev/null; then
+    export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.cache,.vscode,.build,.clangd,build,bazel-*}/*' --glob '!{.cs_files,.project,.root,.workspace,compile_commands.json,cscope.*}' 2> /dev/null"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
 # cat
 if command -v bat &> /dev/null; then
     alias cat="bat --paging=never"
@@ -179,8 +192,14 @@ function set_theme() {
     case $1 in
         light)
             export TERMINAL_THEME="light"
+            # theme: catppuccin latte: https://github.com/catppuccin/fzf
+            export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_WITHOUT_THEME} \
+--color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
+--color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+--color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
             # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfLight"
+            # procs
             export PROCS_THEME="light"
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
@@ -188,7 +207,14 @@ function set_theme() {
             ;;
         dark)
             export TERMINAL_THEME="dark"
+            # theme: catppuccin frappe: https://github.com/catppuccin/fzf
+            export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_WITHOUT_THEME} \
+--color=bg+:#414559,spinner:#f2d5cf,hl:#e78284 \
+--color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+--color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
+            # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfDark"
+            # procs
             export PROCS_THEME="dark"
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
@@ -290,18 +316,5 @@ if command -v tmux &> /dev/null || rtx which tmux &> /dev/null; then
     # kill all sessions
     alias tka='tmux kill-server'
 fi
-
-# Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
-if command -v rg &> /dev/null; then
-    export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.cache,.vscode,.build,.clangd,build,bazel-*}/*' --glob '!{.cs_files,.project,.root,.workspace,compile_commands.json,cscope.*}' 2> /dev/null"
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
-
-# fzf
-# Reference: https://man.archlinux.org/man/community/fzf/fzf.1.en
-# Use same keybindings as `fzf-tab` tool
-export FZF_DEFAULT_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
-export FZF_CTRL_T_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:down,shift-tab:up"
-export FZF_CTRL_R_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
 
 ######################################################################
