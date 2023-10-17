@@ -24,23 +24,24 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-    ~/.gitconfig: configs/.gitconfig
-    ~/.gitignore: configs/.gitignore
-    ~/.config/gh/config.yml: configs/gh/config.yml
-    ~/.config/macchina/themes: configs/macchina/themes
-    ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
+    ~/.cargo/config.toml: configs/cargo/config.toml
+    ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.clang-format: configs/clang/.clang-format
     ~/.clang-tidy: configs/clang/.clang-tidy
-    ~/.cbfmt.toml: configs/.cbfmt.toml
-    ~/.stylua.toml: configs/lua/.stylua.toml
-    ~/.ruff.toml: configs/.ruff.toml
+    ~/.config/btop/themes/: configs/btop/themes/*
+    ~/.config/gh/config.yml: configs/gh/config.yml
+    ~/.config/macchina/themes: configs/macchina/themes
     ~/.config/rtx/config.toml: configs/rtx/config.toml
+    ~/.gh_repos.yaml: configs/.gh_repos.yaml
+    ~/.gitconfig: configs/.gitconfig
+    ~/.gitignore: configs/.gitignore
+    ~/.rcflags: configs/.rcflags
+    ~/.rcppflags: configs/.rcppflags
+    ~/.ruff.toml: configs/.ruff.toml
+    ~/.stylua.toml: configs/lua/.stylua.toml
+    ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.tmuxp/clash.yml: configs/tmuxp/clash.yml
     ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
-    ~/.cargo/config.toml: configs/cargo/config.toml
-    ~/.rcppflags: configs/.rcppflags
-    ~/.rcflags: configs/.rcflags
-    ~/.gh_repos.yaml: configs/.gh_repos.yaml
     # conditional configs
     ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
       if: "[ -d ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim ]"
