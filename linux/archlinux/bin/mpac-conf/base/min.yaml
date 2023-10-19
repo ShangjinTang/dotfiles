@@ -28,3 +28,5 @@ tmux: true
 ripgrep: true
 zoxide: true
 # ------------------------------
+atuin: true
+# ------------------------------

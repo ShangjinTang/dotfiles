@@ -78,6 +78,12 @@ if command -v rtx &> /dev/null && [[ $USE_RTX == 1 ]]; then
     export PYTHON3_HOST_PROG="$(rtx which python)"
 fi
 
+# atuin init
+if command -v atuin &> /dev/null; then
+    # https://atuin.sh/docs/key-binding#disable-up-arrow
+    eval "$(atuin init zsh --disable-up-arrow)" &> /dev/null
+fi
+
 # if $PYTHON3_HOST_PROG not configured, use default python3 for nvim
 if [[ -z ${PYTHON3_HOST_PROG} ]]; then
     export PYTHON3_HOST_PROG="$(which python3)"
