@@ -46,8 +46,9 @@ y::Run "https://www.youtube.com/"
 2::^#!+2  ; Twinkle Tray: Brightness Up
 3::^#!+3  ; Snipaste: Screenshot
 4::^#!+4  ; Snipaste: Hide/Show all the pins
-5:: +#T ; PowerToys: OCR (Text Extractor)
-\::Reload
+5:: +#T  ; PowerToys: OCR (Text Extractor)
+0::Reload
+\::try open_terminal_path_in_samba("/home/sol", "\\wsl$\Arch\home\sol")
 Space::^#!+/  ; Listary: Show Listary Toolbar
 #If
 
@@ -103,6 +104,7 @@ Tab::SetScrollLockState % !GetKeyState("ScrollLock", "T")
 ; M: Miro
 #m::Run "https://miro.com/"
 
+
 ; RAlt
 >!0::Volume_Mute
 >!-::Volume_Down
@@ -139,7 +141,7 @@ search_clipboard(main_url, query_url, html_required:=False)
 {
     clipsaved := ClipboardAll
     clipboard := ""
-    Send ^c
+    Send ^{Insert}
     ClipWait 0.1
     if ErrorLevel
     {
@@ -188,5 +190,42 @@ toggle_ahk_exe(program_path, ahk_exe_name)
     }
     else
         Run, %program_path%
+    return
+}
+
+open_terminal_path_in_samba(terminal_home_path, samba_home_path) {
+    clipsaved := ClipboardAll
+    clipboard := ""
+    Send ^{Insert}
+    ClipWait 0.1
+
+    clipboard := Trim(clipboard)
+
+    if ErrorLevel
+    {
+        Run, explorer.exe %samba_home_path%
+        return
+    }
+
+    if (SubStr(clipboard, 1, 1) = "~")
+    {
+        newClip := samba_home_path . SubStr(clipboard, 2)
+        newClip := StrReplace(newClip, "/", "\")
+        Run, explorer.exe %newClip%
+    }
+    else if (StrLen(terminal_home_path) != 0 && SubStr(clipboard, 1, StrLen(terminal_home_path)) = terminal_home_path)
+    {
+        newClip := samba_home_path . SubStr(clipboard, StrLen(terminal_home_path) + 1)
+        newClip := StrReplace(newClip, "/", "\")
+        Run, explorer.exe %newClip%
+    }
+    else
+    {
+        Run, explorer.exe %samba_home_path%
+        return
+    }
+
+    clipboard := clipsaved
+    clipsaved := ""
     return
 }
