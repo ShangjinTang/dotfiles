@@ -123,8 +123,8 @@ _INCLUDE ~/.zshrc.wsl
 
 ######################################################################
 
-_INCLUDE ~/.zshrc.local
 _INCLUDE ~/.zshrc.private
+_INCLUDE ~/.zshrc.local
 _INCLUDE ~/.zshrc.post
 
 ######################################################################
