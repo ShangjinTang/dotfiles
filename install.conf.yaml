@@ -43,6 +43,7 @@
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     ~/.tmuxp/clash.yml: configs/tmuxp/clash.yml
     ~/.tmuxp/jupyter.yml: configs/tmuxp/jupyter.yml
+    ~/.wezterm.lua: configs/wezterm/.wezterm.lua
     # conditional configs
     ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
       if: "[ -d ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim ]"
