@@ -105,3 +105,6 @@ execute_command "curl https://cht.sh/:zsh > ${script_directory}/_cht"
 
 # _atuin
 execute_command "atuin gen-completions --shell zsh > ${script_directory}/_atuin"
+
+# _eza
+execute_command "curl https://raw.githubusercontent.com/eza-community/eza/main/completions/zsh/_eza -o ${script_directory}/_eza"

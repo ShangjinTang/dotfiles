@@ -249,8 +249,25 @@ elif command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
 
-# lsd -> l
-if command -v lsd &> /dev/null; then
+# use eza / lsd to replace ls
+if command -v eza &> /dev/null; then
+    if xset q &>/dev/null && ! grep -qEi "WSL" /proc/version; then
+        alias eza='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --git-ignore --modified --icons --hyperlink'
+    else
+        alias eza='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --git-ignore --modified --icons'
+    fi
+    alias ls='eza'
+    alias l='eza'
+    alias la='eza --all'
+    alias ll='eza --long'
+    alias lla='eza --long --all'
+    alias lt='eza --tree --no-git'
+    alias l1='eza -1'
+    alias l2='eza --tree --no-git --level=2'
+    alias l3='eza --tree --no-git --level=3'
+    alias l4='eza --tree --no-git --level=4'
+    alias l5='eza --tree --no-git --level=5'
+elif command -v lsd &> /dev/null; then
     if xset q &>/dev/null && ! grep -qEi "WSL" /proc/version; then
         alias lsd="lsd --group-directories-first --date='+%Y-%m-%d %H:%M' --hyperlink=always"
     else
@@ -261,6 +278,7 @@ if command -v lsd &> /dev/null; then
     alias la="lsd -Ah"
     alias ll="lsd -lh --git"
     alias lla="lsd -lAh --git"
+    alias lt="lsd --tree"
     alias l1="lsd -1"
     alias l2="lsd --tree --depth=2"
     alias l3="lsd --tree --depth=3"

@@ -8,6 +8,7 @@ bat: true
 btop: true
 duf: true
 dust: true
+eza: true
 lsd: true
 fd: true
 httpie: true
