@@ -70,11 +70,6 @@ if command -v cscope &> /dev/null; then
     alias cscope="cscope -f ./cscope.out"
 fi
 
-# macchina
-if command -v macchina &> /dev/null && [[ -f ~/.config/macchina/themes/Lithium.toml ]]; then
-    alias macchina="macchina --theme Lithium"
-fi
-
 # nnn
 if [[ -f ~/bin/nnn ]]; then
     alias nnn="~/bin/nnn"

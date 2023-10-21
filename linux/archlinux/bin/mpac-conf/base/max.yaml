@@ -9,4 +9,5 @@ hexyl: true
 tokei: true
 mdcat: true
 asciinema: true
+fastfetch: true
 # ------------------------------

@@ -31,7 +31,7 @@ execute_command() {
     echo
 }
 
-# completions unavailable: macchina, spacer, dua, tokei
+# completions unavailable: spacer, dua, tokei
 
 # completions no auto-renew:
 # _mdcat: 2.4.0
