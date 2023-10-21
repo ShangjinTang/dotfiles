@@ -278,8 +278,8 @@ print_separate_line
 if [[ $(uname -m) == "x86_64" ]]; then
     if ! [ -d ~/.prebuilts ]; then
         git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1
-        if ! grep -qEi "_PATHPREPEND ~/.prebuilts/bin" ~/.zshrc.local &> /dev/null; then
-            echo "_PATHPREPEND ~/.prebuilts/bin" >> ~/.zshrc.local
+        if ! grep -qEi "_PATHAPPEND ~/.prebuilts/bin" ~/.zshrc.local &> /dev/null; then
+            echo "_PATHAPPEND ~/.prebuilts/bin" >> ~/.zshrc.local
         fi
     fi
 fi
