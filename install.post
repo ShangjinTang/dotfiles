@@ -215,6 +215,32 @@ function apply_diff_for_submodule() {
     done
 }
 
+function install_cli_prebuilts() {
+    if ! [ -d ~/.prebuilts ]; then
+        echo "${BOLD}${CYAN}INFO${RESET} ~/.prebuilts not exists"
+        if [[ $(uname -m) == "x86_64" ]]; then
+            echo "- ${BOLD}${CYAN}INFO${RESET} current machine is x86_64, start downloading..."
+            echo "- ${MAGENTA}CMD${RESET} git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1"
+            git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1 &> /dev/null
+            if [ $? -eq 0 ]; then
+                echo "- ${BOLD}${GREEN}OK${RESET} git clone succeeded"
+                if ! grep -qEi "_PATHAPPEND ~/.prebuilts/bin" ~/.zshrc.local &> /dev/null; then
+                    echo "_PATHAPPEND ~/.prebuilts/bin" >> ~/.zshrc.local &&
+                        echo "- ${BOLD}${GREEN}OK${RESET} append ~/.prebuilts/bin to your PATH via ~/zshrc.local"
+                else
+                    echo "- ${BOLD}${CYAN}INFO${RESET} ~/.prebuilts/bin already appended in your PATH via ~/.zshrc.local"
+                fi
+            else
+                echo "- ${BOLD}${RED}ERROR${RESET} git clone failed"
+            fi
+        else
+            echo "- ${BOLD}${YELLOW}WARNING${RESET} current machine is $(uname -m), prebuilts current not supported."
+        fi
+    else
+        echo "${BOLD}${GREEN}OK${RESET} ~/.prebuilts exists"
+    fi
+}
+
 # function copy_from_wsl_to_windows() {
 # if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
 #     echo "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
@@ -257,7 +283,8 @@ print_separate_line &&
 print_separate_line &&
     check_and_install_rustup_components cargo rustfmt rust-analyzer
 
-print_separate_line
+print_separate_line &&
+    install_cli_prebuilts
 
 # # cargo install package takes time; so disabled
 # if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
@@ -274,15 +301,6 @@ print_separate_line
 #         echo "    https://github.com/ShangjinTang/cli-prebuilts"
 #     fi
 # fi
-
-if [[ $(uname -m) == "x86_64" ]]; then
-    if ! [ -d ~/.prebuilts ]; then
-        git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1
-        if ! grep -qEi "_PATHAPPEND ~/.prebuilts/bin" ~/.zshrc.local &> /dev/null; then
-            echo "_PATHAPPEND ~/.prebuilts/bin" >> ~/.zshrc.local
-        fi
-    fi
-fi
 
 print_separate_line &&
     check_and_install_npm_packages "live-server" "@bazel/bazelisk"
