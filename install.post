@@ -227,8 +227,11 @@ function apply_diff_for_submodule() {
 
 ################################################################################
 
-print_separate_line &&
-    install_nerdfonts RobotoMono FiraCode Mononoki VictorMono JetBrainsMono # ComicShannsMono Meslo IosevkaTerm UbuntuMono MPlus
+# only install nerdfonts on GUI or WSL
+if xset q &> /dev/null || grep -qEi "WSL" /proc/version; then
+    print_separate_line &&
+        install_nerdfonts RobotoMono FiraCode Mononoki VictorMono JetBrainsMono # ComicShannsMono Meslo IosevkaTerm UbuntuMono MPlus
+fi
 
 print_separate_line &&
     apply_diff_for_submodule fzf LunarVim ohmyzsh
@@ -256,19 +259,28 @@ print_separate_line &&
 
 print_separate_line
 
-# we use distribution specific, cargo install package takes time
-if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
-    check_and_install_cargo_packages cargo-nextest \
-        ast-grep macchina rtx-cli spacer tealdeer
-elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] && [[ $(lsb_release -rs) == '22.04' ]] &> /dev/null; then
-    check_and_install_cargo_packages cargo-nextest \
-        ast-grep macchina rtx-cli spacer tealdeer \
-        atuin bat du-dust dua-cli eza fd-find git-delta lsd mdcat ouch procs pueue sd tokei watchexec-cli
-else
-    echo "Current OS is not supported."
-    if [[ $(uname -m) != "x86_64" ]]; then
-        echo "You can check & download x86_64 prebuilt binaries in below link:"
-        echo "    https://github.com/ShangjinTang/cli-prebuilts"
+# # cargo install package takes time; so disabled
+# if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
+#     check_and_install_cargo_packages cargo-nextest \
+#         ast-grep macchina rtx-cli spacer tealdeer
+# elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] && [[ $(lsb_release -rs) == '22.04' ]] &> /dev/null; then
+#     check_and_install_cargo_packages cargo-nextest \
+#         ast-grep macchina rtx-cli spacer tealdeer \
+#         atuin bat du-dust dua-cli eza fd-find git-delta lsd mdcat ouch procs pueue sd tokei watchexec-cli
+# else
+#     echo "Current OS is not supported."
+#     if [[ $(uname -m) != "x86_64" ]]; then
+#         echo "You can check & download x86_64 prebuilt binaries in below link:"
+#         echo "    https://github.com/ShangjinTang/cli-prebuilts"
+#     fi
+# fi
+
+if [[ $(uname -m) == "x86_64" ]]; then
+    if ! [ -d ~/.prebuilts ]; then
+        git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1
+        if ! grep -qEi "_PATHPREPEND ~/.prebuilts/bin" ~/.zshrc.local &> /dev/null; then
+            echo "_PATHPREPEND ~/.prebuilts/bin" >> ~/.zshrc.local
+        fi
     fi
 fi
 
