@@ -21,19 +21,12 @@ export USE_RTX=1
 export PROXY_IP="127.0.0.1:1080"
 export PROXY_ENABLED=0
 #---------------------------------------------------------------------
-# disable security setting to avoid some downlink issues
-export SKIP_SSL=0
-#---------------------------------------------------------------------
-# pueued
-export PUEUED_AUTO_START=0
-#---------------------------------------------------------------------
 # terminal theme: light | dark
 export TERMINAL_THEME='dark'
 #---------------------------------------------------------------------
 # nvim extensions
-# auto format or not
 export NVIM_FORMAT_ON_SAVE=false
-# show diag on hover or not
+# show diagnostics on hover or not
 export NVIM_SHOW_DIAG_ON_HOVER=false
 export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error/warn/info/hint
 #---------------------------------------------------------------------
@@ -69,16 +62,6 @@ export FZF_DEFAULT_OPTS_WITHOUT_THEME="--bind left:preview-page-up,right:preview
 if command -v rg &> /dev/null; then
     export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.cache,.vscode,.build,.clangd,build,bazel-*}/*' --glob '!{.cs_files,.project,.root,.workspace,compile_commands.json,cscope.*}' 2> /dev/null"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
-
-# cat
-if command -v bat &> /dev/null; then
-    alias cat="bat --paging=never"
-fi
-
-# cmake
-if command -v cmake &> /dev/null; then
-    export CMAKE_EXPORT_COMPILE_COMMANDS=1
 fi
 
 # cscope
@@ -234,14 +217,6 @@ alias setdark="set_theme dark"
 ######################################################################
 # ALIASES
 
-# clear: do not delete scrollback buffer (requires: tput version >= 6.2)
-if tput -x clear &> /dev/null; then
-    alias clear='tput -x clear'
-fi
-
-# rg
-alias rg='rg --smart-case'
-
 # zoxide: a rust implementation for z / autojump
 if rtx which zoxide &> /dev/null; then
     eval "$($(rtx which zoxide) init zsh)"
@@ -290,16 +265,6 @@ else
     alias la="ls -ah"
     alias ll="ls -lh"
     alias lla="ls -lah"
-fi
-
-# nvim -> v
-if command -v nvim &> /dev/null || rtx which nvim &> /dev/null; then
-    alias v='nvim'
-fi
-
-# git -> g
-if command -v git &> /dev/null; then
-    alias g='git'
 fi
 
 # tmux -> t
