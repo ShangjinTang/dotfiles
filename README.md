@@ -63,8 +63,8 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.0.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-# recommend to use rtx to control python versions
-rtx global python@3.10 # or 'rtx global python@latest'
+# # recommend to use rtx to control python versions
+# rtx global python@3.10 # or 'rtx global python@latest'
 
 # Essential: support for python plugins in Nvim
 pip3 install pynvim
@@ -77,7 +77,7 @@ pip3 install hydra-core "typer[all]" && sudo mpac install
 
 ```bash
 sudo apt update
-sudo apt install zsh git
+sudo apt install -y zsh git
 chsh -s $(which zsh)
 ```
 
@@ -99,6 +99,7 @@ rtx global tmux@3.3a
 rtx global lazygit@latest
 rtx global zoxide@latest
 # recommend to use rtx to control python versions
+sudo apt install -y libssl-dev liblzma-dev # depdendency for python build
 rtx global python@3.10 # or 'rtx global python@latest'
 
 # Essential: support for python plugins in Nvim

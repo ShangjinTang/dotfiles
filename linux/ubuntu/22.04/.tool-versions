@@ -1,3 +1,4 @@
+# note: for python build, 'libssl-dev' is required
 python  3.10.11
 neovim  0.9.4
 tmux    3.3a
