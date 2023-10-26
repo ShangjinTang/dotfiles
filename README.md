@@ -11,7 +11,7 @@ Notes:
 1. **It's not a light-weight configuration; and only support for zsh & nvim.**
 2. **Recommend to use a proxy in China Mainland, set `PROXY_IP` and `PROXY_ENABLED`.**
 3. **There is no uninstall script yet.**. I suggest you to run inside docker to see if it meets your needs.
-4. **Always clone this version with a tagged/release version, e.g. v3.0.0.**
+4. **Always clone this version with a latest tagged/release version.**
 
 ## Supported OS
 
@@ -60,7 +60,7 @@ chsh -s $(which zsh)
 Log out and relogin to make sure the shell is changed to `zsh`.
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.0.0 --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
 # # recommend to use rtx to control python versions
@@ -100,7 +100,7 @@ rtx global lazygit@latest
 rtx global zoxide@latest
 # recommend to use rtx to control python versions
 sudo apt install -y libssl-dev liblzma-dev # depdendency for python build
-rtx global python@3.10 # or 'rtx global python@latest'
+rtx global python@3.10                     # or 'rtx global python@latest'
 
 # Essential: support for python plugins in Nvim
 pip3 install pynvim
@@ -265,11 +265,9 @@ treesitter/highlighter: Error executing lua:
 
 #### mason
 
-Sometimes you have python binaries in `~/.local/share/nvim/mason/bin`,
+Sometimes you have python binaries in `~/.local/share/nvim/mason/bin`, but cannot execute, e.g. `black` `isort`. And nvim prints related error or warning.
 
-But cannot execute, e.g. `black` `isort`. And nvim prints error or warning.
-
-This is often due to python version/environment changes.
+This is often due to python version/environment changes. To resolve it, run command below:
 
 ```python
 rm -rf ~/.local/share/nvim/mason
