@@ -224,12 +224,6 @@ function install_cli_prebuilts() {
             git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1 &> /dev/null
             if [ $? -eq 0 ]; then
                 echo "- ${BOLD}${GREEN}OK${RESET} git clone succeeded"
-                if ! grep -qEi "_PATHAPPEND ~/.prebuilts/bin" ~/.zshrc.local &> /dev/null; then
-                    echo "_PATHAPPEND ~/.prebuilts/bin" >> ~/.zshrc.local &&
-                        echo "- ${BOLD}${GREEN}OK${RESET} append ~/.prebuilts/bin to your PATH via ~/zshrc.local"
-                else
-                    echo "- ${BOLD}${CYAN}INFO${RESET} ~/.prebuilts/bin already appended in your PATH via ~/.zshrc.local"
-                fi
             else
                 echo "- ${BOLD}${RED}ERROR${RESET} git clone failed"
             fi

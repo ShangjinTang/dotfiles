@@ -46,7 +46,7 @@ _DIRCREATE ~/.cache/nvim/undo
 _DIRCREATE ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
 
 _PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin  # For ArchLinux
-_PATHAPPEND ~/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin ~/.local/share/nvim/mason/bin
+_PATHAPPEND ~/bin ~/.prebuilts/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin ~/.local/share/nvim/mason/bin
 
 #=====================================================================
 # exports for specific command line tool
