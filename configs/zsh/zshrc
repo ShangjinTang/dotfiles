@@ -34,12 +34,6 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"  # ZSH_THEME="robbyrussell"
 
 plugins=(
-    # manual install (not built-in in ohmyzsh)
-    fzf-tab                     ## zsh fzf tab completion
-    zsh-abbr                    ## command abbreviation
-    zsh-autosuggestions         ## command history hint
-    zsh-syntax-highlighting     ## command highlight
-
     # ohmyzsh built-in executable
     # extract                     ## extract archive including tar,7z,gz,bz2,xz,zip ... [Replaced by https://github.com/ouch-org/ouch]
     copybuffer                  ## shortcut: Ctrl-o: copy current input in CLI to system clipboard
@@ -60,11 +54,17 @@ plugins=(
     ripgrep
     rust
 
+    # manual install (not built-in in ohmyzsh)
+    # zsh-abbr                    ## command abbreviation
+    fzf-tab                     ## zsh fzf tab completion
+    zsh-autosuggestions         ## command history hint
+    # Note: zsh-syntax-highlighting must be the last plugin sourced
+    zsh-syntax-highlighting     ## command highlight
+
     # macOS only
     # dash                        ## open dash application
     # forklift                    ## open with forklift: fl [<file_or_folder>]
 )
-
 
 ######################################################################
 
@@ -98,20 +98,6 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 _INCLUDE ~/.p10k.zsh
 _INCLUDE ~/.p10k.rtx.zsh
-
-# zsh-abbr highlight
-# this configuration cannot be moved to other files (e.g. ~/.zshrc.post)
-typeset -A ZSH_HIGHLIGHT_REGEXP
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main regexp)
-if [[ $(uname -s) == 'Darwin*' ]]; then
-    # macOS
-    ZSH_HIGHLIGHT_REGEXP+=('^[[:blank:][:space:]]*('${(j:|:)${(k)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
-    ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow)
-else
-    # Linux
-    ZSH_HIGHLIGHT_REGEXP+=('^[[:blank:][:space:]]*('${(j:|:)${(k)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
-    ZSH_HIGHLIGHT_REGEXP+=('\<('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=yellow)
-fi
 
 ######################################################################
 

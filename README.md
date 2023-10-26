@@ -144,7 +144,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - zsh based on [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
   - useful plugins such as:
     - `fzf-tab`
-    - `zsh-abbr`
     - `zsh-autosuggestions`
     - `zsh-syntax-highlighting`
   - settings with multi-stages
@@ -187,7 +186,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - `tk`: kill all sessions except session 0
 - add auto edit for fzf
   - use ALT-V to quick edit without typing `v xxx` (`v` is alias for `nvim`)
-- use zsh abbreviations to replace some alias
 - simplify `$PATH` settings
   - use `_PATHAPPEND`, `_PATHPREPEND` to modify PATHs
   - use `_DIRCREATE` to create a directory if not exists

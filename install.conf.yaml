@@ -134,7 +134,6 @@
     ~/.zshrc.post: configs/zsh/zshrc.post
     ~/.oh-my-zsh: submodules/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/fzf-tab: submodules/fzf-tab
-    ~/.oh-my-zsh/custom/plugins/zsh-abbr: submodules/zsh-abbr
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: submodules/zsh-autosuggestions
     ~/.oh-my-zsh/custom/plugins/zsh-completions: submodules/zsh-completions
     ~/.zsh_completions: configs/zsh/completions
@@ -142,7 +141,6 @@
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.p10k.zsh: configs/zsh/powerlevel10k/.p10k.zsh
     ~/.p10k.rtx.zsh: configs/zsh/powerlevel10k/.p10k.rtx.zsh
-    ~/.config/zsh/abbreviations: configs/zsh/zsh-abbr/abbreviations
 
 # zshrc + wsl
 - defaults:
