@@ -92,5 +92,3 @@ inline_height = 12
 # cwd_filter = [
 #   "^/very/secret/area"
 # ]
-
-search_mode_shell_up_key_binding = "prefix"
