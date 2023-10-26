@@ -222,9 +222,9 @@ fi
 # use eza / lsd to replace ls
 if command -v eza &> /dev/null; then
     if xset q &>/dev/null && ! grep -qEi "WSL" /proc/version; then
-        alias eza='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --git-ignore --modified --icons --hyperlink'
+        alias eza='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --modified --icons --hyperlink'
     else
-        alias eza='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --git-ignore --modified --icons'
+        alias eza='eza --group-directories-first --time-style=long-iso --git --git-repos-no-status --modified --icons'
     fi
     alias ls='eza'
     alias l='eza'
