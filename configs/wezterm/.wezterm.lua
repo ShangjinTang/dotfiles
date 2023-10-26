@@ -44,5 +44,20 @@ config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 -- which render front-end to use
 config.front_end = "WebGpu" -- OpenGL (GPU) / Software (CPU) / WebGpu (GPU); default is WebGpu
 
+config.keys = {
+    {
+        key = "Insert",
+        mods = "CTRL",
+        -- action = wezterm.action.CopyTo("PrimarySelection"),  -- default
+        action = wezterm.action.CopyTo("Clipboard"),
+    },
+    {
+        key = "Insert",
+        mods = "SHIFT",
+        -- action = wezterm.action.PasteFrom("PrimarySelection"),  -- default
+        action = wezterm.action.PasteFrom("Clipboard"),
+    },
+}
+
 -- and finally, return the configuration to wezterm
 return config
