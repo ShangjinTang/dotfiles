@@ -47,7 +47,7 @@ fi
 # atuin init
 if command -v atuin &> /dev/null; then
     # https://atuin.sh/docs/key-binding#disable-up-arrow
-    eval "$(atuin init zsh --disable-up-arrow)" &> /dev/null
+    eval "$(atuin init zsh)" &> /dev/null
 fi
 
 # if $PYTHON3_HOST_PROG not configured, use default python3 for nvim
