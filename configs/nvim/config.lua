@@ -1267,29 +1267,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/mfussenegger/nvim-jdtls
-    {
-        "mfussenegger/nvim-jdtls",
-        -- do not add 'event = "VeryLazy"' here, otherwise it launch on all filetypes
-        ft = "java",
-        config = function()
-            require("jdtls").start_or_attach({
-                -- this depends on jdtls in "williamboman/mason-lspconfig.nvim" ensure_installed
-                cmd = {
-                    vim.fn.expand("~/.local/share/nvim/mason/bin/jdtls"),
-                    "--jvm-arg=-XX:+UseParallelGC",
-                    "--jvm-arg=-XX:GCTimeRatio=4",
-                    "--jvm-arg=-XX:AdaptiveSizePolicyWeight=90",
-                    "--jvm-arg=-Dsun.zip.disableMemoryMapping=true",
-                    "--jvm-arg=-Xmx4G",
-                },
-                root_dir = vim.fs.dirname(
-                    vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml", "gradle.build", ".project" }, { upward = true })[1]
-                ),
-            })
-        end,
-    },
-
     -- Reference: https://github.com/jay-babu/mason-null-ls.nvim
     {
         "jay-babu/mason-null-ls.nvim",
