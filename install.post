@@ -250,7 +250,8 @@ function install_cli_prebuilts() {
 # only install nerdfonts on GUI or WSL
 if xset q &> /dev/null || grep -qEi "WSL" /proc/version; then
     print_separate_line &&
-        install_nerdfonts RobotoMono FiraCode Mononoki VictorMono JetBrainsMono # ComicShannsMono Meslo IosevkaTerm UbuntuMono MPlus
+        # https://github.com/ryanoasis/nerd-fonts/releases/latest
+        install_nerdfonts JetBrainsMono ComicShannsMono FiraCode MPlus Mononoki RobotoMono # IosevkaTerm UbuntuMono VictorMono
 fi
 
 print_separate_line &&
