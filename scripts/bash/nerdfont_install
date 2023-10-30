@@ -26,7 +26,7 @@ function prepare_download() {
 function download() {
     # echo "Installing Nerd Fonts: $*"
     for font in "$@"; do
-        if [[ ! $(ls "${DOWNLOAD_DIR}/${font}/${font}NerdFont"*) ]] &> /dev/null; then
+        if [[ ! $(ls "${DOWNLOAD_DIR}/${font}"*) ]] &> /dev/null; then
             echo "- ${BOLD}${CYAN}INFO${RESET} Downloading from https://github.com/ryanoasis/nerd-fonts/releases/download/${RELEASE_VER}/${font}.zip to ${DOWNLOAD_DIR} ..."
             curl -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/${RELEASE_VER}/${font}.zip" -o "${font}.zip" && unzip -o "${font}.zip" -d "${DOWNLOAD_DIR}/$font" && rm -f ${font}.zip > /dev/null &&
                 echo "- ${BOLD}${CYAN}INFO${RESET} Downloading ${BOLD}${MAGENTA}${font} Nerd Font${RESET} to ${DOWNLOAD_DIR} succeeded" ||
