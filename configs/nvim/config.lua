@@ -1215,7 +1215,7 @@ lvim.plugins = {
                     db_file = "./cscope.out",
                     exec = "cscope", -- "cscope" or "gtags-cscope"
                     picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
-                    skip_picker_for_single_result = false, -- "false" or "true"
+                    skip_picker_for_single_result = true, -- "false" or "true"
                     db_build_cmd_args = { "-Rbqkv" },
                     statusline_indicator = nil,
                 },
@@ -1803,6 +1803,7 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
     "clangd",
     "pyright",
     "lua_ls",
+    "jdtls",
     "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
 })
 
@@ -1843,6 +1844,23 @@ lspmanager.setup("lua_ls", {
             },
         },
     },
+})
+
+lspmanager.setup("jdtls", {
+    cmd = {
+        "jdtls",
+        "-configuration",
+        vim.fn.expand("~/.cache/jdtls/config"),
+        "-data",
+        vim.fn.expand("~/.cache/jdtls/workspace"),
+        -- jvm args
+        "-XX:+UseParallelGC",
+        "-XX:GCTimeRatio=4",
+        "-XX:AdaptiveSizePolicyWeight=90",
+        "-Dsun.zip.disableMemoryMapping=true",
+        "-Xmx4G",
+    },
+    single_file_support = true,
 })
 
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
