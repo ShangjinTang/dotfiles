@@ -1861,6 +1861,16 @@ lspmanager.setup("jdtls", {
         "-Xmx4G",
     },
     single_file_support = true,
+    root_dir = function()
+        return vim.fs.dirname(vim.fs.find({
+            -- ".git",
+            "gradlew",
+            "mvnw",
+            "pom.xml",
+            "gradle.build",
+            ".project",
+        }, { upward = true })[1])
+    end,
 })
 
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
