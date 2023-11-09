@@ -83,6 +83,12 @@
     ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
     ~/.config/lazygit/config.yml: configs/lazygit/config.yml
     ~/bin/: linux/bin/*
+    ~/.config/fcitx5/conf/classicui.conf:
+      if: "command -v fcitx5"
+      path: ./configs/fcitx5/conf/classicui.conf
+    ~/.local/share/fcitx5/themes/:
+      if: "command -v fcitx5"
+      path: ./configs/fcitx5/themes/*
 
 # ArchLinux
 - defaults:
