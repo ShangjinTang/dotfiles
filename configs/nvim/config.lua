@@ -703,6 +703,15 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/rcarriga/nvim-notify
+    {
+        "rcarriga/nvim-notify",
+        lazy = false,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+    },
+
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
     {
         "kevinhwang91/nvim-ufo",
@@ -1528,11 +1537,11 @@ lvim.plugins = {
         config = function()
             require("noice").setup({
                 cmdline = {
+                    enabled = true,
                     view = "cmdline",
-                    enable = false,
                 },
                 messages = {
-                    enable = false,
+                    enabled = true,
                 },
                 lsp = {
                     override = {
