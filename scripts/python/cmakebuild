@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-# TODO: fix issue reported by linters
 
 import argparse
 import multiprocessing
 import os
+import subprocess
 import sys
 from shutil import which
 
+from packaging import version
 from rich.console import Console
 from rich.theme import Theme
 
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
@@ -26,46 +27,185 @@ class UltimateHelpFormatter(
     pass
 
 
+def is_version_greater_or_equal(version_string, target_version):
+    try:
+        source_version = version.parse(version_string)
+        target_version = version.parse(target_version)
+        return source_version >= target_version
+    except version.InvalidVersion:
+        return False
+
+
+def get_cmake_version():
+    try:
+        result = subprocess.run(
+            ["cmake", "--version"], capture_output=True, text=True, check=True
+        )
+        output_lines = result.stdout.strip().split("\n")
+        version_line = output_lines[0]
+        version = version_line.split(" ")[2]
+        return version
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return None
+
+
+def get_conan_version():
+    try:
+        result = subprocess.run(
+            ["conan", "--version"], capture_output=True, text=True, check=True
+        )
+        output_lines = result.stdout.strip().split("\n")
+        version_line = output_lines[0]
+        version = version_line.split(" ")[2]
+        return version
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return None
+
+
+def check_conan_version(required_version):
+    conan_version = get_conan_version()
+    if conan_version:
+        if is_version_greater_or_equal(conan_version, required_version):
+            cprint(f"Conan version {conan_version} >= {required_version}")
+            return True
+        else:
+            cprint(f"Conan version {conan_version} < {required_version}")
+            return False
+    else:
+        raise EnvironmentError("Conan is not found or an error occurred.")
+
+
+def validate_conan_version(required_version):
+    if not check_conan_version(required_version):
+        raise EnvironmentError(f"Conan version < {required_version}")
+
+
+def check_cmake_version(required_version):
+    cmake_version = get_cmake_version()
+    if cmake_version:
+        if is_version_greater_or_equal(cmake_version, required_version):
+            cprint(f"CMake version {cmake_version} >= {required_version}")
+            return True
+        else:
+            cprint(f"CMake version {cmake_version} < {required_version}")
+            return False
+    else:
+        raise EnvironmentError("CMake is not found or an error occurred.")
+
+
+def validate_cmake_version(required_version):
+    if not check_cmake_version(required_version):
+        raise EnvironmentError(f"CMake version < {required_version}")
+
+
+# return True if:
+#   either: conanfile.txt is newer than CMakeUserPresets.json
+#   or: CMakeUserPresets.json doesn't exist
+#   or: build/ doesn't exist
+def should_run_conan_install():
+    conanfile_path = "conanfile.txt"
+    cmake_presets_path = "CMakeUserPresets.json"
+    build_path = "build"
+
+    if not os.path.exists(build_path):
+        return True
+
+    if not os.path.exists(cmake_presets_path):
+        return True
+
+    conanfile_mtime = os.path.getmtime(conanfile_path)
+    cmake_presets_mtime = os.path.getmtime(cmake_presets_path)
+
+    return conanfile_mtime > cmake_presets_mtime
+
+
+def install_conan_packages(config):
+    try:
+        if should_run_conan_install():
+            print("Install conan packages")
+            subprocess.run(
+                ["conan", "install", ".", "-s", f"build_type={config}"],
+                check=True,
+                cwd=os.getcwd(),
+            )
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        raise EnvironmentError("Install conan packages failed")
+
+
 def auto_complete_flags(flags, config):
     if "-DCMAKE_EXPORT_COMPILE_COMMANDS" not in flags:
         flags += " -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
     if "-DCMAKE_BUILD_TYPE" not in flags:
-        flags += " -DCMAKE_BUILD_TYPE={}".format(config)
+        flags += f" -DCMAKE_BUILD_TYPE={config}"
     return flags
 
 
 def main(args):
+    run_with_conan_preset = (
+        args.conan_preset
+    )  # This requires CMake >= 3.23. If it's set to False, we always use lagacy conan_toolchain build
     if not which("cmake"):
         raise EnvironmentError("'cmake' is not found. Please install it first.")
 
     complete_flags = auto_complete_flags(args.flags, args.config)
+    compile_command = "cmake"
+    run_with_conan = False
 
-    # Generate cmake command
-    compile_command = "cmake -S . -B {}".format(args.output)
+    if os.path.exists(os.path.join(os.getcwd(), "conanfile.txt")):
+        validate_conan_version("2.0")
+        install_conan_packages(args.config)
+        args.output = f"build/{args.config}"
+        if run_with_conan_preset and check_cmake_version("3.23"):
+            cprint("[cyan]Info[/cyan] Use `cmake --preset`")
+            compile_command += f" --preset conan-{args.config.lower()}"
+            run_with_conan_preset = True
+        else:
+            validate_cmake_version("3.15")
+            cprint("[cyan]Info[/cyan] Use `cmake -DCMAKE_TOOLCHAIN_FILE=...`")
+            compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={args.output}/generators/conan_toolchain.cmake"
+            run_with_conan_preset = False
+        run_with_conan = True
+    else:
+        compile_command += f" -S . -B {args.output}"
+
     merged_commands_list = []
     if complete_flags:
         compile_command += " " + complete_flags
         merged_commands_list.append(compile_command)
         # Copy compile_commands.json to current directory
         if "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" in complete_flags:
-            copy_compdb_command = "cp {}/compile_commands.json .".format(args.output)
+            copy_compdb_command = f"cp {args.output}/compile_commands.json ."
             merged_commands_list.append(copy_compdb_command)
 
-    merged_commands_list.append(
-        "cmake --build {} --target {} --config {} -j {}".format(
-            args.output, args.target, args.config, args.jobs
+    if run_with_conan_preset:
+        merged_commands_list.append(
+            f"cmake --build --preset conan-{args.config.lower()} -j {args.jobs}"
         )
-    )
+        if args.target != "all":
+            merged_commands_list.append(
+                f"cmake --build --preset conan-{args.config.lower()} --target {args.target} -j {args.jobs}"
+            )
+    else:
+        merged_commands_list.append(
+            f"cmake --build {args.output} --config {args.config} -j {args.jobs}"
+        )
+        if args.target != "all":
+            merged_commands_list.append(
+                f"cmake --build {args.output} --target {args.target} --config {args.config} -j {args.jobs}"
+            )
 
     # Get clean command (optional)
     if args.clean_output:
-        clean_command = "rm ./{}".format(args.output)
+        output_top_dir = args.output.split("/")[0]
+        clean_command = f"rm -r ./{output_top_dir}"
+        if run_with_conan:
+            clean_command += " CMakeUserPresets.json"
         merged_commands_list.append(clean_command)
 
     # cmake + copy compdb + clean
     merged_commands = " && ".join(merged_commands_list)
 
-    cprint("[green]{}[/green]".format(merged_commands))
+    cprint(f"[magenta]{merged_commands}[/magenta]")
     cprint("-" * 70)
     os.system(merged_commands)
     cprint("-" * 70)
@@ -98,8 +238,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "-j",
         "--jobs",
-        default="{}".format(multiprocessing.cpu_count()),
+        default=f"{multiprocessing.cpu_count()}",
         help="parallel thread count for make\n",
+    )
+    parser.add_argument(
+        "--conan_preset",
+        default=False,
+        action="store_true",
+        help="use cmake --preset with conan\n",
     )
     try:
         main(parser.parse_args())
