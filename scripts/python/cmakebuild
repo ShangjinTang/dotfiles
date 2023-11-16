@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import logging
 import multiprocessing
 import os
 import subprocess
@@ -14,11 +15,19 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
 cprint = console.print
+
+LOGGING_FORMAT = "%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s"
+LOGGING_DATEFMT = "%Y-%m-%d %H:%M:%S"
+logging.basicConfig(
+    level=logging.INFO,
+    format=LOGGING_FORMAT,
+    datefmt=LOGGING_DATEFMT,
+)
 
 
 class UltimateHelpFormatter(
@@ -27,7 +36,7 @@ class UltimateHelpFormatter(
     pass
 
 
-def is_version_greater_or_equal(version_string, target_version):
+def is_version_greater_or_equal(version_string: str, target_version: str) -> bool:
     try:
         source_version = version.parse(version_string)
         target_version = version.parse(target_version)
@@ -36,35 +45,23 @@ def is_version_greater_or_equal(version_string, target_version):
         return False
 
 
-def get_cmake_version():
+def get_version(
+    command: str, version_arg: str = "--version", extract_field: int = -1
+) -> str:
     try:
         result = subprocess.run(
-            ["cmake", "--version"], capture_output=True, text=True, check=True
+            [command, version_arg], capture_output=True, text=True, check=True
         )
         output_lines = result.stdout.strip().split("\n")
         version_line = output_lines[0]
-        version = version_line.split(" ")[2]
+        version = version_line.split(" ")[extract_field]
         return version
     except (FileNotFoundError, subprocess.CalledProcessError):
-        return None
+        return ""
 
 
-def get_conan_version():
-    try:
-        result = subprocess.run(
-            ["conan", "--version"], capture_output=True, text=True, check=True
-        )
-        output_lines = result.stdout.strip().split("\n")
-        version_line = output_lines[0]
-        version = version_line.split(" ")[2]
-        return version
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        return None
-
-
-def check_conan_version(required_version):
-    conan_version = get_conan_version()
-    if conan_version:
+def check_conan_version(required_version: str) -> bool:
+    if conan_version := get_version("conan"):
         if is_version_greater_or_equal(conan_version, required_version):
             cprint(f"conan version {conan_version} >= {required_version}")
             return True
@@ -75,27 +72,13 @@ def check_conan_version(required_version):
         raise EnvironmentError("conan is not found or an error occurred.")
 
 
-def validate_conan_version(required_version):
+def validate_conan_version(required_version: str):
     if not check_conan_version(required_version):
         raise EnvironmentError(f"conan version < {required_version}")
 
 
-def get_vcpkg_version():
-    try:
-        result = subprocess.run(
-            ["vcpkg", "--version"], capture_output=True, text=True, check=True
-        )
-        output_lines = result.stdout.strip().split("\n")
-        version_line = output_lines[0]
-        version = version_line.split(" ")[5]
-        return version
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        return None
-
-
 def validate_vcpkg_install():
-    vcpkg_version = get_vcpkg_version()
-    if vcpkg_version:
+    if vcpkg_version := get_version("vcpkg"):
         cprint(f"vcpkg version {vcpkg_version}")
     else:
         raise EnvironmentError("Vcpkg is not found or an error occurred.")
@@ -104,20 +87,19 @@ def validate_vcpkg_install():
         raise EnvironmentError("$VCPKG_ROOT is not set")
 
 
-def check_cmake_version(required_version):
-    cmake_version = get_cmake_version()
-    if cmake_version:
+def check_cmake_version(required_version: str) -> bool:
+    if cmake_version := get_version("cmake"):
         if is_version_greater_or_equal(cmake_version, required_version):
-            cprint(f"cmake version {cmake_version} >= {required_version}")
+            print(f"cmake version {cmake_version} >= {required_version}")
             return True
         else:
-            cprint(f"cmake version {cmake_version} < {required_version}")
+            print(f"cmake version {cmake_version} < {required_version}")
             return False
     else:
         raise EnvironmentError("cmake is not found or an error occurred.")
 
 
-def validate_cmake_version(required_version):
+def validate_cmake_version(required_version: str):
     if not check_cmake_version(required_version):
         raise EnvironmentError(f"cmake version < {required_version}")
 
@@ -126,7 +108,7 @@ def validate_cmake_version(required_version):
 #   either: conanfile.txt is newer than CMakeUserPresets.json
 #   or: CMakeUserPresets.json doesn't exist
 #   or: build/ doesn't exist
-def should_run_conan_install():
+def should_run_conan_install() -> bool:
     conanfile_path = "conanfile.txt"
     cmake_presets_path = "CMakeUserPresets.json"
     build_path = "build"
@@ -143,7 +125,7 @@ def should_run_conan_install():
     return conanfile_mtime > cmake_presets_mtime
 
 
-def install_conan_packages(config):
+def install_conan_packages(config: str):
     try:
         if should_run_conan_install():
             print("Install conan packages")
@@ -156,7 +138,7 @@ def install_conan_packages(config):
         raise EnvironmentError("Install conan packages failed")
 
 
-def auto_complete_flags(flags, config):
+def auto_complete_flags(flags: str, config: str) -> str:
     if "-DCMAKE_EXPORT_COMPILE_COMMANDS" not in flags:
         flags += " -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
     if "-DCMAKE_BUILD_TYPE" not in flags:
@@ -164,7 +146,7 @@ def auto_complete_flags(flags, config):
     return flags
 
 
-def get_third_party_package_manager():
+def get_third_party_package_manager() -> str:
     is_conan = os.path.exists(os.path.join(os.getcwd(), "conanfile.txt"))
     is_vcpkg = os.path.exists(os.path.join(os.getcwd(), "vcpkg.json"))
     if is_conan and is_vcpkg:
@@ -194,19 +176,16 @@ def main(args):
         install_conan_packages(args.config)
         args.output = f"build/{args.config}"
         if run_with_conan_preset and check_cmake_version("3.23"):
-            cprint("[cyan]conan[/cyan] Use `cmake --preset`")
             compile_command += f" --preset conan-{args.config.lower()}"
             run_with_conan_preset = True
         else:
             validate_cmake_version("3.15")
-            cprint("[cyan]conan[/cyan] Use `cmake -DCMAKE_TOOLCHAIN_FILE=...`")
             compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={args.output}/generators/conan_toolchain.cmake"
             run_with_conan_preset = False
         run_with_conan = True
     elif get_third_party_package_manager() == "vcpkg":
         validate_vcpkg_install()
         validate_cmake_version("3.15")
-        cprint("[cyan]vcpkg[/cyan] Use `cmake -DCMAKE_TOOLCHAIN_FILE=...`")
         compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={os.environ.get('VCPKG_ROOT')}/scripts/buildsystems/vcpkg.cmake"
     else:
         compile_command += f" -S . -B {args.output}"
@@ -262,7 +241,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f",
         "--flags",
-        default="-DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug",
+        default="-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
         help="compile flags\n",
     )
     parser.add_argument(
