@@ -1537,7 +1537,7 @@ lvim.plugins = {
         config = function()
             require("noice").setup({
                 cmdline = {
-                    enabled = true,
+                    enabled = false,
                     view = "cmdline",
                 },
                 messages = {
@@ -1613,16 +1613,25 @@ lvim.plugins = {
                 ),
             })
 
-            local highlighters = {
-                wilder.pcre2_highlighter(),
-                wilder.lua_fzy_highlighter(),
-            }
-
-            local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
-                border = "rounded",
+            local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_palette_theme({
+                border = "single",
                 winblend = 20,
+                max_height = "60%", -- max height of the palette
+                min_height = 0, -- set to the same as 'max_height' for a fixed height window
+                prompt_position = "bottom", -- 'top' or 'bottom' to set the location of the prompt
+                reverse = 1, -- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
                 empty_message = wilder.popupmenu_empty_message_with_spinner(),
-                highlighter = highlighters,
+                highlighter = {
+                    wilder.pcre2_highlighter(),
+                    wilder.lua_fzy_highlighter(),
+                },
+                highlights = {
+                    accent = wilder.make_hl(
+                        "WilderAccent",
+                        "Pmenu",
+                        { { a = 1 }, { a = 1 }, { foreground = "#f4468f" } }
+                    ),
+                },
                 left = {
                     " ",
                     wilder.popupmenu_devicons(),
