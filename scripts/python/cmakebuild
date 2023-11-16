@@ -14,7 +14,7 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
@@ -66,36 +66,60 @@ def check_conan_version(required_version):
     conan_version = get_conan_version()
     if conan_version:
         if is_version_greater_or_equal(conan_version, required_version):
-            cprint(f"Conan version {conan_version} >= {required_version}")
+            cprint(f"conan version {conan_version} >= {required_version}")
             return True
         else:
-            cprint(f"Conan version {conan_version} < {required_version}")
+            cprint(f"conan version {conan_version} < {required_version}")
             return False
     else:
-        raise EnvironmentError("Conan is not found or an error occurred.")
+        raise EnvironmentError("conan is not found or an error occurred.")
 
 
 def validate_conan_version(required_version):
     if not check_conan_version(required_version):
-        raise EnvironmentError(f"Conan version < {required_version}")
+        raise EnvironmentError(f"conan version < {required_version}")
+
+
+def get_vcpkg_version():
+    try:
+        result = subprocess.run(
+            ["vcpkg", "--version"], capture_output=True, text=True, check=True
+        )
+        output_lines = result.stdout.strip().split("\n")
+        version_line = output_lines[0]
+        version = version_line.split(" ")[5]
+        return version
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return None
+
+
+def validate_vcpkg_install():
+    vcpkg_version = get_vcpkg_version()
+    if vcpkg_version:
+        cprint(f"vcpkg version {vcpkg_version}")
+    else:
+        raise EnvironmentError("Vcpkg is not found or an error occurred.")
+
+    if os.environ.get("VCPKG_ROOT") is None:
+        raise EnvironmentError("$VCPKG_ROOT is not set")
 
 
 def check_cmake_version(required_version):
     cmake_version = get_cmake_version()
     if cmake_version:
         if is_version_greater_or_equal(cmake_version, required_version):
-            cprint(f"CMake version {cmake_version} >= {required_version}")
+            cprint(f"cmake version {cmake_version} >= {required_version}")
             return True
         else:
-            cprint(f"CMake version {cmake_version} < {required_version}")
+            cprint(f"cmake version {cmake_version} < {required_version}")
             return False
     else:
-        raise EnvironmentError("CMake is not found or an error occurred.")
+        raise EnvironmentError("cmake is not found or an error occurred.")
 
 
 def validate_cmake_version(required_version):
     if not check_cmake_version(required_version):
-        raise EnvironmentError(f"CMake version < {required_version}")
+        raise EnvironmentError(f"cmake version < {required_version}")
 
 
 # return True if:
@@ -140,31 +164,50 @@ def auto_complete_flags(flags, config):
     return flags
 
 
+def get_third_party_package_manager():
+    is_conan = os.path.exists(os.path.join(os.getcwd(), "conanfile.txt"))
+    is_vcpkg = os.path.exists(os.path.join(os.getcwd(), "vcpkg.json"))
+    if is_conan and is_vcpkg:
+        raise EnvironmentError(
+            "Both vcpkg and conan configuration files are here, please remove one."
+        )
+    if is_vcpkg:
+        return "vcpkg"
+    if is_conan:
+        return "conan"
+    return ""
+
+
 def main(args):
     run_with_conan_preset = (
         args.conan_preset
-    )  # This requires CMake >= 3.23. If it's set to False, we always use lagacy conan_toolchain build
+    )  # This requires cmake >= 3.23. If it's set to False, we always use lagacy conan_toolchain build
     if not which("cmake"):
-        raise EnvironmentError("'cmake' is not found. Please install it first.")
+        raise EnvironmentError("cmake is not found. Please install it first.")
 
     complete_flags = auto_complete_flags(args.flags, args.config)
     compile_command = "cmake"
     run_with_conan = False
 
-    if os.path.exists(os.path.join(os.getcwd(), "conanfile.txt")):
+    if get_third_party_package_manager() == "conan":
         validate_conan_version("2.0")
         install_conan_packages(args.config)
         args.output = f"build/{args.config}"
         if run_with_conan_preset and check_cmake_version("3.23"):
-            cprint("[cyan]Info[/cyan] Use `cmake --preset`")
+            cprint("[cyan]conan[/cyan] Use `cmake --preset`")
             compile_command += f" --preset conan-{args.config.lower()}"
             run_with_conan_preset = True
         else:
             validate_cmake_version("3.15")
-            cprint("[cyan]Info[/cyan] Use `cmake -DCMAKE_TOOLCHAIN_FILE=...`")
+            cprint("[cyan]conan[/cyan] Use `cmake -DCMAKE_TOOLCHAIN_FILE=...`")
             compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={args.output}/generators/conan_toolchain.cmake"
             run_with_conan_preset = False
         run_with_conan = True
+    elif get_third_party_package_manager() == "vcpkg":
+        validate_vcpkg_install()
+        validate_cmake_version("3.15")
+        cprint("[cyan]vcpkg[/cyan] Use `cmake -DCMAKE_TOOLCHAIN_FILE=...`")
+        compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={os.environ.get('VCPKG_ROOT')}/scripts/buildsystems/vcpkg.cmake"
     else:
         compile_command += f" -S . -B {args.output}"
 
