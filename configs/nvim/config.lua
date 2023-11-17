@@ -944,6 +944,31 @@ lvim.plugins = {
     {
         "sindrets/diffview.nvim",
         event = "VeryLazy",
+        config = function()
+            local actions = require("diffview.actions")
+            require("diffview").setup({
+                file_panel = {
+                    listing_style = "tree", -- One of 'list' or 'tree'
+                    tree_options = {
+                        flatten_dirs = true,
+                        folder_statuses = "only_folded",
+                    },
+                    win_config = { -- See ':h diffview-config-win_config'
+                        position = "bottom",
+                        height = 6,
+                        win_opts = {},
+                    },
+                },
+                file_history_panel = {
+                    win_config = { -- See ':h diffview-config-win_config'
+                        type = "split",
+                        position = "bottom",
+                        height = 6,
+                        win_opts = {},
+                    },
+                },
+            })
+        end,
     },
 
     -- Reference: https://github.com/tpope/vim-fugitive
