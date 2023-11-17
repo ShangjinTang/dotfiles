@@ -15,7 +15,7 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.4.0"
+__version__ = "1.5.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
@@ -108,10 +108,10 @@ def validate_cmake_version(required_version: str):
 #   either: conanfile.txt is newer than CMakeUserPresets.json
 #   or: CMakeUserPresets.json doesn't exist
 #   or: build/ doesn't exist
-def should_run_conan_install() -> bool:
+def should_run_conan_install(config: str) -> bool:
     conanfile_path = "conanfile.txt"
     cmake_presets_path = "CMakeUserPresets.json"
-    build_path = "build"
+    build_path = os.path.join("build", config)
 
     if not os.path.exists(build_path):
         return True
@@ -127,15 +127,22 @@ def should_run_conan_install() -> bool:
 
 def install_conan_packages(config: str):
     try:
-        if should_run_conan_install():
+        if should_run_conan_install(config):
             print("Install conan packages")
             subprocess.run(
-                ["conan", "install", ".", "-s", f"build_type={config}"],
+                [
+                    "conan",
+                    "install",
+                    ".",
+                    "-s",
+                    f"build_type={config}",
+                    "--build=missing",
+                ],
                 check=True,
                 cwd=os.getcwd(),
             )
     except (FileNotFoundError, subprocess.CalledProcessError):
-        raise EnvironmentError("Install conan packages failed")
+        raise EnvironmentError("Install conan packages failed.")
 
 
 def auto_complete_flags(flags: str, config: str) -> str:
@@ -168,7 +175,7 @@ def main(args):
         raise EnvironmentError("cmake is not found. Please install it first.")
 
     complete_flags = auto_complete_flags(args.flags, args.config)
-    compile_command = "cmake"
+    create_builddir_command = "cmake"
     run_with_conan = False
 
     if get_third_party_package_manager() == "conan":
@@ -176,45 +183,41 @@ def main(args):
         install_conan_packages(args.config)
         args.output = f"build/{args.config}"
         if run_with_conan_preset and check_cmake_version("3.23"):
-            compile_command += f" --preset conan-{args.config.lower()}"
+            create_builddir_command += f" --preset conan-{args.config.lower()}"
             run_with_conan_preset = True
         else:
             validate_cmake_version("3.15")
-            compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={args.output}/generators/conan_toolchain.cmake"
+            create_builddir_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={args.output}/generators/conan_toolchain.cmake"
             run_with_conan_preset = False
         run_with_conan = True
     elif get_third_party_package_manager() == "vcpkg":
         validate_vcpkg_install()
         validate_cmake_version("3.15")
-        compile_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={os.environ.get('VCPKG_ROOT')}/scripts/buildsystems/vcpkg.cmake"
+        create_builddir_command += f" -S . -B {args.output} -DCMAKE_TOOLCHAIN_FILE={os.environ.get('VCPKG_ROOT')}/scripts/buildsystems/vcpkg.cmake"
     else:
-        compile_command += f" -S . -B {args.output}"
+        create_builddir_command += f" -S . -B {args.output}"
 
     merged_commands_list = []
     if complete_flags:
-        compile_command += " " + complete_flags
-        merged_commands_list.append(compile_command)
+        create_builddir_command += " " + complete_flags
+        merged_commands_list.append(create_builddir_command)
         # Copy compile_commands.json to current directory
         if "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" in complete_flags:
             copy_compdb_command = f"cp {args.output}/compile_commands.json ."
             merged_commands_list.append(copy_compdb_command)
 
+    build_command = ""
     if run_with_conan_preset:
-        merged_commands_list.append(
+        build_command = (
             f"cmake --build --preset conan-{args.config.lower()} -j {args.jobs}"
         )
-        if args.target != "all":
-            merged_commands_list.append(
-                f"cmake --build --preset conan-{args.config.lower()} --target {args.target} -j {args.jobs}"
-            )
     else:
-        merged_commands_list.append(
+        build_command = (
             f"cmake --build {args.output} --config {args.config} -j {args.jobs}"
         )
-        if args.target != "all":
-            merged_commands_list.append(
-                f"cmake --build {args.output} --target {args.target} --config {args.config} -j {args.jobs}"
-            )
+    if args.target != "all":
+        build_command += f" --target {args.target}"
+    merged_commands_list.append(build_command)
 
     # Get clean command (optional)
     if args.clean_output:
