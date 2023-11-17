@@ -179,7 +179,17 @@ wk.register({
         function()
             require("telescope.builtin").find_files({
                 cwd = vim.fn.expand("%:h"),
-                prompt_title = "Find Files in Current File Dir",
+                prompt_title = "Find Files in Vim-File Dir",
+                previewer = false,
+            })
+        end,
+        "Find Files in Current File Dir",
+    },
+    ["<leader>fs"] = {
+        function()
+            require("telescope.builtin").find_files({
+                cwd = vim.fn.getcwd(),
+                prompt_title = "Find Files in Shell Dir",
                 previewer = false,
             })
         end,
