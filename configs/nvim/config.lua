@@ -1280,6 +1280,7 @@ lvim.plugins = {
                     "bashls", -- Bash
                     "clangd", -- C/C++
                     "cmake", -- CMake
+                    "neocmake", -- CMake
                     "dockerls", -- Docker
                     "docker_compose_language_service", -- Docker Compose
                     "jdtls", -- Java
@@ -1951,6 +1952,8 @@ lspmanager.setup("jdtls", {
         }, { upward = true })[1])
     end,
 })
+
+lspmanager.setup("neocmake", {})
 
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
 --   { "markdown", "rst", "plaintext", "toml", "proto" }
