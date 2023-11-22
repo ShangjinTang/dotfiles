@@ -27,8 +27,12 @@ build/
 bazel-*
 # scons
 .sconsign.dblite
+# cmake
 cmake-build-debug
 cmake-build-release
+CMakeCache.txt
+CMakeFiles/
+CMakeUserPresets.json
 
 # python cache
 __pycache__
