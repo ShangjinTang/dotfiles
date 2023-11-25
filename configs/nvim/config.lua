@@ -1295,7 +1295,8 @@ lvim.plugins = {
                     -- FrontEnd
                     "cssls", -- CSS
                     "html", -- HTML
-                    "tsserver", -- TypeScript
+                    "quick_lint_js", -- JavaScript
+                    "tsserver", -- JavaScript, TypeScript
                 },
             })
         end,
@@ -1954,6 +1955,43 @@ lspmanager.setup("jdtls", {
 })
 
 lspmanager.setup("neocmake", {})
+
+lspmanager.setup("html", {})
+lspmanager.setup("cssls", {})
+lspmanager.setup("quick_lint_js", {
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+    },
+    root_dir = function()
+        return vim.fs.dirname(vim.fs.find({
+            ".git",
+            "tsconfig.json",
+            "jsconfig.json",
+            "package.json",
+            ".project",
+        }, { upward = true })[1])
+    end,
+    single_file_support = true,
+})
+
+lspmanager.setup("tsserver", {
+    filetypes = {
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+    },
+    root_dir = function()
+        return vim.fs.dirname(vim.fs.find({
+            ".git",
+            "tsconfig.json",
+            "package.json",
+            ".project",
+        }, { upward = true })[1])
+    end,
+    single_file_support = true,
+})
 
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
 --   { "markdown", "rst", "plaintext", "toml", "proto" }
