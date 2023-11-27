@@ -41,6 +41,9 @@ __pycache__
 target/
 Cargo.lock
 
+# nodejs / npm
+node_modules
+
 ######################################################################
 # macOS only
 
