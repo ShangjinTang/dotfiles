@@ -15,6 +15,16 @@ vim.api.nvim_create_autocmd({
     "BufNewFile",
     "BufRead",
 }, {
+    pattern = "*.mdx",
+    callback = function()
+        vim.cmd([[ set ft=markdown ]])
+    end,
+})
+
+vim.api.nvim_create_autocmd({
+    "BufNewFile",
+    "BufRead",
+}, {
     pattern = "*.md",
     callback = function()
         vim.opt.tabstop = 2
