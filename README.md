@@ -89,20 +89,25 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v1.0.0 --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
 # Essential packages
 rtx global neovim@latest
 rtx global node@latest
-rtx global tmux@3.3a
 rtx global lazygit@latest
 rtx global zoxide@latest
-# recommend to use rtx to control python versions
+
+# tmux
+sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config unzip
+rtx global tmux@3.3a
+
+# python: recommend to use rtx to control python versions
 sudo apt install -y libssl-dev liblzma-dev # depdendency for python build
 rtx global python@3.10                     # or 'rtx global python@latest'
 
 # Essential: support for python plugins in Nvim
+sudo apt install python3-pip
 pip3 install pynvim
 
 # install the pre-defined packages
