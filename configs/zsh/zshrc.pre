@@ -29,8 +29,6 @@ export NVIM_FORMAT_ON_SAVE=false
 # show diagnostics on hover or not
 export NVIM_SHOW_DIAG_ON_HOVER=false
 export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error/warn/info/hint
-export NVIM_IM_SELECT_COMMAND=""  # "fcitx5-remote"
-
 #---------------------------------------------------------------------
 # For ChatGPT.nvim and 'sgpt' CLI command
 # export OPENAI_API_KEY=""
