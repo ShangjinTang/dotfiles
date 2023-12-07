@@ -700,6 +700,7 @@ lvim.plugins = {
                     flash = true,
                 },
             })
+            require("flash").setup()
         end,
     },
 
