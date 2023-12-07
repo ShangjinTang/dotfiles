@@ -328,7 +328,19 @@ wk.register({
     ["<leader>s"] = { name = "+Search & Substitute" },
     ["<leader>sw"] = { "Substitute word (from current selection)" },
     ["<leader>sa"] = { "Substitute word (from first line)" },
-    ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "Substitute with Spectre" },
+    ["<leader>sr"] = {
+        function()
+            require("spectre").open({
+                is_insert_mode = true,
+                cwd = vim.fn.expand("%:h"),
+                search_text = "",
+                replace_text = "",
+                path = "/" .. vim.fn.expand("%:t"),
+                is_close = false,
+            })
+        end,
+        "Substitute with Regex",
+    },
 
     ["<leader>m"] = { name = "+Markdown (Telekasten)" },
     ["<leader>mf"] = { "<cmd>Telekasten find_notes<cr>", "Find Notes" },
