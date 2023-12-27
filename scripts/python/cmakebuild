@@ -226,9 +226,8 @@ def main(args, unknown_args):
         create_build_dir_command += " " + complete_flags
         merged_commands_list.append(create_build_dir_command)
         # Copy compile_commands.json to current directory
-        if "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" in complete_flags:
-            copy_compdb_command = f"cp {build_dir_with_type}/compile_commands.json ."
-            merged_commands_list.append(copy_compdb_command)
+        copy_compdb_command = f"cp -f {build_dir_with_type}/compile_commands.json . &> /dev/null"
+        merged_commands_list.append(copy_compdb_command)
 
     build_command = ""
     if run_with_conan_preset:
