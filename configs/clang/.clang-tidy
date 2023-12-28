@@ -1,7 +1,7 @@
 # Reference: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 Checks: -*,
   clang-analyzer-*,
-  cppcoreguidelines-*, -cppcoreguidelines-owning-memory, -cppcoreguidelines-avoid-do-while,
+  cppcoreguidelines-*, -cppcoreguidelines-owning-memory, -cppcoreguidelines-avoid-do-while, -cppcoreguidelines-avoid-magic-numbers,
   google-*, -google-readability-todo,
   -header,
   hicpp-*,
@@ -9,7 +9,7 @@ Checks: -*,
   misc-*,
   modernize-*, -modernize-use-trailing-return-type,
   performance-*,
-  readability-*, -readability-identifier-length,
+  readability-*, -readability-identifier-length, -readability-named-parameter, -readability-magic-numbers
 # Reference: https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
 # Note: default disable CheckOptions for open source projects have different case styles
 # CheckOptions:
