@@ -1894,6 +1894,12 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/vim-scripts/DoxygenToolkit.vim
+    {
+        "vim-scripts/DoxygenToolkit.vim",
+        event = "VeryLazy",
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
