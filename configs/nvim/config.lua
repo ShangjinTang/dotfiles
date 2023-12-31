@@ -1885,10 +1885,14 @@ lvim.plugins = {
                 compiler_flags = "", -- Default flags passed to the compiler.
                 job_timeout_ms = 25000, -- Timeout for libuv job in milliseconds.
                 languages = { -- Language specific default compiler/flags
-                    -- c = {
-                    --     compiler = "cclang1701", -- See: https://godbolt.org/api/compilers/c
-                    --     compiler_flags = "-O0 -Wall -pedantic",
-                    -- },
+                    ["c"] = {
+                        compiler = "cclang1701", -- See: https://godbolt.org/api/compilers/c
+                        compiler_flags = "-O0 -Wall -pedantic -g",
+                    },
+                    ["c++"] = {
+                        compiler = "clang1701", -- See: https://godbolt.org/api/compilers/c
+                        compiler_flags = "-O0 -Wall -pedantic -g -fno-exceptions -std=c++20",
+                    },
                 },
             })
         end,
