@@ -27,7 +27,7 @@ Partially supported:
   - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with full features enabled
     - see: [How to Install on an Oldschool Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
-    - executables: **zsh**, **rustup & cargo**, **rtx**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
+    - executables: **zsh**, **rustup & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
     - python3 packages: **pynvim**
   - You can download in executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
@@ -63,8 +63,8 @@ Log out and relogin to make sure the shell is changed to `zsh`.
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-# # recommend to use rtx to control python versions
-# rtx global python@3.10 # or 'rtx global python@latest'
+# # recommend to use mise to control python versions
+# mise global python@3.10 # or 'mise global python@latest'
 
 # Essential: support for python plugins in Nvim
 pip3 install pynvim
@@ -93,18 +93,18 @@ git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 -
 ~/.dotfiles/install && source ~/.zshrc
 
 # Essential packages
-rtx global neovim@latest
-rtx global node@latest
-rtx global lazygit@latest
-rtx global zoxide@latest
+mise global neovim@latest
+mise global node@latest
+mise global lazygit@latest
+mise global zoxide@latest
 
 # tmux
 sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config unzip
-rtx global tmux@3.3a
+mise global tmux@3.3a
 
-# python: recommend to use rtx to control python versions
+# python: recommend to use mise to control python versions
 sudo apt install -y libssl-dev liblzma-dev # depdendency for python build
-rtx global python@3.10                     # or 'rtx global python@latest'
+mise global python@3.10                    # or 'mise global python@latest'
 
 # Essential: support for python plugins in Nvim
 sudo apt install python3-pip
@@ -117,7 +117,7 @@ pip3 install hydra-core "typer[all]" && sudo mapt install
 ### Other Ubuntu x86_64 Versions
 
 Refer to installation above.
-For some essential binaries, use [rtx](https://github.com/jdx/rtx) and [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+For some essential binaries, use [mise](https://github.com/jdx/mise) and [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## NVIM Plugins Installation
 
@@ -154,8 +154,8 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - settings with multi-stages
     - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.local` -> `~/.zshrc.post`
   - support customized settings (in `~/zshrc.local`)
-- [rtx](https://github.com/jdx/rtx)
-  - `rtx` is like `asdf`, but much more fast and user-friendly
+- [mise](https://github.com/jdx/mise)
+  - `mise` is like `asdf`, but much more fast and user-friendly
   - use `~/.tool-versions` to install essential packages
 - nvim (>=0.9)
   - based on **LunarVim**, but without manual installation
@@ -241,12 +241,12 @@ Then follow [Gist TF_Torch_GPU_Installation](https://gist.github.com/ShangjinTan
 
 ## Tips & Issue Fix
 
-### rtx
+### mise
 
-- If you do not have a proxy, you might occur this issue in China Mainland. `rtx install python` is downloading from https://www.python.org, maybe the download is slow.
-- If you have issue with `rtx` package, please remove the issue package from `.tool-versions` and manually install it.
-- If you need to use a different version in a folder, use `rtx local <some-package>@<version-number>`
-- `rtx` support all [asdf-plugins](https://github.com/asdf-vm/asdf-plugins)
+- If you do not have a proxy, you might occur this issue in China Mainland. `mise install python` is downloading from https://www.python.org, maybe the download is slow.
+- If you have issue with `mise` package, please remove the issue package from `.tool-versions` and manually install it.
+- If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`
+- `mise` support all [asdf-plugins](https://github.com/asdf-vm/asdf-plugins)
 
 ### nvim
 

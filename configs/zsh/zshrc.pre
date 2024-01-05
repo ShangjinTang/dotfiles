@@ -7,10 +7,10 @@
 export EDITOR=nvim
 
 #---------------------------------------------------------------------
-# rtx is an 'asdf'-like tool to install other binaries, but more user-friendly and fast
-# rtx global config: ~/.tool-versions
+# mise is an 'asdf'-like tool to install other binaries, but more user-friendly and fast
+# mise global config: ~/.tool-versions
 # DO NOT suggest to modify this unless you are on an offline server
-export USE_RTX=1
+export USE_MISE=1
 
 #=====================================================================
 # customized exports, can be overrided in ~/.zshrc.private or ~/.zshrc.local
@@ -213,8 +213,8 @@ alias setdark="set_theme dark"
 # ALIASES
 
 # zoxide: a rust implementation for z / autojump
-if rtx which zoxide &> /dev/null; then
-    eval "$($(rtx which zoxide) init zsh)"
+if mise which zoxide &> /dev/null; then
+    eval "$($(mise which zoxide) init zsh)"
 elif command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
@@ -263,7 +263,7 @@ else
 fi
 
 # tmux -> t
-if command -v tmux &> /dev/null || rtx which tmux &> /dev/null; then
+if command -v tmux &> /dev/null || mise which tmux &> /dev/null; then
     function t() {
         # set default $session to $1 or 0 (if $1 not exist)
         local session="${1:-0}"

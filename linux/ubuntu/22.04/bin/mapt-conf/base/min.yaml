@@ -20,7 +20,7 @@ wget: true
 xclip: true
 curl: true
 telnet: true
-libssl-dev: true # required for 'rtx install python'
+libssl-dev: true # required for 'mise install python'
 # ------------------------------
 python3: true
 python3-pip: true

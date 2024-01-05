@@ -1,20 +1,20 @@
-# Powerlevel10k prompt segments for rtx
+# Powerlevel10k prompt segments for mise
 #
 # https://github.com/romkatv/powerlevel10k
-# https://github.com/jdxcode/rtx
+# https://github.com/jdxcode/mise
 # [Feature request: add segment for rtx](https://github.com/romkatv/powerlevel10k/issues/2212)
 #
 # Usage in ~/.zshrc:
 #
 #   # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #   [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-#   [[ -f ~/.p10k.rtx.zsh ]] && source ~/.p10k.rtx.zsh
+#   [[ -f ~/.p10k.mise.zsh ]] && source ~/.p10k.mise.zsh
 #
 
 () {
     function prompt_rtx() {
         local enabled_tools=("ruby" "python" "go" "node" "rust" "dotnet" "flutter" "lua" "java" "perl" "erlang" "elixir" "postgres" "php" "haskell" "julia")
-        local plugins=("${(@f)$(rtx ls --current --installed 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/rtx/config.toml" {print $1, $2}')}")
+        local plugins=("${(@f)$(mise ls --current --installed 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" {print $1, $2}')}")
         local plugin
         for plugin in ${(k)plugins}; do
             local parts=("${(@s/ /)plugin}")
@@ -48,5 +48,5 @@
     typeset -g POWERLEVEL9K_RTX_JULIA_FOREGROUND=2
 
     # Substitute the default asdf prompt element
-    typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS[@]/asdf/rtx}")
+    typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS[@]/asdf/mise}")
 }

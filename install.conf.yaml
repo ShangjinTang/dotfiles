@@ -31,7 +31,7 @@
     ~/.config/atuin/config.toml: configs/atuin/config.toml
     ~/.config/btop/themes/: configs/btop/themes/*
     ~/.config/gh/config.yml: configs/gh/config.yml
-    ~/.config/rtx/config.toml: configs/rtx/config.toml
+    ~/.config/mise/config.toml: configs/mise/config.toml
     ~/.gh_repos.yaml: configs/.gh_repos.yaml
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
@@ -145,7 +145,7 @@
     ~/.oh-my-zsh/custom/themes/powerlevel10k: submodules/powerlevel10k
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: submodules/zsh-syntax-highlighting
     ~/.p10k.zsh: configs/zsh/powerlevel10k/.p10k.zsh
-    ~/.p10k.rtx.zsh: configs/zsh/powerlevel10k/.p10k.rtx.zsh
+    ~/.p10k.mise.zsh: configs/zsh/powerlevel10k/.p10k.mise.zsh
 
 # zshrc + wsl
 - defaults:
