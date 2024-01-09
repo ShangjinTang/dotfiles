@@ -169,7 +169,7 @@ def clean_install(overrides: Optional[List[str]] = typer.Argument(None)):
 @app.command()
 def upgrade():
     command_to_execute = (
-        "sudo pacman -Syu && sudo pacman -Sy archlinux-keyring --noconfirm"
+        "sudo pacman -Sy archlinux-keyring --noconfirm && sudo pacman -Syu"
     )
     print(command_to_execute)
     os.system(command_to_execute)
