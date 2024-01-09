@@ -40,8 +40,8 @@ fi
 # mise init
 if command -v mise &> /dev/null && [[ $USE_MISE == 1 ]]; then
     eval "$(mise activate zsh)" &> /dev/null
-    # use mise python environment in nvim
-    export PYTHON3_HOST_PROG="$(mise which python)"
+    # use `mise` global python environment in nvim
+    export PYTHON3_HOST_PROG="$(cd ~ && $(mise which python))"
 fi
 
 # atuin init
