@@ -20,6 +20,7 @@ __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
 cprint = console.print
+ENABLE_COMPACT = True
 
 LOGGING_FORMAT = "%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s"
 LOGGING_DATEFMT = "%Y-%m-%d %H:%M:%S"
@@ -61,9 +62,10 @@ def get_version(
 def check_conan_version(required_version: str) -> bool:
     if conan_version := get_version("conan"):
         if is_version_greater_or_equal(conan_version, required_version):
-            cprint(
-                f"[cyan]INFO[/cyan] conan version {conan_version} >= {required_version}"
-            )
+            if not ENABLE_COMPACT:
+                cprint(
+                    f"[cyan]INFO[/cyan] conan version {conan_version} >= {required_version}"
+                )
             return True
         else:
             cprint(
@@ -92,9 +94,10 @@ def validate_vcpkg_install():
 def check_cmake_version(required_version: str) -> bool:
     if cmake_version := get_version("cmake"):
         if is_version_greater_or_equal(cmake_version, required_version):
-            cprint(
-                f"[cyan]INFO[/cyan] cmake version {cmake_version} >= {required_version}"
-            )
+            if not ENABLE_COMPACT:
+                cprint(
+                    f"[cyan]INFO[/cyan] cmake version {cmake_version} >= {required_version}"
+                )
             return True
         else:
             cprint(
@@ -257,10 +260,13 @@ def main(args, unknown_args):
 
     # cmake + copy compdb + clean
     merged_commands = " && \\\n".join(merged_commands_list)
-    cprint(f"[cyan]CMD[/cyan]\n{merged_commands}")
+    cprint(f"[cyan]CMD[/cyan]  {merged_commands}")
 
-    for i, command in enumerate(merged_commands_list):
-        cprint(f"[magenta]\n{'=' * 70}\n{i+1}. {command}[/magenta]")
+    for index, command in enumerate(merged_commands_list):
+        if not ENABLE_COMPACT:
+            cprint(f"[magenta]\n{'=' * 70}\n{index+1}. {command}[/magenta]")
+        else:
+            cprint(f"[magenta]{'=' * 70}\n{index+1}. {command}[/magenta]")
         try:
             subprocess.run(command, shell=True, check=True)
         except (subprocess.CalledProcessError, Exception) as e:
