@@ -15,7 +15,7 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2023 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.6.0"
+__version__ = "1.7.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
@@ -226,7 +226,9 @@ def main(args, unknown_args):
         create_build_dir_command += " " + complete_flags
         merged_commands_list.append(create_build_dir_command)
         # Copy compile_commands.json to current directory
-        copy_compdb_command = f"cp -f {build_dir_with_type}/compile_commands.json . &> /dev/null"
+        copy_compdb_command = (
+            f"cp -f {build_dir_with_type}/compile_commands.json . &> /dev/null"
+        )
         merged_commands_list.append(copy_compdb_command)
 
     build_command = ""
@@ -236,8 +238,9 @@ def main(args, unknown_args):
         )
     else:
         build_command = f"cmake --build {build_dir_with_type} --config {args.build_type} -j {args.parallel}"
-    if args.target != "all":
-        build_command += f" --target {args.target}"
+    if args.targets:
+        for target in args.targets:
+            build_command += f" --target {target}"
     merged_commands_list.append(build_command)
 
     if "-DBUILD_TESTING=TRUE" in complete_flags:
@@ -283,7 +286,12 @@ if __name__ == "__main__":
         help="parallel thread count for make\n",
     )
     parser.add_argument(
-        "-t", "--target", default="all", help="target command for cmake"
+        "-t",
+        "--targets",
+        default=[],
+        action="extend",
+        nargs="+",
+        help="targets to build",
     )
     # <<< end of cmake native settings <<<
 
