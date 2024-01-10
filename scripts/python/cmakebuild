@@ -179,7 +179,7 @@ def main(args, unknown_args):
             "CMakeLists.txt not found. Please execute it in a CMake project."
         )
 
-    if args.force:
+    if args.clean_first:
         if os.path.exists(os.path.join(os.getcwd(), args.B)):
             rmtree(os.path.join(os.getcwd(), args.B))
 
@@ -247,8 +247,8 @@ def main(args, unknown_args):
         ctest_command = f"ctest --test-dir build/{args.build_type}"
         merged_commands_list.append(ctest_command)
 
-    # Get clean command (optional)
-    if args.clean_output:
+    # Get clean_last command (optional)
+    if args.clean_last:
         output_top_dir = build_dir_with_type.split("/")[0]
         clean_command = f"rm -r ./{output_top_dir}"
         if run_with_conan:
@@ -297,14 +297,14 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "-f",
-        "--force",
+        "--clean_first",
         default=False,
         action="store_true",
         help="force build: clean output directory before execution\n",
     )
     parser.add_argument(
         "-c",
-        "--clean_output",
+        "--clean_last",
         default=False,
         action="store_true",
         help="clean output directory after execution\n",
