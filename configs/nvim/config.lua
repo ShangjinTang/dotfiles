@@ -1874,8 +1874,7 @@ lvim.plugins = {
         event = "VeryLazy",
         config = function()
             require("compiler-explorer").setup({
-                -- url = "https://godbolt.org",
-                url = "http://localhost:10240",
+                url = "https://godbolt.org",
                 infer_lang = true, -- Try to infer possible language based on file extension.
                 line_match = {
                     highlight = true, -- highlight the matching line(s) in the other buffer.
