@@ -13,14 +13,13 @@ from rich.console import Console
 from rich.theme import Theme
 
 __author__ = "Shangjin Tang"
-__copyright__ = "Copyright 2023 Shangjin Tang"
+__copyright__ = "Copyright 2024 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.7.0"
+__version__ = "1.8.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
 cprint = console.print
-ENABLE_COMPACT = True
 
 LOGGING_FORMAT = "%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s"
 LOGGING_DATEFMT = "%Y-%m-%d %H:%M:%S"
@@ -62,10 +61,9 @@ def get_version(
 def check_conan_version(required_version: str) -> bool:
     if conan_version := get_version("conan"):
         if is_version_greater_or_equal(conan_version, required_version):
-            if not ENABLE_COMPACT:
-                cprint(
-                    f"[cyan]INFO[/cyan] conan version {conan_version} >= {required_version}"
-                )
+            # cprint(
+            #     f"[cyan]INFO[/cyan] conan version {conan_version} >= {required_version}"
+            # )
             return True
         else:
             cprint(
@@ -85,7 +83,7 @@ def validate_vcpkg_install():
     if vcpkg_version := get_version("vcpkg"):
         cprint(f"vcpkg version {vcpkg_version}")
     else:
-        raise EnvironmentError("Vcpkg is not found or an error occurred.")
+        raise EnvironmentError("vcpkg is not found or an error occurred.")
 
     if os.environ.get("VCPKG_ROOT") is None:
         raise EnvironmentError("$VCPKG_ROOT is not set")
@@ -94,10 +92,9 @@ def validate_vcpkg_install():
 def check_cmake_version(required_version: str) -> bool:
     if cmake_version := get_version("cmake"):
         if is_version_greater_or_equal(cmake_version, required_version):
-            if not ENABLE_COMPACT:
-                cprint(
-                    f"[cyan]INFO[/cyan] cmake version {cmake_version} >= {required_version}"
-                )
+            # cprint(
+            #     f"[cyan]INFO[/cyan] cmake version {cmake_version} >= {required_version}"
+            # )
             return True
         else:
             cprint(
@@ -111,6 +108,11 @@ def check_cmake_version(required_version: str) -> bool:
 def validate_cmake_version(required_version: str):
     if not check_cmake_version(required_version):
         raise EnvironmentError(f"cmake version < {required_version}")
+
+
+def validate_watchexec_install():
+    if not get_version("watchexec", extract_field=1):
+        raise EnvironmentError("watchexec is not found or an error occurred.")
 
 
 # return True if:
@@ -175,6 +177,8 @@ def main(args, unknown_args):
     run_with_conan_preset = (
         args.preset
     )  # This requires cmake >= 3.23. If it's set to False, we always use lagacy conan_toolchain build
+    if args.watch:
+        validate_watchexec_install()
     if not which("cmake"):
         raise EnvironmentError("cmake not found. Please install it first.")
     if not os.path.exists(os.path.join(os.getcwd(), "CMakeLists.txt")):
@@ -259,19 +263,25 @@ def main(args, unknown_args):
         merged_commands_list.append(clean_command)
 
     # cmake + copy compdb + clean
-    merged_commands = " && \\\n".join(merged_commands_list)
-    cprint(f"[cyan]CMD[/cyan]  {merged_commands}")
+    merged_commands = " && ".join(merged_commands_list)
 
-    for index, command in enumerate(merged_commands_list):
-        if not ENABLE_COMPACT:
-            cprint(f"[magenta]\n{'=' * 70}\n{index+1}. {command}[/magenta]")
-        else:
+    if not args.watch:
+        cprint(f"[green][Running: {merged_commands}][/green]")
+        for index, command in enumerate(merged_commands_list):
             cprint(f"[magenta]{'=' * 70}\n{index+1}. {command}[/magenta]")
-        try:
-            subprocess.run(command, shell=True, check=True)
-        except (subprocess.CalledProcessError, Exception) as e:
-            cprint(f"[red]Subprocess call failed: {e}[/red]")
-            exit(1)
+            try:
+                subprocess.run(command, shell=True, check=True)
+            except subprocess.CalledProcessError as e:
+                cprint(f"[red][Command exited with {e.returncode}][/red]")
+                exit(1)
+        cprint(f"[green][Command was successful][/green]")
+    else:
+        # note:
+        # 1. default '--shell=sh' errors on 'conan install ...', specify '--shell=bash' to avoid issue
+        # 2. watch 'txt' to for CMakeLists.txt
+        merged_commands = f"watchexec --watch={args.watch} --exts=c,cpp,cc,h,hpp,txt --shell=bash --stop-timeout=0 '{merged_commands}'"
+        subprocess.run(merged_commands, shell=True, check=False)
+        cprint(f"[green][Watch: {args.watch}][/green]")
 
 
 if __name__ == "__main__":
@@ -347,6 +357,11 @@ if __name__ == "__main__":
         default=False,
         action="store_true",
         help="add -DBUILD_SHARED_LIBS=ON",
+    )
+    parser.add_argument(
+        "--watch",
+        default="",
+        help="files to watch (requires 'watchexec')",
     )
 
     try:
