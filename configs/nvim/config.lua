@@ -1904,6 +1904,12 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 
+    -- Reference: https://github.com/nvim-treesitter/playground
+    {
+        "nvim-treesitter/playground",
+        event = "VeryLazy",
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
