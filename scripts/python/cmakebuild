@@ -248,6 +248,8 @@ def main(args, unknown_args):
     if args.targets:
         for target in args.targets:
             build_command += f" --target {target}"
+    if args.verbose:
+        build_command += " --verbose"
     merged_commands_list.append(build_command)
 
     if "-DBUILD_TESTING=TRUE" in complete_flags:
@@ -357,6 +359,13 @@ if __name__ == "__main__":
         default=False,
         action="store_true",
         help="add -DBUILD_SHARED_LIBS=ON",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        default=False,
+        action="store_true",
+        help="enable verbose output",
     )
     parser.add_argument(
         "--watch",
