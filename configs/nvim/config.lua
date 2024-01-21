@@ -1953,7 +1953,7 @@ lspmanager.setup("clangd", {
     cmd = {
         "clangd",
         "--background-index",
-        "--clang-tidy",
+        "--clang-tidy=true",
         "--all-scopes-completion",
         "--completion-style=detailed",
         "--header-insertion=iwyu",
