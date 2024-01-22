@@ -41,7 +41,7 @@ fi
 if command -v mise &> /dev/null && [[ $USE_MISE == 1 ]]; then
     eval "$(mise activate zsh)" &> /dev/null
     # use `mise` global python environment in nvim
-    export PYTHON3_HOST_PROG="$(cd ~ && $(mise which python))"
+    export PYTHON3_HOST_PROG="$(cd ~ && mise which python)"
 fi
 
 # atuin init
