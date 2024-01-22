@@ -8,7 +8,7 @@ import sys
 
 __author__ = "Shangjin Tang"
 __email__ = "shangjin.tang@gmail.com"
-__copyright__ = "Copyright 2023 Shangjin Tang"
+__copyright__ = "Copyright 2024 Shangjin Tang"
 __license__ = "GPL"
 __version__ = "1.1.0"
 
