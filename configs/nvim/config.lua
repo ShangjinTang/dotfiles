@@ -1216,6 +1216,12 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/metakirby5/codi.vim
+    {
+        "metakirby5/codi.vim",
+        cmd = "Codi",
+    },
+
     -- Reference: https://github.com/nvim-neotest/neotest
     {
         "nvim-neotest/neotest",
