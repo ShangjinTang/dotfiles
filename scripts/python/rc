@@ -164,7 +164,6 @@ def run(
     clean_output: bool = typer.Option(
         False,
         "--clean-output",
-        "-c",
         help="Clean output file after run",
     ),
 ) -> None:
