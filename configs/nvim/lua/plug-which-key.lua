@@ -131,7 +131,6 @@ wk.register({
     ["L"] = { "<cmd>Lspsaga finder tyd+def+ref+imp<cr>", "Lspsaga Finder" },
     -- ["gt"] = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
     ["gt"] = { "<cmd>Lspsaga peek_type_definition<cr>", "Lspsaga Peek Type Definition" },
-    ["gx"] = { "Open URL" },
 
     ["mm"] = { "<cmd>BookmarkToggle<cr>", "Bookmark Toggle" },
     ["ma"] = { "<cmd>BookmarkShowAll<cr>", "Bookmark Show All" },

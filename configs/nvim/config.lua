@@ -1916,12 +1916,6 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 
-    -- Reference: https://github.com/felipec/vim-sanegx
-    {
-        "felipec/vim-sanegx",
-        event = "BufRead",
-    },
-
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
