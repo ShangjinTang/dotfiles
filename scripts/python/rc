@@ -30,6 +30,7 @@ cprint = console.print
 
 FLAG_PATTERN = {
     "-ldl": "dlfcn.h",
+    "-lm": "math.h",
     "-pthread": "pthread.h",
 }
 
