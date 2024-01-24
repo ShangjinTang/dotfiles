@@ -382,10 +382,6 @@ wk.register({
 --------------------------------------------------------------------------------
 -- Global Mappings: only visual mode
 
-wk.register({
-    ["<Bslash>"] = { "<Plug>SnipRun", "SnipRun" },
-}, visual_mode)
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- Conditional Mappings: FileType
@@ -409,7 +405,7 @@ function set_key_bindings()
             ["<leader>ms"] = { "<cmd>FeMaco<cr>", "Edit Code Snippet" },
             ["<leader>mp"] = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle Preview" },
             ["<leader>mx"] = { "<cmd>MkdnToggleToDo<cr>", "Toggle Todo" },
-            ["<leader>mr"] = { "<cmd>MkdnMoveSource<cr>", "Rename Source in Link" },
+            ["<leader>mr"] = { "<Plug>SnipRun", "SnipRun" },
             ["<leader>mb"] = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
             ["<leader>mi"] = { name = "+Insert" },
             ["<leader>mit"] = { "<cmd>MkdnTable 3 2<cr>", "Insert Table" },
@@ -421,6 +417,7 @@ function set_key_bindings()
             ["<leader>mii"] = { "<cmd>Telekasten insert_img_link<cr>", "Insert img link" },
         }, normal_mode)
         wk.register({
+            ["<leader>mr"] = { "<Plug>SnipRun", "SnipRun" },
             ["<CR>"] = { "<cmd>MkdnEnter<cr>", "Follow or Insert Link / Header Collapse" },
         }, visual_mode)
     end

@@ -1190,7 +1190,7 @@ lvim.plugins = {
     -- Reference: https://github.com/michaelb/sniprun
     {
         "michaelb/sniprun",
-        event = "VeryLazy",
+        ft = { "markdown" },
         build = "sh ./install.sh 1",
         config = function()
             local palette = require("catppuccin.palettes").get_palette()
@@ -1219,7 +1219,7 @@ lvim.plugins = {
     -- Reference: https://github.com/metakirby5/codi.vim
     {
         "metakirby5/codi.vim",
-        cmd = "Codi",
+        ft = { "python" },
     },
 
     -- Reference: https://github.com/nvim-neotest/neotest
@@ -1907,13 +1907,13 @@ lvim.plugins = {
     -- Reference: https://github.com/vim-scripts/DoxygenToolkit.vim
     {
         "vim-scripts/DoxygenToolkit.vim",
-        event = "VeryLazy",
+        ft = { "python", "c", "cpp", "java" },
     },
 
     -- Reference: https://github.com/nvim-treesitter/playground
     {
         "nvim-treesitter/playground",
-        event = "VeryLazy",
+        cmd = "TSPlaygroundToggle",
     },
 
     -- NOTE: dropbar requires nvim >= 0.10.0
@@ -2037,7 +2037,6 @@ lspmanager.setup("tsserver", {
     filetypes = {
         "typescript",
         "typescriptreact",
-        "typescript.tsx",
     },
     root_dir = function()
         return vim.fs.dirname(vim.fs.find({
