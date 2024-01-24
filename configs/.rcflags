@@ -2,6 +2,7 @@
 -O0
 -g
 -Wall
+-Wextra
 # -Werror
 -pedantic
 # -fno-omit-frame-pointer
