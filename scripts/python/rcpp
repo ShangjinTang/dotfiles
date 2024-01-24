@@ -22,7 +22,7 @@ from rich.console import Console
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2024 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console()
@@ -58,13 +58,13 @@ def get_flag_list_from_file(flag_file: str) -> List[str]:
     return flag_list
 
 
-def get_auto_complete_flag_list(file: List[str], flag_list: List[str]) -> List[str]:
+def get_auto_complete_flag_list(files: List[str], flag_list: List[str]) -> List[str]:
     if which("rg"):
         for flag, pattern in FLAG_PATTERN.items():
             if flag not in flag_list:
                 pattern_check_command = f"rg '^#include.*<{pattern}>'"
-                if file:
-                    pattern_check_command += " " + " ".join(file)
+                if files:
+                    pattern_check_command += " " + " ".join(files)
                 else:
                     pattern_check_command += " --type cpp"
                 retval = subprocess.call(
@@ -80,11 +80,12 @@ def get_auto_complete_flag_list(file: List[str], flag_list: List[str]) -> List[s
 
 
 def compile_run_clean(
-    file: List[str],
+    files: List[str],
     compiler: str,
     flag_file: str,
     output: str,
     clean_output: bool,
+    watchexec: bool,
 ) -> None:
     if not output.endswith(".out") and "." in output:
         raise ValueError(
@@ -97,16 +98,17 @@ def compile_run_clean(
         compiler = "g++"
 
     flag_list = get_flag_list_from_file(flag_file)
-    flag_list = get_auto_complete_flag_list(file, flag_list)
+    flag_list = get_auto_complete_flag_list(files, flag_list)
 
     compile_command_list = [compiler, " ".join(flag_list), "-o", output]
 
+    source_files = []
     # Generate compile command
-    if file:
+    if files:
         # Specify type for file without extension. See: `man g++` -> search "-x language"
-        if not all(file.endswith(".cpp") or file.endswith(".cc") for file in file):
+        if not all(file.endswith(".cpp") or file.endswith(".cc") for file in files):
             compile_command_list.extend(["-x", "c++"])
-        compile_command_list.extend(file)
+        compile_command_list.extend(files)
     else:
         # Get all CPP files under the current directory
         source_files = [
@@ -135,10 +137,16 @@ def compile_run_clean(
     # compile + run + clean
     merged_commands = " && ".join(merged_commands_list)
 
-    cprint(f"[green]{merged_commands}[/green]")
-    print("-" * 70)
-    os.system(merged_commands)
-    print("-" * 70)
+    if watchexec:
+        if files:
+            merged_commands = f"watchexec --watch={','.join(source_files)} --shell=bash --stop-timeout=0 '{merged_commands}'"
+        else:
+            merged_commands = f"watchexec --exts=c,cpp,cc,h,hpp --shell=bash --stop-timeout=0 '{merged_commands}'"
+        subprocess.run(merged_commands, shell=True, check=False)
+    else:
+        cprint(f"[green][Running: {merged_commands}][/green]")
+        subprocess.run(merged_commands, shell=True, check=False)
+        cprint(f"[green][Command was successful][/green]")
 
 
 app = typer.Typer(add_completion=False)
@@ -148,9 +156,9 @@ app = typer.Typer(add_completion=False)
     help="rcpp(Run CPP): A script to compile, build, run source files for CPP language"
 )
 def run(
-    file: List[str] = typer.Argument(
+    files: List[str] = typer.Argument(
         None,
-        help="File(s) to compile; if not specified, use all CPP files under current directory",
+        help="File(s) to compile; if not specified, use all C/CPP files under current directory",
     ),
     compiler: str = typer.Option(
         "clang++",
@@ -175,9 +183,15 @@ def run(
         "--clean-output",
         help="Clean output file after run",
     ),
+    watchexec: bool = typer.Option(
+        False,
+        "--watchexec",
+        "-w",
+        help="run with watchexec",
+    ),
 ) -> None:
     try:
-        compile_run_clean(file, compiler, flag_file, output, clean_output)
+        compile_run_clean(files, compiler, flag_file, output, clean_output, watchexec)
     except KeyboardInterrupt:
         print("Interrupted")
         try:
