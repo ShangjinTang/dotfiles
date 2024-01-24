@@ -685,6 +685,30 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/ShangjinTang/nvim-treesitter-cpp-tools
+    {
+        "ShangjinTang/nvim-treesitter-cpp-tools",
+        ft = { "cpp" },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("nt-cpp-tools").setup({
+                preview = {
+                    quit = "<Esc>", -- optional keymapping for quit preview
+                    accept = "<Enter>", -- optional keymapping for accept preview
+                },
+                header_extension = "h", -- optional
+                source_extension = "cpp", -- optional
+                custom_define_class_function_commands = { -- optional
+                    TSCppImplWrite = {
+                        output_handle = require("nt-cpp-tools.output_handlers").get_add_to_cpp(),
+                    },
+                },
+            })
+        end,
+    },
+
     -----------------------------------------------------------------
     -- NOTE: file non-edit enhancement: move, highlight, show
 
