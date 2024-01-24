@@ -1877,7 +1877,7 @@ lvim.plugins = {
     -- Reference: https://github.com/krady21/compiler-explorer.nvim
     {
         "krady21/compiler-explorer.nvim",
-        event = "VeryLazy",
+        ft = { "c", "cpp" },
         config = function()
             require("compiler-explorer").setup({
                 url = "https://godbolt.org",
