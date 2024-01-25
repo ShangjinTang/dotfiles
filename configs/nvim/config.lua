@@ -685,9 +685,9 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/ShangjinTang/nvim-treesitter-cpp-tools
+    -- Reference: https://github.com/Badhi/nvim-treesitter-cpp-tools
     {
-        "ShangjinTang/nvim-treesitter-cpp-tools",
+        "Badhi/nvim-treesitter-cpp-tools",
         ft = { "cpp" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
