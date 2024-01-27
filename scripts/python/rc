@@ -22,7 +22,7 @@ from rich.console import Console
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2024 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console()
@@ -131,14 +131,17 @@ def compile_run_clean(
 
     if watchexec:
         if files:
-            merged_commands = f"watchexec --watch={','.join(source_files)} --shell=bash --stop-timeout=0 '{merged_commands}'"
+            merged_commands = f"watchexec --watch={','.join(files)} --shell=bash --stop-timeout=0 '{merged_commands}'"
         else:
             merged_commands = f"watchexec --exts=c,h --shell=bash --stop-timeout=0 '{merged_commands}'"
         subprocess.run(merged_commands, shell=True, check=False)
     else:
         cprint(f"[green][Running: {merged_commands}][/green]")
-        subprocess.run(merged_commands, shell=True, check=False)
-        cprint(f"[green][Command was successful][/green]")
+        ret = subprocess.run(merged_commands, shell=True, check=False)
+        if ret.returncode != 0:
+            cprint(f"[red][Command exited with {ret.returncode}][/red]")
+        else:
+            cprint(f"[green][Command was successful][/green]")
 
 
 app = typer.Typer(add_completion=False)
