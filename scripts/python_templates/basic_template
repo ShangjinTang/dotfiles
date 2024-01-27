@@ -4,6 +4,7 @@ This is a docstring.
 """
 
 import argparse
+import argcomplete
 import logging
 import os
 import sys
@@ -35,7 +36,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        formatter_class=argparse.UltimateHelpFormatter, description=""
+        formatter_class=UltimateHelpFormatter, description=""
     )
 
     parser.add_argument("-i", "--input", type=str, help="input")
@@ -57,6 +58,7 @@ if __name__ == "__main__":
     # subparsers = parser.add_subparsers(title="subcommands")
 
     try:
+        argcomplete.autocomplete(parser)
         args = parser.parse_args()
         main(args)
     except KeyboardInterrupt:
