@@ -971,6 +971,7 @@ lvim.plugins = {
     },
 
     -- Reference: https://github.com/AckslD/nvim-neoclip.lua
+    -- Warning: this plugin sometimes might cause nvim slow, use `rm ~/.local/share/nvim/databases/neoclip.sqlite3` to resolve
     {
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
