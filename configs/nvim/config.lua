@@ -1217,35 +1217,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/michaelb/sniprun
-    {
-        "michaelb/sniprun",
-        ft = { "markdown" },
-        build = "sh ./install.sh 1",
-        config = function()
-            local palette = require("catppuccin.palettes").get_palette()
-            require("sniprun").setup({
-                display = {
-                    "Classic", --# display results in the command-line  area
-                    "VirtualTextOk", --# display ok results as virtual text (multiline is shortened)
-                    -- "VirtualText", --# display results as virtual text
-                    "TempFloatingWindow", --# display results in a floating window
-                    -- "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
-                    -- "Terminal", --# display results in a vertical split
-                    -- "TerminalWithCode", --# display results and code history in a vertical split
-                    -- "NvimNotify", --# display with the nvim-notify plugin
-                    -- "Api"                      --# return output to a programming interface
-                },
-                snipruncolors = {
-                    SniprunVirtualTextOk = { bg = palette.mauve, fg = "#000000" },
-                    SniprunFloatingWinOk = { fg = palette.mauve },
-                    SniprunVirtualTextErr = { bg = palette.red, fg = "#000000" },
-                    SniprunFloatingWinErr = { fg = palette.red },
-                },
-            })
-        end,
-    },
-
     -- Reference: https://github.com/metakirby5/codi.vim
     {
         "metakirby5/codi.vim",
