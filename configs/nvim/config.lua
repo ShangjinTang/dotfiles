@@ -36,7 +36,6 @@ lvim.builtin.gitsigns.opts.current_line_blame_formatter =
 lvim.builtin.lir.active = false
 
 -- nvim-tree
-
 lvim.builtin.nvimtree.setup.disable_netrw = true
 lvim.builtin.nvimtree.setup.view = {
     adaptive_size = false,
@@ -471,7 +470,13 @@ lvim.plugins = {
     },
 
     -----------------------------------------------------------------
-    -- NOTE: AI tools: ChatGPT & Copilot
+    -- NOTE: AI tools: LLM & ChatGPT & Copilot
+
+    -- Reference: https://github.com/David-Kunz/gen.nvim
+    {
+        "David-Kunz/gen.nvim",
+        event = "VeryLazy",
+    },
 
     -- Reference: https://github.com/jackMort/ChatGPT.nvim
     -- {
