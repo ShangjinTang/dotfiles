@@ -3,6 +3,5 @@
 -g
 -Wall
 -Wextra
+-Wpedantic
 # -Werror
--pedantic
-# -fno-omit-frame-pointer
