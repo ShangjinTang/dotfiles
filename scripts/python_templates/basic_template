@@ -4,10 +4,11 @@ This is a docstring.
 """
 
 import argparse
-import argcomplete
 import logging
 import os
 import sys
+
+import argcomplete
 
 __author__ = "Shangjin Tang"
 __email__ = "shangjin.tang@gmail.com"
@@ -58,7 +59,6 @@ if __name__ == "__main__":
     # subparsers = parser.add_subparsers(title="subcommands")
 
     try:
-        argcomplete.autocomplete(parser)
         args = parser.parse_args()
         main(args)
     except KeyboardInterrupt:
