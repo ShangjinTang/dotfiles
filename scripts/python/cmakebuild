@@ -6,6 +6,7 @@ import multiprocessing
 import os
 import subprocess
 import sys
+import time
 from shutil import rmtree, which
 
 from packaging import version
@@ -15,7 +16,7 @@ from rich.theme import Theme
 __author__ = "Shangjin Tang"
 __copyright__ = "Copyright 2024 Shangjin Tang"
 __license__ = "GPL"
-__version__ = "1.8.0"
+__version__ = "1.8.2"
 __email__ = "shangjin.tang@gmail.com"
 
 console = Console(theme=Theme(inherit=False))
@@ -34,6 +35,28 @@ class UltimateHelpFormatter(
     argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter
 ):
     pass
+
+
+def confirm_yes_or_no(question: str, default="yes"):
+    valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
+    if default is None:
+        prompt = " [y/n] "
+    elif default == "yes":
+        prompt = " [Y/n] "
+    elif default == "no":
+        prompt = " [y/N] "
+    else:
+        raise ValueError("invalid default answer: '%s'" % default)
+
+    while True:
+        sys.stdout.write(question + prompt)
+        choice = input().lower()
+        if default is not None and choice == "":
+            return valid[default]
+        elif choice in valid:
+            return valid[choice]
+        else:
+            sys.stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
 
 def is_version_greater_or_equal(current_version: str, required_version: str) -> bool:
@@ -267,6 +290,13 @@ def main(args, unknown_args):
     # cmake + copy compdb + clean
     merged_commands = " && ".join(merged_commands_list)
 
+    if args.watch:
+        merged_commands = f"watchexec --watch={args.watch} --exts=c,cpp,cc,h,hpp,txt --shell=bash --stop-timeout=0 '{merged_commands}'"
+
+    if args.dry_run:
+        cprint(merged_commands)
+        return
+
     if not args.watch:
         cprint(f"[green][Running: {merged_commands}][/green]")
         for index, command in enumerate(merged_commands_list):
@@ -281,7 +311,6 @@ def main(args, unknown_args):
         # note:
         # 1. default '--shell=sh' errors on 'conan install ...', specify '--shell=bash' to avoid issue
         # 2. watch 'txt' to for CMakeLists.txt
-        merged_commands = f"watchexec --watch={args.watch} --exts=c,cpp,cc,h,hpp,txt --shell=bash --stop-timeout=0 '{merged_commands}'"
         subprocess.run(merged_commands, shell=True, check=False)
         cprint(f"[green][Watch: {args.watch}][/green]")
 
@@ -334,14 +363,14 @@ if __name__ == "__main__":
         help="use cmake --preset (for conan)\nNote: this would let -S & -B not work",
     )
 
-    config_mutex_group = parser.add_mutually_exclusive_group()
-    config_mutex_group.add_argument(
+    build_type_mutex_group = parser.add_mutually_exclusive_group()
+    build_type_mutex_group.add_argument(
         "--debug",
         default=False,
         action="store_true",
         help="cmake build debug (default)\n",
     )
-    config_mutex_group.add_argument(
+    build_type_mutex_group.add_argument(
         "--release",
         default=False,
         action="store_true",
@@ -371,6 +400,11 @@ if __name__ == "__main__":
         "--watch",
         default="",
         help="files to watch (requires 'watchexec')",
+    )
+    parser.add_argument(
+        "--dry-run",
+        default=False,
+        action="store_true",
     )
 
     try:
