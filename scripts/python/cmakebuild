@@ -375,7 +375,16 @@ if __name__ == "__main__":
 
     try:
         args, unknown_args = parser.parse_known_args()
-        main(args, unknown_args)
+        # fix multiple argument parse in cmake
+        processed_unknown_args = []
+        for arg in unknown_args:
+            if "=" in arg:
+                key, value = arg.split("=", 1)
+                processed_arg = f'{key}="{value}"'
+                processed_unknown_args.append(processed_arg)
+            else:
+                processed_unknown_args.append(arg)
+        main(args, processed_unknown_args)
     except KeyboardInterrupt:
         cprint("Interrupted")
         try:
