@@ -181,6 +181,7 @@ function set_theme() {
             export PROCS_THEME="light"
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
+            export CHTSH_QUERY_OPTIONS="style=stata-light"  # use `curl cht.sh/:styles` or `curl cht.sh/:styles-demo` to check all available styles
             command -v r2 &> /dev/null && echo "eco default" > ~/.radare2rc
             ;;
         dark)
@@ -197,6 +198,7 @@ function set_theme() {
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
             export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+            export CHTSH_QUERY_OPTIONS="style=stata-dark"
             command -v r2 &> /dev/null && echo "eco onedark" > ~/.radare2rc
             ;;
         *)
