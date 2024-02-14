@@ -1261,36 +1261,16 @@ lvim.plugins = {
     -----------------------------------------------------------------
     -- NOTE: cscope & ctags
 
-    -- Reference: https://github.com/ludovicchabant/vim-gutentags
+    -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
     {
-        "dhananjaylatkar/vim-gutentags",
+        "dhananjaylatkar/cscope_maps.nvim",
         ft = { "c", "cpp", "java" },
         dependencies = {
-            "dhananjaylatkar/cscope_maps.nvim",
             "folke/which-key.nvim",
             "nvim-telescope/telescope.nvim",
             -- "ibhagwan/fzf-lua",
             "nvim-tree/nvim-web-devicons",
         },
-        init = function()
-            vim.g.gutentags_modules = { "cscope_maps" } -- This is required. Other config is optional
-            vim.g.gutentags_cscope_build_inverted_index_maps = 1
-            vim.g.gutentags_file_list_command = "fd -e c -e h -e cpp -e java"
-            vim.g.gutentags_cache_dir = tags_dir
-            vim.g.gutentags_project_root = {
-                ".git",
-                ".root",
-                ".project",
-                ".workspace",
-                "WORKSPACE",
-                "Cargo.toml",
-                "compile_commands.json",
-                "cscope.out",
-            }
-            vim.g.gutentags_ctags_tagfile = ".tags"
-            vim.g.gutentags_ctags_extra_args = { "--fields=+niazS", "--extra=+q", "--c++-kinds=+pxI", "--c-kinds=+px" }
-            -- vim.g.gutentags_trace = 1
-        end,
         config = function()
             require("cscope_maps").setup({
                 disable_maps = true,
