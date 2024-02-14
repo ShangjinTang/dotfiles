@@ -18,13 +18,6 @@ wk.register({
     ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute Operator" },
 }, visual_mode)
 
-wk.register({
-    ["<Bslash>"] = { "<cmd>Gen<cr>", "LLM Generate" },
-}, normal_mode)
-wk.register({
-    ["<Bslash>"] = { "<cmd>Gen<cr>", "LLM Gen" },
-}, visual_mode)
-
 -- wk.register({
 --     ["<leader>C"] = { "<cmd>ChatGPT<cr>", "ChatGPT Prompt" },
 --     ["<leader>c"] = { name = "+ChatGPT Commands" },
