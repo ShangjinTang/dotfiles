@@ -724,13 +724,7 @@ lvim.plugins = {
                     flash = true,
                 },
             })
-            require("flash").setup({
-                modes = {
-                    char = {
-                        jump_labels = true,
-                    },
-                },
-            })
+            require("flash").setup({})
         end,
         keys = {
             {
@@ -742,7 +736,7 @@ lvim.plugins = {
                 desc = "Search with Flash",
             },
             {
-                "<space>ss",
+                "<space>S",
                 mode = { "n", "x", "o" },
                 function()
                     require("flash").treesitter()
