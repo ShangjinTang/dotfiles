@@ -249,9 +249,9 @@ unbind -
 unbind |
 
 # split current window horizontally with golden ratio 38.2%
-bind - split-window -p 38 -v
+bind - split-window -l 38% -v
 # split current window vertically with golden ratio 38.2%
-bind | split-window -p 38 -h
+bind | split-window -l 38% -h
 
 # set refresh interval
 set -g status-interval 1
