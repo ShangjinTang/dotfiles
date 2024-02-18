@@ -13,9 +13,13 @@ wk.register({
     ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute Operator" },
     ["ss"] = { "<cmd>lua require('substitute').line()<cr>", "Substitute Line" },
     ["S"] = { "<cmd>lua require('substitute').eol()<cr>", "Substitute to End of Line" },
+    ["cx"] = { "<cmd>lua require('substitute.exchange').operator()<cr>", "Exchange Operator" },
+    ["cxx"] = { "<cmd>lua require('substitute.exchange').line()<cr>", "Exchange Line" },
+    ["cxc"] = { "<cmd>lua require('substitute.exchange').cancel()<cr>", "Cancel Exchange" },
 }, normal_mode)
 wk.register({
-    ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute Operator" },
+    ["s"] = { "<cmd>lua require('substitute').operator()<cr>", "Substitute (Visual)" },
+    ["X"] = { "<cmd>lua require('substitute.exchange').visual()<cr>", "Exchange (Visual)" },
 }, visual_mode)
 
 -- wk.register({
