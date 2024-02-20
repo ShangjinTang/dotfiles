@@ -277,6 +277,16 @@ linters.setup({
     { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
     -- zsh
     { command = "zsh", filetypes = { "zsh" } },
+    -- cspell
+    { command = "cspell", filetypes = { "markdown", "text" } },
+})
+
+local code_actions = require("lvim.lsp.null-ls.code_actions")
+code_actions.setup({
+    {
+        command = "cspell",
+        filetypes = { "markdown", "text" },
+    },
 })
 
 -- local code_actions = require("lvim.lsp.null-ls.code_actions")
@@ -1359,6 +1369,7 @@ lvim.plugins = {
                     -- Linters
                     "ruff",
                     "shellcheck",
+                    "cspell",
                 },
             })
         end,

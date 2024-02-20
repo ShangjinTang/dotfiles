@@ -25,7 +25,7 @@ Partially supported:
 
 - **Other Ubuntu x86_64 Versions**
   - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with full features enabled
-    - see: [How to Install on an Oldschool Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
+    - see: [How to Install on an Old-school Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
     - executables: **zsh**, **rustup & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
     - python3 packages: **pynvim**
@@ -37,7 +37,7 @@ Poorly supported:
 
 ## Installation
 
-If you have a proxy, recommend to set proxy before installlation.
+If you have a proxy, recommend to set proxy before installation.
 
 ```bash
 vim ~/.zshrc.local
@@ -57,7 +57,7 @@ sudo pacman -Sy zsh git neovim
 chsh -s $(which zsh)
 ```
 
-Log out and relogin to make sure the shell is changed to `zsh`.
+Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
@@ -81,7 +81,7 @@ sudo apt install -y zsh git
 chsh -s $(which zsh)
 ```
 
-Log out and relogin to make sure the shell is changed to `zsh`.
+Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
 sudo apt update
@@ -103,7 +103,7 @@ sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config un
 mise global tmux@3.3a
 
 # python: recommend to use mise to control python versions
-sudo apt install -y libssl-dev liblzma-dev # depdendency for python build
+sudo apt install -y libssl-dev liblzma-dev # dependency for python build
 mise global python@3.10                    # or 'mise global python@latest'
 
 # Essential: support for python plugins in Nvim
@@ -134,7 +134,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 
 - AI support to speed up development inside NVIM
   - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
-  - NIVM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
+  - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
   - CLI tool: [sgpt](https://github.com/TheR1D/shell_gpt) (requires `$OPENAI_API_KEY`)
 - ArchLinux x86_64 Packages
   - Provide a script `mpac` with pre-set multi pacman installation
@@ -184,7 +184,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - simplify proxy settings
   - preset: `$PROXY_IP` `$PROXY_ENABLED`
   - toggle: `setproxy|unsetproxy`
-- simplify tmux session manupilations
+- simplify tmux session manipulations
   - `t`: open session 0 (default session-name); if attach fail, will create
   - `t <session-name>`: open session with _session-name_; if attach fail, will create
   - `tl`: list all sessions
@@ -205,7 +205,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 
 - simplify C / C++ development
   - `rc` / `rcpp` to run C / C++ files under current directory with provided flags
-  - `cmakeb` / `cmaker` to build / run cmake projects under PROJECTROOT
+  - `cmakebuild` to build make projects under PROJECT ROOT
     - auto generate `compile_commands.json`
   - docker with **compiler-explorer** using latest ArchLinux clang / gcc
   - `.clang-tidy` support
@@ -221,7 +221,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - simplify python development
   - docker with local **Jupyter Lab**
 - simplify nvim tasks
-  - asynctask: compilation inside nvim under PROJECTROOT based on `.tasks`
+  - asynctask: compilation inside nvim under PROJECT ROOT based on `.tasks`
 
 ### Machine Learning Framework Install (Ubuntu 22.04 x86_64)
 
@@ -236,7 +236,7 @@ Then follow [Gist TF_Torch_GPU_Installation](https://gist.github.com/ShangjinTan
 
 1. Add configuration files
 2. Edit `install.conf.yaml` to create symlink
-3. Edit `install.pre` or `install.post` to customize the behaviour before or after installation
+3. Edit `install.pre` or `install.post` to customize the behavior before or after installation
 4. For configurations override, see [How to Create Override Configurations](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Create-Override-Configurations)
 
 ## Tips & Issue Fix

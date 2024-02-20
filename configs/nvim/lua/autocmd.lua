@@ -68,7 +68,11 @@ if os.getenv("NVIM_SHOW_DIAG_ON_HOVER") == "true" then
                 hint = vim.diagnostic.severity.HINT,
             }
             local severity = diagnostic_serverity_map[os.getenv("NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN")]
-            if severity and vim.diagnostic.config().float then
+            if
+                severity
+                and vim.diagnostic.config().float
+                and not (vim.bo.filetype == "markdown" or vim.bo.filetype == "text")
+            then
                 -- See: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.open_float()
                 vim.diagnostic.open_float({
                     scope = "cursor",
