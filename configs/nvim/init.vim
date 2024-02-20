@@ -83,11 +83,11 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 command! FixWhitespace :%s/\s\+$//e
 
 " ----------------------------------------------------------
-" " ## Replace selected word
-" replace current word from current line to last line (confirm required)
-nnoremap <leader>sw :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
-" replace current word from first line to last line (confirm required)
-nnoremap <leader>sa :%s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+" " ## Replace selected word with confirm popup
+" replace current word forward with boundaries
+nnoremap <leader>s* :.,$s@\<<C-R>=expand("<cword>")<CR>\>@@gc<Left><Left><Left>
+" replace current word forward without boundaries
+nnoremap <leader>sg* :.,$s@<C-R>=expand("<cword>")<CR>@@gc<Left><Left><Left>
 
 " ----------------------------------------------------------
 " ## Automatically set paste mode when pasting in insert mode

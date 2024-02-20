@@ -333,8 +333,8 @@ wk.register({
     },
 
     ["<leader>s"] = { name = "+Search & Substitute" },
-    ["<leader>sw"] = { "Substitute word (from current selection)" },
-    ["<leader>sa"] = { "Substitute word (from first line)" },
+    ["<leader>s*"] = { "Substitute forward with boundaries" },
+    ["<leader>sg*"] = { "Substitute forward without boundaries" },
     ["<leader>sr"] = {
         function()
             require("spectre").open({
