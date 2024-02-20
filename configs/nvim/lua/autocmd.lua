@@ -11,6 +11,7 @@
 
 --------------------------------------------------------------------------------
 
+-- for .mdx, use .md format
 vim.api.nvim_create_autocmd({
     "BufNewFile",
     "BufRead",
@@ -21,6 +22,7 @@ vim.api.nvim_create_autocmd({
     end,
 })
 
+-- for markdown, use tabwidth = 2
 vim.api.nvim_create_autocmd({
     "BufNewFile",
     "BufRead",
@@ -30,6 +32,27 @@ vim.api.nvim_create_autocmd({
         vim.opt.tabstop = 2
         vim.opt.softtabstop = 2
         vim.opt.shiftwidth = 2
+    end,
+})
+
+-- add intepreter (bash) for new bash script file
+vim.api.nvim_create_autocmd({
+    "BufNewFile",
+}, {
+    pattern = "*.sh",
+    callback = function()
+        vim.cmd([[ set formatoptions-=r ]]) -- disable leading "#" on new lines
+        vim.cmd([[ execute("normal i#!/usr/bin/env bash\n\n") ]])
+    end,
+})
+
+-- add intepreter (python3) for new python file, use user env
+vim.api.nvim_create_autocmd({
+    "BufNewFile",
+}, {
+    pattern = "*.py",
+    callback = function()
+        vim.cmd([[ execute("normal i#!/usr/bin/env python3\n\n") ]])
     end,
 })
 
