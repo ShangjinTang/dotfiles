@@ -1892,6 +1892,22 @@ lvim.plugins = {
         event = "VeryLazy",
     },
 
+    -- Reference: https://github.com/haya14busa/vim-asterisk
+    {
+        "haya14busa/vim-asterisk",
+        event = "VeryLazy",
+        config = function()
+            vim.api.nvim_set_keymap("n", "*", "<Plug>(asterisk-z*)", {})
+            vim.api.nvim_set_keymap("v", "*", "<Plug>(asterisk-z*)", {})
+            vim.api.nvim_set_keymap("n", "#", "<Plug>(asterisk-z#)", {})
+            vim.api.nvim_set_keymap("v", "#", "<Plug>(asterisk-z#)", {})
+            vim.api.nvim_set_keymap("n", "g*", "<Plug>(asterisk-gz*)", {})
+            vim.api.nvim_set_keymap("v", "g*", "<Plug>(asterisk-gz*)", {})
+            vim.api.nvim_set_keymap("n", "g#", "<Plug>(asterisk-gz#)", {})
+            vim.api.nvim_set_keymap("v", "g#", "<Plug>(asterisk-gz#)", {})
+        end,
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
