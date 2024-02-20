@@ -1886,6 +1886,12 @@ lvim.plugins = {
         cmd = "TSPlaygroundToggle",
     },
 
+    -- Reference: https://github.com/tpope/vim-abolish
+    {
+        "tpope/vim-abolish",
+        event = "VeryLazy",
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
