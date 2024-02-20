@@ -983,6 +983,7 @@ lvim.plugins = {
                 history = 10000,
                 enable_persistent_history = true,
                 continuous_sync = true,
+                default_register = { "+", "*", '"' },
                 on_select = {
                     move_to_front = true,
                 },
