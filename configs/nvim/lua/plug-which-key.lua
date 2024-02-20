@@ -185,6 +185,7 @@ wk.register({
                 cwd = vim.fn.expand("%:h"),
                 prompt_title = "Find Files in Vim-File Dir",
                 previewer = false,
+                follow = true,
             })
         end,
         "Find Files in Current File Dir",
@@ -195,6 +196,7 @@ wk.register({
                 cwd = vim.fn.getcwd(),
                 prompt_title = "Find Files in Shell Dir",
                 previewer = false,
+                follow = true,
             })
         end,
         "Find Files in Current File Dir",
@@ -304,6 +306,7 @@ wk.register({
                 cwd = require("project_nvim.project").get_project_root(),
                 prompt_title = "Find Project Files",
                 previewer = false,
+                follow = true,
             })
         end,
         "Find Project Files",
