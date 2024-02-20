@@ -1311,7 +1311,6 @@ lvim.plugins = {
                     "docker_compose_language_service", -- Docker Compose
                     "jdtls", -- Java
                     "lua_ls", -- Lua
-                    "marksman", -- Markdown
                     "pyright", -- Python
                     "rust_analyzer", -- Rust
                     "taplo", -- TOML
@@ -2043,5 +2042,4 @@ lspmanager.setup("tsserver", {
 
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
 --   { "markdown", "rst", "plaintext", "toml", "proto" }
-lspmanager.setup("marksman", {})
 lspmanager.setup("taplo", {})
