@@ -1,6 +1,5 @@
 -- ### Leader Key
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
 vim.opt.timeout = true
 vim.opt.timeoutlen = 500
 
