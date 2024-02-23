@@ -289,10 +289,19 @@ if command -v tmux &> /dev/null || mise which tmux &> /dev/null; then
         fi
     }
     alias tl='tmux list-sessions'
-    # kill all sessions except session 0
-    alias tk='tmux kill-session -at 0 &> /dev/null || tmux kill-server'
-    # kill session 0
-    alias tk0='tmux kill-session -t 0 &> /dev/null'
+    # kill specified session(s)
+    function tk() {
+        for session in "$@"; do
+            tmux kill-session -t $session &> /dev/null
+        done
+    }
+    # kill all numeric (regarded as temporary) sessions
+    function tpristine() {
+        local numeric_sessions=($(tmux list-sessions | cut -d ":" -f 1 | grep -E "^[0-9]+$"))
+        for numeric_session in "${numeric_sessions[@]}"; do
+            tmux kill-session -t $numeric_session &> /dev/null
+        done
+    }
     # kill all sessions
     alias tka='tmux kill-server'
 fi
