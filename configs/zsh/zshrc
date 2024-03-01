@@ -71,8 +71,6 @@ plugins=(
 # fzf-tab
 # bindings
 zstyle ':fzf-tab:*' fzf-bindings 'ctrl-a:toggle-all' 'ctrl-s:toggle-out'
-# integrate with tmux
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # disable sorts
 zstyle ':completion:complete:*:options' sort false
 zstyle ':completion:*:git-checkout:*' sort false
