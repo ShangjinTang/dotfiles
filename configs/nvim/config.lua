@@ -1955,6 +1955,22 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/theKnightsOfRohan/csvlens.nvim
+    {
+        "theKnightsOfRohan/csvlens.nvim",
+        dependencies = {
+            "akinsho/toggleterm.nvim",
+        },
+        cmd = "Csvlens",
+        config = function()
+            require("csvlens").setup({
+                direction = "float",
+                exec_path = "csvlens",
+                exec_install_path = vim.fn.stdpath("data") .. "/csvlens.nvim/",
+            })
+        end,
+    },
+
     -- NOTE: dropbar requires nvim >= 0.10.0
     -- Reference: https://github.com/Bekaboo/dropbar.nvim
     -- {
