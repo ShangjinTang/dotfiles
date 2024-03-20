@@ -218,8 +218,8 @@ function apply_diff_for_submodule() {
 function install_cli_prebuilts() {
     if ! [ -d ~/.prebuilts ]; then
         echo "${BOLD}${CYAN}INFO${RESET} ~/.prebuilts not exists"
-        if [[ $(uname -m) == "x86_64" ]]; then
-            echo "- ${BOLD}${CYAN}INFO${RESET} current machine is x86_64, start downloading..."
+        if [[ $(uname -s) == "Linux" ]] && [[ $(uname -m) == "x86_64" ]]; then
+            echo "- ${BOLD}${CYAN}INFO${RESET} current machine is Linux x86_64, start downloading..."
             echo "- ${MAGENTA}CMD${RESET} git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1"
             git clone https://github.com/ShangjinTang/cli-prebuilts ~/.prebuilts --depth=1 &> /dev/null
             if [ $? -eq 0 ]; then
@@ -228,7 +228,7 @@ function install_cli_prebuilts() {
                 echo "- ${BOLD}${RED}ERROR${RESET} git clone failed"
             fi
         else
-            echo "- ${BOLD}${YELLOW}WARNING${RESET} current machine is $(uname -m), prebuilts current not supported."
+            echo "- ${BOLD}${YELLOW}WARNING${RESET} current machine is $(uname -s) $(uname -m), prebuilts current not supported."
         fi
     else
         echo "${BOLD}${GREEN}OK${RESET} ~/.prebuilts exists"
