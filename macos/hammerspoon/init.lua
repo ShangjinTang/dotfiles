@@ -70,17 +70,17 @@ print("Special characters keybindings Alt(Option)+KEY disabled...")
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 -- Weather Menubar
-weatherStatusBar = require("WeatherStatusBar")
-if CONFIG_NOSYNC_WEATHER_CITY then
-  weatherStatusBar:setCity(CONFIG_NOSYNC_WEATHER_CITY)
-end
-weatherStatusBar:setIdSecret("69548741", "pipaue2b")
-weatherStatusBar:setHourWeatherEnabled(true)
-weatherStatusBar:updateWeather()
-periodicallyUpdateWeather = hs.timer.new(3600, function()
-  weatherStatusBar:updateWeather()
-end)
-periodicallyUpdateWeather:start()
+-- weatherStatusBar = require("WeatherStatusBar")
+-- if CONFIG_NOSYNC_WEATHER_CITY then
+--   weatherStatusBar:setCity(CONFIG_NOSYNC_WEATHER_CITY)
+-- end
+-- weatherStatusBar:setIdSecret("69548741", "pipaue2b")
+-- weatherStatusBar:setHourWeatherEnabled(true)
+-- weatherStatusBar:updateWeather()
+-- periodicallyUpdateWeather = hs.timer.new(3600, function()
+--   weatherStatusBar:updateWeather()
+-- end)
+-- periodicallyUpdateWeather:start()
 
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
