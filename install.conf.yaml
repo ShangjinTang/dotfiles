@@ -98,7 +98,7 @@
       force: true
       relative: false
       glob: true
-      if: "[[ $(cat /etc/os-release) =~ 'ID=arch' ]]"
+      if: "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=arch' ]]"
 - link:
     ~/bin/: linux/archlinux/bin/*
     ~/.tool-versions: linux/archlinux/.tool-versions
@@ -111,7 +111,7 @@
       force: true
       relative: false
       glob: true
-      if: "[[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]"
+      if: "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]"
 - link:
     # ~/bin/: linux/ubuntu/bin/*
     # conditional configs

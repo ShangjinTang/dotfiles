@@ -257,8 +257,10 @@ elif command -v lsd &> /dev/null; then
     alias l4="lsd --tree --depth=4"
     alias l5="lsd --tree --depth=5"
 else
-    alias ls='ls --color=auto'
-    alias l='ls --color=auto'
+    if [[ $(uname -s) == "Linux" ]]; then
+        alias ls='ls --color=auto'
+    fi
+    alias l='ls'
     alias la="ls -ah"
     alias ll="ls -lh"
     alias lla="ls -lah"
