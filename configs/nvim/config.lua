@@ -940,9 +940,6 @@ lvim.plugins = {
                     "zt",
                     "zz",
                     "zb",
-                    -- Add PageUp & PageDown
-                    "<PageUp>",
-                    "<PageDown>",
                 },
             })
             local t = {}
