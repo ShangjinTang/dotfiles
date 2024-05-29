@@ -1146,23 +1146,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/AckslD/nvim-FeMaco.lua
-    {
-        "AckslD/nvim-FeMaco.lua",
-        ft = { "markdown" },
-        config = function()
-            require("femaco").setup({
-                post_open_float = function(winnr)
-                    vim.cmd([[ set number ]])
-                    vim.cmd([[ set norelativenumber ]])
-                end,
-                ensure_newline = function(base_filetype)
-                    return true
-                end,
-            })
-        end,
-    },
-
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
     {
         "iamcco/markdown-preview.nvim",
@@ -1265,6 +1248,7 @@ lvim.plugins = {
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-neotest/neotest-python",
+            "nvim-neotest/nvim-nio",
             "rouge8/neotest-rust",
             "folke/neodev.nvim",
         },
@@ -1807,12 +1791,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/ThePrimeagen/vim-be-good
-    {
-        "ThePrimeagen/vim-be-good",
-        cmd = "VimBeGood",
-    },
-
     -- Reference: https://github.com/stevearc/dressing.nvim
     {
         "stevearc/dressing.nvim",
@@ -1865,29 +1843,6 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/Marskey/telescope-sg
-    {
-        "Marskey/telescope-sg",
-        dependencies = {
-            "nvim-telescope/telescope.nvim",
-        },
-        config = function()
-            require("telescope").setup({
-                extensions = {
-                    ast_grep = {
-                        command = {
-                            "ast-grep",
-                            "--json=stream",
-                        },
-                        grep_open_files = true,
-                        lang = nil,
-                    },
-                },
-            })
-            require("telescope").load_extension("ast_grep")
-        end,
-    },
-
     -- Reference: https://github.com/krady21/compiler-explorer.nvim
     {
         "krady21/compiler-explorer.nvim",
@@ -1918,19 +1873,8 @@ lvim.plugins = {
         end,
     },
 
-    -- Reference: https://github.com/vim-scripts/DoxygenToolkit.vim
-    {
-        "vim-scripts/DoxygenToolkit.vim",
-        ft = { "python", "c", "cpp", "java" },
-    },
-
-    -- Reference: https://github.com/nvim-treesitter/playground
-    {
-        "nvim-treesitter/playground",
-        cmd = "TSPlaygroundToggle",
-    },
-
     -- Reference: https://github.com/tpope/vim-abolish
+    -- Usage: :%S/facilit{y, ies}/building{,s}/g
     {
         "tpope/vim-abolish",
         event = "VeryLazy",
@@ -1967,20 +1911,6 @@ lvim.plugins = {
             })
         end,
     },
-
-    -- NOTE: dropbar requires nvim >= 0.10.0
-    -- Reference: https://github.com/Bekaboo/dropbar.nvim
-    -- {
-    --     "Bekaboo/dropbar.nvim",
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("dropbar").setup({})
-    --     end,
-    --     init = function()
-    --         -- disable breadcrumbs (navic) to solve bar not showing path issue
-    --         lvim.builtin.breadcrumbs.active = false
-    --     end,
-    -- },
 }
 
 ----------------------------------------------------------------------
