@@ -1876,10 +1876,10 @@ lvim.plugins = {
                 extensions = {
                     ast_grep = {
                         command = {
-                            "sg",
+                            "ast-grep",
                             "--json=stream",
                         },
-                        grep_open_files = false,
+                        grep_open_files = true,
                         lang = nil,
                     },
                 },
