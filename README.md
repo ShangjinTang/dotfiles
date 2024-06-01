@@ -63,14 +63,19 @@ Log out and re-login to make sure the shell is changed to `zsh`.
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-# # recommend to use mise to control python versions
-# mise global python@3.10 # or 'mise global python@latest'
+# rust & cargo
+sudo pacman -Sy rustup
+rustup default stable
+
+# recommend to use mise to control python versions
+sudo pacman -Sy libx-crypt # required to compile python with 'mise'
+mise global python@3.10    # or 'mise global python@latest'
 
 # Essential: support for python plugins in Nvim
 pip3 install pynvim
 
 # install the pre-defined packages
-pip3 install hydra-core "typer[all]" && sudo mpac install
+pip3 install hydra-core "typer[all]" && mpac install
 ```
 
 ### Ubuntu 22.04 x86_64
