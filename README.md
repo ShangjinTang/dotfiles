@@ -64,8 +64,7 @@ git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 -
 ~/.dotfiles/install && source ~/.zshrc
 
 # rust & cargo
-sudo pacman -Sy rustup
-rustup default stable
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # recommend to use mise to control python versions
 sudo pacman -Sy libx-crypt # required to compile python with 'mise'
