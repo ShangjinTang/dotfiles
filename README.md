@@ -27,13 +27,9 @@ Partially supported:
   - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with full features enabled
     - see: [How to Install on an Old-school Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
-    - executables: **zsh**, **rustup & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
+    - executables: **zsh**, **rust & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
     - python3 packages: **pynvim**
   - You can download in executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
-
-Poorly supported:
-
-- macOS 10.13 ~ 10.15 x86_64 (might be removed in the future).
 
 ## Installation
 
@@ -60,15 +56,15 @@ chsh -s $(which zsh)
 Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
-# rust & cargo
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+# Essential packages
+mise global rust@latest
 
 # recommend to use mise to control python versions
 sudo pacman -Sy libx-crypt # required to compile python with 'mise'
-mise global python@3.10    # or 'mise global python@latest'
+mise global python@3.10
 
 # Essential: support for python plugins in Nvim
 pip3 install pynvim
@@ -88,15 +84,11 @@ chsh -s $(which zsh)
 Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
-sudo apt update
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-```
-
-```bash
 git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
 # Essential packages
+mise global rust@latest
 mise global neovim@latest
 mise global node@latest
 mise global lazygit@latest
@@ -104,7 +96,7 @@ mise global zoxide@latest
 
 # tmux
 sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config unzip
-mise global tmux@3.3a
+mise global tmux@latest
 
 # python: recommend to use mise to control python versions
 sudo apt install -y libssl-dev liblzma-dev # dependency for python build

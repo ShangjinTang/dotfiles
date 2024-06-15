@@ -6,7 +6,7 @@ defaults:
 clang: true
 # ------------------------------
 # rust
-rustup: true
+rustup: false # [mise]
 # ------------------------------
 # nvim
 nodejs: true

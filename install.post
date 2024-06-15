@@ -82,28 +82,6 @@ function check_and_install_cht() {
     fi
 }
 
-# check & install rustup components
-function check_and_install_rustup_components() {
-    if command -v rustup &> /dev/null; then
-        # install rustup components
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}rustup${RESET} available"
-        # echo "${BLUE}Checking rustup requirements ...${RESET}"
-        for COMPONENT in "$@"; do
-            if ! rustup component list --installed | grep -q "$COMPONENT"; then
-                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$COMPONENT${RESET} ..."
-                rustup component add "$COMPONENT"
-            else
-                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$COMPONENT${RESET} available"
-            fi
-        done
-        if ! command -v cargo &> /dev/null; then
-            rustup default stable
-        fi
-    else
-        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}rustup${RESET} not available"
-    fi
-}
-
 # check & install cargo packages
 function check_and_install_cargo_packages() {
     if command -v cargo &> /dev/null; then
@@ -274,9 +252,6 @@ print_separate_line &&
 
 print_separate_line &&
     check_and_install_cht
-
-print_separate_line &&
-    check_and_install_rustup_components cargo rustfmt rust-analyzer
 
 print_separate_line &&
     install_cli_prebuilts

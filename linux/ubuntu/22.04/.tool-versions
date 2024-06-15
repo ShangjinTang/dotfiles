@@ -1,7 +1,15 @@
-# note: for python build, 'libssl-dev' is required
+# sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config unzip
 python  3.10.11
-neovim  0.10.0
-tmux    3.3a
-lazygit 0.40.2
-node    20.8.0
-zoxide  0.9.2
+
+# sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config unzip
+tmux    latest
+
+neovim  latest
+
+lazygit latest
+
+node    latest
+
+zoxide  latest
+
+rust    latest
