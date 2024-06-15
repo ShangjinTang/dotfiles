@@ -1380,7 +1380,6 @@ lvim.plugins = {
                     "isort",
                     "jsonlint",
                     "prettier",
-                    "rustfmt",
                     "shfmt",
                     "stylua",
                     "xmlformatter",
