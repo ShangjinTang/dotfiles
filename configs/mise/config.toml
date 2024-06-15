@@ -1,4 +1,5 @@
 [tools]
+rust = "latest"
 # global tool versions go here
 # you can set these with `mise use -g`
 # go = 'latest'
