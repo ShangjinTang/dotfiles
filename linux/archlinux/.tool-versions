@@ -1,4 +1,4 @@
-# sudo pacman -Sy libx-crypt
+# sudo pacman -Sy libxcrypt-compat
 python  3.10.11
 
 rust    latest
