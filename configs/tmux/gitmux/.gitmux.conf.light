@@ -1,15 +1,15 @@
 tmux:
   symbols:
-    branch: '⎇ '
-    hashprefix: ':'
-    ahead: ↑
-    behind: ↓
-    staged: '+ '
-    conflict: '✖ '
-    modified: '!'
-    untracked: '?'
-    stashed: '*'
-    clean: ✔
+    branch: ' ' # nf-fa-code_branch
+    hashprefix: '' # '' # nf-fa-hashtag
+    ahead: ' ' # nf-fa-arrow_up
+    behind: ' ' # nf-fa-arrow_down
+    staged: ' ' # nf-fa-star
+    conflict: ' ' # nf-fa-xmark
+    modified: ' ' # nf-fa-exclamation
+    stashed: ' ' # nf-fa-envelop
+    untracked: ' ' # nf-fa-question
+    clean: ' ' # nf-fa-check
   styles:
     clear: '#[fg=default]'
     state: '#[fg=#0184bc,bold]'

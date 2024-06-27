@@ -1,15 +1,15 @@
 tmux:
   symbols:
-    branch: '⎇ '
-    hashprefix: ':'
-    ahead: ↑·
-    behind: ↓·
-    staged: '+ '
-    conflict: '✖ '
-    modified: '!'
-    untracked: '?'
-    stashed: '*'
-    clean: ✔
+    branch: ' ' # nf-fa-code_branch
+    hashprefix: '' # '' # nf-fa-hashtag
+    ahead: '' # nf-fa-arrow_up
+    behind: '' # nf-fa-arrow_down
+    staged: '' # nf-fa-star
+    conflict: '' # nf-fa-xmark
+    modified: '' # nf-fa-exclamation
+    stashed: '' # nf-fa-envelop
+    untracked: '' # nf-fa-question
+    clean: '' # nf-fa-check
   styles:
     clear: '#[fg=default]'
     state: '#[fg=#56b6c2,bold]'
@@ -22,7 +22,7 @@ tmux:
     untracked: '#[fg=#e06c75,bold]'
     stashed: '#[fg=#61afef,bold]'
     clean: '#[fg=#98c379,bold]'
-  layout: [branch, .. , remote-branch, divergence, ' - ', flags]
+  layout: [branch, ' .. ', remote-branch, divergence, ' ', flags]
   options:
     branch_max_len: 0
 
