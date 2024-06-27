@@ -86,6 +86,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:*' continuous-trigger '/'
 # use the currently entered user input as the final completion output
 zstyle ':fzf-tab:*' print-query alt-enter
+# change color
+zstyle ':fzf-tab:*' fzf-flags '--color=hl:#ea76cb'
 #---------------------------------------------------------------------
 
 source $ZSH/oh-my-zsh.sh
