@@ -1804,6 +1804,7 @@ lvim.plugins = {
         "Shatur/neovim-session-manager",
         -- Autoload not works if "lazy = true"
         lazy = false,
+        enabled = vim.fn.has("nvim-0.10") == 1 and true or false,
         config = function()
             local session_manager = require("session_manager")
             local config = require("session_manager.config")
