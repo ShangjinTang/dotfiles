@@ -1337,6 +1337,7 @@ lvim.plugins = {
                     "neocmake", -- CMake
                     "dockerls", -- Docker
                     "docker_compose_language_service", -- Docker Compose
+                    "gopls", -- Go
                     "jdtls", -- Java
                     "lua_ls", -- Lua
                     "pyright", -- Python
@@ -2030,6 +2031,8 @@ lspmanager.setup("tsserver", {
     end,
     single_file_support = true,
 })
+
+lspmanager.setup("gopls", {})
 
 -- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
 --   { "markdown", "rst", "plaintext", "toml", "proto" }

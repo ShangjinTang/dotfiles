@@ -13,3 +13,5 @@ node    latest
 zoxide  latest
 
 rust    latest
+
+go      latest
