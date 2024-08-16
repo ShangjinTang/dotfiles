@@ -1449,18 +1449,20 @@ lvim.plugins = {
     {
         "folke/trouble.nvim",
         event = "VeryLazy",
+        cmd = "Trouble",
         config = function()
             local actions = require("telescope.actions")
-            local trouble = require("trouble.sources.telescope")
-            local telescope = require("telescope")
-            telescope.setup({
+            local open_with_trouble = require("trouble.sources.telescope").open
+            local add_to_trouble = require("trouble.sources.telescope").add
+            require("telescope").setup({
                 defaults = {
                     mappings = {
-                        i = { ["<c-t>"] = trouble.open },
-                        n = { ["<c-t>"] = trouble.open },
+                        i = { ["<c-t>"] = open_with_trouble },
+                        n = { ["<c-t>"] = open_with_trouble },
                     },
                 },
             })
+            require("trouble").setup({})
         end,
     },
 
