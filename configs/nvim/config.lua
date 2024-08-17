@@ -1581,6 +1581,21 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/ray-x/go.nvim
+    {
+        "ray-x/go.nvim",
+        ft = { "go", "gomod" },
+        event = { "CmdlineEnter" },
+        dependencies = { -- optional packages
+            "ray-x/guihua.lua",
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("go").setup()
+        end,
+    },
+
     -----------------------------------------------------------------
     -- NOTE: nvim: project management
 
