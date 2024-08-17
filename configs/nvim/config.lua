@@ -431,6 +431,7 @@ lvim.plugins = {
             require("notify").setup({
                 background_colour = require("catppuccin.palettes").get_palette().base,
             })
+            ---@diagnostic disable-next-line: redundant-parameter
             require("lvim.core.bufferline").setup({
                 highlights = require("catppuccin.groups.integrations.bufferline").get(),
             })
@@ -493,7 +494,7 @@ lvim.plugins = {
                 show_prompt = false, -- Shows the Prompt submitted to Ollama.
                 show_model = false, -- Displays which model you are using at the beginning of your chat session.
                 no_auto_close = false, -- Never closes the window automatically.
-                init = function(options)
+                init = function()
                     pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
                 end,
                 -- Function to initialize Ollama
@@ -512,7 +513,7 @@ lvim.plugins = {
                 debug = false, -- Prints errors and the command which is run.
             })
         end,
-        init = function(options)
+        init = function()
             pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
         end,
     },
@@ -838,7 +839,7 @@ lvim.plugins = {
             vim.o.foldlevelstart = 99
             vim.o.foldenable = true
         end,
-        config = function(_, opts)
+        config = function()
             local handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
                 local totalLines = vim.api.nvim_buf_line_count(0)
@@ -1056,7 +1057,6 @@ lvim.plugins = {
         "sindrets/diffview.nvim",
         event = "VeryLazy",
         config = function()
-            local actions = require("diffview.actions")
             require("diffview").setup({
                 file_panel = {
                     listing_style = "tree", -- One of 'list' or 'tree'
@@ -1448,9 +1448,8 @@ lvim.plugins = {
         event = "VeryLazy",
         cmd = "Trouble",
         config = function()
-            local actions = require("telescope.actions")
             local open_with_trouble = require("trouble.sources.telescope").open
-            local add_to_trouble = require("trouble.sources.telescope").add
+            ---@diagnostic disable-next-line: redundant-parameter
             require("telescope").setup({
                 defaults = {
                     mappings = {
@@ -1680,7 +1679,7 @@ lvim.plugins = {
                         fuzzy_filter = wilder.lua_fzy_filter(),
                     }),
                     {
-                        wilder.check(function(ctx, x)
+                        wilder.check(function(_, x)
                             return x == ""
                         end),
                         wilder.history(),
@@ -1723,7 +1722,7 @@ lvim.plugins = {
             }))
 
             local wildmenu_renderer = wilder.wildmenu_renderer({
-                highlighter = highlighters,
+                highlighter = wilder.basic_highlighter(),
                 separator = " · ",
                 left = { " ", wilder.wildmenu_spinner(), " " },
                 right = { " ", wilder.wildmenu_index() },
