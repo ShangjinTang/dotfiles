@@ -6,7 +6,6 @@ bat: true
 btop: true
 duf: true
 httpie: true
-# nnn: true
 # ------------------------------
 aria2: true
 rsync: true

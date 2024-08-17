@@ -70,41 +70,6 @@ if command -v cscope &> /dev/null; then
     alias cscope="cscope -f ./cscope.out"
 fi
 
-# nnn
-if [[ -f ~/bin/nnn ]]; then
-    alias nnn="~/bin/nnn"
-fi
-if command -v nnn &> /dev/null; then
-    export NNN_FIFO="/tmp/nnn.fifo" # temporary buffer for the previews
-    # nnn plugins reference: https://github.com/jarun/nnn/tree/master/plugins
-    export NNN_PLUG='c:!code $nnn*;d:diffs;t:fzopen;p:preview-tui;z:autojump'
-    nn()
-    {
-        if [ -z "$TMUX" ]; then
-            nnn -e "$@"
-        else
-            nnn -e -P p "$@"
-        fi
-    }
-    n() # to cd on quit
-    {
-        if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-            echo "nnn is already running"
-            return
-        fi
-        export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-        if [ -z "$TMUX" ]; then
-            nnn -e "$@"
-        else
-            nnn -e -P p "$@"
-        fi
-        if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-        fi
-    }
-fi
-
 # sg (ast-grep)
 if command -v ast-grep &> /dev/null; then
     alias sg="ast-grep"
@@ -166,7 +131,6 @@ fi
 # Theme settings
 function set_theme() {
     unalias bat &> /dev/null
-    unset NNN_FCOLORS
     case $1 in
         light)
             export TERMINAL_THEME="light"
@@ -196,7 +160,6 @@ function set_theme() {
             # procs
             export PROCS_THEME="dark"
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
-            export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
             export CHTSH_QUERY_OPTIONS="style=stata-dark"
             command -v r2 &> /dev/null && echo "eco onedark" > ~/.radare2rc

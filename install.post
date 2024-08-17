@@ -38,23 +38,6 @@ function install_nerdfonts() {
     fi
 }
 
-# check & install nnn plugin
-function install_nnn_plugins() {
-    if command -v nnn &> /dev/null; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}nnn${RESET} available"
-        if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins" ] ||
-            [ -z "$(ls "${XDG_CONFIG_HOME:-$HOME/.config}"/nnn/plugins)" ]; then
-            bash -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)" &&
-                echo " - ${BOLD}${GREEN}OK${RESET} nnn plugins install succeeded" ||
-                echo " - ${BOLD}${ERROR}ERROR${RESET} nnn plugins install failed"
-        else
-            echo " - ${BOLD}${GREEN}OK${RESET} nnn plugins already installed"
-        fi
-    else
-        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}nnn${RESET} not available"
-    fi
-}
-
 # check & install fzf
 function check_and_install_fzf() {
     if command -v fzf &> /dev/null; then
@@ -243,9 +226,6 @@ print_separate_line &&
 
 print_separate_line &&
     create_dotfiles_symlinks_from_local
-
-print_separate_line &&
-    install_nnn_plugins
 
 print_separate_line &&
     check_and_install_fzf

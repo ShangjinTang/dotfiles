@@ -168,7 +168,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - support white(non-transparent) & dark(transparent) theme with lualine, nvim-tree, toggleterm
   - Customized theme for `tmux` & `gitmux`
   - customized theme for shell prompt
-  - third-party (`nnn`, `bat`, `radare2`) built-in dark theme
+  - third-party (`bat`, `radare2`) built-in dark theme
 - Key Mappings (Gui Only) (CapsLock as Escape or Hyper)
   - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
   - **macOS**: see [Hammerspoon Readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)

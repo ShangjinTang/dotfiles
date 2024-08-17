@@ -13,7 +13,6 @@ lsd: true
 fd: true
 httpie: true
 dua-cli: true
-# nnn: true
 procs: true
 sd: true
 pueue: true
