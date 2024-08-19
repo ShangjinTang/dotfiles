@@ -1340,7 +1340,6 @@ lvim.plugins = {
                     "lua_ls", -- Lua
                     "pyright", -- Python
                     "rust_analyzer", -- Rust
-                    "taplo", -- TOML
                     "vimls", -- VimL
                     "lemminx", -- XML
                     "yamlls", -- YAML
@@ -2051,6 +2050,5 @@ lspmanager.setup("tsserver", {
 
 lspmanager.setup("gopls", {})
 
--- Manually set server for lvim.lsp.automatic_configuration.skipped_servers:
+-- Manually set server for lvim.lsp.automatic_configuration.skipped_filetypes:
 --   { "markdown", "rst", "plaintext", "toml", "proto" }
-lspmanager.setup("taplo", {})
