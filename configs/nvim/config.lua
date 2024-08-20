@@ -1384,6 +1384,7 @@ lvim.plugins = {
                     -- Linters
                     "shellcheck",
                     "cspell",
+                    "actionlint",
                 },
             })
         end,
@@ -1428,6 +1429,20 @@ lvim.plugins = {
                     enable = true,
                     sign = false,
                 },
+            })
+        end,
+    },
+
+    -- Reference: https://github.com/mfussenegger/nvim-lint
+    {
+        "mfussenegger/nvim-lint",
+        config = function()
+            require("lint").linters_by_ft = {}
+            vim.api.nvim_create_autocmd({ "BufRead", "TextChanged" }, {
+                pattern = { ".github/workflows/*.yaml", ".github/workflows/*.yml" },
+                callback = function()
+                    require("lint").try_lint("actionlint")
+                end,
             })
         end,
     },
