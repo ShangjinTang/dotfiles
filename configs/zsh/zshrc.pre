@@ -169,6 +169,10 @@ function set_theme() {
     esac
     alias bat="bat --theme=${BAT_THEME}"
     alias procs="procs --theme ${PROCS_THEME}"
+    # gh (github cli)
+    export GLAMOUR_STYLE="${TERMINAL_THEME}"
+    # glow
+    alias glow="glow -s '${TERMINAL_THEME}'"
     ln -sf ~/.dotfiles/configs/tmux/.tmux.conf.theme.${TERMINAL_THEME} ~/.tmux.conf.theme
 }
 alias setlight="set_theme light"
