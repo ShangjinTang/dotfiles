@@ -1,10 +1,10 @@
 diff --git a/shell/key-bindings.zsh b/shell/key-bindings.zsh
-index fe219bf..91cb825 100644
+index a4d7055..ff5c42d 100644
 --- a/shell/key-bindings.zsh
 +++ b/shell/key-bindings.zsh
-@@ -114,6 +114,37 @@ bindkey -M emacs '^R' fzf-history-widget
- bindkey -M vicmd '^R' fzf-history-widget
+@@ -137,6 +137,37 @@ bindkey -M vicmd '^R' fzf-history-widget
  bindkey -M viins '^R' fzf-history-widget
+ fi
  
 +# SolAdd begin
 +# ALT-V - open the selected file path(s) with $EDITOR (vim / nvim)
