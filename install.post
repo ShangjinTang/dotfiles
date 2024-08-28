@@ -54,17 +54,6 @@ function check_and_install_fzf() {
     fi
 }
 
-# check & install cht
-function check_and_install_cht() {
-    if command -v cht &> /dev/null; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}cht${RESET} available"
-    else
-        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}cht${RESET} not available"
-        echo "${BLUE}Installing cht ...${RESET}"
-        curl -s https://cht.sh/:cht.sh > ~/bin/cht && chmod 755 ~/bin/cht
-    fi
-}
-
 # check & install cargo packages
 function check_and_install_cargo_packages() {
     if command -v cargo &> /dev/null; then
@@ -229,9 +218,6 @@ print_separate_line &&
 
 print_separate_line &&
     check_and_install_fzf
-
-print_separate_line &&
-    check_and_install_cht
 
 print_separate_line &&
     install_cli_prebuilts
