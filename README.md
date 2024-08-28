@@ -1,6 +1,6 @@
 # dotfiles
 
-Dotfiles for ArchLinux x86_64 & Ubuntu x86_64, managed by [dotbot](https://github.com/anishathalye/dotbot).
+Dotfiles for [ArchLinux](ArchLinux) x86_64 & [Ubuntu 22.04](Ubuntu 22.04) x86_64, managed by [dotbot](https://github.com/anishathalye/dotbot).
 
 An out-of-the-box configuration with multiple features, easy to install and customize.
 
@@ -8,18 +8,19 @@ An out-of-the-box configuration with multiple features, easy to install and cust
 
 Notes:
 
-1. **It's not a light-weight configuration; and only support for zsh & nvim.**
-2. **Recommend to use a proxy in China Mainland, set `PROXY_IP` and `PROXY_ENABLED`.**
-3. **There is no uninstall script yet.**. I suggest you to run inside docker to see if it meets your needs.
-4. **Always clone this version with a latest tagged/release version.**
+1. **It's not a light-weight configuration; and only support for [zsh](zsh).**
+2. **If you are in China Mainland, recommend to use a proxy set `PROXY_IP` and `PROXY_ENABLED`.**
+3. **There is no uninstall script yet.**. Before installation please try in docker or virtual machine first.
+4. **Suggest to use [latest release](https://github.com/ShangjinTang/dotfiles/releases).**
 
 ## Supported OS
 
 Fully supported and keep up-to-date:
 
-- **ArchLinux x86_64** (also supported in WSL2)
-- **Ubuntu 22.04 x86_64** (also supported in WSL2)
-  only focus on one recently LTS version, because the required tools/packages are hard to maintain across different Ubuntu versions.
+- **[ArchLinux](ArchLinux) x86_64** (also supported in WSL2)
+- **[Ubuntu 22.04](Ubuntu 22.04) x86_64** (also supported in WSL2)
+
+Note: for Ubuntu, only recently Ubuntu LTS version is supported, because the required tools/packages are hard to maintain across different Ubuntu versions.
 
 Partially supported:
 
@@ -29,11 +30,11 @@ Partially supported:
   - Essential Packages:
     - executables: **zsh**, **rust & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
     - python3 packages: **pynvim**
-  - You can download in executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+  - You can download x86_64 preset executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## Installation
 
-If you have a proxy, recommend to set proxy before installation.
+If you are in China Mainland, please use a proxy to bypass GFW before installation. Otherwise some steps may fail.
 
 ```bash
 vim ~/.zshrc.local
@@ -46,7 +47,7 @@ export PROXY_ENABLED=1
 
 For more customized environments, see [zshrc.pre](https://github.com/ShangjinTang/dotfiles/blob/master/configs/zsh/zshrc.pre)
 
-### Arch Linux x86_64
+### ArchLinux x86_64
 
 ```bash
 sudo pacman -Sy zsh git neovim
@@ -84,7 +85,7 @@ chsh -s $(which zsh)
 Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --branch v3.1.0 --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 ~/.dotfiles/install && source ~/.zshrc
 
 # Essential packages
@@ -133,16 +134,16 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
   - CLI tool: [sgpt](https://github.com/TheR1D/shell_gpt) (requires `$OPENAI_API_KEY`)
 - ArchLinux x86_64 Packages
-  - Provide a script `mpac` with pre-set multi pacman installation
+  - Provide a script `mpac` with pre-set multi `pacman` installation
 - Ubuntu 22.04 x86_64 Packages
-  - Provide a script `mapt` with pre-set multi apt installation
+  - Provide a script `mapt` with pre-set multi `apt` installation
 - Python3 Packages
-  - Provide a script `mpip` with pre-set multi pip installation
+  - Provide a script `mpip` with pre-set multi `pip` installation
 - [dotbot](https://github.com/anishathalye/dotbot)
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
-  - automatically download nerd fonts to `~/.fonts`
-- zsh based on [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+  - automatically download some [nerdfonts](nerdfonts) to `~/.fonts`
+- [zsh](zsh), based on [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
   - useful plugins such as:
     - `fzf-tab`
     - `zsh-autosuggestions`
@@ -150,23 +151,23 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - settings with multi-stages
     - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.local` -> `~/.zshrc.post`
   - support customized settings (in `~/zshrc.local`)
-- [mise](https://github.com/jdx/mise)
-  - `mise` is like `asdf`, but much more fast and user-friendly
+- [mise](mise)
+  - [mise](mise) is like [asdf](asdf), but much more fast and user-friendly
   - use `~/.tool-versions` to install essential packages
-- nvim (>=0.9)
-  - based on **LunarVim**, but without manual installation
-  - LSPs are auto installed using mason-lspconfig
-  - add fuzzy prompt for cmdline (wilder) and modern notice (noice)
+- [nvim](nvim) (>=0.10)
+  - re-use configuration from [LunarVim](LunarVim) without manual install it first
+  - LSPs are auto installed using [mason-lspconfig.nvim](mason-lspconfig.nvim)
+  - add fuzzy prompt for cmdline ([wilder.nvim](wilder.nvim)) and modern message UI ([noice.nvim](noice.nvim))
   - customized key-bindings and seperated from original key-bindings
   - auto format on file save
-  - toggleterm with `Ctrl-\`, `Alt-1`, `Alt-2`, `Alt-3`
-- tmux (>=3.3a)
+  - toggle terminal with `Ctrl-\`, `Alt-1`, `Alt-2`, `Alt-3`
+- [tmux](tmux) (>=3.3a)
   - customized theme and bar
-  - gitmux support
-  - tmuxp support
+  - [gitmux](gitmux) support
+  - [tmuxp](tmuxp) support
 - unified theme Catppuccin Frappe (dark background) with transparency
-  - support white(non-transparent) & dark(transparent) theme with lualine, nvim-tree, toggleterm
-  - Customized theme for `tmux` & `gitmux`
+  - support white(non-transparent) & dark(transparent) theme with [lualine.nvim](lualine.nvim), [nvim-tree.lua](nvim-tree.lua), [toggleterm.nvim](toggleterm.nvim), etc
+  - customized theme for `tmux` & `gitmux`
   - customized theme for shell prompt
   - third-party (`bat`, `radare2`) built-in dark theme
 - Key Mappings (Gui Only) (CapsLock as Escape or Hyper)
@@ -179,7 +180,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - global `.gitconfig` and `.gitignore`
 - simplify proxy settings
   - preset: `$PROXY_IP` `$PROXY_ENABLED`
-  - toggle: `setproxy|unsetproxy`
+  - toggle: `setproxy` `unsetproxy`
 - simplify tmux session manipulations
   - `t`: open session 0 (default session-name); if attach fail, will create
   - `t <session-name>`: open session with _session-name_; if attach fail, will create
@@ -275,3 +276,21 @@ rm -rf ~/.local/share/nvim/mason
 ```
 
 Then open nvim to do a fresh install.
+
+[ArchLinux]: https://archlinux.org/
+[Ubuntu 22.04]: https://releases.ubuntu.com/jammy/
+[zsh]: https://www.zsh.org/
+[mise]: https://mise.jdx.dev/
+[asdf]: https://asdf-vm.com/
+[tmux]: https://github.com/tmux/tmux/wiki
+[gitmux]: https://github.com/arl/gitmux
+[tmuxp]: https://github.com/tmux-python/tmuxp
+[LunarVim]: https://lunarvim.org/
+[nvim]: https://neovim.io/
+[nerdfonts]: https://www.nerdfonts.com/
+[mason-lspconfig.nvim]: https://github.com/williamboman/mason-lspconfig.nvim
+[wilder.nvim]: https://github.com/gelguy/wilder.nvim
+[noice.nvim]: https://github.com/folke/noice.nvim
+[lualine.nvim]: https://github.com/nvim-lualine/lualine.nvim
+[nvim-tree.lua]: https://github.com/nvim-tree/nvim-tree.lua
+[toggleterm.nvim]: https://github.com/akinsho/toggleterm.nvim
