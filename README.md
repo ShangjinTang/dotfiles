@@ -170,10 +170,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - customized theme for `tmux` & `gitmux`
   - customized theme for shell prompt
   - third-party (`bat`, `radare2`) built-in dark theme
-- Key Mappings (Gui Only) (CapsLock as Escape or Hyper)
-  - **Windows**: see [AutoHotkey Settings](https://github.com/ShangjinTang/dotfiles/blob/master/windows/autohotkey/sol.ahk)
-  - **macOS**: see [Hammerspoon Readme](https://github.com/ShangjinTang/dotfiles/blob/master/macos/hammerspoon/README.md)
-  - **Ubuntu 22.04**: not support
 
 ## Features for Simplify Workflow
 
