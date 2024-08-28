@@ -1,2 +1,6 @@
 dotbot/
 submodules/
+node_modules/
+package.json
+pnpm-lock.yaml
+LICENSE
