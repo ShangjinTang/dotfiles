@@ -1,6 +1,6 @@
 # dotfiles
 
-Dotfiles for [ArchLinux](ArchLinux) x86_64 & [Ubuntu 22.04](Ubuntu 22.04) x86_64, managed by [dotbot](https://github.com/anishathalye/dotbot).
+Dotfiles for [ArchLinux][ArchLinux] x86_64 & [Ubuntu 22.04][Ubuntu 22.04] x86_64, managed by [dotbot][dotbot].
 
 An out-of-the-box configuration with multiple features, easy to install and customize.
 
@@ -8,7 +8,7 @@ An out-of-the-box configuration with multiple features, easy to install and cust
 
 Notes:
 
-1. **It's not a light-weight configuration; and only support for [zsh](zsh).**
+1. **It's not a light-weight configuration; and only support for [zsh][zsh].**
 2. **If you are in China Mainland, recommend to use a proxy set `PROXY_IP` and `PROXY_ENABLED`.**
 3. **There is no uninstall script yet.**. Before installation please try in docker or virtual machine first.
 4. **Suggest to use [latest release](https://github.com/ShangjinTang/dotfiles/releases).**
@@ -17,8 +17,8 @@ Notes:
 
 Fully supported and keep up-to-date:
 
-- **[ArchLinux](ArchLinux) x86_64** (also supported in WSL2)
-- **[Ubuntu 22.04](Ubuntu 22.04) x86_64** (also supported in WSL2)
+- **[ArchLinux][ArchLinux] x86_64** (also supported in WSL2)
+- **[Ubuntu 22.04][Ubuntu 22.04] x86_64** (also supported in WSL2)
 
 Note: for Ubuntu, only recently Ubuntu LTS version is supported, because the required tools/packages are hard to maintain across different Ubuntu versions.
 
@@ -114,7 +114,7 @@ pip3 install hydra-core "typer[all]" && sudo mapt install
 ### Other Ubuntu x86_64 Versions
 
 Refer to installation above.
-For some essential binaries, use [mise](https://github.com/jdx/mise) and [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+For some essential binaries, use [mise][mise] and [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## NVIM Plugins Installation
 
@@ -132,18 +132,17 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - AI support to speed up development inside NVIM
   - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
   - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
-  - CLI tool: [sgpt](https://github.com/TheR1D/shell_gpt) (requires `$OPENAI_API_KEY`)
 - ArchLinux x86_64 Packages
   - Provide a script `mpac` with pre-set multi `pacman` installation
 - Ubuntu 22.04 x86_64 Packages
   - Provide a script `mapt` with pre-set multi `apt` installation
 - Python3 Packages
   - Provide a script `mpip` with pre-set multi `pip` installation
-- [dotbot](https://github.com/anishathalye/dotbot)
+- [dotbot][dotbot]
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
-  - automatically download some [nerdfonts](nerdfonts) to `~/.fonts`
-- [zsh](zsh), based on [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+  - automatically download some [nerdfonts][nerdfonts] to `~/.fonts`
+- [zsh][zsh], based on [oh-my-zsh][oh-my-zsh]
   - useful plugins such as:
     - `fzf-tab`
     - `zsh-autosuggestions`
@@ -151,22 +150,22 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - settings with multi-stages
     - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.local` -> `~/.zshrc.post`
   - support customized settings (in `~/zshrc.local`)
-- [mise](mise)
-  - [mise](mise) is like [asdf](asdf), but much more fast and user-friendly
+- [mise][mise]
+  - [mise][mise] is like [asdf][asdf], but much more fast and user-friendly
   - use `~/.tool-versions` to install essential packages
-- [nvim](nvim) (>=0.10)
-  - re-use configuration from [LunarVim](LunarVim) without manual install it first
-  - LSPs are auto installed using [mason-lspconfig.nvim](mason-lspconfig.nvim)
-  - add fuzzy prompt for cmdline ([wilder.nvim](wilder.nvim)) and modern message UI ([noice.nvim](noice.nvim))
+- [nvim][nvim] (>=0.10)
+  - re-use configuration from [LunarVim][LunarVim] without manual install it first
+  - LSPs are auto installed using [mason-lspconfig.nvim][mason-lspconfig.nvim]
+  - add fuzzy prompt for cmdline ([wilder.nvim][wilder.nvim]) and modern message UI ([noice.nvim][noice.nvim])
   - customized key-bindings and seperated from original key-bindings
   - auto format on file save
   - toggle terminal with `Ctrl-\`, `Alt-1`, `Alt-2`, `Alt-3`
-- [tmux](tmux) (>=3.3a)
+- [tmux][tmux] (>=3.3a)
   - customized theme and bar
-  - [gitmux](gitmux) support
-  - [tmuxp](tmuxp) support
+  - [gitmux][gitmux] support
+  - [tmuxp][tmuxp] support
 - unified theme Catppuccin Frappe (dark background) with transparency
-  - support white(non-transparent) & dark(transparent) theme with [lualine.nvim](lualine.nvim), [nvim-tree.lua](nvim-tree.lua), [toggleterm.nvim](toggleterm.nvim), etc
+  - support white(non-transparent) & dark(transparent) theme with [lualine.nvim][lualine.nvim], [nvim-tree.lua][nvim-tree.lua], [toggleterm.nvim][toggleterm.nvim], etc
   - customized theme for `tmux` & `gitmux`
   - customized theme for shell prompt
   - third-party (`bat`, `radare2`) built-in dark theme
@@ -232,8 +231,8 @@ Then follow [Gist TF_Torch_GPU_Installation](https://gist.github.com/ShangjinTan
 
 - If you do not have a proxy, you might occur this issue in China Mainland. `mise install python` is downloading from https://www.python.org, maybe the download is slow.
 - If you have issue with `mise` package, please remove the issue package from `.tool-versions` and manually install it.
-- If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`
-- `mise` support all [asdf-plugins](https://github.com/asdf-vm/asdf-plugins)
+- If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`.
+- `mise` support all [asdf-plugins][asdf-plugins].
 
 ### nvim
 
@@ -267,11 +266,14 @@ rm -rf ~/.local/share/nvim/mason
 
 Then open nvim to do a fresh install.
 
+[dotbot]: https://github.com/anishathalye/dotbot
 [ArchLinux]: https://archlinux.org/
 [Ubuntu 22.04]: https://releases.ubuntu.com/jammy/
 [zsh]: https://www.zsh.org/
+[oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [mise]: https://mise.jdx.dev/
 [asdf]: https://asdf-vm.com/
+[asdf-plugins]: https://github.com/asdf-vm/asdf-plugins
 [tmux]: https://github.com/tmux/tmux/wiki
 [gitmux]: https://github.com/arl/gitmux
 [tmuxp]: https://github.com/tmux-python/tmuxp
