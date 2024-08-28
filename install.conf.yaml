@@ -158,16 +158,3 @@
       if: 'grep -qEi "(Microsoft|WSL)" /proc/version'
 - link:
     ~/.zshrc.wsl: configs/zsh/zshrc.wsl
-
-# docker
-- defaults:
-    link:
-      create: true
-      relink: true
-      force: true
-      relative: false
-      glob: true
-      # if: 'command -v docker'
-- link:
-    ~/docker/: docker/*
-    ~/.tmuxp/: docker/.tmuxp/*

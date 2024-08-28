@@ -1,6 +1,0 @@
-session_name: docker-jupyter
-start_directory: ~/
-windows:
-- panes:
-  - cd ~/docker/jupyter && docker-compose up -d
-  window_name: jupyter

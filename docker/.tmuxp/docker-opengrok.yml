@@ -1,6 +1,0 @@
-session_name: opengrok
-start_directory: ~/
-windows:
-- panes:
-  - cd ~/docker/opengrok && docker-compose up -d
-  window_name: opengrok

@@ -200,8 +200,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - `rc` / `rcpp` to run C / C++ files under current directory with provided flags
   - `cmakebuild` to build make projects under PROJECT ROOT
     - auto generate `compile_commands.json`
-  - docker with **compiler-explorer** using latest ArchLinux clang / gcc
-  - `.clang-tidy` support
 - auto code format on save using `neoformat`
   - C / C++ (based on `~/.clang-format`)
   - Python
@@ -209,10 +207,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - Bash
   - Lua
   - ...
-- simplify large code-base view
-  - docker with local **OpenGrok**
-- simplify python development
-  - docker with local **Jupyter Lab**
 - simplify nvim tasks
   - asynctask: compilation inside nvim under PROJECT ROOT based on `.tasks`
 
