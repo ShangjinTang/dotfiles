@@ -12,10 +12,6 @@ rich: true # https://github.com/Textualize/rich | rich text and beautiful format
 hydra-core: true # https://github.com/facebookresearch/hydra | simplifies configuration from multi resources with CLI specify / override
 
 #---------------------------------------------------------------------
-# essential tools
-shell_gpt: true
-
-#---------------------------------------------------------------------
 # clean
 pip-autoremove: true
 #---------------------------------------------------------------------

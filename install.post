@@ -54,14 +54,14 @@ function check_and_install_fzf() {
     fi
 }
 
-# check & install cargo packages
-function check_and_install_cargo_packages() {
+# check & install cargo executables
+function check_and_install_cargo_executables() {
     if command -v cargo &> /dev/null; then
         echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}cargo${RESET} available"
         # echo "${BLUE}Checking cargo requirements ...${RESET}"
         for PACKAGE in "$@"; do
-            # If the binary is already installed (e.g. pacman), should not build it in cargo
-            # Double check with 'cargo install --list' for some packages, e.g. tealdeer -> tdlr
+            # Skip if the binary is already installed (e.g. pacman)
+            # Double check with 'cargo install --list' for some executables, e.g. tealdeer -> tdlr
             if ! command -v "$PACKAGE" &> /dev/null &&
                 ! cargo install --list | grep -qw "$PACKAGE" &> /dev/null; then
                 echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
@@ -75,8 +75,8 @@ function check_and_install_cargo_packages() {
     fi
 }
 
-# check & install npm packages
-function check_and_install_npm_packages() {
+# check & install npm executables
+function check_and_install_npm_executables() {
     if command -v npm &> /dev/null; then
         echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}npm${RESET} available $(npm -v)"
         # echo "${BOLD}${BLUE}Checking npm requirements ...${RESET}"
@@ -86,6 +86,7 @@ function check_and_install_npm_packages() {
             if [[ "$PACKAGE" == *"/"* ]]; then
                 INSTALL_PACKAGE="${PACKAGE##*/}"
             fi
+            # Skip if the binary is already installed (e.g. pacman)
             if ! command -v "$INSTALL_PACKAGE" &> /dev/null; then
                 echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
                 npm install --global "$PACKAGE" > /dev/null
@@ -95,6 +96,26 @@ function check_and_install_npm_packages() {
         done
     else
         echo "${BOLD}${RED}ERROR${RESET} ${MAGENTA}npm${RESET} not available"
+    fi
+}
+
+# check & install pipx executables
+function check_and_install_pipx_executables() {
+    if command -v pipx &> /dev/null; then
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}pipx${RESET} available $(pipx --version)"
+        # echo "${BOLD}${BLUE}Checking pipx requirements ...${RESET}"
+        for PACKAGE in "$@"; do
+            local INSTALL_PACKAGE="$PACKAGE"
+            # Skip if the binary is already installed (e.g. pacman)
+            if ! command -v "$INSTALL_PACKAGE" &> /dev/null; then
+                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
+                pipx install "$PACKAGE" > /dev/null
+            else
+                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$PACKAGE${RESET} available"
+            fi
+        done
+    else
+        echo "${BOLD}${RED}ERROR${RESET} ${MAGENTA}pipx${RESET} not available"
     fi
 }
 
@@ -185,16 +206,6 @@ function install_cli_prebuilts() {
     fi
 }
 
-# function copy_from_wsl_to_windows() {
-# if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
-#     echo "${BLUE}Copy windows configs to Windows Drive C:\ ...${RESET}"
-#     rm -rf /mnt/c/.dotfiles &> /dev/null
-#     if [ ! -f /mnt/c/.dotfiles ]; then
-#         cp -rL ~/.dotfiles/windows /mnt/c/.dotfiles
-#     fi
-# fi
-# }
-
 ################################################################################
 
 # only install nerdfonts on GUI or WSL
@@ -222,24 +233,11 @@ print_separate_line &&
 print_separate_line &&
     install_cli_prebuilts
 
-# # cargo install package takes time; so disabled
-# if [[ $(cat /etc/os-release) =~ "ID=arch" ]] &> /dev/null; then
-#     check_and_install_cargo_packages cargo-nextest \
-#         ast-grep mise spacer tealdeer
-# elif [[ $(cat /etc/os-release) =~ "ID=ubuntu" ]] && [[ $(lsb_release -rs) == '22.04' ]] &> /dev/null; then
-#     check_and_install_cargo_packages cargo-nextest \
-#         ast-grep mise spacer tealdeer \
-#         atuin bat du-dust dua-cli eza fd-find git-delta lsd mdcat ouch procs pueue sd tokei watchexec-cli
-# else
-#     echo "Current OS is not supported."
-#     if [[ $(uname -m) != "x86_64" ]]; then
-#         echo "You can check & download x86_64 prebuilt binaries in below link:"
-#         echo "    https://github.com/ShangjinTang/cli-prebuilts"
-#     fi
-# fi
+print_separate_line &&
+    check_and_install_npm_executables "pnpm" "live-server" # "@bazel/bazelisk"
 
 print_separate_line &&
-    check_and_install_npm_packages "live-server" "@bazel/bazelisk"
+    check_and_install_pipx_executables "poetry" "pytest" "tmuxp" # "compiledb"
 
 ################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr

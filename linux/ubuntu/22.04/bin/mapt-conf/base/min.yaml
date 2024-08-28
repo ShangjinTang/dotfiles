@@ -29,7 +29,6 @@ python3-venv: true
 # ------------------------------
 # fzf: true
 # tmux: true
-tmuxp: true
 ripgrep: true
 zoxide: true
 # ------------------------------
