@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# git show current status (both unstaged and staged) using `git status`
 
 # dependencies: fzf, delta
 

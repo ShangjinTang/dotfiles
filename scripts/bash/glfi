@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# find git commits which modified FILE|DIR using `git log --follow`
 
 # dependencies: fzf, gshi
 

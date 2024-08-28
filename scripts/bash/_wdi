@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# interactive wd; do not directly use this, instead it's wrapped by 'cd' in.zshrc
+
+# dependencies: fzf, wd
 
 if [ ! -f ~/.warprc ]; then
     echo "fatal: ~/.warprc not exists"

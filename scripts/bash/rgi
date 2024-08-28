@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# interactive rg(ripgrep)
+
+# dependencies: fzf, rg
 
 # Switch between ripgrep launcher mode (CTRL-G) and fzf filtering mode (CTRL-F)
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
