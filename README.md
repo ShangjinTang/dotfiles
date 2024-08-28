@@ -212,7 +212,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 ### Machine Learning Framework Install (Ubuntu 22.04 x86_64)
 
 ```bash
-~/bin/mamba_create_env_pyml
+~/bin/miniforge_create_env_pyml
 conda activate pyml
 ```
 

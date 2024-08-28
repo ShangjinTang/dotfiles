@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-export PATH="$HOME/mambaforge-pypy3/bin:$PATH"
+export PATH="$HOME/miniforge-pypy3/bin:$PATH"
 
-if ! $(which mamba) &> /dev/null; then
+DOWNLOAD_URL="https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge-pypy3-Linux-x86_64.sh"
+DOWNLOAD_TMP_FILE="/tmp/$(basename ${DOWNLOAD_URL})"
 
-    echo "Downloading https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh ..."
+if ! which mamba &> /dev/null; then
 
-    curl -# -sSLf https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh -o /tmp/Mambaforge-pypy3-Linux-x86_64.sh && echo "Installing ..." && bash /tmp/Mambaforge-pypy3-Linux-x86_64.sh -b -f && rm /tmp/Mambaforge-pypy3-Linux-x86_64.sh
+    # https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0 is the latest version supports python 3.10
+    echo "Downloading ${DOWNLOAD_URL} ..."
+
+    curl -# -sSLf ${DOWNLOAD_URL} -o ${DOWNLOAD_TMP_FILE} && echo "Installing ..." && bash ${DOWNLOAD_TMP_FILE} -b -f && rm ${DOWNLOAD_TMP_FILE}
 
 fi
+
+echo "mamba path: $(which mamba)"
 
 if ! mamba env list | grep -q pyml; then
 
