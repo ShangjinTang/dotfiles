@@ -16,7 +16,7 @@
 [interactive]
 	diffFilter = delta --color-only
 [delta]
-	diff-so-fancy = false
+	diff-so-fancy = true
 	side-by-side = false
 	line-numbers = false
 	# use n and N to move between diff sections (files & hunks)
