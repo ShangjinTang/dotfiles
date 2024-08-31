@@ -125,8 +125,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - AI support to speed up development inside NVIM
   - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
   - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
-- Python3 Packages
-  - Provide a script `mpip` with pre-set multi `pip` installation
 - [dotbot][dotbot]
   - settings with multi-stages
   - support customized settings (in `~/.dotfiles.local`)
