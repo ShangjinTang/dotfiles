@@ -50,7 +50,7 @@ For more customized environments, see [zshrc.pre](https://github.com/ShangjinTan
 ### ArchLinux x86_64
 
 ```bash
-sudo pacman -Sy zsh git neovim
+sudo pacman -Sy base-devel git vim neovim zsh direnv tree mandoc net-tools openssh wget xclip inetutils python python-pip tmux ripgrep zoxide atuin
 chsh -s $(which zsh)
 ```
 
@@ -70,7 +70,7 @@ mise global python@3.10
 pip3 install pynvim
 
 # install the pre-defined packages
-pip3 install hydra-core "typer[all]" && mpac install
+pip3 install hydra-core "typer[all]"
 ```
 
 ### Ubuntu 22.04 x86_64
@@ -131,8 +131,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - AI support to speed up development inside NVIM
   - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
   - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
-- ArchLinux x86_64 Packages
-  - Provide a script `mpac` with pre-set multi `pacman` installation
 - Ubuntu 22.04 x86_64 Packages
   - Provide a script `mapt` with pre-set multi `apt` installation
 - Python3 Packages
