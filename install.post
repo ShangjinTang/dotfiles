@@ -54,71 +54,6 @@ function check_and_install_fzf() {
     fi
 }
 
-# check & install cargo executables
-function check_and_install_cargo_executables() {
-    if command -v cargo &> /dev/null; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}cargo${RESET} available"
-        # echo "${BLUE}Checking cargo requirements ...${RESET}"
-        for PACKAGE in "$@"; do
-            # Skip if the binary is already installed (e.g. pacman)
-            # Double check with 'cargo install --list' for some executables, e.g. tealdeer -> tdlr
-            if ! command -v "$PACKAGE" &> /dev/null &&
-                ! cargo install --list | grep -qw "$PACKAGE" &> /dev/null; then
-                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
-                cargo install "${PACKAGE}" > /dev/null
-            else
-                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$PACKAGE${RESET} available"
-            fi
-        done
-    else
-        echo "${BOLD}${YELLOW}WARNING${RESET} ${MAGENTA}cargo${RESET} not available"
-    fi
-}
-
-# check & install npm executables
-function check_and_install_npm_executables() {
-    if command -v npm &> /dev/null; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}npm${RESET} available $(npm -v)"
-        # echo "${BOLD}${BLUE}Checking npm requirements ...${RESET}"
-        for PACKAGE in "$@"; do
-            local INSTALL_PACKAGE="$PACKAGE"
-            # PACKAGE: [<@scope>/]<name>[@<tag>] -> INSTALL_PACKAGE: <name>[@<tag>]
-            if [[ "$PACKAGE" == *"/"* ]]; then
-                INSTALL_PACKAGE="${PACKAGE##*/}"
-            fi
-            # Skip if the binary is already installed (e.g. pacman)
-            if ! command -v "$INSTALL_PACKAGE" &> /dev/null; then
-                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
-                npm install --global "$PACKAGE" > /dev/null
-            else
-                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$PACKAGE${RESET} available"
-            fi
-        done
-    else
-        echo "${BOLD}${RED}ERROR${RESET} ${MAGENTA}npm${RESET} not available"
-    fi
-}
-
-# check & install pipx executables
-function check_and_install_pipx_executables() {
-    if command -v pipx &> /dev/null; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}pipx${RESET} available $(pipx --version)"
-        # echo "${BOLD}${BLUE}Checking pipx requirements ...${RESET}"
-        for PACKAGE in "$@"; do
-            local INSTALL_PACKAGE="$PACKAGE"
-            # Skip if the binary is already installed (e.g. pacman)
-            if ! command -v "$INSTALL_PACKAGE" &> /dev/null; then
-                echo "- ${BOLD}${CYAN}INFO${RESET} Installing ${MAGENTA}$PACKAGE${RESET} ..."
-                pipx install "$PACKAGE" > /dev/null
-            else
-                echo "- ${BOLD}${GREEN}OK${RESET} ${MAGENTA}$PACKAGE${RESET} available"
-            fi
-        done
-    else
-        echo "${BOLD}${RED}ERROR${RESET} ${MAGENTA}pipx${RESET} not available"
-    fi
-}
-
 # extract prebuilt binaries from ~/.dotfiles/"${os_name}"/bin_compressed/"${arch}"/*.tar.xz to ~/bin
 function extract_bin_compressed() {
     os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -232,12 +167,6 @@ print_separate_line &&
 
 print_separate_line &&
     install_cli_prebuilts
-
-print_separate_line &&
-    check_and_install_npm_executables "pnpm" "live-server" # "@bazel/bazelisk"
-
-print_separate_line &&
-    check_and_install_pipx_executables "poetry" "pytest" "tmuxp" # "compiledb"
 
 ################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr
