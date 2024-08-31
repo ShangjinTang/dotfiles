@@ -100,8 +100,7 @@
       glob: true
       if: "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=arch' ]]"
 - link:
-    ~/bin/: linux/archlinux/bin/*
-    ~/.tool-versions: linux/archlinux/.tool-versions
+    ~/.tool-versions: linux/.tool-versions.archlinux
 
 # Ubuntu
 - defaults:

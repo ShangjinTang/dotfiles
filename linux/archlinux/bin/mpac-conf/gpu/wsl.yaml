@@ -1,8 +1,0 @@
-# ------------------------------
-# NVIDIA CUDA
-cuda: true
-cuda-tools: true
-# ------------------------------
-# use "glxinfo -B" to check OpenGL info
-mesa-utils: true
-# ------------------------------
