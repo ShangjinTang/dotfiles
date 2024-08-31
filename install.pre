@@ -53,7 +53,7 @@ else
 fi
 
 if [[ $(uname -m) != "x86_64" ]]; then
-    echo "${BOLD}${YELLOW}WARNING${RESET}: hardware $(uname -m) might not be well supported"
+    echo "${BOLD}${YELLOW}WARNING${RESET}: hardware $(uname -m) might not be supported"
 fi
 
 print_separate_line

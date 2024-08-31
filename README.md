@@ -64,7 +64,6 @@ git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
 mise global rust@latest
 
 # recommend to use mise to control python versions
-sudo pacman -Sy libxcrypt-compat # required to compile python with 'mise'
 mise global python@3.10
 
 # Essential: support for python plugins in Nvim
