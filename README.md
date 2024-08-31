@@ -50,7 +50,7 @@ For more customized environments, see [zshrc.pre](https://github.com/ShangjinTan
 ### ArchLinux x86_64
 
 ```bash
-sudo pacman -Sy base-devel git vim neovim zsh direnv tree mandoc net-tools openssh wget xclip inetutils python python-pip tmux ripgrep zoxide atuin
+sudo pacman -Sy base-devel git zsh vim net-tools openssh wget xclip curl ripgrep
 chsh -s $(which zsh)
 ```
 
@@ -68,16 +68,13 @@ mise global python@3.10
 
 # Essential: support for python plugins in Nvim
 pip3 install pynvim
-
-# install the pre-defined packages
-pip3 install hydra-core "typer[all]"
 ```
 
 ### Ubuntu 22.04 x86_64
 
 ```bash
 sudo apt update
-sudo apt install -y zsh git
+sudo apt install -y build-essential git zsh vim net-tools openssh-client openssh-server wget xclip curl ripgrep
 chsh -s $(which zsh)
 ```
 
@@ -105,9 +102,6 @@ mise global python@3.10                    # or 'mise global python@latest'
 # Essential: support for python plugins in Nvim
 sudo apt install python3-pip
 pip3 install pynvim
-
-# install the pre-defined packages
-pip3 install hydra-core "typer[all]" && sudo mapt install
 ```
 
 ### Other Ubuntu x86_64 Versions
@@ -131,8 +125,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - AI support to speed up development inside NVIM
   - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
   - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
-- Ubuntu 22.04 x86_64 Packages
-  - Provide a script `mapt` with pre-set multi `apt` installation
 - Python3 Packages
   - Provide a script `mpip` with pre-set multi `pip` installation
 - [dotbot][dotbot]
