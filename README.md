@@ -57,7 +57,7 @@ chsh -s $(which zsh)
 Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
 ~/.dotfiles/install && source ~/.zshrc
 
 # Essential packages
@@ -81,7 +81,7 @@ chsh -s $(which zsh)
 Log out and re-login to make sure the shell is changed to `zsh`.
 
 ```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1
+git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
 ~/.dotfiles/install && source ~/.zshrc
 
 # Essential packages
