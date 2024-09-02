@@ -4,7 +4,7 @@
 # link cross-platform
 - shell:
     - ["", ========== shell pre-execute ==========]
-    - [git submodule update --init --recursive, Update submodules]
+    - [git submodule update --init --recursive --depth=1, Update submodules]
 - defaults:
     link:
       create: true
