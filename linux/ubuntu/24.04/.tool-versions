@@ -2,8 +2,6 @@ python  3.12
 
 node    lts
 
-tmux    latest
-
 neovim  latest
 
 lazygit latest

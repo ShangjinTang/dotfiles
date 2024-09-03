@@ -31,7 +31,7 @@
     ~/.config/atuin/config.toml: configs/atuin/config.toml
     ~/.config/btop/themes/: configs/btop/themes/*
     ~/.config/gh/config.yml: configs/gh/config.yml
-    ~/.config/mise/: configs/mise/*
+    ~/.config/mise/settings.toml: configs/mise/settings.toml
     ~/.gh_repos.yaml: configs/.gh_repos.yaml
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
@@ -113,6 +113,9 @@
     ~/.tool-versions:
       if: "[[ $(lsb_release -rs) == '22.04' ]]"
       path: linux/ubuntu/22.04/.tool-versions
+    ~/.tool-versions:
+      if: "[[ $(lsb_release -rs) == '24.04' ]]"
+      path: linux/ubuntu/24.04/.tool-versions
 
 # zshrc
 - shell:
