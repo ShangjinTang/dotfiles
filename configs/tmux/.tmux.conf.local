@@ -286,7 +286,7 @@ unbind -n MouseDown3Pane
 bind -n MouseDown3Pane paste-buffer
 
 # os dependent configuration
-if '[ -f ~/.tmux.conf.local.os ]' 'source -q ~/.tmux.conf.local.os'
+if '[[ $(uname) == "Linux" ]] && [[ -f ~/.tmux.conf.local.linux ]]' 'source -q ~/.tmux.conf.local.linux'
 
 # <<< Shangjin customize end <<<
 

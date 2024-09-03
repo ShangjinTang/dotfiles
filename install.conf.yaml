@@ -47,26 +47,6 @@
       if: "[ -d ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim ]"
       path: configs/vim-plugins/asyncrun.vim/runner/tmuxsol.vim
 
-# link for macOS
-- shell:
-    - ["", ========== macOS install ==========]
-- defaults:
-    link:
-      create: true
-      relink: true
-      force: true
-      relative: false
-      glob: true
-      if: "[ $(uname) = Darwin ]"
-- link:
-    # ~/bin/: macos/bin/*
-    ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.macos
-    ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.macos.amd64
-    # macOS only
-    ~/.hammerspoon: macos/hammerspoon
-    ~/.config/karabiner/assets/complex_modifications/custom.json: macos/karabiner/custom.json
-    ~/Library/Application Support/lazygit/config.yml: configs/lazygit/config.yml
-
 # link for Linux (Ubuntu | ArchLinux)
 - shell:
     - ["", ========== Linux install ==========]
@@ -77,10 +57,9 @@
       force: true
       relative: false
       glob: true
-      if: "[ $(uname) = Linux ]"
+      if: "[ $(uname) = 'Linux' ]"
 - link:
-    ~/.tmux.conf.local.os: configs/tmux/.tmux.conf.local.linux
-    ~/.dotfiles.os/gitmux: configs/tmux/gitmux/gitmux.linux.amd64
+    ~/.tmux.conf.local.linux: configs/tmux/.tmux.conf.local.linux
     ~/.config/lazygit/config.yml: configs/lazygit/config.yml
     ~/bin/: linux/bin/*
     ~/.config/fcitx5/conf/classicui.conf:
@@ -89,6 +68,20 @@
     ~/.local/share/fcitx5/themes/:
       if: "command -v fcitx5"
       path: ./configs/fcitx5/themes/*
+
+# link for Linux x86_64 (Ubuntu | ArchLinux)
+- shell:
+    - ["", ========== Linux install ==========]
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      relative: false
+      glob: true
+      if: "[[ $(uname) = 'Linux' ]] && [[ $(uname -m) = 'x86_64' ]]"
+- link:
+    ~/.tmux.gitmux/: configs/tmux/gitmux-linux-x86_64/*
 
 # ArchLinux
 - defaults:
