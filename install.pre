@@ -19,9 +19,24 @@ ITALIC=$(tput sitm)
 # shellcheck disable=SC2034
 BOLD=$(tput bold)
 
-function print_separate_line() {
-    echo "${BLUE}----------------------------------------------------------------------${RESET}"
-}
+# system / hardware check; currently only support ubuntu 24.04 and archlinux
+if [[ ! -f "/etc/os-release" ]]; then
+    echo "${BOLD}${YELLOW}ERROR${RESET}: couldn't determine current os."
+    [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+else
+    . /etc/os-release
+    if [[ ${NAME} != "Ubuntu" ]] && [[ ${NAME} != "Arch Linux" ]]; then
+        echo "${BOLD}${RED}ERROR${RESET}: distro ${NAME} is not supported"
+        [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+    fi
+    if [[ ${NAME} == "Ubuntu" ]] && [[ ${VERSION_ID} != "24.04" ]]; then
+        echo "${BOLD}${YELLOW}WARNING${RESET}: Ubuntu ${VERSION_ID} might not be well supported"
+    fi
+fi
+if [[ $(uname -m) != "x86_64" ]]; then
+    echo "${BOLD}${YELLOW}ERROR${RESET}: hardware $(uname -m) is not supported"
+    [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+fi
 
 # delete all broken symlinks in $CLEAN_DIRS
 function delete_broken_symlinks() {
@@ -37,11 +52,14 @@ function delete_broken_symlinks() {
 }
 
 ################################################################################
+function print_separate_line() {
+    echo "${BLUE}----------------------------------------------------------------------${RESET}"
+}
 
 print_separate_line
 # NOTE: do not place this block inside function; otherwise it won't exit
 if [[ $(basename $SHELL) != 'zsh' ]]; then
-    echo "${BOLD}${RED}CRITICAL${RESET}: current shell is not zsh"
+    echo "${BOLD}${RED}ERROR${RESET}: current shell is not zsh"
     echo "- Please install zsh, run '${BOLD}${MAGENTA}chsh -s $(which zsh)${RESET}', relogin shell and run this script again."
     exit 1
 else
@@ -50,10 +68,6 @@ else
     if [ ! -f ~/.zshrc.local ]; then
         touch ~/.zshrc.local && echo "- ${BOLD}${CYAN}INFO${RESET} ~/.zshrc.local created"
     fi
-fi
-
-if [[ $(uname -m) != "x86_64" ]]; then
-    echo "${BOLD}${YELLOW}WARNING${RESET}: hardware $(uname -m) might not be supported"
 fi
 
 print_separate_line
