@@ -40,7 +40,7 @@ _DIRCREATE ~/bin
 _DIRCREATE ~/.cache/nvim/undo
 # Create npm local directory for nvim lsp
 # Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
-_DIRCREATE ~/.npm-global/bin && export NPM_CONFIG_PREFIX=~/.npm-global
+_DIRCREATE ~/.npm-global/bin ~/.npm-global/lib && export NPM_CONFIG_PREFIX=~/.npm-global
 
 _PATHPREPEND /usr/lib64/jvm/java-17-openjdk/bin  # For ArchLinux
 _PATHAPPEND ~/bin ~/.prebuilts/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin ~/.local/share/nvim/mason/bin
