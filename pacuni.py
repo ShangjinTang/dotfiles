@@ -119,7 +119,7 @@ class PacUni(dotbot.Plugin):
         if "depends" in self._installers_config[directive]:
             depends = self._installers_config[directive]["depends"]
             if depends and "cmd" in depends:
-                result = subprocess.call(depends["cmd"], shell=True)
+                result = subprocess.call(f"bash -c '{depends["cmd"]}'", shell=True)
                 if result != 0:
                     if "msg_fail" in depends:
                         self._log.warning(f"Warning: {depends['msg_fail']}")
