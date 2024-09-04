@@ -43,29 +43,21 @@ class PkgStatus(Enum):
 class PacUni(dotbot.Plugin):
 
     _installers_config = {
-        "apt": {
+        "apt-get": {
             "depends": {
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]",
-                "msg_fail": "'apt' can not be used, not Ubuntu distro",
+                "msg_fail": "'apt-get' can not be used, not Ubuntu distro",
             },
             "check_installed": "dpkg -l",
-            "try_install": "sudo apt install -y",
+            "try_install": "sudo apt-get install -y",
         },
-        "apt-22.04": {
-            "depends": {
-                "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]] && [[ $(lsb_release -rs) == '22.04' ]]",
-                "msg_fail": "'apt-22.04' can not be used, not Ubuntu 22.04 distro",
-            },
-            "check_installed": "dpkg -l",
-            "try_install": "sudo apt install -y",
-        },
-        "apt-24.04": {
+        "apt-get-24.04": {
             "depends": {
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]] && [[ $(lsb_release -rs) == '24.04' ]]",
-                "msg_fail": "'apt-24.04' can not be used, not Ubuntu 24.04 distro",
+                "msg_fail": "'apt-get-24.04' can not be used, not Ubuntu 24.04 distro",
             },
             "check_installed": "dpkg -l",
-            "try_install": "sudo apt install -y",
+            "try_install": "sudo apt-get install -y",
         },
         "pacman": {
             "depends": {
