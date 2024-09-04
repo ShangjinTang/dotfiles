@@ -119,7 +119,9 @@ class PacUni(dotbot.Plugin):
         if "depends" in self._installers_config[directive]:
             depends = self._installers_config[directive]["depends"]
             if depends and "cmd" in depends:
-                result = subprocess.call(f"bash -c '{depends["cmd"]}'", shell=True)
+                result = subprocess.call(
+                    f"bash -c '{depends["cmd"]}' > /dev/null", shell=True
+                )
                 if result != 0:
                     if "msg_fail" in depends:
                         self._log.warning(f"Warning: {depends['msg_fail']}")
@@ -130,7 +132,7 @@ class PacUni(dotbot.Plugin):
         check_installed_cmd = self._installers_config[directive]["check_installed"]
         return (
             subprocess.call(
-                f"{check_installed_cmd} | grep {pkg} &> /dev/null", shell=True
+                f"{check_installed_cmd} | grep {pkg} > /dev/null", shell=True
             )
             == 0
         )
@@ -139,7 +141,7 @@ class PacUni(dotbot.Plugin):
         try_install_cmd = self._installers_config[directive]["try_install"]
         cmd_to_run = f"{try_install_cmd} {pkg}".strip()
         self._log.lowinfo(f" {cmd_to_run}")
-        result = subprocess.call(f"{cmd_to_run} &> /dev/null", shell=True)
+        result = subprocess.call(f"{cmd_to_run} > /dev/null", shell=True)
         if result != 0:
             self._log.error(f" {cmd_to_run}")
         else:
