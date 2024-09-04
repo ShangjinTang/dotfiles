@@ -1972,6 +1972,12 @@ lvim.plugins = {
             })
         end,
     },
+
+    -- Reference: https://github.com/lambdalisue/vim-suda
+    {
+        "lambdalisue/vim-suda",
+        cmd = { "SudaRead", "SudaWrite" },
+    },
 }
 
 ----------------------------------------------------------------------
