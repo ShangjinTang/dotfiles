@@ -35,7 +35,7 @@ How to use:
         ```bash
         ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml
         ```
-    
+
     Note: you can place all the configurations in one file, and run specific config(s) with '--only' or '--except' flag, e.g.:
 
         ```bash
@@ -73,15 +73,7 @@ class PacUni(dotbot.Plugin):
         "apt-get": {
             "depends": {
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]",
-                "msg_fail": "'apt-get' can not be used, not Ubuntu distro",
-            },
-            "check_installed": "dpkg -l",
-            "try_install": "sudo apt-get install -y",
-        },
-        "apt-get-24.04": {
-            "depends": {
-                "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]] && [[ $(lsb_release -rs) == '24.04' ]]",
-                "msg_fail": "'apt-get-24.04' can not be used, not Ubuntu 24.04 distro",
+                "msg_fail": "'apt-get' not available, not Ubuntu distro",
             },
             "check_installed": "dpkg -l",
             "try_install": "sudo apt-get install -y",
@@ -89,7 +81,7 @@ class PacUni(dotbot.Plugin):
         "pacman": {
             "depends": {
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=arch' ]]",
-                "msg_fail": "'pacman' not found, not ArchLinux distro",
+                "msg_fail": "'pacman' not available, not ArchLinux distro",
             },
             "check_installed": "pacman -Qi",
             "try_install": "sudo pacman --noconfirm -S",
@@ -97,7 +89,7 @@ class PacUni(dotbot.Plugin):
         "cargo": {
             "depends": {
                 "cmd": "command -v cargo &> /dev/null",
-                "msg_fail": "'cargo' not found. To install it, see: https://rustup.rs/",
+                "msg_fail": "'cargo' not available. To install it, see: https://rustup.rs/",
             },
             "check_installed": "cargo install --list",
             "try_install": "cargo install",
@@ -105,7 +97,7 @@ class PacUni(dotbot.Plugin):
         "npm": {
             "depends": {
                 "cmd": "command -v npm &> /dev/null",
-                "msg_fail": "'npm' not found. To install it, see: https://nodejs.org/en/download/package-manager",
+                "msg_fail": "'npm' not available. To install it, see: https://nodejs.org/en/download/package-manager",
             },
             "check_installed": "npm list -g",
             "try_install": "npm install -g",
