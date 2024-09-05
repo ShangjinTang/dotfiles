@@ -74,29 +74,42 @@ function extract_bin_compressed() {
     done
 }
 
-# create symlinks from ~/.dotfiles.private/ to ~/
-function create_dotfiles_symlinks_from_private() {
+# create symlinks from ~/.dotfiles.*/ to ~/
+function create_dotfiles_symlinks() {
     if [ -d ~/.dotfiles.private ]; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.private${RESET} exists"
-        echo "${BLUE}Create symlinks from ~/.dotfiles.private/ to ~/${RESET}"
+        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.$1${RESET} exists"
+        echo "${BLUE}Create symlinks from ~/.dotfiles.$1/ to ~/${RESET}"
         while IFS= read -r -d '' file; do
-            ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.private\///')"
-        done < <(find ~/.dotfiles.private -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.private/README.md" -print0)
+            target_file="$(echo $file | sed "s/\.dotfiles\.$1\///")"
+            target_dir=$(dirname "$target_file")
+
+            # Check if target directory exists, if not, create it
+            if [ ! -d "$target_dir" ]; then
+                echo "Creating directory: $target_dir"
+                mkdir -p "$target_dir" > /dev/null
+            fi
+
+            ln -sf "$file" "$target_file"
+        done < <(find ~/.dotfiles.$1 -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.$1/README.md" -print0)
     else
-        echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.private${RESET} not exists"
+        echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.$1${RESET} not exists"
     fi
 }
 
-function create_dotfiles_symlinks_from_local() {
-    if [ -d ~/.dotfiles.local ]; then
-        echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.local${RESET} exists"
-        echo "${BLUE}Create symlinks from ~/.dotfiles.local/ to ~/${RESET}"
-        while IFS= read -r -d '' file; do
-            ln -sf "$file" "$(echo "$file" | sed 's/\.dotfiles\.local\///')"
-        done < <(find ~/.dotfiles.local -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.local/README.md" -print0)
-    else
-        echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.local${RESET} not exists"
-    fi
+# Function to check and unlink symbolic links pointing to ~/.dotfiles.*/
+function unlink_dotfiles_symlinks() {
+    echo "${BLUE}Checking and unlinking symlinks pointing to ~/.dotfiles.$1/${RESET}"
+
+    while IFS= read -r -d '' dotfiles_file; do
+        home_symlink="$(echo $dotfiles_file | sed "s/\.dotfiles\.$1\///")"
+
+        if [[ -L "${home_symlink}" ]]; then
+            if [[ "$(readlink -f "${home_symlink}")" == "${dotfiles_file}" ]]; then
+                echo "Removing symbolic link: ${home_symlink}"
+                unlink "${home_symlink}"
+            fi
+        fi
+    done < <(find ~/.dotfiles.$1 -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.$1/README.md" -print0)
 }
 
 # apply diff files in ~/.dotfiles/submodules_diff/<MODULE_NAME> to ~/.dotfiles/submodules/<MODULE_NAME>
@@ -157,10 +170,12 @@ print_separate_line &&
     extract_bin_compressed
 
 print_separate_line &&
-    create_dotfiles_symlinks_from_private
-
+    create_dotfiles_symlinks "private"
 print_separate_line &&
-    create_dotfiles_symlinks_from_local
+    create_dotfiles_symlinks "local"
+
+# unlink_dotfiles_symlinks "local"
+# unlink_dotfiles_symlinks "private"
 
 print_separate_line &&
     check_and_install_fzf
