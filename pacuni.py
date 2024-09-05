@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
 """
-Step:
+A configuration python script to unify installation (depends on 'dotbot').
 
-    1. add the configuration in file, e.g. `~/.pacuni_conf.yaml`:
+How to use:
 
+    1. Add the configuration in file, e.g. `~/.pacuni_conf.yaml`:
+
+    Ubuntu 24.04:
         ```yaml
-        - pacman:
+        - apt-get:
             - jq
         - npm:
             - pnpm
@@ -15,10 +18,34 @@ Step:
         - cargo:
         ```
 
+    Arch Linux:
+        ```yaml
+        - pacman
+            - jq
+        - npm:
+            - pnpm
+        - pipx:
+            - pytest
+        - cargo:
+        ```
+
+
     2. run: `${DOTBOT_BIN} -p {CURRENT_SCRIPT} -c {CONFIG}`, e.g.:
 
         ```bash
         ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml
+        ```
+    
+    Note: you can place all the configurations in one file, and run specific config(s) with '--only' or '--except' flag, e.g.:
+
+        ```bash
+        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --except apt-get
+        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --except pacman apt-get
+        ```
+
+        ```bash
+        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --only apt-get
+        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --only npm pipx
         ```
 """
 
