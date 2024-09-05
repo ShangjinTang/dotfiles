@@ -57,6 +57,7 @@ __version__ = "0.1.0"
 
 import subprocess
 from enum import Enum
+from typing import List
 
 import dotbot
 
@@ -120,21 +121,21 @@ class PacUni(dotbot.Plugin):
         },
     }
 
-    def __init__(self, context):
+    def __init__(self, context: str) -> None:
         super(PacUni, self).__init__(self)
         self._context = context
 
-    def can_handle(self, directive):
+    def can_handle(self, directive: str) -> bool:
         return directive in self._installers_config.keys()
 
-    def handle(self, directive, data):
+    def handle(self, directive: str, data: List[str]) -> bool:
         if not self.can_handle(directive):
             raise RuntimeError(f"PacUni cannot handle directive {directive}")
         if not data:
             return True
         return self._process_packages(directive, data)
 
-    def _check_depends(self, directive):
+    def _check_depends(self, directive: str) -> bool:
         if "depends" in self._installers_config[directive]:
             depends = self._installers_config[directive]["depends"]
             if depends and "cmd" in depends:
@@ -149,7 +150,7 @@ class PacUni(dotbot.Plugin):
                     return False
         return True
 
-    def _is_installed(self, directive, pkg):
+    def _is_installed(self, directive: str, pkg: str) -> bool:
         check_installed_cmd = self._installers_config[directive]["check_installed"]
         return (
             subprocess.call(
@@ -158,7 +159,7 @@ class PacUni(dotbot.Plugin):
             == 0
         )
 
-    def _install_package(self, directive, pkg):
+    def _install_package(self, directive: str, pkg: str) -> None:
         try_install_cmd = self._installers_config[directive]["try_install"]
         cmd_to_run = f"{try_install_cmd} {pkg}".strip()
         self._log.lowinfo(f" {cmd_to_run}")
@@ -168,7 +169,7 @@ class PacUni(dotbot.Plugin):
         else:
             self._log.info(f" {cmd_to_run}")
 
-    def _process_packages(self, directive, packages):
+    def _process_packages(self, directive: str, packages: List[str]) -> bool:
         if not self._check_depends(directive):
             return False
         results = {
