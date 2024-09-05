@@ -133,6 +133,8 @@ class PacUni(dotbot.Plugin):
             raise RuntimeError(f"PacUni cannot handle directive {directive}")
         if not data:
             return True
+        non_installed_pkgs = [pkg for pkg in data if not self._is_installed(directive, pkg)]
+        self._log.info(f"Packages to install: {non_installed_pkgs}")
         return self._process_packages(directive, data)
 
     def _check_depends(self, directive: str) -> bool:
