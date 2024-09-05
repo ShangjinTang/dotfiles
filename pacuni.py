@@ -76,7 +76,7 @@ class PacUni(dotbot.Plugin):
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]",
                 "msg_fail": "'apt-get' not available, not Ubuntu distro",
             },
-            "check_installed": "dpkg -l",
+            "check_installed": "dpkg -l | grep '^ii ' | cut -d ' ' -f 3 | cut -d ':' -f 1",
             "try_install": "sudo apt-get install -y",
         },
         "pacman": {
@@ -154,7 +154,7 @@ class PacUni(dotbot.Plugin):
         check_installed_cmd = self._installers_config[directive]["check_installed"]
         return (
             subprocess.call(
-                f"{check_installed_cmd} | grep {pkg} > /dev/null", shell=True
+                f"{check_installed_cmd} | grep -qw {pkg}", shell=True
             )
             == 0
         )
