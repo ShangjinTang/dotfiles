@@ -1361,7 +1361,7 @@ lvim.plugins = {
                 --   https://github.com/williamboman/mason-lspconfig.nvim/tree/main#available-lsp-servers
                 --   https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
                 ensure_installed = {
-                    "asm_lsp", -- Assembly (GAS/NASM, GO)
+                    -- "asm_lsp", -- Assembly (GAS/NASM, GO)
                     "bashls", -- Bash
                     "clangd", -- C/C++
                     "cmake", -- CMake
