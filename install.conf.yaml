@@ -107,15 +107,9 @@
 - link:
     # ~/bin/: linux/ubuntu/bin/*
     # conditional configs
-    ~/bin/:
-      if: "cat /etc/os-release | grep 'VERSION_ID' | grep -q '22.04'"
-      path: linux/ubuntu/22.04/bin/*
-    ~/.tool-versions:
-      if: "cat /etc/os-release | grep 'VERSION_ID' | grep -q '22.04'"
-      path: linux/ubuntu/22.04/.tool-versions
     ~/.tool-versions:
       if: "cat /etc/os-release | grep 'VERSION_ID' | grep -q '24.04'"
-      path: linux/ubuntu/24.04/.tool-versions
+      path: linux/.tool-versions.ubuntu2404
 
 # zshrc
 - shell:

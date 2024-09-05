@@ -91,6 +91,14 @@ class PacUni(dotbot.Plugin):
             "check_installed": "pipx list",
             "try_install": "pipx install",
         },
+        "pip": {
+            "depends": {
+                "cmd": "command -v python &> /dev/null",
+                "msg_fail": "'pip' cannot be used as 'python' not found",
+            },
+            "check_installed": "python -m pip list",
+            "try_install": "python -m pip install",
+        },
     }
 
     def __init__(self, context):
@@ -116,7 +124,9 @@ class PacUni(dotbot.Plugin):
                 )
                 if result != 0:
                     if "msg_fail" in depends:
-                        self._log.warning(f"Warning: {depends['msg_fail']}")
+                        self._log.error(f"Error: {depends['msg_fail']}")
+                    else:
+                        self._log.error(f"Error: failed to process '{directive}'")
                     return False
         return True
 

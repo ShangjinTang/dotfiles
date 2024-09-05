@@ -1,6 +1,6 @@
 # dotfiles
 
-Dotfiles for [ArchLinux][ArchLinux] x86_64 & [Ubuntu 22.04][Ubuntu 22.04] x86_64, managed by [dotbot][dotbot].
+Dotfiles for [ArchLinux][ArchLinux] x86_64 & [Ubuntu 24.04][Ubuntu 24.04] x86_64, managed by [dotbot][dotbot].
 
 An out-of-the-box configuration with multiple features, easy to install and customize.
 
@@ -18,7 +18,7 @@ Notes:
 Fully supported and keep up-to-date:
 
 - **[ArchLinux][ArchLinux] x86_64** (also supported in WSL2)
-- **[Ubuntu 22.04][Ubuntu 22.04] x86_64** (also supported in WSL2)
+- **[Ubuntu 24.04][Ubuntu 24.04] x86_64** (also supported in WSL2)
 
 Note: for Ubuntu, only recently Ubuntu LTS version is supported, because the required tools/packages are hard to maintain across different Ubuntu versions.
 
@@ -70,7 +70,7 @@ mise global python@3.10
 pip3 install pynvim
 ```
 
-### Ubuntu 22.04 x86_64
+### Ubuntu 24.04 x86_64
 
 ```bash
 sudo apt update
@@ -198,12 +198,16 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 
 ### Machine Learning Framework Install (Ubuntu 22.04 x86_64)
 
+**Note: Ubuntu 22.04 is deprecated.**
+
+**TODO: Update to 24.04.**
+
 ```bash
 ~/bin/miniforge_create_env_pyml
 conda activate pyml
 ```
 
-Then follow [Gist TF_Torch_GPU_Installation](https://gist.github.com/ShangjinTang/e19d6c03334957f0f72ae59c0583d647).
+Then follow [Gist: TF_Torch_GPU_Installation (Ubuntu 22.04)](https://gist.github.com/ShangjinTang/e19d6c03334957f0f72ae59c0583d647).
 
 ## Customization
 
@@ -255,7 +259,7 @@ Then open nvim to do a fresh install.
 
 [dotbot]: https://github.com/anishathalye/dotbot
 [ArchLinux]: https://archlinux.org/
-[Ubuntu 22.04]: https://releases.ubuntu.com/jammy/
+[Ubuntu 24.04]: https://releases.ubuntu.com/noble/
 [zsh]: https://www.zsh.org/
 [oh-my-zsh]: https://github.com/ohmyzsh/ohmyzsh
 [mise]: https://mise.jdx.dev/
