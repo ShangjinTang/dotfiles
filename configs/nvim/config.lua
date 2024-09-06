@@ -1998,6 +1998,25 @@ lvim.plugins = {
             require("telescope").load_extension("chezmoi")
         end,
     },
+
+    -- Reference: https://github.com/alker0/chezmoi.vim
+    {
+        "alker0/chezmoi.vim",
+        lazy = false,
+        init = function()
+            vim.g["chezmoi#use_tmp_buffer"] = true
+        end,
+        require("nvim-treesitter.configs").setup({
+            highlight = {
+                disable = function()
+                    -- check if 'filetype' option includes 'chezmoitmpl'
+                    if string.find(vim.bo.filetype, "chezmoitmpl") then
+                        return true
+                    end
+                end,
+            },
+        }),
+    },
 }
 
 ----------------------------------------------------------------------
