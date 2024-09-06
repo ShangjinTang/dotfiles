@@ -20,12 +20,12 @@ ITALIC=$(tput sitm)
 BOLD=$(tput bold)
 
 set -e
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "${YELLOW}======================================================================${RESET}"
 echo "${YELLOW}1. Executing install.pre ...${RESET}"
 
-[ -f "$SCRIPT_DIR/install.pre" ] && "$SCRIPT_DIR/install.pre"
+[ -f "${BASEDIR}/install.pre" ] && "${BASEDIR}/install.pre"
 
 echo "${YELLOW}======================================================================${RESET}"
 echo "${YELLOW}2. Executing install ...${RESET}"
@@ -34,7 +34,6 @@ CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
@@ -45,7 +44,7 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 echo "${YELLOW}======================================================================${RESET}"
 echo "${YELLOW}3. Executing install.post ...${RESET}"
 
-[ -f "$SCRIPT_DIR/install.post" ] && "$SCRIPT_DIR/install.post"
+[ -f "${BASEDIR}/install.post" ] && "${BASEDIR}/install.post"
 
 echo "${YELLOW}======================================================================${RESET}"
 
