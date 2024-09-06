@@ -116,7 +116,7 @@ class PacUni(dotbot.Plugin):
                 "cmd": "command -v python &> /dev/null",
                 "msg_fail": "'pip' cannot be used as 'python' not found",
             },
-            "check_installed": "python -m pip list",
+            "check_installed": "python -m pip list | tail -n +3",
             "try_install": "python -m pip install",
         },
     }
@@ -133,7 +133,9 @@ class PacUni(dotbot.Plugin):
             raise RuntimeError(f"PacUni cannot handle directive {directive}")
         if not data:
             return True
-        non_installed_pkgs = [pkg for pkg in data if not self._is_installed(directive, pkg)]
+        non_installed_pkgs = [
+            pkg for pkg in data if not self._is_installed(directive, pkg)
+        ]
         self._log.info(f"Packages to install: {non_installed_pkgs}")
         return self._process_packages(directive, data)
 
@@ -155,10 +157,7 @@ class PacUni(dotbot.Plugin):
     def _is_installed(self, directive: str, pkg: str) -> bool:
         check_installed_cmd = self._installers_config[directive]["check_installed"]
         return (
-            subprocess.call(
-                f"{check_installed_cmd} | grep -qw {pkg}", shell=True
-            )
-            == 0
+            subprocess.call(f"{check_installed_cmd} | grep -qw {pkg}", shell=True) == 0
         )
 
     def _install_package(self, directive: str, pkg: str) -> None:
