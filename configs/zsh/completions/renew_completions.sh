@@ -53,3 +53,8 @@ fi
 if command -v mise &> /dev/null; then
     execute_command "mise completions zsh > ${script_directory}/_mise"
 fi
+
+# _chezmoi
+if command -v chezmoi &> /dev/null; then
+    execute_command "chezmoi completion zsh > ${script_directory}/_chezmoi"
+fi
