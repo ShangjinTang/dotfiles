@@ -136,7 +136,8 @@ class PacUni(dotbot.Plugin):
         non_installed_pkgs = [
             pkg for pkg in data if not self._is_installed(directive, pkg)
         ]
-        self._log.info(f"Packages to install: {non_installed_pkgs}")
+        if non_installed_pkgs:
+            self._log.info(f"{directive}: packages to install: {non_installed_pkgs}")
         return self._process_packages(directive, data)
 
     def _check_depends(self, directive: str) -> bool:
@@ -193,7 +194,7 @@ class PacUni(dotbot.Plugin):
         results_stripped = {k: v for k, v in results.items() if v}
 
         if all(result in successful for result in results_stripped.keys()):
-            self._log.info(f"All {directive} packages installed successfully")
+            self._log.info(f"{directive}: all packages installed successfully")
             success = True
         else:
             success = False
