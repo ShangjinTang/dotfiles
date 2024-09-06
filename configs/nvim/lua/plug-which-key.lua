@@ -186,6 +186,12 @@ wk.register({
     },
 
     ["<leader>f"] = { name = "+File" },
+    ["<leader>fc"] = {
+        function()
+            require("telescope").extensions.chezmoi.find_files({})
+        end,
+        "Find Chezmoi Files",
+    },
     ["<leader>ff"] = {
         function()
             require("telescope.builtin").find_files({
