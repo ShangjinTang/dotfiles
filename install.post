@@ -76,7 +76,7 @@ function extract_bin_compressed() {
 
 # create symlinks from ~/.dotfiles.*/ to ~/
 function create_dotfiles_symlinks() {
-    if [ -d ~/.dotfiles.private ]; then
+    if [ -d ~/.dotfiles.$1 ]; then
         echo "${BOLD}${GREEN}OK${RESET} ${MAGENTA}~/.dotfiles.$1${RESET} exists"
         echo "${BLUE}Create symlinks from ~/.dotfiles.$1/ to ~/${RESET}"
         while IFS= read -r -d '' file; do
