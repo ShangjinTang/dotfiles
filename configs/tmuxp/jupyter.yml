@@ -1,6 +1,0 @@
-session_name: jupyter
-start_directory: ~/jupyter/
-windows:
-  - panes:
-      - conda activate pyml && jupyter lab --ip=0.0.0.0 --no-browser
-    window_name: jupyter
