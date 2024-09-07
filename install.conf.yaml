@@ -31,7 +31,6 @@
     ~/.config/atuin/config.toml: configs/atuin/config.toml
     ~/.config/btop/themes/: configs/btop/themes/*
     ~/.config/gh/config.yml: configs/gh/config.yml
-    ~/.config/mise/settings.toml: configs/mise/settings.toml
     ~/.gh_repos.yaml: configs/.gh_repos.yaml
     ~/.gitconfig: configs/.gitconfig
     ~/.gitignore: configs/.gitignore
