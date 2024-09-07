@@ -4,8 +4,6 @@ Dotfiles for [ArchLinux][ArchLinux] x86_64 & [Ubuntu 24.04][Ubuntu 24.04] x86_64
 
 An out-of-the-box configuration with multiple features, easy to install and customize.
 
-**PRs are welcome.**
-
 Notes:
 
 1. **It's not a light-weight configuration; and only support for [zsh][zsh].**
@@ -25,89 +23,66 @@ Note: for Ubuntu, only recently Ubuntu LTS version is supported, because the req
 Partially supported:
 
 - **Other Ubuntu x86_64 Versions**
-  - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with full features enabled
+  - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with almost full features enabled
     - see: [How to Install on an Old-school Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
-    - executables: **zsh**, **rust & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**, **delta**
-    - python3 packages: **pynvim**
-  - You can download x86_64 preset executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+    - executables: **zsh**, **rust & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
+    - python packages: **pynvim**
+  - You can download x86_64 prebuilt executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## Installation
 
-If you are in China Mainland, please use a proxy to bypass GFW before installation. Otherwise some steps may fail.
+1. Setup a proxy (China Mainland only)
 
-```bash
-vim ~/.zshrc.local
-```
+   If you are in China Mainland, please use a proxy to bypass GFW before installation. Otherwise some steps may fail.
 
-```bash
-export PROXY_IP="127.0.0.1:7890"
-export PROXY_ENABLED=1
-```
+   ```bash
+   vim ~/.zshrc.local
+   ```
 
-For more customized environments, see [zshrc.pre](https://github.com/ShangjinTang/dotfiles/blob/master/configs/zsh/zshrc.pre)
+   ```bash
+   export PROXY_IP="127.0.0.1:7890"
+   export PROXY_ENABLED=1
+   ```
 
-### ArchLinux x86_64
+   For more customized environments, see [zshrc.pre](https://github.com/ShangjinTang/dotfiles/blob/master/configs/zsh/zshrc.pre)
 
-```bash
-sudo pacman -Sy base-devel git zsh vim net-tools openssh wget xclip curl ripgrep
-chsh -s $(which zsh)
-```
+2. Add essential required packages
 
-Log out and re-login to make sure the shell is changed to `zsh`.
+   - **Arch Linux x86_64**
 
-```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
-~/.dotfiles/install && source ~/.zshrc
+     ```bash
+     sudo pacman -Sy base-devel python git zsh vim net-tools wget xclip curl ripgrep
+     chsh -s $(which zsh)
+     ```
 
-# Essential packages
-mise global rust@latest
+   - **Ubuntu 24.04 x86_64**
 
-# recommend to use mise to control python versions
-mise global python@3.10
+     ```bash
+     sudo apt update
+     sudo apt install -y build-essential python git zsh vim net-tools wget xclip curl ripgrep
+     ```
 
-# Essential: support for python plugins in Nvim
-pip3 install pynvim
-```
+3. Change shell to zsh
 
-### Ubuntu 24.04 x86_64
+   ```bash
+   chsh -s $(which zsh)
+   ```
 
-```bash
-sudo apt update
-sudo apt install -y build-essential git zsh vim net-tools openssh-client openssh-server wget xclip curl ripgrep
-chsh -s $(which zsh)
-```
+   Log out and re-login to make sure the shell is changed to `zsh`.
 
-Log out and re-login to make sure the shell is changed to `zsh`.
+4. Clone this repository and install
 
-```bash
-git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
-~/.dotfiles/install && source ~/.zshrc
+   ```bash
+   git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
+   ~/.dotfiles/install && source ~/.zshrc
 
-# Essential packages
-mise global rust@latest
-mise global neovim@latest
-mise global node@latest
-mise global lazygit@latest
-mise global zoxide@latest
+   # recommend to use mise to control python versions
+   # mise use --global python@3.12
 
-# tmux
-sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config unzip
-mise global tmux@latest
-
-# python: recommend to use mise to control python versions
-sudo apt install -y libssl-dev liblzma-dev # dependency for python build
-mise global python@3.10                    # or 'mise global python@latest'
-
-# Essential: support for python plugins in Nvim
-sudo apt install python3-pip
-pip3 install pynvim
-```
-
-### Other Ubuntu x86_64 Versions
-
-Refer to installation above.
-For some essential binaries, use [mise][mise] and [Cli Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
+   # Essential: support for python plugins in Nvim
+   python -m pip install pynvim
+   ```
 
 ## NVIM Plugins Installation
 
@@ -207,8 +182,7 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 
 ### mise
 
-- If you do not have a proxy, you might occur this issue in China Mainland. `mise install python` is downloading from https://www.python.org, maybe the download is slow.
-- If you have issue with `mise` package, please remove the issue package from `.tool-versions` and manually install it.
+- If you have issue with `mise` packages, please remove the issue package from `.tool-versions` and manually install it.
 - If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`.
 - `mise` support all [asdf-plugins][asdf-plugins].
 
