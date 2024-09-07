@@ -24,7 +24,6 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-    ~/.cargo/config.toml: configs/cargo/config.toml
     ~/.cbfmt.toml: configs/.cbfmt.toml
     ~/.clang-format: configs/clang/.clang-format
     ~/.clang-tidy: configs/clang/.clang-tidy
