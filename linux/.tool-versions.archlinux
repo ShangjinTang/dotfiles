@@ -1,4 +1,4 @@
 # sudo pacman -Sy libxcrypt-compat
-python  3.12
+python  3.12.5
 
 rust    latest
