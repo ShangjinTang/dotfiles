@@ -54,26 +54,6 @@ function check_and_install_fzf() {
     fi
 }
 
-# extract prebuilt binaries from ~/.dotfiles/"${os_name}"/bin_compressed/"${arch}"/*.tar.xz to ~/bin
-function extract_bin_compressed() {
-    os_name=$(uname -s | tr '[:upper:]' '[:lower:]')
-    arch=$(uname -m | tr '[:upper:]' '[:lower:]')
-    compressed_dir=~/.dotfiles/"${os_name}"/bin_compressed/"${arch}"
-    find ${compressed_dir} -type f -name "*.tar.xz" | while read -r source_tar_xz; do
-        echo "${BLUE}Extracting prebuilt binaries to ~/bin ...${RESET}"
-        target_decompressed=~/bin/$(basename "${source_tar_xz}" .tar.xz)
-        source_relative=$(echo "$source_tar_xz" | sed "s|^$HOME|~|")
-        target_relative=$(echo "$target_decompressed" | sed "s|^$HOME|~|")
-        if [[ ! -f "$target_decompressed" || "$source_tar_xz" -nt "$target_decompressed" ]]; then
-            tar xf "$source_tar_xz" -C ~/bin --touch &&
-                echo " - ${BOLD}${GREEN}OK${RESET} extracted ${CYAN}$source_relative${RESET} to ${CYAN}$target_relative${RESET} succeeded" ||
-                echo " - ${BOLD}${ERROR}ERROR${RESET} extracted ${CYAN}$source_relative${RESET} to ${CYAN}$target_relative${RESET} failed"
-        else
-            echo " - ${BOLD}${GREEN}OK${RESET} ${MAGENTA}${target_relative}${RESET} is up to date."
-        fi
-    done
-}
-
 # create symlinks from ~/.dotfiles.*/ to ~/
 function create_dotfiles_symlinks() {
     if [ -d ~/.dotfiles.$1 ]; then
@@ -165,9 +145,6 @@ fi
 
 print_separate_line &&
     apply_diff_for_submodule fzf LunarVim ohmyzsh
-
-print_separate_line &&
-    extract_bin_compressed
 
 print_separate_line &&
     create_dotfiles_symlinks "private"
