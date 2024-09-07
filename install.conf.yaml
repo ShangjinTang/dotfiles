@@ -37,7 +37,6 @@
     ~/.rcflags: configs/.rcflags
     ~/.rcppflags: configs/.rcppflags
     ~/.ruff.toml: configs/.ruff.toml
-    ~/.stylua.toml: configs/lua/.stylua.toml
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     # conditional configs
     ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
