@@ -196,19 +196,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - simplify nvim tasks
   - asynctask: compilation inside nvim under PROJECT ROOT based on `.tasks`
 
-### Machine Learning Framework Install (Ubuntu 22.04 x86_64)
-
-**Note: Ubuntu 22.04 is deprecated.**
-
-**TODO: Update to 24.04.**
-
-```bash
-~/bin/miniforge_create_env_pyml
-conda activate pyml
-```
-
-Then follow [Gist: TF_Torch_GPU_Installation (Ubuntu 22.04)](https://gist.github.com/ShangjinTang/e19d6c03334957f0f72ae59c0583d647).
-
 ## Customization
 
 1. Add configuration files
