@@ -61,7 +61,6 @@
 - link:
     ~/.tmux.conf.local.linux: configs/tmux/.tmux.conf.local.linux
     ~/.config/lazygit/config.yml: configs/lazygit/config.yml
-    ~/bin/: linux/bin/*
     ~/.config/fcitx5/conf/classicui.conf:
       if: "command -v fcitx5"
       path: ./configs/fcitx5/conf/classicui.conf
@@ -91,7 +90,7 @@
       force: true
       relative: false
       glob: true
-      if: "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=arch' ]]"
+      if: "cat /etc/os-release | grep '^ID=' | grep -q 'arch'"
 - link:
     ~/.tool-versions: linux/.tool-versions.archlinux
 
@@ -103,12 +102,12 @@
       force: true
       relative: false
       glob: true
-      if: "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]"
+      if: "cat /etc/os-release | grep '^ID=' | grep -q 'ubuntu'"
 - link:
     # ~/bin/: linux/ubuntu/bin/*
     # conditional configs
     ~/.tool-versions:
-      if: "cat /etc/os-release | grep 'VERSION_ID' | grep -q '24.04'"
+      if: "cat /etc/os-release | grep '^VERSION_ID=' | grep -q '24.04'"
       path: linux/.tool-versions.ubuntu2404
 
 # zshrc
