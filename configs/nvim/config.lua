@@ -1984,7 +1984,20 @@ lvim.plugins = {
         "xvzc/chezmoi.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
-            require("chezmoi").setup({})
+            require("chezmoi").setup({
+                edit = {
+                    watch = true,
+                    force = true,
+                },
+                notification = {
+                    on_open = true,
+                    on_apply = true,
+                    on_watch = false,
+                },
+                telescope = {
+                    select = { "<CR>" },
+                },
+            })
             vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
                 pattern = { os.getenv("HOME") .. "/.local/share/chezmoi/*" },
                 callback = function(ev)
