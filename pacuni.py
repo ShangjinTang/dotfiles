@@ -108,7 +108,7 @@ class PacUni(dotbot.Plugin):
                 "cmd": "command -v pipx &> /dev/null",
                 "msg_fail": "'pipx' not available",
             },
-            "check_installed": "pipx list | grep -qwi",
+            "check_installed": "pipx list --short | grep -qwi",
             "try_install": "pipx install",
         },
         "pip": {
