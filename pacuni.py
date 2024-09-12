@@ -76,7 +76,7 @@ class PacUni(dotbot.Plugin):
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=ubuntu' ]]",
                 "msg_fail": "'apt-get' not available, not Ubuntu distro",
             },
-            "check_installed": "dpkg -l | grep '^ii ' | cut -d ' ' -f 3 | cut -d ':' -f 1",
+            "check_installed": "dpkg -l | grep '^ii ' | cut -d ' ' -f 3 | cut -d ':' -f 1 | grep -qw",
             "try_install": "sudo apt-get install -y",
         },
         "pacman": {
@@ -84,7 +84,7 @@ class PacUni(dotbot.Plugin):
                 "cmd": "[[ -f '/etc/os-release' ]] && [[ $(cat /etc/os-release) =~ 'ID=arch' ]]",
                 "msg_fail": "'pacman' not available, not ArchLinux distro",
             },
-            "check_installed": "pacman -Qi",
+            "check_installed": "pacman -Qi | grep -qw",
             "try_install": "sudo pacman --noconfirm -S",
         },
         "cargo": {
@@ -92,7 +92,7 @@ class PacUni(dotbot.Plugin):
                 "cmd": "command -v cargo &> /dev/null",
                 "msg_fail": "'cargo' not available. To install it, see: https://rustup.rs/",
             },
-            "check_installed": "cargo install --list",
+            "check_installed": "cargo install --list | grep -qw",
             "try_install": "cargo install",
         },
         "npm": {
@@ -100,23 +100,23 @@ class PacUni(dotbot.Plugin):
                 "cmd": "command -v npm &> /dev/null",
                 "msg_fail": "'npm' not available. To install it, see: https://nodejs.org/en/download/package-manager",
             },
-            "check_installed": "npm list -g",
+            "check_installed": "npm list -g | grep -qw",
             "try_install": "npm install -g",
         },
         "pipx": {
             "depends": {
                 "cmd": "command -v pipx &> /dev/null",
-                "msg_fail": "'pipx' not found",
+                "msg_fail": "'pipx' not available",
             },
-            "check_installed": "pipx list",
+            "check_installed": "pipx list | grep -qwi",
             "try_install": "pipx install",
         },
         "pip": {
             "depends": {
                 "cmd": "command -v python &> /dev/null",
-                "msg_fail": "'pip' cannot be used as 'python' not found",
+                "msg_fail": "'pip' not available as 'python' not found",
             },
-            "check_installed": "python -m pip list | tail -n +3",
+            "check_installed": "python -m pip list | tail -n +3 | grep -qwi",
             "try_install": "python -m pip install",
         },
     }
@@ -157,9 +157,7 @@ class PacUni(dotbot.Plugin):
 
     def _is_installed(self, directive: str, pkg: str) -> bool:
         check_installed_cmd = self._installers_config[directive]["check_installed"]
-        return (
-            subprocess.call(f"{check_installed_cmd} | grep -qw {pkg}", shell=True) == 0
-        )
+        return subprocess.call(f"{check_installed_cmd} {pkg}", shell=True) == 0
 
     def _install_package(self, directive: str, pkg: str) -> None:
         try_install_cmd = self._installers_config[directive]["try_install"]
