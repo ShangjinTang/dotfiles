@@ -1,3 +1,6 @@
+# .ignore is used by 'rg', 'fd'
+
+.husky/_/
 dotbot/
 submodules/
 node_modules/
@@ -5,3 +8,5 @@ package.json
 pnpm-lock.yaml
 LICENSE
 cspell.json
+
+# vim: ft=gitignore
