@@ -57,7 +57,7 @@ export FZF_CTRL_R_OPTS="--bind left:preview-page-up,right:preview-page-down,ctrl
 export FZF_DEFAULT_OPTS_WITHOUT_THEME="--bind left:preview-page-up,right:preview-page-down,ctrl-/:toggle-preview,ctrl-a:toggle-all,ctrl-s:toggle-out,tab:up,shift-tab:down"
 # Use rg (ripgrep) as fzf's **<TAB> / CTRL-T backend
 if command -v rg &> /dev/null; then
-    export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.cache,.vscode,.build,.clangd,build,bazel-*}/*' --glob '!{.cs_files,.project,.root,.workspace,compile_commands.json,cscope.*}' 2> /dev/null"
+    export FZF_DEFAULT_COMMAND="rg --files --no-ignore --hidden --follow --glob '!{.git,.repo,.cache,.vscode,.build,.clangd,build,bazel-*,node_modules,.husky/_}/*' --glob '!{.cs_files,.project,.root,.workspace,compile_commands.json,cscope.*}' 2> /dev/null"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
