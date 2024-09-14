@@ -120,13 +120,6 @@ function cdup_to_exists() {
 }
 alias ce="cdup_to_exists"
 
-# use fzf to scan 'wd' directories
-if command -v _wdi &> /dev/null; then
-    function wdi() {
-        cd "$(_wdi "$*")"
-    }
-fi
-
 # Theme settings
 function set_theme() {
     unalias bat &> /dev/null
