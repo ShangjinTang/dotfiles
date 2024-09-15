@@ -1,7 +1,0 @@
-# rc uses .rcflags in current or upper dirs
--O0
--g
--Wall
--Wextra
--Wpedantic
-# -Werror

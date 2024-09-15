@@ -22,16 +22,8 @@
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
-    ~/.cbfmt.toml: configs/.cbfmt.toml
-    ~/.clang-format: configs/clang/.clang-format
-    ~/.clang-tidy: configs/clang/.clang-tidy
     ~/.config/atuin/config.toml: configs/atuin/config.toml
     ~/.config/btop/themes/: configs/btop/themes/*
-    ~/.gitconfig: configs/.gitconfig
-    ~/.gitignore: configs/.gitignore
-    ~/.rcflags: configs/.rcflags
-    ~/.rcppflags: configs/.rcppflags
-    ~/.ruff.toml: configs/.ruff.toml
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
     # conditional configs
     ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
