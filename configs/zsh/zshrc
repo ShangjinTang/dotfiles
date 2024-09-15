@@ -1,9 +1,5 @@
 ######################################################################
 
-_INCLUDE () {
-    [[ -f "$1" ]] && source "$1"
-}
-
 _INCLUDE ~/.zshrc.pre
 
 ######################################################################
@@ -94,8 +90,7 @@ unset LSCOLORS # zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 #---------------------------------------------------------------------
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-_INCLUDE ~/.p10k.zsh
-_INCLUDE ~/.p10k.mise.zsh
+_INCLUDE ~/.p10k.zsh ~/.p10k.mise.zsh
 
 ######################################################################
 
@@ -107,8 +102,11 @@ _INCLUDE ~/.zshrc.wsl
 
 ######################################################################
 
-_INCLUDE ~/.zshrc.private
-_INCLUDE ~/.zshrc.local
+# Add customized configurations in ~/.zshrc.usr
+_INCLUDE ~/.zshrc.user
+
+######################################################################
+
 _INCLUDE ~/.zshrc.post
 
 ######################################################################

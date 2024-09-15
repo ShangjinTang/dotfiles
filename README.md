@@ -37,7 +37,7 @@ Partially supported:
    If you are in China Mainland, please use a proxy to bypass GFW before installation. Otherwise some steps may fail.
 
    ```bash
-   vim ~/.zshrc.local
+   vim ~/.zshrc.user
    ```
 
    ```bash
@@ -102,7 +102,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
 - [dotbot][dotbot]
   - settings with multi-stages
-  - support customized settings (in `~/.dotfiles.local`)
   - automatically download some [nerdfonts][nerdfonts] to `~/.fonts`
 - [zsh][zsh], based on [oh-my-zsh][oh-my-zsh]
   - useful plugins such as:
@@ -110,8 +109,8 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
     - `zsh-autosuggestions`
     - `zsh-syntax-highlighting`
   - settings with multi-stages
-    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.local` -> `~/.zshrc.post`
-  - support customized settings (in `~/zshrc.local`)
+    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.user` -> `~/.zshrc.post`
+  - support customized settings (in `~/zshrc.user`)
 - [mise][mise]
   - [mise][mise] is like [asdf][asdf], but much more fast and user-friendly
   - use `~/.tool-versions` to install essential packages

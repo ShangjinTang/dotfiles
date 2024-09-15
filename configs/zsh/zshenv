@@ -47,4 +47,12 @@ _PATHAPPEND() {
     done
 }
 
+_INCLUDE () {
+    for arg in "$@"; do
+        if [[ -f "$arg" ]]; then
+            source "$arg"
+        fi
+    done
+}
+
 #=====================================================================
