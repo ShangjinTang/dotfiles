@@ -87,6 +87,7 @@ function set_theme() {
             # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions#suggestion-highlight-style
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252"  # default color: 8
             command -v r2 &> /dev/null && echo "eco default" > ~/.radare2rc
+            mkdir -p ~/.config/yazi && ln -sf ~/.dotfiles/configs/yazi/latte.toml ~/.config/yazi/theme.toml
             ;;
         dark)
             export TERMINAL_THEME="dark"
@@ -102,6 +103,7 @@ function set_theme() {
             BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
             export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
             command -v r2 &> /dev/null && echo "eco onedark" > ~/.radare2rc
+            mkdir -p ~/.config/yazi && ln -sf ~/.dotfiles/configs/yazi/frappe.toml ~/.config/yazi/theme.toml
             ;;
         *)
             ;;
