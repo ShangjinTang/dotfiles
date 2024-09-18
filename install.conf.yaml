@@ -43,7 +43,6 @@
       if: "[ $(uname) = 'Linux' ]"
 - link:
     ~/.tmux.conf.local.linux: configs/tmux/.tmux.conf.local.linux
-    ~/.config/lazygit/config.yml: configs/lazygit/config.yml
     ~/.config/fcitx5/conf/classicui.conf:
       if: "command -v fcitx5"
       path: ./configs/fcitx5/conf/classicui.conf
