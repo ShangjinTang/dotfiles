@@ -214,6 +214,7 @@ else
     lvim.format_on_save.enabled = false
 end
 local formatters = require("lvim.lsp.null-ls.formatters")
+
 formatters.setup({
     -- cargo install stylua
     { command = "stylua", filetypes = { "lua" } },
@@ -1670,6 +1671,10 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/noice.nvim
     {
         "folke/noice.nvim",
+        -- enable if not in JetBrains IDE
+        enabled = not (
+                vim.env.TERMINAL_EMULATOR and string.match(string.lower(vim.env.TERMINAL_EMULATOR), "jetbrains")
+            ),
         lazy = false,
         dependencies = {
             "MunifTanjim/nui.nvim",
