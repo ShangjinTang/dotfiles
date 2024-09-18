@@ -102,7 +102,7 @@ _INCLUDE ~/.zshrc.wsl
 
 ######################################################################
 
-# Add user configurations in ~/.zshrc.usr
+# Add user configurations in ~/.zshrc.user
 _INCLUDE ~/.zshrc.user
 
 ######################################################################

@@ -1,6 +1,10 @@
 # Configurations depend on customized variables should be placed in here
 # Add customized variables in ~/.*shrc.local
 
+# if theme is not set before, set it to dark (default)
+if [[ -z "$TERMINAL_THEME" ]]; then
+    export TERMINAL_THEME="dark"
+fi
 # set theme
 set_theme $TERMINAL_THEME
 case ${TERMINAL_THEME} in
