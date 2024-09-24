@@ -1984,39 +1984,6 @@ lvim.plugins = {
         cmd = { "SudaRead", "SudaWrite" },
     },
 
-    -- Reference: https://github.com/xvzc/chezmoi.nvim
-    {
-        "xvzc/chezmoi.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("chezmoi").setup({
-                edit = {
-                    watch = true,
-                    force = true,
-                },
-                notification = {
-                    on_open = true,
-                    on_apply = true,
-                    on_watch = false,
-                },
-                telescope = {
-                    select = { "<CR>" },
-                },
-            })
-            vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-                pattern = { os.getenv("HOME") .. "/.local/share/chezmoi/*" },
-                callback = function(ev)
-                    local bufnr = ev.buf
-                    local edit_watch = function()
-                        require("chezmoi.commands.__edit").watch(bufnr)
-                    end
-                    vim.schedule(edit_watch)
-                end,
-            })
-            require("telescope").load_extension("chezmoi")
-        end,
-    },
-
     -- Reference: https://github.com/alker0/chezmoi.vim
     {
         "alker0/chezmoi.vim",
