@@ -147,8 +147,6 @@ print_separate_line &&
     apply_diff_for_submodule fzf LunarVim ohmyzsh
 
 print_separate_line &&
-    create_dotfiles_symlinks "private"
-print_separate_line &&
     create_dotfiles_symlinks "local"
 
 # unlink_dotfiles_symlinks "local"
