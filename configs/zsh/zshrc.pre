@@ -21,6 +21,8 @@ export USE_MISE=1
 export PROXY_IP="127.0.0.1:7890"
 export PROXY_ENABLED=0
 #---------------------------------------------------------------------
+# nvim lite mode
+export NVIM_LITE_MODE=true
 # nvim extensions
 export NVIM_FORMAT_ON_SAVE=false
 # show diagnostics on hover or not

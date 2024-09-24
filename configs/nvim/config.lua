@@ -64,6 +64,8 @@ lvim.builtin.project.patterns = {
     "cscope.out",
 }
 
+local LITE_MODE = vim.env.NVIM_LITE_MODE == "true"
+
 ----------------------------------------------------------------------
 -- lualine
 
@@ -112,69 +114,77 @@ lvim.builtin.lualine = {
 ----------------------------------------------------------------------
 -- treesitter
 
--- Automatically install missing parsers when entering buffer
-lvim.builtin.treesitter.auto_install = true
+if LITE_MODE then
 
--- lvim.builtin.treesitter.ignore_install = { "haskell" }
+    lvim.builtin.treesitter.auto_install = false
 
--- -- always installed on startup, useful for parsers without a strict filetype
-lvim.builtin.treesitter.ensure_installed = {
-    "bash",
-    "c",
-    "cmake",
-    "comment",
-    "css",
-    "cuda",
-    "devicetree",
-    "diff",
-    "dockerfile",
-    "dot",
-    "git_config",
-    "gitattributes",
-    "gitcommit",
-    "gitignore",
-    "go",
-    "gomod",
-    "gosum",
-    "gowork",
-    "graphql",
-    "html",
-    "ini",
-    "java",
-    "javascript",
-    "json",
-    "kotlin",
-    "latex",
-    "llvm",
-    "lua",
-    "luadoc",
-    "make",
-    "markdown",
-    "markdown_inline",
-    "mermaid",
-    "meson",
-    "mlir",
-    "nasm",
-    "ninja",
-    "nix",
-    "perl",
-    "php",
-    "proto",
-    "regex",
-    "requirements",
-    "rst",
-    "rust",
-    "scala",
-    "sql",
-    "tmux",
-    "toml",
-    "typescript",
-    "vim",
-    "vimdoc",
-    "vue",
-    "xml",
-    "yaml",
-}
+else
+
+    -- Automatically install missing parsers when entering buffer
+    lvim.builtin.treesitter.auto_install = true
+
+    -- lvim.builtin.treesitter.ignore_install = { "haskell" }
+
+    -- -- always installed on startup, useful for parsers without a strict filetype
+    lvim.builtin.treesitter.ensure_installed = {
+        "bash",
+        "c",
+        "cmake",
+        "comment",
+        "css",
+        "cuda",
+        "devicetree",
+        "diff",
+        "dockerfile",
+        "dot",
+        "git_config",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
+        "graphql",
+        "html",
+        "ini",
+        "java",
+        "javascript",
+        "json",
+        "kotlin",
+        "latex",
+        "llvm",
+        "lua",
+        "luadoc",
+        "make",
+        "markdown",
+        "markdown_inline",
+        "mermaid",
+        "meson",
+        "mlir",
+        "nasm",
+        "ninja",
+        "nix",
+        "perl",
+        "php",
+        "proto",
+        "regex",
+        "requirements",
+        "rst",
+        "rust",
+        "scala",
+        "sql",
+        "tmux",
+        "toml",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "vue",
+        "xml",
+        "yaml",
+    }
+
+end
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>
 
@@ -203,104 +213,107 @@ lvim.builtin.treesitter.ensure_installed = {
 ----------------------------------------------------------------------
 -- null-ls
 
--- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
-if os.getenv("NVIM_FORMAT_ON_SAVE") == "true" then
-    lvim.format_on_save = {
-        enabled = true,
-        -- pattern = "*.lua",
-        timeout = 1000,
-    }
-else
-    lvim.format_on_save.enabled = false
-end
-local formatters = require("lvim.lsp.null-ls.formatters")
+if not LITE_MODE then
+    -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
+    if os.getenv("NVIM_FORMAT_ON_SAVE") == "true" then
+        lvim.format_on_save = {
+            enabled = true,
+            -- pattern = "*.lua",
+            timeout = 1000,
+        }
+    else
+        lvim.format_on_save.enabled = false
+    end
 
-formatters.setup({
-    -- cargo install stylua
-    { command = "stylua", filetypes = { "lua" } },
-    -- sudo pacman -Sy clang | sudo apt install -y clang-format
-    { command = "clang_format", filetypes = { "c", "cpp", "cuda" } },
-    -- npm install --global google-java-format
-    { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
-    -- sudo pacman -Sy python-black | sudo apt install -y black
-    { command = "black", filetypes = { "python" } },
-    -- pip install isort
-    { command = "isort", filetypes = { "python" } },
-    -- sudo pacman -Sy shfmt | sudo apt install -y shfmt
-    { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
-    -- pip install beautysh
-    { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
-    -- rustup component add rustfmt
-    { command = "rustfmt", filetypes = { "rust" } },
-    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
-    { command = "buildifier", filetypes = { "bzl" } },
-    -- cargo install cbfmt
-    { command = "cbfmt", filetypes = { "markdown" } },
-    -- npm install --global @bufbuild/buf
-    { command = "buf", filetypes = { "proto" } },
-    -- pip install cmakelang
-    { command = "cmake-format", filetypes = { "cmake" } },
-    -- pip install xmlformatter
-    { command = "xmlformat", filetypes = { "xml" } },
-    -- npm install --global prettier
-    {
-        command = "prettier",
-        -- extra_args = { "--print-width", "120", "tabWidth", "4" },
-        extra_args = { "--print-width", "120" },
-        filetypes = {
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "vue",
-            "css",
-            "scss",
-            "less",
-            "html",
-            "json",
-            "jsonc",
-            "yaml",
-            "markdown",
-            "markdown.mdx",
-            "graphql",
-            "handlebars",
+    local formatters = require("lvim.lsp.null-ls.formatters")
+
+    formatters.setup({
+        -- cargo install stylua
+        { command = "stylua", filetypes = { "lua" } },
+        -- sudo pacman -Sy clang | sudo apt install -y clang-format
+        { command = "clang_format", filetypes = { "c", "cpp", "cuda" } },
+        -- npm install --global google-java-format
+        { command = "google_java_format", extra_args = { "--aosp" }, filetypes = { "java" } },
+        -- sudo pacman -Sy python-black | sudo apt install -y black
+        { command = "black", filetypes = { "python" } },
+        -- pip install isort
+        { command = "isort", filetypes = { "python" } },
+        -- sudo pacman -Sy shfmt | sudo apt install -y shfmt
+        { command = "shfmt", extra_args = { "-sr", "-ci", "-i", "4" }, filetypes = { "sh", "bash" } },
+        -- pip install beautysh
+        { command = "beautysh", extra_args = { "-i", "4" }, filetypes = { "csh", "ksh", "zsh" } },
+        -- rustup component add rustfmt
+        { command = "rustfmt", filetypes = { "rust" } },
+        -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+        { command = "buildifier", filetypes = { "bzl" } },
+        -- cargo install cbfmt
+        { command = "cbfmt", filetypes = { "markdown" } },
+        -- npm install --global @bufbuild/buf
+        { command = "buf", filetypes = { "proto" } },
+        -- pip install cmakelang
+        { command = "cmake-format", filetypes = { "cmake" } },
+        -- pip install xmlformatter
+        { command = "xmlformat", filetypes = { "xml" } },
+        -- npm install --global prettier
+        {
+            command = "prettier",
+            -- extra_args = { "--print-width", "120", "tabWidth", "4" },
+            extra_args = { "--print-width", "120" },
+            filetypes = {
+                "javascript",
+                "javascriptreact",
+                "typescript",
+                "typescriptreact",
+                "vue",
+                "css",
+                "scss",
+                "less",
+                "html",
+                "json",
+                "jsonc",
+                "yaml",
+                "markdown",
+                "markdown.mdx",
+                "graphql",
+                "handlebars",
+            },
         },
-    },
-})
+    })
 
-local linters = require("lvim.lsp.null-ls.linters")
-linters.setup({
-    -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
-    { command = "buildifier", filetypes = { "bzl" } },
-    -- npm install --global @bufbuild/buf
-    { command = "buf", filetypes = { "proto" } },
-    -- pip install cmakelang
-    { command = "cmake-lint", filetypes = { "cmake" } },
-    -- npm install --global jsonlint
-    { command = "jsonlint", filetypes = { "json" } },
-    -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
-    { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
-    -- zsh
-    { command = "zsh", filetypes = { "zsh" } },
-    -- cspell
-    { command = "cspell", filetypes = { "markdown", "text" } },
-})
+    local linters = require("lvim.lsp.null-ls.linters")
+    linters.setup({
+        -- go install github.com/bazelbuild/buildtools/buildifier@latest | npm install --global @bazel/buildifier
+        { command = "buildifier", filetypes = { "bzl" } },
+        -- npm install --global @bufbuild/buf
+        { command = "buf", filetypes = { "proto" } },
+        -- pip install cmakelang
+        { command = "cmake-lint", filetypes = { "cmake" } },
+        -- npm install --global jsonlint
+        { command = "jsonlint", filetypes = { "json" } },
+        -- sudo pacman -Sy shellcheck | sudo apt install -y shellcheck
+        { command = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
+        -- zsh
+        { command = "zsh", filetypes = { "zsh" } },
+        -- cspell
+        { command = "cspell", filetypes = { "markdown", "text" } },
+    })
 
-local code_actions = require("lvim.lsp.null-ls.code_actions")
-code_actions.setup({
-    {
-        command = "cspell",
-        filetypes = { "markdown", "text" },
-    },
-})
+    local code_actions = require("lvim.lsp.null-ls.code_actions")
+    code_actions.setup({
+        {
+            command = "cspell",
+            filetypes = { "markdown", "text" },
+        },
+    })
 
--- local code_actions = require("lvim.lsp.null-ls.code_actions")
--- code_actions.setup({
---     {
---         command = "eslint",
---         filetypes = { "typescript", "typescriptreact" },
---     },
--- })
+    -- local code_actions = require("lvim.lsp.null-ls.code_actions")
+    -- code_actions.setup({
+    --     {
+    --         command = "eslint",
+    --         filetypes = { "typescript", "typescriptreact" },
+    --     },
+    -- })
+end
 
 ----------------------------------------------------------------------
 -- telescope
@@ -341,13 +354,13 @@ lvim.plugins = {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        enabled = true,
         priority = 1000,
         dependencies = {
             "nvim-lualine/lualine.nvim",
         },
         config = function()
-            require("catppuccin").setup({
-                -- flavour = "frappe", -- latte, frappe, macchiato, mocha
+            require("catppuccin").setup({ -- flavour = "frappe", -- latte, frappe, macchiato, mocha
                 background = {
                     -- :h background
                     light = "latte",
@@ -435,9 +448,11 @@ lvim.plugins = {
                     which_key = true,
                 },
             })
-            require("notify").setup({
-                background_colour = require("catppuccin.palettes").get_palette().base,
-            })
+            if not  LITE_MODE then
+                require("notify").setup({
+                    background_colour = require("catppuccin.palettes").get_palette().base,
+                })
+            end
             ---@diagnostic disable-next-line: redundant-parameter
             require("lvim.core.bufferline").setup({
                 highlights = require("catppuccin.groups.integrations.bufferline").get(),
@@ -453,6 +468,7 @@ lvim.plugins = {
     -- Reference: https://github.com/skywind3000/asyncrun.vim
     {
         "skywind3000/asyncrun.vim",
+        enabled = not LITE_MODE,
         cmd = "AsyncRun",
         dependencies = {
             "preservim/vimux",
@@ -462,6 +478,7 @@ lvim.plugins = {
     -- Reference: https://github.com/skywind3000/asynctasks.vim
     {
         "skywind3000/asynctasks.vim",
+        enabled = not LITE_MODE,
         cmd = {
             "AsyncTask",
             "AsyncTaskList",
@@ -479,6 +496,7 @@ lvim.plugins = {
     -- Reference: https://github.com/GustavoKatel/telescope-asynctasks.nvim
     {
         "GustavoKatel/telescope-asynctasks.nvim",
+        enabled = not LITE_MODE,
         lazy = true,
         dependencies = {
             "skywind3000/asynctasks.vim",
@@ -491,6 +509,7 @@ lvim.plugins = {
     -- Reference: https://github.com/David-Kunz/gen.nvim
     {
         "David-Kunz/gen.nvim",
+        enabled = not LITE_MODE,
         cmd = "Gen",
         config = function()
             require("gen").setup({
@@ -591,6 +610,7 @@ lvim.plugins = {
     -- Reference: https://github.com/danymat/neogen
     {
         "danymat/neogen",
+        enabled = not LITE_MODE,
         cmd = "Neogen",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -606,6 +626,7 @@ lvim.plugins = {
     -- Reference: https://github.com/SirVer/ultisnips
     {
         "honza/vim-snippets",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "SirVer/ultisnips",
@@ -618,6 +639,7 @@ lvim.plugins = {
     -- Reference: https://github.com/monaqa/dial.nvim
     {
         "monaqa/dial.nvim",
+        enabled = true,
         keys = { { "<C-a>" }, { "<C-x>" } },
         config = function()
             local augend = require("dial.augend")
@@ -656,6 +678,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-pack/nvim-spectre
     {
         "nvim-pack/nvim-spectre",
+        enabled = not LITE_MODE,
         cmd = "Spectre",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -679,6 +702,7 @@ lvim.plugins = {
     -- Reference: https://github.com/kylechui/nvim-surround
     {
         "kylechui/nvim-surround",
+        enabled = true,
         version = "*",
         event = "VeryLazy",
         config = function()
@@ -689,6 +713,7 @@ lvim.plugins = {
     -- Reference: https://github.com/windwp/nvim-ts-autotag
     {
         "windwp/nvim-ts-autotag",
+        enabled = true,
         ft = { "php", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "markdown", "xml" },
         config = function()
             require("nvim-ts-autotag").setup({})
@@ -698,6 +723,7 @@ lvim.plugins = {
     -- Reference: https://github.com/gbprod/substitute.nvim
     {
         "gbprod/substitute.nvim",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             require("substitute").setup({})
@@ -707,6 +733,7 @@ lvim.plugins = {
     -- Reference: https://github.com/stevearc/oil.nvim
     {
         "stevearc/oil.nvim",
+        enabled = not LITE_MODE,
         lazy = false, -- to make "nvim ." work
         config = function()
             require("oil").setup({
@@ -740,6 +767,7 @@ lvim.plugins = {
     -- Reference: https://github.com/Badhi/nvim-treesitter-cpp-tools
     {
         "Badhi/nvim-treesitter-cpp-tools",
+        enabled = not LITE_MODE,
         ft = { "cpp" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -767,6 +795,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/flash.nvim
     {
         "folke/flash.nvim",
+        enabled = true,
         event = "VeryLazy",
         dependencies = {
             { "catppuccin/nvim", name = "catppuccin" },
@@ -826,6 +855,7 @@ lvim.plugins = {
     -- Reference: https://github.com/rcarriga/nvim-notify
     {
         "rcarriga/nvim-notify",
+        enabled = not LITE_MODE,
         lazy = false,
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -835,6 +865,7 @@ lvim.plugins = {
     -- Reference: https://github.com/kevinhwang91/nvim-ufo
     {
         "kevinhwang91/nvim-ufo",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "kevinhwang91/promise-async",
@@ -890,6 +921,7 @@ lvim.plugins = {
     -- Reference: https://github.com/norcalli/nvim-colorizer.lua
     {
         "norcalli/nvim-colorizer.lua",
+        enabled = true,
         ft = { "css", "javascript", "html", "tmux", "yaml", "zsh", "json", "lua", "markdown" },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
@@ -912,6 +944,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/todo-comments.nvim
     {
         "folke/todo-comments.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -924,6 +957,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/zen-mode.nvim
     {
         "folke/zen-mode.nvim",
+        enabled = not LITE_MODE,
         cmd = "ZenMode",
         config = function()
             require("zen-mode").setup({})
@@ -933,6 +967,7 @@ lvim.plugins = {
     -- Reference: https://github.com/karb94/neoscroll.nvim
     {
         "karb94/neoscroll.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         config = function()
             local neoscroll = require("neoscroll")
@@ -995,6 +1030,7 @@ lvim.plugins = {
     -- Reference: https://github.com/petertriho/nvim-scrollbar
     {
         "petertriho/nvim-scrollbar",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         config = function()
             local palette = require("catppuccin.palettes").get_palette()
@@ -1018,6 +1054,7 @@ lvim.plugins = {
     {
         -- "simrat39/symbols-outline.nvim",
         "enddeadroyal/symbols-outline.nvim",
+        enabled = not LITE_MODE,
         branch = "bugfix/symbol-hover-misplacement",
         cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
         event = "VeryLazy",
@@ -1029,6 +1066,7 @@ lvim.plugins = {
     -- Reference: https://github.com/ethanholz/nvim-lastplace
     {
         "ethanholz/nvim-lastplace",
+        enabled = true,
         lazy = false,
         config = function()
             require("nvim-lastplace").setup({})
@@ -1039,6 +1077,7 @@ lvim.plugins = {
     -- Warning: this plugin sometimes might cause nvim slow, use `rm ~/.local/share/nvim/databases/neoclip.sqlite3` to resolve
     {
         "AckslD/nvim-neoclip.lua",
+        enabled = true,
         event = "VeryLazy",
         dependencies = {
             { "kkharji/sqlite.lua", module = "sqlite" },
@@ -1080,6 +1119,7 @@ lvim.plugins = {
     -- Reference: https://github.com/christoomey/vim-tmux-navigator
     {
         "christoomey/vim-tmux-navigator",
+        enabled = true,
         event = "VeryLazy",
     },
 
@@ -1089,6 +1129,7 @@ lvim.plugins = {
     -- Reference: https://github.com/sindrets/diffview.nvim
     {
         "sindrets/diffview.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         config = function()
             require("diffview").setup({
@@ -1119,6 +1160,7 @@ lvim.plugins = {
     -- Reference: https://github.com/tpope/vim-fugitive
     {
         "tpope/vim-fugitive",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
     },
 
@@ -1128,6 +1170,7 @@ lvim.plugins = {
     -- Reference: https://github.com/renerocksai/telekasten.nvim
     {
         "renerocksai/telekasten.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "nvim-telescope/telescope.nvim",
@@ -1143,6 +1186,7 @@ lvim.plugins = {
     -- Reference: https://github.com/jakewvincent/mkdnflow.nvim
     {
         "jakewvincent/mkdnflow.nvim",
+        enabled = not LITE_MODE,
         ft = "markdown",
         config = function()
             require("mkdnflow").setup({
@@ -1181,6 +1225,7 @@ lvim.plugins = {
     -- Reference: https://github.com/iamcco/markdown-preview.nvim
     {
         "iamcco/markdown-preview.nvim",
+        enabled = not LITE_MODE,
         ft = "markdown",
         config = function()
             vim.fn["mkdp#util#install"]()
@@ -1193,6 +1238,7 @@ lvim.plugins = {
     -- Reference: https://github.com/jakemason/ouroboros.nvim
     {
         "jakemason/ouroboros",
+        enabled = not LITE_MODE,
         ft = { "c", "cpp" },
         event = "VeryLazy",
         dependencies = {
@@ -1206,6 +1252,7 @@ lvim.plugins = {
     -- Reference: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
         "jay-babu/mason-nvim-dap.nvim",
+        enabled = not LITE_MODE,
         ft = { "python", "c", "cpp", "rust" },
         dependencies = {
             "williamboman/mason.nvim",
@@ -1242,6 +1289,7 @@ lvim.plugins = {
     -- Reference: https://github.com/theHamsta/nvim-dap-virtual-text
     {
         "theHamsta/nvim-dap-virtual-text",
+        enabled = not LITE_MODE,
         ft = { "python", "c", "cpp", "rust" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -1254,6 +1302,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-telescope/telescope-dap.nvim
     {
         "nvim-telescope/telescope-dap.nvim",
+        enabled = not LITE_MODE,
         ft = { "python", "c", "cpp", "rust" },
         dependencies = {
             "mfussenegger/nvim-dap",
@@ -1268,12 +1317,14 @@ lvim.plugins = {
     -- Reference: https://github.com/metakirby5/codi.vim
     {
         "metakirby5/codi.vim",
+        enabled = not LITE_MODE,
         ft = { "python" },
     },
 
     -- Reference: https://github.com/nvim-neotest/neotest
     {
         "nvim-neotest/neotest",
+        enabled = not LITE_MODE,
         ft = { "python", "rust" },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -1319,6 +1370,7 @@ lvim.plugins = {
     -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
     {
         "dhananjaylatkar/cscope_maps.nvim",
+        enabled = not LITE_MODE,
         ft = { "c", "cpp", "java" },
         dependencies = {
             "folke/which-key.nvim",
@@ -1352,6 +1404,7 @@ lvim.plugins = {
     -- Reference: https://github.com/williamboman/mason-lspconfig.nvim
     {
         "williamboman/mason-lspconfig.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim",
@@ -1361,6 +1414,7 @@ lvim.plugins = {
                 -- See:
                 --   https://github.com/williamboman/mason-lspconfig.nvim/tree/main#available-lsp-servers
                 --   https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+
                 ensure_installed = {
                     -- "asm_lsp", -- Assembly (GAS/NASM, GO)
                     "bashls", -- Bash
@@ -1390,6 +1444,7 @@ lvim.plugins = {
     -- Reference: https://github.com/jay-babu/mason-null-ls.nvim
     {
         "jay-babu/mason-null-ls.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "williamboman/mason.nvim",
@@ -1427,6 +1482,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvimdev/lspsaga.nvim
     {
         "nvimdev/lspsaga.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -1470,6 +1526,7 @@ lvim.plugins = {
     -- Reference: https://github.com/mfussenegger/nvim-lint
     {
         "mfussenegger/nvim-lint",
+        enabled = not LITE_MODE,
         config = function()
             require("lint").linters_by_ft = {}
             vim.api.nvim_create_autocmd({ "BufRead", "TextChanged" }, {
@@ -1484,6 +1541,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/neodev.nvim
     {
         "folke/neodev.nvim",
+        enabled = not LITE_MODE,
         ft = "lua",
         config = function()
             require("neodev").setup({})
@@ -1493,6 +1551,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/trouble.nvim
     {
         "folke/trouble.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         cmd = "Trouble",
         config = function()
@@ -1513,6 +1572,7 @@ lvim.plugins = {
     -- Reference: https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     {
         "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+        enabled = not LITE_MODE,
         event = "LspAttach",
         config = function()
             require("toggle_lsp_diagnostics").init({
@@ -1528,6 +1588,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-treesitter/nvim-treesitter-context
     {
         "nvim-treesitter/nvim-treesitter-context",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -1540,6 +1601,7 @@ lvim.plugins = {
     -- Reference: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -1605,6 +1667,7 @@ lvim.plugins = {
     -- Reference: https://github.com/simrat39/rust-tools.nvim
     {
         "simrat39/rust-tools.nvim",
+        enabled = not LITE_MODE,
         ft = "rust",
         dependencies = {
             "neovim/nvim-lspconfig",
@@ -1620,6 +1683,7 @@ lvim.plugins = {
     -- Reference: https://github.com/saecki/crates.nvim
     {
         "saecki/crates.nvim",
+        enabled = not LITE_MODE,
         event = { "BufRead Cargo.toml" },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -1632,6 +1696,7 @@ lvim.plugins = {
     -- Reference: https://github.com/ray-x/go.nvim
     {
         "ray-x/go.nvim",
+        enabled = not LITE_MODE,
         ft = { "go", "gomod" },
         event = { "CmdlineEnter" },
         dependencies = { -- optional packages
@@ -1650,6 +1715,7 @@ lvim.plugins = {
     -- Reference: https://github.com/junegunn/fzf.vim
     {
         "junegunn/fzf.vim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "junegunn/fzf",
@@ -1659,6 +1725,7 @@ lvim.plugins = {
     -- Reference: https://github.com/MattesGroeger/vim-bookmarks
     {
         "MattesGroeger/vim-bookmarks",
+        enabled = true,
         event = "VeryLazy",
         init = function()
             vim.g.bookmark_no_default_key_mappings = 1
@@ -1671,6 +1738,7 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/noice.nvim
     {
         "folke/noice.nvim",
+        enabled = not LITE_MODE,
         -- enable if not in JetBrains IDE
         enabled = not (
                 vim.env.TERMINAL_EMULATOR and string.match(string.lower(vim.env.TERMINAL_EMULATOR), "jetbrains")
@@ -1718,6 +1786,7 @@ lvim.plugins = {
     -- Reference: https://github.com/gelguy/wilder.nvim
     {
         "gelguy/wilder.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         dependencies = {
             "romgrk/fzy-lua-native",
@@ -1812,6 +1881,7 @@ lvim.plugins = {
     -- Reference: https://github.com/jvgrootveld/telescope-zoxide
     {
         "jvgrootveld/telescope-zoxide",
+        enabled = true,
         dependencies = {
             "nvim-telescope/telescope.nvim",
         },
@@ -1827,12 +1897,14 @@ lvim.plugins = {
     -- Reference: https://github.com/ojroques/nvim-osc52
     {
         "ojroques/nvim-osc52",
+        enabled = true,
         event = "VeryLazy",
     },
 
     -- Reference: https://github.com/rafcamlet/nvim-luapad
     {
         "rafcamlet/nvim-luapad",
+        enabled = not LITE_MODE,
         cmd = "Luapad",
         config = function()
             require("luapad").setup({})
@@ -1842,6 +1914,7 @@ lvim.plugins = {
     -- Reference: https://github.com/kevinhwang91/nvim-bqf
     {
         "kevinhwang91/nvim-bqf",
+        enabled = true,
         event = "VeryLazy",
         dependencies = {
             "junegunn/fzf",
@@ -1859,6 +1932,7 @@ lvim.plugins = {
     -- Reference: https://github.com/stevearc/dressing.nvim
     {
         "stevearc/dressing.nvim",
+        enabled = not LITE_MODE,
         event = "VeryLazy",
         config = function()
             require("dressing").setup({})
@@ -1868,6 +1942,7 @@ lvim.plugins = {
     -- Reference: https://github.com/Shatur/neovim-session-manager
     {
         "Shatur/neovim-session-manager",
+        enabled = not LITE_MODE,
         -- Autoload not works if "lazy = true"
         lazy = false,
         enabled = vim.fn.has("nvim-0.10") == 1 and true or false,
@@ -1912,6 +1987,7 @@ lvim.plugins = {
     -- Reference: https://github.com/krady21/compiler-explorer.nvim
     {
         "krady21/compiler-explorer.nvim",
+        enabled = not LITE_MODE,
         ft = { "c", "cpp" },
         config = function()
             require("compiler-explorer").setup({
@@ -1943,12 +2019,14 @@ lvim.plugins = {
     -- Usage: :%S/facilit{y, ies}/building{,s}/g
     {
         "tpope/vim-abolish",
+        enabled = true,
         event = "VeryLazy",
     },
 
     -- Reference: https://github.com/haya14busa/vim-asterisk
     {
         "haya14busa/vim-asterisk",
+        enabled = true,
         event = "VeryLazy",
         config = function()
             vim.api.nvim_set_keymap("n", "*", "<Plug>(asterisk-z*)", {})
@@ -1965,6 +2043,7 @@ lvim.plugins = {
     -- Reference: https://github.com/theKnightsOfRohan/csvlens.nvim
     {
         "theKnightsOfRohan/csvlens.nvim",
+        enabled = not LITE_MODE,
         dependencies = {
             "akinsho/toggleterm.nvim",
         },
@@ -1981,12 +2060,14 @@ lvim.plugins = {
     -- Reference: https://github.com/lambdalisue/vim-suda
     {
         "lambdalisue/vim-suda",
+        enabled = true,
         cmd = { "SudaRead", "SudaWrite" },
     },
 
     -- Reference: https://github.com/alker0/chezmoi.vim
     {
         "alker0/chezmoi.vim",
+        enabled = true,
         lazy = false,
         init = function()
             vim.g["chezmoi#use_tmp_buffer"] = true
@@ -2008,125 +2089,127 @@ lvim.plugins = {
 -- LSP
 -- Note: this section should after section 'lvim.plugins' to resolve dependencies correctly
 
--- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
--- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
-    "clangd",
-    "pyright",
-    "lua_ls",
-    "jdtls",
-    "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
-})
-
-local lspmanager = require("lvim.lsp.manager")
-
-lspmanager.setup("clangd", {
-    filetypes = {
-        "c",
-        "cpp",
-        "objc",
-        "objcpp",
-        "cuda",
-        -- "proto",
-    },
-    cmd = {
+if not LITE_MODE then
+    -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
+    -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
+    vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
         "clangd",
-        "--background-index",
-        "--clang-tidy=true",
-        "--all-scopes-completion",
-        "--completion-style=detailed",
-        "--header-insertion=iwyu",
-        "--header-insertion-decorators",
-        "--limit-results=100",
-        "--suggest-missing-includes",
-        "-j=12",
-        "--pch-storage=memory",
-        "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
-    },
-})
+        "pyright",
+        "lua_ls",
+        "jdtls",
+        "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
+    })
 
-lspmanager.setup("pyright", {
-    pyright = {
-        disableOrganizeImports = true,
-    },
-})
+    local lspmanager = require("lvim.lsp.manager")
 
-lspmanager.setup("lua_ls", {
-    settings = {
-        Lua = {
-            completion = {
-                callSnippet = "Replace",
+    lspmanager.setup("clangd", {
+        filetypes = {
+            "c",
+            "cpp",
+            "objc",
+            "objcpp",
+            "cuda",
+            -- "proto",
+        },
+        cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy=true",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
+            "--limit-results=100",
+            "--suggest-missing-includes",
+            "-j=12",
+            "--pch-storage=memory",
+            "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
+        },
+    })
+
+    lspmanager.setup("pyright", {
+        pyright = {
+            disableOrganizeImports = true,
+        },
+    })
+
+    lspmanager.setup("lua_ls", {
+        settings = {
+            Lua = {
+                completion = {
+                    callSnippet = "Replace",
+                },
             },
         },
-    },
-})
+    })
 
-lspmanager.setup("jdtls", {
-    cmd = {
-        "jdtls",
-        "-configuration",
-        vim.fn.expand("~/.cache/jdtls/config"),
-        "-data",
-        vim.fn.expand("~/.cache/jdtls/workspace"),
-        -- jvm args
-        "-XX:+UseParallelGC",
-        "-XX:GCTimeRatio=4",
-        "-XX:AdaptiveSizePolicyWeight=90",
-        "-Dsun.zip.disableMemoryMapping=true",
-        "-Xmx4G",
-    },
-    single_file_support = true,
-    root_dir = function()
-        return vim.fs.dirname(vim.fs.find({
-            -- ".git",
-            "gradlew",
-            "mvnw",
-            "pom.xml",
-            "gradle.build",
-            ".project",
-        }, { upward = true })[1])
-    end,
-})
+    lspmanager.setup("jdtls", {
+        cmd = {
+            "jdtls",
+            "-configuration",
+            vim.fn.expand("~/.cache/jdtls/config"),
+            "-data",
+            vim.fn.expand("~/.cache/jdtls/workspace"),
+            -- jvm args
+            "-XX:+UseParallelGC",
+            "-XX:GCTimeRatio=4",
+            "-XX:AdaptiveSizePolicyWeight=90",
+            "-Dsun.zip.disableMemoryMapping=true",
+            "-Xmx4G",
+        },
+        single_file_support = true,
+        root_dir = function()
+            return vim.fs.dirname(vim.fs.find({
+                -- ".git",
+                "gradlew",
+                "mvnw",
+                "pom.xml",
+                "gradle.build",
+                ".project",
+            }, { upward = true })[1])
+        end,
+    })
 
-lspmanager.setup("neocmake", {})
+    lspmanager.setup("neocmake", {})
 
-lspmanager.setup("html", {})
-lspmanager.setup("cssls", {})
-lspmanager.setup("quick_lint_js", {
-    filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-    },
-    root_dir = function()
-        return vim.fs.dirname(vim.fs.find({
-            ".git",
-            "tsconfig.json",
-            "jsconfig.json",
-            "package.json",
-            ".project",
-        }, { upward = true })[1])
-    end,
-    single_file_support = true,
-})
+    lspmanager.setup("html", {})
+    lspmanager.setup("cssls", {})
+    lspmanager.setup("quick_lint_js", {
+        filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+        },
+        root_dir = function()
+            return vim.fs.dirname(vim.fs.find({
+                ".git",
+                "tsconfig.json",
+                "jsconfig.json",
+                "package.json",
+                ".project",
+            }, { upward = true })[1])
+        end,
+        single_file_support = true,
+    })
 
-lspmanager.setup("tsserver", {
-    filetypes = {
-        "typescript",
-        "typescriptreact",
-    },
-    root_dir = function()
-        return vim.fs.dirname(vim.fs.find({
-            ".git",
-            "tsconfig.json",
-            "package.json",
-            ".project",
-        }, { upward = true })[1])
-    end,
-    single_file_support = true,
-})
+    lspmanager.setup("tsserver", {
+        filetypes = {
+            "typescript",
+            "typescriptreact",
+        },
+        root_dir = function()
+            return vim.fs.dirname(vim.fs.find({
+                ".git",
+                "tsconfig.json",
+                "package.json",
+                ".project",
+            }, { upward = true })[1])
+        end,
+        single_file_support = true,
+    })
 
-lspmanager.setup("gopls", {})
+    lspmanager.setup("gopls", {})
 
--- Manually set server for lvim.lsp.automatic_configuration.skipped_filetypes:
---   { "markdown", "rst", "plaintext", "toml", "proto" }
+    -- Manually set server for lvim.lsp.automatic_configuration.skipped_filetypes:
+    --   { "markdown", "rst", "plaintext", "toml", "proto" }
+end
