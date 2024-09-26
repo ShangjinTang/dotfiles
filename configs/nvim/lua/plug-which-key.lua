@@ -184,6 +184,9 @@ wk.register({
         end,
         "Grep in Buffers",
     },
+    ["<leader>bs"] = { "<cmd>SessionManager save_current_session<cr>", "Save current session" },
+    ["<leader>br"] = { "<cmd>SessionManager load_session<cr>", "Restore session" },
+    ["<leader>bd"] = { "<cmd>SessionManager delete_session<cr>", "Delete session" },
 
     ["<leader>f"] = { name = "+File" },
     ["<leader>fc"] = {

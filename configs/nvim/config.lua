@@ -115,11 +115,8 @@ lvim.builtin.lualine = {
 -- treesitter
 
 if LITE_MODE then
-
     lvim.builtin.treesitter.auto_install = false
-
 else
-
     -- Automatically install missing parsers when entering buffer
     lvim.builtin.treesitter.auto_install = true
 
@@ -183,7 +180,6 @@ else
         "xml",
         "yaml",
     }
-
 end
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/configuration/language-features/language-servers>
@@ -448,7 +444,7 @@ lvim.plugins = {
                     which_key = true,
                 },
             })
-            if not  LITE_MODE then
+            if not LITE_MODE then
                 require("notify").setup({
                     background_colour = require("catppuccin.palettes").get_palette().base,
                 })
@@ -1942,28 +1938,27 @@ lvim.plugins = {
     -- Reference: https://github.com/Shatur/neovim-session-manager
     {
         "Shatur/neovim-session-manager",
-        enabled = not LITE_MODE,
+        enabled = (vim.fn.has("nvim-0.10") == 1 and true or false) and not LITE_MODE,
         -- Autoload not works if "lazy = true"
         lazy = false,
-        enabled = vim.fn.has("nvim-0.10") == 1 and true or false,
         config = function()
             local session_manager = require("session_manager")
             local config = require("session_manager.config")
             session_manager.setup({
-                sessions_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
-                autoload_mode = config.AutoloadMode.CurrentDir, -- [ Disabled / CurrentDir / LastSession ]: autoload when 'nvim' without arguments
+                sessions_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- ~/.local/share/nvim/sessions/
+                autoload_mode = config.AutoloadMode.CurrentDir, -- [ Disabled / CurrentDir / LastSession / GitSession ]: autoload when 'nvim' without arguments
                 autosave_last_session = true,
                 autosave_ignore_not_normal = true,
                 autosave_ignore_dirs = {
                     vim.fn.expand("~"),
-                },
+                }, -- When in HOME directory, do no process auto save
                 autosave_ignore_filetypes = {
                     "alpha",
                     "gitcommit",
                     "gitrebase",
                 },
                 autosave_ignore_buftypes = {},
-                autosave_only_in_session = true,
+                autosave_only_in_session = false,
                 max_path_length = 0,
             })
             vim.api.nvim_create_autocmd({ "User" }, {
