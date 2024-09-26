@@ -51,12 +51,17 @@ source -q ~/.tmux.conf.theme
 # -- plugins -------------------------------------------------------------------
 
 # List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-yank'
-# set -g @plugin 'laktak/extrakto'
-set -g @extrakto_split_direction "v"
-set -g @extrakto_open_tool "cd"
+set -g @tpm_plugins '          \
+   tmux-plugins/tpm            \
+   tmux-plugins/tmux-sensible  \
+   tmux-plugins/tmux-resurrect \
+   tmux-plugins/tmux-continuum \
+   tmux-plugins/tmux-sensible  \
+   tmux-plugins/tmux-yank      \
+'
+
+set -g @continuum-save-interval '1'
+set -g @continuum-restore 'on'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
