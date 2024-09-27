@@ -1420,7 +1420,7 @@ lvim.plugins = {
                     "dockerls", -- Docker
                     "docker_compose_language_service", -- Docker Compose
                     "gopls", -- Go
-                    "jdtls", -- Java
+                    -- "jdtls", -- Java
                     "lua_ls", -- Lua
                     "pyright", -- Python
                     "rust_analyzer", -- Rust
@@ -1734,10 +1734,11 @@ lvim.plugins = {
     -- Reference: https://github.com/folke/noice.nvim
     {
         "folke/noice.nvim",
-        enabled = not LITE_MODE,
         -- enable if not in JetBrains IDE
         enabled = not (
-                vim.env.TERMINAL_EMULATOR and string.match(string.lower(vim.env.TERMINAL_EMULATOR), "jetbrains")
+                vim.env.TERMINAL_EMULATOR
+                and string.match(string.lower(vim.env.TERMINAL_EMULATOR), "jetbrains")
+                and LITE_MODE
             ),
         lazy = false,
         dependencies = {
@@ -2088,122 +2089,122 @@ if not LITE_MODE then
     -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
     -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
     vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
-        "clangd",
-        "pyright",
-        "lua_ls",
-        "jdtls",
+        -- "clangd",
+        -- "pyright",
+        -- "lua_ls",
+        -- "jdtls",
         "rust_analyzer", -- disable it as it's already configured in rust-tools.nvim
     })
 
-    local lspmanager = require("lvim.lsp.manager")
+    -- local lspmanager = require("lvim.lsp.manager")
 
-    lspmanager.setup("clangd", {
-        filetypes = {
-            "c",
-            "cpp",
-            "objc",
-            "objcpp",
-            "cuda",
-            -- "proto",
-        },
-        cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy=true",
-            "--all-scopes-completion",
-            "--completion-style=detailed",
-            "--header-insertion=iwyu",
-            "--header-insertion-decorators",
-            "--limit-results=100",
-            "--suggest-missing-includes",
-            "-j=12",
-            "--pch-storage=memory",
-            "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
-        },
-    })
+    -- lspmanager.setup("clangd", {
+    --     filetypes = {
+    --         "c",
+    --         "cpp",
+    --         "objc",
+    --         "objcpp",
+    --         "cuda",
+    --         -- "proto",
+    --     },
+    --     cmd = {
+    --         "clangd",
+    --         "--background-index",
+    --         "--clang-tidy=true",
+    --         "--all-scopes-completion",
+    --         "--completion-style=detailed",
+    --         "--header-insertion=iwyu",
+    --         "--header-insertion-decorators",
+    --         "--limit-results=100",
+    --         "--suggest-missing-includes",
+    --         "-j=12",
+    --         "--pch-storage=memory",
+    --         "--offset-encoding=utf-16", -- Fix "warning: multiple different client offset_encodings detected" when using clangd with copilot
+    --     },
+    -- })
 
-    lspmanager.setup("pyright", {
-        pyright = {
-            disableOrganizeImports = true,
-        },
-    })
+    -- lspmanager.setup("pyright", {
+    --     pyright = {
+    --         disableOrganizeImports = true,
+    --     },
+    -- })
 
-    lspmanager.setup("lua_ls", {
-        settings = {
-            Lua = {
-                completion = {
-                    callSnippet = "Replace",
-                },
-            },
-        },
-    })
+    -- lspmanager.setup("lua_ls", {
+    --     settings = {
+    --         Lua = {
+    --             completion = {
+    --                 callSnippet = "Replace",
+    --             },
+    --         },
+    --     },
+    -- })
 
-    lspmanager.setup("jdtls", {
-        cmd = {
-            "jdtls",
-            "-configuration",
-            vim.fn.expand("~/.cache/jdtls/config"),
-            "-data",
-            vim.fn.expand("~/.cache/jdtls/workspace"),
-            -- jvm args
-            "-XX:+UseParallelGC",
-            "-XX:GCTimeRatio=4",
-            "-XX:AdaptiveSizePolicyWeight=90",
-            "-Dsun.zip.disableMemoryMapping=true",
-            "-Xmx4G",
-        },
-        single_file_support = true,
-        root_dir = function()
-            return vim.fs.dirname(vim.fs.find({
-                -- ".git",
-                "gradlew",
-                "mvnw",
-                "pom.xml",
-                "gradle.build",
-                ".project",
-            }, { upward = true })[1])
-        end,
-    })
+    -- lspmanager.setup("jdtls", {
+    --     cmd = {
+    --         "jdtls",
+    --         "-configuration",
+    --         vim.fn.expand("~/.cache/jdtls/config"),
+    --         "-data",
+    --         vim.fn.expand("~/.cache/jdtls/workspace"),
+    --         -- jvm args
+    --         "-XX:+UseParallelGC",
+    --         "-XX:GCTimeRatio=4",
+    --         "-XX:AdaptiveSizePolicyWeight=90",
+    --         "-Dsun.zip.disableMemoryMapping=true",
+    --         "-Xmx4G",
+    --     },
+    --     single_file_support = true,
+    --     root_dir = function()
+    --         return vim.fs.dirname(vim.fs.find({
+    --             -- ".git",
+    --             "gradlew",
+    --             "mvnw",
+    --             "pom.xml",
+    --             "gradle.build",
+    --             ".project",
+    --         }, { upward = true })[1])
+    --     end,
+    -- })
 
-    lspmanager.setup("neocmake", {})
+    -- lspmanager.setup("neocmake", {})
 
-    lspmanager.setup("html", {})
-    lspmanager.setup("cssls", {})
-    lspmanager.setup("quick_lint_js", {
-        filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-        },
-        root_dir = function()
-            return vim.fs.dirname(vim.fs.find({
-                ".git",
-                "tsconfig.json",
-                "jsconfig.json",
-                "package.json",
-                ".project",
-            }, { upward = true })[1])
-        end,
-        single_file_support = true,
-    })
+    -- lspmanager.setup("html", {})
+    -- lspmanager.setup("cssls", {})
+    -- lspmanager.setup("quick_lint_js", {
+    --     filetypes = {
+    --         "javascript",
+    --         "javascriptreact",
+    --         "javascript.jsx",
+    --     },
+    --     root_dir = function()
+    --         return vim.fs.dirname(vim.fs.find({
+    --             ".git",
+    --             "tsconfig.json",
+    --             "jsconfig.json",
+    --             "package.json",
+    --             ".project",
+    --         }, { upward = true })[1])
+    --     end,
+    --     single_file_support = true,
+    -- })
 
-    lspmanager.setup("tsserver", {
-        filetypes = {
-            "typescript",
-            "typescriptreact",
-        },
-        root_dir = function()
-            return vim.fs.dirname(vim.fs.find({
-                ".git",
-                "tsconfig.json",
-                "package.json",
-                ".project",
-            }, { upward = true })[1])
-        end,
-        single_file_support = true,
-    })
+    -- lspmanager.setup("tsserver", {
+    --     filetypes = {
+    --         "typescript",
+    --         "typescriptreact",
+    --     },
+    --     root_dir = function()
+    --         return vim.fs.dirname(vim.fs.find({
+    --             ".git",
+    --             "tsconfig.json",
+    --             "package.json",
+    --             ".project",
+    --         }, { upward = true })[1])
+    --     end,
+    --     single_file_support = true,
+    -- })
 
-    lspmanager.setup("gopls", {})
+    -- lspmanager.setup("gopls", {})
 
     -- Manually set server for lvim.lsp.automatic_configuration.skipped_filetypes:
     --   { "markdown", "rst", "plaintext", "toml", "proto" }
