@@ -18,7 +18,7 @@ Fully supported and keep up-to-date:
 - **[ArchLinux][ArchLinux] x86_64** (also supported in WSL2)
 - **[Ubuntu 24.04][Ubuntu 24.04] x86_64** (also supported in WSL2)
 
-Note: for Ubuntu, only recently Ubuntu LTS version is supported, because the required tools/packages are hard to maintain across different Ubuntu versions.
+Note: for Ubuntu, only recently Ubuntu LTS version is supported, as the required tools/packages are hard to maintain across different Ubuntu versions.
 
 Partially supported:
 
@@ -71,14 +71,18 @@ Partially supported:
 
    Log out and re-login to make sure the shell is changed to `zsh`.
 
-4. Clone this repository and install
+4. (Optional) Enable LSP and other plugins.
+
+   Append `export NVIM_LITE_MODE=false` to `~/.zshrc.user`.
+
+5. Clone this repository and install
 
    ```bash
    git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
    ~/.dotfiles/install && source ~/.zshrc
 
-   # recommend to use mise to control python versions
-   # mise use --global python@3.12
+   # recommend to use mise to unify python versions across different machines
+   mise use --global python@3.12
 
    # Essential: support for python plugins in Nvim
    python -m pip install pynvim
@@ -86,7 +90,7 @@ Partially supported:
 
 ## NVIM Plugins Installation
 
-1. Entering nvim, and wait the plugins to be installed.
+1. Enter nvim, wait the plugins to be installed.
 
 - First install cycle: LunarVim plugins
 - Second install cycle: Additional plugins
@@ -131,35 +135,16 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - customized theme for shell prompt
   - third-party (`bat`, `radare2`) built-in dark theme
 
-## Features for Simplify Workflow
+## Features
 
-- global `.gitconfig` and `.gitignore`
 - simplify proxy settings
   - preset: `$PROXY_IP` `$PROXY_ENABLED`
   - toggle: `setproxy` `unsetproxy`
-- simplify tmux session manipulations
-  - `t`: open session 0 (default session-name); if attach fail, will create
-  - `t <session-name>`: open session with _session-name_; if attach fail, will create
-  - `tl`: list all sessions
-  - `tk`: kill all sessions except session 0
 - add auto edit for fzf
   - use ALT-V to quick edit without typing `v xxx` (`v` is alias for `nvim`)
 - simplify `$PATH` settings
   - use `_PATHAPPEND`, `_PATHPREPEND` to modify PATHs
   - use `_DIRCREATE` to create a directory if not exists
-- simplify change between directories
-  - `cu` (short for `cdup`)
-    - `cu NUMBER`: e.g. `cu 3` => `cd ../../..`
-    - `cu UPPER_DIR_NAME`: cd up to nearest `UPPER_DIR_NAME`
-  - `cg` : cd to git root directory
-  - `ce` (short for `cdup_to_exists`)
-
-## Features for Simplify Software Development
-
-- simplify C / C++ development
-  - `rc` / `rcpp` to run C / C++ files under current directory with provided flags
-  - `cmakebuild` to build make projects under PROJECT ROOT
-    - auto generate `compile_commands.json`
 - auto code format on save using `neoformat`
   - C / C++ (based on `~/.clang-format`)
   - Python
@@ -167,8 +152,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
   - Bash
   - Lua
   - ...
-- simplify nvim tasks
-  - asynctask: compilation inside nvim under PROJECT ROOT based on `.tasks`
 
 ## Customization
 
