@@ -37,7 +37,7 @@ Partially supported:
    If you are in China Mainland, please use a proxy to bypass GFW before installation. Otherwise some steps may fail.
 
    ```bash
-   vim ~/.zshrc.user
+   vim ~/.zshrc.private
    ```
 
    ```bash
@@ -73,7 +73,7 @@ Partially supported:
 
 4. (Optional) Enable LSP and other plugins.
 
-   Append `export NVIM_LITE_MODE=false` to `~/.zshrc.user`.
+   Append `export NVIM_LITE_MODE=false` to `~/.zshrc.private`.
 
 5. Clone this repository and install
 
@@ -113,8 +113,8 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
     - `zsh-autosuggestions`
     - `zsh-syntax-highlighting`
   - settings with multi-stages
-    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.user` -> `~/.zshrc.post`
-  - support customized settings (in `~/zshrc.user`)
+    - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.private` -> `~/.zshrc.post`
+  - support customized settings (in `~/zshrc.private`)
 - [mise][mise]
   - [mise][mise] is like [asdf][asdf], but much more fast and user-friendly
   - use `~/.tool-versions` to install essential packages

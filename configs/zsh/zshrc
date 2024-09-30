@@ -102,8 +102,8 @@ _INCLUDE ~/.zshrc.wsl
 
 ######################################################################
 
-# Add user configurations in ~/.zshrc.user
-_INCLUDE ~/.zshrc.user
+# Add private configurations in ~/.zshrc.private
+_INCLUDE ~/.zshrc.private
 
 ######################################################################
 
