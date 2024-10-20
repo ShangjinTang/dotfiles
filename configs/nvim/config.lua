@@ -267,11 +267,6 @@ if not LITE_MODE then
                 "html",
                 "json",
                 "jsonc",
-                "yaml",
-                "markdown",
-                "markdown.mdx",
-                "graphql",
-                "handlebars",
             },
         },
     })
