@@ -1,6 +1,6 @@
 pipx    latest
 
-node    lts
+node    latest
 
 neovim  latest
 
