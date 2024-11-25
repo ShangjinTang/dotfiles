@@ -10,7 +10,7 @@ BOLD=$(tput bold)
 
 # Usage example: $0 RobotoMono FiraCode
 
-RELEASE_VER="v3.0.2"
+RELEASE_VER="v3.3.0"
 USE_TAR_XZ=true # since v3.0.1
 DOWNLOAD_DIR=~/.fonts
 NEED_TO_REFRESH_CACHE=false

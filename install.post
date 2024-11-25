@@ -140,7 +140,7 @@ function install_cli_prebuilts() {
 if xset q &> /dev/null || grep -qEi "WSL" /proc/version; then
     print_separate_line &&
         # https://github.com/ryanoasis/nerd-fonts/releases/latest
-        install_nerdfonts JetBrainsMono # ComicShannsMono FiraCode MPlus Mononoki RobotoMono SourceCodePro IosevkaTerm UbuntuMono VictorMono
+        install_nerdfonts JetBrainsMono # ComicShannsMono FiraCode MPlus Mononoki RobotoMono SourceCodePro IosevkaTerm UbuntuMono VictorMono GeistMono
 fi
 
 print_separate_line &&
