@@ -41,6 +41,10 @@ else
     unsetproxy
 fi
 
+if ! command -v rustc &> /dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile=complete --no-modify-path -y
+fi
+
 # mise init
 if command -v mise &> /dev/null && [[ $USE_MISE == 1 ]]; then
     eval "$(mise activate zsh)" &> /dev/null
