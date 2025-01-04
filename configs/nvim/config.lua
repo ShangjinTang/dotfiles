@@ -502,103 +502,36 @@ lvim.plugins = {
     -----------------------------------------------------------------
     -- NOTE: AI tools: LLM & ChatGPT & Copilot
 
-    -- Reference: https://github.com/David-Kunz/gen.nvim
+    -- Reference: https://github.com/Robitx/gp.nvim
     {
-        "David-Kunz/gen.nvim",
-        enabled = not LITE_MODE,
-        cmd = "Gen",
+        "robitx/gp.nvim",
         config = function()
-            require("gen").setup({
-                model = "codellama", -- The default model to use.
-                host = "localhost", -- The host running the Ollama service.
-                port = "11434", -- The port on which the Ollama service is listening.
-                display_mode = "float", -- The display mode. Can be "float" or "split".
-                show_prompt = false, -- Shows the Prompt submitted to Ollama.
-                show_model = false, -- Displays which model you are using at the beginning of your chat session.
-                no_auto_close = false, -- Never closes the window automatically.
-                init = function()
-                    pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
-                end,
-                -- Function to initialize Ollama
-                command = function(options)
-                    return "curl --silent --no-buffer -X POST http://"
-                        .. options.host
-                        .. ":"
-                        .. options.port
-                        .. "/api/chat -d $body"
-                end,
-                -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
-                -- This can also be a command string.
-                -- The executed command must return a JSON object with { response, context }
-                -- (context property is optional).
-                -- list_models = '<omitted lua function>', -- Retrieves a list of model names
-                debug = false, -- Prints errors and the command which is run.
-            })
-        end,
-        init = function()
-            pcall(io.popen, "ollama serve > /dev/null 2>&1 &")
+            local conf = {
+                providers = {
+                    deepseek = {
+                        disable = false,
+                        endpoint = "https://api.deepseek.com/v1/chat/completions",
+                        secret = os.getenv("DEEPSEEK_API_KEY"),
+                    },
+                },
+                default_command_agent = "DeepSeek",
+                default_chat_agent = "DeepSeek",
+                agents = {
+                    {
+                        provider = "deepseek",
+                        name = "DeepSeek",
+                        chat = true,
+                        command = false,
+                        -- string with model name or table with model name and parameters
+                        model = { model = "deepseek-chat", temperature = 1.1, top_p = 1 },
+                        -- system prompt (use this to specify the persona/role of the AI)
+                        system_prompt = require("gp.defaults").chat_system_prompt,
+                    },
+                },
+            }
+            require("gp").setup(conf)
         end,
     },
-
-    -- Reference: https://github.com/jackMort/ChatGPT.nvim
-    -- {
-    --     "jackMort/ChatGPT.nvim",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "nvim-lua/plenary.nvim",
-    --         "nvim-telescope/telescope.nvim",
-    --     },
-    --     config = function()
-    --         require("chatgpt").setup({
-    --             api_key_cmd = "echo -n $OPENAI_API_KEY",
-    --             openai_params = {
-    --                 model = "gpt-3.5-turbo",
-    --                 frequency_penalty = 0,
-    --                 presence_penalty = 0,
-    --                 max_tokens = 2048,
-    --                 temperature = 0,
-    --                 top_p = 1,
-    --                 n = 1,
-    --             },
-    --         })
-    --     end,
-    -- },
-
-    -- Reference: https://github.com/dpayne/CodeGPT.nvim
-    -- {
-    --     "dpayne/CodeGPT.nvim",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --         "MunifTanjim/nui.nvim",
-    --     },
-    --     config = function()
-    --         require("codegpt.config")
-    --     end,
-    -- },
-
-    -- -- Reference: https://github.com/zbirenbaum/copilot-cmp
-    -- {
-    --     "zbirenbaum/copilot-cmp",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "zbirenbaum/copilot.lua",
-    --     },
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --     end,
-    -- },
-    -- -- Reference: https://github.com/zbirenbaum/copilot.lua
-    -- -- Note: Use `:Copilot auth` to authenticate
-    -- {
-    --     "zbirenbaum/copilot.lua",
-    --     cmd = "Copilot",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot").setup()
-    --     end,
-    -- },
 
     -----------------------------------------------------------------
     -- NOTE: legacy code completion tools
