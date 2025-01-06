@@ -33,19 +33,19 @@ How to use:
     2. run: `${DOTBOT_BIN} -p {CURRENT_SCRIPT} -c {CONFIG}`, e.g.:
 
         ```bash
-        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml
+        ~/.dotfiles/dotbot/bin/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml
         ```
 
     Note: you can place all the configurations in one file, and run specific config(s) with '--only' or '--except' flag, e.g.:
 
         ```bash
-        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --except apt-get
-        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --except pacman apt-get
+        ~/.dotfiles/dotbot/bin/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --except apt-get
+        ~/.dotfiles/dotbot/bin/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --except pacman apt-get
         ```
 
         ```bash
-        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --only apt-get
-        ~/.dotfiles/dotbot/install/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --only npm pipx
+        ~/.dotfiles/dotbot/bin/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --only apt-get
+        ~/.dotfiles/dotbot/bin/dotbot -p pacuni.py -c ~/.pacuni_conf.yaml --only npm pipx
         ```
 """
 
