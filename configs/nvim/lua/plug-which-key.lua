@@ -23,10 +23,10 @@ wk.register({
 }, visual_mode)
 
 wk.register({
-    ["<Bslash>"] = { "<cmd>GpChatToggle<cr>", "Toggle LLM Chat" },
+    ["<Bslash>"] = { "<cmd>AvanteToggle<cr>", "Toggle LLM" },
 }, normal_mode)
 wk.register({
-    ["<Bslash>"] = { ":<C-u>'<,'>GpChatToggle<cr>", "Toggle LLM Chat" },
+    ["<Bslash>"] = { "<cmd>AvanteToggle<cr>", "Toggle LLM" },
 }, visual_mode)
 
 wk.register({
