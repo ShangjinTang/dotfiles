@@ -508,22 +508,22 @@ lvim.plugins = {
         config = function()
             local conf = {
                 providers = {
-                    deepseek = {
+                    gemini = {
                         disable = false,
-                        endpoint = "https://api.deepseek.com/chat/completions",
-                        secret = os.getenv("OPENAI_API_KEY"),
+                        endpoint = "https://generativelanguage.googleapis.com/v1beta/chat/completions",
+                        secret = os.getenv("GEMINI_API_KEY"),
                     },
                 },
-                default_command_agent = "DeepSeek",
-                default_chat_agent = "DeepSeek",
+                default_command_agent = "gemini",
+                default_chat_agent = "gemini",
                 agents = {
                     {
-                        provider = "deepseek",
-                        name = "DeepSeek",
+                        provider = "gemini",
+                        name = "gemini",
                         chat = true,
                         command = false,
                         -- string with model name or table with model name and parameters
-                        model = { model = "deepseek-chat", temperature = 1.1, top_p = 1 },
+                        model = { model = "gemini-2.0-flash", temperature = 1.1, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
                         system_prompt = require("gp.defaults").chat_system_prompt,
                     },
@@ -540,11 +540,18 @@ lvim.plugins = {
         lazy = false,
         version = false, -- set this if you want to always pull the latest change
         opts = {
-            provider = "openai",
-            auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+            provider = "gemini",
+            auto_suggestions_provider = "gemini", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
             openai = {
                 endpoint = "https://api.deepseek.com",
                 model = "deepseek-chat",
+                timeout = 30000, -- Timeout in milliseconds
+                temperature = 0,
+                max_tokens = 4096,
+            },
+            gemini = {
+                endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+                model = "gemini-2.0-flash",
                 timeout = 30000, -- Timeout in milliseconds
                 temperature = 0,
                 max_tokens = 4096,
