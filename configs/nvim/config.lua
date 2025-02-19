@@ -510,8 +510,7 @@ lvim.plugins = {
                 providers = {
                     gemini = {
                         disable = false,
-                        -- endpoint = "https://generativelanguage.googleapis.com/v1beta/chat/completions",
-                        endpoint = "https://gemini.szdev.com/v1beta/chat/completions",
+                        endpoint = "https://generativelanguage.googleapis.com/v1beta/chat/completions",
                         secret = os.getenv("GEMINI_API_KEY"),
                     },
                 },
@@ -551,8 +550,7 @@ lvim.plugins = {
                 max_tokens = 4096,
             },
             gemini = {
-                -- endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-                endpoint = "https://gemini.szdev.com/v1beta/models",
+                endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
                 model = "gemini-2.0-flash",
                 timeout = 30000, -- Timeout in milliseconds
                 temperature = 0,
