@@ -508,22 +508,23 @@ lvim.plugins = {
         config = function()
             local conf = {
                 providers = {
-                    gemini = {
+                    googleai = {
                         disable = false,
-                        endpoint = "https://generativelanguage.googleapis.com/v1beta/chat/completions",
+                        endpoint = os.getenv("GEMINI_API_HOST")
+                            .. "/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
                         secret = os.getenv("GEMINI_API_KEY"),
                     },
                 },
-                default_command_agent = "gemini",
-                default_chat_agent = "gemini",
+                default_command_agent = "Google Gemini",
+                default_chat_agent = "Google Gemini",
                 agents = {
                     {
-                        provider = "gemini",
-                        name = "gemini",
+                        name = "Google Gemini",
+                        provider = "googleai",
                         chat = true,
                         command = false,
                         -- string with model name or table with model name and parameters
-                        model = { model = "gemini-2.0-flash", temperature = 1.1, top_p = 1 },
+                        model = { model = os.getenv("GEMINI_API_MODEL"), temperature = 1.1, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
                         system_prompt = require("gp.defaults").chat_system_prompt,
                     },
@@ -542,16 +543,10 @@ lvim.plugins = {
         opts = {
             provider = "gemini",
             auto_suggestions_provider = "gemini", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
-            openai = {
-                endpoint = "https://api.deepseek.com",
-                model = "deepseek-chat",
-                timeout = 30000, -- Timeout in milliseconds
-                temperature = 0,
-                max_tokens = 4096,
-            },
             gemini = {
-                endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-                model = "gemini-2.0-flash",
+                -- GEMINI_API_KEY should be set in env (.bashrc, .zshrc, etc)
+                endpoint = os.getenv("GEMINI_API_HOST") .. "/v1beta/models",
+                model = os.getenv("GEMINI_API_MODEL"),
                 timeout = 30000, -- Timeout in milliseconds
                 temperature = 0,
                 max_tokens = 4096,

@@ -29,6 +29,9 @@ export NVIM_FORMAT_ON_SAVE=false
 export NVIM_SHOW_DIAG_ON_HOVER=false
 export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error/warn/info/hint
 #---------------------------------------------------------------------
+# You should add your GEMINI_API_KEY to make AI related work
+export GEMINI_API_HOST=https://generativelanguage.googleapis.com
+export GEMINI_MODEL_NAME=gemini-2.0-flash
 
 #=====================================================================
 # create directories & modify PATH
