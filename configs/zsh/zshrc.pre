@@ -29,9 +29,10 @@ export NVIM_FORMAT_ON_SAVE=false
 export NVIM_SHOW_DIAG_ON_HOVER=false
 export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error/warn/info/hint
 #---------------------------------------------------------------------
-# You should add your GEMINI_API_KEY to make AI related work
-export GEMINI_API_HOST=https://generativelanguage.googleapis.com
-export GEMINI_MODEL_NAME=gemini-2.0-flash
+# You should customize these variables to make AI related work
+export OPENAI_API_KEY="your_api_key_here"
+export OPENAI_API_HOST="https://api.openai.com/v1"
+export OPENAI_API_MODEL="gpt-4o-mini"
 
 #=====================================================================
 # create directories & modify PATH

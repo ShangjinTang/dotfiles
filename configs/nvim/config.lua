@@ -508,23 +508,22 @@ lvim.plugins = {
         config = function()
             local conf = {
                 providers = {
-                    googleai = {
+                    openaicompatible = {
                         disable = false,
-                        endpoint = os.getenv("GEMINI_API_HOST")
-                            .. "/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
-                        secret = os.getenv("GEMINI_API_KEY"),
+                        endpoint = os.getenv("OPENAI_API_HOST") .. "/chat/completions",
+                        secret = os.getenv("OPENAI_API_KEY"),
                     },
                 },
-                default_command_agent = "Google Gemini",
-                default_chat_agent = "Google Gemini",
+                default_command_agent = "OpenAI Compatible",
+                default_chat_agent = "OpenAI Compatible",
                 agents = {
                     {
-                        name = "Google Gemini",
-                        provider = "googleai",
+                        name = "OpenAI Compatible",
+                        provider = "openaicompatible",
                         chat = true,
-                        command = false,
+                        command = true,
                         -- string with model name or table with model name and parameters
-                        model = { model = os.getenv("GEMINI_API_MODEL"), temperature = 1.1, top_p = 1 },
+                        model = { model = os.getenv("OPENAI_API_MODEL"), temperature = 0.7, top_p = 1 },
                         -- system prompt (use this to specify the persona/role of the AI)
                         system_prompt = require("gp.defaults").chat_system_prompt,
                     },
@@ -534,19 +533,72 @@ lvim.plugins = {
         end,
     },
 
+    -- Reference: https://github.com/milanglacier/minuet-ai.nvim
+    {
+        "milanglacier/minuet-ai.nvim",
+        event = "VeryLazy",
+        lazy = true,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            -- 'hrsh7th/nvim-cmp',
+            -- "Saghen/blink.cmp",
+        },
+        config = function()
+            require("minuet").setup({
+                -- notify = "debug",
+                provider = "openai_compatible",
+                provider_options = {
+                    openai_compatible = {
+                        api_key = function()
+                            return os.getenv("OPENAI_API_KEY")
+                        end,
+                        end_point = os.getenv("OPENAI_API_HOST") .. "/chat/completions",
+                        model = os.getenv("OPENAI_API_MODEL"),
+                        -- request_timeout = 3,
+                        -- throttle = 1000, -- Increase to reduce costs and avoid rate limits
+                        throttle = 500,
+                        -- debounce = 400, -- Increase to reduce costs and avoid rate limits
+                        debounce = 200, -- Increase to reduce costs and avoid rate limits
+                        name = "OPENAI_COMPATIBLE",
+                        optional = {
+                            max_tokens = 128,
+                            temperature = 0,
+                            top_p = 0.9,
+                            provider = {
+                                -- Prioritize throughput for faster completion
+                                sort = "throughput",
+                            },
+                        },
+                    },
+                },
+                virtualtext = {
+                    auto_trigger_ft = {},
+                    keymap = {
+                        -- accept whole completion
+                        accept = "<A-a>",
+                        -- Cycle to prev completion item, or manually invoke completion
+                        prev = "<A-[>",
+                        -- Cycle to next completion item, or manually invoke completion
+                        next = "<A-]>",
+                        -- dismiss = "<A-e>",
+                    },
+                },
+            })
+        end,
+    },
+
     -- Reference: https://github.com/yetone/avante.nvim
     {
         "yetone/avante.nvim",
         event = "VeryLazy",
         lazy = false,
-        version = false, -- set this if you want to always pull the latest change
+        version = "*",
         opts = {
-            provider = "gemini",
-            auto_suggestions_provider = "gemini", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
-            gemini = {
-                -- GEMINI_API_KEY should be set in env (.bashrc, .zshrc, etc)
-                endpoint = os.getenv("GEMINI_API_HOST") .. "/v1beta/models",
-                model = os.getenv("GEMINI_API_MODEL"),
+            provider = "openai",
+            openai = {
+                -- OPENAI_API_KEY should be set in env (.bashrc, .zshrc, etc)
+                endpoint = os.getenv("OPENAI_API_HOST") .. "/v1",
+                model = os.getenv("OPENAI_API_MODEL"),
                 timeout = 30000, -- Timeout in milliseconds
                 temperature = 0,
                 max_tokens = 4096,
