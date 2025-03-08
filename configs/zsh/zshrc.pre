@@ -64,12 +64,6 @@ elif command -v rg &> /dev/null; then
 fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# cscope
-if command -v cscope &> /dev/null; then
-    # use same generate files as `cscope_maps.nvim`
-    alias cscope="cscope -f ./cscope.out"
-fi
-
 #=====================================================================
 
 # Theme settings

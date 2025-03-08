@@ -61,7 +61,6 @@ lvim.builtin.project.patterns = {
     "WORKSPACE",
     "Cargo.toml",
     "compile_commands.json",
-    "cscope.out",
 }
 
 local LITE_MODE = vim.env.NVIM_LITE_MODE == "true"
@@ -1399,40 +1398,6 @@ lvim.plugins = {
                     require("neotest").run.run(vim.fn.getcwd())
                 end,
             })
-        end,
-    },
-
-    -----------------------------------------------------------------
-    -- NOTE: cscope & ctags
-
-    -- Reference: https://github.com/dhananjaylatkar/cscope_maps.nvim
-    {
-        "dhananjaylatkar/cscope_maps.nvim",
-        enabled = not LITE_MODE,
-        ft = { "c", "cpp", "java" },
-        dependencies = {
-            "folke/which-key.nvim",
-            "nvim-telescope/telescope.nvim",
-            -- "ibhagwan/fzf-lua",
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("cscope_maps").setup({
-                disable_maps = true,
-                skip_input_prompt = true,
-                cscope = {
-                    db_file = "./cscope.out",
-                    exec = "cscope", -- "cscope" or "gtags-cscope"
-                    picker = "telescope", -- "telescope", "fzf-lua" or "quickfix"
-                    skip_picker_for_single_result = true, -- "false" or "true"
-                    db_build_cmd_args = { "-Rbqkv" },
-                    statusline_indicator = nil,
-                },
-            })
-            local tags_dir = vim.fn.expand("~/.cache/tags")
-            if vim.fn.isdirectory(tags_dir) == 0 then
-                vim.fn.mkdir(tags_dir, "p")
-            end
         end,
     },
 

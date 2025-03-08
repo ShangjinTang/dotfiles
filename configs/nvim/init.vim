@@ -12,7 +12,7 @@ noremap <Space> <Nop>
 " ----------------------------------------------------------
 
 " Set root for project
-let projectroot = ['.git', '.root', '.project', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json', 'cscope.out']
+let projectroot = ['.git', '.root', '.project', '.workspace', 'WORKSPACE', 'Cargo.toml', 'compile_commands.json']
 
 " ===================================================================
 " async run
