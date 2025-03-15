@@ -509,7 +509,7 @@ lvim.plugins = {
                 providers = {
                     openaicompatible = {
                         disable = false,
-                        endpoint = os.getenv("OPENAI_API_HOST") .. "/chat/completions",
+                        endpoint = os.getenv("OPENAI_API_BASE") .. "/chat/completions",
                         secret = os.getenv("OPENAI_API_KEY"),
                     },
                 },
@@ -551,7 +551,7 @@ lvim.plugins = {
                         api_key = function()
                             return os.getenv("OPENAI_API_KEY")
                         end,
-                        end_point = os.getenv("OPENAI_API_HOST") .. "/chat/completions",
+                        end_point = os.getenv("OPENAI_API_BASE") .. "/chat/completions",
                         model = os.getenv("OPENAI_API_MODEL"),
                         -- request_timeout = 3,
                         -- throttle = 1000, -- Increase to reduce costs and avoid rate limits
@@ -596,7 +596,7 @@ lvim.plugins = {
             provider = "openai",
             openai = {
                 -- OPENAI_API_KEY should be set in env (.bashrc, .zshrc, etc)
-                endpoint = os.getenv("OPENAI_API_HOST") .. "/v1",
+                endpoint = os.getenv("OPENAI_API_BASE"),
                 model = os.getenv("OPENAI_API_MODEL"),
                 timeout = 30000, -- Timeout in milliseconds
                 temperature = 0,
