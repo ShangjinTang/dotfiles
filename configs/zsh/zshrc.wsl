@@ -18,4 +18,4 @@ if ! command -v code &> /dev/null; then
 fi
 
 # win32yank is a tool to allow sync clipboard between WSL tools (neovim, copypath) and Windows
-[[ ! -f /mnt/c/Windows/SysWOW64/win32yank.exe ]] && cp ~/.dotfiles/wsl2/windows/win32yank.exe /mnt/c/Windows/SysWOW64
+# [[ ! -f /mnt/c/Windows/SysWOW64/win32yank.exe ]] && cp ~/.dotfiles/wsl2/windows/win32yank.exe /mnt/c/Windows/SysWOW64

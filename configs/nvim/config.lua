@@ -1437,7 +1437,6 @@ lvim.plugins = {
                     -- FrontEnd
                     "cssls", -- CSS
                     "html", -- HTML
-                    "quick_lint_js", -- JavaScript
                     "tsserver", -- JavaScript, TypeScript
                 },
             })
@@ -2156,23 +2155,6 @@ if not LITE_MODE then
 
     lspmanager.setup("html", {})
     lspmanager.setup("cssls", {})
-    lspmanager.setup("quick_lint_js", {
-        filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-        },
-        root_dir = function()
-            return vim.fs.dirname(vim.fs.find({
-                ".git",
-                "tsconfig.json",
-                "jsconfig.json",
-                "package.json",
-                ".project",
-            }, { upward = true })[1])
-        end,
-        single_file_support = true,
-    })
 
     lspmanager.setup("tsserver", {
         filetypes = {
