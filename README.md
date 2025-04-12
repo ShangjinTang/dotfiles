@@ -26,7 +26,7 @@ Partially supported:
   - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with almost full features enabled
     - see: [How to Install on an Old-school Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
-    - executables: **zsh**, **rust & cargo**, **mise**, **nvim**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
+    - executables: **zsh**, **rust & cargo**, **mise**, **nvim(0.10.x)**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
     - python packages: **pynvim**
   - You can download x86_64 prebuilt executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
@@ -161,6 +161,11 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 4. For configurations override, see [How to Create Override Configurations](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Create-Override-Configurations)
 
 ## Tips & Issue Fix
+
+### took too long to start in WSL
+
+1. Remove `xclip` and `xsel`.
+2. Install `win32yank` and add it to Windows PATH. Ensure `win32yank` can be accessed in WSL.
 
 ### mise
 
