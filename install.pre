@@ -71,7 +71,7 @@ else
 fi
 
 print_separate_line
-delete_broken_symlinks ~ ~/bin ~/.config/nvim ~/.config/nvim/lua
+delete_broken_symlinks ~ ~/bin
 
 ################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr

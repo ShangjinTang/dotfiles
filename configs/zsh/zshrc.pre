@@ -21,13 +21,10 @@ export USE_MISE=1
 export PROXY_IP="127.0.0.1:7890"
 export PROXY_ENABLED=0
 #---------------------------------------------------------------------
-# nvim lite mode
-export NVIM_LITE_MODE=true
-# nvim extensions
-export NVIM_FORMAT_ON_SAVE=false
-# show diagnostics on hover or not
-export NVIM_SHOW_DIAG_ON_HOVER=false
-export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error/warn/info/hint
+# # nvim lite mode
+# export NVIM_LITE_MODE=true
+# # nvim extensions
+# export NVIM_FORMAT_ON_SAVE=false
 #---------------------------------------------------------------------
 # You should customize these variables to make AI related work
 export OPENAI_API_KEY="your_api_key_here"
@@ -41,10 +38,10 @@ export OPENAI_API_MODEL="gpt-4o"
 _DIRCREATE ~/bin
 # Create nvim persistent undo directory
 _DIRCREATE ~/.cache/nvim/undo
-# Create npm local directory for nvim lsp
+# Create npm local directory
 # Reference: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#manually-change-npms-default-directory
 _DIRCREATE ~/.npm-global/bin ~/.npm-global/lib && export NPM_CONFIG_PREFIX=~/.npm-global
-_PATHAPPEND ~/bin ~/.prebuilts/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin ~/.local/share/nvim/mason/bin
+_PATHAPPEND ~/bin ~/.prebuilts/bin ~/.cargo/bin ~/.npm-global/bin ~/.go/bin ~/.local/bin
 
 #=====================================================================
 # exports for specific command line tool

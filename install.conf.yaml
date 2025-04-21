@@ -15,20 +15,12 @@
 - link:
     ~/bin/: scripts/bash/*
 - link:
-    # submodules
-    ~/.config/nvim/: configs/nvim/**
-    ~/.config/nvim/lua/: configs/nvim/lua/**
-    ~/.config/nvim/lua/LunarVim: submodules/LunarVim
     ~/.fzf: submodules/fzf
     ~/.tmux.conf: submodules/.tmux/.tmux.conf
     # configs
     ~/.config/atuin/config.toml: configs/atuin/config.toml
     ~/.config/btop/themes/: configs/btop/themes/*
     ~/.tmux.conf.local: configs/tmux/.tmux.conf.local
-    # conditional configs
-    ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim/autoload/asyncrun/runner/tmuxsol.vim:
-      if: "[ -d ~/.local/share/nvim/site/pack/lazy/opt/asyncrun.vim ]"
-      path: configs/vim-plugins/asyncrun.vim/runner/tmuxsol.vim
 
 # link for Linux (Ubuntu | ArchLinux)
 - shell:

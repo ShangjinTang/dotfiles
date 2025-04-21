@@ -26,8 +26,7 @@ Partially supported:
   - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with almost full features enabled
     - see: [How to Install on an Old-school Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
-    - executables: **zsh**, **rust & cargo**, **mise**, **nvim(0.10.x)**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
-    - python packages: **pynvim**
+    - executables: **zsh**, **rust & cargo**, **mise**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
   - You can download x86_64 prebuilt executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## Installation
@@ -71,11 +70,7 @@ Partially supported:
 
    Log out and re-login to make sure the shell is changed to `zsh`.
 
-4. (Optional) Enable LSP and other plugins.
-
-   Append `export NVIM_LITE_MODE=false` to `~/.zshrc.private`.
-
-5. Clone this repository and install
+4. Clone this repository and install
 
    ```bash
    git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
@@ -83,27 +78,10 @@ Partially supported:
 
    # recommend to use mise to unify python versions across different machines
    mise use --global python@3.12
-
-   # Essential: support for python plugins in Nvim
-   python -m pip install pynvim
    ```
-
-## NVIM Plugins Installation
-
-1. Enter nvim, wait the plugins to be installed.
-
-- First install cycle: LunarVim plugins
-- Second install cycle: Additional plugins
-
-2. **Execute `:UpdateRemotePlugins`**.
-
-Note: NVIM sometimes might be buggy, because some error just appears in the first-time installation. Scroll down to bottom to see some fixes & tips.
 
 ## Core Features
 
-- AI support to speed up development inside NVIM
-  - NVIM: copilot-cmp (type `:Copilot auth` for first time use)
-  - NVIM: ChatGPT.nvim (requires `$OPENAI_API_KEY`)
 - [dotbot][dotbot]
   - settings with multi-stages
   - automatically download some [nerdfonts][nerdfonts] to `~/.fonts`
@@ -118,19 +96,11 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - [mise][mise]
   - [mise][mise] is like [asdf][asdf], but much more fast and user-friendly
   - use `~/.tool-versions` to install essential packages
-- [nvim][nvim] (>=0.10)
-  - re-use configuration from [LunarVim][LunarVim] without manual install it first
-  - LSPs are auto installed using [mason-lspconfig.nvim][mason-lspconfig.nvim]
-  - add fuzzy prompt for cmdline ([wilder.nvim][wilder.nvim]) and modern message UI ([noice.nvim][noice.nvim])
-  - customized key-bindings and seperated from original key-bindings
-  - auto format on file save
-  - toggle terminal with `Ctrl-\`, `Alt-1`, `Alt-2`, `Alt-3`
 - [tmux][tmux] (>=3.3a)
   - customized theme and bar
   - [gitmux][gitmux] support
   - [tmuxp][tmuxp] support
 - unified theme Catppuccin Frappe (dark background) with transparency
-  - support white(non-transparent) & dark(transparent) theme with [lualine.nvim][lualine.nvim], [nvim-tree.lua][nvim-tree.lua], [toggleterm.nvim][toggleterm.nvim], etc
   - customized theme for `tmux` & `gitmux`
   - customized theme for shell prompt
   - third-party (`bat`, `radare2`) built-in dark theme
@@ -140,8 +110,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - simplify proxy settings
   - preset: `$PROXY_IP` `$PROXY_ENABLED`
   - toggle: `setproxy` `unsetproxy`
-- add auto edit for fzf
-  - use ALT-V to quick edit without typing `v xxx` (`v` is alias for `nvim`)
 - simplify `$PATH` settings
   - use `_PATHAPPEND`, `_PATHPREPEND` to modify PATHs
   - use `_DIRCREATE` to create a directory if not exists
@@ -173,38 +141,6 @@ Note: NVIM sometimes might be buggy, because some error just appears in the firs
 - If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`.
 - `mise` support all [asdf-plugins][asdf-plugins].
 
-### nvim
-
-1. You always need to use `:UpdateRemotePlugins` in nvim after python environment changes.
-2. `pynvim` must be installed in current python.
-
-#### nvim plugins
-
-Sometimes you need to update plugins to fix plugin issues by executing `LvimSyncCorePlugins` in nvim.
-
-#### nvim treesitter
-
-Sometimes you need to update treesitter to fix it's issues by executing `:TSUpdate` in nvim.
-
-This can solve issue as below:
-
-```plain
-treesitter/highlighter: Error executing lua:
-.../share/nvim/runtime/lua/vim/treesitter/query.lua:161: query: invalid node type at position XXX
-```
-
-#### mason
-
-Sometimes you have python binaries in `~/.local/share/nvim/mason/bin`, but cannot execute, e.g. `black` `isort`. And nvim prints related error or warning.
-
-This is often due to python version/environment changes. To resolve it, run command below:
-
-```python
-rm -rf ~/.local/share/nvim/mason
-```
-
-Then open nvim to do a fresh install.
-
 [dotbot]: https://github.com/anishathalye/dotbot
 [ArchLinux]: https://archlinux.org/
 [Ubuntu 24.04]: https://releases.ubuntu.com/noble/
@@ -216,12 +152,4 @@ Then open nvim to do a fresh install.
 [tmux]: https://github.com/tmux/tmux/wiki
 [gitmux]: https://github.com/arl/gitmux
 [tmuxp]: https://github.com/tmux-python/tmuxp
-[LunarVim]: https://lunarvim.org/
-[nvim]: https://neovim.io/
 [nerdfonts]: https://www.nerdfonts.com/
-[mason-lspconfig.nvim]: https://github.com/williamboman/mason-lspconfig.nvim
-[wilder.nvim]: https://github.com/gelguy/wilder.nvim
-[noice.nvim]: https://github.com/folke/noice.nvim
-[lualine.nvim]: https://github.com/nvim-lualine/lualine.nvim
-[nvim-tree.lua]: https://github.com/nvim-tree/nvim-tree.lua
-[toggleterm.nvim]: https://github.com/akinsho/toggleterm.nvim
