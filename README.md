@@ -113,13 +113,6 @@ Partially supported:
 - simplify `$PATH` settings
   - use `_PATHAPPEND`, `_PATHPREPEND` to modify PATHs
   - use `_DIRCREATE` to create a directory if not exists
-- auto code format on save using `neoformat`
-  - C / C++ (based on `~/.clang-format`)
-  - Python
-  - Java
-  - Bash
-  - Lua
-  - ...
 
 ## Customization
 
@@ -139,7 +132,7 @@ Partially supported:
 
 - If you have issue with `mise` packages, please remove the issue package from `.tool-versions` and manually install it.
 - If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`.
-- `mise` support all [asdf-plugins][asdf-plugins].
+- `mise` supports all [asdf-plugins][asdf-plugins].
 
 [dotbot]: https://github.com/anishathalye/dotbot
 [ArchLinux]: https://archlinux.org/
