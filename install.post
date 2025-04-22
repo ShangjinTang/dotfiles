@@ -144,7 +144,7 @@ if xset q &> /dev/null || grep -qEi "WSL" /proc/version; then
 fi
 
 print_separate_line &&
-    apply_diff_for_submodule fzf LunarVim ohmyzsh
+    apply_diff_for_submodule fzf ohmyzsh
 
 print_separate_line &&
     create_dotfiles_symlinks "local"
