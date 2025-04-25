@@ -26,7 +26,7 @@ Partially supported:
   - Even running on Ubuntu 16.04 (offline, no root permission) can be OK with almost full features enabled
     - see: [How to Install on an Old-school Server](https://github.com/ShangjinTang/dotfiles/wiki/How-to-Install-on-an-Oldschool-Server)
   - Essential Packages:
-    - executables: **zsh**, **rust & cargo**, **mise**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
+    - executables: **zsh**, **nodejs**, **tmux**, **rg(ripgrep)**, **fd(fd-find)**
   - You can download x86_64 prebuilt executables in [CLI Prebuilts](https://github.com/ShangjinTang/cli-prebuilts).
 
 ## Installation
@@ -76,8 +76,6 @@ Partially supported:
    git clone https://github.com/ShangjinTang/dotfiles ~/.dotfiles --depth=1 --recurse-submodules --shallow-submodules
    ~/.dotfiles/install && source ~/.zshrc
 
-   # recommend to use mise to unify python versions across different machines
-   mise use --global python@3.12
    ```
 
 ## Core Features
@@ -93,9 +91,6 @@ Partially supported:
   - settings with multi-stages
     - `~/.zshrc.pre` -> `~/.zshrc` -> `~/.zshrc.private` -> `~/.zshrc.post`
   - support customized settings (in `~/zshrc.private`)
-- [mise][mise]
-  - [mise][mise] is like [asdf][asdf], but much more fast and user-friendly
-  - use `~/.tool-versions` to install essential packages
 - [tmux][tmux] (>=3.3a)
   - customized theme and bar
   - [gitmux][gitmux] support
@@ -129,6 +124,8 @@ Partially supported:
 2. Install `win32yank` and add it to Windows PATH. Ensure `win32yank` can be accessed in WSL.
 
 ### mise
+
+Package tool [mise][mise] is not defaulted installed, but is recommended.
 
 - If you have issue with `mise` packages, please remove the issue package from `.tool-versions` and manually install it.
 - If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`.

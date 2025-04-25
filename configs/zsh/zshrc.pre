@@ -6,12 +6,6 @@
 # default editor
 export EDITOR=nvim
 
-#---------------------------------------------------------------------
-# mise is an 'asdf'-like tool to install other binaries, but more user-friendly and fast
-# mise global config: ~/.tool-versions
-# DO NOT suggest to modify this unless you are on an offline server
-export USE_MISE=1
-
 #=====================================================================
 # customized exports, can be overrided in ~/.zshrc.private or ~/.zshrc.local
 # if need to config different for specific directories, you can use tool 'direnv'
