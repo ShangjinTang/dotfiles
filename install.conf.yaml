@@ -56,34 +56,6 @@
 - link:
     ~/.tmux.gitmux/: configs/tmux/gitmux-linux-x86_64/*
 
-# ArchLinux
-- defaults:
-    link:
-      create: true
-      relink: true
-      force: true
-      relative: false
-      glob: true
-      if: "cat /etc/os-release | grep '^ID=' | grep -q 'arch'"
-- link:
-    ~/.tool-versions: linux/.tool-versions.archlinux
-
-# Ubuntu
-- defaults:
-    link:
-      create: true
-      relink: true
-      force: true
-      relative: false
-      glob: true
-      if: "cat /etc/os-release | grep '^ID=' | grep -q 'ubuntu'"
-- link:
-    # ~/bin/: linux/ubuntu/bin/*
-    # conditional configs
-    ~/.tool-versions:
-      if: "cat /etc/os-release | grep '^VERSION_ID=' | grep -q '24.04'"
-      path: linux/.tool-versions.ubuntu2404
-
 # zshrc
 - shell:
     - ["", ========== zsh configs install ==========]
