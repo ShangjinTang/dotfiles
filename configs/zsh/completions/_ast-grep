@@ -35,8 +35,8 @@ _arguments "${_arguments_options[@]}" : \
 '--selector=[AST kind to extract sub-part of pattern to match]:KIND: ' \
 '-r+[String to replace the matched AST node]:FIX: ' \
 '--rewrite=[String to replace the matched AST node]:FIX: ' \
-'-l+[The language of the pattern. Supported languages are\: \[Bash, C, Cpp, CSharp, Css, Dart, Elixir, Go, Haskell, Html, Java, JavaScript, Json, Kotlin, Lua, Php, Python, Ruby, Rust, Scala, Sql, Swift, Tsx, TypeScript\]]:LANG: ' \
-'--lang=[The language of the pattern. Supported languages are\: \[Bash, C, Cpp, CSharp, Css, Dart, Elixir, Go, Haskell, Html, Java, JavaScript, Json, Kotlin, Lua, Php, Python, Ruby, Rust, Scala, Sql, Swift, Tsx, TypeScript\]]:LANG: ' \
+'-l+[The language of the pattern. Supported languages are\: \[Bash, C, Cpp, CSharp, Css, Dart, Elixir, Go, Haskell, Html, Java, JavaScript, Json, Kotlin, Lua, Php, Python, Ruby, Rust, Scala, Sql, Swift, Tsx, TypeScript, Yaml\]]:LANG: ' \
+'--lang=[The language of the pattern. Supported languages are\: \[Bash, C, Cpp, CSharp, Css, Dart, Elixir, Go, Haskell, Html, Java, JavaScript, Json, Kotlin, Lua, Php, Python, Ruby, Rust, Scala, Sql, Swift, Tsx, TypeScript, Yaml\]]:LANG: ' \
 '--debug-query=[Print query pattern'\''s tree-sitter AST. Requires lang be set explicitly]' \
 '--strictness=[The strictness of the pattern]:STRICTNESS:((cst\:"Match exact all node"
 smart\:"Match all node except source trivial nodes"
@@ -49,11 +49,16 @@ exclude\:"Don'\''t respect ignore files that are manually configured for the rep
 global\:"Don'\''t respect ignore files that come from "global" sources such as git'\''s \`core.excludesFile\` configuration option (which defaults to \`\$HOME/.config/git/ignore\`)"
 parent\:"Don'\''t respect ignore files (.gitignore, .ignore, etc.) in parent directories"
 vcs\:"Don'\''t respect version control ignore files (.gitignore, etc.). This implies --no-ignore parent for VCS files. Note that .ignore files will continue to be respected"))' \
+'*--globs=[Include or exclude file paths]:GLOBS: ' \
+'-j+[Set the approximate number of threads to use]:NUM: ' \
+'--threads=[Set the approximate number of threads to use]:NUM: ' \
 '(-i --interactive)--json=[Output matches in structured JSON ]' \
 '--color=[Controls output color]:WHEN:((auto\:"Try to use colors, but don'\''t force the issue. If the output is piped to another program, or the console isn'\''t available on Windows, or if TERM=dumb, or if \`NO_COLOR\` is defined, for example, then don'\''t use colors"
 always\:"Try very hard to emit colors. This includes emitting ANSI colors on Windows if the console API is unavailable (not implemented yet)"
 ansi\:"Ansi is like Always, except it never tries to use anything other than emitting ANSI color codes"
 never\:"Never emit colors"))' \
+'--tracing=[Show tracing information for file/rule discovery and scanning]:LEVEL:((nothing\:"Do not show any tracing information"
+summary\:"Show summary about how many files are scanned and skipped"))' \
 '--heading=[Controls whether to print the file name as heading]:WHEN:((auto\:"Print heading for terminal tty but not for piped output"
 always\:"Always print heading regardless of output type"
 never\:"Never print heading regardless of output type"))' \
@@ -63,6 +68,7 @@ never\:"Never print heading regardless of output type"))' \
 '(-C --context)--before=[Show NUM lines before each match]:NUM: ' \
 '-C+[Show NUM lines around each match]:NUM: ' \
 '--context=[Show NUM lines around each match]:NUM: ' \
+'--follow[Follow symbolic links]' \
 '--stdin[Enable search code from StdIn]' \
 '-i[Start interactive edit session]' \
 '--interactive[Start interactive edit session]' \
@@ -91,11 +97,17 @@ exclude\:"Don'\''t respect ignore files that are manually configured for the rep
 global\:"Don'\''t respect ignore files that come from "global" sources such as git'\''s \`core.excludesFile\` configuration option (which defaults to \`\$HOME/.config/git/ignore\`)"
 parent\:"Don'\''t respect ignore files (.gitignore, .ignore, etc.) in parent directories"
 vcs\:"Don'\''t respect version control ignore files (.gitignore, etc.). This implies --no-ignore parent for VCS files. Note that .ignore files will continue to be respected"))' \
+'*--globs=[Include or exclude file paths]:GLOBS: ' \
+'-j+[Set the approximate number of threads to use]:NUM: ' \
+'--threads=[Set the approximate number of threads to use]:NUM: ' \
 '(-i --interactive)--json=[Output matches in structured JSON ]' \
 '--color=[Controls output color]:WHEN:((auto\:"Try to use colors, but don'\''t force the issue. If the output is piped to another program, or the console isn'\''t available on Windows, or if TERM=dumb, or if \`NO_COLOR\` is defined, for example, then don'\''t use colors"
 always\:"Try very hard to emit colors. This includes emitting ANSI colors on Windows if the console API is unavailable (not implemented yet)"
 ansi\:"Ansi is like Always, except it never tries to use anything other than emitting ANSI color codes"
 never\:"Never emit colors"))' \
+'--tracing=[Show tracing information for file/rule discovery and scanning]:LEVEL:((nothing\:"Do not show any tracing information"
+summary\:"Show summary about how many files are scanned and skipped"))' \
+'--follow[Follow symbolic links]' \
 '--stdin[Enable search code from StdIn]' \
 '-i[Start interactive edit session]' \
 '--interactive[Start interactive edit session]' \
