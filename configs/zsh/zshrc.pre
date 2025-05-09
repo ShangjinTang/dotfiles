@@ -19,6 +19,10 @@ export PROXY_ENABLED=0
 # export NVIM_LITE_MODE=true
 # # nvim extensions
 # export NVIM_FORMAT_ON_SAVE=false
+# # nvim diagnostic
+# export NVIM_SHOW_DIAG_VIRTUAL_TEXT=false
+# export NVIM_SHOW_DIAG_ON_HOVER=true
+# export NVIM_SHOW_DIAG_ON_HOVER_SERVERITY_MIN="error"  # error / warn / info / hint
 #---------------------------------------------------------------------
 # You should customize these variables to make AI related work
 export OPENAI_API_KEY="your_api_key_here"
