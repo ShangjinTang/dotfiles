@@ -125,7 +125,7 @@ Partially supported:
 
 ### mise
 
-Package tool [mise][mise] is not defaulted installed, but is recommended.
+Package tool [mise][mise] (a rust alternative tool for [asdf][asdf] is not defaulted installed, but is recommended.
 
 - If you have issue with `mise` packages, please remove the issue package from `.tool-versions` and manually install it.
 - If you need to use a different version in a folder, use `mise local <some-package>@<version-number>`.
