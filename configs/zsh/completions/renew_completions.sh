@@ -11,7 +11,7 @@ MAGENTA=$(tput setaf 5)
 # ITALIC=$(tput sitm)
 BOLD=$(tput bold)
 
-if ! command -v jq &> /dev/null; then
+if ! command -v jq &>/dev/null; then
     echo "${BOLD}${RED}ERROR:${RESET} 'jq' not available, please install it first."
     exit 1
 fi
@@ -22,7 +22,7 @@ script_directory=$(dirname "$script_path")
 execute_command() {
     command=$*
     echo "${MAGENTA}$command${RESET}"
-    eval $command
+    eval "$command"
     if [ $? -eq 0 ]; then
         echo "${GREEN}done${RESET}"
     else
@@ -40,21 +40,24 @@ execute_command() {
 execute_command "curl https://raw.githubusercontent.com/sharkdp/fd/master/contrib/completion/_fd -o ${script_directory}/_fd"
 
 # _pueue
-if command -v pueue &> /dev/null; then
+if command -v pueue &>/dev/null; then
     execute_command "pueue completions zsh ${script_directory}"
 fi
 
 # _ast-grep
-if command -v ast-grep &> /dev/null; then
+if command -v ast-grep &>/dev/null; then
     execute_command "ast-grep completions zsh > ${script_directory}/_ast-grep"
 fi
 
 # _mise
-if command -v mise &> /dev/null; then
+if command -v mise &>/dev/null; then
     execute_command "mise completions zsh > ${script_directory}/_mise"
 fi
 
 # _chezmoi
-if command -v chezmoi &> /dev/null; then
+if command -v chezmoi &>/dev/null; then
     execute_command "chezmoi completion zsh > ${script_directory}/_chezmoi"
 fi
+
+# _aichat
+execute_command "curl https://raw.githubusercontent.com/sigoden/aichat/refs/heads/main/scripts/completions/aichat.zsh -o ${script_directory}/_aichat"
