@@ -54,6 +54,7 @@ function set_theme() {
     case $1 in
         light)
             export TERMINAL_THEME="light"
+            export AIDER_DARK_MODE=false && export AIDER_LIGHT_MODE=true
             # theme: catppuccin latte: https://github.com/catppuccin/fzf
             export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_WITHOUT_THEME} \
 --color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
@@ -70,6 +71,7 @@ function set_theme() {
             ;;
         dark)
             export TERMINAL_THEME="dark"
+            export AIDER_DARK_MODE=true && export AIDER_LIGHT_MODE=false
             # theme: catppuccin frappe: https://github.com/catppuccin/fzf
             export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_WITHOUT_THEME} \
 --color=bg+:#414559,spinner:#f2d5cf,hl:#e78284 \
