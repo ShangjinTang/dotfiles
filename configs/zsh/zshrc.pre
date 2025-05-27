@@ -55,11 +55,6 @@ function set_theme() {
         light)
             export TERMINAL_THEME="light"
             export AIDER_DARK_MODE=false && export AIDER_LIGHT_MODE=true
-            # theme: catppuccin latte: https://github.com/catppuccin/fzf
-            export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_WITHOUT_THEME} \
---color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
---color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
---color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
             # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfLight"
             # procs
@@ -72,11 +67,6 @@ function set_theme() {
         dark)
             export TERMINAL_THEME="dark"
             export AIDER_DARK_MODE=true && export AIDER_LIGHT_MODE=false
-            # theme: catppuccin frappe: https://github.com/catppuccin/fzf
-            export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_WITHOUT_THEME} \
---color=bg+:#414559,spinner:#f2d5cf,hl:#e78284 \
---color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
---color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284"
             # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfDark"
             # procs

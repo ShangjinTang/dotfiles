@@ -95,10 +95,6 @@ Partially supported:
   - customized theme and bar
   - [gitmux][gitmux] support
   - [tmuxp][tmuxp] support
-- unified theme Catppuccin Frappe (dark background) with transparency
-  - customized theme for `tmux` & `gitmux`
-  - customized theme for shell prompt
-  - third-party (`bat`, `radare2`) built-in dark theme
 
 ## Features
 
