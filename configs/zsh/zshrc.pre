@@ -55,6 +55,7 @@ function set_theme() {
         light)
             export TERMINAL_THEME="light"
             export AIDER_DARK_MODE=false && export AIDER_LIGHT_MODE=true
+            export AICHAT_LIGHT_THEME=true
             # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfLight"
             # procs
@@ -67,6 +68,7 @@ function set_theme() {
         dark)
             export TERMINAL_THEME="dark"
             export AIDER_DARK_MODE=true && export AIDER_LIGHT_MODE=false
+            export AICHAT_LIGHT_THEME=false
             # bat: use `bat --list-thmes` to check available colors
             export BAT_THEME="OneHalfDark"
             # procs
