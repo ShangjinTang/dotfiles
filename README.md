@@ -59,7 +59,7 @@ Partially supported:
 
      ```bash
      sudo apt update
-     sudo apt install -y build-essential python git zsh vim net-tools wget xclip curl ripgrep
+     sudo apt install -y build-essential python3 python-is-python3 git zsh vim net-tools wget xclip curl ripgrep
      ```
 
 3. Change shell to zsh
