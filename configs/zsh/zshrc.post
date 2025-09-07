@@ -3,7 +3,7 @@
 
 # if theme is not set before, set it to default theme
 if [[ -z "$TERMINAL_THEME" ]]; then
-    export TERMINAL_THEME="light"
+    export TERMINAL_THEME="dark"
 fi
 # set theme
 set_theme $TERMINAL_THEME
