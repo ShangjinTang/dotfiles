@@ -238,8 +238,8 @@ tmux_conf_copy_to_os_clipboard=true
 # increase history size
 set -g history-limit 100000
 
-# mouse mode enabled
-set -g mouse on
+# mouse mode disabled
+set -g mouse off
 
 # do not use C-a as prefix
 set -gu prefix2
