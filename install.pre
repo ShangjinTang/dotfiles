@@ -19,22 +19,36 @@ ITALIC=$(tput sitm)
 # shellcheck disable=SC2034
 BOLD=$(tput bold)
 
-# system / hardware check; currently only support ubuntu 24.04 and archlinux
-if [[ ! -f "/etc/os-release" ]]; then
-    echo "${BOLD}${YELLOW}ERROR${RESET}: couldn't determine current os."
-    [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
-else
-    . /etc/os-release
-    if [[ ${NAME} != "Ubuntu" ]] && [[ ${NAME} != "Arch Linux" ]]; then
-        echo "${BOLD}${RED}ERROR${RESET}: distro ${NAME} is not supported"
+# system / hardware check; support Linux (Ubuntu 24.04/Arch) and macOS (arm64)
+OS_NAME="$(uname -s)"
+ARCH_NAME="$(uname -m)"
+
+if [[ "${OS_NAME}" == "Linux" ]]; then
+    if [[ ! -f "/etc/os-release" ]]; then
+        echo "${BOLD}${YELLOW}ERROR${RESET}: couldn't determine current os."
         [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+    else
+        . /etc/os-release
+        if [[ ${NAME} != "Ubuntu" ]] && [[ ${NAME} != "Arch Linux" ]]; then
+            echo "${BOLD}${RED}ERROR${RESET}: distro ${NAME} is not supported"
+            [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+        fi
+        if [[ ${NAME} == "Ubuntu" ]] && [[ ${VERSION_ID} != "24.04" ]]; then
+            echo "${BOLD}${YELLOW}WARNING${RESET}: Ubuntu ${VERSION_ID} might not be well supported"
+        fi
     fi
-    if [[ ${NAME} == "Ubuntu" ]] && [[ ${VERSION_ID} != "24.04" ]]; then
-        echo "${BOLD}${YELLOW}WARNING${RESET}: Ubuntu ${VERSION_ID} might not be well supported"
-    fi
+elif [[ "${OS_NAME}" == "Darwin" ]]; then
+    echo "${BOLD}${GREEN}OK${RESET}: macOS detected"
+else
+    echo "${BOLD}${YELLOW}ERROR${RESET}: os ${OS_NAME} is not supported"
+    [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
 fi
-if [[ $(uname -m) != "x86_64" ]]; then
-    echo "${BOLD}${YELLOW}ERROR${RESET}: hardware $(uname -m) is not supported"
+
+if [[ "${OS_NAME}" == "Linux" ]] && [[ "${ARCH_NAME}" != "x86_64" ]]; then
+    echo "${BOLD}${YELLOW}ERROR${RESET}: hardware ${ARCH_NAME} is not supported on Linux"
+    [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+elif [[ "${OS_NAME}" == "Darwin" ]] && [[ "${ARCH_NAME}" != "arm64" ]] && [[ "${ARCH_NAME}" != "x86_64" ]]; then
+    echo "${BOLD}${YELLOW}ERROR${RESET}: hardware ${ARCH_NAME} is not supported on macOS"
     [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
 fi
 
