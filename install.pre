@@ -29,12 +29,14 @@ if [[ "${OS_NAME}" == "Linux" ]]; then
         [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
     else
         . /etc/os-release
-        if [[ ${NAME} != "Ubuntu" ]] && [[ ${NAME} != "Arch Linux" ]]; then
+        if [[ ${NAME} == "Ubuntu" ]]; then
+            if [[ ${VERSION_ID} != "24.04" ]]; then
+                echo "${BOLD}${RED}ERROR${RESET}: Ubuntu ${VERSION_ID} is not supported"
+                [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
+            fi
+        elif [[ ${NAME} != "Arch Linux" ]]; then
             echo "${BOLD}${RED}ERROR${RESET}: distro ${NAME} is not supported"
             [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
-        fi
-        if [[ ${NAME} == "Ubuntu" ]] && [[ ${VERSION_ID} != "24.04" ]]; then
-            echo "${BOLD}${YELLOW}WARNING${RESET}: Ubuntu ${VERSION_ID} might not be well supported"
         fi
     fi
 elif [[ "${OS_NAME}" == "Darwin" ]]; then
@@ -47,7 +49,7 @@ fi
 if [[ "${OS_NAME}" == "Linux" ]] && [[ "${ARCH_NAME}" != "x86_64" ]]; then
     echo "${BOLD}${YELLOW}ERROR${RESET}: hardware ${ARCH_NAME} is not supported on Linux"
     [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
-elif [[ "${OS_NAME}" == "Darwin" ]] && [[ "${ARCH_NAME}" != "arm64" ]] && [[ "${ARCH_NAME}" != "x86_64" ]]; then
+elif [[ "${OS_NAME}" == "Darwin" ]] && [[ "${ARCH_NAME}" != "arm64" ]]; then
     echo "${BOLD}${YELLOW}ERROR${RESET}: hardware ${ARCH_NAME} is not supported on macOS"
     [[ ${DOTFILES_STRICT_CHECKING} != 0 ]] && echo "Use DOTFILES_STRICT_CHECKING=0 to bypass it" && exit 1
 fi
