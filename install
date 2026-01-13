@@ -22,19 +22,6 @@ BOLD=$(tput bold)
 set -e
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-SKIP_PRIVATE=0
-DOTBOT_ARGS=()
-for arg in "${@}"; do
-  case "${arg}" in
-    --skip-private)
-      SKIP_PRIVATE=1
-      ;;
-    *)
-      DOTBOT_ARGS+=("${arg}")
-      ;;
-  esac
-done
-
 echo "${YELLOW}======================================================================${RESET}"
 echo "${YELLOW}1. Executing install.pre ...${RESET}"
 
@@ -52,15 +39,12 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-INSTALL_SKIP_PRIVATE="${SKIP_PRIVATE}" \
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${DOTBOT_ARGS[@]}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
 echo "${YELLOW}======================================================================${RESET}"
 echo "${YELLOW}3. Executing install.post ...${RESET}"
 
-[ -f "${BASEDIR}/install.post" ] && \
-  INSTALL_SKIP_PRIVATE="${SKIP_PRIVATE}" \
-  "${BASEDIR}/install.post"
+[ -f "${BASEDIR}/install.post" ] && "${BASEDIR}/install.post"
 
 echo "${YELLOW}======================================================================${RESET}"
 

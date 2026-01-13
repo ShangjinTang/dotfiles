@@ -18,6 +18,10 @@ CYAN=$(tput setaf 6)
 ITALIC=$(tput sitm)
 # shellcheck disable=SC2034
 BOLD=$(tput bold)
+# shellcheck disable=SC2034
+ITALIC=$(tput sitm)
+# shellcheck disable=SC2034
+BOLD=$(tput bold)
 
 function print_separate_line() {
     echo "${BLUE}----------------------------------------------------------------------${RESET}"
@@ -61,7 +65,7 @@ function create_dotfiles_symlinks() {
 
             # Check if target directory exists, if not, create it
             if [ ! -d "$target_dir" ]; then
-                echo "${BLUE}Creating directory:${RESET} ${target_dir}"
+                echo "Creating directory: $target_dir"
                 mkdir -p "$target_dir" > /dev/null
             fi
 
@@ -69,19 +73,6 @@ function create_dotfiles_symlinks() {
         done < <(find ~/.dotfiles.$1 -type f -not -path "*.git*" -not -path "$HOME/.dotfiles.$1/README.md" -print0)
     else
         echo "${BOLD}${CYAN}INFO${RESET} ${MAGENTA}~/.dotfiles.$1${RESET} not exists"
-    fi
-}
-
-function run_private_install() {
-    if [ "${INSTALL_SKIP_PRIVATE}" = "1" ]; then
-        echo "${BOLD}${CYAN}INFO${RESET} private install skipped"
-        return 0
-    fi
-    if [ -x ~/.dotfiles.private/install ]; then
-        echo "${BLUE}Running private install ...${RESET}"
-        ~/.dotfiles.private/install
-    else
-        echo "${BOLD}${CYAN}INFO${RESET} ~/.dotfiles.private/install not found"
     fi
 }
 
@@ -94,7 +85,7 @@ function unlink_dotfiles_symlinks() {
 
         if [[ -L "${home_symlink}" ]]; then
             if [[ "$(readlink -f "${home_symlink}")" == "${dotfiles_file}" ]]; then
-                echo "${BLUE}Removing symbolic link:${RESET} ${home_symlink}"
+                echo "Removing symbolic link: ${home_symlink}"
                 unlink "${home_symlink}"
             fi
         fi
@@ -166,9 +157,6 @@ print_separate_line &&
 
 # print_separate_line &&
 #     install_cli_prebuilts
-
-print_separate_line &&
-    run_private_install
 
 ################################################################################
 # vim: ft=bash syntax=bash cc=120 tw=119 ts=4 sw=4 sts=4 et sr
